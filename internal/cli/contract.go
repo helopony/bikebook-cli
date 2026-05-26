@@ -61,6 +61,14 @@ type CLIError struct {
 	localParam string
 }
 
+type SilentExitError struct {
+	Code int
+}
+
+func (e SilentExitError) Error() string {
+	return "silent exit"
+}
+
 type cliErrorContext struct {
 	ExitCode   int     `json:"exit_code"`
 	HTTPStatus *int    `json:"http_status,omitempty"`
@@ -199,6 +207,10 @@ func RenderData(w io.Writer, contract Contract, data any) error {
 func RenderError(w io.Writer, contract Contract, err error) int {
 	if err == nil {
 		return ExitSuccess
+	}
+	var silent SilentExitError
+	if errors.As(err, &silent) {
+		return silent.Code
 	}
 
 	cliErr := normalizeError(err)

@@ -42,6 +42,13 @@ func TestVersionCommand(t *testing.T) {
 		version = previousVersion
 		commit = previousCommit
 	})
+	previousLatest := latestAvailable
+	latestAvailable = func() (string, error) {
+		return "v9.9.9", nil
+	}
+	t.Cleanup(func() {
+		latestAvailable = previousLatest
+	})
 	SetVersionInfo("1.2.3", "abc123")
 
 	cmd := NewRootCommand()
@@ -54,7 +61,7 @@ func TestVersionCommand(t *testing.T) {
 	}
 
 	got := out.String()
-	for _, want := range []string{`"version":"1.2.3"`, `"commit":"abc123"`, `"api_base":"` + defaultAPIBase + `"`} {
+	for _, want := range []string{`"version":"1.2.3"`, `"commit":"abc123"`, `"api_base":"` + defaultAPIBase + `"`, `"latest_available":"v9.9.9"`} {
 		if !strings.Contains(got, want) {
 			t.Fatalf("version output missing %q: %s", want, got)
 		}
@@ -81,7 +88,7 @@ func TestGlobalAuthEnvMismatchReturnsUsageExitCode(t *testing.T) {
 	withTempHome(t)
 	var stdout, stderr bytes.Buffer
 
-	code := ExecuteWithArgs([]string{"version", "--api-key", "bbk_live_secret", "--env", "test"}, &stdout, &stderr)
+	code := ExecuteWithArgs([]string{"--api-key", "bbk_live_secret", "--env", "test"}, &stdout, &stderr)
 
 	if code != ExitUsage {
 		t.Fatalf("exit code = %d, want %d", code, ExitUsage)
