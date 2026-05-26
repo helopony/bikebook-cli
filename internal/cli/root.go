@@ -12,6 +12,7 @@ const defaultAPIBase = "https://api.bikebook.com/public/v1"
 var (
 	version = "dev"
 	commit  = "none"
+	builtAt = "unknown"
 )
 
 type rootOptions struct {
@@ -32,6 +33,12 @@ type rootOptions struct {
 func SetVersionInfo(v, c string) {
 	version = v
 	commit = c
+}
+
+func SetBuildInfo(v, c, b string) {
+	version = v
+	commit = c
+	builtAt = b
 }
 
 func Execute() int {
@@ -69,7 +76,7 @@ func newRootCommand() (*cobra.Command, *rootOptions) {
 		SilenceErrors: true,
 		Version:       versionString(defaultAPIBase),
 		PersistentPreRunE: func(cmd *cobra.Command, args []string) error {
-			if commandHasAncestor(cmd, "config") {
+			if commandHasAncestor(cmd, "config") || cmd.Name() == "doctor" || cmd.Name() == "version" {
 				return nil
 			}
 			_, err := ResolveAuth(opts)
@@ -96,6 +103,7 @@ func newRootCommand() (*cobra.Command, *rootOptions) {
 	flags.BoolVar(&opts.debug, "debug", false, "write HTTP debug diagnostics to stderr")
 
 	cmd.AddCommand(newConfigCommand(&opts))
+	cmd.AddCommand(newDoctorCommand(&opts))
 	cmd.AddCommand(newVersionCommand(&opts))
 
 	return cmd, &opts
@@ -107,14 +115,11 @@ func newVersionCommand(opts *rootOptions) *cobra.Command {
 		Short: "Print version information",
 		RunE: func(cmd *cobra.Command, args []string) error {
 			contract := contractFromOptions(*opts, cmd.OutOrStdout())
-			if contract.OutputMode == OutputHuman {
-				return RenderData(cmd.OutOrStdout(), contract, versionString(contract.APIBase))
+			info := BuildVersionInfo(contract.APIBase)
+			if latest, err := latestAvailable(); err == nil {
+				info.LatestAvailable = latest
 			}
-			return RenderData(cmd.OutOrStdout(), contract, map[string]string{
-				"version":  version,
-				"commit":   commit,
-				"api_base": contract.APIBase,
-			})
+			return RenderData(cmd.OutOrStdout(), contract, info)
 		},
 	}
 }
