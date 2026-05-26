@@ -45,6 +45,7 @@ type Contract struct {
 	Debug          bool
 	APIBase        string
 	APIKey         string
+	Profile        string
 	Env            string
 	RequestID      string
 	IdempotencyKey string
@@ -158,6 +159,7 @@ func contractFromOptions(opts rootOptions, stdout io.Writer) Contract {
 		Debug:          opts.debug,
 		APIBase:        opts.apiBase,
 		APIKey:         opts.apiKey,
+		Profile:        opts.profile,
 		Env:            opts.env,
 		RequestID:      opts.requestID,
 		IdempotencyKey: opts.idempotencyKey,
@@ -173,8 +175,8 @@ func envEnabled(name string) bool {
 	return value != "" && value != "0" && value != "false"
 }
 
-func isTerminal(w io.Writer) bool {
-	file, ok := w.(*os.File)
+func isTerminal(stream any) bool {
+	file, ok := stream.(*os.File)
 	if !ok {
 		return false
 	}

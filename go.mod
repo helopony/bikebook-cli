@@ -4,6 +4,7 @@ go 1.25.0
 
 require (
 	github.com/oapi-codegen/runtime v1.4.1
+	github.com/pelletier/go-toml/v2 v2.3.1
 	github.com/spf13/cobra v1.10.2
 	golang.org/x/term v0.43.0
 )
