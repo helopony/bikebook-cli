@@ -19,7 +19,7 @@
         ],
         "summary": "List assets",
         "description": "Requires `customer.read` access scope.\n\nLists customer assets for workshops allowed by the API key. Optional `business_id` narrows results to one workshop. Use named filters to look up assets before booking jobs.",
-        "operationId": "List",
+        "operationId": "AssetsList",
         "parameters": [
           {
             "name": "business_id",
@@ -250,7 +250,7 @@
         ],
         "summary": "Create asset",
         "description": "Creates a customer asset owned by an existing customer. Requires `customer.write` and an `Idempotency-Key` header.",
-        "operationId": "Create",
+        "operationId": "AssetsCreate",
         "parameters": [
           {
             "name": "Authorization",
@@ -446,7 +446,7 @@
         ],
         "summary": "List customer assets",
         "description": "Requires `customer.read` access scope.\n\nLists assets owned by one customer. Equivalent to `GET /assets?customer_id=...` with the same optional filters.",
-        "operationId": "ListForCustomer",
+        "operationId": "AssetsListForCustomer",
         "parameters": [
           {
             "name": "customer_id",
@@ -674,7 +674,7 @@
         ],
         "summary": "Get asset",
         "description": "Requires `customer.read` access scope.\n\nReturns one customer asset by public id (`asset_...`).",
-        "operationId": "Get",
+        "operationId": "AssetsGet",
         "parameters": [
           {
             "name": "asset_id",
@@ -832,7 +832,7 @@
         ],
         "summary": "Update asset",
         "description": "Patch semantics: null properties are ignored. Requires `customer.write` and an `Idempotency-Key` header.",
-        "operationId": "Update",
+        "operationId": "AssetsUpdate",
         "parameters": [
           {
             "name": "asset_id",
@@ -1033,7 +1033,7 @@
         ],
         "summary": "List businesses",
         "description": "Requires `business.read` access scope.\n\nDoes not require a route `business_id`. Returns every non-deleted business linked to the authenticated public API client. Use `GET /public/v1/businesses/{business_id}` for a single business after you know its id.",
-        "operationId": "List",
+        "operationId": "BusinessesList",
         "parameters": [
           {
             "name": "Authorization",
@@ -1186,7 +1186,7 @@
         ],
         "summary": "Get business",
         "description": "Requires `business.read` access scope.\n\nThe route `business_id` must be allowed for your API key. The response uses the public `id` field (currently an `org_...` value).",
-        "operationId": "Get",
+        "operationId": "BusinessesGet",
         "parameters": [
           {
             "name": "business_id",
@@ -1339,7 +1339,7 @@
         ],
         "summary": "List services",
         "description": "Requires `catalogue.read` access scope.\n\nReturns enabled services in enabled categories with `external_and_internal` visibility only. Admin-locked or internal-only services are omitted. Supports cursor pagination via `limit` and `cursor` (max 100 per page). Optional `name` matches service name, description, or category (substring). Optional `sort` accepts `order`, `name`, `price`, or `category`. Prefix with `-` for descending order.",
-        "operationId": "Services",
+        "operationId": "BusinessesServices",
         "parameters": [
           {
             "name": "name",
@@ -1540,7 +1540,7 @@
         ],
         "summary": "Create service",
         "description": "Requires `catalogue.write` and an `Idempotency-Key` header. Category is supplied by name; Workshop creates the category if needed. Does not support catalogue tasks (service checklists), delete, or reorder operations.",
-        "operationId": "CreateService",
+        "operationId": "ServicesCreate",
         "parameters": [
           {
             "name": "business_id",
@@ -1748,7 +1748,7 @@
         ],
         "summary": "Get availability",
         "description": "Requires `business.read` access scope.\n\nReturns bookable calendar dates as `YYYY-MM-DD` (no time or timezone). Optional `from` and `to` default to workshop-local today and 42 days ahead. Date arrays are empty when the related fulfilment mode is disabled on the business profile.",
-        "operationId": "Availability",
+        "operationId": "BusinessesAvailability",
         "parameters": [
           {
             "name": "from",
@@ -1935,7 +1935,7 @@
         ],
         "summary": "Get availability slots for a date.",
         "description": "Requires `business.read` access scope.\n\nReturns collection/drop-off time windows for one bookable calendar day (`date=YYYY-MM-DD`). Slot `start_time` / `end_time` are workshop-local schedule times. Each slot includes `is_available` when capacity limits apply.",
-        "operationId": "AvailabilitySlots",
+        "operationId": "BusinessesAvailabilitySlots",
         "parameters": [
           {
             "name": "date",
@@ -2110,7 +2110,7 @@
         ],
         "summary": "Get next available slot",
         "description": "Requires `business.read` access scope.\n\nSearches between optional `from` and `to` (`YYYY-MM-DD`; defaults workshop-local today through 90 days ahead). Returns the earliest date with time windows and `fulfilment_type`. When none is found, `date` and `fulfilment_type` are null and `slots` is empty.",
-        "operationId": "NextAvailableSlot",
+        "operationId": "BusinessesNextAvailableSlot",
         "parameters": [
           {
             "name": "from",
@@ -2482,7 +2482,7 @@
         ],
         "summary": "Send chat message",
         "description": "Requires `chat.write` and `Idempotency-Key`. `sender` is `customer` or `business` (defaults to customer). Creates the chat thread on first message when one does not exist.",
-        "operationId": "CreateChatMessage",
+        "operationId": "ChatCreateMessage",
         "parameters": [
           {
             "name": "customer_id",
@@ -2690,7 +2690,7 @@
         ],
         "summary": "Upload chat attachments",
         "description": "Multipart form upload. Requires `chat.write` and `Idempotency-Key`. Pass `sender` as a form field (`customer` or `business`). Maximum upload size is 100 MB per request.",
-        "operationId": "CreateChatAttachments",
+        "operationId": "ChatCreateAttachments",
         "parameters": [
           {
             "name": "customer_id",
@@ -2892,7 +2892,7 @@
         ],
         "summary": "Update customer",
         "description": "Patch semantics: null properties are ignored. Requires `customer.write` and `Idempotency-Key`.",
-        "operationId": "UpdateCustomer",
+        "operationId": "CustomersUpdate",
         "parameters": [
           {
             "name": "customer_id",
@@ -3091,7 +3091,7 @@
         ],
         "summary": "Get customer",
         "description": "Requires `customer.read` access scope. **Guides:** [Authentication](/guides/authentication) · [Errors & pagination](/guides/errors-and-pagination) · [Rate limiting](/guides/rate-limiting) · [Retries & idempotency](/guides/retries-and-idempotency) · [Public ids](/guides/public-ids) · [Webhooks](/guides/webhooks)",
-        "operationId": "Customer",
+        "operationId": "CustomersGet",
         "parameters": [
           {
             "name": "customer_id",
@@ -3252,7 +3252,7 @@
         ],
         "summary": "List customers",
         "description": "Requires `customer.read` access scope.\n\nSupports cursor pagination via `limit` and `cursor`. Optional filters: `name` (substring), `email` (exact), and `phone` (substring).",
-        "operationId": "Customers",
+        "operationId": "CustomersList",
         "parameters": [
           {
             "name": "business_id",
@@ -3465,7 +3465,7 @@
         ],
         "summary": "Get invoice item.",
         "description": "Requires `invoice.read` access scope.\n\nReturns one billable row by its public id (`invitem_...`).",
-        "operationId": "Get",
+        "operationId": "InvoiceItemsGet",
         "parameters": [
           {
             "name": "invoice_item_id",
@@ -3624,7 +3624,7 @@
         ],
         "summary": "Update invoice item",
         "description": "Requires `invoice.write` access scope.\n\nPatch semantics: null properties are ignored.",
-        "operationId": "Update",
+        "operationId": "InvoiceItemsUpdate",
         "parameters": [
           {
             "name": "invoice_item_id",
@@ -3824,7 +3824,7 @@
         ],
         "summary": "Delete invoice item",
         "description": "Requires `invoice.write` access scope.\n\nRemoves the line using the same internal cleanup rules as Workshop, including linked service or stock rows where applicable.",
-        "operationId": "Delete",
+        "operationId": "InvoiceItemsDelete",
         "parameters": [
           {
             "name": "invoice_item_id",
@@ -4004,7 +4004,7 @@
         ],
         "summary": "Create invoice item",
         "description": "Requires `invoice.write` access scope.\n\nCreates a custom, service, or part line on the invoice identified by `invoice_id` in the request body. Uses the same internal billing rules as Workshop.",
-        "operationId": "Create",
+        "operationId": "InvoiceItemsCreate",
         "parameters": [
           {
             "name": "Authorization",
@@ -4201,7 +4201,7 @@
         ],
         "summary": "List invoices",
         "description": "Requires `invoice.read` access scope.\n\nLists invoices for every business allowed by the API key. Supports cursor pagination via `limit` and `cursor`. Optional `business_id` narrows results to one workshop. Optional `job_id` filters to invoices linked to that job. Optional filters: `invoice_number` (exact), `customer_id` (exact public id), and `customer_email` (exact).",
-        "operationId": "List",
+        "operationId": "InvoicesList",
         "parameters": [
           {
             "name": "business_id",
@@ -4445,7 +4445,7 @@
         ],
         "summary": "Get invoice",
         "description": "Requires `invoice.read` access scope.\n\nReturns one invoice by public id. Access is verified against the API key allow list.",
-        "operationId": "Get",
+        "operationId": "InvoicesGet",
         "parameters": [
           {
             "name": "invoice_id",
@@ -4629,17 +4629,8 @@
         ],
         "summary": "List job reports",
         "description": "Requires `job.read` access scope.\n\nCall either `GET .../job_reports` or `GET .../jobs/{job_id}/job_reports` to filter by job. Supports cursor pagination via `limit` and `cursor`. Optional `business_id` narrows to one workshop.",
-        "operationId": "List",
+        "operationId": "JobReportsList",
         "parameters": [
-          {
-            "name": "job_id",
-            "in": "path",
-            "description": "Opaque public id of the job (`job_...`).",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
           {
             "name": "business_id",
             "in": "query",
@@ -4841,7 +4832,7 @@
         ],
         "summary": "List job reports.",
         "description": "Requires `job.read` access scope.\n\nCall either `GET .../job_reports` or `GET .../jobs/{job_id}/job_reports` to filter by job. Supports cursor pagination via `limit` and `cursor`. Optional `business_id` narrows to one workshop.",
-        "operationId": "List",
+        "operationId": "JobReportsListForJob",
         "parameters": [
           {
             "name": "job_id",
@@ -5053,21 +5044,12 @@
         ],
         "summary": "Get job report",
         "description": "Requires `job.read` access scope.\n\nWhen `job_id` is present in the route, the report must belong to that job.",
-        "operationId": "Get",
+        "operationId": "JobReportsGet",
         "parameters": [
           {
             "name": "job_report_id",
             "in": "path",
             "description": "Opaque public id of the job report (`jrp_...`).",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "job_id",
-            "in": "path",
-            "description": "Opaque public id of the job (`job_...`).",
             "required": true,
             "schema": {
               "type": "string"
@@ -5234,7 +5216,7 @@
         ],
         "summary": "Get job report.",
         "description": "Requires `job.read` access scope.\n\nWhen `job_id` is present in the route, the report must belong to that job.",
-        "operationId": "Get",
+        "operationId": "JobReportsGetForJob",
         "parameters": [
           {
             "name": "job_report_id",
@@ -5415,7 +5397,7 @@
         ],
         "summary": "List job part authorisations",
         "description": "Requires `job.read` access scope. Returns every part line on this job's report(s) that can be approved or declined (upgrade offers are excluded). Each item includes an `id` such as `pauth_01h2...` — that is the value you pass to **Submit part authorisation decisions** as `decisions[].id`. Status is one of `not_sent`, `pending`, `approved`, or `declined`. Filter client-side for `status === \"pending\"` when building an approval UI. See the [Part authorisations guide](/guides/part-authorisations).",
-        "operationId": "PartAuthorisations",
+        "operationId": "JobsPartAuthorisations",
         "parameters": [
           {
             "name": "job_id",
@@ -5596,7 +5578,7 @@
         ],
         "summary": "Submit part authorisation decisions",
         "description": "Requires `job.write` access scope. Requires `Idempotency-Key` on every request (see Retries and idempotency guide). Records `approved` or `declined` for **existing** parts — this does **not** create new part lines. **How to get `pauth_...` ids** 1. Call **List job part authorisations** on the same `job_id`, or\n2. Read `data.id` from a `part_authorisation.created` / `part_authorisation.updated` webhook. **Request body:** `{ \"decisions\": [{ \"id\": \"pauth_...\", \"decision\": \"approved\" }] }` **Response:** only parts whose status changed in this request (empty `data` if you repeat the same decision). Approved parts may adjust stock and send notifications inside Workshop. See the [Part authorisations guide](/guides/part-authorisations).",
-        "operationId": "SubmitPartAuthorisationDecisions",
+        "operationId": "JobsSubmitPartAuthorisationDecisions",
         "parameters": [
           {
             "name": "job_id",
@@ -5806,7 +5788,7 @@
         ],
         "summary": "List jobs",
         "description": "Requires `job.read` access scope.\n\nSupports cursor pagination. Optional `business_id` narrows results to one workshop. Optional filters: `job_number` (exact), `customer_id` (exact public id), and `customer_email` (exact).",
-        "operationId": "Jobs",
+        "operationId": "JobsList",
         "parameters": [
           {
             "name": "business_id",
@@ -6062,7 +6044,7 @@
         ],
         "summary": "Create job",
         "description": "Requires `job.write` and a unique `Idempotency-Key` header. The workshop is determined by `customer.id`: the customer must already exist and belong to a business your API key can access. If your key spans multiple workshops, use a customer id scoped to the target workshop. v1 requires existing `customer.id` and `assets[].id` values. The request body is workflow-shaped: customer, assets, work_lines, schedule, notifications, and integration_options. Send the body as `application/json` (not JSON Patch). See the development guide for minimal and full JSON examples.",
-        "operationId": "CreateJob",
+        "operationId": "JobsCreate",
         "parameters": [
           {
             "name": "Authorization",
@@ -6328,7 +6310,7 @@
         ],
         "summary": "Get job",
         "description": "Requires `job.read` access scope. **Guides:** [Authentication](/guides/authentication) · [Errors & pagination](/guides/errors-and-pagination) · [Rate limiting](/guides/rate-limiting) · [Retries & idempotency](/guides/retries-and-idempotency) · [Public ids](/guides/public-ids) · [Webhooks](/guides/webhooks)",
-        "operationId": "Job",
+        "operationId": "JobsGet",
         "parameters": [
           {
             "name": "job_id",
@@ -6534,7 +6516,7 @@
         ],
         "summary": "Update service",
         "description": "Requires `catalogue.write` access scope.\n\nSend only the fields you want to change. Omitted or null properties are left unchanged. Use `visibility: \"disabled\"` to hide a service from the public catalogue without deleting it.",
-        "operationId": "UpdateService",
+        "operationId": "ServicesUpdate",
         "parameters": [
           {
             "name": "service_id",
@@ -6748,7 +6730,7 @@
         ],
         "summary": "List services",
         "description": "Requires `catalogue.read` access scope. **Guides:** [Authentication](/guides/authentication) · [Errors & pagination](/guides/errors-and-pagination) · [Rate limiting](/guides/rate-limiting) · [Retries & idempotency](/guides/retries-and-idempotency) · [Public ids](/guides/public-ids) · [Webhooks](/guides/webhooks)",
-        "operationId": "List",
+        "operationId": "ServicesList",
         "parameters": [
           {
             "name": "business_id",
@@ -6949,7 +6931,7 @@
         ],
         "summary": "Get service",
         "description": "Requires `catalogue.read` access scope. **Guides:** [Authentication](/guides/authentication) · [Errors & pagination](/guides/errors-and-pagination) · [Rate limiting](/guides/rate-limiting) · [Retries & idempotency](/guides/retries-and-idempotency) · [Public ids](/guides/public-ids) · [Webhooks](/guides/webhooks)",
-        "operationId": "Get",
+        "operationId": "ServicesGet",
         "parameters": [
           {
             "name": "service_id",
@@ -7112,7 +7094,7 @@
         ],
         "summary": "List stock variations",
         "description": "Requires `catalogue.read` access scope.\n\nLists enabled stock variations for workshops allowed by the API key. Optional `business_id` narrows results to one workshop. Use `query` for text search across name, SKU, EAN, barcode, and parent item name. Use `sku`, `ean`, or `barcode` for exact identifier lookup.",
-        "operationId": "List",
+        "operationId": "StockList",
         "parameters": [
           {
             "name": "business_id",
@@ -7339,7 +7321,7 @@
         ],
         "summary": "Get stock variation",
         "description": "Requires `catalogue.read` access scope.\n\nReturns one stock variation by public id (`stkv_...`).",
-        "operationId": "Get",
+        "operationId": "StockGet",
         "parameters": [
           {
             "name": "stock_variation_id",
@@ -7505,7 +7487,7 @@
         ],
         "summary": "List webhook deliveries.",
         "description": "Requires `webhook_delivery.read`. Filter by `status` or `event_type`. Supports cursor pagination. Payloads use the signed envelope described in the webhooks guide.",
-        "operationId": "ListForEndpoint",
+        "operationId": "WebhookDeliveriesListForEndpoint",
         "parameters": [
           {
             "name": "endpoint_id",
@@ -7712,7 +7694,7 @@
         ],
         "summary": "Get webhook delivery",
         "description": "Requires `webhook_delivery.read` access scope.\n\nIncludes the outbound payload, HTTP response metadata, retry schedule, and replay lineage when applicable.",
-        "operationId": "Get",
+        "operationId": "WebhookDeliveriesGet",
         "parameters": [
           {
             "name": "delivery_id",
@@ -7878,7 +7860,7 @@
         ],
         "summary": "Replay webhook delivery",
         "description": "Requires `webhook.manage` and `Idempotency-Key`. The new delivery references the original via `replayed_from_delivery_id`.",
-        "operationId": "Replay",
+        "operationId": "WebhookDeliveriesReplay",
         "parameters": [
           {
             "name": "delivery_id",
@@ -8071,7 +8053,7 @@
         ],
         "summary": "List webhook endpoints",
         "description": "Requires `webhook.manage` access scope. **Guides:** [Authentication](/guides/authentication) · [Errors & pagination](/guides/errors-and-pagination) · [Rate limiting](/guides/rate-limiting) · [Retries & idempotency](/guides/retries-and-idempotency) · [Public ids](/guides/public-ids) · [Webhooks](/guides/webhooks)",
-        "operationId": "List",
+        "operationId": "WebhookEndpointsList",
         "parameters": [
           {
             "name": "Authorization",
@@ -8235,7 +8217,7 @@
         ],
         "summary": "Create webhook endpoint",
         "description": "Requires `webhook.manage` and `Idempotency-Key`. The response includes the full `signing_secret` once — store it securely. `business_ids` must list every workshop that should receive events from this endpoint.",
-        "operationId": "Create",
+        "operationId": "WebhookEndpointsCreate",
         "parameters": [
           {
             "name": "Authorization",
@@ -8441,7 +8423,7 @@
         ],
         "summary": "Get webhook endpoint",
         "description": "Requires `webhook.manage` access scope.\n\nSigning secrets are never returned on read; only prefixes are shown. Use create or rotate to obtain a full secret once.",
-        "operationId": "Get",
+        "operationId": "WebhookEndpointsGet",
         "parameters": [
           {
             "name": "endpoint_id",
@@ -8606,7 +8588,7 @@
         ],
         "summary": "Update webhook endpoint",
         "description": "Requires `webhook.manage` access scope.\n\nPatch semantics for URL, description, enabled flag, event types, and business filters. Requires `Idempotency-Key`.",
-        "operationId": "Update",
+        "operationId": "WebhookEndpointsUpdate",
         "parameters": [
           {
             "name": "endpoint_id",
@@ -8817,7 +8799,7 @@
         ],
         "summary": "Delete webhook endpoint",
         "description": "Requires `webhook.manage` access scope.\n\nRequires `Idempotency-Key`. Deleted endpoints stop receiving new deliveries but remain readable in management APIs.",
-        "operationId": "Delete",
+        "operationId": "WebhookEndpointsDelete",
         "parameters": [
           {
             "name": "endpoint_id",
@@ -9011,7 +8993,7 @@
         ],
         "summary": "Rotate webhook secret",
         "description": "Requires `webhook.manage` access scope.\n\nRequires `Idempotency-Key`. Returns the new full `signing_secret` once. The previous secret remains valid until its expiry time in the response.",
-        "operationId": "RotateSecret",
+        "operationId": "WebhookEndpointsRotateSecret",
         "parameters": [
           {
             "name": "endpoint_id",
@@ -9206,7 +9188,7 @@
         ],
         "summary": "List webhook event types",
         "description": "Requires `webhook.manage` access scope.\n\nReturns the catalog of event names, human descriptions, payload object types, and availability status. Use these names in `event_types` when creating or updating webhook endpoints.",
-        "operationId": "List",
+        "operationId": "WebhookEventsList",
         "parameters": [
           {
             "name": "Authorization",
