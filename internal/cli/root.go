@@ -76,7 +76,7 @@ func newRootCommand() (*cobra.Command, *rootOptions) {
 		SilenceErrors: true,
 		Version:       versionString(defaultAPIBase),
 		PersistentPreRunE: func(cmd *cobra.Command, args []string) error {
-			if commandHasAncestor(cmd, "config") || cmd.Name() == "doctor" || cmd.Name() == "version" {
+			if commandHasAncestor(cmd, "config") || cmd.Name() == "describe" || cmd.Name() == "doctor" || cmd.Name() == "version" {
 				return nil
 			}
 			_, err := ResolveAuth(opts)
@@ -103,6 +103,7 @@ func newRootCommand() (*cobra.Command, *rootOptions) {
 	flags.BoolVar(&opts.debug, "debug", false, "write HTTP debug diagnostics to stderr")
 
 	cmd.AddCommand(newConfigCommand(&opts))
+	cmd.AddCommand(newDescribeCommand(&opts))
 	cmd.AddCommand(newDoctorCommand(&opts))
 	cmd.AddCommand(newVersionCommand(&opts))
 

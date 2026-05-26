@@ -9,6 +9,7 @@ build:
 generate:
 	$(OAPI_CODEGEN) -generate types -package api -o internal/api/types.go public-v1.json
 	$(OAPI_CODEGEN) -generate client -package api -o internal/api/client.go public-v1.json
+	go run ./internal/tools/embedopenapi public-v1.json internal/openapi/public_v1.go
 
 test:
 	go test ./...
