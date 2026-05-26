@@ -1,8 +1,8 @@
 package cli
 
 import (
-	"fmt"
 	"io"
+	"os"
 
 	"github.com/spf13/cobra"
 )
@@ -12,7 +12,6 @@ const defaultAPIBase = "https://api.bikebook.com/public/v1"
 var (
 	version = "dev"
 	commit  = "none"
-	apiBase = defaultAPIBase
 )
 
 type rootOptions struct {
@@ -34,11 +33,28 @@ func SetVersionInfo(v, c string) {
 	commit = c
 }
 
-func Execute() error {
-	return NewRootCommand().Execute()
+func Execute() int {
+	return ExecuteWithArgs(os.Args[1:], os.Stdout, os.Stderr)
+}
+
+func ExecuteWithArgs(args []string, out, errOut io.Writer) int {
+	cmd, opts := newRootCommand()
+	SetOutput(cmd, out, errOut)
+	cmd.SetArgs(args)
+
+	if err := cmd.Execute(); err != nil {
+		contract := contractFromOptions(*opts, out)
+		return RenderError(errOut, contract, err)
+	}
+	return ExitSuccess
 }
 
 func NewRootCommand() *cobra.Command {
+	cmd, _ := newRootCommand()
+	return cmd
+}
+
+func newRootCommand() (*cobra.Command, *rootOptions) {
 	opts := rootOptions{
 		apiBase: defaultAPIBase,
 		env:     "auto",
@@ -50,7 +66,7 @@ func NewRootCommand() *cobra.Command {
 		Long:          "bikebook is an agent-first CLI for the BikeBook Workshop Public API.",
 		SilenceUsage:  true,
 		SilenceErrors: true,
-		Version:       versionString(),
+		Version:       versionString(defaultAPIBase),
 		RunE: func(cmd *cobra.Command, args []string) error {
 			return cmd.Help()
 		},
@@ -70,24 +86,31 @@ func NewRootCommand() *cobra.Command {
 	flags.StringVar(&opts.idempotencyKey, "idempotency-key", "", "idempotency key for write requests")
 	flags.BoolVar(&opts.debug, "debug", false, "write HTTP debug diagnostics to stderr")
 
-	cmd.AddCommand(newVersionCommand())
+	cmd.AddCommand(newVersionCommand(&opts))
 
-	return cmd
+	return cmd, &opts
 }
 
-func newVersionCommand() *cobra.Command {
+func newVersionCommand(opts *rootOptions) *cobra.Command {
 	return &cobra.Command{
 		Use:   "version",
 		Short: "Print version information",
 		RunE: func(cmd *cobra.Command, args []string) error {
-			_, err := fmt.Fprintln(cmd.OutOrStdout(), versionString())
-			return err
+			contract := contractFromOptions(*opts, cmd.OutOrStdout())
+			if contract.OutputMode == OutputHuman {
+				return RenderData(cmd.OutOrStdout(), contract, versionString(contract.APIBase))
+			}
+			return RenderData(cmd.OutOrStdout(), contract, map[string]string{
+				"version":  version,
+				"commit":   commit,
+				"api_base": contract.APIBase,
+			})
 		},
 	}
 }
 
-func versionString() string {
-	return fmt.Sprintf("bikebook %s (commit %s, api_base %s)", version, commit, apiBase)
+func versionString(baseURL string) string {
+	return "bikebook " + version + " (commit " + commit + ", api_base " + baseURL + ")"
 }
 
 func SetOutput(cmd *cobra.Command, out, errOut io.Writer) {

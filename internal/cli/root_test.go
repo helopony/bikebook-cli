@@ -53,9 +53,25 @@ func TestVersionCommand(t *testing.T) {
 	}
 
 	got := out.String()
-	for _, want := range []string{"bikebook 1.2.3", "commit abc123", defaultAPIBase} {
+	for _, want := range []string{`"version":"1.2.3"`, `"commit":"abc123"`, `"api_base":"` + defaultAPIBase + `"`} {
 		if !strings.Contains(got, want) {
 			t.Fatalf("version output missing %q: %s", want, got)
 		}
+	}
+}
+
+func TestExecuteWithArgsReturnsUsageExitCode(t *testing.T) {
+	var stdout, stderr bytes.Buffer
+
+	code := ExecuteWithArgs([]string{"--unknown"}, &stdout, &stderr)
+
+	if code != ExitUsage {
+		t.Fatalf("exit code = %d, want %d", code, ExitUsage)
+	}
+	if stdout.Len() != 0 {
+		t.Fatalf("stdout should stay data-only, got %q", stdout.String())
+	}
+	if !strings.Contains(stderr.String(), "cli_invalid_input") {
+		t.Fatalf("stderr missing structured local error: %s", stderr.String())
 	}
 }
