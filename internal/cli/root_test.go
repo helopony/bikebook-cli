@@ -26,6 +26,7 @@ func TestRootHelpIncludesGlobalFlags(t *testing.T) {
 		"--idempotency-key",
 		"--json",
 		"--no-color",
+		"--profile",
 		"--raw",
 		"--request-id",
 	} {
@@ -73,5 +74,22 @@ func TestExecuteWithArgsReturnsUsageExitCode(t *testing.T) {
 	}
 	if !strings.Contains(stderr.String(), "cli_invalid_input") {
 		t.Fatalf("stderr missing structured local error: %s", stderr.String())
+	}
+}
+
+func TestGlobalAuthEnvMismatchReturnsUsageExitCode(t *testing.T) {
+	withTempHome(t)
+	var stdout, stderr bytes.Buffer
+
+	code := ExecuteWithArgs([]string{"version", "--api-key", "bbk_live_secret", "--env", "test"}, &stdout, &stderr)
+
+	if code != ExitUsage {
+		t.Fatalf("exit code = %d, want %d", code, ExitUsage)
+	}
+	if stdout.Len() != 0 {
+		t.Fatalf("stdout should stay data-only, got %q", stdout.String())
+	}
+	if !strings.Contains(stderr.String(), "cli_env_key_mismatch") {
+		t.Fatalf("stderr missing mismatch error: %s", stderr.String())
 	}
 }

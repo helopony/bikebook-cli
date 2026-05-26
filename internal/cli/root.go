@@ -21,6 +21,7 @@ type rootOptions struct {
 	noColor        bool
 	apiBase        string
 	apiKey         string
+	profile        string
 	env            string
 	requestID      string
 	idempotencyKey string
@@ -67,6 +68,13 @@ func newRootCommand() (*cobra.Command, *rootOptions) {
 		SilenceUsage:  true,
 		SilenceErrors: true,
 		Version:       versionString(defaultAPIBase),
+		PersistentPreRunE: func(cmd *cobra.Command, args []string) error {
+			if commandHasAncestor(cmd, "config") {
+				return nil
+			}
+			_, err := ResolveAuth(opts)
+			return err
+		},
 		RunE: func(cmd *cobra.Command, args []string) error {
 			return cmd.Help()
 		},
@@ -81,11 +89,13 @@ func newRootCommand() (*cobra.Command, *rootOptions) {
 	flags.BoolVar(&opts.noColor, "no-color", false, "disable ANSI color output")
 	flags.StringVar(&opts.apiBase, "api-base", defaultAPIBase, "BikeBook API base URL")
 	flags.StringVar(&opts.apiKey, "api-key", "", "BikeBook API key")
+	flags.StringVar(&opts.profile, "profile", "", "BikeBook config profile")
 	flags.StringVar(&opts.env, "env", "auto", "BikeBook environment: auto, live, or test")
 	flags.StringVar(&opts.requestID, "request-id", "", "request correlation ID to send as X-Bikebook-Request-Id")
 	flags.StringVar(&opts.idempotencyKey, "idempotency-key", "", "idempotency key for write requests")
 	flags.BoolVar(&opts.debug, "debug", false, "write HTTP debug diagnostics to stderr")
 
+	cmd.AddCommand(newConfigCommand(&opts))
 	cmd.AddCommand(newVersionCommand(&opts))
 
 	return cmd, &opts
@@ -116,4 +126,13 @@ func versionString(baseURL string) string {
 func SetOutput(cmd *cobra.Command, out, errOut io.Writer) {
 	cmd.SetOut(out)
 	cmd.SetErr(errOut)
+}
+
+func commandHasAncestor(cmd *cobra.Command, use string) bool {
+	for current := cmd; current != nil; current = current.Parent() {
+		if current.Name() == use {
+			return true
+		}
+	}
+	return false
 }
