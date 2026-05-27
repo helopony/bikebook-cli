@@ -106,6 +106,7 @@ func newRootCommand() (*cobra.Command, *rootOptions) {
 	cmd.AddCommand(newDescribeCommand(&opts))
 	cmd.AddCommand(newDoctorCommand(&opts))
 	cmd.AddCommand(newRawCommand(&opts))
+	cmd.AddCommand(newReadCommands(&opts)...)
 	cmd.AddCommand(newVersionCommand(&opts))
 
 	return cmd, &opts
