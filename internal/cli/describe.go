@@ -291,6 +291,8 @@ func describeCommandOutput(cmd *cobra.Command) any {
 		return map[string]string{"type": "array", "items": "DoctorCheck"}
 	case "raw":
 		return map[string]string{"type": "upstream API response"}
+	case "upgrade":
+		return map[string]string{"type": "UpgradeResult"}
 	case "version":
 		return map[string]string{"type": "VersionInfo"}
 	default:

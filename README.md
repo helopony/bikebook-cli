@@ -2,8 +2,9 @@
 
 Agent-first command-line interface for the [BikeBook Workshop Public API][api].
 
-> Status: design phase. See [`RESEARCH.md`](./RESEARCH.md) for the design doc
-> and [`LINEAR_STORIES.md`](./LINEAR_STORIES.md) for the v1 implementation plan.
+> Status: v1 implementation in progress. See [`RESEARCH.md`](./RESEARCH.md)
+> for the design doc and [`LINEAR_STORIES.md`](./LINEAR_STORIES.md) for the
+> implementation plan.
 
 ## Why
 
@@ -13,11 +14,11 @@ output, deterministic exit codes, mandatory idempotency on writes, and a
 machine-readable `bikebook describe` schema generated from the API's OpenAPI
 spec.
 
-## Planned install
+## Install
 
 ```sh
-# macOS / Linux — one-liner installer (will be available after the first release)
-curl -fsSL https://bikebook-cli.helopony.dev/install.sh | sh
+# macOS / Linux
+curl -fsSL https://raw.githubusercontent.com/helopony/bikebook-cli/main/install.sh | sh
 
 # Homebrew
 brew install helopony/tap/bikebook
@@ -28,10 +29,9 @@ go install github.com/helopony/bikebook-cli/cmd/bikebook@latest
 
 ## For agents
 
-Once shipped:
-
 - `bikebook describe` — full machine-readable schema of every command, flag, and exit code, generated from `public-v1.json`.
 - `bikebook --help` and `bikebook <cmd> --help` — per-command help.
+- `bikebook upgrade` — self-update from the latest GitHub Release; set `BIKEBOOK_NO_UPGRADE=1` to disable.
 - [`AGENTS.md`](./AGENTS.md) — short, task-shaped recipes (planned).
 
 ## Spec
