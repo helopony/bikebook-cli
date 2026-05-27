@@ -340,13 +340,16 @@ Resolved on 2026-05-26 with the user:
 | Language | **Go + `oapi-codegen`** — single static binary, ~5 ms cold start, typed client generated from `public-v1.json`. |
 | Binary name | **`bikebook`** |
 | Production base URL | **`https://api.bikebook.com/public/v1`** (path prefix included in the base) |
+| Sandbox / test routing | **No separate sandbox host for v1.** `bbk_test_` keys use the same default host, and `--env=test` validates the key prefix without rewriting `--api-base`. Use `--api-base` if BikeBook later provides a dedicated sandbox hostname. |
 | v1 scope | **All 48 operations at once** via codegen — generate the typed client, then write thin Cobra wrappers for every operation. |
 | Distribution | **Public**: GitHub Releases (darwin/linux/windows × amd64/arm64) + `curl \| sh` installer + Homebrew tap. |
 | Webhook listener | **Skip for v1.** Ship `webhook_endpoints`/`webhook_deliveries`/`webhook_events` CRUD only; defer Stripe-style `listen` to a later milestone. |
 
-Still open (low priority, can be answered during implementation):
-
-- Sandbox host: are `bbk_test_` keys routed via the same `api.bikebook.com` host with a key-based split, or a separate hostname? (Will discover from `doctor` or by asking BikeBook.)
+Sandbox routing note, resolved 2026-05-27: `public-v1.json` does not publish a
+separate sandbox server, and the public developer docs found during
+implementation did not identify a dedicated test hostname. The CLI therefore
+treats `--env=live|test` as API-key prefix validation and keeps transport on
+`--api-base` unchanged.
 
 ## 14. Proposed step-by-step path
 
