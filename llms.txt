@@ -1,0 +1,33 @@
+# BikeBook CLI
+
+> Agent-first Go CLI for the BikeBook Workshop Public API. Use it to configure API profiles, inspect command schemas, read resources, execute idempotent writes, and ship a single binary across agent runtimes.
+
+## Primary Docs
+
+- [Repository](https://github.com/helopony/bikebook-cli): Source, releases, issues, and pull requests.
+- [README](https://github.com/helopony/bikebook-cli/blob/main/README.md): Install commands, project overview, and core agent entry points.
+- [Agent Guide](https://github.com/helopony/bikebook-cli/blob/main/AGENTS.md): Task-shaped command recipes for agents.
+- [Design Research](https://github.com/helopony/bikebook-cli/blob/main/RESEARCH.md): CLI contract, distribution model, and design rationale.
+- [Implementation Stories](https://github.com/helopony/bikebook-cli/blob/main/LINEAR_STORIES.md): Story-level acceptance criteria for v1.
+
+## Machine-Readable Inputs
+
+- [OpenAPI Spec](https://github.com/helopony/bikebook-cli/blob/main/public-v1.json): Workshop Public API v1 schema used for generated types, client methods, and describe output.
+- [CLI Describe Command](https://github.com/helopony/bikebook-cli/blob/main/internal/cli/describe.go): Implementation of the machine-readable `bikebook describe` schema.
+- [Read Commands](https://github.com/helopony/bikebook-cli/blob/main/internal/cli/read.go): Generated-client wrappers for GET operations.
+- [Write Commands](https://github.com/helopony/bikebook-cli/blob/main/internal/cli/write.go): Generated-client wrappers for idempotent POST, PATCH, and DELETE operations.
+
+## Install And Release
+
+- [Installer Script](https://raw.githubusercontent.com/helopony/bikebook-cli/main/install.sh): Stable one-line installer for macOS and Linux.
+- [GoReleaser Config](https://github.com/helopony/bikebook-cli/blob/main/.goreleaser.yml): Cross-platform release, checksums, SBOM, and Homebrew formula config.
+- [Release Workflow](https://github.com/helopony/bikebook-cli/blob/main/.github/workflows/release.yml): Tag-push GitHub Releases workflow.
+- [Homebrew Tap](https://github.com/helopony/homebrew-tap): Formula target repository updated by GoReleaser.
+
+## Runtime Commands
+
+- `bikebook describe --json`: Full command, flag, input, output, and exit-code schema.
+- `bikebook doctor --json`: Auth, config, environment, and connectivity checks.
+- `bikebook config profiles list|use|unset`: Manage saved profiles with API keys redacted.
+- `bikebook jobs list --all --max 250 --json`: Cursor-following read example that preserves API envelopes.
+- `bikebook jobs create --from-file job.json --json`: Idempotent write example; log the stderr `Idempotency-Key` for retries.

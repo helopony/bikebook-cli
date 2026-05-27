@@ -32,7 +32,9 @@ go install github.com/helopony/bikebook-cli/cmd/bikebook@latest
 - `bikebook describe` — full machine-readable schema of every command, flag, and exit code, generated from `public-v1.json`.
 - `bikebook --help` and `bikebook <cmd> --help` — per-command help.
 - `bikebook upgrade` — self-update from the latest GitHub Release; set `BIKEBOOK_NO_UPGRADE=1` to disable.
-- [`AGENTS.md`](./AGENTS.md) — short, task-shaped recipes (planned).
+- [`AGENTS.md`](./AGENTS.md) — task-shaped command recipes for agents.
+- [`llms.txt`](./llms.txt) — curated Markdown link map for LLM tools.
+- [`.claude/skills/bikebook.md`](./.claude/skills/bikebook.md) — Claude Code skill with install and common command patterns.
 
 ## Spec
 
