@@ -208,6 +208,10 @@ func decodeRawResponseBody(resp *http.Response) (any, []byte, error) {
 }
 
 func rawResponseError(status int, parsedBody any, rawBytes []byte) error {
+	return responseErrorWithHint(status, parsedBody, rawBytes, "", "")
+}
+
+func responseErrorWithHint(status int, parsedBody any, rawBytes []byte, hint, docsURL string) error {
 	envelope := api.ApiErrorResponse{}
 	if len(rawBytes) > 0 {
 		_ = json.Unmarshal(rawBytes, &envelope)
@@ -222,5 +226,5 @@ func rawResponseError(status int, parsedBody any, rawBytes []byte) error {
 		}
 		envelope.Error = &api.ApiError{Code: stringPtr("upstream_error"), Message: stringPtr(message)}
 	}
-	return NewAPIError(status, envelope, "", "")
+	return NewAPIError(status, envelope, hint, docsURL)
 }
