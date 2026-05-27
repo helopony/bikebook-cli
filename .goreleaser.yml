@@ -1,0 +1,96 @@
+# yaml-language-server: $schema=https://goreleaser.com/static/schema.json
+version: 2
+
+project_name: bikebook
+
+gomod:
+  proxy: true
+  env:
+    - GOPROXY=https://proxy.golang.org,direct
+    - GOSUMDB=sum.golang.org
+
+before:
+  hooks:
+    - go mod tidy
+    - go test ./...
+
+builds:
+  - id: bikebook
+    main: ./cmd/bikebook
+    binary: bikebook
+    env:
+      - CGO_ENABLED=0
+    goos:
+      - darwin
+      - linux
+      - windows
+    goarch:
+      - amd64
+      - arm64
+    flags:
+      - -trimpath
+    mod_timestamp: "{{ .CommitTimestamp }}"
+    ldflags:
+      - -s -w
+      - -X github.com/helopony/bikebook-cli/internal/cli.version={{ .Tag }}
+      - -X github.com/helopony/bikebook-cli/internal/cli.commit={{ .FullCommit }}
+      - -X github.com/helopony/bikebook-cli/internal/cli.builtAt={{ .CommitDate }}
+
+archives:
+  - id: bikebook
+    ids:
+      - bikebook
+    name_template: "{{ .ProjectName }}_{{ .Tag }}_{{ .Os }}_{{ .Arch }}"
+    formats:
+      - tar.gz
+    format_overrides:
+      - goos: windows
+        formats:
+          - zip
+    files:
+      - LICENSE
+      - README.md
+
+checksum:
+  name_template: "{{ .ProjectName }}_{{ .Tag }}_checksums.txt"
+  algorithm: sha256
+
+sboms:
+  - id: archive
+    artifacts: archive
+    cmd: syft
+    args:
+      - "$artifact"
+      - "--output"
+      - "cyclonedx-json=$document"
+
+brews:
+  - name: bikebook
+    ids:
+      - bikebook
+    repository:
+      owner: helopony
+      name: homebrew-tap
+      branch: main
+      token: "{{ .Env.TAP_GITHUB_TOKEN }}"
+    directory: Formula
+    homepage: "https://github.com/helopony/bikebook-cli"
+    description: "Agent-first CLI for the BikeBook Workshop API"
+    license: MIT
+    install: |
+      bin.install "bikebook"
+    test: |
+      system "#{bin}/bikebook", "version"
+
+release:
+  github:
+    owner: helopony
+    name: bikebook-cli
+  prerelease: auto
+
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - "^docs:"
+      - "^test:"

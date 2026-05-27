@@ -76,7 +76,7 @@ func newRootCommand() (*cobra.Command, *rootOptions) {
 		SilenceErrors: true,
 		Version:       versionString(defaultAPIBase),
 		PersistentPreRunE: func(cmd *cobra.Command, args []string) error {
-			if commandHasAncestor(cmd, "config") || cmd.Name() == "describe" || cmd.Name() == "doctor" || cmd.Name() == "version" {
+			if commandHasAncestor(cmd, "config") || cmd.Name() == "describe" || cmd.Name() == "doctor" || cmd.Name() == "upgrade" || cmd.Name() == "version" {
 				return nil
 			}
 			_, err := ResolveAuth(opts)
@@ -108,6 +108,7 @@ func newRootCommand() (*cobra.Command, *rootOptions) {
 	cmd.AddCommand(newRawCommand(&opts))
 	cmd.AddCommand(newReadCommands(&opts)...)
 	addWriteCommands(cmd, &opts)
+	cmd.AddCommand(newUpgradeCommand(&opts))
 	cmd.AddCommand(newVersionCommand(&opts))
 
 	return cmd, &opts
