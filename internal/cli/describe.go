@@ -272,6 +272,14 @@ func describeCommandInputs(cmd *cobra.Command) []DescribeInputField {
 	if cmd.Name() == "config" || commandHasAncestor(cmd, "config") {
 		return []DescribeInputField{{Name: "api_key", Location: "stdin/env", Required: false, Description: "API key for config set api-key. Prefer stdin or BIKEBOOK_API_KEY."}}
 	}
+	if cmd.Name() == "raw" {
+		return []DescribeInputField{
+			{Name: "method", Location: "argument", Required: true, Description: "HTTP method to send to BikeBook."},
+			{Name: "path", Location: "argument", Required: true, Description: "API path relative to --api-base, including optional query string."},
+			{Name: "data", Location: "flag/stdin", Required: false, Description: "Request body from --data @file, --data -, literal --data, or stdin for write methods."},
+			{Name: "header", Location: "flag", Required: false, Description: "Additional request header, repeatable."},
+		}
+	}
 	return nil
 }
 
@@ -281,6 +289,8 @@ func describeCommandOutput(cmd *cobra.Command) any {
 		return map[string]string{"type": "DescribeDocument or DescribeCommand"}
 	case "doctor":
 		return map[string]string{"type": "array", "items": "DoctorCheck"}
+	case "raw":
+		return map[string]string{"type": "upstream API response"}
 	case "version":
 		return map[string]string{"type": "VersionInfo"}
 	default:
