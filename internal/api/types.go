@@ -13,155 +13,6608 @@ const (
 	BearerAuthScopes bearerAuthContextKey = "bearerAuth.Scopes"
 )
 
-// ApiError Public API error details. Codes are stable machine-readable values.
-type ApiError struct {
-	// Code Stable machine-readable error code, such as invalid_request or resource_not_found.
-	Code *string `json:"code,omitempty"`
+// Defines values for AcceptedStatusChangeNotificationsCustomer.
+const (
+	AcceptedStatusChangeNotificationsCustomerDefault AcceptedStatusChangeNotificationsCustomer = "default"
+	AcceptedStatusChangeNotificationsCustomerSend    AcceptedStatusChangeNotificationsCustomer = "send"
+	AcceptedStatusChangeNotificationsCustomerSkip    AcceptedStatusChangeNotificationsCustomer = "skip"
+)
 
-	// Message Human-readable explanation of the error.
-	Message *string `json:"message,omitempty"`
-
-	// Parameter Request parameter related to the error, when the failure can be tied to one field.
-	Parameter *string `json:"parameter,omitempty"`
+// Valid indicates whether the value is a known member of the AcceptedStatusChangeNotificationsCustomer enum.
+func (e AcceptedStatusChangeNotificationsCustomer) Valid() bool {
+	switch e {
+	case AcceptedStatusChangeNotificationsCustomerDefault:
+		return true
+	case AcceptedStatusChangeNotificationsCustomerSend:
+		return true
+	case AcceptedStatusChangeNotificationsCustomerSkip:
+		return true
+	default:
+		return false
+	}
 }
 
-// ApiErrorResponse Standard error envelope returned by public API endpoints.
-type ApiErrorResponse struct {
-	// Error Public API error details. Codes are stable machine-readable values.
-	Error *ApiError `json:"error,omitempty"`
+// Defines values for AssetBikeType.
+const (
+	AssetBikeTypeBmx           AssetBikeType = "bmx"
+	AssetBikeTypeECargo        AssetBikeType = "e_cargo"
+	AssetBikeTypeEGravel       AssetBikeType = "e_gravel"
+	AssetBikeTypeERoad         AssetBikeType = "e_road"
+	AssetBikeTypeElectricBike  AssetBikeType = "electric_bike"
+	AssetBikeTypeGenericBike   AssetBikeType = "generic_bike"
+	AssetBikeTypeGravel        AssetBikeType = "gravel"
+	AssetBikeTypeHybrid        AssetBikeType = "hybrid"
+	AssetBikeTypeKidsBike      AssetBikeType = "kids_bike"
+	AssetBikeTypeMountainBike  AssetBikeType = "mountain_bike"
+	AssetBikeTypeOther         AssetBikeType = "other"
+	AssetBikeTypeRoadBike      AssetBikeType = "road_bike"
+	AssetBikeTypeSingleSpeed   AssetBikeType = "single_speed"
+	AssetBikeTypeStaticBike    AssetBikeType = "static_bike"
+	AssetBikeTypeTriathlonBike AssetBikeType = "triathlon_bike"
+)
 
-	// RequestId Request correlation id. Matches X-Bikebook-Request-Id when the caller supplies one.
-	RequestId *string `json:"request_id,omitempty"`
+// Valid indicates whether the value is a known member of the AssetBikeType enum.
+func (e AssetBikeType) Valid() bool {
+	switch e {
+	case AssetBikeTypeBmx:
+		return true
+	case AssetBikeTypeECargo:
+		return true
+	case AssetBikeTypeEGravel:
+		return true
+	case AssetBikeTypeERoad:
+		return true
+	case AssetBikeTypeElectricBike:
+		return true
+	case AssetBikeTypeGenericBike:
+		return true
+	case AssetBikeTypeGravel:
+		return true
+	case AssetBikeTypeHybrid:
+		return true
+	case AssetBikeTypeKidsBike:
+		return true
+	case AssetBikeTypeMountainBike:
+		return true
+	case AssetBikeTypeOther:
+		return true
+	case AssetBikeTypeRoadBike:
+		return true
+	case AssetBikeTypeSingleSpeed:
+		return true
+	case AssetBikeTypeStaticBike:
+		return true
+	case AssetBikeTypeTriathlonBike:
+		return true
+	default:
+		return false
+	}
 }
 
-// ApiListResponseOfAssetResponse Standard public API list response with cursor pagination metadata.
-type ApiListResponseOfAssetResponse struct {
-	// Data Page of public resources returned by the list endpoint.
-	Data *[]AssetResponse `json:"data,omitempty"`
+// Defines values for AssetObject.
+const (
+	AssetObjectAsset AssetObject = "asset"
+)
 
-	// Pagination Cursor pagination metadata used by public list endpoints.
-	Pagination *ApiPagination `json:"pagination,omitempty"`
+// Valid indicates whether the value is a known member of the AssetObject enum.
+func (e AssetObject) Valid() bool {
+	switch e {
+	case AssetObjectAsset:
+		return true
+	default:
+		return false
+	}
 }
 
-// ApiListResponseOfBusinessResponse Standard public API list response with cursor pagination metadata.
-type ApiListResponseOfBusinessResponse struct {
-	// Data Page of public resources returned by the list endpoint.
-	Data *[]BusinessResponse `json:"data,omitempty"`
+// Defines values for AssetCreateRequestBikeType.
+const (
+	AssetCreateRequestBikeTypeBmx           AssetCreateRequestBikeType = "bmx"
+	AssetCreateRequestBikeTypeECargo        AssetCreateRequestBikeType = "e_cargo"
+	AssetCreateRequestBikeTypeEGravel       AssetCreateRequestBikeType = "e_gravel"
+	AssetCreateRequestBikeTypeERoad         AssetCreateRequestBikeType = "e_road"
+	AssetCreateRequestBikeTypeElectricBike  AssetCreateRequestBikeType = "electric_bike"
+	AssetCreateRequestBikeTypeGenericBike   AssetCreateRequestBikeType = "generic_bike"
+	AssetCreateRequestBikeTypeGravel        AssetCreateRequestBikeType = "gravel"
+	AssetCreateRequestBikeTypeHybrid        AssetCreateRequestBikeType = "hybrid"
+	AssetCreateRequestBikeTypeKidsBike      AssetCreateRequestBikeType = "kids_bike"
+	AssetCreateRequestBikeTypeMountainBike  AssetCreateRequestBikeType = "mountain_bike"
+	AssetCreateRequestBikeTypeOther         AssetCreateRequestBikeType = "other"
+	AssetCreateRequestBikeTypeRoadBike      AssetCreateRequestBikeType = "road_bike"
+	AssetCreateRequestBikeTypeSingleSpeed   AssetCreateRequestBikeType = "single_speed"
+	AssetCreateRequestBikeTypeStaticBike    AssetCreateRequestBikeType = "static_bike"
+	AssetCreateRequestBikeTypeTriathlonBike AssetCreateRequestBikeType = "triathlon_bike"
+)
 
-	// Pagination Cursor pagination metadata used by public list endpoints.
-	Pagination *ApiPagination `json:"pagination,omitempty"`
+// Valid indicates whether the value is a known member of the AssetCreateRequestBikeType enum.
+func (e AssetCreateRequestBikeType) Valid() bool {
+	switch e {
+	case AssetCreateRequestBikeTypeBmx:
+		return true
+	case AssetCreateRequestBikeTypeECargo:
+		return true
+	case AssetCreateRequestBikeTypeEGravel:
+		return true
+	case AssetCreateRequestBikeTypeERoad:
+		return true
+	case AssetCreateRequestBikeTypeElectricBike:
+		return true
+	case AssetCreateRequestBikeTypeGenericBike:
+		return true
+	case AssetCreateRequestBikeTypeGravel:
+		return true
+	case AssetCreateRequestBikeTypeHybrid:
+		return true
+	case AssetCreateRequestBikeTypeKidsBike:
+		return true
+	case AssetCreateRequestBikeTypeMountainBike:
+		return true
+	case AssetCreateRequestBikeTypeOther:
+		return true
+	case AssetCreateRequestBikeTypeRoadBike:
+		return true
+	case AssetCreateRequestBikeTypeSingleSpeed:
+		return true
+	case AssetCreateRequestBikeTypeStaticBike:
+		return true
+	case AssetCreateRequestBikeTypeTriathlonBike:
+		return true
+	default:
+		return false
+	}
 }
 
-// ApiListResponseOfChatMessageResponse Standard public API list response with cursor pagination metadata.
-type ApiListResponseOfChatMessageResponse struct {
-	// Data Page of public resources returned by the list endpoint.
-	Data *[]ChatMessageResponse `json:"data,omitempty"`
+// Defines values for AssetUpdateRequestBikeType.
+const (
+	AssetUpdateRequestBikeTypeBmx           AssetUpdateRequestBikeType = "bmx"
+	AssetUpdateRequestBikeTypeECargo        AssetUpdateRequestBikeType = "e_cargo"
+	AssetUpdateRequestBikeTypeEGravel       AssetUpdateRequestBikeType = "e_gravel"
+	AssetUpdateRequestBikeTypeERoad         AssetUpdateRequestBikeType = "e_road"
+	AssetUpdateRequestBikeTypeElectricBike  AssetUpdateRequestBikeType = "electric_bike"
+	AssetUpdateRequestBikeTypeGenericBike   AssetUpdateRequestBikeType = "generic_bike"
+	AssetUpdateRequestBikeTypeGravel        AssetUpdateRequestBikeType = "gravel"
+	AssetUpdateRequestBikeTypeHybrid        AssetUpdateRequestBikeType = "hybrid"
+	AssetUpdateRequestBikeTypeKidsBike      AssetUpdateRequestBikeType = "kids_bike"
+	AssetUpdateRequestBikeTypeMountainBike  AssetUpdateRequestBikeType = "mountain_bike"
+	AssetUpdateRequestBikeTypeOther         AssetUpdateRequestBikeType = "other"
+	AssetUpdateRequestBikeTypeRoadBike      AssetUpdateRequestBikeType = "road_bike"
+	AssetUpdateRequestBikeTypeSingleSpeed   AssetUpdateRequestBikeType = "single_speed"
+	AssetUpdateRequestBikeTypeStaticBike    AssetUpdateRequestBikeType = "static_bike"
+	AssetUpdateRequestBikeTypeTriathlonBike AssetUpdateRequestBikeType = "triathlon_bike"
+)
 
-	// Pagination Cursor pagination metadata used by public list endpoints.
-	Pagination *ApiPagination `json:"pagination,omitempty"`
+// Valid indicates whether the value is a known member of the AssetUpdateRequestBikeType enum.
+func (e AssetUpdateRequestBikeType) Valid() bool {
+	switch e {
+	case AssetUpdateRequestBikeTypeBmx:
+		return true
+	case AssetUpdateRequestBikeTypeECargo:
+		return true
+	case AssetUpdateRequestBikeTypeEGravel:
+		return true
+	case AssetUpdateRequestBikeTypeERoad:
+		return true
+	case AssetUpdateRequestBikeTypeElectricBike:
+		return true
+	case AssetUpdateRequestBikeTypeGenericBike:
+		return true
+	case AssetUpdateRequestBikeTypeGravel:
+		return true
+	case AssetUpdateRequestBikeTypeHybrid:
+		return true
+	case AssetUpdateRequestBikeTypeKidsBike:
+		return true
+	case AssetUpdateRequestBikeTypeMountainBike:
+		return true
+	case AssetUpdateRequestBikeTypeOther:
+		return true
+	case AssetUpdateRequestBikeTypeRoadBike:
+		return true
+	case AssetUpdateRequestBikeTypeSingleSpeed:
+		return true
+	case AssetUpdateRequestBikeTypeStaticBike:
+		return true
+	case AssetUpdateRequestBikeTypeTriathlonBike:
+		return true
+	default:
+		return false
+	}
 }
 
-// ApiListResponseOfCustomerResponse Standard public API list response with cursor pagination metadata.
-type ApiListResponseOfCustomerResponse struct {
-	// Data Page of public resources returned by the list endpoint.
-	Data *[]CustomerResponse `json:"data,omitempty"`
+// Defines values for AvailabilityCalendarObject.
+const (
+	Availability AvailabilityCalendarObject = "availability"
+)
 
-	// Pagination Cursor pagination metadata used by public list endpoints.
-	Pagination *ApiPagination `json:"pagination,omitempty"`
+// Valid indicates whether the value is a known member of the AvailabilityCalendarObject enum.
+func (e AvailabilityCalendarObject) Valid() bool {
+	switch e {
+	case Availability:
+		return true
+	default:
+		return false
+	}
 }
 
-// ApiListResponseOfInvoiceResponse Standard public API list response with cursor pagination metadata.
-type ApiListResponseOfInvoiceResponse struct {
-	// Data Page of public resources returned by the list endpoint.
-	Data *[]InvoiceResponse `json:"data,omitempty"`
+// Defines values for AvailabilitySlotsResultObject.
+const (
+	AvailabilitySlots AvailabilitySlotsResultObject = "availability_slots"
+)
 
-	// Pagination Cursor pagination metadata used by public list endpoints.
-	Pagination *ApiPagination `json:"pagination,omitempty"`
+// Valid indicates whether the value is a known member of the AvailabilitySlotsResultObject enum.
+func (e AvailabilitySlotsResultObject) Valid() bool {
+	switch e {
+	case AvailabilitySlots:
+		return true
+	default:
+		return false
+	}
 }
 
-// ApiListResponseOfJobReportResponse Standard public API list response with cursor pagination metadata.
-type ApiListResponseOfJobReportResponse struct {
-	// Data Page of public resources returned by the list endpoint.
-	Data *[]JobReportResponse `json:"data,omitempty"`
+// Defines values for BackOrderObject.
+const (
+	BackOrderObjectBackOrder BackOrderObject = "back_order"
+)
 
-	// Pagination Cursor pagination metadata used by public list endpoints.
-	Pagination *ApiPagination `json:"pagination,omitempty"`
+// Valid indicates whether the value is a known member of the BackOrderObject enum.
+func (e BackOrderObject) Valid() bool {
+	switch e {
+	case BackOrderObjectBackOrder:
+		return true
+	default:
+		return false
+	}
 }
 
-// ApiListResponseOfJobResponse Standard public API list response with cursor pagination metadata.
-type ApiListResponseOfJobResponse struct {
-	// Data Page of public resources returned by the list endpoint.
-	Data *[]JobResponse `json:"data,omitempty"`
+// Defines values for BackOrderSource.
+const (
+	BackOrderSourceGeneral BackOrderSource = "general"
+	BackOrderSourceInvoice BackOrderSource = "invoice"
+	BackOrderSourceJob     BackOrderSource = "job"
+)
 
-	// Pagination Cursor pagination metadata used by public list endpoints.
-	Pagination *ApiPagination `json:"pagination,omitempty"`
+// Valid indicates whether the value is a known member of the BackOrderSource enum.
+func (e BackOrderSource) Valid() bool {
+	switch e {
+	case BackOrderSourceGeneral:
+		return true
+	case BackOrderSourceInvoice:
+		return true
+	case BackOrderSourceJob:
+		return true
+	default:
+		return false
+	}
 }
 
-// ApiListResponseOfPartAuthorisationResponse Standard public API list response with cursor pagination metadata.
-type ApiListResponseOfPartAuthorisationResponse struct {
-	// Data Part lines on the job report. Each element includes a `pauth_...` `id` for submit decisions.
-	Data *[]PartAuthorisationResponse `json:"data,omitempty"`
+// Defines values for BackOrderStatus.
+const (
+	BackOrderStatusNeedsOrdering     BackOrderStatus = "needs_ordering"
+	BackOrderStatusReceived          BackOrderStatus = "received"
+	BackOrderStatusWaitingOnDelivery BackOrderStatus = "waiting_on_delivery"
+)
 
-	// Pagination Cursor pagination metadata used by public list endpoints.
-	Pagination *ApiPagination `json:"pagination,omitempty"`
+// Valid indicates whether the value is a known member of the BackOrderStatus enum.
+func (e BackOrderStatus) Valid() bool {
+	switch e {
+	case BackOrderStatusNeedsOrdering:
+		return true
+	case BackOrderStatusReceived:
+		return true
+	case BackOrderStatusWaitingOnDelivery:
+		return true
+	default:
+		return false
+	}
 }
 
-// ApiListResponseOfServiceResponse Standard public API list response with cursor pagination metadata.
-type ApiListResponseOfServiceResponse struct {
-	// Data Page of public resources returned by the list endpoint.
-	Data *[]ServiceResponse `json:"data,omitempty"`
+// Defines values for BackOrderCreateRequestStatus.
+const (
+	BackOrderCreateRequestStatusNeedsOrdering     BackOrderCreateRequestStatus = "needs_ordering"
+	BackOrderCreateRequestStatusReceived          BackOrderCreateRequestStatus = "received"
+	BackOrderCreateRequestStatusWaitingOnDelivery BackOrderCreateRequestStatus = "waiting_on_delivery"
+)
 
-	// Pagination Cursor pagination metadata used by public list endpoints.
-	Pagination *ApiPagination `json:"pagination,omitempty"`
+// Valid indicates whether the value is a known member of the BackOrderCreateRequestStatus enum.
+func (e BackOrderCreateRequestStatus) Valid() bool {
+	switch e {
+	case BackOrderCreateRequestStatusNeedsOrdering:
+		return true
+	case BackOrderCreateRequestStatusReceived:
+		return true
+	case BackOrderCreateRequestStatusWaitingOnDelivery:
+		return true
+	default:
+		return false
+	}
 }
 
-// ApiListResponseOfStockVariationResponse Standard public API list response with cursor pagination metadata.
-type ApiListResponseOfStockVariationResponse struct {
-	// Data Page of public resources returned by the list endpoint.
-	Data *[]StockVariationResponse `json:"data,omitempty"`
+// Defines values for BackOrderUpdateRequestStatus.
+const (
+	BackOrderUpdateRequestStatusNeedsOrdering     BackOrderUpdateRequestStatus = "needs_ordering"
+	BackOrderUpdateRequestStatusReceived          BackOrderUpdateRequestStatus = "received"
+	BackOrderUpdateRequestStatusWaitingOnDelivery BackOrderUpdateRequestStatus = "waiting_on_delivery"
+)
 
-	// Pagination Cursor pagination metadata used by public list endpoints.
-	Pagination *ApiPagination `json:"pagination,omitempty"`
+// Valid indicates whether the value is a known member of the BackOrderUpdateRequestStatus enum.
+func (e BackOrderUpdateRequestStatus) Valid() bool {
+	switch e {
+	case BackOrderUpdateRequestStatusNeedsOrdering:
+		return true
+	case BackOrderUpdateRequestStatusReceived:
+		return true
+	case BackOrderUpdateRequestStatusWaitingOnDelivery:
+		return true
+	default:
+		return false
+	}
 }
 
-// ApiListResponseOfWebhookDeliveryResponse Standard public API list response with cursor pagination metadata.
-type ApiListResponseOfWebhookDeliveryResponse struct {
-	// Data Page of public resources returned by the list endpoint.
-	Data *[]WebhookDeliveryResponse `json:"data,omitempty"`
+// Defines values for BusinessBusinessType.
+const (
+	Location BusinessBusinessType = "location"
+	Mobile   BusinessBusinessType = "mobile"
+)
 
-	// Pagination Cursor pagination metadata used by public list endpoints.
-	Pagination *ApiPagination `json:"pagination,omitempty"`
+// Valid indicates whether the value is a known member of the BusinessBusinessType enum.
+func (e BusinessBusinessType) Valid() bool {
+	switch e {
+	case Location:
+		return true
+	case Mobile:
+		return true
+	default:
+		return false
+	}
 }
 
-// ApiListResponseOfWebhookEndpointResponse Standard public API list response with cursor pagination metadata.
-type ApiListResponseOfWebhookEndpointResponse struct {
-	// Data Page of public resources returned by the list endpoint.
-	Data *[]WebhookEndpointResponse `json:"data,omitempty"`
+// Defines values for BusinessCountry.
+const (
+	BusinessCountryABW BusinessCountry = "ABW"
+	BusinessCountryAFG BusinessCountry = "AFG"
+	BusinessCountryAGO BusinessCountry = "AGO"
+	BusinessCountryAIA BusinessCountry = "AIA"
+	BusinessCountryALA BusinessCountry = "ALA"
+	BusinessCountryALB BusinessCountry = "ALB"
+	BusinessCountryAND BusinessCountry = "AND"
+	BusinessCountryANT BusinessCountry = "ANT"
+	BusinessCountryARE BusinessCountry = "ARE"
+	BusinessCountryARG BusinessCountry = "ARG"
+	BusinessCountryARM BusinessCountry = "ARM"
+	BusinessCountryASM BusinessCountry = "ASM"
+	BusinessCountryATA BusinessCountry = "ATA"
+	BusinessCountryATF BusinessCountry = "ATF"
+	BusinessCountryATG BusinessCountry = "ATG"
+	BusinessCountryAUS BusinessCountry = "AUS"
+	BusinessCountryAUT BusinessCountry = "AUT"
+	BusinessCountryAZE BusinessCountry = "AZE"
+	BusinessCountryBDI BusinessCountry = "BDI"
+	BusinessCountryBEL BusinessCountry = "BEL"
+	BusinessCountryBEN BusinessCountry = "BEN"
+	BusinessCountryBES BusinessCountry = "BES"
+	BusinessCountryBFA BusinessCountry = "BFA"
+	BusinessCountryBGD BusinessCountry = "BGD"
+	BusinessCountryBGR BusinessCountry = "BGR"
+	BusinessCountryBHR BusinessCountry = "BHR"
+	BusinessCountryBHS BusinessCountry = "BHS"
+	BusinessCountryBIH BusinessCountry = "BIH"
+	BusinessCountryBLM BusinessCountry = "BLM"
+	BusinessCountryBLR BusinessCountry = "BLR"
+	BusinessCountryBLZ BusinessCountry = "BLZ"
+	BusinessCountryBMU BusinessCountry = "BMU"
+	BusinessCountryBOL BusinessCountry = "BOL"
+	BusinessCountryBRA BusinessCountry = "BRA"
+	BusinessCountryBRB BusinessCountry = "BRB"
+	BusinessCountryBRN BusinessCountry = "BRN"
+	BusinessCountryBTN BusinessCountry = "BTN"
+	BusinessCountryBVT BusinessCountry = "BVT"
+	BusinessCountryBWA BusinessCountry = "BWA"
+	BusinessCountryCAF BusinessCountry = "CAF"
+	BusinessCountryCAN BusinessCountry = "CAN"
+	BusinessCountryCCK BusinessCountry = "CCK"
+	BusinessCountryCHE BusinessCountry = "CHE"
+	BusinessCountryCHL BusinessCountry = "CHL"
+	BusinessCountryCHN BusinessCountry = "CHN"
+	BusinessCountryCIV BusinessCountry = "CIV"
+	BusinessCountryCMR BusinessCountry = "CMR"
+	BusinessCountryCOD BusinessCountry = "COD"
+	BusinessCountryCOG BusinessCountry = "COG"
+	BusinessCountryCOK BusinessCountry = "COK"
+	BusinessCountryCOL BusinessCountry = "COL"
+	BusinessCountryCOM BusinessCountry = "COM"
+	BusinessCountryCPV BusinessCountry = "CPV"
+	BusinessCountryCRI BusinessCountry = "CRI"
+	BusinessCountryCUB BusinessCountry = "CUB"
+	BusinessCountryCUW BusinessCountry = "CUW"
+	BusinessCountryCXR BusinessCountry = "CXR"
+	BusinessCountryCYM BusinessCountry = "CYM"
+	BusinessCountryCYP BusinessCountry = "CYP"
+	BusinessCountryCZE BusinessCountry = "CZE"
+	BusinessCountryDEU BusinessCountry = "DEU"
+	BusinessCountryDJI BusinessCountry = "DJI"
+	BusinessCountryDMA BusinessCountry = "DMA"
+	BusinessCountryDNK BusinessCountry = "DNK"
+	BusinessCountryDOM BusinessCountry = "DOM"
+	BusinessCountryDZA BusinessCountry = "DZA"
+	BusinessCountryECU BusinessCountry = "ECU"
+	BusinessCountryEGY BusinessCountry = "EGY"
+	BusinessCountryERI BusinessCountry = "ERI"
+	BusinessCountryESH BusinessCountry = "ESH"
+	BusinessCountryESP BusinessCountry = "ESP"
+	BusinessCountryEST BusinessCountry = "EST"
+	BusinessCountryETH BusinessCountry = "ETH"
+	BusinessCountryFIN BusinessCountry = "FIN"
+	BusinessCountryFJI BusinessCountry = "FJI"
+	BusinessCountryFLK BusinessCountry = "FLK"
+	BusinessCountryFRA BusinessCountry = "FRA"
+	BusinessCountryFRO BusinessCountry = "FRO"
+	BusinessCountryFSM BusinessCountry = "FSM"
+	BusinessCountryGAB BusinessCountry = "GAB"
+	BusinessCountryGBR BusinessCountry = "GBR"
+	BusinessCountryGEO BusinessCountry = "GEO"
+	BusinessCountryGGY BusinessCountry = "GGY"
+	BusinessCountryGHA BusinessCountry = "GHA"
+	BusinessCountryGIB BusinessCountry = "GIB"
+	BusinessCountryGIN BusinessCountry = "GIN"
+	BusinessCountryGLP BusinessCountry = "GLP"
+	BusinessCountryGMB BusinessCountry = "GMB"
+	BusinessCountryGNB BusinessCountry = "GNB"
+	BusinessCountryGNQ BusinessCountry = "GNQ"
+	BusinessCountryGRC BusinessCountry = "GRC"
+	BusinessCountryGRD BusinessCountry = "GRD"
+	BusinessCountryGRL BusinessCountry = "GRL"
+	BusinessCountryGTM BusinessCountry = "GTM"
+	BusinessCountryGUF BusinessCountry = "GUF"
+	BusinessCountryGUM BusinessCountry = "GUM"
+	BusinessCountryGUY BusinessCountry = "GUY"
+	BusinessCountryHKG BusinessCountry = "HKG"
+	BusinessCountryHMD BusinessCountry = "HMD"
+	BusinessCountryHND BusinessCountry = "HND"
+	BusinessCountryHRV BusinessCountry = "HRV"
+	BusinessCountryHTI BusinessCountry = "HTI"
+	BusinessCountryHUN BusinessCountry = "HUN"
+	BusinessCountryIDN BusinessCountry = "IDN"
+	BusinessCountryIMN BusinessCountry = "IMN"
+	BusinessCountryIND BusinessCountry = "IND"
+	BusinessCountryIOT BusinessCountry = "IOT"
+	BusinessCountryIRL BusinessCountry = "IRL"
+	BusinessCountryIRN BusinessCountry = "IRN"
+	BusinessCountryIRQ BusinessCountry = "IRQ"
+	BusinessCountryISL BusinessCountry = "ISL"
+	BusinessCountryISR BusinessCountry = "ISR"
+	BusinessCountryITA BusinessCountry = "ITA"
+	BusinessCountryJAM BusinessCountry = "JAM"
+	BusinessCountryJEY BusinessCountry = "JEY"
+	BusinessCountryJOR BusinessCountry = "JOR"
+	BusinessCountryJPN BusinessCountry = "JPN"
+	BusinessCountryKAZ BusinessCountry = "KAZ"
+	BusinessCountryKEN BusinessCountry = "KEN"
+	BusinessCountryKGZ BusinessCountry = "KGZ"
+	BusinessCountryKHM BusinessCountry = "KHM"
+	BusinessCountryKIR BusinessCountry = "KIR"
+	BusinessCountryKNA BusinessCountry = "KNA"
+	BusinessCountryKOR BusinessCountry = "KOR"
+	BusinessCountryKWT BusinessCountry = "KWT"
+	BusinessCountryLAO BusinessCountry = "LAO"
+	BusinessCountryLBN BusinessCountry = "LBN"
+	BusinessCountryLBR BusinessCountry = "LBR"
+	BusinessCountryLBY BusinessCountry = "LBY"
+	BusinessCountryLCA BusinessCountry = "LCA"
+	BusinessCountryLIE BusinessCountry = "LIE"
+	BusinessCountryLKA BusinessCountry = "LKA"
+	BusinessCountryLSO BusinessCountry = "LSO"
+	BusinessCountryLTU BusinessCountry = "LTU"
+	BusinessCountryLUX BusinessCountry = "LUX"
+	BusinessCountryLVA BusinessCountry = "LVA"
+	BusinessCountryMAC BusinessCountry = "MAC"
+	BusinessCountryMAF BusinessCountry = "MAF"
+	BusinessCountryMAR BusinessCountry = "MAR"
+	BusinessCountryMCO BusinessCountry = "MCO"
+	BusinessCountryMDA BusinessCountry = "MDA"
+	BusinessCountryMDG BusinessCountry = "MDG"
+	BusinessCountryMDV BusinessCountry = "MDV"
+	BusinessCountryMEX BusinessCountry = "MEX"
+	BusinessCountryMHL BusinessCountry = "MHL"
+	BusinessCountryMKD BusinessCountry = "MKD"
+	BusinessCountryMLI BusinessCountry = "MLI"
+	BusinessCountryMLT BusinessCountry = "MLT"
+	BusinessCountryMMR BusinessCountry = "MMR"
+	BusinessCountryMNE BusinessCountry = "MNE"
+	BusinessCountryMNG BusinessCountry = "MNG"
+	BusinessCountryMNP BusinessCountry = "MNP"
+	BusinessCountryMOZ BusinessCountry = "MOZ"
+	BusinessCountryMRT BusinessCountry = "MRT"
+	BusinessCountryMSR BusinessCountry = "MSR"
+	BusinessCountryMTQ BusinessCountry = "MTQ"
+	BusinessCountryMUS BusinessCountry = "MUS"
+	BusinessCountryMWI BusinessCountry = "MWI"
+	BusinessCountryMYS BusinessCountry = "MYS"
+	BusinessCountryMYT BusinessCountry = "MYT"
+	BusinessCountryNAM BusinessCountry = "NAM"
+	BusinessCountryNCL BusinessCountry = "NCL"
+	BusinessCountryNER BusinessCountry = "NER"
+	BusinessCountryNFK BusinessCountry = "NFK"
+	BusinessCountryNGA BusinessCountry = "NGA"
+	BusinessCountryNIC BusinessCountry = "NIC"
+	BusinessCountryNIU BusinessCountry = "NIU"
+	BusinessCountryNLD BusinessCountry = "NLD"
+	BusinessCountryNOR BusinessCountry = "NOR"
+	BusinessCountryNPL BusinessCountry = "NPL"
+	BusinessCountryNRU BusinessCountry = "NRU"
+	BusinessCountryNZL BusinessCountry = "NZL"
+	BusinessCountryOMN BusinessCountry = "OMN"
+	BusinessCountryPAK BusinessCountry = "PAK"
+	BusinessCountryPAN BusinessCountry = "PAN"
+	BusinessCountryPCN BusinessCountry = "PCN"
+	BusinessCountryPER BusinessCountry = "PER"
+	BusinessCountryPHL BusinessCountry = "PHL"
+	BusinessCountryPLW BusinessCountry = "PLW"
+	BusinessCountryPNG BusinessCountry = "PNG"
+	BusinessCountryPOL BusinessCountry = "POL"
+	BusinessCountryPRI BusinessCountry = "PRI"
+	BusinessCountryPRK BusinessCountry = "PRK"
+	BusinessCountryPRT BusinessCountry = "PRT"
+	BusinessCountryPRY BusinessCountry = "PRY"
+	BusinessCountryPSE BusinessCountry = "PSE"
+	BusinessCountryPYF BusinessCountry = "PYF"
+	BusinessCountryQAT BusinessCountry = "QAT"
+	BusinessCountryREU BusinessCountry = "REU"
+	BusinessCountryROU BusinessCountry = "ROU"
+	BusinessCountryRUS BusinessCountry = "RUS"
+	BusinessCountryRWA BusinessCountry = "RWA"
+	BusinessCountrySAU BusinessCountry = "SAU"
+	BusinessCountrySCG BusinessCountry = "SCG"
+	BusinessCountrySDN BusinessCountry = "SDN"
+	BusinessCountrySEN BusinessCountry = "SEN"
+	BusinessCountrySGP BusinessCountry = "SGP"
+	BusinessCountrySGS BusinessCountry = "SGS"
+	BusinessCountrySHN BusinessCountry = "SHN"
+	BusinessCountrySJM BusinessCountry = "SJM"
+	BusinessCountrySLB BusinessCountry = "SLB"
+	BusinessCountrySLE BusinessCountry = "SLE"
+	BusinessCountrySLV BusinessCountry = "SLV"
+	BusinessCountrySMR BusinessCountry = "SMR"
+	BusinessCountrySOM BusinessCountry = "SOM"
+	BusinessCountrySPM BusinessCountry = "SPM"
+	BusinessCountrySRB BusinessCountry = "SRB"
+	BusinessCountrySSD BusinessCountry = "SSD"
+	BusinessCountrySTP BusinessCountry = "STP"
+	BusinessCountrySUR BusinessCountry = "SUR"
+	BusinessCountrySVK BusinessCountry = "SVK"
+	BusinessCountrySVN BusinessCountry = "SVN"
+	BusinessCountrySWE BusinessCountry = "SWE"
+	BusinessCountrySWZ BusinessCountry = "SWZ"
+	BusinessCountrySXM BusinessCountry = "SXM"
+	BusinessCountrySYC BusinessCountry = "SYC"
+	BusinessCountrySYR BusinessCountry = "SYR"
+	BusinessCountryTCA BusinessCountry = "TCA"
+	BusinessCountryTCD BusinessCountry = "TCD"
+	BusinessCountryTGO BusinessCountry = "TGO"
+	BusinessCountryTHA BusinessCountry = "THA"
+	BusinessCountryTJK BusinessCountry = "TJK"
+	BusinessCountryTKL BusinessCountry = "TKL"
+	BusinessCountryTKM BusinessCountry = "TKM"
+	BusinessCountryTLS BusinessCountry = "TLS"
+	BusinessCountryTON BusinessCountry = "TON"
+	BusinessCountryTTO BusinessCountry = "TTO"
+	BusinessCountryTUN BusinessCountry = "TUN"
+	BusinessCountryTUR BusinessCountry = "TUR"
+	BusinessCountryTUV BusinessCountry = "TUV"
+	BusinessCountryTWN BusinessCountry = "TWN"
+	BusinessCountryTZA BusinessCountry = "TZA"
+	BusinessCountryUGA BusinessCountry = "UGA"
+	BusinessCountryUKR BusinessCountry = "UKR"
+	BusinessCountryUMI BusinessCountry = "UMI"
+	BusinessCountryURY BusinessCountry = "URY"
+	BusinessCountryUSA BusinessCountry = "USA"
+	BusinessCountryUZB BusinessCountry = "UZB"
+	BusinessCountryVAT BusinessCountry = "VAT"
+	BusinessCountryVCT BusinessCountry = "VCT"
+	BusinessCountryVEN BusinessCountry = "VEN"
+	BusinessCountryVGB BusinessCountry = "VGB"
+	BusinessCountryVIR BusinessCountry = "VIR"
+	BusinessCountryVNM BusinessCountry = "VNM"
+	BusinessCountryVUT BusinessCountry = "VUT"
+	BusinessCountryWLF BusinessCountry = "WLF"
+	BusinessCountryWSM BusinessCountry = "WSM"
+	BusinessCountryXKX BusinessCountry = "XKX"
+	BusinessCountryYEM BusinessCountry = "YEM"
+	BusinessCountryZAF BusinessCountry = "ZAF"
+	BusinessCountryZMB BusinessCountry = "ZMB"
+	BusinessCountryZWE BusinessCountry = "ZWE"
+)
 
-	// Pagination Cursor pagination metadata used by public list endpoints.
-	Pagination *ApiPagination `json:"pagination,omitempty"`
+// Valid indicates whether the value is a known member of the BusinessCountry enum.
+func (e BusinessCountry) Valid() bool {
+	switch e {
+	case BusinessCountryABW:
+		return true
+	case BusinessCountryAFG:
+		return true
+	case BusinessCountryAGO:
+		return true
+	case BusinessCountryAIA:
+		return true
+	case BusinessCountryALA:
+		return true
+	case BusinessCountryALB:
+		return true
+	case BusinessCountryAND:
+		return true
+	case BusinessCountryANT:
+		return true
+	case BusinessCountryARE:
+		return true
+	case BusinessCountryARG:
+		return true
+	case BusinessCountryARM:
+		return true
+	case BusinessCountryASM:
+		return true
+	case BusinessCountryATA:
+		return true
+	case BusinessCountryATF:
+		return true
+	case BusinessCountryATG:
+		return true
+	case BusinessCountryAUS:
+		return true
+	case BusinessCountryAUT:
+		return true
+	case BusinessCountryAZE:
+		return true
+	case BusinessCountryBDI:
+		return true
+	case BusinessCountryBEL:
+		return true
+	case BusinessCountryBEN:
+		return true
+	case BusinessCountryBES:
+		return true
+	case BusinessCountryBFA:
+		return true
+	case BusinessCountryBGD:
+		return true
+	case BusinessCountryBGR:
+		return true
+	case BusinessCountryBHR:
+		return true
+	case BusinessCountryBHS:
+		return true
+	case BusinessCountryBIH:
+		return true
+	case BusinessCountryBLM:
+		return true
+	case BusinessCountryBLR:
+		return true
+	case BusinessCountryBLZ:
+		return true
+	case BusinessCountryBMU:
+		return true
+	case BusinessCountryBOL:
+		return true
+	case BusinessCountryBRA:
+		return true
+	case BusinessCountryBRB:
+		return true
+	case BusinessCountryBRN:
+		return true
+	case BusinessCountryBTN:
+		return true
+	case BusinessCountryBVT:
+		return true
+	case BusinessCountryBWA:
+		return true
+	case BusinessCountryCAF:
+		return true
+	case BusinessCountryCAN:
+		return true
+	case BusinessCountryCCK:
+		return true
+	case BusinessCountryCHE:
+		return true
+	case BusinessCountryCHL:
+		return true
+	case BusinessCountryCHN:
+		return true
+	case BusinessCountryCIV:
+		return true
+	case BusinessCountryCMR:
+		return true
+	case BusinessCountryCOD:
+		return true
+	case BusinessCountryCOG:
+		return true
+	case BusinessCountryCOK:
+		return true
+	case BusinessCountryCOL:
+		return true
+	case BusinessCountryCOM:
+		return true
+	case BusinessCountryCPV:
+		return true
+	case BusinessCountryCRI:
+		return true
+	case BusinessCountryCUB:
+		return true
+	case BusinessCountryCUW:
+		return true
+	case BusinessCountryCXR:
+		return true
+	case BusinessCountryCYM:
+		return true
+	case BusinessCountryCYP:
+		return true
+	case BusinessCountryCZE:
+		return true
+	case BusinessCountryDEU:
+		return true
+	case BusinessCountryDJI:
+		return true
+	case BusinessCountryDMA:
+		return true
+	case BusinessCountryDNK:
+		return true
+	case BusinessCountryDOM:
+		return true
+	case BusinessCountryDZA:
+		return true
+	case BusinessCountryECU:
+		return true
+	case BusinessCountryEGY:
+		return true
+	case BusinessCountryERI:
+		return true
+	case BusinessCountryESH:
+		return true
+	case BusinessCountryESP:
+		return true
+	case BusinessCountryEST:
+		return true
+	case BusinessCountryETH:
+		return true
+	case BusinessCountryFIN:
+		return true
+	case BusinessCountryFJI:
+		return true
+	case BusinessCountryFLK:
+		return true
+	case BusinessCountryFRA:
+		return true
+	case BusinessCountryFRO:
+		return true
+	case BusinessCountryFSM:
+		return true
+	case BusinessCountryGAB:
+		return true
+	case BusinessCountryGBR:
+		return true
+	case BusinessCountryGEO:
+		return true
+	case BusinessCountryGGY:
+		return true
+	case BusinessCountryGHA:
+		return true
+	case BusinessCountryGIB:
+		return true
+	case BusinessCountryGIN:
+		return true
+	case BusinessCountryGLP:
+		return true
+	case BusinessCountryGMB:
+		return true
+	case BusinessCountryGNB:
+		return true
+	case BusinessCountryGNQ:
+		return true
+	case BusinessCountryGRC:
+		return true
+	case BusinessCountryGRD:
+		return true
+	case BusinessCountryGRL:
+		return true
+	case BusinessCountryGTM:
+		return true
+	case BusinessCountryGUF:
+		return true
+	case BusinessCountryGUM:
+		return true
+	case BusinessCountryGUY:
+		return true
+	case BusinessCountryHKG:
+		return true
+	case BusinessCountryHMD:
+		return true
+	case BusinessCountryHND:
+		return true
+	case BusinessCountryHRV:
+		return true
+	case BusinessCountryHTI:
+		return true
+	case BusinessCountryHUN:
+		return true
+	case BusinessCountryIDN:
+		return true
+	case BusinessCountryIMN:
+		return true
+	case BusinessCountryIND:
+		return true
+	case BusinessCountryIOT:
+		return true
+	case BusinessCountryIRL:
+		return true
+	case BusinessCountryIRN:
+		return true
+	case BusinessCountryIRQ:
+		return true
+	case BusinessCountryISL:
+		return true
+	case BusinessCountryISR:
+		return true
+	case BusinessCountryITA:
+		return true
+	case BusinessCountryJAM:
+		return true
+	case BusinessCountryJEY:
+		return true
+	case BusinessCountryJOR:
+		return true
+	case BusinessCountryJPN:
+		return true
+	case BusinessCountryKAZ:
+		return true
+	case BusinessCountryKEN:
+		return true
+	case BusinessCountryKGZ:
+		return true
+	case BusinessCountryKHM:
+		return true
+	case BusinessCountryKIR:
+		return true
+	case BusinessCountryKNA:
+		return true
+	case BusinessCountryKOR:
+		return true
+	case BusinessCountryKWT:
+		return true
+	case BusinessCountryLAO:
+		return true
+	case BusinessCountryLBN:
+		return true
+	case BusinessCountryLBR:
+		return true
+	case BusinessCountryLBY:
+		return true
+	case BusinessCountryLCA:
+		return true
+	case BusinessCountryLIE:
+		return true
+	case BusinessCountryLKA:
+		return true
+	case BusinessCountryLSO:
+		return true
+	case BusinessCountryLTU:
+		return true
+	case BusinessCountryLUX:
+		return true
+	case BusinessCountryLVA:
+		return true
+	case BusinessCountryMAC:
+		return true
+	case BusinessCountryMAF:
+		return true
+	case BusinessCountryMAR:
+		return true
+	case BusinessCountryMCO:
+		return true
+	case BusinessCountryMDA:
+		return true
+	case BusinessCountryMDG:
+		return true
+	case BusinessCountryMDV:
+		return true
+	case BusinessCountryMEX:
+		return true
+	case BusinessCountryMHL:
+		return true
+	case BusinessCountryMKD:
+		return true
+	case BusinessCountryMLI:
+		return true
+	case BusinessCountryMLT:
+		return true
+	case BusinessCountryMMR:
+		return true
+	case BusinessCountryMNE:
+		return true
+	case BusinessCountryMNG:
+		return true
+	case BusinessCountryMNP:
+		return true
+	case BusinessCountryMOZ:
+		return true
+	case BusinessCountryMRT:
+		return true
+	case BusinessCountryMSR:
+		return true
+	case BusinessCountryMTQ:
+		return true
+	case BusinessCountryMUS:
+		return true
+	case BusinessCountryMWI:
+		return true
+	case BusinessCountryMYS:
+		return true
+	case BusinessCountryMYT:
+		return true
+	case BusinessCountryNAM:
+		return true
+	case BusinessCountryNCL:
+		return true
+	case BusinessCountryNER:
+		return true
+	case BusinessCountryNFK:
+		return true
+	case BusinessCountryNGA:
+		return true
+	case BusinessCountryNIC:
+		return true
+	case BusinessCountryNIU:
+		return true
+	case BusinessCountryNLD:
+		return true
+	case BusinessCountryNOR:
+		return true
+	case BusinessCountryNPL:
+		return true
+	case BusinessCountryNRU:
+		return true
+	case BusinessCountryNZL:
+		return true
+	case BusinessCountryOMN:
+		return true
+	case BusinessCountryPAK:
+		return true
+	case BusinessCountryPAN:
+		return true
+	case BusinessCountryPCN:
+		return true
+	case BusinessCountryPER:
+		return true
+	case BusinessCountryPHL:
+		return true
+	case BusinessCountryPLW:
+		return true
+	case BusinessCountryPNG:
+		return true
+	case BusinessCountryPOL:
+		return true
+	case BusinessCountryPRI:
+		return true
+	case BusinessCountryPRK:
+		return true
+	case BusinessCountryPRT:
+		return true
+	case BusinessCountryPRY:
+		return true
+	case BusinessCountryPSE:
+		return true
+	case BusinessCountryPYF:
+		return true
+	case BusinessCountryQAT:
+		return true
+	case BusinessCountryREU:
+		return true
+	case BusinessCountryROU:
+		return true
+	case BusinessCountryRUS:
+		return true
+	case BusinessCountryRWA:
+		return true
+	case BusinessCountrySAU:
+		return true
+	case BusinessCountrySCG:
+		return true
+	case BusinessCountrySDN:
+		return true
+	case BusinessCountrySEN:
+		return true
+	case BusinessCountrySGP:
+		return true
+	case BusinessCountrySGS:
+		return true
+	case BusinessCountrySHN:
+		return true
+	case BusinessCountrySJM:
+		return true
+	case BusinessCountrySLB:
+		return true
+	case BusinessCountrySLE:
+		return true
+	case BusinessCountrySLV:
+		return true
+	case BusinessCountrySMR:
+		return true
+	case BusinessCountrySOM:
+		return true
+	case BusinessCountrySPM:
+		return true
+	case BusinessCountrySRB:
+		return true
+	case BusinessCountrySSD:
+		return true
+	case BusinessCountrySTP:
+		return true
+	case BusinessCountrySUR:
+		return true
+	case BusinessCountrySVK:
+		return true
+	case BusinessCountrySVN:
+		return true
+	case BusinessCountrySWE:
+		return true
+	case BusinessCountrySWZ:
+		return true
+	case BusinessCountrySXM:
+		return true
+	case BusinessCountrySYC:
+		return true
+	case BusinessCountrySYR:
+		return true
+	case BusinessCountryTCA:
+		return true
+	case BusinessCountryTCD:
+		return true
+	case BusinessCountryTGO:
+		return true
+	case BusinessCountryTHA:
+		return true
+	case BusinessCountryTJK:
+		return true
+	case BusinessCountryTKL:
+		return true
+	case BusinessCountryTKM:
+		return true
+	case BusinessCountryTLS:
+		return true
+	case BusinessCountryTON:
+		return true
+	case BusinessCountryTTO:
+		return true
+	case BusinessCountryTUN:
+		return true
+	case BusinessCountryTUR:
+		return true
+	case BusinessCountryTUV:
+		return true
+	case BusinessCountryTWN:
+		return true
+	case BusinessCountryTZA:
+		return true
+	case BusinessCountryUGA:
+		return true
+	case BusinessCountryUKR:
+		return true
+	case BusinessCountryUMI:
+		return true
+	case BusinessCountryURY:
+		return true
+	case BusinessCountryUSA:
+		return true
+	case BusinessCountryUZB:
+		return true
+	case BusinessCountryVAT:
+		return true
+	case BusinessCountryVCT:
+		return true
+	case BusinessCountryVEN:
+		return true
+	case BusinessCountryVGB:
+		return true
+	case BusinessCountryVIR:
+		return true
+	case BusinessCountryVNM:
+		return true
+	case BusinessCountryVUT:
+		return true
+	case BusinessCountryWLF:
+		return true
+	case BusinessCountryWSM:
+		return true
+	case BusinessCountryXKX:
+		return true
+	case BusinessCountryYEM:
+		return true
+	case BusinessCountryZAF:
+		return true
+	case BusinessCountryZMB:
+		return true
+	case BusinessCountryZWE:
+		return true
+	default:
+		return false
+	}
 }
 
-// ApiListResponseOfWebhookEventResponse Standard public API list response with cursor pagination metadata.
-type ApiListResponseOfWebhookEventResponse struct {
-	// Data Page of public resources returned by the list endpoint.
-	Data *[]WebhookEventResponse `json:"data,omitempty"`
+// Defines values for BusinessObject.
+const (
+	BusinessObjectBusiness BusinessObject = "business"
+)
 
-	// Pagination Cursor pagination metadata used by public list endpoints.
-	Pagination *ApiPagination `json:"pagination,omitempty"`
+// Valid indicates whether the value is a known member of the BusinessObject enum.
+func (e BusinessObject) Valid() bool {
+	switch e {
+	case BusinessObjectBusiness:
+		return true
+	default:
+		return false
+	}
 }
 
-// ApiPagination Cursor pagination metadata used by public list endpoints.
-type ApiPagination struct {
-	// HasMore True when another page is available after this response.
-	HasMore *bool `json:"has_more,omitempty"`
+// Defines values for BusinessIntegrationObject.
+const (
+	BusinessIntegrationObjectBusinessIntegration BusinessIntegrationObject = "business_integration"
+)
 
-	// NextCursor Opaque cursor to pass as the next request's cursor parameter. Null when there are no more pages.
-	NextCursor *string `json:"next_cursor,omitempty"`
+// Valid indicates whether the value is a known member of the BusinessIntegrationObject enum.
+func (e BusinessIntegrationObject) Valid() bool {
+	switch e {
+	case BusinessIntegrationObjectBusinessIntegration:
+		return true
+	default:
+		return false
+	}
 }
 
-// AssetResponse Public customer asset read model.
-type AssetResponse struct {
+// Defines values for ChatMessageContentType.
+const (
+	File  ChatMessageContentType = "file"
+	Image ChatMessageContentType = "image"
+	Text  ChatMessageContentType = "text"
+	Video ChatMessageContentType = "video"
+)
+
+// Valid indicates whether the value is a known member of the ChatMessageContentType enum.
+func (e ChatMessageContentType) Valid() bool {
+	switch e {
+	case File:
+		return true
+	case Image:
+		return true
+	case Text:
+		return true
+	case Video:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for ChatMessageObject.
+const (
+	ChatMessageObjectChatMessage ChatMessageObject = "chat_message"
+)
+
+// Valid indicates whether the value is a known member of the ChatMessageObject enum.
+func (e ChatMessageObject) Valid() bool {
+	switch e {
+	case ChatMessageObjectChatMessage:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for ChatMessageSender.
+const (
+	ChatMessageSenderBusiness ChatMessageSender = "business"
+	ChatMessageSenderCustomer ChatMessageSender = "customer"
+	ChatMessageSenderSystem   ChatMessageSender = "system"
+)
+
+// Valid indicates whether the value is a known member of the ChatMessageSender enum.
+func (e ChatMessageSender) Valid() bool {
+	switch e {
+	case ChatMessageSenderBusiness:
+		return true
+	case ChatMessageSenderCustomer:
+		return true
+	case ChatMessageSenderSystem:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for ChatMessageCreateRequestSender.
+const (
+	ChatMessageCreateRequestSenderBusiness ChatMessageCreateRequestSender = "business"
+	ChatMessageCreateRequestSenderCustomer ChatMessageCreateRequestSender = "customer"
+)
+
+// Valid indicates whether the value is a known member of the ChatMessageCreateRequestSender enum.
+func (e ChatMessageCreateRequestSender) Valid() bool {
+	switch e {
+	case ChatMessageCreateRequestSenderBusiness:
+		return true
+	case ChatMessageCreateRequestSenderCustomer:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for CustomerCountry.
+const (
+	CustomerCountryABW CustomerCountry = "ABW"
+	CustomerCountryAFG CustomerCountry = "AFG"
+	CustomerCountryAGO CustomerCountry = "AGO"
+	CustomerCountryAIA CustomerCountry = "AIA"
+	CustomerCountryALA CustomerCountry = "ALA"
+	CustomerCountryALB CustomerCountry = "ALB"
+	CustomerCountryAND CustomerCountry = "AND"
+	CustomerCountryANT CustomerCountry = "ANT"
+	CustomerCountryARE CustomerCountry = "ARE"
+	CustomerCountryARG CustomerCountry = "ARG"
+	CustomerCountryARM CustomerCountry = "ARM"
+	CustomerCountryASM CustomerCountry = "ASM"
+	CustomerCountryATA CustomerCountry = "ATA"
+	CustomerCountryATF CustomerCountry = "ATF"
+	CustomerCountryATG CustomerCountry = "ATG"
+	CustomerCountryAUS CustomerCountry = "AUS"
+	CustomerCountryAUT CustomerCountry = "AUT"
+	CustomerCountryAZE CustomerCountry = "AZE"
+	CustomerCountryBDI CustomerCountry = "BDI"
+	CustomerCountryBEL CustomerCountry = "BEL"
+	CustomerCountryBEN CustomerCountry = "BEN"
+	CustomerCountryBES CustomerCountry = "BES"
+	CustomerCountryBFA CustomerCountry = "BFA"
+	CustomerCountryBGD CustomerCountry = "BGD"
+	CustomerCountryBGR CustomerCountry = "BGR"
+	CustomerCountryBHR CustomerCountry = "BHR"
+	CustomerCountryBHS CustomerCountry = "BHS"
+	CustomerCountryBIH CustomerCountry = "BIH"
+	CustomerCountryBLM CustomerCountry = "BLM"
+	CustomerCountryBLR CustomerCountry = "BLR"
+	CustomerCountryBLZ CustomerCountry = "BLZ"
+	CustomerCountryBMU CustomerCountry = "BMU"
+	CustomerCountryBOL CustomerCountry = "BOL"
+	CustomerCountryBRA CustomerCountry = "BRA"
+	CustomerCountryBRB CustomerCountry = "BRB"
+	CustomerCountryBRN CustomerCountry = "BRN"
+	CustomerCountryBTN CustomerCountry = "BTN"
+	CustomerCountryBVT CustomerCountry = "BVT"
+	CustomerCountryBWA CustomerCountry = "BWA"
+	CustomerCountryCAF CustomerCountry = "CAF"
+	CustomerCountryCAN CustomerCountry = "CAN"
+	CustomerCountryCCK CustomerCountry = "CCK"
+	CustomerCountryCHE CustomerCountry = "CHE"
+	CustomerCountryCHL CustomerCountry = "CHL"
+	CustomerCountryCHN CustomerCountry = "CHN"
+	CustomerCountryCIV CustomerCountry = "CIV"
+	CustomerCountryCMR CustomerCountry = "CMR"
+	CustomerCountryCOD CustomerCountry = "COD"
+	CustomerCountryCOG CustomerCountry = "COG"
+	CustomerCountryCOK CustomerCountry = "COK"
+	CustomerCountryCOL CustomerCountry = "COL"
+	CustomerCountryCOM CustomerCountry = "COM"
+	CustomerCountryCPV CustomerCountry = "CPV"
+	CustomerCountryCRI CustomerCountry = "CRI"
+	CustomerCountryCUB CustomerCountry = "CUB"
+	CustomerCountryCUW CustomerCountry = "CUW"
+	CustomerCountryCXR CustomerCountry = "CXR"
+	CustomerCountryCYM CustomerCountry = "CYM"
+	CustomerCountryCYP CustomerCountry = "CYP"
+	CustomerCountryCZE CustomerCountry = "CZE"
+	CustomerCountryDEU CustomerCountry = "DEU"
+	CustomerCountryDJI CustomerCountry = "DJI"
+	CustomerCountryDMA CustomerCountry = "DMA"
+	CustomerCountryDNK CustomerCountry = "DNK"
+	CustomerCountryDOM CustomerCountry = "DOM"
+	CustomerCountryDZA CustomerCountry = "DZA"
+	CustomerCountryECU CustomerCountry = "ECU"
+	CustomerCountryEGY CustomerCountry = "EGY"
+	CustomerCountryERI CustomerCountry = "ERI"
+	CustomerCountryESH CustomerCountry = "ESH"
+	CustomerCountryESP CustomerCountry = "ESP"
+	CustomerCountryEST CustomerCountry = "EST"
+	CustomerCountryETH CustomerCountry = "ETH"
+	CustomerCountryFIN CustomerCountry = "FIN"
+	CustomerCountryFJI CustomerCountry = "FJI"
+	CustomerCountryFLK CustomerCountry = "FLK"
+	CustomerCountryFRA CustomerCountry = "FRA"
+	CustomerCountryFRO CustomerCountry = "FRO"
+	CustomerCountryFSM CustomerCountry = "FSM"
+	CustomerCountryGAB CustomerCountry = "GAB"
+	CustomerCountryGBR CustomerCountry = "GBR"
+	CustomerCountryGEO CustomerCountry = "GEO"
+	CustomerCountryGGY CustomerCountry = "GGY"
+	CustomerCountryGHA CustomerCountry = "GHA"
+	CustomerCountryGIB CustomerCountry = "GIB"
+	CustomerCountryGIN CustomerCountry = "GIN"
+	CustomerCountryGLP CustomerCountry = "GLP"
+	CustomerCountryGMB CustomerCountry = "GMB"
+	CustomerCountryGNB CustomerCountry = "GNB"
+	CustomerCountryGNQ CustomerCountry = "GNQ"
+	CustomerCountryGRC CustomerCountry = "GRC"
+	CustomerCountryGRD CustomerCountry = "GRD"
+	CustomerCountryGRL CustomerCountry = "GRL"
+	CustomerCountryGTM CustomerCountry = "GTM"
+	CustomerCountryGUF CustomerCountry = "GUF"
+	CustomerCountryGUM CustomerCountry = "GUM"
+	CustomerCountryGUY CustomerCountry = "GUY"
+	CustomerCountryHKG CustomerCountry = "HKG"
+	CustomerCountryHMD CustomerCountry = "HMD"
+	CustomerCountryHND CustomerCountry = "HND"
+	CustomerCountryHRV CustomerCountry = "HRV"
+	CustomerCountryHTI CustomerCountry = "HTI"
+	CustomerCountryHUN CustomerCountry = "HUN"
+	CustomerCountryIDN CustomerCountry = "IDN"
+	CustomerCountryIMN CustomerCountry = "IMN"
+	CustomerCountryIND CustomerCountry = "IND"
+	CustomerCountryIOT CustomerCountry = "IOT"
+	CustomerCountryIRL CustomerCountry = "IRL"
+	CustomerCountryIRN CustomerCountry = "IRN"
+	CustomerCountryIRQ CustomerCountry = "IRQ"
+	CustomerCountryISL CustomerCountry = "ISL"
+	CustomerCountryISR CustomerCountry = "ISR"
+	CustomerCountryITA CustomerCountry = "ITA"
+	CustomerCountryJAM CustomerCountry = "JAM"
+	CustomerCountryJEY CustomerCountry = "JEY"
+	CustomerCountryJOR CustomerCountry = "JOR"
+	CustomerCountryJPN CustomerCountry = "JPN"
+	CustomerCountryKAZ CustomerCountry = "KAZ"
+	CustomerCountryKEN CustomerCountry = "KEN"
+	CustomerCountryKGZ CustomerCountry = "KGZ"
+	CustomerCountryKHM CustomerCountry = "KHM"
+	CustomerCountryKIR CustomerCountry = "KIR"
+	CustomerCountryKNA CustomerCountry = "KNA"
+	CustomerCountryKOR CustomerCountry = "KOR"
+	CustomerCountryKWT CustomerCountry = "KWT"
+	CustomerCountryLAO CustomerCountry = "LAO"
+	CustomerCountryLBN CustomerCountry = "LBN"
+	CustomerCountryLBR CustomerCountry = "LBR"
+	CustomerCountryLBY CustomerCountry = "LBY"
+	CustomerCountryLCA CustomerCountry = "LCA"
+	CustomerCountryLIE CustomerCountry = "LIE"
+	CustomerCountryLKA CustomerCountry = "LKA"
+	CustomerCountryLSO CustomerCountry = "LSO"
+	CustomerCountryLTU CustomerCountry = "LTU"
+	CustomerCountryLUX CustomerCountry = "LUX"
+	CustomerCountryLVA CustomerCountry = "LVA"
+	CustomerCountryMAC CustomerCountry = "MAC"
+	CustomerCountryMAF CustomerCountry = "MAF"
+	CustomerCountryMAR CustomerCountry = "MAR"
+	CustomerCountryMCO CustomerCountry = "MCO"
+	CustomerCountryMDA CustomerCountry = "MDA"
+	CustomerCountryMDG CustomerCountry = "MDG"
+	CustomerCountryMDV CustomerCountry = "MDV"
+	CustomerCountryMEX CustomerCountry = "MEX"
+	CustomerCountryMHL CustomerCountry = "MHL"
+	CustomerCountryMKD CustomerCountry = "MKD"
+	CustomerCountryMLI CustomerCountry = "MLI"
+	CustomerCountryMLT CustomerCountry = "MLT"
+	CustomerCountryMMR CustomerCountry = "MMR"
+	CustomerCountryMNE CustomerCountry = "MNE"
+	CustomerCountryMNG CustomerCountry = "MNG"
+	CustomerCountryMNP CustomerCountry = "MNP"
+	CustomerCountryMOZ CustomerCountry = "MOZ"
+	CustomerCountryMRT CustomerCountry = "MRT"
+	CustomerCountryMSR CustomerCountry = "MSR"
+	CustomerCountryMTQ CustomerCountry = "MTQ"
+	CustomerCountryMUS CustomerCountry = "MUS"
+	CustomerCountryMWI CustomerCountry = "MWI"
+	CustomerCountryMYS CustomerCountry = "MYS"
+	CustomerCountryMYT CustomerCountry = "MYT"
+	CustomerCountryNAM CustomerCountry = "NAM"
+	CustomerCountryNCL CustomerCountry = "NCL"
+	CustomerCountryNER CustomerCountry = "NER"
+	CustomerCountryNFK CustomerCountry = "NFK"
+	CustomerCountryNGA CustomerCountry = "NGA"
+	CustomerCountryNIC CustomerCountry = "NIC"
+	CustomerCountryNIU CustomerCountry = "NIU"
+	CustomerCountryNLD CustomerCountry = "NLD"
+	CustomerCountryNOR CustomerCountry = "NOR"
+	CustomerCountryNPL CustomerCountry = "NPL"
+	CustomerCountryNRU CustomerCountry = "NRU"
+	CustomerCountryNZL CustomerCountry = "NZL"
+	CustomerCountryOMN CustomerCountry = "OMN"
+	CustomerCountryPAK CustomerCountry = "PAK"
+	CustomerCountryPAN CustomerCountry = "PAN"
+	CustomerCountryPCN CustomerCountry = "PCN"
+	CustomerCountryPER CustomerCountry = "PER"
+	CustomerCountryPHL CustomerCountry = "PHL"
+	CustomerCountryPLW CustomerCountry = "PLW"
+	CustomerCountryPNG CustomerCountry = "PNG"
+	CustomerCountryPOL CustomerCountry = "POL"
+	CustomerCountryPRI CustomerCountry = "PRI"
+	CustomerCountryPRK CustomerCountry = "PRK"
+	CustomerCountryPRT CustomerCountry = "PRT"
+	CustomerCountryPRY CustomerCountry = "PRY"
+	CustomerCountryPSE CustomerCountry = "PSE"
+	CustomerCountryPYF CustomerCountry = "PYF"
+	CustomerCountryQAT CustomerCountry = "QAT"
+	CustomerCountryREU CustomerCountry = "REU"
+	CustomerCountryROU CustomerCountry = "ROU"
+	CustomerCountryRUS CustomerCountry = "RUS"
+	CustomerCountryRWA CustomerCountry = "RWA"
+	CustomerCountrySAU CustomerCountry = "SAU"
+	CustomerCountrySCG CustomerCountry = "SCG"
+	CustomerCountrySDN CustomerCountry = "SDN"
+	CustomerCountrySEN CustomerCountry = "SEN"
+	CustomerCountrySGP CustomerCountry = "SGP"
+	CustomerCountrySGS CustomerCountry = "SGS"
+	CustomerCountrySHN CustomerCountry = "SHN"
+	CustomerCountrySJM CustomerCountry = "SJM"
+	CustomerCountrySLB CustomerCountry = "SLB"
+	CustomerCountrySLE CustomerCountry = "SLE"
+	CustomerCountrySLV CustomerCountry = "SLV"
+	CustomerCountrySMR CustomerCountry = "SMR"
+	CustomerCountrySOM CustomerCountry = "SOM"
+	CustomerCountrySPM CustomerCountry = "SPM"
+	CustomerCountrySRB CustomerCountry = "SRB"
+	CustomerCountrySSD CustomerCountry = "SSD"
+	CustomerCountrySTP CustomerCountry = "STP"
+	CustomerCountrySUR CustomerCountry = "SUR"
+	CustomerCountrySVK CustomerCountry = "SVK"
+	CustomerCountrySVN CustomerCountry = "SVN"
+	CustomerCountrySWE CustomerCountry = "SWE"
+	CustomerCountrySWZ CustomerCountry = "SWZ"
+	CustomerCountrySXM CustomerCountry = "SXM"
+	CustomerCountrySYC CustomerCountry = "SYC"
+	CustomerCountrySYR CustomerCountry = "SYR"
+	CustomerCountryTCA CustomerCountry = "TCA"
+	CustomerCountryTCD CustomerCountry = "TCD"
+	CustomerCountryTGO CustomerCountry = "TGO"
+	CustomerCountryTHA CustomerCountry = "THA"
+	CustomerCountryTJK CustomerCountry = "TJK"
+	CustomerCountryTKL CustomerCountry = "TKL"
+	CustomerCountryTKM CustomerCountry = "TKM"
+	CustomerCountryTLS CustomerCountry = "TLS"
+	CustomerCountryTON CustomerCountry = "TON"
+	CustomerCountryTTO CustomerCountry = "TTO"
+	CustomerCountryTUN CustomerCountry = "TUN"
+	CustomerCountryTUR CustomerCountry = "TUR"
+	CustomerCountryTUV CustomerCountry = "TUV"
+	CustomerCountryTWN CustomerCountry = "TWN"
+	CustomerCountryTZA CustomerCountry = "TZA"
+	CustomerCountryUGA CustomerCountry = "UGA"
+	CustomerCountryUKR CustomerCountry = "UKR"
+	CustomerCountryUMI CustomerCountry = "UMI"
+	CustomerCountryURY CustomerCountry = "URY"
+	CustomerCountryUSA CustomerCountry = "USA"
+	CustomerCountryUZB CustomerCountry = "UZB"
+	CustomerCountryVAT CustomerCountry = "VAT"
+	CustomerCountryVCT CustomerCountry = "VCT"
+	CustomerCountryVEN CustomerCountry = "VEN"
+	CustomerCountryVGB CustomerCountry = "VGB"
+	CustomerCountryVIR CustomerCountry = "VIR"
+	CustomerCountryVNM CustomerCountry = "VNM"
+	CustomerCountryVUT CustomerCountry = "VUT"
+	CustomerCountryWLF CustomerCountry = "WLF"
+	CustomerCountryWSM CustomerCountry = "WSM"
+	CustomerCountryXKX CustomerCountry = "XKX"
+	CustomerCountryYEM CustomerCountry = "YEM"
+	CustomerCountryZAF CustomerCountry = "ZAF"
+	CustomerCountryZMB CustomerCountry = "ZMB"
+	CustomerCountryZWE CustomerCountry = "ZWE"
+)
+
+// Valid indicates whether the value is a known member of the CustomerCountry enum.
+func (e CustomerCountry) Valid() bool {
+	switch e {
+	case CustomerCountryABW:
+		return true
+	case CustomerCountryAFG:
+		return true
+	case CustomerCountryAGO:
+		return true
+	case CustomerCountryAIA:
+		return true
+	case CustomerCountryALA:
+		return true
+	case CustomerCountryALB:
+		return true
+	case CustomerCountryAND:
+		return true
+	case CustomerCountryANT:
+		return true
+	case CustomerCountryARE:
+		return true
+	case CustomerCountryARG:
+		return true
+	case CustomerCountryARM:
+		return true
+	case CustomerCountryASM:
+		return true
+	case CustomerCountryATA:
+		return true
+	case CustomerCountryATF:
+		return true
+	case CustomerCountryATG:
+		return true
+	case CustomerCountryAUS:
+		return true
+	case CustomerCountryAUT:
+		return true
+	case CustomerCountryAZE:
+		return true
+	case CustomerCountryBDI:
+		return true
+	case CustomerCountryBEL:
+		return true
+	case CustomerCountryBEN:
+		return true
+	case CustomerCountryBES:
+		return true
+	case CustomerCountryBFA:
+		return true
+	case CustomerCountryBGD:
+		return true
+	case CustomerCountryBGR:
+		return true
+	case CustomerCountryBHR:
+		return true
+	case CustomerCountryBHS:
+		return true
+	case CustomerCountryBIH:
+		return true
+	case CustomerCountryBLM:
+		return true
+	case CustomerCountryBLR:
+		return true
+	case CustomerCountryBLZ:
+		return true
+	case CustomerCountryBMU:
+		return true
+	case CustomerCountryBOL:
+		return true
+	case CustomerCountryBRA:
+		return true
+	case CustomerCountryBRB:
+		return true
+	case CustomerCountryBRN:
+		return true
+	case CustomerCountryBTN:
+		return true
+	case CustomerCountryBVT:
+		return true
+	case CustomerCountryBWA:
+		return true
+	case CustomerCountryCAF:
+		return true
+	case CustomerCountryCAN:
+		return true
+	case CustomerCountryCCK:
+		return true
+	case CustomerCountryCHE:
+		return true
+	case CustomerCountryCHL:
+		return true
+	case CustomerCountryCHN:
+		return true
+	case CustomerCountryCIV:
+		return true
+	case CustomerCountryCMR:
+		return true
+	case CustomerCountryCOD:
+		return true
+	case CustomerCountryCOG:
+		return true
+	case CustomerCountryCOK:
+		return true
+	case CustomerCountryCOL:
+		return true
+	case CustomerCountryCOM:
+		return true
+	case CustomerCountryCPV:
+		return true
+	case CustomerCountryCRI:
+		return true
+	case CustomerCountryCUB:
+		return true
+	case CustomerCountryCUW:
+		return true
+	case CustomerCountryCXR:
+		return true
+	case CustomerCountryCYM:
+		return true
+	case CustomerCountryCYP:
+		return true
+	case CustomerCountryCZE:
+		return true
+	case CustomerCountryDEU:
+		return true
+	case CustomerCountryDJI:
+		return true
+	case CustomerCountryDMA:
+		return true
+	case CustomerCountryDNK:
+		return true
+	case CustomerCountryDOM:
+		return true
+	case CustomerCountryDZA:
+		return true
+	case CustomerCountryECU:
+		return true
+	case CustomerCountryEGY:
+		return true
+	case CustomerCountryERI:
+		return true
+	case CustomerCountryESH:
+		return true
+	case CustomerCountryESP:
+		return true
+	case CustomerCountryEST:
+		return true
+	case CustomerCountryETH:
+		return true
+	case CustomerCountryFIN:
+		return true
+	case CustomerCountryFJI:
+		return true
+	case CustomerCountryFLK:
+		return true
+	case CustomerCountryFRA:
+		return true
+	case CustomerCountryFRO:
+		return true
+	case CustomerCountryFSM:
+		return true
+	case CustomerCountryGAB:
+		return true
+	case CustomerCountryGBR:
+		return true
+	case CustomerCountryGEO:
+		return true
+	case CustomerCountryGGY:
+		return true
+	case CustomerCountryGHA:
+		return true
+	case CustomerCountryGIB:
+		return true
+	case CustomerCountryGIN:
+		return true
+	case CustomerCountryGLP:
+		return true
+	case CustomerCountryGMB:
+		return true
+	case CustomerCountryGNB:
+		return true
+	case CustomerCountryGNQ:
+		return true
+	case CustomerCountryGRC:
+		return true
+	case CustomerCountryGRD:
+		return true
+	case CustomerCountryGRL:
+		return true
+	case CustomerCountryGTM:
+		return true
+	case CustomerCountryGUF:
+		return true
+	case CustomerCountryGUM:
+		return true
+	case CustomerCountryGUY:
+		return true
+	case CustomerCountryHKG:
+		return true
+	case CustomerCountryHMD:
+		return true
+	case CustomerCountryHND:
+		return true
+	case CustomerCountryHRV:
+		return true
+	case CustomerCountryHTI:
+		return true
+	case CustomerCountryHUN:
+		return true
+	case CustomerCountryIDN:
+		return true
+	case CustomerCountryIMN:
+		return true
+	case CustomerCountryIND:
+		return true
+	case CustomerCountryIOT:
+		return true
+	case CustomerCountryIRL:
+		return true
+	case CustomerCountryIRN:
+		return true
+	case CustomerCountryIRQ:
+		return true
+	case CustomerCountryISL:
+		return true
+	case CustomerCountryISR:
+		return true
+	case CustomerCountryITA:
+		return true
+	case CustomerCountryJAM:
+		return true
+	case CustomerCountryJEY:
+		return true
+	case CustomerCountryJOR:
+		return true
+	case CustomerCountryJPN:
+		return true
+	case CustomerCountryKAZ:
+		return true
+	case CustomerCountryKEN:
+		return true
+	case CustomerCountryKGZ:
+		return true
+	case CustomerCountryKHM:
+		return true
+	case CustomerCountryKIR:
+		return true
+	case CustomerCountryKNA:
+		return true
+	case CustomerCountryKOR:
+		return true
+	case CustomerCountryKWT:
+		return true
+	case CustomerCountryLAO:
+		return true
+	case CustomerCountryLBN:
+		return true
+	case CustomerCountryLBR:
+		return true
+	case CustomerCountryLBY:
+		return true
+	case CustomerCountryLCA:
+		return true
+	case CustomerCountryLIE:
+		return true
+	case CustomerCountryLKA:
+		return true
+	case CustomerCountryLSO:
+		return true
+	case CustomerCountryLTU:
+		return true
+	case CustomerCountryLUX:
+		return true
+	case CustomerCountryLVA:
+		return true
+	case CustomerCountryMAC:
+		return true
+	case CustomerCountryMAF:
+		return true
+	case CustomerCountryMAR:
+		return true
+	case CustomerCountryMCO:
+		return true
+	case CustomerCountryMDA:
+		return true
+	case CustomerCountryMDG:
+		return true
+	case CustomerCountryMDV:
+		return true
+	case CustomerCountryMEX:
+		return true
+	case CustomerCountryMHL:
+		return true
+	case CustomerCountryMKD:
+		return true
+	case CustomerCountryMLI:
+		return true
+	case CustomerCountryMLT:
+		return true
+	case CustomerCountryMMR:
+		return true
+	case CustomerCountryMNE:
+		return true
+	case CustomerCountryMNG:
+		return true
+	case CustomerCountryMNP:
+		return true
+	case CustomerCountryMOZ:
+		return true
+	case CustomerCountryMRT:
+		return true
+	case CustomerCountryMSR:
+		return true
+	case CustomerCountryMTQ:
+		return true
+	case CustomerCountryMUS:
+		return true
+	case CustomerCountryMWI:
+		return true
+	case CustomerCountryMYS:
+		return true
+	case CustomerCountryMYT:
+		return true
+	case CustomerCountryNAM:
+		return true
+	case CustomerCountryNCL:
+		return true
+	case CustomerCountryNER:
+		return true
+	case CustomerCountryNFK:
+		return true
+	case CustomerCountryNGA:
+		return true
+	case CustomerCountryNIC:
+		return true
+	case CustomerCountryNIU:
+		return true
+	case CustomerCountryNLD:
+		return true
+	case CustomerCountryNOR:
+		return true
+	case CustomerCountryNPL:
+		return true
+	case CustomerCountryNRU:
+		return true
+	case CustomerCountryNZL:
+		return true
+	case CustomerCountryOMN:
+		return true
+	case CustomerCountryPAK:
+		return true
+	case CustomerCountryPAN:
+		return true
+	case CustomerCountryPCN:
+		return true
+	case CustomerCountryPER:
+		return true
+	case CustomerCountryPHL:
+		return true
+	case CustomerCountryPLW:
+		return true
+	case CustomerCountryPNG:
+		return true
+	case CustomerCountryPOL:
+		return true
+	case CustomerCountryPRI:
+		return true
+	case CustomerCountryPRK:
+		return true
+	case CustomerCountryPRT:
+		return true
+	case CustomerCountryPRY:
+		return true
+	case CustomerCountryPSE:
+		return true
+	case CustomerCountryPYF:
+		return true
+	case CustomerCountryQAT:
+		return true
+	case CustomerCountryREU:
+		return true
+	case CustomerCountryROU:
+		return true
+	case CustomerCountryRUS:
+		return true
+	case CustomerCountryRWA:
+		return true
+	case CustomerCountrySAU:
+		return true
+	case CustomerCountrySCG:
+		return true
+	case CustomerCountrySDN:
+		return true
+	case CustomerCountrySEN:
+		return true
+	case CustomerCountrySGP:
+		return true
+	case CustomerCountrySGS:
+		return true
+	case CustomerCountrySHN:
+		return true
+	case CustomerCountrySJM:
+		return true
+	case CustomerCountrySLB:
+		return true
+	case CustomerCountrySLE:
+		return true
+	case CustomerCountrySLV:
+		return true
+	case CustomerCountrySMR:
+		return true
+	case CustomerCountrySOM:
+		return true
+	case CustomerCountrySPM:
+		return true
+	case CustomerCountrySRB:
+		return true
+	case CustomerCountrySSD:
+		return true
+	case CustomerCountrySTP:
+		return true
+	case CustomerCountrySUR:
+		return true
+	case CustomerCountrySVK:
+		return true
+	case CustomerCountrySVN:
+		return true
+	case CustomerCountrySWE:
+		return true
+	case CustomerCountrySWZ:
+		return true
+	case CustomerCountrySXM:
+		return true
+	case CustomerCountrySYC:
+		return true
+	case CustomerCountrySYR:
+		return true
+	case CustomerCountryTCA:
+		return true
+	case CustomerCountryTCD:
+		return true
+	case CustomerCountryTGO:
+		return true
+	case CustomerCountryTHA:
+		return true
+	case CustomerCountryTJK:
+		return true
+	case CustomerCountryTKL:
+		return true
+	case CustomerCountryTKM:
+		return true
+	case CustomerCountryTLS:
+		return true
+	case CustomerCountryTON:
+		return true
+	case CustomerCountryTTO:
+		return true
+	case CustomerCountryTUN:
+		return true
+	case CustomerCountryTUR:
+		return true
+	case CustomerCountryTUV:
+		return true
+	case CustomerCountryTWN:
+		return true
+	case CustomerCountryTZA:
+		return true
+	case CustomerCountryUGA:
+		return true
+	case CustomerCountryUKR:
+		return true
+	case CustomerCountryUMI:
+		return true
+	case CustomerCountryURY:
+		return true
+	case CustomerCountryUSA:
+		return true
+	case CustomerCountryUZB:
+		return true
+	case CustomerCountryVAT:
+		return true
+	case CustomerCountryVCT:
+		return true
+	case CustomerCountryVEN:
+		return true
+	case CustomerCountryVGB:
+		return true
+	case CustomerCountryVIR:
+		return true
+	case CustomerCountryVNM:
+		return true
+	case CustomerCountryVUT:
+		return true
+	case CustomerCountryWLF:
+		return true
+	case CustomerCountryWSM:
+		return true
+	case CustomerCountryXKX:
+		return true
+	case CustomerCountryYEM:
+		return true
+	case CustomerCountryZAF:
+		return true
+	case CustomerCountryZMB:
+		return true
+	case CustomerCountryZWE:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for CustomerObject.
+const (
+	CustomerObjectCustomer CustomerObject = "customer"
+)
+
+// Valid indicates whether the value is a known member of the CustomerObject enum.
+func (e CustomerObject) Valid() bool {
+	switch e {
+	case CustomerObjectCustomer:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for CustomerPreferredContactMethod.
+const (
+	CustomerPreferredContactMethodEmail     CustomerPreferredContactMethod = "email"
+	CustomerPreferredContactMethodFacebook  CustomerPreferredContactMethod = "facebook"
+	CustomerPreferredContactMethodInstagram CustomerPreferredContactMethod = "instagram"
+	CustomerPreferredContactMethodPhone     CustomerPreferredContactMethod = "phone"
+	CustomerPreferredContactMethodWhatsApp  CustomerPreferredContactMethod = "whats_app"
+)
+
+// Valid indicates whether the value is a known member of the CustomerPreferredContactMethod enum.
+func (e CustomerPreferredContactMethod) Valid() bool {
+	switch e {
+	case CustomerPreferredContactMethodEmail:
+		return true
+	case CustomerPreferredContactMethodFacebook:
+		return true
+	case CustomerPreferredContactMethodInstagram:
+		return true
+	case CustomerPreferredContactMethodPhone:
+		return true
+	case CustomerPreferredContactMethodWhatsApp:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for CustomerAddressInputCountry.
+const (
+	CustomerAddressInputCountryABW CustomerAddressInputCountry = "ABW"
+	CustomerAddressInputCountryAFG CustomerAddressInputCountry = "AFG"
+	CustomerAddressInputCountryAGO CustomerAddressInputCountry = "AGO"
+	CustomerAddressInputCountryAIA CustomerAddressInputCountry = "AIA"
+	CustomerAddressInputCountryALA CustomerAddressInputCountry = "ALA"
+	CustomerAddressInputCountryALB CustomerAddressInputCountry = "ALB"
+	CustomerAddressInputCountryAND CustomerAddressInputCountry = "AND"
+	CustomerAddressInputCountryANT CustomerAddressInputCountry = "ANT"
+	CustomerAddressInputCountryARE CustomerAddressInputCountry = "ARE"
+	CustomerAddressInputCountryARG CustomerAddressInputCountry = "ARG"
+	CustomerAddressInputCountryARM CustomerAddressInputCountry = "ARM"
+	CustomerAddressInputCountryASM CustomerAddressInputCountry = "ASM"
+	CustomerAddressInputCountryATA CustomerAddressInputCountry = "ATA"
+	CustomerAddressInputCountryATF CustomerAddressInputCountry = "ATF"
+	CustomerAddressInputCountryATG CustomerAddressInputCountry = "ATG"
+	CustomerAddressInputCountryAUS CustomerAddressInputCountry = "AUS"
+	CustomerAddressInputCountryAUT CustomerAddressInputCountry = "AUT"
+	CustomerAddressInputCountryAZE CustomerAddressInputCountry = "AZE"
+	CustomerAddressInputCountryBDI CustomerAddressInputCountry = "BDI"
+	CustomerAddressInputCountryBEL CustomerAddressInputCountry = "BEL"
+	CustomerAddressInputCountryBEN CustomerAddressInputCountry = "BEN"
+	CustomerAddressInputCountryBES CustomerAddressInputCountry = "BES"
+	CustomerAddressInputCountryBFA CustomerAddressInputCountry = "BFA"
+	CustomerAddressInputCountryBGD CustomerAddressInputCountry = "BGD"
+	CustomerAddressInputCountryBGR CustomerAddressInputCountry = "BGR"
+	CustomerAddressInputCountryBHR CustomerAddressInputCountry = "BHR"
+	CustomerAddressInputCountryBHS CustomerAddressInputCountry = "BHS"
+	CustomerAddressInputCountryBIH CustomerAddressInputCountry = "BIH"
+	CustomerAddressInputCountryBLM CustomerAddressInputCountry = "BLM"
+	CustomerAddressInputCountryBLR CustomerAddressInputCountry = "BLR"
+	CustomerAddressInputCountryBLZ CustomerAddressInputCountry = "BLZ"
+	CustomerAddressInputCountryBMU CustomerAddressInputCountry = "BMU"
+	CustomerAddressInputCountryBOL CustomerAddressInputCountry = "BOL"
+	CustomerAddressInputCountryBRA CustomerAddressInputCountry = "BRA"
+	CustomerAddressInputCountryBRB CustomerAddressInputCountry = "BRB"
+	CustomerAddressInputCountryBRN CustomerAddressInputCountry = "BRN"
+	CustomerAddressInputCountryBTN CustomerAddressInputCountry = "BTN"
+	CustomerAddressInputCountryBVT CustomerAddressInputCountry = "BVT"
+	CustomerAddressInputCountryBWA CustomerAddressInputCountry = "BWA"
+	CustomerAddressInputCountryCAF CustomerAddressInputCountry = "CAF"
+	CustomerAddressInputCountryCAN CustomerAddressInputCountry = "CAN"
+	CustomerAddressInputCountryCCK CustomerAddressInputCountry = "CCK"
+	CustomerAddressInputCountryCHE CustomerAddressInputCountry = "CHE"
+	CustomerAddressInputCountryCHL CustomerAddressInputCountry = "CHL"
+	CustomerAddressInputCountryCHN CustomerAddressInputCountry = "CHN"
+	CustomerAddressInputCountryCIV CustomerAddressInputCountry = "CIV"
+	CustomerAddressInputCountryCMR CustomerAddressInputCountry = "CMR"
+	CustomerAddressInputCountryCOD CustomerAddressInputCountry = "COD"
+	CustomerAddressInputCountryCOG CustomerAddressInputCountry = "COG"
+	CustomerAddressInputCountryCOK CustomerAddressInputCountry = "COK"
+	CustomerAddressInputCountryCOL CustomerAddressInputCountry = "COL"
+	CustomerAddressInputCountryCOM CustomerAddressInputCountry = "COM"
+	CustomerAddressInputCountryCPV CustomerAddressInputCountry = "CPV"
+	CustomerAddressInputCountryCRI CustomerAddressInputCountry = "CRI"
+	CustomerAddressInputCountryCUB CustomerAddressInputCountry = "CUB"
+	CustomerAddressInputCountryCUW CustomerAddressInputCountry = "CUW"
+	CustomerAddressInputCountryCXR CustomerAddressInputCountry = "CXR"
+	CustomerAddressInputCountryCYM CustomerAddressInputCountry = "CYM"
+	CustomerAddressInputCountryCYP CustomerAddressInputCountry = "CYP"
+	CustomerAddressInputCountryCZE CustomerAddressInputCountry = "CZE"
+	CustomerAddressInputCountryDEU CustomerAddressInputCountry = "DEU"
+	CustomerAddressInputCountryDJI CustomerAddressInputCountry = "DJI"
+	CustomerAddressInputCountryDMA CustomerAddressInputCountry = "DMA"
+	CustomerAddressInputCountryDNK CustomerAddressInputCountry = "DNK"
+	CustomerAddressInputCountryDOM CustomerAddressInputCountry = "DOM"
+	CustomerAddressInputCountryDZA CustomerAddressInputCountry = "DZA"
+	CustomerAddressInputCountryECU CustomerAddressInputCountry = "ECU"
+	CustomerAddressInputCountryEGY CustomerAddressInputCountry = "EGY"
+	CustomerAddressInputCountryERI CustomerAddressInputCountry = "ERI"
+	CustomerAddressInputCountryESH CustomerAddressInputCountry = "ESH"
+	CustomerAddressInputCountryESP CustomerAddressInputCountry = "ESP"
+	CustomerAddressInputCountryEST CustomerAddressInputCountry = "EST"
+	CustomerAddressInputCountryETH CustomerAddressInputCountry = "ETH"
+	CustomerAddressInputCountryFIN CustomerAddressInputCountry = "FIN"
+	CustomerAddressInputCountryFJI CustomerAddressInputCountry = "FJI"
+	CustomerAddressInputCountryFLK CustomerAddressInputCountry = "FLK"
+	CustomerAddressInputCountryFRA CustomerAddressInputCountry = "FRA"
+	CustomerAddressInputCountryFRO CustomerAddressInputCountry = "FRO"
+	CustomerAddressInputCountryFSM CustomerAddressInputCountry = "FSM"
+	CustomerAddressInputCountryGAB CustomerAddressInputCountry = "GAB"
+	CustomerAddressInputCountryGBR CustomerAddressInputCountry = "GBR"
+	CustomerAddressInputCountryGEO CustomerAddressInputCountry = "GEO"
+	CustomerAddressInputCountryGGY CustomerAddressInputCountry = "GGY"
+	CustomerAddressInputCountryGHA CustomerAddressInputCountry = "GHA"
+	CustomerAddressInputCountryGIB CustomerAddressInputCountry = "GIB"
+	CustomerAddressInputCountryGIN CustomerAddressInputCountry = "GIN"
+	CustomerAddressInputCountryGLP CustomerAddressInputCountry = "GLP"
+	CustomerAddressInputCountryGMB CustomerAddressInputCountry = "GMB"
+	CustomerAddressInputCountryGNB CustomerAddressInputCountry = "GNB"
+	CustomerAddressInputCountryGNQ CustomerAddressInputCountry = "GNQ"
+	CustomerAddressInputCountryGRC CustomerAddressInputCountry = "GRC"
+	CustomerAddressInputCountryGRD CustomerAddressInputCountry = "GRD"
+	CustomerAddressInputCountryGRL CustomerAddressInputCountry = "GRL"
+	CustomerAddressInputCountryGTM CustomerAddressInputCountry = "GTM"
+	CustomerAddressInputCountryGUF CustomerAddressInputCountry = "GUF"
+	CustomerAddressInputCountryGUM CustomerAddressInputCountry = "GUM"
+	CustomerAddressInputCountryGUY CustomerAddressInputCountry = "GUY"
+	CustomerAddressInputCountryHKG CustomerAddressInputCountry = "HKG"
+	CustomerAddressInputCountryHMD CustomerAddressInputCountry = "HMD"
+	CustomerAddressInputCountryHND CustomerAddressInputCountry = "HND"
+	CustomerAddressInputCountryHRV CustomerAddressInputCountry = "HRV"
+	CustomerAddressInputCountryHTI CustomerAddressInputCountry = "HTI"
+	CustomerAddressInputCountryHUN CustomerAddressInputCountry = "HUN"
+	CustomerAddressInputCountryIDN CustomerAddressInputCountry = "IDN"
+	CustomerAddressInputCountryIMN CustomerAddressInputCountry = "IMN"
+	CustomerAddressInputCountryIND CustomerAddressInputCountry = "IND"
+	CustomerAddressInputCountryIOT CustomerAddressInputCountry = "IOT"
+	CustomerAddressInputCountryIRL CustomerAddressInputCountry = "IRL"
+	CustomerAddressInputCountryIRN CustomerAddressInputCountry = "IRN"
+	CustomerAddressInputCountryIRQ CustomerAddressInputCountry = "IRQ"
+	CustomerAddressInputCountryISL CustomerAddressInputCountry = "ISL"
+	CustomerAddressInputCountryISR CustomerAddressInputCountry = "ISR"
+	CustomerAddressInputCountryITA CustomerAddressInputCountry = "ITA"
+	CustomerAddressInputCountryJAM CustomerAddressInputCountry = "JAM"
+	CustomerAddressInputCountryJEY CustomerAddressInputCountry = "JEY"
+	CustomerAddressInputCountryJOR CustomerAddressInputCountry = "JOR"
+	CustomerAddressInputCountryJPN CustomerAddressInputCountry = "JPN"
+	CustomerAddressInputCountryKAZ CustomerAddressInputCountry = "KAZ"
+	CustomerAddressInputCountryKEN CustomerAddressInputCountry = "KEN"
+	CustomerAddressInputCountryKGZ CustomerAddressInputCountry = "KGZ"
+	CustomerAddressInputCountryKHM CustomerAddressInputCountry = "KHM"
+	CustomerAddressInputCountryKIR CustomerAddressInputCountry = "KIR"
+	CustomerAddressInputCountryKNA CustomerAddressInputCountry = "KNA"
+	CustomerAddressInputCountryKOR CustomerAddressInputCountry = "KOR"
+	CustomerAddressInputCountryKWT CustomerAddressInputCountry = "KWT"
+	CustomerAddressInputCountryLAO CustomerAddressInputCountry = "LAO"
+	CustomerAddressInputCountryLBN CustomerAddressInputCountry = "LBN"
+	CustomerAddressInputCountryLBR CustomerAddressInputCountry = "LBR"
+	CustomerAddressInputCountryLBY CustomerAddressInputCountry = "LBY"
+	CustomerAddressInputCountryLCA CustomerAddressInputCountry = "LCA"
+	CustomerAddressInputCountryLIE CustomerAddressInputCountry = "LIE"
+	CustomerAddressInputCountryLKA CustomerAddressInputCountry = "LKA"
+	CustomerAddressInputCountryLSO CustomerAddressInputCountry = "LSO"
+	CustomerAddressInputCountryLTU CustomerAddressInputCountry = "LTU"
+	CustomerAddressInputCountryLUX CustomerAddressInputCountry = "LUX"
+	CustomerAddressInputCountryLVA CustomerAddressInputCountry = "LVA"
+	CustomerAddressInputCountryMAC CustomerAddressInputCountry = "MAC"
+	CustomerAddressInputCountryMAF CustomerAddressInputCountry = "MAF"
+	CustomerAddressInputCountryMAR CustomerAddressInputCountry = "MAR"
+	CustomerAddressInputCountryMCO CustomerAddressInputCountry = "MCO"
+	CustomerAddressInputCountryMDA CustomerAddressInputCountry = "MDA"
+	CustomerAddressInputCountryMDG CustomerAddressInputCountry = "MDG"
+	CustomerAddressInputCountryMDV CustomerAddressInputCountry = "MDV"
+	CustomerAddressInputCountryMEX CustomerAddressInputCountry = "MEX"
+	CustomerAddressInputCountryMHL CustomerAddressInputCountry = "MHL"
+	CustomerAddressInputCountryMKD CustomerAddressInputCountry = "MKD"
+	CustomerAddressInputCountryMLI CustomerAddressInputCountry = "MLI"
+	CustomerAddressInputCountryMLT CustomerAddressInputCountry = "MLT"
+	CustomerAddressInputCountryMMR CustomerAddressInputCountry = "MMR"
+	CustomerAddressInputCountryMNE CustomerAddressInputCountry = "MNE"
+	CustomerAddressInputCountryMNG CustomerAddressInputCountry = "MNG"
+	CustomerAddressInputCountryMNP CustomerAddressInputCountry = "MNP"
+	CustomerAddressInputCountryMOZ CustomerAddressInputCountry = "MOZ"
+	CustomerAddressInputCountryMRT CustomerAddressInputCountry = "MRT"
+	CustomerAddressInputCountryMSR CustomerAddressInputCountry = "MSR"
+	CustomerAddressInputCountryMTQ CustomerAddressInputCountry = "MTQ"
+	CustomerAddressInputCountryMUS CustomerAddressInputCountry = "MUS"
+	CustomerAddressInputCountryMWI CustomerAddressInputCountry = "MWI"
+	CustomerAddressInputCountryMYS CustomerAddressInputCountry = "MYS"
+	CustomerAddressInputCountryMYT CustomerAddressInputCountry = "MYT"
+	CustomerAddressInputCountryNAM CustomerAddressInputCountry = "NAM"
+	CustomerAddressInputCountryNCL CustomerAddressInputCountry = "NCL"
+	CustomerAddressInputCountryNER CustomerAddressInputCountry = "NER"
+	CustomerAddressInputCountryNFK CustomerAddressInputCountry = "NFK"
+	CustomerAddressInputCountryNGA CustomerAddressInputCountry = "NGA"
+	CustomerAddressInputCountryNIC CustomerAddressInputCountry = "NIC"
+	CustomerAddressInputCountryNIU CustomerAddressInputCountry = "NIU"
+	CustomerAddressInputCountryNLD CustomerAddressInputCountry = "NLD"
+	CustomerAddressInputCountryNOR CustomerAddressInputCountry = "NOR"
+	CustomerAddressInputCountryNPL CustomerAddressInputCountry = "NPL"
+	CustomerAddressInputCountryNRU CustomerAddressInputCountry = "NRU"
+	CustomerAddressInputCountryNZL CustomerAddressInputCountry = "NZL"
+	CustomerAddressInputCountryOMN CustomerAddressInputCountry = "OMN"
+	CustomerAddressInputCountryPAK CustomerAddressInputCountry = "PAK"
+	CustomerAddressInputCountryPAN CustomerAddressInputCountry = "PAN"
+	CustomerAddressInputCountryPCN CustomerAddressInputCountry = "PCN"
+	CustomerAddressInputCountryPER CustomerAddressInputCountry = "PER"
+	CustomerAddressInputCountryPHL CustomerAddressInputCountry = "PHL"
+	CustomerAddressInputCountryPLW CustomerAddressInputCountry = "PLW"
+	CustomerAddressInputCountryPNG CustomerAddressInputCountry = "PNG"
+	CustomerAddressInputCountryPOL CustomerAddressInputCountry = "POL"
+	CustomerAddressInputCountryPRI CustomerAddressInputCountry = "PRI"
+	CustomerAddressInputCountryPRK CustomerAddressInputCountry = "PRK"
+	CustomerAddressInputCountryPRT CustomerAddressInputCountry = "PRT"
+	CustomerAddressInputCountryPRY CustomerAddressInputCountry = "PRY"
+	CustomerAddressInputCountryPSE CustomerAddressInputCountry = "PSE"
+	CustomerAddressInputCountryPYF CustomerAddressInputCountry = "PYF"
+	CustomerAddressInputCountryQAT CustomerAddressInputCountry = "QAT"
+	CustomerAddressInputCountryREU CustomerAddressInputCountry = "REU"
+	CustomerAddressInputCountryROU CustomerAddressInputCountry = "ROU"
+	CustomerAddressInputCountryRUS CustomerAddressInputCountry = "RUS"
+	CustomerAddressInputCountryRWA CustomerAddressInputCountry = "RWA"
+	CustomerAddressInputCountrySAU CustomerAddressInputCountry = "SAU"
+	CustomerAddressInputCountrySCG CustomerAddressInputCountry = "SCG"
+	CustomerAddressInputCountrySDN CustomerAddressInputCountry = "SDN"
+	CustomerAddressInputCountrySEN CustomerAddressInputCountry = "SEN"
+	CustomerAddressInputCountrySGP CustomerAddressInputCountry = "SGP"
+	CustomerAddressInputCountrySGS CustomerAddressInputCountry = "SGS"
+	CustomerAddressInputCountrySHN CustomerAddressInputCountry = "SHN"
+	CustomerAddressInputCountrySJM CustomerAddressInputCountry = "SJM"
+	CustomerAddressInputCountrySLB CustomerAddressInputCountry = "SLB"
+	CustomerAddressInputCountrySLE CustomerAddressInputCountry = "SLE"
+	CustomerAddressInputCountrySLV CustomerAddressInputCountry = "SLV"
+	CustomerAddressInputCountrySMR CustomerAddressInputCountry = "SMR"
+	CustomerAddressInputCountrySOM CustomerAddressInputCountry = "SOM"
+	CustomerAddressInputCountrySPM CustomerAddressInputCountry = "SPM"
+	CustomerAddressInputCountrySRB CustomerAddressInputCountry = "SRB"
+	CustomerAddressInputCountrySSD CustomerAddressInputCountry = "SSD"
+	CustomerAddressInputCountrySTP CustomerAddressInputCountry = "STP"
+	CustomerAddressInputCountrySUR CustomerAddressInputCountry = "SUR"
+	CustomerAddressInputCountrySVK CustomerAddressInputCountry = "SVK"
+	CustomerAddressInputCountrySVN CustomerAddressInputCountry = "SVN"
+	CustomerAddressInputCountrySWE CustomerAddressInputCountry = "SWE"
+	CustomerAddressInputCountrySWZ CustomerAddressInputCountry = "SWZ"
+	CustomerAddressInputCountrySXM CustomerAddressInputCountry = "SXM"
+	CustomerAddressInputCountrySYC CustomerAddressInputCountry = "SYC"
+	CustomerAddressInputCountrySYR CustomerAddressInputCountry = "SYR"
+	CustomerAddressInputCountryTCA CustomerAddressInputCountry = "TCA"
+	CustomerAddressInputCountryTCD CustomerAddressInputCountry = "TCD"
+	CustomerAddressInputCountryTGO CustomerAddressInputCountry = "TGO"
+	CustomerAddressInputCountryTHA CustomerAddressInputCountry = "THA"
+	CustomerAddressInputCountryTJK CustomerAddressInputCountry = "TJK"
+	CustomerAddressInputCountryTKL CustomerAddressInputCountry = "TKL"
+	CustomerAddressInputCountryTKM CustomerAddressInputCountry = "TKM"
+	CustomerAddressInputCountryTLS CustomerAddressInputCountry = "TLS"
+	CustomerAddressInputCountryTON CustomerAddressInputCountry = "TON"
+	CustomerAddressInputCountryTTO CustomerAddressInputCountry = "TTO"
+	CustomerAddressInputCountryTUN CustomerAddressInputCountry = "TUN"
+	CustomerAddressInputCountryTUR CustomerAddressInputCountry = "TUR"
+	CustomerAddressInputCountryTUV CustomerAddressInputCountry = "TUV"
+	CustomerAddressInputCountryTWN CustomerAddressInputCountry = "TWN"
+	CustomerAddressInputCountryTZA CustomerAddressInputCountry = "TZA"
+	CustomerAddressInputCountryUGA CustomerAddressInputCountry = "UGA"
+	CustomerAddressInputCountryUKR CustomerAddressInputCountry = "UKR"
+	CustomerAddressInputCountryUMI CustomerAddressInputCountry = "UMI"
+	CustomerAddressInputCountryURY CustomerAddressInputCountry = "URY"
+	CustomerAddressInputCountryUSA CustomerAddressInputCountry = "USA"
+	CustomerAddressInputCountryUZB CustomerAddressInputCountry = "UZB"
+	CustomerAddressInputCountryVAT CustomerAddressInputCountry = "VAT"
+	CustomerAddressInputCountryVCT CustomerAddressInputCountry = "VCT"
+	CustomerAddressInputCountryVEN CustomerAddressInputCountry = "VEN"
+	CustomerAddressInputCountryVGB CustomerAddressInputCountry = "VGB"
+	CustomerAddressInputCountryVIR CustomerAddressInputCountry = "VIR"
+	CustomerAddressInputCountryVNM CustomerAddressInputCountry = "VNM"
+	CustomerAddressInputCountryVUT CustomerAddressInputCountry = "VUT"
+	CustomerAddressInputCountryWLF CustomerAddressInputCountry = "WLF"
+	CustomerAddressInputCountryWSM CustomerAddressInputCountry = "WSM"
+	CustomerAddressInputCountryXKX CustomerAddressInputCountry = "XKX"
+	CustomerAddressInputCountryYEM CustomerAddressInputCountry = "YEM"
+	CustomerAddressInputCountryZAF CustomerAddressInputCountry = "ZAF"
+	CustomerAddressInputCountryZMB CustomerAddressInputCountry = "ZMB"
+	CustomerAddressInputCountryZWE CustomerAddressInputCountry = "ZWE"
+)
+
+// Valid indicates whether the value is a known member of the CustomerAddressInputCountry enum.
+func (e CustomerAddressInputCountry) Valid() bool {
+	switch e {
+	case CustomerAddressInputCountryABW:
+		return true
+	case CustomerAddressInputCountryAFG:
+		return true
+	case CustomerAddressInputCountryAGO:
+		return true
+	case CustomerAddressInputCountryAIA:
+		return true
+	case CustomerAddressInputCountryALA:
+		return true
+	case CustomerAddressInputCountryALB:
+		return true
+	case CustomerAddressInputCountryAND:
+		return true
+	case CustomerAddressInputCountryANT:
+		return true
+	case CustomerAddressInputCountryARE:
+		return true
+	case CustomerAddressInputCountryARG:
+		return true
+	case CustomerAddressInputCountryARM:
+		return true
+	case CustomerAddressInputCountryASM:
+		return true
+	case CustomerAddressInputCountryATA:
+		return true
+	case CustomerAddressInputCountryATF:
+		return true
+	case CustomerAddressInputCountryATG:
+		return true
+	case CustomerAddressInputCountryAUS:
+		return true
+	case CustomerAddressInputCountryAUT:
+		return true
+	case CustomerAddressInputCountryAZE:
+		return true
+	case CustomerAddressInputCountryBDI:
+		return true
+	case CustomerAddressInputCountryBEL:
+		return true
+	case CustomerAddressInputCountryBEN:
+		return true
+	case CustomerAddressInputCountryBES:
+		return true
+	case CustomerAddressInputCountryBFA:
+		return true
+	case CustomerAddressInputCountryBGD:
+		return true
+	case CustomerAddressInputCountryBGR:
+		return true
+	case CustomerAddressInputCountryBHR:
+		return true
+	case CustomerAddressInputCountryBHS:
+		return true
+	case CustomerAddressInputCountryBIH:
+		return true
+	case CustomerAddressInputCountryBLM:
+		return true
+	case CustomerAddressInputCountryBLR:
+		return true
+	case CustomerAddressInputCountryBLZ:
+		return true
+	case CustomerAddressInputCountryBMU:
+		return true
+	case CustomerAddressInputCountryBOL:
+		return true
+	case CustomerAddressInputCountryBRA:
+		return true
+	case CustomerAddressInputCountryBRB:
+		return true
+	case CustomerAddressInputCountryBRN:
+		return true
+	case CustomerAddressInputCountryBTN:
+		return true
+	case CustomerAddressInputCountryBVT:
+		return true
+	case CustomerAddressInputCountryBWA:
+		return true
+	case CustomerAddressInputCountryCAF:
+		return true
+	case CustomerAddressInputCountryCAN:
+		return true
+	case CustomerAddressInputCountryCCK:
+		return true
+	case CustomerAddressInputCountryCHE:
+		return true
+	case CustomerAddressInputCountryCHL:
+		return true
+	case CustomerAddressInputCountryCHN:
+		return true
+	case CustomerAddressInputCountryCIV:
+		return true
+	case CustomerAddressInputCountryCMR:
+		return true
+	case CustomerAddressInputCountryCOD:
+		return true
+	case CustomerAddressInputCountryCOG:
+		return true
+	case CustomerAddressInputCountryCOK:
+		return true
+	case CustomerAddressInputCountryCOL:
+		return true
+	case CustomerAddressInputCountryCOM:
+		return true
+	case CustomerAddressInputCountryCPV:
+		return true
+	case CustomerAddressInputCountryCRI:
+		return true
+	case CustomerAddressInputCountryCUB:
+		return true
+	case CustomerAddressInputCountryCUW:
+		return true
+	case CustomerAddressInputCountryCXR:
+		return true
+	case CustomerAddressInputCountryCYM:
+		return true
+	case CustomerAddressInputCountryCYP:
+		return true
+	case CustomerAddressInputCountryCZE:
+		return true
+	case CustomerAddressInputCountryDEU:
+		return true
+	case CustomerAddressInputCountryDJI:
+		return true
+	case CustomerAddressInputCountryDMA:
+		return true
+	case CustomerAddressInputCountryDNK:
+		return true
+	case CustomerAddressInputCountryDOM:
+		return true
+	case CustomerAddressInputCountryDZA:
+		return true
+	case CustomerAddressInputCountryECU:
+		return true
+	case CustomerAddressInputCountryEGY:
+		return true
+	case CustomerAddressInputCountryERI:
+		return true
+	case CustomerAddressInputCountryESH:
+		return true
+	case CustomerAddressInputCountryESP:
+		return true
+	case CustomerAddressInputCountryEST:
+		return true
+	case CustomerAddressInputCountryETH:
+		return true
+	case CustomerAddressInputCountryFIN:
+		return true
+	case CustomerAddressInputCountryFJI:
+		return true
+	case CustomerAddressInputCountryFLK:
+		return true
+	case CustomerAddressInputCountryFRA:
+		return true
+	case CustomerAddressInputCountryFRO:
+		return true
+	case CustomerAddressInputCountryFSM:
+		return true
+	case CustomerAddressInputCountryGAB:
+		return true
+	case CustomerAddressInputCountryGBR:
+		return true
+	case CustomerAddressInputCountryGEO:
+		return true
+	case CustomerAddressInputCountryGGY:
+		return true
+	case CustomerAddressInputCountryGHA:
+		return true
+	case CustomerAddressInputCountryGIB:
+		return true
+	case CustomerAddressInputCountryGIN:
+		return true
+	case CustomerAddressInputCountryGLP:
+		return true
+	case CustomerAddressInputCountryGMB:
+		return true
+	case CustomerAddressInputCountryGNB:
+		return true
+	case CustomerAddressInputCountryGNQ:
+		return true
+	case CustomerAddressInputCountryGRC:
+		return true
+	case CustomerAddressInputCountryGRD:
+		return true
+	case CustomerAddressInputCountryGRL:
+		return true
+	case CustomerAddressInputCountryGTM:
+		return true
+	case CustomerAddressInputCountryGUF:
+		return true
+	case CustomerAddressInputCountryGUM:
+		return true
+	case CustomerAddressInputCountryGUY:
+		return true
+	case CustomerAddressInputCountryHKG:
+		return true
+	case CustomerAddressInputCountryHMD:
+		return true
+	case CustomerAddressInputCountryHND:
+		return true
+	case CustomerAddressInputCountryHRV:
+		return true
+	case CustomerAddressInputCountryHTI:
+		return true
+	case CustomerAddressInputCountryHUN:
+		return true
+	case CustomerAddressInputCountryIDN:
+		return true
+	case CustomerAddressInputCountryIMN:
+		return true
+	case CustomerAddressInputCountryIND:
+		return true
+	case CustomerAddressInputCountryIOT:
+		return true
+	case CustomerAddressInputCountryIRL:
+		return true
+	case CustomerAddressInputCountryIRN:
+		return true
+	case CustomerAddressInputCountryIRQ:
+		return true
+	case CustomerAddressInputCountryISL:
+		return true
+	case CustomerAddressInputCountryISR:
+		return true
+	case CustomerAddressInputCountryITA:
+		return true
+	case CustomerAddressInputCountryJAM:
+		return true
+	case CustomerAddressInputCountryJEY:
+		return true
+	case CustomerAddressInputCountryJOR:
+		return true
+	case CustomerAddressInputCountryJPN:
+		return true
+	case CustomerAddressInputCountryKAZ:
+		return true
+	case CustomerAddressInputCountryKEN:
+		return true
+	case CustomerAddressInputCountryKGZ:
+		return true
+	case CustomerAddressInputCountryKHM:
+		return true
+	case CustomerAddressInputCountryKIR:
+		return true
+	case CustomerAddressInputCountryKNA:
+		return true
+	case CustomerAddressInputCountryKOR:
+		return true
+	case CustomerAddressInputCountryKWT:
+		return true
+	case CustomerAddressInputCountryLAO:
+		return true
+	case CustomerAddressInputCountryLBN:
+		return true
+	case CustomerAddressInputCountryLBR:
+		return true
+	case CustomerAddressInputCountryLBY:
+		return true
+	case CustomerAddressInputCountryLCA:
+		return true
+	case CustomerAddressInputCountryLIE:
+		return true
+	case CustomerAddressInputCountryLKA:
+		return true
+	case CustomerAddressInputCountryLSO:
+		return true
+	case CustomerAddressInputCountryLTU:
+		return true
+	case CustomerAddressInputCountryLUX:
+		return true
+	case CustomerAddressInputCountryLVA:
+		return true
+	case CustomerAddressInputCountryMAC:
+		return true
+	case CustomerAddressInputCountryMAF:
+		return true
+	case CustomerAddressInputCountryMAR:
+		return true
+	case CustomerAddressInputCountryMCO:
+		return true
+	case CustomerAddressInputCountryMDA:
+		return true
+	case CustomerAddressInputCountryMDG:
+		return true
+	case CustomerAddressInputCountryMDV:
+		return true
+	case CustomerAddressInputCountryMEX:
+		return true
+	case CustomerAddressInputCountryMHL:
+		return true
+	case CustomerAddressInputCountryMKD:
+		return true
+	case CustomerAddressInputCountryMLI:
+		return true
+	case CustomerAddressInputCountryMLT:
+		return true
+	case CustomerAddressInputCountryMMR:
+		return true
+	case CustomerAddressInputCountryMNE:
+		return true
+	case CustomerAddressInputCountryMNG:
+		return true
+	case CustomerAddressInputCountryMNP:
+		return true
+	case CustomerAddressInputCountryMOZ:
+		return true
+	case CustomerAddressInputCountryMRT:
+		return true
+	case CustomerAddressInputCountryMSR:
+		return true
+	case CustomerAddressInputCountryMTQ:
+		return true
+	case CustomerAddressInputCountryMUS:
+		return true
+	case CustomerAddressInputCountryMWI:
+		return true
+	case CustomerAddressInputCountryMYS:
+		return true
+	case CustomerAddressInputCountryMYT:
+		return true
+	case CustomerAddressInputCountryNAM:
+		return true
+	case CustomerAddressInputCountryNCL:
+		return true
+	case CustomerAddressInputCountryNER:
+		return true
+	case CustomerAddressInputCountryNFK:
+		return true
+	case CustomerAddressInputCountryNGA:
+		return true
+	case CustomerAddressInputCountryNIC:
+		return true
+	case CustomerAddressInputCountryNIU:
+		return true
+	case CustomerAddressInputCountryNLD:
+		return true
+	case CustomerAddressInputCountryNOR:
+		return true
+	case CustomerAddressInputCountryNPL:
+		return true
+	case CustomerAddressInputCountryNRU:
+		return true
+	case CustomerAddressInputCountryNZL:
+		return true
+	case CustomerAddressInputCountryOMN:
+		return true
+	case CustomerAddressInputCountryPAK:
+		return true
+	case CustomerAddressInputCountryPAN:
+		return true
+	case CustomerAddressInputCountryPCN:
+		return true
+	case CustomerAddressInputCountryPER:
+		return true
+	case CustomerAddressInputCountryPHL:
+		return true
+	case CustomerAddressInputCountryPLW:
+		return true
+	case CustomerAddressInputCountryPNG:
+		return true
+	case CustomerAddressInputCountryPOL:
+		return true
+	case CustomerAddressInputCountryPRI:
+		return true
+	case CustomerAddressInputCountryPRK:
+		return true
+	case CustomerAddressInputCountryPRT:
+		return true
+	case CustomerAddressInputCountryPRY:
+		return true
+	case CustomerAddressInputCountryPSE:
+		return true
+	case CustomerAddressInputCountryPYF:
+		return true
+	case CustomerAddressInputCountryQAT:
+		return true
+	case CustomerAddressInputCountryREU:
+		return true
+	case CustomerAddressInputCountryROU:
+		return true
+	case CustomerAddressInputCountryRUS:
+		return true
+	case CustomerAddressInputCountryRWA:
+		return true
+	case CustomerAddressInputCountrySAU:
+		return true
+	case CustomerAddressInputCountrySCG:
+		return true
+	case CustomerAddressInputCountrySDN:
+		return true
+	case CustomerAddressInputCountrySEN:
+		return true
+	case CustomerAddressInputCountrySGP:
+		return true
+	case CustomerAddressInputCountrySGS:
+		return true
+	case CustomerAddressInputCountrySHN:
+		return true
+	case CustomerAddressInputCountrySJM:
+		return true
+	case CustomerAddressInputCountrySLB:
+		return true
+	case CustomerAddressInputCountrySLE:
+		return true
+	case CustomerAddressInputCountrySLV:
+		return true
+	case CustomerAddressInputCountrySMR:
+		return true
+	case CustomerAddressInputCountrySOM:
+		return true
+	case CustomerAddressInputCountrySPM:
+		return true
+	case CustomerAddressInputCountrySRB:
+		return true
+	case CustomerAddressInputCountrySSD:
+		return true
+	case CustomerAddressInputCountrySTP:
+		return true
+	case CustomerAddressInputCountrySUR:
+		return true
+	case CustomerAddressInputCountrySVK:
+		return true
+	case CustomerAddressInputCountrySVN:
+		return true
+	case CustomerAddressInputCountrySWE:
+		return true
+	case CustomerAddressInputCountrySWZ:
+		return true
+	case CustomerAddressInputCountrySXM:
+		return true
+	case CustomerAddressInputCountrySYC:
+		return true
+	case CustomerAddressInputCountrySYR:
+		return true
+	case CustomerAddressInputCountryTCA:
+		return true
+	case CustomerAddressInputCountryTCD:
+		return true
+	case CustomerAddressInputCountryTGO:
+		return true
+	case CustomerAddressInputCountryTHA:
+		return true
+	case CustomerAddressInputCountryTJK:
+		return true
+	case CustomerAddressInputCountryTKL:
+		return true
+	case CustomerAddressInputCountryTKM:
+		return true
+	case CustomerAddressInputCountryTLS:
+		return true
+	case CustomerAddressInputCountryTON:
+		return true
+	case CustomerAddressInputCountryTTO:
+		return true
+	case CustomerAddressInputCountryTUN:
+		return true
+	case CustomerAddressInputCountryTUR:
+		return true
+	case CustomerAddressInputCountryTUV:
+		return true
+	case CustomerAddressInputCountryTWN:
+		return true
+	case CustomerAddressInputCountryTZA:
+		return true
+	case CustomerAddressInputCountryUGA:
+		return true
+	case CustomerAddressInputCountryUKR:
+		return true
+	case CustomerAddressInputCountryUMI:
+		return true
+	case CustomerAddressInputCountryURY:
+		return true
+	case CustomerAddressInputCountryUSA:
+		return true
+	case CustomerAddressInputCountryUZB:
+		return true
+	case CustomerAddressInputCountryVAT:
+		return true
+	case CustomerAddressInputCountryVCT:
+		return true
+	case CustomerAddressInputCountryVEN:
+		return true
+	case CustomerAddressInputCountryVGB:
+		return true
+	case CustomerAddressInputCountryVIR:
+		return true
+	case CustomerAddressInputCountryVNM:
+		return true
+	case CustomerAddressInputCountryVUT:
+		return true
+	case CustomerAddressInputCountryWLF:
+		return true
+	case CustomerAddressInputCountryWSM:
+		return true
+	case CustomerAddressInputCountryXKX:
+		return true
+	case CustomerAddressInputCountryYEM:
+		return true
+	case CustomerAddressInputCountryZAF:
+		return true
+	case CustomerAddressInputCountryZMB:
+		return true
+	case CustomerAddressInputCountryZWE:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for CustomerAssetSummaryBikeType.
+const (
+	CustomerAssetSummaryBikeTypeBmx           CustomerAssetSummaryBikeType = "bmx"
+	CustomerAssetSummaryBikeTypeECargo        CustomerAssetSummaryBikeType = "e_cargo"
+	CustomerAssetSummaryBikeTypeEGravel       CustomerAssetSummaryBikeType = "e_gravel"
+	CustomerAssetSummaryBikeTypeERoad         CustomerAssetSummaryBikeType = "e_road"
+	CustomerAssetSummaryBikeTypeElectricBike  CustomerAssetSummaryBikeType = "electric_bike"
+	CustomerAssetSummaryBikeTypeGenericBike   CustomerAssetSummaryBikeType = "generic_bike"
+	CustomerAssetSummaryBikeTypeGravel        CustomerAssetSummaryBikeType = "gravel"
+	CustomerAssetSummaryBikeTypeHybrid        CustomerAssetSummaryBikeType = "hybrid"
+	CustomerAssetSummaryBikeTypeKidsBike      CustomerAssetSummaryBikeType = "kids_bike"
+	CustomerAssetSummaryBikeTypeMountainBike  CustomerAssetSummaryBikeType = "mountain_bike"
+	CustomerAssetSummaryBikeTypeOther         CustomerAssetSummaryBikeType = "other"
+	CustomerAssetSummaryBikeTypeRoadBike      CustomerAssetSummaryBikeType = "road_bike"
+	CustomerAssetSummaryBikeTypeSingleSpeed   CustomerAssetSummaryBikeType = "single_speed"
+	CustomerAssetSummaryBikeTypeStaticBike    CustomerAssetSummaryBikeType = "static_bike"
+	CustomerAssetSummaryBikeTypeTriathlonBike CustomerAssetSummaryBikeType = "triathlon_bike"
+)
+
+// Valid indicates whether the value is a known member of the CustomerAssetSummaryBikeType enum.
+func (e CustomerAssetSummaryBikeType) Valid() bool {
+	switch e {
+	case CustomerAssetSummaryBikeTypeBmx:
+		return true
+	case CustomerAssetSummaryBikeTypeECargo:
+		return true
+	case CustomerAssetSummaryBikeTypeEGravel:
+		return true
+	case CustomerAssetSummaryBikeTypeERoad:
+		return true
+	case CustomerAssetSummaryBikeTypeElectricBike:
+		return true
+	case CustomerAssetSummaryBikeTypeGenericBike:
+		return true
+	case CustomerAssetSummaryBikeTypeGravel:
+		return true
+	case CustomerAssetSummaryBikeTypeHybrid:
+		return true
+	case CustomerAssetSummaryBikeTypeKidsBike:
+		return true
+	case CustomerAssetSummaryBikeTypeMountainBike:
+		return true
+	case CustomerAssetSummaryBikeTypeOther:
+		return true
+	case CustomerAssetSummaryBikeTypeRoadBike:
+		return true
+	case CustomerAssetSummaryBikeTypeSingleSpeed:
+		return true
+	case CustomerAssetSummaryBikeTypeStaticBike:
+		return true
+	case CustomerAssetSummaryBikeTypeTriathlonBike:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for CustomerCreateRequestPreferredContactMethod.
+const (
+	CustomerCreateRequestPreferredContactMethodEmail     CustomerCreateRequestPreferredContactMethod = "email"
+	CustomerCreateRequestPreferredContactMethodFacebook  CustomerCreateRequestPreferredContactMethod = "facebook"
+	CustomerCreateRequestPreferredContactMethodInstagram CustomerCreateRequestPreferredContactMethod = "instagram"
+	CustomerCreateRequestPreferredContactMethodPhone     CustomerCreateRequestPreferredContactMethod = "phone"
+	CustomerCreateRequestPreferredContactMethodWhatsApp  CustomerCreateRequestPreferredContactMethod = "whats_app"
+)
+
+// Valid indicates whether the value is a known member of the CustomerCreateRequestPreferredContactMethod enum.
+func (e CustomerCreateRequestPreferredContactMethod) Valid() bool {
+	switch e {
+	case CustomerCreateRequestPreferredContactMethodEmail:
+		return true
+	case CustomerCreateRequestPreferredContactMethodFacebook:
+		return true
+	case CustomerCreateRequestPreferredContactMethodInstagram:
+		return true
+	case CustomerCreateRequestPreferredContactMethodPhone:
+		return true
+	case CustomerCreateRequestPreferredContactMethodWhatsApp:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for CustomerUpdateRequestPreferredContactMethod.
+const (
+	CustomerUpdateRequestPreferredContactMethodEmail     CustomerUpdateRequestPreferredContactMethod = "email"
+	CustomerUpdateRequestPreferredContactMethodFacebook  CustomerUpdateRequestPreferredContactMethod = "facebook"
+	CustomerUpdateRequestPreferredContactMethodInstagram CustomerUpdateRequestPreferredContactMethod = "instagram"
+	CustomerUpdateRequestPreferredContactMethodPhone     CustomerUpdateRequestPreferredContactMethod = "phone"
+	CustomerUpdateRequestPreferredContactMethodWhatsApp  CustomerUpdateRequestPreferredContactMethod = "whats_app"
+)
+
+// Valid indicates whether the value is a known member of the CustomerUpdateRequestPreferredContactMethod enum.
+func (e CustomerUpdateRequestPreferredContactMethod) Valid() bool {
+	switch e {
+	case CustomerUpdateRequestPreferredContactMethodEmail:
+		return true
+	case CustomerUpdateRequestPreferredContactMethodFacebook:
+		return true
+	case CustomerUpdateRequestPreferredContactMethodInstagram:
+		return true
+	case CustomerUpdateRequestPreferredContactMethodPhone:
+		return true
+	case CustomerUpdateRequestPreferredContactMethodWhatsApp:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for ErrorCode.
+const (
+	AuthenticationRequired           ErrorCode = "authentication_required"
+	CannotDeleteResourceWithOpenJobs ErrorCode = "cannot_delete_resource_with_open_jobs"
+	IdempotencyConflict              ErrorCode = "idempotency_conflict"
+	IdempotencyKeyRequired           ErrorCode = "idempotency_key_required"
+	InternalError                    ErrorCode = "internal_error"
+	InvalidRequest                   ErrorCode = "invalid_request"
+	InvalidStatusTransition          ErrorCode = "invalid_status_transition"
+	InvalidWorkflowAction            ErrorCode = "invalid_workflow_action"
+	InvoiceAlreadyPaid               ErrorCode = "invoice_already_paid"
+	InvoiceNotPayable                ErrorCode = "invoice_not_payable"
+	NotificationDisabled             ErrorCode = "notification_disabled"
+	NotificationNotAllowed           ErrorCode = "notification_not_allowed"
+	PermissionDenied                 ErrorCode = "permission_denied"
+	RateLimited                      ErrorCode = "rate_limited"
+	ResourceLocked                   ErrorCode = "resource_locked"
+	ResourceNotFound                 ErrorCode = "resource_not_found"
+	SyncUnavailable                  ErrorCode = "sync_unavailable"
+)
+
+// Valid indicates whether the value is a known member of the ErrorCode enum.
+func (e ErrorCode) Valid() bool {
+	switch e {
+	case AuthenticationRequired:
+		return true
+	case CannotDeleteResourceWithOpenJobs:
+		return true
+	case IdempotencyConflict:
+		return true
+	case IdempotencyKeyRequired:
+		return true
+	case InternalError:
+		return true
+	case InvalidRequest:
+		return true
+	case InvalidStatusTransition:
+		return true
+	case InvalidWorkflowAction:
+		return true
+	case InvoiceAlreadyPaid:
+		return true
+	case InvoiceNotPayable:
+		return true
+	case NotificationDisabled:
+		return true
+	case NotificationNotAllowed:
+		return true
+	case PermissionDenied:
+		return true
+	case RateLimited:
+		return true
+	case ResourceLocked:
+		return true
+	case ResourceNotFound:
+		return true
+	case SyncUnavailable:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for IntegrationPullSyncStateStatus.
+const (
+	IntegrationPullSyncStateStatusCompleted IntegrationPullSyncStateStatus = "completed"
+	IntegrationPullSyncStateStatusDeleted   IntegrationPullSyncStateStatus = "deleted"
+	IntegrationPullSyncStateStatusFailed    IntegrationPullSyncStateStatus = "failed"
+	IntegrationPullSyncStateStatusNotSynced IntegrationPullSyncStateStatus = "not_synced"
+	IntegrationPullSyncStateStatusSynced    IntegrationPullSyncStateStatus = "synced"
+	IntegrationPullSyncStateStatusSyncing   IntegrationPullSyncStateStatus = "syncing"
+)
+
+// Valid indicates whether the value is a known member of the IntegrationPullSyncStateStatus enum.
+func (e IntegrationPullSyncStateStatus) Valid() bool {
+	switch e {
+	case IntegrationPullSyncStateStatusCompleted:
+		return true
+	case IntegrationPullSyncStateStatusDeleted:
+		return true
+	case IntegrationPullSyncStateStatusFailed:
+		return true
+	case IntegrationPullSyncStateStatusNotSynced:
+		return true
+	case IntegrationPullSyncStateStatusSynced:
+		return true
+	case IntegrationPullSyncStateStatusSyncing:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for IntegrationSyncEventDirection.
+const (
+	Bidirectional IntegrationSyncEventDirection = "bidirectional"
+	Pull          IntegrationSyncEventDirection = "pull"
+	Push          IntegrationSyncEventDirection = "push"
+)
+
+// Valid indicates whether the value is a known member of the IntegrationSyncEventDirection enum.
+func (e IntegrationSyncEventDirection) Valid() bool {
+	switch e {
+	case Bidirectional:
+		return true
+	case Pull:
+		return true
+	case Push:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for IntegrationSyncEventOperation.
+const (
+	IntegrationSyncEventOperationComplete               IntegrationSyncEventOperation = "complete"
+	IntegrationSyncEventOperationCompleteWarrantyUnpaid IntegrationSyncEventOperation = "complete_warranty_unpaid"
+	IntegrationSyncEventOperationCreate                 IntegrationSyncEventOperation = "create"
+	IntegrationSyncEventOperationDelete                 IntegrationSyncEventOperation = "delete"
+	IntegrationSyncEventOperationPaymentSync            IntegrationSyncEventOperation = "payment_sync"
+	IntegrationSyncEventOperationUpdate                 IntegrationSyncEventOperation = "update"
+)
+
+// Valid indicates whether the value is a known member of the IntegrationSyncEventOperation enum.
+func (e IntegrationSyncEventOperation) Valid() bool {
+	switch e {
+	case IntegrationSyncEventOperationComplete:
+		return true
+	case IntegrationSyncEventOperationCompleteWarrantyUnpaid:
+		return true
+	case IntegrationSyncEventOperationCreate:
+		return true
+	case IntegrationSyncEventOperationDelete:
+		return true
+	case IntegrationSyncEventOperationPaymentSync:
+		return true
+	case IntegrationSyncEventOperationUpdate:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for IntegrationSyncEventStatus.
+const (
+	IntegrationSyncEventStatusCancelled  IntegrationSyncEventStatus = "cancelled"
+	IntegrationSyncEventStatusFailed     IntegrationSyncEventStatus = "failed"
+	IntegrationSyncEventStatusPending    IntegrationSyncEventStatus = "pending"
+	IntegrationSyncEventStatusProcessing IntegrationSyncEventStatus = "processing"
+	IntegrationSyncEventStatusSuccess    IntegrationSyncEventStatus = "success"
+	IntegrationSyncEventStatusSuperseded IntegrationSyncEventStatus = "superseded"
+)
+
+// Valid indicates whether the value is a known member of the IntegrationSyncEventStatus enum.
+func (e IntegrationSyncEventStatus) Valid() bool {
+	switch e {
+	case IntegrationSyncEventStatusCancelled:
+		return true
+	case IntegrationSyncEventStatusFailed:
+		return true
+	case IntegrationSyncEventStatusPending:
+		return true
+	case IntegrationSyncEventStatusProcessing:
+		return true
+	case IntegrationSyncEventStatusSuccess:
+		return true
+	case IntegrationSyncEventStatusSuperseded:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for IntegrationSyncEventTrigger.
+const (
+	IntegrationSyncEventTriggerAutoOnCreate      IntegrationSyncEventTrigger = "auto_on_create"
+	IntegrationSyncEventTriggerAutoOnUpdate      IntegrationSyncEventTrigger = "auto_on_update"
+	IntegrationSyncEventTriggerManual            IntegrationSyncEventTrigger = "manual"
+	IntegrationSyncEventTriggerRetry             IntegrationSyncEventTrigger = "retry"
+	IntegrationSyncEventTriggerShopifyPosWebhook IntegrationSyncEventTrigger = "shopify_pos_webhook"
+)
+
+// Valid indicates whether the value is a known member of the IntegrationSyncEventTrigger enum.
+func (e IntegrationSyncEventTrigger) Valid() bool {
+	switch e {
+	case IntegrationSyncEventTriggerAutoOnCreate:
+		return true
+	case IntegrationSyncEventTriggerAutoOnUpdate:
+		return true
+	case IntegrationSyncEventTriggerManual:
+		return true
+	case IntegrationSyncEventTriggerRetry:
+		return true
+	case IntegrationSyncEventTriggerShopifyPosWebhook:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for IntegrationSyncTriggerRequestMode.
+const (
+	IntegrationSyncTriggerRequestModeAuto        IntegrationSyncTriggerRequestMode = "auto"
+	IntegrationSyncTriggerRequestModeComplete    IntegrationSyncTriggerRequestMode = "complete"
+	IntegrationSyncTriggerRequestModeCreate      IntegrationSyncTriggerRequestMode = "create"
+	IntegrationSyncTriggerRequestModePaymentSync IntegrationSyncTriggerRequestMode = "payment_sync"
+	IntegrationSyncTriggerRequestModeUpdate      IntegrationSyncTriggerRequestMode = "update"
+)
+
+// Valid indicates whether the value is a known member of the IntegrationSyncTriggerRequestMode enum.
+func (e IntegrationSyncTriggerRequestMode) Valid() bool {
+	switch e {
+	case IntegrationSyncTriggerRequestModeAuto:
+		return true
+	case IntegrationSyncTriggerRequestModeComplete:
+		return true
+	case IntegrationSyncTriggerRequestModeCreate:
+		return true
+	case IntegrationSyncTriggerRequestModePaymentSync:
+		return true
+	case IntegrationSyncTriggerRequestModeUpdate:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for InvoiceDiscountType.
+const (
+	InvoiceDiscountTypePercentage InvoiceDiscountType = "percentage"
+	InvoiceDiscountTypeSetAmount  InvoiceDiscountType = "set_amount"
+)
+
+// Valid indicates whether the value is a known member of the InvoiceDiscountType enum.
+func (e InvoiceDiscountType) Valid() bool {
+	switch e {
+	case InvoiceDiscountTypePercentage:
+		return true
+	case InvoiceDiscountTypeSetAmount:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for InvoiceObject.
+const (
+	InvoiceObjectInvoice InvoiceObject = "invoice"
+)
+
+// Valid indicates whether the value is a known member of the InvoiceObject enum.
+func (e InvoiceObject) Valid() bool {
+	switch e {
+	case InvoiceObjectInvoice:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for InvoiceOrigin.
+const (
+	InvoiceOriginAdHoc InvoiceOrigin = "ad_hoc"
+	InvoiceOriginJob   InvoiceOrigin = "job"
+	InvoiceOriginSale  InvoiceOrigin = "sale"
+)
+
+// Valid indicates whether the value is a known member of the InvoiceOrigin enum.
+func (e InvoiceOrigin) Valid() bool {
+	switch e {
+	case InvoiceOriginAdHoc:
+		return true
+	case InvoiceOriginJob:
+		return true
+	case InvoiceOriginSale:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for InvoiceStatus.
+const (
+	InvoiceStatusCancelled InvoiceStatus = "cancelled"
+	InvoiceStatusDraft     InvoiceStatus = "draft"
+	InvoiceStatusPaid      InvoiceStatus = "paid"
+	InvoiceStatusPending   InvoiceStatus = "pending"
+)
+
+// Valid indicates whether the value is a known member of the InvoiceStatus enum.
+func (e InvoiceStatus) Valid() bool {
+	switch e {
+	case InvoiceStatusCancelled:
+		return true
+	case InvoiceStatusDraft:
+		return true
+	case InvoiceStatusPaid:
+		return true
+	case InvoiceStatusPending:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for InvoiceIntegrationSyncObject.
+const (
+	InvoiceIntegrationSyncObjectInvoiceIntegrationSync InvoiceIntegrationSyncObject = "invoice_integration_sync"
+)
+
+// Valid indicates whether the value is a known member of the InvoiceIntegrationSyncObject enum.
+func (e InvoiceIntegrationSyncObject) Valid() bool {
+	switch e {
+	case InvoiceIntegrationSyncObjectInvoiceIntegrationSync:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for InvoiceIntegrationSyncStatus.
+const (
+	InvoiceIntegrationSyncStatusCompleted InvoiceIntegrationSyncStatus = "completed"
+	InvoiceIntegrationSyncStatusDeleted   InvoiceIntegrationSyncStatus = "deleted"
+	InvoiceIntegrationSyncStatusFailed    InvoiceIntegrationSyncStatus = "failed"
+	InvoiceIntegrationSyncStatusNotSynced InvoiceIntegrationSyncStatus = "not_synced"
+	InvoiceIntegrationSyncStatusSynced    InvoiceIntegrationSyncStatus = "synced"
+	InvoiceIntegrationSyncStatusSyncing   InvoiceIntegrationSyncStatus = "syncing"
+)
+
+// Valid indicates whether the value is a known member of the InvoiceIntegrationSyncStatus enum.
+func (e InvoiceIntegrationSyncStatus) Valid() bool {
+	switch e {
+	case InvoiceIntegrationSyncStatusCompleted:
+		return true
+	case InvoiceIntegrationSyncStatusDeleted:
+		return true
+	case InvoiceIntegrationSyncStatusFailed:
+		return true
+	case InvoiceIntegrationSyncStatusNotSynced:
+		return true
+	case InvoiceIntegrationSyncStatusSynced:
+		return true
+	case InvoiceIntegrationSyncStatusSyncing:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for InvoiceItemLineType.
+const (
+	InvoiceItemLineTypeCustom  InvoiceItemLineType = "custom"
+	InvoiceItemLineTypePart    InvoiceItemLineType = "part"
+	InvoiceItemLineTypeService InvoiceItemLineType = "service"
+)
+
+// Valid indicates whether the value is a known member of the InvoiceItemLineType enum.
+func (e InvoiceItemLineType) Valid() bool {
+	switch e {
+	case InvoiceItemLineTypeCustom:
+		return true
+	case InvoiceItemLineTypePart:
+		return true
+	case InvoiceItemLineTypeService:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for InvoiceItemObject.
+const (
+	InvoiceItemObjectInvoiceItem InvoiceItemObject = "invoice_item"
+)
+
+// Valid indicates whether the value is a known member of the InvoiceItemObject enum.
+func (e InvoiceItemObject) Valid() bool {
+	switch e {
+	case InvoiceItemObjectInvoiceItem:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for InvoiceItemDeletedObject.
+const (
+	InvoiceItemDeletedObjectInvoiceItem InvoiceItemDeletedObject = "invoice_item"
+)
+
+// Valid indicates whether the value is a known member of the InvoiceItemDeletedObject enum.
+func (e InvoiceItemDeletedObject) Valid() bool {
+	switch e {
+	case InvoiceItemDeletedObjectInvoiceItem:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for InvoicePaymentCreateRequestPaymentMethod.
+const (
+	InvoicePaymentCreateRequestPaymentMethodBACS    InvoicePaymentCreateRequestPaymentMethod = "b_a_c_s"
+	InvoicePaymentCreateRequestPaymentMethodCard    InvoicePaymentCreateRequestPaymentMethod = "card"
+	InvoicePaymentCreateRequestPaymentMethodCash    InvoicePaymentCreateRequestPaymentMethod = "cash"
+	InvoicePaymentCreateRequestPaymentMethodLayaway InvoicePaymentCreateRequestPaymentMethod = "layaway"
+	InvoicePaymentCreateRequestPaymentMethodOther   InvoicePaymentCreateRequestPaymentMethod = "other"
+)
+
+// Valid indicates whether the value is a known member of the InvoicePaymentCreateRequestPaymentMethod enum.
+func (e InvoicePaymentCreateRequestPaymentMethod) Valid() bool {
+	switch e {
+	case InvoicePaymentCreateRequestPaymentMethodBACS:
+		return true
+	case InvoicePaymentCreateRequestPaymentMethodCard:
+		return true
+	case InvoicePaymentCreateRequestPaymentMethodCash:
+		return true
+	case InvoicePaymentCreateRequestPaymentMethodLayaway:
+		return true
+	case InvoicePaymentCreateRequestPaymentMethodOther:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for InvoiceStatusChangeRequestStatus.
+const (
+	InvoiceStatusChangeRequestStatusCancelled InvoiceStatusChangeRequestStatus = "cancelled"
+	InvoiceStatusChangeRequestStatusDraft     InvoiceStatusChangeRequestStatus = "draft"
+	InvoiceStatusChangeRequestStatusPaid      InvoiceStatusChangeRequestStatus = "paid"
+	InvoiceStatusChangeRequestStatusPending   InvoiceStatusChangeRequestStatus = "pending"
+)
+
+// Valid indicates whether the value is a known member of the InvoiceStatusChangeRequestStatus enum.
+func (e InvoiceStatusChangeRequestStatus) Valid() bool {
+	switch e {
+	case InvoiceStatusChangeRequestStatusCancelled:
+		return true
+	case InvoiceStatusChangeRequestStatusDraft:
+		return true
+	case InvoiceStatusChangeRequestStatusPaid:
+		return true
+	case InvoiceStatusChangeRequestStatusPending:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for InvoiceUpdateRequestDiscountType.
+const (
+	InvoiceUpdateRequestDiscountTypePercentage InvoiceUpdateRequestDiscountType = "percentage"
+	InvoiceUpdateRequestDiscountTypeSetAmount  InvoiceUpdateRequestDiscountType = "set_amount"
+)
+
+// Valid indicates whether the value is a known member of the InvoiceUpdateRequestDiscountType enum.
+func (e InvoiceUpdateRequestDiscountType) Valid() bool {
+	switch e {
+	case InvoiceUpdateRequestDiscountTypePercentage:
+		return true
+	case InvoiceUpdateRequestDiscountTypeSetAmount:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for JobAcceptedStatus.
+const (
+	JobAcceptedStatusAccepted  JobAcceptedStatus = "accepted"
+	JobAcceptedStatusCancelled JobAcceptedStatus = "cancelled"
+	JobAcceptedStatusPending   JobAcceptedStatus = "pending"
+	JobAcceptedStatusRejected  JobAcceptedStatus = "rejected"
+)
+
+// Valid indicates whether the value is a known member of the JobAcceptedStatus enum.
+func (e JobAcceptedStatus) Valid() bool {
+	switch e {
+	case JobAcceptedStatusAccepted:
+		return true
+	case JobAcceptedStatusCancelled:
+		return true
+	case JobAcceptedStatusPending:
+		return true
+	case JobAcceptedStatusRejected:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for JobAuthorisationStatus.
+const (
+	Authorised   JobAuthorisationStatus = "authorised"
+	Unauthorised JobAuthorisationStatus = "unauthorised"
+)
+
+// Valid indicates whether the value is a known member of the JobAuthorisationStatus enum.
+func (e JobAuthorisationStatus) Valid() bool {
+	switch e {
+	case Authorised:
+		return true
+	case Unauthorised:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for JobBillingType.
+const (
+	JobBillingTypeCod                   JobBillingType = "cod"
+	JobBillingTypeDealerPlan            JobBillingType = "dealer_plan"
+	JobBillingTypeDealerWarranty        JobBillingType = "dealer_warranty"
+	JobBillingTypeDepositMonthlyTerms   JobBillingType = "deposit_monthly_terms"
+	JobBillingTypeFoc                   JobBillingType = "foc"
+	JobBillingTypeInsurance             JobBillingType = "insurance"
+	JobBillingTypeInternalCost          JobBillingType = "internal_cost"
+	JobBillingTypeManufacturersWarranty JobBillingType = "manufacturers_warranty"
+	JobBillingTypeMotabilityCallOut     JobBillingType = "motability_call_out"
+	JobBillingTypeMotabilityInsurance   JobBillingType = "motability_insurance"
+	JobBillingTypeMotabilityPaidJob     JobBillingType = "motability_paid_job"
+	JobBillingTypeMotabilityWarranty    JobBillingType = "motability_warranty"
+	JobBillingTypeOnAccount             JobBillingType = "on_account"
+)
+
+// Valid indicates whether the value is a known member of the JobBillingType enum.
+func (e JobBillingType) Valid() bool {
+	switch e {
+	case JobBillingTypeCod:
+		return true
+	case JobBillingTypeDealerPlan:
+		return true
+	case JobBillingTypeDealerWarranty:
+		return true
+	case JobBillingTypeDepositMonthlyTerms:
+		return true
+	case JobBillingTypeFoc:
+		return true
+	case JobBillingTypeInsurance:
+		return true
+	case JobBillingTypeInternalCost:
+		return true
+	case JobBillingTypeManufacturersWarranty:
+		return true
+	case JobBillingTypeMotabilityCallOut:
+		return true
+	case JobBillingTypeMotabilityInsurance:
+		return true
+	case JobBillingTypeMotabilityPaidJob:
+		return true
+	case JobBillingTypeMotabilityWarranty:
+		return true
+	case JobBillingTypeOnAccount:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for JobCreationSource.
+const (
+	JobCreationSourceManual        JobCreationSource = "manual"
+	JobCreationSourceOnlineBooking JobCreationSource = "online_booking"
+	JobCreationSourceWidgetBooking JobCreationSource = "widget_booking"
+)
+
+// Valid indicates whether the value is a known member of the JobCreationSource enum.
+func (e JobCreationSource) Valid() bool {
+	switch e {
+	case JobCreationSourceManual:
+		return true
+	case JobCreationSourceOnlineBooking:
+		return true
+	case JobCreationSourceWidgetBooking:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for JobCustomerPreferredContactMethod.
+const (
+	JobCustomerPreferredContactMethodEmail     JobCustomerPreferredContactMethod = "email"
+	JobCustomerPreferredContactMethodFacebook  JobCustomerPreferredContactMethod = "facebook"
+	JobCustomerPreferredContactMethodInstagram JobCustomerPreferredContactMethod = "instagram"
+	JobCustomerPreferredContactMethodPhone     JobCustomerPreferredContactMethod = "phone"
+	JobCustomerPreferredContactMethodWhatsApp  JobCustomerPreferredContactMethod = "whats_app"
+)
+
+// Valid indicates whether the value is a known member of the JobCustomerPreferredContactMethod enum.
+func (e JobCustomerPreferredContactMethod) Valid() bool {
+	switch e {
+	case JobCustomerPreferredContactMethodEmail:
+		return true
+	case JobCustomerPreferredContactMethodFacebook:
+		return true
+	case JobCustomerPreferredContactMethodInstagram:
+		return true
+	case JobCustomerPreferredContactMethodPhone:
+		return true
+	case JobCustomerPreferredContactMethodWhatsApp:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for JobDiscountType.
+const (
+	Percentage JobDiscountType = "percentage"
+	SetAmount  JobDiscountType = "set_amount"
+)
+
+// Valid indicates whether the value is a known member of the JobDiscountType enum.
+func (e JobDiscountType) Valid() bool {
+	switch e {
+	case Percentage:
+		return true
+	case SetAmount:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for JobObject.
+const (
+	JobObjectJob JobObject = "job"
+)
+
+// Valid indicates whether the value is a known member of the JobObject enum.
+func (e JobObject) Valid() bool {
+	switch e {
+	case JobObjectJob:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for JobPartnerEmbedType.
+const (
+	Hygge   JobPartnerEmbedType = "hygge"
+	Ribble  JobPartnerEmbedType = "ribble"
+	Roxform JobPartnerEmbedType = "roxform"
+	Skarper JobPartnerEmbedType = "skarper"
+)
+
+// Valid indicates whether the value is a known member of the JobPartnerEmbedType enum.
+func (e JobPartnerEmbedType) Valid() bool {
+	switch e {
+	case Hygge:
+		return true
+	case Ribble:
+		return true
+	case Roxform:
+		return true
+	case Skarper:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for JobAcceptedStatusChangeRequestStatus.
+const (
+	JobAcceptedStatusChangeRequestStatusAccepted  JobAcceptedStatusChangeRequestStatus = "accepted"
+	JobAcceptedStatusChangeRequestStatusCancelled JobAcceptedStatusChangeRequestStatus = "cancelled"
+	JobAcceptedStatusChangeRequestStatusRejected  JobAcceptedStatusChangeRequestStatus = "rejected"
+)
+
+// Valid indicates whether the value is a known member of the JobAcceptedStatusChangeRequestStatus enum.
+func (e JobAcceptedStatusChangeRequestStatus) Valid() bool {
+	switch e {
+	case JobAcceptedStatusChangeRequestStatusAccepted:
+		return true
+	case JobAcceptedStatusChangeRequestStatusCancelled:
+		return true
+	case JobAcceptedStatusChangeRequestStatusRejected:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for JobAddressCountry.
+const (
+	JobAddressCountryABW JobAddressCountry = "ABW"
+	JobAddressCountryAFG JobAddressCountry = "AFG"
+	JobAddressCountryAGO JobAddressCountry = "AGO"
+	JobAddressCountryAIA JobAddressCountry = "AIA"
+	JobAddressCountryALA JobAddressCountry = "ALA"
+	JobAddressCountryALB JobAddressCountry = "ALB"
+	JobAddressCountryAND JobAddressCountry = "AND"
+	JobAddressCountryANT JobAddressCountry = "ANT"
+	JobAddressCountryARE JobAddressCountry = "ARE"
+	JobAddressCountryARG JobAddressCountry = "ARG"
+	JobAddressCountryARM JobAddressCountry = "ARM"
+	JobAddressCountryASM JobAddressCountry = "ASM"
+	JobAddressCountryATA JobAddressCountry = "ATA"
+	JobAddressCountryATF JobAddressCountry = "ATF"
+	JobAddressCountryATG JobAddressCountry = "ATG"
+	JobAddressCountryAUS JobAddressCountry = "AUS"
+	JobAddressCountryAUT JobAddressCountry = "AUT"
+	JobAddressCountryAZE JobAddressCountry = "AZE"
+	JobAddressCountryBDI JobAddressCountry = "BDI"
+	JobAddressCountryBEL JobAddressCountry = "BEL"
+	JobAddressCountryBEN JobAddressCountry = "BEN"
+	JobAddressCountryBES JobAddressCountry = "BES"
+	JobAddressCountryBFA JobAddressCountry = "BFA"
+	JobAddressCountryBGD JobAddressCountry = "BGD"
+	JobAddressCountryBGR JobAddressCountry = "BGR"
+	JobAddressCountryBHR JobAddressCountry = "BHR"
+	JobAddressCountryBHS JobAddressCountry = "BHS"
+	JobAddressCountryBIH JobAddressCountry = "BIH"
+	JobAddressCountryBLM JobAddressCountry = "BLM"
+	JobAddressCountryBLR JobAddressCountry = "BLR"
+	JobAddressCountryBLZ JobAddressCountry = "BLZ"
+	JobAddressCountryBMU JobAddressCountry = "BMU"
+	JobAddressCountryBOL JobAddressCountry = "BOL"
+	JobAddressCountryBRA JobAddressCountry = "BRA"
+	JobAddressCountryBRB JobAddressCountry = "BRB"
+	JobAddressCountryBRN JobAddressCountry = "BRN"
+	JobAddressCountryBTN JobAddressCountry = "BTN"
+	JobAddressCountryBVT JobAddressCountry = "BVT"
+	JobAddressCountryBWA JobAddressCountry = "BWA"
+	JobAddressCountryCAF JobAddressCountry = "CAF"
+	JobAddressCountryCAN JobAddressCountry = "CAN"
+	JobAddressCountryCCK JobAddressCountry = "CCK"
+	JobAddressCountryCHE JobAddressCountry = "CHE"
+	JobAddressCountryCHL JobAddressCountry = "CHL"
+	JobAddressCountryCHN JobAddressCountry = "CHN"
+	JobAddressCountryCIV JobAddressCountry = "CIV"
+	JobAddressCountryCMR JobAddressCountry = "CMR"
+	JobAddressCountryCOD JobAddressCountry = "COD"
+	JobAddressCountryCOG JobAddressCountry = "COG"
+	JobAddressCountryCOK JobAddressCountry = "COK"
+	JobAddressCountryCOL JobAddressCountry = "COL"
+	JobAddressCountryCOM JobAddressCountry = "COM"
+	JobAddressCountryCPV JobAddressCountry = "CPV"
+	JobAddressCountryCRI JobAddressCountry = "CRI"
+	JobAddressCountryCUB JobAddressCountry = "CUB"
+	JobAddressCountryCUW JobAddressCountry = "CUW"
+	JobAddressCountryCXR JobAddressCountry = "CXR"
+	JobAddressCountryCYM JobAddressCountry = "CYM"
+	JobAddressCountryCYP JobAddressCountry = "CYP"
+	JobAddressCountryCZE JobAddressCountry = "CZE"
+	JobAddressCountryDEU JobAddressCountry = "DEU"
+	JobAddressCountryDJI JobAddressCountry = "DJI"
+	JobAddressCountryDMA JobAddressCountry = "DMA"
+	JobAddressCountryDNK JobAddressCountry = "DNK"
+	JobAddressCountryDOM JobAddressCountry = "DOM"
+	JobAddressCountryDZA JobAddressCountry = "DZA"
+	JobAddressCountryECU JobAddressCountry = "ECU"
+	JobAddressCountryEGY JobAddressCountry = "EGY"
+	JobAddressCountryERI JobAddressCountry = "ERI"
+	JobAddressCountryESH JobAddressCountry = "ESH"
+	JobAddressCountryESP JobAddressCountry = "ESP"
+	JobAddressCountryEST JobAddressCountry = "EST"
+	JobAddressCountryETH JobAddressCountry = "ETH"
+	JobAddressCountryFIN JobAddressCountry = "FIN"
+	JobAddressCountryFJI JobAddressCountry = "FJI"
+	JobAddressCountryFLK JobAddressCountry = "FLK"
+	JobAddressCountryFRA JobAddressCountry = "FRA"
+	JobAddressCountryFRO JobAddressCountry = "FRO"
+	JobAddressCountryFSM JobAddressCountry = "FSM"
+	JobAddressCountryGAB JobAddressCountry = "GAB"
+	JobAddressCountryGBR JobAddressCountry = "GBR"
+	JobAddressCountryGEO JobAddressCountry = "GEO"
+	JobAddressCountryGGY JobAddressCountry = "GGY"
+	JobAddressCountryGHA JobAddressCountry = "GHA"
+	JobAddressCountryGIB JobAddressCountry = "GIB"
+	JobAddressCountryGIN JobAddressCountry = "GIN"
+	JobAddressCountryGLP JobAddressCountry = "GLP"
+	JobAddressCountryGMB JobAddressCountry = "GMB"
+	JobAddressCountryGNB JobAddressCountry = "GNB"
+	JobAddressCountryGNQ JobAddressCountry = "GNQ"
+	JobAddressCountryGRC JobAddressCountry = "GRC"
+	JobAddressCountryGRD JobAddressCountry = "GRD"
+	JobAddressCountryGRL JobAddressCountry = "GRL"
+	JobAddressCountryGTM JobAddressCountry = "GTM"
+	JobAddressCountryGUF JobAddressCountry = "GUF"
+	JobAddressCountryGUM JobAddressCountry = "GUM"
+	JobAddressCountryGUY JobAddressCountry = "GUY"
+	JobAddressCountryHKG JobAddressCountry = "HKG"
+	JobAddressCountryHMD JobAddressCountry = "HMD"
+	JobAddressCountryHND JobAddressCountry = "HND"
+	JobAddressCountryHRV JobAddressCountry = "HRV"
+	JobAddressCountryHTI JobAddressCountry = "HTI"
+	JobAddressCountryHUN JobAddressCountry = "HUN"
+	JobAddressCountryIDN JobAddressCountry = "IDN"
+	JobAddressCountryIMN JobAddressCountry = "IMN"
+	JobAddressCountryIND JobAddressCountry = "IND"
+	JobAddressCountryIOT JobAddressCountry = "IOT"
+	JobAddressCountryIRL JobAddressCountry = "IRL"
+	JobAddressCountryIRN JobAddressCountry = "IRN"
+	JobAddressCountryIRQ JobAddressCountry = "IRQ"
+	JobAddressCountryISL JobAddressCountry = "ISL"
+	JobAddressCountryISR JobAddressCountry = "ISR"
+	JobAddressCountryITA JobAddressCountry = "ITA"
+	JobAddressCountryJAM JobAddressCountry = "JAM"
+	JobAddressCountryJEY JobAddressCountry = "JEY"
+	JobAddressCountryJOR JobAddressCountry = "JOR"
+	JobAddressCountryJPN JobAddressCountry = "JPN"
+	JobAddressCountryKAZ JobAddressCountry = "KAZ"
+	JobAddressCountryKEN JobAddressCountry = "KEN"
+	JobAddressCountryKGZ JobAddressCountry = "KGZ"
+	JobAddressCountryKHM JobAddressCountry = "KHM"
+	JobAddressCountryKIR JobAddressCountry = "KIR"
+	JobAddressCountryKNA JobAddressCountry = "KNA"
+	JobAddressCountryKOR JobAddressCountry = "KOR"
+	JobAddressCountryKWT JobAddressCountry = "KWT"
+	JobAddressCountryLAO JobAddressCountry = "LAO"
+	JobAddressCountryLBN JobAddressCountry = "LBN"
+	JobAddressCountryLBR JobAddressCountry = "LBR"
+	JobAddressCountryLBY JobAddressCountry = "LBY"
+	JobAddressCountryLCA JobAddressCountry = "LCA"
+	JobAddressCountryLIE JobAddressCountry = "LIE"
+	JobAddressCountryLKA JobAddressCountry = "LKA"
+	JobAddressCountryLSO JobAddressCountry = "LSO"
+	JobAddressCountryLTU JobAddressCountry = "LTU"
+	JobAddressCountryLUX JobAddressCountry = "LUX"
+	JobAddressCountryLVA JobAddressCountry = "LVA"
+	JobAddressCountryMAC JobAddressCountry = "MAC"
+	JobAddressCountryMAF JobAddressCountry = "MAF"
+	JobAddressCountryMAR JobAddressCountry = "MAR"
+	JobAddressCountryMCO JobAddressCountry = "MCO"
+	JobAddressCountryMDA JobAddressCountry = "MDA"
+	JobAddressCountryMDG JobAddressCountry = "MDG"
+	JobAddressCountryMDV JobAddressCountry = "MDV"
+	JobAddressCountryMEX JobAddressCountry = "MEX"
+	JobAddressCountryMHL JobAddressCountry = "MHL"
+	JobAddressCountryMKD JobAddressCountry = "MKD"
+	JobAddressCountryMLI JobAddressCountry = "MLI"
+	JobAddressCountryMLT JobAddressCountry = "MLT"
+	JobAddressCountryMMR JobAddressCountry = "MMR"
+	JobAddressCountryMNE JobAddressCountry = "MNE"
+	JobAddressCountryMNG JobAddressCountry = "MNG"
+	JobAddressCountryMNP JobAddressCountry = "MNP"
+	JobAddressCountryMOZ JobAddressCountry = "MOZ"
+	JobAddressCountryMRT JobAddressCountry = "MRT"
+	JobAddressCountryMSR JobAddressCountry = "MSR"
+	JobAddressCountryMTQ JobAddressCountry = "MTQ"
+	JobAddressCountryMUS JobAddressCountry = "MUS"
+	JobAddressCountryMWI JobAddressCountry = "MWI"
+	JobAddressCountryMYS JobAddressCountry = "MYS"
+	JobAddressCountryMYT JobAddressCountry = "MYT"
+	JobAddressCountryNAM JobAddressCountry = "NAM"
+	JobAddressCountryNCL JobAddressCountry = "NCL"
+	JobAddressCountryNER JobAddressCountry = "NER"
+	JobAddressCountryNFK JobAddressCountry = "NFK"
+	JobAddressCountryNGA JobAddressCountry = "NGA"
+	JobAddressCountryNIC JobAddressCountry = "NIC"
+	JobAddressCountryNIU JobAddressCountry = "NIU"
+	JobAddressCountryNLD JobAddressCountry = "NLD"
+	JobAddressCountryNOR JobAddressCountry = "NOR"
+	JobAddressCountryNPL JobAddressCountry = "NPL"
+	JobAddressCountryNRU JobAddressCountry = "NRU"
+	JobAddressCountryNZL JobAddressCountry = "NZL"
+	JobAddressCountryOMN JobAddressCountry = "OMN"
+	JobAddressCountryPAK JobAddressCountry = "PAK"
+	JobAddressCountryPAN JobAddressCountry = "PAN"
+	JobAddressCountryPCN JobAddressCountry = "PCN"
+	JobAddressCountryPER JobAddressCountry = "PER"
+	JobAddressCountryPHL JobAddressCountry = "PHL"
+	JobAddressCountryPLW JobAddressCountry = "PLW"
+	JobAddressCountryPNG JobAddressCountry = "PNG"
+	JobAddressCountryPOL JobAddressCountry = "POL"
+	JobAddressCountryPRI JobAddressCountry = "PRI"
+	JobAddressCountryPRK JobAddressCountry = "PRK"
+	JobAddressCountryPRT JobAddressCountry = "PRT"
+	JobAddressCountryPRY JobAddressCountry = "PRY"
+	JobAddressCountryPSE JobAddressCountry = "PSE"
+	JobAddressCountryPYF JobAddressCountry = "PYF"
+	JobAddressCountryQAT JobAddressCountry = "QAT"
+	JobAddressCountryREU JobAddressCountry = "REU"
+	JobAddressCountryROU JobAddressCountry = "ROU"
+	JobAddressCountryRUS JobAddressCountry = "RUS"
+	JobAddressCountryRWA JobAddressCountry = "RWA"
+	JobAddressCountrySAU JobAddressCountry = "SAU"
+	JobAddressCountrySCG JobAddressCountry = "SCG"
+	JobAddressCountrySDN JobAddressCountry = "SDN"
+	JobAddressCountrySEN JobAddressCountry = "SEN"
+	JobAddressCountrySGP JobAddressCountry = "SGP"
+	JobAddressCountrySGS JobAddressCountry = "SGS"
+	JobAddressCountrySHN JobAddressCountry = "SHN"
+	JobAddressCountrySJM JobAddressCountry = "SJM"
+	JobAddressCountrySLB JobAddressCountry = "SLB"
+	JobAddressCountrySLE JobAddressCountry = "SLE"
+	JobAddressCountrySLV JobAddressCountry = "SLV"
+	JobAddressCountrySMR JobAddressCountry = "SMR"
+	JobAddressCountrySOM JobAddressCountry = "SOM"
+	JobAddressCountrySPM JobAddressCountry = "SPM"
+	JobAddressCountrySRB JobAddressCountry = "SRB"
+	JobAddressCountrySSD JobAddressCountry = "SSD"
+	JobAddressCountrySTP JobAddressCountry = "STP"
+	JobAddressCountrySUR JobAddressCountry = "SUR"
+	JobAddressCountrySVK JobAddressCountry = "SVK"
+	JobAddressCountrySVN JobAddressCountry = "SVN"
+	JobAddressCountrySWE JobAddressCountry = "SWE"
+	JobAddressCountrySWZ JobAddressCountry = "SWZ"
+	JobAddressCountrySXM JobAddressCountry = "SXM"
+	JobAddressCountrySYC JobAddressCountry = "SYC"
+	JobAddressCountrySYR JobAddressCountry = "SYR"
+	JobAddressCountryTCA JobAddressCountry = "TCA"
+	JobAddressCountryTCD JobAddressCountry = "TCD"
+	JobAddressCountryTGO JobAddressCountry = "TGO"
+	JobAddressCountryTHA JobAddressCountry = "THA"
+	JobAddressCountryTJK JobAddressCountry = "TJK"
+	JobAddressCountryTKL JobAddressCountry = "TKL"
+	JobAddressCountryTKM JobAddressCountry = "TKM"
+	JobAddressCountryTLS JobAddressCountry = "TLS"
+	JobAddressCountryTON JobAddressCountry = "TON"
+	JobAddressCountryTTO JobAddressCountry = "TTO"
+	JobAddressCountryTUN JobAddressCountry = "TUN"
+	JobAddressCountryTUR JobAddressCountry = "TUR"
+	JobAddressCountryTUV JobAddressCountry = "TUV"
+	JobAddressCountryTWN JobAddressCountry = "TWN"
+	JobAddressCountryTZA JobAddressCountry = "TZA"
+	JobAddressCountryUGA JobAddressCountry = "UGA"
+	JobAddressCountryUKR JobAddressCountry = "UKR"
+	JobAddressCountryUMI JobAddressCountry = "UMI"
+	JobAddressCountryURY JobAddressCountry = "URY"
+	JobAddressCountryUSA JobAddressCountry = "USA"
+	JobAddressCountryUZB JobAddressCountry = "UZB"
+	JobAddressCountryVAT JobAddressCountry = "VAT"
+	JobAddressCountryVCT JobAddressCountry = "VCT"
+	JobAddressCountryVEN JobAddressCountry = "VEN"
+	JobAddressCountryVGB JobAddressCountry = "VGB"
+	JobAddressCountryVIR JobAddressCountry = "VIR"
+	JobAddressCountryVNM JobAddressCountry = "VNM"
+	JobAddressCountryVUT JobAddressCountry = "VUT"
+	JobAddressCountryWLF JobAddressCountry = "WLF"
+	JobAddressCountryWSM JobAddressCountry = "WSM"
+	JobAddressCountryXKX JobAddressCountry = "XKX"
+	JobAddressCountryYEM JobAddressCountry = "YEM"
+	JobAddressCountryZAF JobAddressCountry = "ZAF"
+	JobAddressCountryZMB JobAddressCountry = "ZMB"
+	JobAddressCountryZWE JobAddressCountry = "ZWE"
+)
+
+// Valid indicates whether the value is a known member of the JobAddressCountry enum.
+func (e JobAddressCountry) Valid() bool {
+	switch e {
+	case JobAddressCountryABW:
+		return true
+	case JobAddressCountryAFG:
+		return true
+	case JobAddressCountryAGO:
+		return true
+	case JobAddressCountryAIA:
+		return true
+	case JobAddressCountryALA:
+		return true
+	case JobAddressCountryALB:
+		return true
+	case JobAddressCountryAND:
+		return true
+	case JobAddressCountryANT:
+		return true
+	case JobAddressCountryARE:
+		return true
+	case JobAddressCountryARG:
+		return true
+	case JobAddressCountryARM:
+		return true
+	case JobAddressCountryASM:
+		return true
+	case JobAddressCountryATA:
+		return true
+	case JobAddressCountryATF:
+		return true
+	case JobAddressCountryATG:
+		return true
+	case JobAddressCountryAUS:
+		return true
+	case JobAddressCountryAUT:
+		return true
+	case JobAddressCountryAZE:
+		return true
+	case JobAddressCountryBDI:
+		return true
+	case JobAddressCountryBEL:
+		return true
+	case JobAddressCountryBEN:
+		return true
+	case JobAddressCountryBES:
+		return true
+	case JobAddressCountryBFA:
+		return true
+	case JobAddressCountryBGD:
+		return true
+	case JobAddressCountryBGR:
+		return true
+	case JobAddressCountryBHR:
+		return true
+	case JobAddressCountryBHS:
+		return true
+	case JobAddressCountryBIH:
+		return true
+	case JobAddressCountryBLM:
+		return true
+	case JobAddressCountryBLR:
+		return true
+	case JobAddressCountryBLZ:
+		return true
+	case JobAddressCountryBMU:
+		return true
+	case JobAddressCountryBOL:
+		return true
+	case JobAddressCountryBRA:
+		return true
+	case JobAddressCountryBRB:
+		return true
+	case JobAddressCountryBRN:
+		return true
+	case JobAddressCountryBTN:
+		return true
+	case JobAddressCountryBVT:
+		return true
+	case JobAddressCountryBWA:
+		return true
+	case JobAddressCountryCAF:
+		return true
+	case JobAddressCountryCAN:
+		return true
+	case JobAddressCountryCCK:
+		return true
+	case JobAddressCountryCHE:
+		return true
+	case JobAddressCountryCHL:
+		return true
+	case JobAddressCountryCHN:
+		return true
+	case JobAddressCountryCIV:
+		return true
+	case JobAddressCountryCMR:
+		return true
+	case JobAddressCountryCOD:
+		return true
+	case JobAddressCountryCOG:
+		return true
+	case JobAddressCountryCOK:
+		return true
+	case JobAddressCountryCOL:
+		return true
+	case JobAddressCountryCOM:
+		return true
+	case JobAddressCountryCPV:
+		return true
+	case JobAddressCountryCRI:
+		return true
+	case JobAddressCountryCUB:
+		return true
+	case JobAddressCountryCUW:
+		return true
+	case JobAddressCountryCXR:
+		return true
+	case JobAddressCountryCYM:
+		return true
+	case JobAddressCountryCYP:
+		return true
+	case JobAddressCountryCZE:
+		return true
+	case JobAddressCountryDEU:
+		return true
+	case JobAddressCountryDJI:
+		return true
+	case JobAddressCountryDMA:
+		return true
+	case JobAddressCountryDNK:
+		return true
+	case JobAddressCountryDOM:
+		return true
+	case JobAddressCountryDZA:
+		return true
+	case JobAddressCountryECU:
+		return true
+	case JobAddressCountryEGY:
+		return true
+	case JobAddressCountryERI:
+		return true
+	case JobAddressCountryESH:
+		return true
+	case JobAddressCountryESP:
+		return true
+	case JobAddressCountryEST:
+		return true
+	case JobAddressCountryETH:
+		return true
+	case JobAddressCountryFIN:
+		return true
+	case JobAddressCountryFJI:
+		return true
+	case JobAddressCountryFLK:
+		return true
+	case JobAddressCountryFRA:
+		return true
+	case JobAddressCountryFRO:
+		return true
+	case JobAddressCountryFSM:
+		return true
+	case JobAddressCountryGAB:
+		return true
+	case JobAddressCountryGBR:
+		return true
+	case JobAddressCountryGEO:
+		return true
+	case JobAddressCountryGGY:
+		return true
+	case JobAddressCountryGHA:
+		return true
+	case JobAddressCountryGIB:
+		return true
+	case JobAddressCountryGIN:
+		return true
+	case JobAddressCountryGLP:
+		return true
+	case JobAddressCountryGMB:
+		return true
+	case JobAddressCountryGNB:
+		return true
+	case JobAddressCountryGNQ:
+		return true
+	case JobAddressCountryGRC:
+		return true
+	case JobAddressCountryGRD:
+		return true
+	case JobAddressCountryGRL:
+		return true
+	case JobAddressCountryGTM:
+		return true
+	case JobAddressCountryGUF:
+		return true
+	case JobAddressCountryGUM:
+		return true
+	case JobAddressCountryGUY:
+		return true
+	case JobAddressCountryHKG:
+		return true
+	case JobAddressCountryHMD:
+		return true
+	case JobAddressCountryHND:
+		return true
+	case JobAddressCountryHRV:
+		return true
+	case JobAddressCountryHTI:
+		return true
+	case JobAddressCountryHUN:
+		return true
+	case JobAddressCountryIDN:
+		return true
+	case JobAddressCountryIMN:
+		return true
+	case JobAddressCountryIND:
+		return true
+	case JobAddressCountryIOT:
+		return true
+	case JobAddressCountryIRL:
+		return true
+	case JobAddressCountryIRN:
+		return true
+	case JobAddressCountryIRQ:
+		return true
+	case JobAddressCountryISL:
+		return true
+	case JobAddressCountryISR:
+		return true
+	case JobAddressCountryITA:
+		return true
+	case JobAddressCountryJAM:
+		return true
+	case JobAddressCountryJEY:
+		return true
+	case JobAddressCountryJOR:
+		return true
+	case JobAddressCountryJPN:
+		return true
+	case JobAddressCountryKAZ:
+		return true
+	case JobAddressCountryKEN:
+		return true
+	case JobAddressCountryKGZ:
+		return true
+	case JobAddressCountryKHM:
+		return true
+	case JobAddressCountryKIR:
+		return true
+	case JobAddressCountryKNA:
+		return true
+	case JobAddressCountryKOR:
+		return true
+	case JobAddressCountryKWT:
+		return true
+	case JobAddressCountryLAO:
+		return true
+	case JobAddressCountryLBN:
+		return true
+	case JobAddressCountryLBR:
+		return true
+	case JobAddressCountryLBY:
+		return true
+	case JobAddressCountryLCA:
+		return true
+	case JobAddressCountryLIE:
+		return true
+	case JobAddressCountryLKA:
+		return true
+	case JobAddressCountryLSO:
+		return true
+	case JobAddressCountryLTU:
+		return true
+	case JobAddressCountryLUX:
+		return true
+	case JobAddressCountryLVA:
+		return true
+	case JobAddressCountryMAC:
+		return true
+	case JobAddressCountryMAF:
+		return true
+	case JobAddressCountryMAR:
+		return true
+	case JobAddressCountryMCO:
+		return true
+	case JobAddressCountryMDA:
+		return true
+	case JobAddressCountryMDG:
+		return true
+	case JobAddressCountryMDV:
+		return true
+	case JobAddressCountryMEX:
+		return true
+	case JobAddressCountryMHL:
+		return true
+	case JobAddressCountryMKD:
+		return true
+	case JobAddressCountryMLI:
+		return true
+	case JobAddressCountryMLT:
+		return true
+	case JobAddressCountryMMR:
+		return true
+	case JobAddressCountryMNE:
+		return true
+	case JobAddressCountryMNG:
+		return true
+	case JobAddressCountryMNP:
+		return true
+	case JobAddressCountryMOZ:
+		return true
+	case JobAddressCountryMRT:
+		return true
+	case JobAddressCountryMSR:
+		return true
+	case JobAddressCountryMTQ:
+		return true
+	case JobAddressCountryMUS:
+		return true
+	case JobAddressCountryMWI:
+		return true
+	case JobAddressCountryMYS:
+		return true
+	case JobAddressCountryMYT:
+		return true
+	case JobAddressCountryNAM:
+		return true
+	case JobAddressCountryNCL:
+		return true
+	case JobAddressCountryNER:
+		return true
+	case JobAddressCountryNFK:
+		return true
+	case JobAddressCountryNGA:
+		return true
+	case JobAddressCountryNIC:
+		return true
+	case JobAddressCountryNIU:
+		return true
+	case JobAddressCountryNLD:
+		return true
+	case JobAddressCountryNOR:
+		return true
+	case JobAddressCountryNPL:
+		return true
+	case JobAddressCountryNRU:
+		return true
+	case JobAddressCountryNZL:
+		return true
+	case JobAddressCountryOMN:
+		return true
+	case JobAddressCountryPAK:
+		return true
+	case JobAddressCountryPAN:
+		return true
+	case JobAddressCountryPCN:
+		return true
+	case JobAddressCountryPER:
+		return true
+	case JobAddressCountryPHL:
+		return true
+	case JobAddressCountryPLW:
+		return true
+	case JobAddressCountryPNG:
+		return true
+	case JobAddressCountryPOL:
+		return true
+	case JobAddressCountryPRI:
+		return true
+	case JobAddressCountryPRK:
+		return true
+	case JobAddressCountryPRT:
+		return true
+	case JobAddressCountryPRY:
+		return true
+	case JobAddressCountryPSE:
+		return true
+	case JobAddressCountryPYF:
+		return true
+	case JobAddressCountryQAT:
+		return true
+	case JobAddressCountryREU:
+		return true
+	case JobAddressCountryROU:
+		return true
+	case JobAddressCountryRUS:
+		return true
+	case JobAddressCountryRWA:
+		return true
+	case JobAddressCountrySAU:
+		return true
+	case JobAddressCountrySCG:
+		return true
+	case JobAddressCountrySDN:
+		return true
+	case JobAddressCountrySEN:
+		return true
+	case JobAddressCountrySGP:
+		return true
+	case JobAddressCountrySGS:
+		return true
+	case JobAddressCountrySHN:
+		return true
+	case JobAddressCountrySJM:
+		return true
+	case JobAddressCountrySLB:
+		return true
+	case JobAddressCountrySLE:
+		return true
+	case JobAddressCountrySLV:
+		return true
+	case JobAddressCountrySMR:
+		return true
+	case JobAddressCountrySOM:
+		return true
+	case JobAddressCountrySPM:
+		return true
+	case JobAddressCountrySRB:
+		return true
+	case JobAddressCountrySSD:
+		return true
+	case JobAddressCountrySTP:
+		return true
+	case JobAddressCountrySUR:
+		return true
+	case JobAddressCountrySVK:
+		return true
+	case JobAddressCountrySVN:
+		return true
+	case JobAddressCountrySWE:
+		return true
+	case JobAddressCountrySWZ:
+		return true
+	case JobAddressCountrySXM:
+		return true
+	case JobAddressCountrySYC:
+		return true
+	case JobAddressCountrySYR:
+		return true
+	case JobAddressCountryTCA:
+		return true
+	case JobAddressCountryTCD:
+		return true
+	case JobAddressCountryTGO:
+		return true
+	case JobAddressCountryTHA:
+		return true
+	case JobAddressCountryTJK:
+		return true
+	case JobAddressCountryTKL:
+		return true
+	case JobAddressCountryTKM:
+		return true
+	case JobAddressCountryTLS:
+		return true
+	case JobAddressCountryTON:
+		return true
+	case JobAddressCountryTTO:
+		return true
+	case JobAddressCountryTUN:
+		return true
+	case JobAddressCountryTUR:
+		return true
+	case JobAddressCountryTUV:
+		return true
+	case JobAddressCountryTWN:
+		return true
+	case JobAddressCountryTZA:
+		return true
+	case JobAddressCountryUGA:
+		return true
+	case JobAddressCountryUKR:
+		return true
+	case JobAddressCountryUMI:
+		return true
+	case JobAddressCountryURY:
+		return true
+	case JobAddressCountryUSA:
+		return true
+	case JobAddressCountryUZB:
+		return true
+	case JobAddressCountryVAT:
+		return true
+	case JobAddressCountryVCT:
+		return true
+	case JobAddressCountryVEN:
+		return true
+	case JobAddressCountryVGB:
+		return true
+	case JobAddressCountryVIR:
+		return true
+	case JobAddressCountryVNM:
+		return true
+	case JobAddressCountryVUT:
+		return true
+	case JobAddressCountryWLF:
+		return true
+	case JobAddressCountryWSM:
+		return true
+	case JobAddressCountryXKX:
+		return true
+	case JobAddressCountryYEM:
+		return true
+	case JobAddressCountryZAF:
+		return true
+	case JobAddressCountryZMB:
+		return true
+	case JobAddressCountryZWE:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for JobAddressInputCountry.
+const (
+	ABW JobAddressInputCountry = "ABW"
+	AFG JobAddressInputCountry = "AFG"
+	AGO JobAddressInputCountry = "AGO"
+	AIA JobAddressInputCountry = "AIA"
+	ALA JobAddressInputCountry = "ALA"
+	ALB JobAddressInputCountry = "ALB"
+	AND JobAddressInputCountry = "AND"
+	ANT JobAddressInputCountry = "ANT"
+	ARE JobAddressInputCountry = "ARE"
+	ARG JobAddressInputCountry = "ARG"
+	ARM JobAddressInputCountry = "ARM"
+	ASM JobAddressInputCountry = "ASM"
+	ATA JobAddressInputCountry = "ATA"
+	ATF JobAddressInputCountry = "ATF"
+	ATG JobAddressInputCountry = "ATG"
+	AUS JobAddressInputCountry = "AUS"
+	AUT JobAddressInputCountry = "AUT"
+	AZE JobAddressInputCountry = "AZE"
+	BDI JobAddressInputCountry = "BDI"
+	BEL JobAddressInputCountry = "BEL"
+	BEN JobAddressInputCountry = "BEN"
+	BES JobAddressInputCountry = "BES"
+	BFA JobAddressInputCountry = "BFA"
+	BGD JobAddressInputCountry = "BGD"
+	BGR JobAddressInputCountry = "BGR"
+	BHR JobAddressInputCountry = "BHR"
+	BHS JobAddressInputCountry = "BHS"
+	BIH JobAddressInputCountry = "BIH"
+	BLM JobAddressInputCountry = "BLM"
+	BLR JobAddressInputCountry = "BLR"
+	BLZ JobAddressInputCountry = "BLZ"
+	BMU JobAddressInputCountry = "BMU"
+	BOL JobAddressInputCountry = "BOL"
+	BRA JobAddressInputCountry = "BRA"
+	BRB JobAddressInputCountry = "BRB"
+	BRN JobAddressInputCountry = "BRN"
+	BTN JobAddressInputCountry = "BTN"
+	BVT JobAddressInputCountry = "BVT"
+	BWA JobAddressInputCountry = "BWA"
+	CAF JobAddressInputCountry = "CAF"
+	CAN JobAddressInputCountry = "CAN"
+	CCK JobAddressInputCountry = "CCK"
+	CHE JobAddressInputCountry = "CHE"
+	CHL JobAddressInputCountry = "CHL"
+	CHN JobAddressInputCountry = "CHN"
+	CIV JobAddressInputCountry = "CIV"
+	CMR JobAddressInputCountry = "CMR"
+	COD JobAddressInputCountry = "COD"
+	COG JobAddressInputCountry = "COG"
+	COK JobAddressInputCountry = "COK"
+	COL JobAddressInputCountry = "COL"
+	COM JobAddressInputCountry = "COM"
+	CPV JobAddressInputCountry = "CPV"
+	CRI JobAddressInputCountry = "CRI"
+	CUB JobAddressInputCountry = "CUB"
+	CUW JobAddressInputCountry = "CUW"
+	CXR JobAddressInputCountry = "CXR"
+	CYM JobAddressInputCountry = "CYM"
+	CYP JobAddressInputCountry = "CYP"
+	CZE JobAddressInputCountry = "CZE"
+	DEU JobAddressInputCountry = "DEU"
+	DJI JobAddressInputCountry = "DJI"
+	DMA JobAddressInputCountry = "DMA"
+	DNK JobAddressInputCountry = "DNK"
+	DOM JobAddressInputCountry = "DOM"
+	DZA JobAddressInputCountry = "DZA"
+	ECU JobAddressInputCountry = "ECU"
+	EGY JobAddressInputCountry = "EGY"
+	ERI JobAddressInputCountry = "ERI"
+	ESH JobAddressInputCountry = "ESH"
+	ESP JobAddressInputCountry = "ESP"
+	EST JobAddressInputCountry = "EST"
+	ETH JobAddressInputCountry = "ETH"
+	FIN JobAddressInputCountry = "FIN"
+	FJI JobAddressInputCountry = "FJI"
+	FLK JobAddressInputCountry = "FLK"
+	FRA JobAddressInputCountry = "FRA"
+	FRO JobAddressInputCountry = "FRO"
+	FSM JobAddressInputCountry = "FSM"
+	GAB JobAddressInputCountry = "GAB"
+	GBR JobAddressInputCountry = "GBR"
+	GEO JobAddressInputCountry = "GEO"
+	GGY JobAddressInputCountry = "GGY"
+	GHA JobAddressInputCountry = "GHA"
+	GIB JobAddressInputCountry = "GIB"
+	GIN JobAddressInputCountry = "GIN"
+	GLP JobAddressInputCountry = "GLP"
+	GMB JobAddressInputCountry = "GMB"
+	GNB JobAddressInputCountry = "GNB"
+	GNQ JobAddressInputCountry = "GNQ"
+	GRC JobAddressInputCountry = "GRC"
+	GRD JobAddressInputCountry = "GRD"
+	GRL JobAddressInputCountry = "GRL"
+	GTM JobAddressInputCountry = "GTM"
+	GUF JobAddressInputCountry = "GUF"
+	GUM JobAddressInputCountry = "GUM"
+	GUY JobAddressInputCountry = "GUY"
+	HKG JobAddressInputCountry = "HKG"
+	HMD JobAddressInputCountry = "HMD"
+	HND JobAddressInputCountry = "HND"
+	HRV JobAddressInputCountry = "HRV"
+	HTI JobAddressInputCountry = "HTI"
+	HUN JobAddressInputCountry = "HUN"
+	IDN JobAddressInputCountry = "IDN"
+	IMN JobAddressInputCountry = "IMN"
+	IND JobAddressInputCountry = "IND"
+	IOT JobAddressInputCountry = "IOT"
+	IRL JobAddressInputCountry = "IRL"
+	IRN JobAddressInputCountry = "IRN"
+	IRQ JobAddressInputCountry = "IRQ"
+	ISL JobAddressInputCountry = "ISL"
+	ISR JobAddressInputCountry = "ISR"
+	ITA JobAddressInputCountry = "ITA"
+	JAM JobAddressInputCountry = "JAM"
+	JEY JobAddressInputCountry = "JEY"
+	JOR JobAddressInputCountry = "JOR"
+	JPN JobAddressInputCountry = "JPN"
+	KAZ JobAddressInputCountry = "KAZ"
+	KEN JobAddressInputCountry = "KEN"
+	KGZ JobAddressInputCountry = "KGZ"
+	KHM JobAddressInputCountry = "KHM"
+	KIR JobAddressInputCountry = "KIR"
+	KNA JobAddressInputCountry = "KNA"
+	KOR JobAddressInputCountry = "KOR"
+	KWT JobAddressInputCountry = "KWT"
+	LAO JobAddressInputCountry = "LAO"
+	LBN JobAddressInputCountry = "LBN"
+	LBR JobAddressInputCountry = "LBR"
+	LBY JobAddressInputCountry = "LBY"
+	LCA JobAddressInputCountry = "LCA"
+	LIE JobAddressInputCountry = "LIE"
+	LKA JobAddressInputCountry = "LKA"
+	LSO JobAddressInputCountry = "LSO"
+	LTU JobAddressInputCountry = "LTU"
+	LUX JobAddressInputCountry = "LUX"
+	LVA JobAddressInputCountry = "LVA"
+	MAC JobAddressInputCountry = "MAC"
+	MAF JobAddressInputCountry = "MAF"
+	MAR JobAddressInputCountry = "MAR"
+	MCO JobAddressInputCountry = "MCO"
+	MDA JobAddressInputCountry = "MDA"
+	MDG JobAddressInputCountry = "MDG"
+	MDV JobAddressInputCountry = "MDV"
+	MEX JobAddressInputCountry = "MEX"
+	MHL JobAddressInputCountry = "MHL"
+	MKD JobAddressInputCountry = "MKD"
+	MLI JobAddressInputCountry = "MLI"
+	MLT JobAddressInputCountry = "MLT"
+	MMR JobAddressInputCountry = "MMR"
+	MNE JobAddressInputCountry = "MNE"
+	MNG JobAddressInputCountry = "MNG"
+	MNP JobAddressInputCountry = "MNP"
+	MOZ JobAddressInputCountry = "MOZ"
+	MRT JobAddressInputCountry = "MRT"
+	MSR JobAddressInputCountry = "MSR"
+	MTQ JobAddressInputCountry = "MTQ"
+	MUS JobAddressInputCountry = "MUS"
+	MWI JobAddressInputCountry = "MWI"
+	MYS JobAddressInputCountry = "MYS"
+	MYT JobAddressInputCountry = "MYT"
+	NAM JobAddressInputCountry = "NAM"
+	NCL JobAddressInputCountry = "NCL"
+	NER JobAddressInputCountry = "NER"
+	NFK JobAddressInputCountry = "NFK"
+	NGA JobAddressInputCountry = "NGA"
+	NIC JobAddressInputCountry = "NIC"
+	NIU JobAddressInputCountry = "NIU"
+	NLD JobAddressInputCountry = "NLD"
+	NOR JobAddressInputCountry = "NOR"
+	NPL JobAddressInputCountry = "NPL"
+	NRU JobAddressInputCountry = "NRU"
+	NZL JobAddressInputCountry = "NZL"
+	OMN JobAddressInputCountry = "OMN"
+	PAK JobAddressInputCountry = "PAK"
+	PAN JobAddressInputCountry = "PAN"
+	PCN JobAddressInputCountry = "PCN"
+	PER JobAddressInputCountry = "PER"
+	PHL JobAddressInputCountry = "PHL"
+	PLW JobAddressInputCountry = "PLW"
+	PNG JobAddressInputCountry = "PNG"
+	POL JobAddressInputCountry = "POL"
+	PRI JobAddressInputCountry = "PRI"
+	PRK JobAddressInputCountry = "PRK"
+	PRT JobAddressInputCountry = "PRT"
+	PRY JobAddressInputCountry = "PRY"
+	PSE JobAddressInputCountry = "PSE"
+	PYF JobAddressInputCountry = "PYF"
+	QAT JobAddressInputCountry = "QAT"
+	REU JobAddressInputCountry = "REU"
+	ROU JobAddressInputCountry = "ROU"
+	RUS JobAddressInputCountry = "RUS"
+	RWA JobAddressInputCountry = "RWA"
+	SAU JobAddressInputCountry = "SAU"
+	SCG JobAddressInputCountry = "SCG"
+	SDN JobAddressInputCountry = "SDN"
+	SEN JobAddressInputCountry = "SEN"
+	SGP JobAddressInputCountry = "SGP"
+	SGS JobAddressInputCountry = "SGS"
+	SHN JobAddressInputCountry = "SHN"
+	SJM JobAddressInputCountry = "SJM"
+	SLB JobAddressInputCountry = "SLB"
+	SLE JobAddressInputCountry = "SLE"
+	SLV JobAddressInputCountry = "SLV"
+	SMR JobAddressInputCountry = "SMR"
+	SOM JobAddressInputCountry = "SOM"
+	SPM JobAddressInputCountry = "SPM"
+	SRB JobAddressInputCountry = "SRB"
+	SSD JobAddressInputCountry = "SSD"
+	STP JobAddressInputCountry = "STP"
+	SUR JobAddressInputCountry = "SUR"
+	SVK JobAddressInputCountry = "SVK"
+	SVN JobAddressInputCountry = "SVN"
+	SWE JobAddressInputCountry = "SWE"
+	SWZ JobAddressInputCountry = "SWZ"
+	SXM JobAddressInputCountry = "SXM"
+	SYC JobAddressInputCountry = "SYC"
+	SYR JobAddressInputCountry = "SYR"
+	TCA JobAddressInputCountry = "TCA"
+	TCD JobAddressInputCountry = "TCD"
+	TGO JobAddressInputCountry = "TGO"
+	THA JobAddressInputCountry = "THA"
+	TJK JobAddressInputCountry = "TJK"
+	TKL JobAddressInputCountry = "TKL"
+	TKM JobAddressInputCountry = "TKM"
+	TLS JobAddressInputCountry = "TLS"
+	TON JobAddressInputCountry = "TON"
+	TTO JobAddressInputCountry = "TTO"
+	TUN JobAddressInputCountry = "TUN"
+	TUR JobAddressInputCountry = "TUR"
+	TUV JobAddressInputCountry = "TUV"
+	TWN JobAddressInputCountry = "TWN"
+	TZA JobAddressInputCountry = "TZA"
+	UGA JobAddressInputCountry = "UGA"
+	UKR JobAddressInputCountry = "UKR"
+	UMI JobAddressInputCountry = "UMI"
+	URY JobAddressInputCountry = "URY"
+	USA JobAddressInputCountry = "USA"
+	UZB JobAddressInputCountry = "UZB"
+	VAT JobAddressInputCountry = "VAT"
+	VCT JobAddressInputCountry = "VCT"
+	VEN JobAddressInputCountry = "VEN"
+	VGB JobAddressInputCountry = "VGB"
+	VIR JobAddressInputCountry = "VIR"
+	VNM JobAddressInputCountry = "VNM"
+	VUT JobAddressInputCountry = "VUT"
+	WLF JobAddressInputCountry = "WLF"
+	WSM JobAddressInputCountry = "WSM"
+	XKX JobAddressInputCountry = "XKX"
+	YEM JobAddressInputCountry = "YEM"
+	ZAF JobAddressInputCountry = "ZAF"
+	ZMB JobAddressInputCountry = "ZMB"
+	ZWE JobAddressInputCountry = "ZWE"
+)
+
+// Valid indicates whether the value is a known member of the JobAddressInputCountry enum.
+func (e JobAddressInputCountry) Valid() bool {
+	switch e {
+	case ABW:
+		return true
+	case AFG:
+		return true
+	case AGO:
+		return true
+	case AIA:
+		return true
+	case ALA:
+		return true
+	case ALB:
+		return true
+	case AND:
+		return true
+	case ANT:
+		return true
+	case ARE:
+		return true
+	case ARG:
+		return true
+	case ARM:
+		return true
+	case ASM:
+		return true
+	case ATA:
+		return true
+	case ATF:
+		return true
+	case ATG:
+		return true
+	case AUS:
+		return true
+	case AUT:
+		return true
+	case AZE:
+		return true
+	case BDI:
+		return true
+	case BEL:
+		return true
+	case BEN:
+		return true
+	case BES:
+		return true
+	case BFA:
+		return true
+	case BGD:
+		return true
+	case BGR:
+		return true
+	case BHR:
+		return true
+	case BHS:
+		return true
+	case BIH:
+		return true
+	case BLM:
+		return true
+	case BLR:
+		return true
+	case BLZ:
+		return true
+	case BMU:
+		return true
+	case BOL:
+		return true
+	case BRA:
+		return true
+	case BRB:
+		return true
+	case BRN:
+		return true
+	case BTN:
+		return true
+	case BVT:
+		return true
+	case BWA:
+		return true
+	case CAF:
+		return true
+	case CAN:
+		return true
+	case CCK:
+		return true
+	case CHE:
+		return true
+	case CHL:
+		return true
+	case CHN:
+		return true
+	case CIV:
+		return true
+	case CMR:
+		return true
+	case COD:
+		return true
+	case COG:
+		return true
+	case COK:
+		return true
+	case COL:
+		return true
+	case COM:
+		return true
+	case CPV:
+		return true
+	case CRI:
+		return true
+	case CUB:
+		return true
+	case CUW:
+		return true
+	case CXR:
+		return true
+	case CYM:
+		return true
+	case CYP:
+		return true
+	case CZE:
+		return true
+	case DEU:
+		return true
+	case DJI:
+		return true
+	case DMA:
+		return true
+	case DNK:
+		return true
+	case DOM:
+		return true
+	case DZA:
+		return true
+	case ECU:
+		return true
+	case EGY:
+		return true
+	case ERI:
+		return true
+	case ESH:
+		return true
+	case ESP:
+		return true
+	case EST:
+		return true
+	case ETH:
+		return true
+	case FIN:
+		return true
+	case FJI:
+		return true
+	case FLK:
+		return true
+	case FRA:
+		return true
+	case FRO:
+		return true
+	case FSM:
+		return true
+	case GAB:
+		return true
+	case GBR:
+		return true
+	case GEO:
+		return true
+	case GGY:
+		return true
+	case GHA:
+		return true
+	case GIB:
+		return true
+	case GIN:
+		return true
+	case GLP:
+		return true
+	case GMB:
+		return true
+	case GNB:
+		return true
+	case GNQ:
+		return true
+	case GRC:
+		return true
+	case GRD:
+		return true
+	case GRL:
+		return true
+	case GTM:
+		return true
+	case GUF:
+		return true
+	case GUM:
+		return true
+	case GUY:
+		return true
+	case HKG:
+		return true
+	case HMD:
+		return true
+	case HND:
+		return true
+	case HRV:
+		return true
+	case HTI:
+		return true
+	case HUN:
+		return true
+	case IDN:
+		return true
+	case IMN:
+		return true
+	case IND:
+		return true
+	case IOT:
+		return true
+	case IRL:
+		return true
+	case IRN:
+		return true
+	case IRQ:
+		return true
+	case ISL:
+		return true
+	case ISR:
+		return true
+	case ITA:
+		return true
+	case JAM:
+		return true
+	case JEY:
+		return true
+	case JOR:
+		return true
+	case JPN:
+		return true
+	case KAZ:
+		return true
+	case KEN:
+		return true
+	case KGZ:
+		return true
+	case KHM:
+		return true
+	case KIR:
+		return true
+	case KNA:
+		return true
+	case KOR:
+		return true
+	case KWT:
+		return true
+	case LAO:
+		return true
+	case LBN:
+		return true
+	case LBR:
+		return true
+	case LBY:
+		return true
+	case LCA:
+		return true
+	case LIE:
+		return true
+	case LKA:
+		return true
+	case LSO:
+		return true
+	case LTU:
+		return true
+	case LUX:
+		return true
+	case LVA:
+		return true
+	case MAC:
+		return true
+	case MAF:
+		return true
+	case MAR:
+		return true
+	case MCO:
+		return true
+	case MDA:
+		return true
+	case MDG:
+		return true
+	case MDV:
+		return true
+	case MEX:
+		return true
+	case MHL:
+		return true
+	case MKD:
+		return true
+	case MLI:
+		return true
+	case MLT:
+		return true
+	case MMR:
+		return true
+	case MNE:
+		return true
+	case MNG:
+		return true
+	case MNP:
+		return true
+	case MOZ:
+		return true
+	case MRT:
+		return true
+	case MSR:
+		return true
+	case MTQ:
+		return true
+	case MUS:
+		return true
+	case MWI:
+		return true
+	case MYS:
+		return true
+	case MYT:
+		return true
+	case NAM:
+		return true
+	case NCL:
+		return true
+	case NER:
+		return true
+	case NFK:
+		return true
+	case NGA:
+		return true
+	case NIC:
+		return true
+	case NIU:
+		return true
+	case NLD:
+		return true
+	case NOR:
+		return true
+	case NPL:
+		return true
+	case NRU:
+		return true
+	case NZL:
+		return true
+	case OMN:
+		return true
+	case PAK:
+		return true
+	case PAN:
+		return true
+	case PCN:
+		return true
+	case PER:
+		return true
+	case PHL:
+		return true
+	case PLW:
+		return true
+	case PNG:
+		return true
+	case POL:
+		return true
+	case PRI:
+		return true
+	case PRK:
+		return true
+	case PRT:
+		return true
+	case PRY:
+		return true
+	case PSE:
+		return true
+	case PYF:
+		return true
+	case QAT:
+		return true
+	case REU:
+		return true
+	case ROU:
+		return true
+	case RUS:
+		return true
+	case RWA:
+		return true
+	case SAU:
+		return true
+	case SCG:
+		return true
+	case SDN:
+		return true
+	case SEN:
+		return true
+	case SGP:
+		return true
+	case SGS:
+		return true
+	case SHN:
+		return true
+	case SJM:
+		return true
+	case SLB:
+		return true
+	case SLE:
+		return true
+	case SLV:
+		return true
+	case SMR:
+		return true
+	case SOM:
+		return true
+	case SPM:
+		return true
+	case SRB:
+		return true
+	case SSD:
+		return true
+	case STP:
+		return true
+	case SUR:
+		return true
+	case SVK:
+		return true
+	case SVN:
+		return true
+	case SWE:
+		return true
+	case SWZ:
+		return true
+	case SXM:
+		return true
+	case SYC:
+		return true
+	case SYR:
+		return true
+	case TCA:
+		return true
+	case TCD:
+		return true
+	case TGO:
+		return true
+	case THA:
+		return true
+	case TJK:
+		return true
+	case TKL:
+		return true
+	case TKM:
+		return true
+	case TLS:
+		return true
+	case TON:
+		return true
+	case TTO:
+		return true
+	case TUN:
+		return true
+	case TUR:
+		return true
+	case TUV:
+		return true
+	case TWN:
+		return true
+	case TZA:
+		return true
+	case UGA:
+		return true
+	case UKR:
+		return true
+	case UMI:
+		return true
+	case URY:
+		return true
+	case USA:
+		return true
+	case UZB:
+		return true
+	case VAT:
+		return true
+	case VCT:
+		return true
+	case VEN:
+		return true
+	case VGB:
+		return true
+	case VIR:
+		return true
+	case VNM:
+		return true
+	case VUT:
+		return true
+	case WLF:
+		return true
+	case WSM:
+		return true
+	case XKX:
+		return true
+	case YEM:
+		return true
+	case ZAF:
+		return true
+	case ZMB:
+		return true
+	case ZWE:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for JobAssetSummaryBikeType.
+const (
+	JobAssetSummaryBikeTypeBmx           JobAssetSummaryBikeType = "bmx"
+	JobAssetSummaryBikeTypeECargo        JobAssetSummaryBikeType = "e_cargo"
+	JobAssetSummaryBikeTypeEGravel       JobAssetSummaryBikeType = "e_gravel"
+	JobAssetSummaryBikeTypeERoad         JobAssetSummaryBikeType = "e_road"
+	JobAssetSummaryBikeTypeElectricBike  JobAssetSummaryBikeType = "electric_bike"
+	JobAssetSummaryBikeTypeGenericBike   JobAssetSummaryBikeType = "generic_bike"
+	JobAssetSummaryBikeTypeGravel        JobAssetSummaryBikeType = "gravel"
+	JobAssetSummaryBikeTypeHybrid        JobAssetSummaryBikeType = "hybrid"
+	JobAssetSummaryBikeTypeKidsBike      JobAssetSummaryBikeType = "kids_bike"
+	JobAssetSummaryBikeTypeMountainBike  JobAssetSummaryBikeType = "mountain_bike"
+	JobAssetSummaryBikeTypeOther         JobAssetSummaryBikeType = "other"
+	JobAssetSummaryBikeTypeRoadBike      JobAssetSummaryBikeType = "road_bike"
+	JobAssetSummaryBikeTypeSingleSpeed   JobAssetSummaryBikeType = "single_speed"
+	JobAssetSummaryBikeTypeStaticBike    JobAssetSummaryBikeType = "static_bike"
+	JobAssetSummaryBikeTypeTriathlonBike JobAssetSummaryBikeType = "triathlon_bike"
+)
+
+// Valid indicates whether the value is a known member of the JobAssetSummaryBikeType enum.
+func (e JobAssetSummaryBikeType) Valid() bool {
+	switch e {
+	case JobAssetSummaryBikeTypeBmx:
+		return true
+	case JobAssetSummaryBikeTypeECargo:
+		return true
+	case JobAssetSummaryBikeTypeEGravel:
+		return true
+	case JobAssetSummaryBikeTypeERoad:
+		return true
+	case JobAssetSummaryBikeTypeElectricBike:
+		return true
+	case JobAssetSummaryBikeTypeGenericBike:
+		return true
+	case JobAssetSummaryBikeTypeGravel:
+		return true
+	case JobAssetSummaryBikeTypeHybrid:
+		return true
+	case JobAssetSummaryBikeTypeKidsBike:
+		return true
+	case JobAssetSummaryBikeTypeMountainBike:
+		return true
+	case JobAssetSummaryBikeTypeOther:
+		return true
+	case JobAssetSummaryBikeTypeRoadBike:
+		return true
+	case JobAssetSummaryBikeTypeSingleSpeed:
+		return true
+	case JobAssetSummaryBikeTypeStaticBike:
+		return true
+	case JobAssetSummaryBikeTypeTriathlonBike:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for JobCreateRequestBillingType.
+const (
+	JobCreateRequestBillingTypeCod                   JobCreateRequestBillingType = "cod"
+	JobCreateRequestBillingTypeDealerPlan            JobCreateRequestBillingType = "dealer_plan"
+	JobCreateRequestBillingTypeDealerWarranty        JobCreateRequestBillingType = "dealer_warranty"
+	JobCreateRequestBillingTypeDepositMonthlyTerms   JobCreateRequestBillingType = "deposit_monthly_terms"
+	JobCreateRequestBillingTypeFoc                   JobCreateRequestBillingType = "foc"
+	JobCreateRequestBillingTypeInsurance             JobCreateRequestBillingType = "insurance"
+	JobCreateRequestBillingTypeInternalCost          JobCreateRequestBillingType = "internal_cost"
+	JobCreateRequestBillingTypeManufacturersWarranty JobCreateRequestBillingType = "manufacturers_warranty"
+	JobCreateRequestBillingTypeMotabilityCallOut     JobCreateRequestBillingType = "motability_call_out"
+	JobCreateRequestBillingTypeMotabilityInsurance   JobCreateRequestBillingType = "motability_insurance"
+	JobCreateRequestBillingTypeMotabilityPaidJob     JobCreateRequestBillingType = "motability_paid_job"
+	JobCreateRequestBillingTypeMotabilityWarranty    JobCreateRequestBillingType = "motability_warranty"
+	JobCreateRequestBillingTypeOnAccount             JobCreateRequestBillingType = "on_account"
+)
+
+// Valid indicates whether the value is a known member of the JobCreateRequestBillingType enum.
+func (e JobCreateRequestBillingType) Valid() bool {
+	switch e {
+	case JobCreateRequestBillingTypeCod:
+		return true
+	case JobCreateRequestBillingTypeDealerPlan:
+		return true
+	case JobCreateRequestBillingTypeDealerWarranty:
+		return true
+	case JobCreateRequestBillingTypeDepositMonthlyTerms:
+		return true
+	case JobCreateRequestBillingTypeFoc:
+		return true
+	case JobCreateRequestBillingTypeInsurance:
+		return true
+	case JobCreateRequestBillingTypeInternalCost:
+		return true
+	case JobCreateRequestBillingTypeManufacturersWarranty:
+		return true
+	case JobCreateRequestBillingTypeMotabilityCallOut:
+		return true
+	case JobCreateRequestBillingTypeMotabilityInsurance:
+		return true
+	case JobCreateRequestBillingTypeMotabilityPaidJob:
+		return true
+	case JobCreateRequestBillingTypeMotabilityWarranty:
+		return true
+	case JobCreateRequestBillingTypeOnAccount:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for JobReportObject.
+const (
+	JobReportObjectJobReport JobReportObject = "job_report"
+)
+
+// Valid indicates whether the value is a known member of the JobReportObject enum.
+func (e JobReportObject) Valid() bool {
+	switch e {
+	case JobReportObjectJobReport:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for JobReportAttachmentObject.
+const (
+	Attachment JobReportAttachmentObject = "attachment"
+)
+
+// Valid indicates whether the value is a known member of the JobReportAttachmentObject enum.
+func (e JobReportAttachmentObject) Valid() bool {
+	switch e {
+	case Attachment:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for JobReportServiceItemResultStatus.
+const (
+	NotApplicable JobReportServiceItemResultStatus = "not_applicable"
+	NotChecked    JobReportServiceItemResultStatus = "not_checked"
+	Ok            JobReportServiceItemResultStatus = "ok"
+	Recommended   JobReportServiceItemResultStatus = "recommended"
+	Replaced      JobReportServiceItemResultStatus = "replaced"
+	SlightWear    JobReportServiceItemResultStatus = "slight_wear"
+	Upgraded      JobReportServiceItemResultStatus = "upgraded"
+	Urgent        JobReportServiceItemResultStatus = "urgent"
+)
+
+// Valid indicates whether the value is a known member of the JobReportServiceItemResultStatus enum.
+func (e JobReportServiceItemResultStatus) Valid() bool {
+	switch e {
+	case NotApplicable:
+		return true
+	case NotChecked:
+		return true
+	case Ok:
+		return true
+	case Recommended:
+		return true
+	case Replaced:
+		return true
+	case SlightWear:
+		return true
+	case Upgraded:
+		return true
+	case Urgent:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for JobScheduleFulfilmentType.
+const (
+	JobScheduleFulfilmentTypeCollection    JobScheduleFulfilmentType = "collection"
+	JobScheduleFulfilmentTypeDropOff       JobScheduleFulfilmentType = "drop_off"
+	JobScheduleFulfilmentTypeOnSiteService JobScheduleFulfilmentType = "on_site_service"
+)
+
+// Valid indicates whether the value is a known member of the JobScheduleFulfilmentType enum.
+func (e JobScheduleFulfilmentType) Valid() bool {
+	switch e {
+	case JobScheduleFulfilmentTypeCollection:
+		return true
+	case JobScheduleFulfilmentTypeDropOff:
+		return true
+	case JobScheduleFulfilmentTypeOnSiteService:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for JobScheduleInputFulfilmentType.
+const (
+	JobScheduleInputFulfilmentTypeCollection    JobScheduleInputFulfilmentType = "collection"
+	JobScheduleInputFulfilmentTypeDropOff       JobScheduleInputFulfilmentType = "drop_off"
+	JobScheduleInputFulfilmentTypeOnSiteService JobScheduleInputFulfilmentType = "on_site_service"
+)
+
+// Valid indicates whether the value is a known member of the JobScheduleInputFulfilmentType enum.
+func (e JobScheduleInputFulfilmentType) Valid() bool {
+	switch e {
+	case JobScheduleInputFulfilmentTypeCollection:
+		return true
+	case JobScheduleInputFulfilmentTypeDropOff:
+		return true
+	case JobScheduleInputFulfilmentTypeOnSiteService:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for JobStatusObject.
+const (
+	JobStatusObjectJobStatus JobStatusObject = "job_status"
+)
+
+// Valid indicates whether the value is a known member of the JobStatusObject enum.
+func (e JobStatusObject) Valid() bool {
+	switch e {
+	case JobStatusObjectJobStatus:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for JobStatusType.
+const (
+	JobStatusTypeBikeReady          JobStatusType = "bike_ready"
+	JobStatusTypeCompleted          JobStatusType = "completed"
+	JobStatusTypeCustom             JobStatusType = "custom"
+	JobStatusTypeNotStarted         JobStatusType = "not_started"
+	JobStatusTypePartsToBeOrdered   JobStatusType = "parts_to_be_ordered"
+	JobStatusTypePendingCollection  JobStatusType = "pending_collection"
+	JobStatusTypeWaitingForApproval JobStatusType = "waiting_for_approval"
+	JobStatusTypeWaitingForBike     JobStatusType = "waiting_for_bike"
+	JobStatusTypeWaitingForParts    JobStatusType = "waiting_for_parts"
+	JobStatusTypeWaitingToStart     JobStatusType = "waiting_to_start"
+	JobStatusTypeWorkingOn          JobStatusType = "working_on"
+)
+
+// Valid indicates whether the value is a known member of the JobStatusType enum.
+func (e JobStatusType) Valid() bool {
+	switch e {
+	case JobStatusTypeBikeReady:
+		return true
+	case JobStatusTypeCompleted:
+		return true
+	case JobStatusTypeCustom:
+		return true
+	case JobStatusTypeNotStarted:
+		return true
+	case JobStatusTypePartsToBeOrdered:
+		return true
+	case JobStatusTypePendingCollection:
+		return true
+	case JobStatusTypeWaitingForApproval:
+		return true
+	case JobStatusTypeWaitingForBike:
+		return true
+	case JobStatusTypeWaitingForParts:
+		return true
+	case JobStatusTypeWaitingToStart:
+		return true
+	case JobStatusTypeWorkingOn:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for JobStatusListObject.
+const (
+	JobStatusListObjectJobStatusList JobStatusListObject = "job_status_list"
+)
+
+// Valid indicates whether the value is a known member of the JobStatusListObject enum.
+func (e JobStatusListObject) Valid() bool {
+	switch e {
+	case JobStatusListObjectJobStatusList:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for JobUpdateRequestBillingType.
+const (
+	Cod                   JobUpdateRequestBillingType = "cod"
+	DealerPlan            JobUpdateRequestBillingType = "dealer_plan"
+	DealerWarranty        JobUpdateRequestBillingType = "dealer_warranty"
+	DepositMonthlyTerms   JobUpdateRequestBillingType = "deposit_monthly_terms"
+	Foc                   JobUpdateRequestBillingType = "foc"
+	Insurance             JobUpdateRequestBillingType = "insurance"
+	InternalCost          JobUpdateRequestBillingType = "internal_cost"
+	ManufacturersWarranty JobUpdateRequestBillingType = "manufacturers_warranty"
+	MotabilityCallOut     JobUpdateRequestBillingType = "motability_call_out"
+	MotabilityInsurance   JobUpdateRequestBillingType = "motability_insurance"
+	MotabilityPaidJob     JobUpdateRequestBillingType = "motability_paid_job"
+	MotabilityWarranty    JobUpdateRequestBillingType = "motability_warranty"
+	OnAccount             JobUpdateRequestBillingType = "on_account"
+)
+
+// Valid indicates whether the value is a known member of the JobUpdateRequestBillingType enum.
+func (e JobUpdateRequestBillingType) Valid() bool {
+	switch e {
+	case Cod:
+		return true
+	case DealerPlan:
+		return true
+	case DealerWarranty:
+		return true
+	case DepositMonthlyTerms:
+		return true
+	case Foc:
+		return true
+	case Insurance:
+		return true
+	case InternalCost:
+		return true
+	case ManufacturersWarranty:
+		return true
+	case MotabilityCallOut:
+		return true
+	case MotabilityInsurance:
+		return true
+	case MotabilityPaidJob:
+		return true
+	case MotabilityWarranty:
+		return true
+	case OnAccount:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for JobWorkLineObject.
+const (
+	WorkLine JobWorkLineObject = "work_line"
+)
+
+// Valid indicates whether the value is a known member of the JobWorkLineObject enum.
+func (e JobWorkLineObject) Valid() bool {
+	switch e {
+	case WorkLine:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for MechanicAssignmentNotificationsMechanic.
+const (
+	MechanicAssignmentNotificationsMechanicDefault MechanicAssignmentNotificationsMechanic = "default"
+	MechanicAssignmentNotificationsMechanicSend    MechanicAssignmentNotificationsMechanic = "send"
+	MechanicAssignmentNotificationsMechanicSkip    MechanicAssignmentNotificationsMechanic = "skip"
+)
+
+// Valid indicates whether the value is a known member of the MechanicAssignmentNotificationsMechanic enum.
+func (e MechanicAssignmentNotificationsMechanic) Valid() bool {
+	switch e {
+	case MechanicAssignmentNotificationsMechanicDefault:
+		return true
+	case MechanicAssignmentNotificationsMechanicSend:
+		return true
+	case MechanicAssignmentNotificationsMechanicSkip:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for NextAvailableSlotResultFulfilmentType.
+const (
+	Collection      NextAvailableSlotResultFulfilmentType = "collection"
+	CustomerDropOff NextAvailableSlotResultFulfilmentType = "customer_drop_off"
+)
+
+// Valid indicates whether the value is a known member of the NextAvailableSlotResultFulfilmentType enum.
+func (e NextAvailableSlotResultFulfilmentType) Valid() bool {
+	switch e {
+	case Collection:
+		return true
+	case CustomerDropOff:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for NextAvailableSlotResultObject.
+const (
+	NextAvailableSlot NextAvailableSlotResultObject = "next_available_slot"
+)
+
+// Valid indicates whether the value is a known member of the NextAvailableSlotResultObject enum.
+func (e NextAvailableSlotResultObject) Valid() bool {
+	switch e {
+	case NextAvailableSlot:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for PartAuthorisationObject.
+const (
+	PartAuthorisationObjectPartAuthorisation PartAuthorisationObject = "part_authorisation"
+)
+
+// Valid indicates whether the value is a known member of the PartAuthorisationObject enum.
+func (e PartAuthorisationObject) Valid() bool {
+	switch e {
+	case PartAuthorisationObjectPartAuthorisation:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for PartAuthorisationStatus.
+const (
+	PartAuthorisationStatusApproved PartAuthorisationStatus = "approved"
+	PartAuthorisationStatusDeclined PartAuthorisationStatus = "declined"
+	PartAuthorisationStatusNotSent  PartAuthorisationStatus = "not_sent"
+	PartAuthorisationStatusPending  PartAuthorisationStatus = "pending"
+)
+
+// Valid indicates whether the value is a known member of the PartAuthorisationStatus enum.
+func (e PartAuthorisationStatus) Valid() bool {
+	switch e {
+	case PartAuthorisationStatusApproved:
+		return true
+	case PartAuthorisationStatusDeclined:
+		return true
+	case PartAuthorisationStatusNotSent:
+		return true
+	case PartAuthorisationStatusPending:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for PartAuthorisationDecisionRequestDecision.
+const (
+	PartAuthorisationDecisionRequestDecisionApproved PartAuthorisationDecisionRequestDecision = "approved"
+	PartAuthorisationDecisionRequestDecisionDeclined PartAuthorisationDecisionRequestDecision = "declined"
+)
+
+// Valid indicates whether the value is a known member of the PartAuthorisationDecisionRequestDecision enum.
+func (e PartAuthorisationDecisionRequestDecision) Valid() bool {
+	switch e {
+	case PartAuthorisationDecisionRequestDecisionApproved:
+		return true
+	case PartAuthorisationDecisionRequestDecisionDeclined:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for PaymentObject.
+const (
+	PaymentObjectPayment PaymentObject = "payment"
+)
+
+// Valid indicates whether the value is a known member of the PaymentObject enum.
+func (e PaymentObject) Valid() bool {
+	switch e {
+	case PaymentObjectPayment:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for PaymentOrigin.
+const (
+	PaymentOriginAdHoc PaymentOrigin = "ad_hoc"
+	PaymentOriginJob   PaymentOrigin = "job"
+	PaymentOriginSale  PaymentOrigin = "sale"
+)
+
+// Valid indicates whether the value is a known member of the PaymentOrigin enum.
+func (e PaymentOrigin) Valid() bool {
+	switch e {
+	case PaymentOriginAdHoc:
+		return true
+	case PaymentOriginJob:
+		return true
+	case PaymentOriginSale:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for PaymentPaymentMethod.
+const (
+	PaymentPaymentMethodBACS    PaymentPaymentMethod = "b_a_c_s"
+	PaymentPaymentMethodCard    PaymentPaymentMethod = "card"
+	PaymentPaymentMethodCash    PaymentPaymentMethod = "cash"
+	PaymentPaymentMethodLayaway PaymentPaymentMethod = "layaway"
+	PaymentPaymentMethodOther   PaymentPaymentMethod = "other"
+)
+
+// Valid indicates whether the value is a known member of the PaymentPaymentMethod enum.
+func (e PaymentPaymentMethod) Valid() bool {
+	switch e {
+	case PaymentPaymentMethodBACS:
+		return true
+	case PaymentPaymentMethodCard:
+		return true
+	case PaymentPaymentMethodCash:
+		return true
+	case PaymentPaymentMethodLayaway:
+		return true
+	case PaymentPaymentMethodOther:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for PaymentRefundCreateRequestPaymentMethod.
+const (
+	PaymentRefundCreateRequestPaymentMethodBACS    PaymentRefundCreateRequestPaymentMethod = "b_a_c_s"
+	PaymentRefundCreateRequestPaymentMethodCard    PaymentRefundCreateRequestPaymentMethod = "card"
+	PaymentRefundCreateRequestPaymentMethodCash    PaymentRefundCreateRequestPaymentMethod = "cash"
+	PaymentRefundCreateRequestPaymentMethodLayaway PaymentRefundCreateRequestPaymentMethod = "layaway"
+	PaymentRefundCreateRequestPaymentMethodOther   PaymentRefundCreateRequestPaymentMethod = "other"
+)
+
+// Valid indicates whether the value is a known member of the PaymentRefundCreateRequestPaymentMethod enum.
+func (e PaymentRefundCreateRequestPaymentMethod) Valid() bool {
+	switch e {
+	case PaymentRefundCreateRequestPaymentMethodBACS:
+		return true
+	case PaymentRefundCreateRequestPaymentMethodCard:
+		return true
+	case PaymentRefundCreateRequestPaymentMethodCash:
+		return true
+	case PaymentRefundCreateRequestPaymentMethodLayaway:
+		return true
+	case PaymentRefundCreateRequestPaymentMethodOther:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for ServiceCurrency.
+const (
+	GBP ServiceCurrency = "GBP"
+)
+
+// Valid indicates whether the value is a known member of the ServiceCurrency enum.
+func (e ServiceCurrency) Valid() bool {
+	switch e {
+	case GBP:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for ServiceObject.
+const (
+	ServiceObjectService ServiceObject = "service"
+)
+
+// Valid indicates whether the value is a known member of the ServiceObject enum.
+func (e ServiceObject) Valid() bool {
+	switch e {
+	case ServiceObjectService:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for ServicePricingType.
+const (
+	ServicePricingTypePriceOnAssessment ServicePricingType = "price_on_assessment"
+	ServicePricingTypePriceOnRequest    ServicePricingType = "price_on_request"
+	ServicePricingTypeSetPrice          ServicePricingType = "set_price"
+)
+
+// Valid indicates whether the value is a known member of the ServicePricingType enum.
+func (e ServicePricingType) Valid() bool {
+	switch e {
+	case ServicePricingTypePriceOnAssessment:
+		return true
+	case ServicePricingTypePriceOnRequest:
+		return true
+	case ServicePricingTypeSetPrice:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for ServiceCreateRequestPricingType.
+const (
+	ServiceCreateRequestPricingTypePriceOnAssessment ServiceCreateRequestPricingType = "price_on_assessment"
+	ServiceCreateRequestPricingTypePriceOnRequest    ServiceCreateRequestPricingType = "price_on_request"
+	ServiceCreateRequestPricingTypeSetPrice          ServiceCreateRequestPricingType = "set_price"
+)
+
+// Valid indicates whether the value is a known member of the ServiceCreateRequestPricingType enum.
+func (e ServiceCreateRequestPricingType) Valid() bool {
+	switch e {
+	case ServiceCreateRequestPricingTypePriceOnAssessment:
+		return true
+	case ServiceCreateRequestPricingTypePriceOnRequest:
+		return true
+	case ServiceCreateRequestPricingTypeSetPrice:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for ServiceCreateRequestVisibility.
+const (
+	ServiceCreateRequestVisibilityDisabled            ServiceCreateRequestVisibility = "disabled"
+	ServiceCreateRequestVisibilityExternalAndInternal ServiceCreateRequestVisibility = "external_and_internal"
+	ServiceCreateRequestVisibilityInternalOnly        ServiceCreateRequestVisibility = "internal_only"
+)
+
+// Valid indicates whether the value is a known member of the ServiceCreateRequestVisibility enum.
+func (e ServiceCreateRequestVisibility) Valid() bool {
+	switch e {
+	case ServiceCreateRequestVisibilityDisabled:
+		return true
+	case ServiceCreateRequestVisibilityExternalAndInternal:
+		return true
+	case ServiceCreateRequestVisibilityInternalOnly:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for ServiceInstanceObject.
+const (
+	ServiceInstanceObjectServiceInstance ServiceInstanceObject = "service_instance"
+)
+
+// Valid indicates whether the value is a known member of the ServiceInstanceObject enum.
+func (e ServiceInstanceObject) Valid() bool {
+	switch e {
+	case ServiceInstanceObjectServiceInstance:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for ServiceUpdateRequestPricingType.
+const (
+	PriceOnAssessment ServiceUpdateRequestPricingType = "price_on_assessment"
+	PriceOnRequest    ServiceUpdateRequestPricingType = "price_on_request"
+	SetPrice          ServiceUpdateRequestPricingType = "set_price"
+)
+
+// Valid indicates whether the value is a known member of the ServiceUpdateRequestPricingType enum.
+func (e ServiceUpdateRequestPricingType) Valid() bool {
+	switch e {
+	case PriceOnAssessment:
+		return true
+	case PriceOnRequest:
+		return true
+	case SetPrice:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for ServiceUpdateRequestVisibility.
+const (
+	ServiceUpdateRequestVisibilityDisabled            ServiceUpdateRequestVisibility = "disabled"
+	ServiceUpdateRequestVisibilityExternalAndInternal ServiceUpdateRequestVisibility = "external_and_internal"
+	ServiceUpdateRequestVisibilityInternalOnly        ServiceUpdateRequestVisibility = "internal_only"
+)
+
+// Valid indicates whether the value is a known member of the ServiceUpdateRequestVisibility enum.
+func (e ServiceUpdateRequestVisibility) Valid() bool {
+	switch e {
+	case ServiceUpdateRequestVisibilityDisabled:
+		return true
+	case ServiceUpdateRequestVisibilityExternalAndInternal:
+		return true
+	case ServiceUpdateRequestVisibilityInternalOnly:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for StockItemSummaryObject.
+const (
+	StockItem StockItemSummaryObject = "stock_item"
+)
+
+// Valid indicates whether the value is a known member of the StockItemSummaryObject enum.
+func (e StockItemSummaryObject) Valid() bool {
+	switch e {
+	case StockItem:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for StockVariationObject.
+const (
+	StockVariationObjectStockVariation StockVariationObject = "stock_variation"
+)
+
+// Valid indicates whether the value is a known member of the StockVariationObject enum.
+func (e StockVariationObject) Valid() bool {
+	switch e {
+	case StockVariationObjectStockVariation:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for WebhookDeliveryObject.
+const (
+	WebhookDeliveryObjectWebhookDelivery WebhookDeliveryObject = "webhook_delivery"
+)
+
+// Valid indicates whether the value is a known member of the WebhookDeliveryObject enum.
+func (e WebhookDeliveryObject) Valid() bool {
+	switch e {
+	case WebhookDeliveryObjectWebhookDelivery:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for WebhookDeliveryStatus.
+const (
+	WebhookDeliveryStatusFailed  WebhookDeliveryStatus = "failed"
+	WebhookDeliveryStatusPending WebhookDeliveryStatus = "pending"
+	WebhookDeliveryStatusSuccess WebhookDeliveryStatus = "success"
+)
+
+// Valid indicates whether the value is a known member of the WebhookDeliveryStatus enum.
+func (e WebhookDeliveryStatus) Valid() bool {
+	switch e {
+	case WebhookDeliveryStatusFailed:
+		return true
+	case WebhookDeliveryStatusPending:
+		return true
+	case WebhookDeliveryStatusSuccess:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for WebhookEndpointEventTypes.
+const (
+	WebhookEndpointEventTypesChatMessageCreated       WebhookEndpointEventTypes = "chat_message.created"
+	WebhookEndpointEventTypesCustomerCreated          WebhookEndpointEventTypes = "customer.created"
+	WebhookEndpointEventTypesCustomerDeleted          WebhookEndpointEventTypes = "customer.deleted"
+	WebhookEndpointEventTypesCustomerUpdated          WebhookEndpointEventTypes = "customer.updated"
+	WebhookEndpointEventTypesInvoiceCreated           WebhookEndpointEventTypes = "invoice.created"
+	WebhookEndpointEventTypesInvoiceItemCreated       WebhookEndpointEventTypes = "invoice_item.created"
+	WebhookEndpointEventTypesInvoiceItemDeleted       WebhookEndpointEventTypes = "invoice_item.deleted"
+	WebhookEndpointEventTypesInvoiceItemUpdated       WebhookEndpointEventTypes = "invoice_item.updated"
+	WebhookEndpointEventTypesInvoiceStatusChanged     WebhookEndpointEventTypes = "invoice.status_changed"
+	WebhookEndpointEventTypesInvoiceUpdated           WebhookEndpointEventTypes = "invoice.updated"
+	WebhookEndpointEventTypesJobCreated               WebhookEndpointEventTypes = "job.created"
+	WebhookEndpointEventTypesJobDeleted               WebhookEndpointEventTypes = "job.deleted"
+	WebhookEndpointEventTypesJobReportCreated         WebhookEndpointEventTypes = "job_report.created"
+	WebhookEndpointEventTypesJobReportDeleted         WebhookEndpointEventTypes = "job_report.deleted"
+	WebhookEndpointEventTypesJobReportUpdated         WebhookEndpointEventTypes = "job_report.updated"
+	WebhookEndpointEventTypesJobUpdated               WebhookEndpointEventTypes = "job.updated"
+	WebhookEndpointEventTypesMessageCancelled         WebhookEndpointEventTypes = "message.cancelled"
+	WebhookEndpointEventTypesMessageDelivered         WebhookEndpointEventTypes = "message.delivered"
+	WebhookEndpointEventTypesMessageFailed            WebhookEndpointEventTypes = "message.failed"
+	WebhookEndpointEventTypesMessageQueued            WebhookEndpointEventTypes = "message.queued"
+	WebhookEndpointEventTypesMessageSent              WebhookEndpointEventTypes = "message.sent"
+	WebhookEndpointEventTypesPartAuthorisationCreated WebhookEndpointEventTypes = "part_authorisation.created"
+	WebhookEndpointEventTypesPartAuthorisationDeleted WebhookEndpointEventTypes = "part_authorisation.deleted"
+	WebhookEndpointEventTypesPartAuthorisationUpdated WebhookEndpointEventTypes = "part_authorisation.updated"
+)
+
+// Valid indicates whether the value is a known member of the WebhookEndpointEventTypes enum.
+func (e WebhookEndpointEventTypes) Valid() bool {
+	switch e {
+	case WebhookEndpointEventTypesChatMessageCreated:
+		return true
+	case WebhookEndpointEventTypesCustomerCreated:
+		return true
+	case WebhookEndpointEventTypesCustomerDeleted:
+		return true
+	case WebhookEndpointEventTypesCustomerUpdated:
+		return true
+	case WebhookEndpointEventTypesInvoiceCreated:
+		return true
+	case WebhookEndpointEventTypesInvoiceItemCreated:
+		return true
+	case WebhookEndpointEventTypesInvoiceItemDeleted:
+		return true
+	case WebhookEndpointEventTypesInvoiceItemUpdated:
+		return true
+	case WebhookEndpointEventTypesInvoiceStatusChanged:
+		return true
+	case WebhookEndpointEventTypesInvoiceUpdated:
+		return true
+	case WebhookEndpointEventTypesJobCreated:
+		return true
+	case WebhookEndpointEventTypesJobDeleted:
+		return true
+	case WebhookEndpointEventTypesJobReportCreated:
+		return true
+	case WebhookEndpointEventTypesJobReportDeleted:
+		return true
+	case WebhookEndpointEventTypesJobReportUpdated:
+		return true
+	case WebhookEndpointEventTypesJobUpdated:
+		return true
+	case WebhookEndpointEventTypesMessageCancelled:
+		return true
+	case WebhookEndpointEventTypesMessageDelivered:
+		return true
+	case WebhookEndpointEventTypesMessageFailed:
+		return true
+	case WebhookEndpointEventTypesMessageQueued:
+		return true
+	case WebhookEndpointEventTypesMessageSent:
+		return true
+	case WebhookEndpointEventTypesPartAuthorisationCreated:
+		return true
+	case WebhookEndpointEventTypesPartAuthorisationDeleted:
+		return true
+	case WebhookEndpointEventTypesPartAuthorisationUpdated:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for WebhookEndpointObject.
+const (
+	WebhookEndpointObjectWebhookEndpoint WebhookEndpointObject = "webhook_endpoint"
+)
+
+// Valid indicates whether the value is a known member of the WebhookEndpointObject enum.
+func (e WebhookEndpointObject) Valid() bool {
+	switch e {
+	case WebhookEndpointObjectWebhookEndpoint:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for WebhookEndpointCreateRequestEventTypes.
+const (
+	WebhookEndpointCreateRequestEventTypesAsterisk                 WebhookEndpointCreateRequestEventTypes = "*"
+	WebhookEndpointCreateRequestEventTypesChatMessageCreated       WebhookEndpointCreateRequestEventTypes = "chat_message.created"
+	WebhookEndpointCreateRequestEventTypesCustomerCreated          WebhookEndpointCreateRequestEventTypes = "customer.created"
+	WebhookEndpointCreateRequestEventTypesCustomerDeleted          WebhookEndpointCreateRequestEventTypes = "customer.deleted"
+	WebhookEndpointCreateRequestEventTypesCustomerUpdated          WebhookEndpointCreateRequestEventTypes = "customer.updated"
+	WebhookEndpointCreateRequestEventTypesInvoiceCreated           WebhookEndpointCreateRequestEventTypes = "invoice.created"
+	WebhookEndpointCreateRequestEventTypesInvoiceItemCreated       WebhookEndpointCreateRequestEventTypes = "invoice_item.created"
+	WebhookEndpointCreateRequestEventTypesInvoiceItemDeleted       WebhookEndpointCreateRequestEventTypes = "invoice_item.deleted"
+	WebhookEndpointCreateRequestEventTypesInvoiceItemUpdated       WebhookEndpointCreateRequestEventTypes = "invoice_item.updated"
+	WebhookEndpointCreateRequestEventTypesInvoiceStatusChanged     WebhookEndpointCreateRequestEventTypes = "invoice.status_changed"
+	WebhookEndpointCreateRequestEventTypesInvoiceUpdated           WebhookEndpointCreateRequestEventTypes = "invoice.updated"
+	WebhookEndpointCreateRequestEventTypesJobCreated               WebhookEndpointCreateRequestEventTypes = "job.created"
+	WebhookEndpointCreateRequestEventTypesJobDeleted               WebhookEndpointCreateRequestEventTypes = "job.deleted"
+	WebhookEndpointCreateRequestEventTypesJobReportCreated         WebhookEndpointCreateRequestEventTypes = "job_report.created"
+	WebhookEndpointCreateRequestEventTypesJobReportDeleted         WebhookEndpointCreateRequestEventTypes = "job_report.deleted"
+	WebhookEndpointCreateRequestEventTypesJobReportUpdated         WebhookEndpointCreateRequestEventTypes = "job_report.updated"
+	WebhookEndpointCreateRequestEventTypesJobUpdated               WebhookEndpointCreateRequestEventTypes = "job.updated"
+	WebhookEndpointCreateRequestEventTypesMessageCancelled         WebhookEndpointCreateRequestEventTypes = "message.cancelled"
+	WebhookEndpointCreateRequestEventTypesMessageDelivered         WebhookEndpointCreateRequestEventTypes = "message.delivered"
+	WebhookEndpointCreateRequestEventTypesMessageFailed            WebhookEndpointCreateRequestEventTypes = "message.failed"
+	WebhookEndpointCreateRequestEventTypesMessageQueued            WebhookEndpointCreateRequestEventTypes = "message.queued"
+	WebhookEndpointCreateRequestEventTypesMessageSent              WebhookEndpointCreateRequestEventTypes = "message.sent"
+	WebhookEndpointCreateRequestEventTypesPartAuthorisationCreated WebhookEndpointCreateRequestEventTypes = "part_authorisation.created"
+	WebhookEndpointCreateRequestEventTypesPartAuthorisationDeleted WebhookEndpointCreateRequestEventTypes = "part_authorisation.deleted"
+	WebhookEndpointCreateRequestEventTypesPartAuthorisationUpdated WebhookEndpointCreateRequestEventTypes = "part_authorisation.updated"
+)
+
+// Valid indicates whether the value is a known member of the WebhookEndpointCreateRequestEventTypes enum.
+func (e WebhookEndpointCreateRequestEventTypes) Valid() bool {
+	switch e {
+	case WebhookEndpointCreateRequestEventTypesAsterisk:
+		return true
+	case WebhookEndpointCreateRequestEventTypesChatMessageCreated:
+		return true
+	case WebhookEndpointCreateRequestEventTypesCustomerCreated:
+		return true
+	case WebhookEndpointCreateRequestEventTypesCustomerDeleted:
+		return true
+	case WebhookEndpointCreateRequestEventTypesCustomerUpdated:
+		return true
+	case WebhookEndpointCreateRequestEventTypesInvoiceCreated:
+		return true
+	case WebhookEndpointCreateRequestEventTypesInvoiceItemCreated:
+		return true
+	case WebhookEndpointCreateRequestEventTypesInvoiceItemDeleted:
+		return true
+	case WebhookEndpointCreateRequestEventTypesInvoiceItemUpdated:
+		return true
+	case WebhookEndpointCreateRequestEventTypesInvoiceStatusChanged:
+		return true
+	case WebhookEndpointCreateRequestEventTypesInvoiceUpdated:
+		return true
+	case WebhookEndpointCreateRequestEventTypesJobCreated:
+		return true
+	case WebhookEndpointCreateRequestEventTypesJobDeleted:
+		return true
+	case WebhookEndpointCreateRequestEventTypesJobReportCreated:
+		return true
+	case WebhookEndpointCreateRequestEventTypesJobReportDeleted:
+		return true
+	case WebhookEndpointCreateRequestEventTypesJobReportUpdated:
+		return true
+	case WebhookEndpointCreateRequestEventTypesJobUpdated:
+		return true
+	case WebhookEndpointCreateRequestEventTypesMessageCancelled:
+		return true
+	case WebhookEndpointCreateRequestEventTypesMessageDelivered:
+		return true
+	case WebhookEndpointCreateRequestEventTypesMessageFailed:
+		return true
+	case WebhookEndpointCreateRequestEventTypesMessageQueued:
+		return true
+	case WebhookEndpointCreateRequestEventTypesMessageSent:
+		return true
+	case WebhookEndpointCreateRequestEventTypesPartAuthorisationCreated:
+		return true
+	case WebhookEndpointCreateRequestEventTypesPartAuthorisationDeleted:
+		return true
+	case WebhookEndpointCreateRequestEventTypesPartAuthorisationUpdated:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for WebhookEndpointUpdateRequestEventTypes.
+const (
+	WebhookEndpointUpdateRequestEventTypesAsterisk                 WebhookEndpointUpdateRequestEventTypes = "*"
+	WebhookEndpointUpdateRequestEventTypesChatMessageCreated       WebhookEndpointUpdateRequestEventTypes = "chat_message.created"
+	WebhookEndpointUpdateRequestEventTypesCustomerCreated          WebhookEndpointUpdateRequestEventTypes = "customer.created"
+	WebhookEndpointUpdateRequestEventTypesCustomerDeleted          WebhookEndpointUpdateRequestEventTypes = "customer.deleted"
+	WebhookEndpointUpdateRequestEventTypesCustomerUpdated          WebhookEndpointUpdateRequestEventTypes = "customer.updated"
+	WebhookEndpointUpdateRequestEventTypesInvoiceCreated           WebhookEndpointUpdateRequestEventTypes = "invoice.created"
+	WebhookEndpointUpdateRequestEventTypesInvoiceItemCreated       WebhookEndpointUpdateRequestEventTypes = "invoice_item.created"
+	WebhookEndpointUpdateRequestEventTypesInvoiceItemDeleted       WebhookEndpointUpdateRequestEventTypes = "invoice_item.deleted"
+	WebhookEndpointUpdateRequestEventTypesInvoiceItemUpdated       WebhookEndpointUpdateRequestEventTypes = "invoice_item.updated"
+	WebhookEndpointUpdateRequestEventTypesInvoiceStatusChanged     WebhookEndpointUpdateRequestEventTypes = "invoice.status_changed"
+	WebhookEndpointUpdateRequestEventTypesInvoiceUpdated           WebhookEndpointUpdateRequestEventTypes = "invoice.updated"
+	WebhookEndpointUpdateRequestEventTypesJobCreated               WebhookEndpointUpdateRequestEventTypes = "job.created"
+	WebhookEndpointUpdateRequestEventTypesJobDeleted               WebhookEndpointUpdateRequestEventTypes = "job.deleted"
+	WebhookEndpointUpdateRequestEventTypesJobReportCreated         WebhookEndpointUpdateRequestEventTypes = "job_report.created"
+	WebhookEndpointUpdateRequestEventTypesJobReportDeleted         WebhookEndpointUpdateRequestEventTypes = "job_report.deleted"
+	WebhookEndpointUpdateRequestEventTypesJobReportUpdated         WebhookEndpointUpdateRequestEventTypes = "job_report.updated"
+	WebhookEndpointUpdateRequestEventTypesJobUpdated               WebhookEndpointUpdateRequestEventTypes = "job.updated"
+	WebhookEndpointUpdateRequestEventTypesMessageCancelled         WebhookEndpointUpdateRequestEventTypes = "message.cancelled"
+	WebhookEndpointUpdateRequestEventTypesMessageDelivered         WebhookEndpointUpdateRequestEventTypes = "message.delivered"
+	WebhookEndpointUpdateRequestEventTypesMessageFailed            WebhookEndpointUpdateRequestEventTypes = "message.failed"
+	WebhookEndpointUpdateRequestEventTypesMessageQueued            WebhookEndpointUpdateRequestEventTypes = "message.queued"
+	WebhookEndpointUpdateRequestEventTypesMessageSent              WebhookEndpointUpdateRequestEventTypes = "message.sent"
+	WebhookEndpointUpdateRequestEventTypesPartAuthorisationCreated WebhookEndpointUpdateRequestEventTypes = "part_authorisation.created"
+	WebhookEndpointUpdateRequestEventTypesPartAuthorisationDeleted WebhookEndpointUpdateRequestEventTypes = "part_authorisation.deleted"
+	WebhookEndpointUpdateRequestEventTypesPartAuthorisationUpdated WebhookEndpointUpdateRequestEventTypes = "part_authorisation.updated"
+)
+
+// Valid indicates whether the value is a known member of the WebhookEndpointUpdateRequestEventTypes enum.
+func (e WebhookEndpointUpdateRequestEventTypes) Valid() bool {
+	switch e {
+	case WebhookEndpointUpdateRequestEventTypesAsterisk:
+		return true
+	case WebhookEndpointUpdateRequestEventTypesChatMessageCreated:
+		return true
+	case WebhookEndpointUpdateRequestEventTypesCustomerCreated:
+		return true
+	case WebhookEndpointUpdateRequestEventTypesCustomerDeleted:
+		return true
+	case WebhookEndpointUpdateRequestEventTypesCustomerUpdated:
+		return true
+	case WebhookEndpointUpdateRequestEventTypesInvoiceCreated:
+		return true
+	case WebhookEndpointUpdateRequestEventTypesInvoiceItemCreated:
+		return true
+	case WebhookEndpointUpdateRequestEventTypesInvoiceItemDeleted:
+		return true
+	case WebhookEndpointUpdateRequestEventTypesInvoiceItemUpdated:
+		return true
+	case WebhookEndpointUpdateRequestEventTypesInvoiceStatusChanged:
+		return true
+	case WebhookEndpointUpdateRequestEventTypesInvoiceUpdated:
+		return true
+	case WebhookEndpointUpdateRequestEventTypesJobCreated:
+		return true
+	case WebhookEndpointUpdateRequestEventTypesJobDeleted:
+		return true
+	case WebhookEndpointUpdateRequestEventTypesJobReportCreated:
+		return true
+	case WebhookEndpointUpdateRequestEventTypesJobReportDeleted:
+		return true
+	case WebhookEndpointUpdateRequestEventTypesJobReportUpdated:
+		return true
+	case WebhookEndpointUpdateRequestEventTypesJobUpdated:
+		return true
+	case WebhookEndpointUpdateRequestEventTypesMessageCancelled:
+		return true
+	case WebhookEndpointUpdateRequestEventTypesMessageDelivered:
+		return true
+	case WebhookEndpointUpdateRequestEventTypesMessageFailed:
+		return true
+	case WebhookEndpointUpdateRequestEventTypesMessageQueued:
+		return true
+	case WebhookEndpointUpdateRequestEventTypesMessageSent:
+		return true
+	case WebhookEndpointUpdateRequestEventTypesPartAuthorisationCreated:
+		return true
+	case WebhookEndpointUpdateRequestEventTypesPartAuthorisationDeleted:
+		return true
+	case WebhookEndpointUpdateRequestEventTypesPartAuthorisationUpdated:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for WebhookEndpointWithSecretEventTypes.
+const (
+	WebhookEndpointWithSecretEventTypesChatMessageCreated       WebhookEndpointWithSecretEventTypes = "chat_message.created"
+	WebhookEndpointWithSecretEventTypesCustomerCreated          WebhookEndpointWithSecretEventTypes = "customer.created"
+	WebhookEndpointWithSecretEventTypesCustomerDeleted          WebhookEndpointWithSecretEventTypes = "customer.deleted"
+	WebhookEndpointWithSecretEventTypesCustomerUpdated          WebhookEndpointWithSecretEventTypes = "customer.updated"
+	WebhookEndpointWithSecretEventTypesInvoiceCreated           WebhookEndpointWithSecretEventTypes = "invoice.created"
+	WebhookEndpointWithSecretEventTypesInvoiceItemCreated       WebhookEndpointWithSecretEventTypes = "invoice_item.created"
+	WebhookEndpointWithSecretEventTypesInvoiceItemDeleted       WebhookEndpointWithSecretEventTypes = "invoice_item.deleted"
+	WebhookEndpointWithSecretEventTypesInvoiceItemUpdated       WebhookEndpointWithSecretEventTypes = "invoice_item.updated"
+	WebhookEndpointWithSecretEventTypesInvoiceStatusChanged     WebhookEndpointWithSecretEventTypes = "invoice.status_changed"
+	WebhookEndpointWithSecretEventTypesInvoiceUpdated           WebhookEndpointWithSecretEventTypes = "invoice.updated"
+	WebhookEndpointWithSecretEventTypesJobCreated               WebhookEndpointWithSecretEventTypes = "job.created"
+	WebhookEndpointWithSecretEventTypesJobDeleted               WebhookEndpointWithSecretEventTypes = "job.deleted"
+	WebhookEndpointWithSecretEventTypesJobReportCreated         WebhookEndpointWithSecretEventTypes = "job_report.created"
+	WebhookEndpointWithSecretEventTypesJobReportDeleted         WebhookEndpointWithSecretEventTypes = "job_report.deleted"
+	WebhookEndpointWithSecretEventTypesJobReportUpdated         WebhookEndpointWithSecretEventTypes = "job_report.updated"
+	WebhookEndpointWithSecretEventTypesJobUpdated               WebhookEndpointWithSecretEventTypes = "job.updated"
+	WebhookEndpointWithSecretEventTypesMessageCancelled         WebhookEndpointWithSecretEventTypes = "message.cancelled"
+	WebhookEndpointWithSecretEventTypesMessageDelivered         WebhookEndpointWithSecretEventTypes = "message.delivered"
+	WebhookEndpointWithSecretEventTypesMessageFailed            WebhookEndpointWithSecretEventTypes = "message.failed"
+	WebhookEndpointWithSecretEventTypesMessageQueued            WebhookEndpointWithSecretEventTypes = "message.queued"
+	WebhookEndpointWithSecretEventTypesMessageSent              WebhookEndpointWithSecretEventTypes = "message.sent"
+	WebhookEndpointWithSecretEventTypesPartAuthorisationCreated WebhookEndpointWithSecretEventTypes = "part_authorisation.created"
+	WebhookEndpointWithSecretEventTypesPartAuthorisationDeleted WebhookEndpointWithSecretEventTypes = "part_authorisation.deleted"
+	WebhookEndpointWithSecretEventTypesPartAuthorisationUpdated WebhookEndpointWithSecretEventTypes = "part_authorisation.updated"
+)
+
+// Valid indicates whether the value is a known member of the WebhookEndpointWithSecretEventTypes enum.
+func (e WebhookEndpointWithSecretEventTypes) Valid() bool {
+	switch e {
+	case WebhookEndpointWithSecretEventTypesChatMessageCreated:
+		return true
+	case WebhookEndpointWithSecretEventTypesCustomerCreated:
+		return true
+	case WebhookEndpointWithSecretEventTypesCustomerDeleted:
+		return true
+	case WebhookEndpointWithSecretEventTypesCustomerUpdated:
+		return true
+	case WebhookEndpointWithSecretEventTypesInvoiceCreated:
+		return true
+	case WebhookEndpointWithSecretEventTypesInvoiceItemCreated:
+		return true
+	case WebhookEndpointWithSecretEventTypesInvoiceItemDeleted:
+		return true
+	case WebhookEndpointWithSecretEventTypesInvoiceItemUpdated:
+		return true
+	case WebhookEndpointWithSecretEventTypesInvoiceStatusChanged:
+		return true
+	case WebhookEndpointWithSecretEventTypesInvoiceUpdated:
+		return true
+	case WebhookEndpointWithSecretEventTypesJobCreated:
+		return true
+	case WebhookEndpointWithSecretEventTypesJobDeleted:
+		return true
+	case WebhookEndpointWithSecretEventTypesJobReportCreated:
+		return true
+	case WebhookEndpointWithSecretEventTypesJobReportDeleted:
+		return true
+	case WebhookEndpointWithSecretEventTypesJobReportUpdated:
+		return true
+	case WebhookEndpointWithSecretEventTypesJobUpdated:
+		return true
+	case WebhookEndpointWithSecretEventTypesMessageCancelled:
+		return true
+	case WebhookEndpointWithSecretEventTypesMessageDelivered:
+		return true
+	case WebhookEndpointWithSecretEventTypesMessageFailed:
+		return true
+	case WebhookEndpointWithSecretEventTypesMessageQueued:
+		return true
+	case WebhookEndpointWithSecretEventTypesMessageSent:
+		return true
+	case WebhookEndpointWithSecretEventTypesPartAuthorisationCreated:
+		return true
+	case WebhookEndpointWithSecretEventTypesPartAuthorisationDeleted:
+		return true
+	case WebhookEndpointWithSecretEventTypesPartAuthorisationUpdated:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for WebhookEndpointWithSecretObject.
+const (
+	WebhookEndpointWithSecretObjectWebhookEndpoint WebhookEndpointWithSecretObject = "webhook_endpoint"
+)
+
+// Valid indicates whether the value is a known member of the WebhookEndpointWithSecretObject enum.
+func (e WebhookEndpointWithSecretObject) Valid() bool {
+	switch e {
+	case WebhookEndpointWithSecretObjectWebhookEndpoint:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for WebhookEventTypePayloadObject.
+const (
+	WebhookEventTypePayloadObjectChatMessage       WebhookEventTypePayloadObject = "chat_message"
+	WebhookEventTypePayloadObjectCustomer          WebhookEventTypePayloadObject = "customer"
+	WebhookEventTypePayloadObjectInvoice           WebhookEventTypePayloadObject = "invoice"
+	WebhookEventTypePayloadObjectInvoiceItem       WebhookEventTypePayloadObject = "invoice_item"
+	WebhookEventTypePayloadObjectJob               WebhookEventTypePayloadObject = "job"
+	WebhookEventTypePayloadObjectJobReport         WebhookEventTypePayloadObject = "job_report"
+	WebhookEventTypePayloadObjectMessage           WebhookEventTypePayloadObject = "message"
+	WebhookEventTypePayloadObjectPartAuthorisation WebhookEventTypePayloadObject = "part_authorisation"
+)
+
+// Valid indicates whether the value is a known member of the WebhookEventTypePayloadObject enum.
+func (e WebhookEventTypePayloadObject) Valid() bool {
+	switch e {
+	case WebhookEventTypePayloadObjectChatMessage:
+		return true
+	case WebhookEventTypePayloadObjectCustomer:
+		return true
+	case WebhookEventTypePayloadObjectInvoice:
+		return true
+	case WebhookEventTypePayloadObjectInvoiceItem:
+		return true
+	case WebhookEventTypePayloadObjectJob:
+		return true
+	case WebhookEventTypePayloadObjectJobReport:
+		return true
+	case WebhookEventTypePayloadObjectMessage:
+		return true
+	case WebhookEventTypePayloadObjectPartAuthorisation:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for WebhookEventTypeStatus.
+const (
+	Available WebhookEventTypeStatus = "available"
+)
+
+// Valid indicates whether the value is a known member of the WebhookEventTypeStatus enum.
+func (e WebhookEventTypeStatus) Valid() bool {
+	switch e {
+	case Available:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for WorkLineStatusChangeNotificationsCustomer.
+const (
+	Default WorkLineStatusChangeNotificationsCustomer = "default"
+	Send    WorkLineStatusChangeNotificationsCustomer = "send"
+	Skip    WorkLineStatusChangeNotificationsCustomer = "skip"
+)
+
+// Valid indicates whether the value is a known member of the WorkLineStatusChangeNotificationsCustomer enum.
+func (e WorkLineStatusChangeNotificationsCustomer) Valid() bool {
+	switch e {
+	case Default:
+		return true
+	case Send:
+		return true
+	case Skip:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for ListAssetParamsBikeType.
+const (
+	ListAssetParamsBikeTypeBmx           ListAssetParamsBikeType = "bmx"
+	ListAssetParamsBikeTypeECargo        ListAssetParamsBikeType = "e_cargo"
+	ListAssetParamsBikeTypeEGravel       ListAssetParamsBikeType = "e_gravel"
+	ListAssetParamsBikeTypeERoad         ListAssetParamsBikeType = "e_road"
+	ListAssetParamsBikeTypeElectricBike  ListAssetParamsBikeType = "electric_bike"
+	ListAssetParamsBikeTypeGenericBike   ListAssetParamsBikeType = "generic_bike"
+	ListAssetParamsBikeTypeGravel        ListAssetParamsBikeType = "gravel"
+	ListAssetParamsBikeTypeHybrid        ListAssetParamsBikeType = "hybrid"
+	ListAssetParamsBikeTypeKidsBike      ListAssetParamsBikeType = "kids_bike"
+	ListAssetParamsBikeTypeMountainBike  ListAssetParamsBikeType = "mountain_bike"
+	ListAssetParamsBikeTypeOther         ListAssetParamsBikeType = "other"
+	ListAssetParamsBikeTypeRoadBike      ListAssetParamsBikeType = "road_bike"
+	ListAssetParamsBikeTypeSingleSpeed   ListAssetParamsBikeType = "single_speed"
+	ListAssetParamsBikeTypeStaticBike    ListAssetParamsBikeType = "static_bike"
+	ListAssetParamsBikeTypeTriathlonBike ListAssetParamsBikeType = "triathlon_bike"
+)
+
+// Valid indicates whether the value is a known member of the ListAssetParamsBikeType enum.
+func (e ListAssetParamsBikeType) Valid() bool {
+	switch e {
+	case ListAssetParamsBikeTypeBmx:
+		return true
+	case ListAssetParamsBikeTypeECargo:
+		return true
+	case ListAssetParamsBikeTypeEGravel:
+		return true
+	case ListAssetParamsBikeTypeERoad:
+		return true
+	case ListAssetParamsBikeTypeElectricBike:
+		return true
+	case ListAssetParamsBikeTypeGenericBike:
+		return true
+	case ListAssetParamsBikeTypeGravel:
+		return true
+	case ListAssetParamsBikeTypeHybrid:
+		return true
+	case ListAssetParamsBikeTypeKidsBike:
+		return true
+	case ListAssetParamsBikeTypeMountainBike:
+		return true
+	case ListAssetParamsBikeTypeOther:
+		return true
+	case ListAssetParamsBikeTypeRoadBike:
+		return true
+	case ListAssetParamsBikeTypeSingleSpeed:
+		return true
+	case ListAssetParamsBikeTypeStaticBike:
+		return true
+	case ListAssetParamsBikeTypeTriathlonBike:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for ListParamsStatus.
+const (
+	ListParamsStatusNeedsOrdering     ListParamsStatus = "needs_ordering"
+	ListParamsStatusReceived          ListParamsStatus = "received"
+	ListParamsStatusWaitingOnDelivery ListParamsStatus = "waiting_on_delivery"
+)
+
+// Valid indicates whether the value is a known member of the ListParamsStatus enum.
+func (e ListParamsStatus) Valid() bool {
+	switch e {
+	case ListParamsStatusNeedsOrdering:
+		return true
+	case ListParamsStatusReceived:
+		return true
+	case ListParamsStatusWaitingOnDelivery:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for ListParamsSource.
+const (
+	ListParamsSourceGeneral ListParamsSource = "general"
+	ListParamsSourceInvoice ListParamsSource = "invoice"
+	ListParamsSourceJob     ListParamsSource = "job"
+)
+
+// Valid indicates whether the value is a known member of the ListParamsSource enum.
+func (e ListParamsSource) Valid() bool {
+	switch e {
+	case ListParamsSourceGeneral:
+		return true
+	case ListParamsSourceInvoice:
+		return true
+	case ListParamsSourceJob:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for ListForCustomerParamsBikeType.
+const (
+	ListForCustomerParamsBikeTypeBmx           ListForCustomerParamsBikeType = "bmx"
+	ListForCustomerParamsBikeTypeECargo        ListForCustomerParamsBikeType = "e_cargo"
+	ListForCustomerParamsBikeTypeEGravel       ListForCustomerParamsBikeType = "e_gravel"
+	ListForCustomerParamsBikeTypeERoad         ListForCustomerParamsBikeType = "e_road"
+	ListForCustomerParamsBikeTypeElectricBike  ListForCustomerParamsBikeType = "electric_bike"
+	ListForCustomerParamsBikeTypeGenericBike   ListForCustomerParamsBikeType = "generic_bike"
+	ListForCustomerParamsBikeTypeGravel        ListForCustomerParamsBikeType = "gravel"
+	ListForCustomerParamsBikeTypeHybrid        ListForCustomerParamsBikeType = "hybrid"
+	ListForCustomerParamsBikeTypeKidsBike      ListForCustomerParamsBikeType = "kids_bike"
+	ListForCustomerParamsBikeTypeMountainBike  ListForCustomerParamsBikeType = "mountain_bike"
+	ListForCustomerParamsBikeTypeOther         ListForCustomerParamsBikeType = "other"
+	ListForCustomerParamsBikeTypeRoadBike      ListForCustomerParamsBikeType = "road_bike"
+	ListForCustomerParamsBikeTypeSingleSpeed   ListForCustomerParamsBikeType = "single_speed"
+	ListForCustomerParamsBikeTypeStaticBike    ListForCustomerParamsBikeType = "static_bike"
+	ListForCustomerParamsBikeTypeTriathlonBike ListForCustomerParamsBikeType = "triathlon_bike"
+)
+
+// Valid indicates whether the value is a known member of the ListForCustomerParamsBikeType enum.
+func (e ListForCustomerParamsBikeType) Valid() bool {
+	switch e {
+	case ListForCustomerParamsBikeTypeBmx:
+		return true
+	case ListForCustomerParamsBikeTypeECargo:
+		return true
+	case ListForCustomerParamsBikeTypeEGravel:
+		return true
+	case ListForCustomerParamsBikeTypeERoad:
+		return true
+	case ListForCustomerParamsBikeTypeElectricBike:
+		return true
+	case ListForCustomerParamsBikeTypeGenericBike:
+		return true
+	case ListForCustomerParamsBikeTypeGravel:
+		return true
+	case ListForCustomerParamsBikeTypeHybrid:
+		return true
+	case ListForCustomerParamsBikeTypeKidsBike:
+		return true
+	case ListForCustomerParamsBikeTypeMountainBike:
+		return true
+	case ListForCustomerParamsBikeTypeOther:
+		return true
+	case ListForCustomerParamsBikeTypeRoadBike:
+		return true
+	case ListForCustomerParamsBikeTypeSingleSpeed:
+		return true
+	case ListForCustomerParamsBikeTypeStaticBike:
+		return true
+	case ListForCustomerParamsBikeTypeTriathlonBike:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for ListInvoiceParamsStatus.
+const (
+	ListInvoiceParamsStatusCancelled ListInvoiceParamsStatus = "cancelled"
+	ListInvoiceParamsStatusDraft     ListInvoiceParamsStatus = "draft"
+	ListInvoiceParamsStatusPaid      ListInvoiceParamsStatus = "paid"
+	ListInvoiceParamsStatusPending   ListInvoiceParamsStatus = "pending"
+)
+
+// Valid indicates whether the value is a known member of the ListInvoiceParamsStatus enum.
+func (e ListInvoiceParamsStatus) Valid() bool {
+	switch e {
+	case ListInvoiceParamsStatusCancelled:
+		return true
+	case ListInvoiceParamsStatusDraft:
+		return true
+	case ListInvoiceParamsStatusPaid:
+		return true
+	case ListInvoiceParamsStatusPending:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for JobsParamsAcceptedStatus.
+const (
+	JobsParamsAcceptedStatusAccepted  JobsParamsAcceptedStatus = "accepted"
+	JobsParamsAcceptedStatusCancelled JobsParamsAcceptedStatus = "cancelled"
+	JobsParamsAcceptedStatusPending   JobsParamsAcceptedStatus = "pending"
+	JobsParamsAcceptedStatusRejected  JobsParamsAcceptedStatus = "rejected"
+)
+
+// Valid indicates whether the value is a known member of the JobsParamsAcceptedStatus enum.
+func (e JobsParamsAcceptedStatus) Valid() bool {
+	switch e {
+	case JobsParamsAcceptedStatusAccepted:
+		return true
+	case JobsParamsAcceptedStatusCancelled:
+		return true
+	case JobsParamsAcceptedStatusPending:
+		return true
+	case JobsParamsAcceptedStatusRejected:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for ListForEndpointParamsStatus.
+const (
+	ListForEndpointParamsStatusFailed  ListForEndpointParamsStatus = "failed"
+	ListForEndpointParamsStatusPending ListForEndpointParamsStatus = "pending"
+	ListForEndpointParamsStatusSuccess ListForEndpointParamsStatus = "success"
+)
+
+// Valid indicates whether the value is a known member of the ListForEndpointParamsStatus enum.
+func (e ListForEndpointParamsStatus) Valid() bool {
+	switch e {
+	case ListForEndpointParamsStatusFailed:
+		return true
+	case ListForEndpointParamsStatusPending:
+		return true
+	case ListForEndpointParamsStatusSuccess:
+		return true
+	default:
+		return false
+	}
+}
+
+// AcceptedStatusChangeNotifications Notification options for accepted, rejected, and cancelled job status changes.
+type AcceptedStatusChangeNotifications struct {
+	// Customer Notification control. Allowed values: `default`, `send`, or `skip`.
+	Customer *AcceptedStatusChangeNotificationsCustomer `json:"customer,omitempty"`
+}
+
+// AcceptedStatusChangeNotificationsCustomer Notification control. Allowed values: `default`, `send`, or `skip`.
+type AcceptedStatusChangeNotificationsCustomer string
+
+// Asset Public customer bike asset read model. Assets are bikes today; `bike_type` classifies the bike category.
+type Asset struct {
+	// BikeType Bike category (bikes only — public assets are bikes today). Snake_case enum (for example `road_bike`, `generic_bike`).
+	BikeType *AssetBikeType `json:"bike_type,omitempty"`
+
 	// BusinessId Workshop that owns the customer asset.
 	BusinessId *string `json:"business_id,omitempty"`
 
@@ -181,20 +6634,83 @@ type AssetResponse struct {
 	Name *string `json:"name,omitempty"`
 
 	// Object Resource object type. Always `asset`.
-	Object *string `json:"object,omitempty"`
+	Object *AssetObject `json:"object,omitempty"`
 
 	// SerialNumber Asset serial number, when known.
 	SerialNumber *string `json:"serial_number,omitempty"`
-
-	// Type Public asset type, such as bike or another serviced asset category.
-	Type *string `json:"type,omitempty"`
 
 	// Year Asset year, when known.
 	Year *int32 `json:"year,omitempty"`
 }
 
-// AvailabilityResponse Public availability response for a business over a date range.
-type AvailabilityResponse struct {
+// AssetBikeType Bike category (bikes only — public assets are bikes today). Snake_case enum (for example `road_bike`, `generic_bike`).
+type AssetBikeType string
+
+// AssetObject Resource object type. Always `asset`.
+type AssetObject string
+
+// AssetCreateRequest Request body for creating a customer asset through the public API.
+type AssetCreateRequest struct {
+	// BikeType Bike category (bikes only). Snake_case enum. Defaults to `generic_bike` when omitted on create.
+	BikeType *AssetCreateRequestBikeType `json:"bike_type,omitempty"`
+
+	// CustomerId Required. Customer public id that will own the asset (`cus_...`).
+	CustomerId string `json:"customer_id"`
+
+	// Make Asset make or manufacturer.
+	Make *string `json:"make,omitempty"`
+
+	// Model Asset model.
+	Model *string `json:"model,omitempty"`
+
+	// Name Asset display name.
+	Name *string `json:"name,omitempty"`
+
+	// SerialNumber Asset serial number.
+	SerialNumber *string `json:"serial_number,omitempty"`
+
+	// Year Asset model year.
+	Year *int32 `json:"year,omitempty"`
+}
+
+// AssetCreateRequestBikeType Bike category (bikes only). Snake_case enum. Defaults to `generic_bike` when omitted on create.
+type AssetCreateRequestBikeType string
+
+// AssetDeleted Response returned after deleting an asset.
+type AssetDeleted struct {
+	// Deleted Whether the asset was deleted.
+	Deleted *bool `json:"deleted,omitempty"`
+
+	// Id Deleted public asset id.
+	Id *string `json:"id,omitempty"`
+}
+
+// AssetUpdateRequest Request body for updating a customer's asset through an authenticated business-scoped public API key.
+type AssetUpdateRequest struct {
+	// BikeType Bike category (bikes only). Snake_case enum. Omit to leave unchanged.
+	BikeType *AssetUpdateRequestBikeType `json:"bike_type,omitempty"`
+
+	// Make Asset make or manufacturer. Omit to leave unchanged.
+	Make *string `json:"make,omitempty"`
+
+	// Model Asset model. Omit to leave unchanged.
+	Model *string `json:"model,omitempty"`
+
+	// Name Asset display name. Omit to leave unchanged.
+	Name *string `json:"name,omitempty"`
+
+	// SerialNumber Asset serial number. Omit to leave unchanged.
+	SerialNumber *string `json:"serial_number,omitempty"`
+
+	// Year Asset model year. Omit to leave unchanged.
+	Year *int32 `json:"year,omitempty"`
+}
+
+// AssetUpdateRequestBikeType Bike category (bikes only). Snake_case enum. Omit to leave unchanged.
+type AssetUpdateRequestBikeType string
+
+// AvailabilityCalendar Public availability response for a business over a date range.
+type AvailabilityCalendar struct {
 	// BusinessId Public business id for this availability response.
 	BusinessId *string `json:"business_id,omitempty"`
 
@@ -211,14 +6727,17 @@ type AvailabilityResponse struct {
 	From *openapi_types.Date `json:"from,omitempty"`
 
 	// Object Resource object type. Always availability.
-	Object *string `json:"object,omitempty"`
+	Object *AvailabilityCalendarObject `json:"object,omitempty"`
 
 	// To Calendar date (`YYYY-MM-DD`). No time or timezone offset — use the date part only.
 	To *openapi_types.Date `json:"to,omitempty"`
 }
 
-// AvailabilitySlotResponse Public availability time slot.
-type AvailabilitySlotResponse struct {
+// AvailabilityCalendarObject Resource object type. Always availability.
+type AvailabilityCalendarObject string
+
+// AvailabilitySlot Public availability time slot.
+type AvailabilitySlot struct {
 	// EndTime End time of the available slot in the business's local schedule.
 	EndTime *string `json:"end_time,omitempty"`
 
@@ -229,8 +6748,8 @@ type AvailabilitySlotResponse struct {
 	StartTime *string `json:"start_time,omitempty"`
 }
 
-// AvailabilitySlotsResponse Public availability time slots for a single calendar date.
-type AvailabilitySlotsResponse struct {
+// AvailabilitySlotsResult Public availability time slots for a single calendar date.
+type AvailabilitySlotsResult struct {
 	// BusinessId Public business id for this availability result.
 	BusinessId *string `json:"business_id,omitempty"`
 
@@ -238,19 +6757,178 @@ type AvailabilitySlotsResponse struct {
 	Date *openapi_types.Date `json:"date,omitempty"`
 
 	// Object Resource object type. Always availability_slots.
-	Object *string `json:"object,omitempty"`
+	Object *AvailabilitySlotsResultObject `json:"object,omitempty"`
 
 	// Slots Collection/drop-off time windows configured for this date.
-	Slots *[]AvailabilitySlotResponse `json:"slots,omitempty"`
+	Slots *[]AvailabilitySlot `json:"slots,omitempty"`
 }
 
-// BusinessResponse Public business profile returned by the public API.
-type BusinessResponse struct {
+// AvailabilitySlotsResultObject Resource object type. Always availability_slots.
+type AvailabilitySlotsResultObject string
+
+// BackOrder Public back order line in a workshop needs-ordering collection.
+type BackOrder struct {
+	// AddedBy Workshop user or integration label that added the line.
+	AddedBy *string `json:"added_by,omitempty"`
+
+	// BusinessId Workshop that owns this back order (`org_...`).
+	BusinessId *string `json:"business_id,omitempty"`
+
+	// CreatedAt UTC timestamp when the back order was created.
+	CreatedAt *time.Time `json:"created_at,omitempty"`
+
+	// CustomerId Customer public id (`cus_...`) when a job or invoice provides one.
+	CustomerId *string `json:"customer_id,omitempty"`
+
+	// CustomerName Customer display name when available.
+	CustomerName *string `json:"customer_name,omitempty"`
+
+	// Id Opaque resource-prefixed public identifier, such as job_... or cus_.... Internal database ids must never be assigned here.
+	Id *string `json:"id,omitempty"`
+
+	// InvoiceId Linked invoice public id (`inv_...`), when the back order is tied to an invoice.
+	InvoiceId *string `json:"invoice_id,omitempty"`
+
+	// InvoiceTitle Display label for the linked invoice, when present.
+	InvoiceTitle *string `json:"invoice_title,omitempty"`
+
+	// JobId Linked job public id (`job_...`), when the back order is tied to a job.
+	JobId *string `json:"job_id,omitempty"`
+
+	// JobTitle Display label for the linked job, when present.
+	JobTitle *string `json:"job_title,omitempty"`
+
+	// Object Resource object type. Always `back_order`.
+	Object *BackOrderObject `json:"object,omitempty"`
+
+	// Quantity Quantity still required.
+	Quantity *int32 `json:"quantity,omitempty"`
+
+	// ServiceItemInstanceId Linked service item instance public id, when the back order is tied to a job report checklist step.
+	ServiceItemInstanceId *string `json:"service_item_instance_id,omitempty"`
+
+	// ServiceItemName Checklist or service item name when linked to a job report line.
+	ServiceItemName *string `json:"service_item_name,omitempty"`
+
+	// Source Where the back order was created: `general`, `job`, or `invoice`.
+	Source *BackOrderSource `json:"source,omitempty"`
+
+	// Status Ordering status: `needs_ordering`, `waiting_on_delivery`, or `received`.
+	Status *BackOrderStatus `json:"status,omitempty"`
+
+	// StockVariation Public stock variation (SKU) read model for catalogue and inventory lookup.
+	StockVariation *StockVariation `json:"stock_variation,omitempty"`
+
+	// StockVariationId Stock variation public id (`stkv_...`) for the part being ordered.
+	StockVariationId *string `json:"stock_variation_id,omitempty"`
+
+	// UpdatedAt UTC timestamp when the back order was last updated, when available.
+	UpdatedAt *time.Time `json:"updated_at,omitempty"`
+}
+
+// BackOrderObject Resource object type. Always `back_order`.
+type BackOrderObject string
+
+// BackOrderSource Where the back order was created: `general`, `job`, or `invoice`.
+type BackOrderSource string
+
+// BackOrderStatus Ordering status: `needs_ordering`, `waiting_on_delivery`, or `received`.
+type BackOrderStatus string
+
+// BackOrderCreateRequest Request body for creating or upserting a back order through the public API.
+type BackOrderCreateRequest struct {
+	// BusinessId Workshop public id (`org_...`) that owns the back order.
+	BusinessId string `json:"business_id"`
+
+	// InvoiceId Optional linked invoice public id (`inv_...`). Mutually exclusive with `job_id` and `service_item_instance_id`.
+	InvoiceId *string `json:"invoice_id,omitempty"`
+
+	// JobId Optional linked job public id (`job_...`). Mutually exclusive with `invoice_id` and `service_item_instance_id`.
+	JobId *string `json:"job_id,omitempty"`
+
+	// Quantity Quantity required. Must be at least 1.
+	Quantity int32 `json:"quantity"`
+
+	// ServiceItemInstanceId Optional linked service item instance public id. Mutually exclusive with `job_id` and `invoice_id`.
+	ServiceItemInstanceId *string `json:"service_item_instance_id,omitempty"`
+
+	// Status Optional initial status. Defaults to `needs_ordering` when omitted.
+	Status *BackOrderCreateRequestStatus `json:"status,omitempty"`
+
+	// StockVariationId Stock variation public id (`stkv_...`) for the part to order.
+	StockVariationId string `json:"stock_variation_id"`
+}
+
+// BackOrderCreateRequestStatus Optional initial status. Defaults to `needs_ordering` when omitted.
+type BackOrderCreateRequestStatus string
+
+// BackOrderDeleted Confirmation payload after deleting a back order.
+type BackOrderDeleted struct {
+	// Deleted Always true when the delete succeeded.
+	Deleted *bool `json:"deleted,omitempty"`
+
+	// Id Public back order id that was removed.
+	Id *string `json:"id,omitempty"`
+}
+
+// BackOrderReceiveItemRequest Per-line options when marking back orders as received.
+type BackOrderReceiveItemRequest struct {
+	// BackOrderId Back order public id (`pordi_...`) being received.
+	BackOrderId string `json:"back_order_id"`
+
+	// CreateStockItem When true, create a workshop stock item from a supplier catalogue variation if one does not already exist for the SKU.
+	CreateStockItem *bool `json:"create_stock_item,omitempty"`
+
+	// RemoveBackOrder When true, remove the back order line after processing.
+	RemoveBackOrder *bool `json:"remove_back_order,omitempty"`
+
+	// UpdateStockLevel When true, increase remaining stock for the variation by the back order quantity.
+	UpdateStockLevel *bool `json:"update_stock_level,omitempty"`
+}
+
+// BackOrderReceiveRequest Batch request for processing received back orders.
+type BackOrderReceiveRequest struct {
+	// Items Back orders to mark as received with per-line stock options.
+	Items []BackOrderReceiveItemRequest `json:"items"`
+}
+
+// BackOrderUpdateRequest Patch body for updating a back order quantity or status.
+type BackOrderUpdateRequest struct {
+	// Quantity New quantity. Must be at least 1. Use `DELETE` to remove the back order instead of sending 0.
+	Quantity *int32 `json:"quantity,omitempty"`
+
+	// Status New status: `needs_ordering`, `waiting_on_delivery`, or `received`.
+	Status *BackOrderUpdateRequestStatus `json:"status,omitempty"`
+}
+
+// BackOrderUpdateRequestStatus New status: `needs_ordering`, `waiting_on_delivery`, or `received`.
+type BackOrderUpdateRequestStatus string
+
+// BatchResponseOfBackOrder Public API batch response for bounded action results that are not cursor-paginated.
+type BatchResponseOfBackOrder struct {
+	// Data Resources affected or created by the action.
+	Data *[]BackOrder `json:"data,omitempty"`
+}
+
+// BatchResponseOfChatMessage Public API batch response for bounded action results that are not cursor-paginated.
+type BatchResponseOfChatMessage struct {
+	// Data Resources affected or created by the action.
+	Data *[]ChatMessage `json:"data,omitempty"`
+}
+
+// BatchResponseOfPartAuthorisation Public API batch response for bounded action results that are not cursor-paginated.
+type BatchResponseOfPartAuthorisation struct {
+	// Data Resources affected or created by the action.
+	Data *[]PartAuthorisation `json:"data,omitempty"`
+}
+
+// Business Public business profile returned by the public API.
+type Business struct {
 	// BookingsEnabled True when the business currently accepts customer bookings/jobs.
 	BookingsEnabled *bool `json:"bookings_enabled,omitempty"`
 
-	// BusinessType Public business type as a stable snake_case value.
-	BusinessType *string `json:"business_type,omitempty"`
+	// BusinessType Workshop operating model. Allowed values: `location` (fixed premises) or `mobile` (mobile/collection business).
+	BusinessType *BusinessBusinessType `json:"business_type,omitempty"`
 
 	// CollectionEnabled True when mechanic collection is enabled for the business.
 	CollectionEnabled *bool `json:"collection_enabled,omitempty"`
@@ -261,8 +6939,8 @@ type BusinessResponse struct {
 	// ContactPhone Public contact phone number for the business, when configured.
 	ContactPhone *string `json:"contact_phone,omitempty"`
 
-	// Country ISO country code configured for the business.
-	Country *string `json:"country,omitempty"`
+	// Country ISO 3166-1 alpha-3 country code in uppercase (for example `GBR`, `USA`, or `DEU`).
+	Country *BusinessCountry `json:"country,omitempty"`
 
 	// Description Public business profile description.
 	Description *string `json:"description,omitempty"`
@@ -270,7 +6948,7 @@ type BusinessResponse struct {
 	// DropOffsEnabled True when customer drop-off is enabled for the business.
 	DropOffsEnabled *bool `json:"drop_offs_enabled,omitempty"`
 
-	// Id Public workshop id (`org_...`, for example `org_2abc8example`).
+	// Id Opaque resource-prefixed public identifier, such as job_... or cus_.... Internal database ids must never be assigned here.
 	Id *string `json:"id,omitempty"`
 
 	// ImageUrl Public image or logo URL for the business.
@@ -280,7 +6958,7 @@ type BusinessResponse struct {
 	Name *string `json:"name,omitempty"`
 
 	// Object Resource object type. Always business.
-	Object *string `json:"object,omitempty"`
+	Object *BusinessObject `json:"object,omitempty"`
 
 	// ServicesVisible True when the business has chosen to show services publicly.
 	ServicesVisible *bool `json:"services_visible,omitempty"`
@@ -289,8 +6967,74 @@ type BusinessResponse struct {
 	Slug *string `json:"slug,omitempty"`
 }
 
-// ChatAttachmentResponse Public metadata for a file attached to a chat message.
-type ChatAttachmentResponse struct {
+// BusinessBusinessType Workshop operating model. Allowed values: `location` (fixed premises) or `mobile` (mobile/collection business).
+type BusinessBusinessType string
+
+// BusinessCountry ISO 3166-1 alpha-3 country code in uppercase (for example `GBR`, `USA`, or `DEU`).
+type BusinessCountry string
+
+// BusinessObject Resource object type. Always business.
+type BusinessObject string
+
+// BusinessIntegration Public state for the active POS/accounting integration configured on a business.
+type BusinessIntegration struct {
+	// BusinessId Public business id that owns this integration state.
+	BusinessId *string `json:"business_id,omitempty"`
+
+	// CanTriggerCustomerSync True when a public API caller can trigger customer sync for this integration.
+	CanTriggerCustomerSync *bool `json:"can_trigger_customer_sync,omitempty"`
+
+	// CanTriggerInvoiceSync True when a public API caller can trigger invoice sync for this integration.
+	CanTriggerInvoiceSync *bool `json:"can_trigger_invoice_sync,omitempty"`
+
+	// CanTriggerStockSync True when a public API caller can trigger stock/product sync for this integration.
+	CanTriggerStockSync *bool `json:"can_trigger_stock_sync,omitempty"`
+
+	// Category Public integration category: pos or accounting.
+	Category *string `json:"category,omitempty"`
+
+	// CustomerSync Public state for a background pull sync stream.
+	CustomerSync *IntegrationPullSyncState `json:"customer_sync,omitempty"`
+
+	// DefaultStoreName Default store, location, register, or account display name where available.
+	DefaultStoreName *string `json:"default_store_name,omitempty"`
+
+	// Enabled True when the internal connected account is enabled.
+	Enabled *bool `json:"enabled,omitempty"`
+
+	// HasIntegration True when the business has an active supported POS or accounting integration.
+	HasIntegration *bool `json:"has_integration,omitempty"`
+
+	// Object Resource object type. Always business_integration.
+	Object *BusinessIntegrationObject `json:"object,omitempty"`
+
+	// Provider Connected provider name in snake_case, when an integration is configured.
+	Provider *string `json:"provider,omitempty"`
+
+	// SetupCompleted True when the provider setup has completed.
+	SetupCompleted *bool `json:"setup_completed,omitempty"`
+
+	// StockSync Public state for a background pull sync stream.
+	StockSync *IntegrationPullSyncState `json:"stock_sync,omitempty"`
+
+	// SupportsCustomerSync True when Workshop can pull customers from this integration.
+	SupportsCustomerSync *bool `json:"supports_customer_sync,omitempty"`
+
+	// SupportsInvoiceSync True when invoices can be pushed to this integration.
+	SupportsInvoiceSync *bool `json:"supports_invoice_sync,omitempty"`
+
+	// SupportsPaymentLinks True when the business can create Stripe-backed payment links.
+	SupportsPaymentLinks *bool `json:"supports_payment_links,omitempty"`
+
+	// SupportsStockSync True when Workshop can pull stock/products from this integration.
+	SupportsStockSync *bool `json:"supports_stock_sync,omitempty"`
+}
+
+// BusinessIntegrationObject Resource object type. Always business_integration.
+type BusinessIntegrationObject string
+
+// ChatAttachment Public metadata for a file attached to a chat message. Does not include a download URL.
+type ChatAttachment struct {
 	// ContentType MIME type supplied for the uploaded file.
 	ContentType *string `json:"content_type,omitempty"`
 
@@ -304,19 +7048,28 @@ type ChatAttachmentResponse struct {
 	Id *string `json:"id,omitempty"`
 }
 
-// ChatMessageResponse Public representation of a customer/business chat message.
-type ChatMessageResponse struct {
-	// Attachment Public metadata for a file attached to a chat message.
-	Attachment *ChatAttachmentResponse `json:"attachment,omitempty"`
+// ChatMarkRead Response returned after marking chat messages as read.
+type ChatMarkRead struct {
+	// CustomerId Public customer id.
+	CustomerId *string `json:"customer_id,omitempty"`
+
+	// MessagesMarkedRead Number of messages changed to read.
+	MessagesMarkedRead *int32 `json:"messages_marked_read,omitempty"`
+}
+
+// ChatMessage Public representation of a customer/business chat message.
+type ChatMessage struct {
+	// Attachment Public metadata for a file attached to a chat message. Does not include a download URL.
+	Attachment *ChatAttachment `json:"attachment,omitempty"`
 
 	// Body Text body for text messages. File messages use attachment metadata instead.
 	Body *string `json:"body,omitempty"`
 
-	// BusinessId Public business id that owns the chat thread, currently an org_... Clerk organization id.
+	// BusinessId Public business id that owns the chat thread.
 	BusinessId *string `json:"business_id,omitempty"`
 
-	// ContentType Content type: text, image, video, or file.
-	ContentType *string `json:"content_type,omitempty"`
+	// ContentType Message payload type. Allowed values: `text`, `image`, `video`, or `file`.
+	ContentType *ChatMessageContentType `json:"content_type,omitempty"`
 
 	// CreatedAt UTC timestamp when the message was created.
 	CreatedAt *time.Time `json:"created_at,omitempty"`
@@ -324,14 +7077,14 @@ type ChatMessageResponse struct {
 	// CustomerId Public customer id for the chat thread.
 	CustomerId *string `json:"customer_id,omitempty"`
 
-	// Id Public chat message id (`chatmsg_...`, for example `chatmsg_01h2example`).
+	// Id Opaque resource-prefixed public identifier, such as job_... or cus_.... Internal database ids must never be assigned here.
 	Id *string `json:"id,omitempty"`
 
-	// JobId Optional public job id used by the caller for context.
+	// JobId Optional public job id echoed from the caller's `job_id` query parameter. Not stored per message.
 	JobId *string `json:"job_id,omitempty"`
 
 	// Object Resource object type. Always chat_message.
-	Object *string `json:"object,omitempty"`
+	Object *ChatMessageObject `json:"object,omitempty"`
 
 	// Read Whether the message has been read by the recipient.
 	Read *bool `json:"read,omitempty"`
@@ -339,14 +7092,233 @@ type ChatMessageResponse struct {
 	// ReadAt UTC timestamp when the message was read, when available.
 	ReadAt *time.Time `json:"read_at,omitempty"`
 
-	// Sender Sender of the message: customer, business, or system.
-	Sender *string `json:"sender,omitempty"`
+	// Sender Message sender. Allowed values: `customer`, `business`, or `system`.
+	Sender *ChatMessageSender `json:"sender,omitempty"`
 }
 
-// CreateAssetRequest Request body for creating a customer asset through the public API.
-type CreateAssetRequest struct {
-	// CustomerId Required. Customer public id that will own the asset (`cus_...`).
-	CustomerId string `json:"customer_id"`
+// ChatMessageContentType Message payload type. Allowed values: `text`, `image`, `video`, or `file`.
+type ChatMessageContentType string
+
+// ChatMessageObject Resource object type. Always chat_message.
+type ChatMessageObject string
+
+// ChatMessageSender Message sender. Allowed values: `customer`, `business`, or `system`.
+type ChatMessageSender string
+
+// ChatMessageCreateRequest Request body for creating a customer chat text message through an authenticated public API key.
+type ChatMessageCreateRequest struct {
+	// Body Plain text message body to add to the customer's chat thread.
+	Body string `json:"body"`
+
+	// Sender Message sender. Allowed values: `customer` or `business`. Defaults to `customer` when omitted.
+	Sender *ChatMessageCreateRequestSender `json:"sender,omitempty"`
+}
+
+// ChatMessageCreateRequestSender Message sender. Allowed values: `customer` or `business`. Defaults to `customer` when omitted.
+type ChatMessageCreateRequestSender string
+
+// CommandEffects High-level side effects produced by a public API workflow command.
+type CommandEffects struct {
+	// AuditLogged Whether the command is expected to create an audit trail entry.
+	AuditLogged *bool `json:"audit_logged,omitempty"`
+
+	// EmailsSent Customer or workshop emails sent by the command.
+	EmailsSent *[]string `json:"emails_sent,omitempty"`
+
+	// EmailsSkipped Customer or workshop emails intentionally skipped by the command.
+	EmailsSkipped *[]string `json:"emails_skipped,omitempty"`
+
+	// NotificationsCreated Whether the command created internal Workshop notifications.
+	NotificationsCreated *bool `json:"notifications_created,omitempty"`
+
+	// SyncEnqueued Whether an integration sync job was enqueued.
+	SyncEnqueued *bool `json:"sync_enqueued,omitempty"`
+
+	// Warnings Non-fatal notes about optional side effects.
+	Warnings *[]string `json:"warnings,omitempty"`
+
+	// WebhooksEnqueued Public webhook event types enqueued by the command, when known.
+	WebhooksEnqueued *[]string `json:"webhooks_enqueued,omitempty"`
+}
+
+// CommandResponseOfBatchResponseOfBackOrder Standard response envelope for public API workflow commands.
+type CommandResponseOfBatchResponseOfBackOrder struct {
+	// Effects High-level side effects produced by a public API workflow command.
+	Effects *CommandEffects `json:"effects,omitempty"`
+
+	// Resource Public API batch response for bounded action results that are not cursor-paginated.
+	Resource *BatchResponseOfBackOrder `json:"resource,omitempty"`
+}
+
+// CommandResponseOfBatchResponseOfChatMessage Standard response envelope for public API workflow commands.
+type CommandResponseOfBatchResponseOfChatMessage struct {
+	// Effects High-level side effects produced by a public API workflow command.
+	Effects *CommandEffects `json:"effects,omitempty"`
+
+	// Resource Public API batch response for bounded action results that are not cursor-paginated.
+	Resource *BatchResponseOfChatMessage `json:"resource,omitempty"`
+}
+
+// CommandResponseOfBatchResponseOfPartAuthorisation Standard response envelope for public API workflow commands.
+type CommandResponseOfBatchResponseOfPartAuthorisation struct {
+	// Effects High-level side effects produced by a public API workflow command.
+	Effects *CommandEffects `json:"effects,omitempty"`
+
+	// Resource Public API batch response for bounded action results that are not cursor-paginated.
+	Resource *BatchResponseOfPartAuthorisation `json:"resource,omitempty"`
+}
+
+// CommandResponseOfChatMessage Standard response envelope for public API workflow commands.
+type CommandResponseOfChatMessage struct {
+	// Effects High-level side effects produced by a public API workflow command.
+	Effects *CommandEffects `json:"effects,omitempty"`
+
+	// Resource Public representation of a customer/business chat message.
+	Resource *ChatMessage `json:"resource,omitempty"`
+}
+
+// CommandResponseOfInvoice Standard response envelope for public API workflow commands.
+type CommandResponseOfInvoice struct {
+	// Effects High-level side effects produced by a public API workflow command.
+	Effects *CommandEffects `json:"effects,omitempty"`
+
+	// Resource Public invoice for a job or standalone sale (Workshop costs).
+	Resource *Invoice `json:"resource,omitempty"`
+}
+
+// CommandResponseOfInvoicePaymentLink Standard response envelope for public API workflow commands.
+type CommandResponseOfInvoicePaymentLink struct {
+	// Effects High-level side effects produced by a public API workflow command.
+	Effects *CommandEffects `json:"effects,omitempty"`
+
+	// Resource Workshop-hosted payment link generated for an invoice.
+	Resource *InvoicePaymentLink `json:"resource,omitempty"`
+}
+
+// CommandResponseOfJob Standard response envelope for public API workflow commands.
+type CommandResponseOfJob struct {
+	// Effects High-level side effects produced by a public API workflow command.
+	Effects *CommandEffects `json:"effects,omitempty"`
+
+	// Resource Public representation of a created or retrieved job.
+	Resource *Job `json:"resource,omitempty"`
+}
+
+// CommandResponseOfPayment Standard response envelope for public API workflow commands.
+type CommandResponseOfPayment struct {
+	// Effects High-level side effects produced by a public API workflow command.
+	Effects *CommandEffects `json:"effects,omitempty"`
+
+	// Resource Public representation of a payment recorded against an invoice.
+	Resource *Payment `json:"resource,omitempty"`
+}
+
+// CommandResponseOfWebhookDelivery Standard response envelope for public API workflow commands.
+type CommandResponseOfWebhookDelivery struct {
+	// Effects High-level side effects produced by a public API workflow command.
+	Effects *CommandEffects `json:"effects,omitempty"`
+
+	// Resource Public representation of an outbound webhook delivery attempt.
+	Resource *WebhookDelivery `json:"resource,omitempty"`
+}
+
+// CommandResponseOfWebhookEndpointWithSecret Standard response envelope for public API workflow commands.
+type CommandResponseOfWebhookEndpointWithSecret struct {
+	// Effects High-level side effects produced by a public API workflow command.
+	Effects *CommandEffects `json:"effects,omitempty"`
+
+	// Resource Response returned when a webhook endpoint is created. The signing secret is only returned once.
+	Resource *WebhookEndpointWithSecret `json:"resource,omitempty"`
+}
+
+// Customer Public representation of a customer available to authorized API clients.
+type Customer struct {
+	// Assets Assets associated with the customer that may be serviced in jobs.
+	Assets *[]CustomerAssetSummary `json:"assets,omitempty"`
+
+	// BusinessId Public business id that owns this customer.
+	BusinessId *string `json:"business_id,omitempty"`
+
+	// Country ISO 3166-1 alpha-3 country code in uppercase (for example `GBR`, `USA`, or `DEU`).
+	Country *CustomerCountry `json:"country,omitempty"`
+
+	// CreatedAt UTC timestamp when the customer was created.
+	CreatedAt *time.Time `json:"created_at,omitempty"`
+
+	// Email Customer email address, when available.
+	Email *string `json:"email,omitempty"`
+
+	// FirstName Customer first name.
+	FirstName *string `json:"first_name,omitempty"`
+
+	// FullName Customer display name.
+	FullName *string `json:"full_name,omitempty"`
+
+	// Id Opaque resource-prefixed public identifier, such as job_... or cus_.... Internal database ids must never be assigned here.
+	Id *string `json:"id,omitempty"`
+
+	// Landline Customer landline phone number, when available.
+	Landline *string `json:"landline,omitempty"`
+
+	// LastName Customer last name.
+	LastName *string `json:"last_name,omitempty"`
+
+	// Object Resource object type. Always customer.
+	Object *CustomerObject `json:"object,omitempty"`
+
+	// Phone Customer mobile phone number, when available.
+	Phone *string `json:"phone,omitempty"`
+
+	// PreferredContactMethod Preferred contact method. Allowed values: `email`, `phone`, `whats_app`, `instagram`, or `facebook`.
+	PreferredContactMethod *CustomerPreferredContactMethod `json:"preferred_contact_method,omitempty"`
+
+	// UpdatedAt UTC timestamp when the customer was last updated, when available.
+	UpdatedAt *time.Time `json:"updated_at,omitempty"`
+}
+
+// CustomerCountry ISO 3166-1 alpha-3 country code in uppercase (for example `GBR`, `USA`, or `DEU`).
+type CustomerCountry string
+
+// CustomerObject Resource object type. Always customer.
+type CustomerObject string
+
+// CustomerPreferredContactMethod Preferred contact method. Allowed values: `email`, `phone`, `whats_app`, `instagram`, or `facebook`.
+type CustomerPreferredContactMethod string
+
+// CustomerAddressInput Default customer address fields for create or patch requests.
+type CustomerAddressInput struct {
+	// Country ISO 3166-1 alpha-3 country code in uppercase (for example `GBR`, `USA`, or `DEU`).
+	Country *CustomerAddressInputCountry `json:"country,omitempty"`
+
+	// Latitude Latitude for the default address.
+	Latitude *float64 `json:"latitude,omitempty"`
+
+	// Line1 First address line.
+	Line1 *string `json:"line1,omitempty"`
+
+	// Line2 Second address line.
+	Line2 *string `json:"line2,omitempty"`
+
+	// Longitude Longitude for the default address.
+	Longitude *float64 `json:"longitude,omitempty"`
+
+	// Postcode Postal code.
+	Postcode *string `json:"postcode,omitempty"`
+
+	// Town Town or city.
+	Town *string `json:"town,omitempty"`
+}
+
+// CustomerAddressInputCountry ISO 3166-1 alpha-3 country code in uppercase (for example `GBR`, `USA`, or `DEU`).
+type CustomerAddressInputCountry string
+
+// CustomerAssetSummary Public customer asset summary embedded in customer responses.
+type CustomerAssetSummary struct {
+	// BikeType Bike category (bikes only — public assets are bikes today). Snake_case enum (for example `road_bike`, `generic_bike`).
+	BikeType *CustomerAssetSummaryBikeType `json:"bike_type,omitempty"`
+
+	// Id Opaque resource-prefixed public identifier, such as job_... or cus_.... Internal database ids must never be assigned here.
+	Id *string `json:"id,omitempty"`
 
 	// Make Asset make or manufacturer.
 	Make *string `json:"make,omitempty"`
@@ -357,27 +7329,414 @@ type CreateAssetRequest struct {
 	// Name Asset display name.
 	Name *string `json:"name,omitempty"`
 
-	// SerialNumber Asset serial number.
+	// SerialNumber Asset serial number, when known.
 	SerialNumber *string `json:"serial_number,omitempty"`
 
-	// Type Public asset type, such as `bike`. Defaults to `bike` when omitted.
-	Type *string `json:"type,omitempty"`
-
-	// Year Asset model year.
+	// Year Asset year, when known.
 	Year *int32 `json:"year,omitempty"`
 }
 
-// CreateChatMessageRequest Request body for creating a customer chat text message through an authenticated public API key.
-type CreateChatMessageRequest struct {
-	// Body Plain text message body to add to the customer's chat thread.
-	Body string `json:"body"`
+// CustomerAssetSummaryBikeType Bike category (bikes only — public assets are bikes today). Snake_case enum (for example `road_bike`, `generic_bike`).
+type CustomerAssetSummaryBikeType string
 
-	// Sender Message sender: customer or business. Defaults to customer when omitted.
-	Sender *string `json:"sender,omitempty"`
+// CustomerCreateRequest Request body for creating a customer in a workshop.
+type CustomerCreateRequest struct {
+	// Address Default customer address fields for create or patch requests.
+	Address *CustomerAddressInput `json:"address,omitempty"`
+
+	// BusinessId Public business id that should own the customer.
+	BusinessId string `json:"business_id"`
+
+	// Email Customer email address.
+	Email *openapi_types.Email `json:"email,omitempty"`
+
+	// FirstName Customer first name.
+	FirstName *string `json:"first_name,omitempty"`
+
+	// Landline Customer landline phone number.
+	Landline *string `json:"landline,omitempty"`
+
+	// LastName Customer last name.
+	LastName *string `json:"last_name,omitempty"`
+
+	// Phone Customer mobile phone number.
+	Phone *string `json:"phone,omitempty"`
+
+	// PreferredContactMethod Preferred contact method: email, phone, whats_app, instagram, or facebook.
+	PreferredContactMethod *CustomerCreateRequestPreferredContactMethod `json:"preferred_contact_method,omitempty"`
 }
 
-// CreateInvoiceItemRequest Creates a line on an invoice. `invoice_id` is always required. Also provide exactly one of `service_id`, `stock_variation_id`, or `name` (custom line).
-type CreateInvoiceItemRequest struct {
+// CustomerCreateRequestPreferredContactMethod Preferred contact method: email, phone, whats_app, instagram, or facebook.
+type CustomerCreateRequestPreferredContactMethod string
+
+// CustomerUpdateRequest Request body for updating a customer through an authenticated business-scoped public API key.
+type CustomerUpdateRequest struct {
+	// Address Default customer address fields for create or patch requests.
+	Address *CustomerAddressInput `json:"address,omitempty"`
+
+	// Email Customer email address. Omit to leave unchanged.
+	Email *string `json:"email,omitempty"`
+
+	// FirstName Customer first name. Omit to leave unchanged.
+	FirstName *string `json:"first_name,omitempty"`
+
+	// Landline Customer landline phone number. Omit to leave unchanged.
+	Landline *string `json:"landline,omitempty"`
+
+	// LastName Customer last name. Omit to leave unchanged.
+	LastName *string `json:"last_name,omitempty"`
+
+	// Phone Customer mobile phone number. Omit to leave unchanged.
+	Phone *string `json:"phone,omitempty"`
+
+	// PreferredContactMethod Preferred contact method. Allowed values: `email`, `phone`, `whats_app`, `instagram`, or `facebook`.
+	PreferredContactMethod *CustomerUpdateRequestPreferredContactMethod `json:"preferred_contact_method,omitempty"`
+}
+
+// CustomerUpdateRequestPreferredContactMethod Preferred contact method. Allowed values: `email`, `phone`, `whats_app`, `instagram`, or `facebook`.
+type CustomerUpdateRequestPreferredContactMethod string
+
+// Error Public API error details. Codes are stable machine-readable values.
+type Error struct {
+	// Code Machine-readable error code.
+	Code *ErrorCode `json:"code,omitempty"`
+
+	// Message Human-readable explanation of the error.
+	Message *string `json:"message,omitempty"`
+
+	// Parameter Request parameter related to the error, when the failure can be tied to one field.
+	Parameter *string `json:"parameter,omitempty"`
+}
+
+// ErrorCode Machine-readable error code.
+type ErrorCode string
+
+// ErrorResponse Standard error envelope returned by public API endpoints.
+type ErrorResponse struct {
+	// Error Public API error details. Codes are stable machine-readable values.
+	Error *Error `json:"error,omitempty"`
+
+	// RequestId Request correlation id. Matches X-Bikebook-Request-Id when the caller supplies one.
+	RequestId *string `json:"request_id,omitempty"`
+}
+
+// IntegrationAutoSyncChangeRequest Request body for changing invoice auto-sync.
+type IntegrationAutoSyncChangeRequest struct {
+	// Enabled Whether auto-sync should be enabled.
+	Enabled *bool `json:"enabled,omitempty"`
+
+	// Reason Optional reason for disabling auto-sync.
+	Reason *string `json:"reason,omitempty"`
+}
+
+// IntegrationPullSyncAccepted Response from a background stock or customer sync trigger.
+type IntegrationPullSyncAccepted struct {
+	// Effects High-level side effects produced by a public API workflow command.
+	Effects *CommandEffects `json:"effects,omitempty"`
+
+	// PollUrl URL to poll for updated integration state.
+	PollUrl *string `json:"poll_url,omitempty"`
+
+	// Resource Public state for the active POS/accounting integration configured on a business.
+	Resource *BusinessIntegration `json:"resource,omitempty"`
+}
+
+// IntegrationPullSyncRequest Request body for triggering a background stock or customer sync.
+type IntegrationPullSyncRequest struct {
+	// FullResync When true, clears the last-sync cursor so the next worker pass performs a fuller resync.
+	FullResync *bool `json:"full_resync,omitempty"`
+}
+
+// IntegrationPullSyncState Public state for a background pull sync stream.
+type IntegrationPullSyncState struct {
+	// Disabled True when this sync stream is disabled by the workshop.
+	Disabled *bool `json:"disabled,omitempty"`
+
+	// LastSyncedAt UTC timestamp when this stream last completed successfully.
+	LastSyncedAt *time.Time `json:"last_synced_at,omitempty"`
+
+	// Status Sync status in snake_case.
+	Status *IntegrationPullSyncStateStatus `json:"status,omitempty"`
+}
+
+// IntegrationPullSyncStateStatus Sync status in snake_case.
+type IntegrationPullSyncStateStatus string
+
+// IntegrationSyncCommand Response from an inline invoice integration sync command.
+type IntegrationSyncCommand struct {
+	// Effects High-level side effects produced by a public API workflow command.
+	Effects *CommandEffects `json:"effects,omitempty"`
+
+	// Resource Public invoice sync state for the invoice's active business integration.
+	Resource *InvoiceIntegrationSync `json:"resource,omitempty"`
+
+	// SyncResult Public-safe result from a manual integration sync call.
+	SyncResult *IntegrationSyncResult `json:"sync_result,omitempty"`
+}
+
+// IntegrationSyncCompletionRequest Request body for marking invoice integration sync completed or uncompleted.
+type IntegrationSyncCompletionRequest struct {
+	// Completed Whether to mark the invoice integration sync as completed.
+	Completed *bool `json:"completed,omitempty"`
+}
+
+// IntegrationSyncEvent Public summary of an integration sync attempt.
+type IntegrationSyncEvent struct {
+	// CompletedAt UTC timestamp when processing completed.
+	CompletedAt *time.Time `json:"completed_at,omitempty"`
+
+	// CreatedAt UTC timestamp when the event was created.
+	CreatedAt *time.Time `json:"created_at,omitempty"`
+
+	// Direction Data flow direction for the sync event.
+	Direction *IntegrationSyncEventDirection `json:"direction,omitempty"`
+
+	// ErrorMessage Public-safe error message, when the sync failed.
+	ErrorMessage *string `json:"error_message,omitempty"`
+
+	// HttpStatusCode External HTTP status code, when available.
+	HttpStatusCode *int32 `json:"http_status_code,omitempty"`
+
+	// Id Public sync event id.
+	Id *string `json:"id,omitempty"`
+
+	// Operation Provider operation performed by the sync event.
+	Operation *IntegrationSyncEventOperation `json:"operation,omitempty"`
+
+	// ProcessingStartedAt UTC timestamp when processing started.
+	ProcessingStartedAt *time.Time `json:"processing_started_at,omitempty"`
+
+	// Retryable True when retrying this event can be useful.
+	Retryable *bool `json:"retryable,omitempty"`
+
+	// Status Integration sync event processing status.
+	Status *IntegrationSyncEventStatus `json:"status,omitempty"`
+
+	// Trigger What triggered the sync event.
+	Trigger *IntegrationSyncEventTrigger `json:"trigger,omitempty"`
+
+	// TriggerDescription Public-safe trigger description.
+	TriggerDescription *string `json:"trigger_description,omitempty"`
+}
+
+// IntegrationSyncEventDirection Data flow direction for the sync event.
+type IntegrationSyncEventDirection string
+
+// IntegrationSyncEventOperation Provider operation performed by the sync event.
+type IntegrationSyncEventOperation string
+
+// IntegrationSyncEventStatus Integration sync event processing status.
+type IntegrationSyncEventStatus string
+
+// IntegrationSyncEventTrigger What triggered the sync event.
+type IntegrationSyncEventTrigger string
+
+// IntegrationSyncEventList Public sync event history response.
+type IntegrationSyncEventList struct {
+	// Events Recent sync events, newest first.
+	Events *[]IntegrationSyncEvent `json:"events,omitempty"`
+}
+
+// IntegrationSyncResult Public-safe result from a manual integration sync call.
+type IntegrationSyncResult struct {
+	// ErrorMessage Public-safe error message when the sync failed.
+	ErrorMessage *string `json:"error_message,omitempty"`
+
+	// ExternalSystemId Provider-specific external order or invoice id, when available.
+	ExternalSystemId *string `json:"external_system_id,omitempty"`
+
+	// ExternalSystemReference Provider-specific external reference, when available.
+	ExternalSystemReference *string `json:"external_system_reference,omitempty"`
+
+	// IsVoidFailed True when the requested replacement sync stopped because voiding the existing external record failed.
+	IsVoidFailed *bool `json:"is_void_failed,omitempty"`
+
+	// Success Whether the sync completed successfully.
+	Success *bool `json:"success,omitempty"`
+
+	// VoidErrorMessage Public-safe void failure message.
+	VoidErrorMessage *string `json:"void_error_message,omitempty"`
+}
+
+// IntegrationSyncTriggerRequest Request body for manually triggering invoice integration sync.
+type IntegrationSyncTriggerRequest struct {
+	// CancelExisting When true and create_new is true, attempt to cancel or void the existing external order/invoice first.
+	CancelExisting *bool `json:"cancel_existing,omitempty"`
+
+	// CreateNew When true, create a new external order/invoice instead of updating the existing one.
+	CreateNew *bool `json:"create_new,omitempty"`
+
+	// Mode Manual sync mode. `auto` creates when no external id exists and updates otherwise.
+	Mode *IntegrationSyncTriggerRequestMode `json:"mode,omitempty"`
+}
+
+// IntegrationSyncTriggerRequestMode Manual sync mode. `auto` creates when no external id exists and updates otherwise.
+type IntegrationSyncTriggerRequestMode string
+
+// Invoice Public invoice for a job or standalone sale (Workshop costs).
+type Invoice struct {
+	// BusinessId Public business id that owns the invoice.
+	BusinessId *string `json:"business_id,omitempty"`
+
+	// CreatedAt UTC timestamp when the invoice was created.
+	CreatedAt *time.Time `json:"created_at,omitempty"`
+
+	// Currency ISO currency code for all monetary fields, for example GBP.
+	Currency *string `json:"currency,omitempty"`
+
+	// CustomerId Public customer id for the billed party, for example cus_....
+	CustomerId *string `json:"customer_id,omitempty"`
+
+	// DiscountType Discount model when configured. Allowed values: `percentage` or `set_amount`.
+	DiscountType *InvoiceDiscountType `json:"discount_type,omitempty"`
+
+	// DiscountValue Discount value; interpretation depends on discount_type.
+	DiscountValue *float64 `json:"discount_value,omitempty"`
+
+	// DueAt UTC due date for payment, when set.
+	DueAt *time.Time `json:"due_at,omitempty"`
+
+	// Id Opaque resource-prefixed public identifier, such as job_... or cus_.... Internal database ids must never be assigned here.
+	Id *string `json:"id,omitempty"`
+
+	// InvoiceNumber Human-readable invoice number shown in Workshop, for example INV-1234.
+	InvoiceNumber *string `json:"invoice_number,omitempty"`
+
+	// JobId Public job id when this invoice bills a job, for example job_....
+	JobId *string `json:"job_id,omitempty"`
+
+	// LastSentAt UTC timestamp when the invoice was last sent to the customer, when available.
+	LastSentAt *time.Time `json:"last_sent_at,omitempty"`
+
+	// LineItems Billable line items on the invoice (internal `InvoiceItem` rows).
+	LineItems *[]InvoiceItem `json:"line_items,omitempty"`
+
+	// Object Resource object type. Always invoice.
+	Object *InvoiceObject `json:"object,omitempty"`
+
+	// Origin How the invoice was created. Allowed values: `job`, `sale`, or `ad_hoc`.
+	Origin *InvoiceOrigin `json:"origin,omitempty"`
+
+	// OutstandingAmount Amount still outstanding on the invoice.
+	OutstandingAmount *float64 `json:"outstanding_amount,omitempty"`
+
+	// PaidAmount Amount already paid against the invoice.
+	PaidAmount *float64 `json:"paid_amount,omitempty"`
+
+	// PaymentLink Customer payment link when configured.
+	PaymentLink *string `json:"payment_link,omitempty"`
+
+	// Status Invoice lifecycle status. Allowed values: `draft`, `pending`, `paid`, or `cancelled`.
+	Status *InvoiceStatus `json:"status,omitempty"`
+
+	// Total Invoice total after discounts, in currency units.
+	Total *float64 `json:"total,omitempty"`
+
+	// UpdatedAt UTC timestamp when the invoice was last updated, when available.
+	UpdatedAt *time.Time `json:"updated_at,omitempty"`
+}
+
+// InvoiceDiscountType Discount model when configured. Allowed values: `percentage` or `set_amount`.
+type InvoiceDiscountType string
+
+// InvoiceObject Resource object type. Always invoice.
+type InvoiceObject string
+
+// InvoiceOrigin How the invoice was created. Allowed values: `job`, `sale`, or `ad_hoc`.
+type InvoiceOrigin string
+
+// InvoiceStatus Invoice lifecycle status. Allowed values: `draft`, `pending`, `paid`, or `cancelled`.
+type InvoiceStatus string
+
+// InvoiceIntegrationSync Public invoice sync state for the invoice's active business integration.
+type InvoiceIntegrationSync struct {
+	// AutoSyncEnabled True when automatic invoice sync is enabled for this invoice/integration link.
+	AutoSyncEnabled *bool `json:"auto_sync_enabled,omitempty"`
+
+	// BusinessId Public business id that owns the invoice.
+	BusinessId *string `json:"business_id,omitempty"`
+
+	// ExternalSystemId Provider-specific external order or invoice id, when known.
+	ExternalSystemId *string `json:"external_system_id,omitempty"`
+
+	// ExternalSystemReference Provider-specific external reference, when known.
+	ExternalSystemReference *string `json:"external_system_reference,omitempty"`
+
+	// HasSync True when the invoice has a sync link for the business's active integration.
+	HasSync *bool `json:"has_sync,omitempty"`
+
+	// InvoiceId Public invoice id.
+	InvoiceId *string `json:"invoice_id,omitempty"`
+
+	// LastSyncedAt UTC timestamp of the last successful sync.
+	LastSyncedAt *time.Time `json:"last_synced_at,omitempty"`
+
+	// LatestEvent Public summary of an integration sync attempt.
+	LatestEvent *IntegrationSyncEvent `json:"latest_event,omitempty"`
+
+	// Object Resource object type. Always invoice_integration_sync.
+	Object *InvoiceIntegrationSyncObject `json:"object,omitempty"`
+
+	// Provider Connected provider name in snake_case.
+	Provider *string `json:"provider,omitempty"`
+
+	// Status Current invoice integration sync status.
+	Status *InvoiceIntegrationSyncStatus `json:"status,omitempty"`
+
+	// SyncId Public sync link id when a link exists.
+	SyncId *string `json:"sync_id,omitempty"`
+}
+
+// InvoiceIntegrationSyncObject Resource object type. Always invoice_integration_sync.
+type InvoiceIntegrationSyncObject string
+
+// InvoiceIntegrationSyncStatus Current invoice integration sync status.
+type InvoiceIntegrationSyncStatus string
+
+// InvoiceItem One billable item on a public invoice (internal `InvoiceItem`).
+type InvoiceItem struct {
+	// AssetId Public customer asset id when the row is tied to a serviced asset, for example asset_....
+	AssetId *string `json:"asset_id,omitempty"`
+
+	// Description Optional longer description for the item.
+	Description *string `json:"description,omitempty"`
+
+	// Id Opaque resource-prefixed public identifier, such as job_... or cus_.... Internal database ids must never be assigned here.
+	Id *string `json:"id,omitempty"`
+
+	// InvoiceId Public invoice id (`inv_...`) that this row belongs to.
+	InvoiceId *string `json:"invoice_id,omitempty"`
+
+	// LineType Line item type. Allowed values: `service`, `part`, or `custom`.
+	LineType *InvoiceItemLineType `json:"line_type,omitempty"`
+
+	// Name Display name of the billed service or part.
+	Name *string `json:"name,omitempty"`
+
+	// Object Resource object type. Always invoice_item.
+	Object *InvoiceItemObject `json:"object,omitempty"`
+
+	// Order Display order of the item on the invoice.
+	Order *int32 `json:"order,omitempty"`
+
+	// Quantity Quantity billed on the item.
+	Quantity *float64 `json:"quantity,omitempty"`
+
+	// Total Row total (unit_price × quantity) in the invoice currency.
+	Total *float64 `json:"total,omitempty"`
+
+	// UnitPrice Unit price in the invoice currency.
+	UnitPrice *float64 `json:"unit_price,omitempty"`
+}
+
+// InvoiceItemLineType Line item type. Allowed values: `service`, `part`, or `custom`.
+type InvoiceItemLineType string
+
+// InvoiceItemObject Resource object type. Always invoice_item.
+type InvoiceItemObject string
+
+// InvoiceItemCreateRequest Creates a line on an invoice. `invoice_id` is always required. Also provide exactly one of `service_id`, `stock_variation_id`, or `name` (custom line).
+type InvoiceItemCreateRequest struct {
 	// AssetId Public customer asset id (`asset_...`) when the row is tied to a serviced bike or asset.
 	AssetId *string `json:"asset_id,omitempty"`
 
@@ -409,201 +7768,8 @@ type CreateInvoiceItemRequest struct {
 	UnitPrice *float64 `json:"unit_price,omitempty"`
 }
 
-// CreateJobRequest Request body for POST /public/v1/jobs.
-type CreateJobRequest struct {
-	// AllDay Whether the job is treated as an all-day booking in scheduling views.
-	AllDay *bool `json:"all_day,omitempty"`
-
-	// Assets Customer assets included on this job (bikes or other serviced assets). Required: at least one entry. Each entry must use `assets[].id` — an existing public asset id already on the customer (from `GET .../customers/{customer_id}` → `assets[].id`). This array is not optional and must not be empty.
-	Assets []JobAssetInput `json:"assets"`
-
-	// AssignedTeamMemberId Public team member id assigned at job level, for example a Clerk user id.
-	AssignedTeamMemberId *string `json:"assigned_team_member_id,omitempty"`
-
-	// BillingType Billing/charge source for the job, such as cod, on_account, insurance, or motability_warranty.
-	BillingType *string `json:"billing_type,omitempty"`
-
-	// CheckInNotes Check-in notes captured when the asset is received for service.
-	CheckInNotes *string `json:"check_in_notes,omitempty"`
-
-	// Customer Customer reference for public job creation.
-	Customer JobCustomerInput `json:"customer"`
-
-	// IntegrationOptions Optional till/POS integration settings for the created job. Does not describe which items or services are on the job — use `items` and `work_lines` on the job create request for that.
-	IntegrationOptions *JobIntegrationOptions `json:"integration_options,omitempty"`
-
-	// Notes Internal workshop notes to attach to the job.
-	Notes         *string                 `json:"notes,omitempty"`
-	Notifications *JobNotificationOptions `json:"notifications,omitempty"`
-
-	// RequiredByDate Calendar date when the job must be completed by, when set.
-	RequiredByDate *openapi_types.Date `json:"required_by_date,omitempty"`
-
-	// Schedule Scheduling and logistics requested for a public job.
-	Schedule *JobScheduleInput `json:"schedule,omitempty"`
-
-	// WorkLines Work to perform per asset. Required: at least one entry; each entry needs `asset_id` and a non-empty `services` array. Each line's `asset_id` must match an `id` listed in `assets`.
-	WorkLines []JobWorkLineInput `json:"work_lines"`
-}
-
-// CreateServiceRequest Public API request for creating a service in a business catalogue.
-type CreateServiceRequest struct {
-	// Category Public category name. Workshop creates the category for the business if it does not exist.
-	Category string `json:"category"`
-
-	// Description Description of what the service includes.
-	Description *string `json:"description,omitempty"`
-
-	// DurationMinutes Estimated duration in minutes.
-	DurationMinutes *int32 `json:"duration_minutes,omitempty"`
-
-	// ImageUrl Public image URL to associate with the service.
-	ImageUrl *string `json:"image_url,omitempty"`
-
-	// Name Service name shown in the public catalogue.
-	Name string `json:"name"`
-
-	// Price Raw service price. Required by callers for set_price services; ignored in public display for other pricing models.
-	Price *float64 `json:"price,omitempty"`
-
-	// PricingType Pricing model as a snake_case value: set_price, price_on_assessment, or price_on_request.
-	PricingType *string `json:"pricing_type,omitempty"`
-
-	// Visibility Catalogue visibility as a snake_case value: external_and_internal, internal_only, or disabled.
-	Visibility *string `json:"visibility,omitempty"`
-}
-
-// CreateWebhookEndpointRequest Request body for creating an outbound webhook endpoint subscription.
-type CreateWebhookEndpointRequest struct {
-	// BusinessIds Public business ids (`org_...`) this endpoint is subscribed to. At least one id is required; each id must be allowed for your API key.
-	BusinessIds []string `json:"business_ids"`
-
-	// Description Optional human-readable description for this endpoint.
-	Description *string `json:"description,omitempty"`
-
-	// Enabled Whether delivery to this endpoint is enabled. Defaults to true when omitted.
-	Enabled *bool `json:"enabled,omitempty"`
-
-	// EventTypes Event type filters such as job.created. Use * or omit for all supported events.
-	EventTypes *[]string `json:"event_types,omitempty"`
-
-	// Url HTTPS URL that Workshop will POST webhook events to.
-	Url string `json:"url"`
-}
-
-// CreateWebhookEndpointResponse Response returned when a webhook endpoint is created. The signing secret is only returned once.
-type CreateWebhookEndpointResponse struct {
-	// BusinessIds Public business ids this endpoint is subscribed to.
-	BusinessIds *[]string `json:"business_ids,omitempty"`
-
-	// CreatedAt UTC timestamp when this endpoint was created.
-	CreatedAt *time.Time `json:"created_at,omitempty"`
-
-	// Description Human-readable description for this endpoint.
-	Description *string `json:"description,omitempty"`
-
-	// Enabled Whether delivery to this endpoint is enabled.
-	Enabled *bool `json:"enabled,omitempty"`
-
-	// EventTypes Event type filters. A single * means all supported events.
-	EventTypes *[]string `json:"event_types,omitempty"`
-
-	// Id Opaque resource-prefixed public identifier, such as job_... or cus_.... Internal database ids must never be assigned here.
-	Id *string `json:"id,omitempty"`
-
-	// Object Resource object type. Always webhook_endpoint.
-	Object *string `json:"object,omitempty"`
-
-	// PreviousSigningSecretExpiresAt UTC timestamp when the previous signing secret stops being included in signatures.
-	PreviousSigningSecretExpiresAt *time.Time `json:"previous_signing_secret_expires_at,omitempty"`
-
-	// PreviousSigningSecretPrefix Display-only prefix for the previous signing secret during rotation, when active.
-	PreviousSigningSecretPrefix *string `json:"previous_signing_secret_prefix,omitempty"`
-
-	// SigningSecret One-time signing secret used to verify Workshop webhook signatures. Store it securely.
-	SigningSecret *string `json:"signing_secret,omitempty"`
-
-	// SigningSecretPrefix Display-only prefix for identifying the active signing secret.
-	SigningSecretPrefix *string `json:"signing_secret_prefix,omitempty"`
-
-	// UpdatedAt UTC timestamp when this endpoint was last updated.
-	UpdatedAt *time.Time `json:"updated_at,omitempty"`
-
-	// Url HTTPS URL that Workshop posts webhook events to.
-	Url *string `json:"url,omitempty"`
-}
-
-// CustomerAssetSummaryResponse Public customer asset summary embedded in customer responses.
-type CustomerAssetSummaryResponse struct {
-	// Id Opaque resource-prefixed public identifier, such as job_... or cus_.... Internal database ids must never be assigned here.
-	Id *string `json:"id,omitempty"`
-
-	// Make Asset make or manufacturer.
-	Make *string `json:"make,omitempty"`
-
-	// Model Asset model.
-	Model *string `json:"model,omitempty"`
-
-	// Name Asset display name.
-	Name *string `json:"name,omitempty"`
-
-	// SerialNumber Asset serial number, when known.
-	SerialNumber *string `json:"serial_number,omitempty"`
-
-	// Type Public asset type, such as bike or another serviced asset category.
-	Type *string `json:"type,omitempty"`
-
-	// Year Asset year, when known.
-	Year *int32 `json:"year,omitempty"`
-}
-
-// CustomerResponse Public representation of a customer available to authorized API clients.
-type CustomerResponse struct {
-	// Assets Assets associated with the customer that may be serviced in jobs.
-	Assets *[]CustomerAssetSummaryResponse `json:"assets,omitempty"`
-
-	// BusinessId Public business id that owns this customer, currently an org_... Clerk organization id.
-	BusinessId *string `json:"business_id,omitempty"`
-
-	// Country Customer country code or name, when available.
-	Country *string `json:"country,omitempty"`
-
-	// CreatedAt UTC timestamp when the customer was created.
-	CreatedAt *time.Time `json:"created_at,omitempty"`
-
-	// Email Customer email address, when available.
-	Email *string `json:"email,omitempty"`
-
-	// FirstName Customer first name.
-	FirstName *string `json:"first_name,omitempty"`
-
-	// FullName Customer display name.
-	FullName *string `json:"full_name,omitempty"`
-
-	// Id Public customer id (`cus_...`, for example `cus_9k3mexample`).
-	Id *string `json:"id,omitempty"`
-
-	// Landline Customer landline phone number, when available.
-	Landline *string `json:"landline,omitempty"`
-
-	// LastName Customer last name.
-	LastName *string `json:"last_name,omitempty"`
-
-	// Object Resource object type. Always customer.
-	Object *string `json:"object,omitempty"`
-
-	// Phone Customer mobile phone number, when available.
-	Phone *string `json:"phone,omitempty"`
-
-	// PreferredContactMethod Customer's preferred contact method as a public string value.
-	PreferredContactMethod *string `json:"preferred_contact_method,omitempty"`
-
-	// UpdatedAt UTC timestamp when the customer was last updated, when available.
-	UpdatedAt *time.Time `json:"updated_at,omitempty"`
-}
-
-// InvoiceItemDeleteResponse Response returned after deleting an invoice item.
-type InvoiceItemDeleteResponse struct {
+// InvoiceItemDeleted Response returned after deleting an invoice item.
+type InvoiceItemDeleted struct {
 	// Deleted Whether the item was deleted.
 	Deleted *bool `json:"deleted,omitempty"`
 
@@ -611,368 +7777,144 @@ type InvoiceItemDeleteResponse struct {
 	Id *string `json:"id,omitempty"`
 
 	// Object Resource object type. Always invoice_item.
-	Object *string `json:"object,omitempty"`
+	Object *InvoiceItemDeletedObject `json:"object,omitempty"`
 }
 
-// InvoiceItemResponse One billable item on a public invoice (internal `InvoiceItem`).
-type InvoiceItemResponse struct {
-	// AssetId Public customer asset id when the row is tied to a serviced asset, for example asset_....
+// InvoiceItemDeletedObject Resource object type. Always invoice_item.
+type InvoiceItemDeletedObject string
+
+// InvoiceItemUpdateRequest Request body for updating an invoice item through the public API.
+type InvoiceItemUpdateRequest struct {
+	// AssetId Public customer asset id (`asset_...`). Omit to leave unchanged.
 	AssetId *string `json:"asset_id,omitempty"`
 
-	// Description Optional longer description for the item.
+	// Description Optional longer description. Omit to leave unchanged.
 	Description *string `json:"description,omitempty"`
 
-	// Id Opaque resource-prefixed public identifier, such as job_... or cus_.... Internal database ids must never be assigned here.
-	Id *string `json:"id,omitempty"`
-
-	// InvoiceId Public invoice id (`inv_...`) that this row belongs to.
-	InvoiceId *string `json:"invoice_id,omitempty"`
-
-	// LineType Stable line category: service, part, or custom.
-	LineType *string `json:"line_type,omitempty"`
-
-	// Name Display name of the billed service or part.
+	// Name Display name. Omit to leave unchanged.
 	Name *string `json:"name,omitempty"`
 
-	// Object Resource object type. Always invoice_item.
-	Object *string `json:"object,omitempty"`
-
-	// Order Display order of the item on the invoice.
+	// Order Display order of the item on the invoice. Omit to leave unchanged.
 	Order *int32 `json:"order,omitempty"`
 
-	// Quantity Quantity billed on the item.
+	// Quantity Quantity billed on the item. Omit to leave unchanged.
 	Quantity *float64 `json:"quantity,omitempty"`
 
-	// Total Row total (unit_price × quantity) in the invoice currency.
-	Total *float64 `json:"total,omitempty"`
-
-	// UnitPrice Unit price in the invoice currency.
+	// UnitPrice Unit price in the invoice currency. Omit to leave unchanged.
 	UnitPrice *float64 `json:"unit_price,omitempty"`
 }
 
-// InvoiceResponse Public invoice for a job or standalone sale (Workshop costs).
-type InvoiceResponse struct {
-	// BusinessId Public business id that owns the invoice, currently an org_... Clerk organization id.
-	BusinessId *string `json:"business_id,omitempty"`
+// InvoicePaymentCreateRequest Request body for recording a manual or external invoice payment.
+type InvoicePaymentCreateRequest struct {
+	// Amount Payment amount in invoice currency units.
+	Amount *float64 `json:"amount,omitempty"`
 
-	// CreatedAt UTC timestamp when the invoice was created.
-	CreatedAt *time.Time `json:"created_at,omitempty"`
+	// CustomPaymentMethodLabel Optional custom label when `payment_method` is `other`.
+	CustomPaymentMethodLabel *string `json:"custom_payment_method_label,omitempty"`
 
-	// Currency ISO currency code for all monetary fields, for example GBP.
-	Currency *string `json:"currency,omitempty"`
+	// MarkInvoiceAsPaid Whether to mark the invoice as paid after recording the payment.
+	MarkInvoiceAsPaid *bool `json:"mark_invoice_as_paid,omitempty"`
 
-	// CustomerId Public customer id for the billed party, for example cus_....
-	CustomerId *string `json:"customer_id,omitempty"`
+	// PaymentMethod Payment method recorded against the invoice. Allowed values: `cash`, `card`, `layaway`, `bacs`, or `other`.
+	PaymentMethod InvoicePaymentCreateRequestPaymentMethod `json:"payment_method"`
+}
 
-	// DiscountType Discount type when applied: percentage or fixed.
-	DiscountType *string `json:"discount_type,omitempty"`
+// InvoicePaymentCreateRequestPaymentMethod Payment method recorded against the invoice. Allowed values: `cash`, `card`, `layaway`, `bacs`, or `other`.
+type InvoicePaymentCreateRequestPaymentMethod string
 
-	// DiscountValue Discount value; interpretation depends on discount_type.
-	DiscountValue *float64 `json:"discount_value,omitempty"`
+// InvoicePaymentLink Workshop-hosted payment link generated for an invoice.
+type InvoicePaymentLink struct {
+	// InvoiceId Public invoice id.
+	InvoiceId *string `json:"invoice_id,omitempty"`
 
-	// DueAt UTC due date for payment, when set.
-	DueAt *time.Time `json:"due_at,omitempty"`
-
-	// Id Opaque resource-prefixed public identifier, such as job_... or cus_.... Internal database ids must never be assigned here.
-	Id *string `json:"id,omitempty"`
-
-	// InvoiceNumber Human-readable invoice number shown in Workshop, for example INV-1234.
-	InvoiceNumber *string `json:"invoice_number,omitempty"`
-
-	// JobId Public job id when this invoice bills a job, for example job_....
-	JobId *string `json:"job_id,omitempty"`
-
-	// LastSentAt UTC timestamp when the invoice was last sent to the customer, when available.
-	LastSentAt *time.Time `json:"last_sent_at,omitempty"`
-
-	// LineItems Billable line items on the invoice (internal `InvoiceItem` rows).
-	LineItems *[]InvoiceItemResponse `json:"line_items,omitempty"`
-
-	// Object Resource object type. Always invoice.
-	Object *string `json:"object,omitempty"`
-
-	// Origin How the invoice was created: job, sale, or ad_hoc.
-	Origin *string `json:"origin,omitempty"`
-
-	// OutstandingAmount Amount still outstanding on the invoice.
-	OutstandingAmount *float64 `json:"outstanding_amount,omitempty"`
-
-	// PaidAmount Amount already paid against the invoice.
-	PaidAmount *float64 `json:"paid_amount,omitempty"`
-
-	// PaymentLink Customer payment link when configured.
+	// PaymentLink Customer payment link processed through Workshop and backed by the workshop's connected Stripe account.
 	PaymentLink *string `json:"payment_link,omitempty"`
-
-	// Status Invoice lifecycle status: draft, pending, paid, or cancelled.
-	Status *string `json:"status,omitempty"`
-
-	// Total Invoice total after discounts, in currency units.
-	Total *float64 `json:"total,omitempty"`
-
-	// UpdatedAt UTC timestamp when the invoice was last updated, when available.
-	UpdatedAt *time.Time `json:"updated_at,omitempty"`
 }
 
-// JobAddressInput Public postal/geographic address input.
-type JobAddressInput struct {
-	// Country Country name or code supplied by the caller.
-	Country *string `json:"country,omitempty"`
-
-	// Latitude Latitude coordinate when the caller has geocoded the address.
-	Latitude *float64 `json:"latitude,omitempty"`
-
-	// Line1 First line of the postal address.
-	Line1 *string `json:"line1,omitempty"`
-
-	// Line2 Second line of the postal address.
-	Line2 *string `json:"line2,omitempty"`
-
-	// Longitude Longitude coordinate when the caller has geocoded the address.
-	Longitude *float64 `json:"longitude,omitempty"`
-
-	// Postcode Postal or ZIP code.
-	Postcode *string `json:"postcode,omitempty"`
-
-	// Region Region, county, state, or province when applicable.
-	Region *string `json:"region,omitempty"`
-
-	// Town Town or city.
-	Town *string `json:"town,omitempty"`
-}
-
-// JobAddressResponse Public postal/geographic address on a job schedule.
-type JobAddressResponse struct {
-	// Country Country name or code.
-	Country *string `json:"country,omitempty"`
-
-	// Latitude Latitude coordinate when known.
-	Latitude *float64 `json:"latitude,omitempty"`
-
-	// Line1 First line of the postal address.
-	Line1 *string `json:"line1,omitempty"`
-
-	// Line2 Second line of the postal address.
-	Line2 *string `json:"line2,omitempty"`
-
-	// Longitude Longitude coordinate when known.
-	Longitude *float64 `json:"longitude,omitempty"`
-
-	// Postcode Postal or ZIP code.
-	Postcode *string `json:"postcode,omitempty"`
-
-	// Region Region, county, state, or province when applicable.
-	Region *string `json:"region,omitempty"`
-
-	// Town Town or city.
-	Town *string `json:"town,omitempty"`
-}
-
-// JobAssetInput One customer asset to include on the job. v1 does not create assets inline — reference an existing asset only.
-type JobAssetInput struct {
-	// ClientReference Request-local reference used by work lines when inline asset creation is supported in future. Not used while `id` is required on each asset.
-	ClientReference *string `json:"client_reference,omitempty"`
-
-	// Id Required. Existing public asset id on the customer (`asset_...` from the customer record). Example: `{ "id": "asset_4f2bexample" }`.
-	Id string `json:"id"`
-}
-
-// JobAssetSummaryResponse Public customer asset summary embedded in job responses.
-type JobAssetSummaryResponse struct {
-	// CustomerId Public customer id that owns this asset, when known.
-	CustomerId *string `json:"customer_id,omitempty"`
-
-	// Description Human-readable asset description or formatted label.
-	Description *string `json:"description,omitempty"`
-
-	// Id Opaque resource-prefixed public identifier, such as job_... or cus_.... Internal database ids must never be assigned here.
-	Id *string `json:"id,omitempty"`
-
-	// LastServicedDate Calendar date when the asset was last serviced, when known.
-	LastServicedDate *openapi_types.Date `json:"last_serviced_date,omitempty"`
-
-	// Make Asset make or manufacturer.
-	Make *string `json:"make,omitempty"`
-
-	// Model Asset model.
-	Model *string `json:"model,omitempty"`
-
-	// Name Asset display name.
-	Name *string `json:"name,omitempty"`
-
-	// SerialNumber Asset serial number, when known.
-	SerialNumber *string `json:"serial_number,omitempty"`
-
-	// Type Public asset type, such as bike or another serviced asset category.
-	Type *string `json:"type,omitempty"`
-
-	// Year Asset year, when known.
-	Year *int32 `json:"year,omitempty"`
-}
-
-// JobCustomerInput Customer reference for public job creation.
-type JobCustomerInput struct {
-	// ExternalReference Optional caller-side customer reference for partner reconciliation. Not persisted in the current implementation.
-	ExternalReference *string `json:"external_reference,omitempty"`
-
-	// Id Existing customer public id (`cus_...`). Required. The customer's workshop is used for the new job.
-	Id string `json:"id"`
-}
-
-// JobCustomerSchedulingOptionsInput Customer self-service scheduling permissions requested when creating a public job.
-type JobCustomerSchedulingOptionsInput struct {
-	// AllowBookCustomerCollection Whether the customer can book their own collection appointments.
-	AllowBookCustomerCollection *bool `json:"allow_book_customer_collection,omitempty"`
-
-	// AllowBookMechanicDropOff Whether the customer can book mechanic drop-off appointments.
-	AllowBookMechanicDropOff *bool `json:"allow_book_mechanic_drop_off,omitempty"`
-
-	// AllowRescheduleCustomerDropOff Whether the customer can reschedule their own drop-off appointments.
-	AllowRescheduleCustomerDropOff *bool `json:"allow_reschedule_customer_drop_off,omitempty"`
-
-	// AllowRescheduleMechanicCollection Whether the customer can reschedule mechanic collection appointments.
-	AllowRescheduleMechanicCollection *bool `json:"allow_reschedule_mechanic_collection,omitempty"`
-
-	// AllowRescheduleOnSiteService Whether the customer can reschedule on-site service appointments.
-	AllowRescheduleOnSiteService *bool `json:"allow_reschedule_on_site_service,omitempty"`
-}
-
-// JobCustomerSchedulingOptionsResponse defines model for JobCustomerSchedulingOptionsResponse.
-type JobCustomerSchedulingOptionsResponse struct {
-	AllowBookCustomerCollection       *bool `json:"allow_book_customer_collection,omitempty"`
-	AllowBookMechanicDropOff          *bool `json:"allow_book_mechanic_drop_off,omitempty"`
-	AllowRescheduleCustomerDropOff    *bool `json:"allow_reschedule_customer_drop_off,omitempty"`
-	AllowRescheduleMechanicCollection *bool `json:"allow_reschedule_mechanic_collection,omitempty"`
-	AllowRescheduleOnSiteService      *bool `json:"allow_reschedule_on_site_service,omitempty"`
-}
-
-// JobIntegrationOptions Optional till/POS integration settings for the created job. Does not describe which items or services are on the job — use `items` and `work_lines` on the job create request for that.
-type JobIntegrationOptions struct {
-	// AutoSync Whether Workshop should auto-sync the resulting job/invoice with connected systems when configured. Defaults should be applied by the endpoint implementation.
-	AutoSync *bool `json:"auto_sync,omitempty"`
-
-	// IntegrationStoreId External POS or integration store id to associate with the created job, when applicable.
-	IntegrationStoreId *string `json:"integration_store_id,omitempty"`
-
-	// IntegrationStoreName Display name for `integration_store_id`, when applicable.
-	IntegrationStoreName *string `json:"integration_store_name,omitempty"`
-}
-
-// JobNotificationOptions defines model for JobNotificationOptions.
-type JobNotificationOptions struct {
-	CustomerConfirmation *bool `json:"customer_confirmation,omitempty"`
-}
-
-// JobReportAttachmentResponse Public attachment metadata for a job report.
-type JobReportAttachmentResponse struct {
-	// ContentType Attachment content type, for example image/jpeg or application/pdf.
+// InvoicePdf Stable invoice PDF viewer link.
+type InvoicePdf struct {
+	// ContentType Viewer content type. The URL ultimately serves an invoice PDF.
 	ContentType *string `json:"content_type,omitempty"`
 
-	// FileSizeBytes Attachment file size in bytes, when known.
-	FileSizeBytes *int64 `json:"file_size_bytes,omitempty"`
+	// InvoiceId Public invoice id.
+	InvoiceId *string `json:"invoice_id,omitempty"`
 
-	// FriendlyName Human-friendly attachment display name, when available.
-	FriendlyName *string `json:"friendly_name,omitempty"`
-
-	// Id Public attachment id for the report file.
-	Id *string `json:"id,omitempty"`
-
-	// Name Original attachment file name, when available.
-	Name *string `json:"name,omitempty"`
-
-	// Object Resource object type. Always attachment.
-	Object *string `json:"object,omitempty"`
+	// InvoiceUrl Stable Workshop invoice viewer URL. Opening this URL renders or redirects to the latest invoice PDF.
+	InvoiceUrl *string `json:"invoice_url,omitempty"`
 }
 
-// JobReportChecksResponse Public quality-check summary for a job report.
-type JobReportChecksResponse struct {
-	// MechanicalCheck True when a mechanical check was completed.
-	MechanicalCheck *bool `json:"mechanical_check,omitempty"`
+// InvoiceSendRequest Request body for sending an invoice to a customer.
+type InvoiceSendRequest struct {
+	// Body Optional message body to include in the invoice email.
+	Body *string `json:"body,omitempty"`
 
-	// SignedOff True when the report or work was signed off.
-	SignedOff *bool `json:"signed_off,omitempty"`
+	// GeneratePaymentLink Whether to create a Workshop-hosted customer payment link backed by the workshop's connected Stripe account before sending.
+	GeneratePaymentLink *bool `json:"generate_payment_link,omitempty"`
 
-	// TestRidden True when the item was test ridden as part of the report.
-	TestRidden *bool `json:"test_ridden,omitempty"`
+	// IncludeJobReports Whether to attach job reports when available. Public v1 currently sends the invoice PDF only.
+	IncludeJobReports *bool `json:"include_job_reports,omitempty"`
+
+	// SendCopyToBusiness Whether to copy the workshop contact email.
+	SendCopyToBusiness *bool `json:"send_copy_to_business,omitempty"`
+
+	// Subject Email subject. When omitted, Workshop uses a default invoice subject.
+	Subject *string `json:"subject,omitempty"`
+
+	// To Recipient email address. When omitted, Workshop uses the invoice customer email.
+	To *openapi_types.Email `json:"to,omitempty"`
 }
 
-// JobReportResponse Public representation of a job report available to authorized API clients.
-type JobReportResponse struct {
-	// AssetId Public asset id for the reported asset, for example asset_....
-	AssetId *string `json:"asset_id,omitempty"`
+// InvoiceStatusChangeRequest Request body for changing an invoice lifecycle status.
+type InvoiceStatusChangeRequest struct {
+	// Reason Optional reason or note for the status change.
+	Reason *string `json:"reason,omitempty"`
 
-	// Attachments Public attachment metadata for files included with the report.
-	Attachments *[]JobReportAttachmentResponse `json:"attachments,omitempty"`
+	// Status Target invoice status. Allowed values: `draft`, `pending`, `paid`, or `cancelled`.
+	Status InvoiceStatusChangeRequestStatus `json:"status"`
+}
 
-	// BusinessId Public business id that owns this report, currently an org_... Clerk organization id.
-	BusinessId *string `json:"business_id,omitempty"`
+// InvoiceStatusChangeRequestStatus Target invoice status. Allowed values: `draft`, `pending`, `paid`, or `cancelled`.
+type InvoiceStatusChangeRequestStatus string
 
-	// Checks Public quality-check summary for a job report.
-	Checks *JobReportChecksResponse `json:"checks,omitempty"`
-
-	// Comment Public report comment or summary.
-	Comment *string `json:"comment,omitempty"`
-
-	// CreatedAt UTC timestamp when the report was created.
-	CreatedAt *time.Time `json:"created_at,omitempty"`
-
-	// CustomerId Public customer id for the report's customer, for example cus_....
+// InvoiceUpdateRequest Patch body for low-side-effect invoice metadata. Omitted properties are ignored.
+type InvoiceUpdateRequest struct {
+	// CustomerId Public customer id to bill.
 	CustomerId *string `json:"customer_id,omitempty"`
 
-	// Id Public job report id (`jr_...`, for example `jr_7d3eexample`).
-	Id *string `json:"id,omitempty"`
+	// DiscountType Discount type, such as percentage or fixed.
+	DiscountType *InvoiceUpdateRequestDiscountType `json:"discount_type,omitempty"`
 
-	// JobId Public job id for the reported job, for example job_....
-	JobId *string `json:"job_id,omitempty"`
+	// DiscountValue Discount value interpreted according to `discount_type`.
+	DiscountValue *float64 `json:"discount_value,omitempty"`
 
-	// Object Resource object type. Always job_report.
-	Object *string `json:"object,omitempty"`
+	// DueAt UTC due date for payment.
+	DueAt *time.Time `json:"due_at,omitempty"`
 
-	// ServiceItems Service item or checklist results included in the report.
-	ServiceItems *[]JobReportServiceItemResponse `json:"service_items,omitempty"`
-
-	// UpdatedAt UTC timestamp when the report was last updated, when available.
-	UpdatedAt *time.Time `json:"updated_at,omitempty"`
+	// Notes Invoice notes shown to workshop staff and customer communications where applicable.
+	Notes *string `json:"notes,omitempty"`
 }
 
-// JobReportServiceItemResponse Public service item result documented in a job report.
-type JobReportServiceItemResponse struct {
-	// Category Public service item category, when available.
-	Category *string `json:"category,omitempty"`
+// InvoiceUpdateRequestDiscountType Discount type, such as percentage or fixed.
+type InvoiceUpdateRequestDiscountType string
 
-	// Comment Comment recorded against this service item.
-	Comment *string `json:"comment,omitempty"`
-
-	// Name Service item or checklist item name.
-	Name *string `json:"name,omitempty"`
-
-	// Order Display order of the service item in the report.
-	Order *int32 `json:"order,omitempty"`
-
-	// Status Service item result status as a stable snake_case value.
-	Status *string `json:"status,omitempty"`
-}
-
-// JobResponse Public representation of a created or retrieved job.
-type JobResponse struct {
-	// AcceptedStatus Job acceptance status: pending, accepted, rejected, or cancelled.
-	AcceptedStatus *string `json:"accepted_status,omitempty"`
+// Job Public representation of a created or retrieved job.
+type Job struct {
+	// AcceptedStatus Job acceptance status. Allowed values: `pending`, `accepted`, `rejected`, or `cancelled`.
+	AcceptedStatus *JobAcceptedStatus `json:"accepted_status,omitempty"`
 
 	// AllDay Whether the job is treated as an all-day booking in scheduling views.
 	AllDay *bool `json:"all_day,omitempty"`
 
 	// Assets Assets being serviced on this job.
-	Assets *[]JobAssetSummaryResponse `json:"assets,omitempty"`
+	Assets *[]JobAssetSummary `json:"assets,omitempty"`
 
-	// AssignedTeamMemberId Public team member id assigned at job level, when assignment is exposed publicly.
-	AssignedTeamMemberId *string `json:"assigned_team_member_id,omitempty"`
+	// AuthorisationStatus Customer authorisation state. Allowed values: `authorised` or `unauthorised`.
+	AuthorisationStatus *JobAuthorisationStatus `json:"authorisation_status,omitempty"`
 
-	// AuthorisationStatus Customer authorisation status for additional work or charges.
-	AuthorisationStatus *string `json:"authorisation_status,omitempty"`
+	// BillingType Billing/charge source for the job.
+	BillingType *JobBillingType `json:"billing_type,omitempty"`
 
-	// BillingType Billing/charge source for the job, such as customer, business, insurance, or motability.
-	BillingType *string `json:"billing_type,omitempty"`
-
-	// BusinessId Public business id that owns this job, currently an org_... Clerk organization id.
+	// BusinessId Public business id that owns this job.
 	BusinessId *string `json:"business_id,omitempty"`
 
 	// CheckInNotes Check-in notes captured when the item is received for service.
@@ -981,17 +7923,17 @@ type JobResponse struct {
 	// CreatedAt UTC timestamp when the job was created.
 	CreatedAt *time.Time `json:"created_at,omitempty"`
 
-	// CreationSource How the job entered Workshop: manual, online_booking, or widget_booking.
-	CreationSource *string `json:"creation_source,omitempty"`
+	// CreationSource How the job entered Workshop. Allowed values: `manual`, `online_booking`, or `widget_booking`.
+	CreationSource *JobCreationSource `json:"creation_source,omitempty"`
 
 	// CustomerId Public customer id for the job, for example cus_....
 	CustomerId *string `json:"customer_id,omitempty"`
 
-	// CustomerPreferredContactMethod Customer preferred contact method on the job, such as email, phone, or sms.
-	CustomerPreferredContactMethod *string `json:"customer_preferred_contact_method,omitempty"`
+	// CustomerPreferredContactMethod Customer preferred contact method copied onto the job.
+	CustomerPreferredContactMethod *JobCustomerPreferredContactMethod `json:"customer_preferred_contact_method,omitempty"`
 
-	// DiscountType Discount type applied to the job, such as percentage or fixed_amount.
-	DiscountType *string `json:"discount_type,omitempty"`
+	// DiscountType Discount model when a job-level discount is configured. Allowed values: `percentage` or `set_amount`.
+	DiscountType *JobDiscountType `json:"discount_type,omitempty"`
 
 	// DiscountValue Discount value for the job, interpreted according to `discount_type`.
 	DiscountValue *float64 `json:"discount_value,omitempty"`
@@ -999,7 +7941,7 @@ type JobResponse struct {
 	// ExternalJobId Partner or integration ticket/reference id supplied by the caller or upstream system.
 	ExternalJobId *string `json:"external_job_id,omitempty"`
 
-	// Id Public job id (`job_...`, for example `job_01h2example`).
+	// Id Opaque resource-prefixed public identifier, such as job_... or cus_.... Internal database ids must never be assigned here.
 	Id *string `json:"id,omitempty"`
 
 	// IntegrationStoreId External POS or integration store id selected for this job, when applicable.
@@ -1024,13 +7966,13 @@ type JobResponse struct {
 	JobNumber *int64 `json:"job_number,omitempty"`
 
 	// Object Resource object type. Always job.
-	Object *string `json:"object,omitempty"`
+	Object *JobObject `json:"object,omitempty"`
 
 	// Paid Whether the job has been fully paid.
 	Paid *bool `json:"paid,omitempty"`
 
-	// PartnerEmbedType Partner embed type that originated this job, when applicable.
-	PartnerEmbedType *string `json:"partner_embed_type,omitempty"`
+	// PartnerEmbedType Partner embed configuration when the job originated from a partner widget.
+	PartnerEmbedType *JobPartnerEmbedType `json:"partner_embed_type,omitempty"`
 
 	// PaymentLink Customer payment link for outstanding job invoices, when generated.
 	PaymentLink *string `json:"payment_link,omitempty"`
@@ -1041,11 +7983,8 @@ type JobResponse struct {
 	// RejectionReason Reason the job was rejected, when `accepted_status` is `rejected`.
 	RejectionReason *string `json:"rejection_reason,omitempty"`
 
-	// RequiredByDate Calendar date when the job must be completed by, when set.
-	RequiredByDate *openapi_types.Date `json:"required_by_date,omitempty"`
-
 	// Schedule Scheduling and logistics on a public job response.
-	Schedule *JobScheduleResponse `json:"schedule,omitempty"`
+	Schedule *JobSchedule `json:"schedule,omitempty"`
 
 	// TrackingId Legacy tracking reference generated when the job was created.
 	TrackingId *string `json:"tracking_id,omitempty"`
@@ -1054,67 +7993,358 @@ type JobResponse struct {
 	UpdatedAt *time.Time `json:"updated_at,omitempty"`
 
 	// WorkLines Work lines on this job, mapped from service bookings.
-	WorkLines *[]JobWorkLineResponse `json:"work_lines,omitempty"`
+	WorkLines *[]JobWorkLine `json:"work_lines,omitempty"`
 }
 
-// JobScheduleInput Scheduling and logistics requested for a public job.
-type JobScheduleInput struct {
-	// Address Public postal/geographic address input.
-	Address *JobAddressInput `json:"address,omitempty"`
+// JobAcceptedStatus Job acceptance status. Allowed values: `pending`, `accepted`, `rejected`, or `cancelled`.
+type JobAcceptedStatus string
 
-	// CollectionBringInDate Calendar date when the item was or will be brought in for collection services.
-	CollectionBringInDate *openapi_types.Date `json:"collection_bring_in_date,omitempty"`
+// JobAuthorisationStatus Customer authorisation state. Allowed values: `authorised` or `unauthorised`.
+type JobAuthorisationStatus string
 
-	// CustomerCollectionDate Calendar date when the customer plans to collect the item from the business.
-	CustomerCollectionDate *openapi_types.Date `json:"customer_collection_date,omitempty"`
+// JobBillingType Billing/charge source for the job.
+type JobBillingType string
 
-	// CustomerCollectionWindow Public time window selected by the caller.
-	CustomerCollectionWindow *JobTimeWindowInput `json:"customer_collection_window,omitempty"`
+// JobCreationSource How the job entered Workshop. Allowed values: `manual`, `online_booking`, or `widget_booking`.
+type JobCreationSource string
 
-	// CustomerDropOffDate Calendar date when the customer plans to drop the item off at the business.
-	CustomerDropOffDate *openapi_types.Date `json:"customer_drop_off_date,omitempty"`
+// JobCustomerPreferredContactMethod Customer preferred contact method copied onto the job.
+type JobCustomerPreferredContactMethod string
 
-	// CustomerDropOffWindow Public time window selected by the caller.
-	CustomerDropOffWindow *JobTimeWindowInput `json:"customer_drop_off_window,omitempty"`
+// JobDiscountType Discount model when a job-level discount is configured. Allowed values: `percentage` or `set_amount`.
+type JobDiscountType string
 
-	// CustomerScheduling Customer self-service scheduling permissions requested when creating a public job.
-	CustomerScheduling *JobCustomerSchedulingOptionsInput `json:"customer_scheduling,omitempty"`
+// JobObject Resource object type. Always job.
+type JobObject string
 
-	// DropOffAddress Public postal/geographic address input.
-	DropOffAddress *JobAddressInput `json:"drop_off_address,omitempty"`
+// JobPartnerEmbedType Partner embed configuration when the job originated from a partner widget.
+type JobPartnerEmbedType string
 
-	// EstimatedTravelMinutes Estimated travel time in minutes for mobile or on-site work when known.
-	EstimatedTravelMinutes *float64 `json:"estimated_travel_minutes,omitempty"`
+// JobAcceptedStatusChangeRequest Request body for accepting, rejecting, or cancelling a job.
+type JobAcceptedStatusChangeRequest struct {
+	// Notifications Notification options for accepted, rejected, and cancelled job status changes.
+	Notifications *AcceptedStatusChangeNotifications `json:"notifications,omitempty"`
 
-	// FulfilmentType Public workflow type: `drop_off` (customer drops off at the workshop), `collection` (workshop collects and returns), or `on_site_service` (service at customer location).
-	FulfilmentType *string `json:"fulfilment_type,omitempty"`
+	// Reason Optional reason for rejected or cancelled status changes.
+	Reason *string `json:"reason,omitempty"`
 
-	// MechanicCollectionDate Calendar date when the mechanic or business plans to collect the item from the customer.
-	MechanicCollectionDate *openapi_types.Date `json:"mechanic_collection_date,omitempty"`
-
-	// MechanicCollectionWindow Public time window selected by the caller.
-	MechanicCollectionWindow *JobTimeWindowInput `json:"mechanic_collection_window,omitempty"`
-
-	// MechanicDropOffDate Calendar date when the mechanic or business plans to return the item to the customer.
-	MechanicDropOffDate *openapi_types.Date `json:"mechanic_drop_off_date,omitempty"`
-
-	// MechanicDropOffWindow Public time window selected by the caller.
-	MechanicDropOffWindow *JobTimeWindowInput `json:"mechanic_drop_off_window,omitempty"`
-
-	// PreferredDate Preferred overall job date when the caller does not need per-service scheduling.
-	PreferredDate *openapi_types.Date `json:"preferred_date,omitempty"`
-
-	// PreferredWindow Public time window selected by the caller.
-	PreferredWindow *JobTimeWindowInput `json:"preferred_window,omitempty"`
-
-	// ShowCollectionInCalendar Whether collection and drop-off events should appear on workshop calendars.
-	ShowCollectionInCalendar *bool `json:"show_collection_in_calendar,omitempty"`
+	// Status New job accepted status. Allowed values: `accepted`, `rejected`, or `cancelled`.
+	Status JobAcceptedStatusChangeRequestStatus `json:"status"`
 }
 
-// JobScheduleResponse Scheduling and logistics on a public job response.
-type JobScheduleResponse struct {
+// JobAcceptedStatusChangeRequestStatus New job accepted status. Allowed values: `accepted`, `rejected`, or `cancelled`.
+type JobAcceptedStatusChangeRequestStatus string
+
+// JobAddress Public postal/geographic address on a job schedule.
+type JobAddress struct {
+	// Country Country label stored on the job address. May be a display name or code depending on how the address was captured. Use `Business.country` and `Customer.country` for normalized ISO alpha-3 codes.
+	Country *JobAddressCountry `json:"country,omitempty"`
+
+	// Latitude Latitude coordinate when known.
+	Latitude *float64 `json:"latitude,omitempty"`
+
+	// Line1 First line of the postal address.
+	Line1 *string `json:"line1,omitempty"`
+
+	// Line2 Second line of the postal address.
+	Line2 *string `json:"line2,omitempty"`
+
+	// Longitude Longitude coordinate when known.
+	Longitude *float64 `json:"longitude,omitempty"`
+
+	// Postcode Postal or ZIP code.
+	Postcode *string `json:"postcode,omitempty"`
+
+	// Region Region, county, state, or province when applicable.
+	Region *string `json:"region,omitempty"`
+
+	// Town Town or city.
+	Town *string `json:"town,omitempty"`
+}
+
+// JobAddressCountry Country label stored on the job address. May be a display name or code depending on how the address was captured. Use `Business.country` and `Customer.country` for normalized ISO alpha-3 codes.
+type JobAddressCountry string
+
+// JobAddressInput Public postal/geographic address input.
+type JobAddressInput struct {
+	// Country Country label for the job address. Stored as provided and not validated against ISO alpha-3 on write.
+	Country *JobAddressInputCountry `json:"country,omitempty"`
+
+	// Latitude Latitude coordinate when the caller has geocoded the address.
+	Latitude *float64 `json:"latitude,omitempty"`
+
+	// Line1 First line of the postal address.
+	Line1 *string `json:"line1,omitempty"`
+
+	// Line2 Second line of the postal address.
+	Line2 *string `json:"line2,omitempty"`
+
+	// Longitude Longitude coordinate when the caller has geocoded the address.
+	Longitude *float64 `json:"longitude,omitempty"`
+
+	// Postcode Postal or ZIP code.
+	Postcode *string `json:"postcode,omitempty"`
+
+	// Region Region, county, state, or province when applicable.
+	Region *string `json:"region,omitempty"`
+
+	// Town Town or city.
+	Town *string `json:"town,omitempty"`
+}
+
+// JobAddressInputCountry Country label for the job address. Stored as provided and not validated against ISO alpha-3 on write.
+type JobAddressInputCountry string
+
+// JobAssetInput One customer asset to include on the job. v1 does not create assets inline — reference an existing asset only.
+type JobAssetInput struct {
+	// ClientReference Request-local reference used by work lines when inline asset creation is supported in future. Not used while `id` is required on each asset.
+	ClientReference *string `json:"client_reference,omitempty"`
+
+	// Id Required. Existing public asset id on the customer (`asset_...` from the customer record). Example: `{ "id": "asset_4f2bexample" }`.
+	Id string `json:"id"`
+}
+
+// JobAssetSummary Public customer asset summary embedded in job responses.
+type JobAssetSummary struct {
+	// BikeType Bike category (bikes only — public assets are bikes today). Snake_case enum (for example `road_bike`, `generic_bike`).
+	BikeType *JobAssetSummaryBikeType `json:"bike_type,omitempty"`
+
+	// CustomerId Public customer id that owns this asset, when known.
+	CustomerId *string `json:"customer_id,omitempty"`
+
+	// Description Human-readable asset description or formatted label.
+	Description *string `json:"description,omitempty"`
+
+	// Id Opaque resource-prefixed public identifier, such as job_... or cus_.... Internal database ids must never be assigned here.
+	Id *string `json:"id,omitempty"`
+
+	// LastServicedDate Calendar date when the asset was last serviced, when known.
+	LastServicedDate *openapi_types.Date `json:"last_serviced_date,omitempty"`
+
+	// Make Asset make or manufacturer.
+	Make *string `json:"make,omitempty"`
+
+	// Model Asset model.
+	Model *string `json:"model,omitempty"`
+
+	// Name Asset display name.
+	Name *string `json:"name,omitempty"`
+
+	// SerialNumber Asset serial number, when known.
+	SerialNumber *string `json:"serial_number,omitempty"`
+
+	// Year Asset year, when known.
+	Year *int32 `json:"year,omitempty"`
+}
+
+// JobAssetSummaryBikeType Bike category (bikes only — public assets are bikes today). Snake_case enum (for example `road_bike`, `generic_bike`).
+type JobAssetSummaryBikeType string
+
+// JobCreateRequest Request body for POST /public/v1/jobs.
+type JobCreateRequest struct {
+	// AllDay Whether the job is treated as an all-day booking in scheduling views.
+	AllDay *bool `json:"all_day,omitempty"`
+
+	// Assets Customer assets included on this job (bikes or other serviced assets). Required: at least one entry. Each entry must use `assets[].id` — an existing public asset id already on the customer (from `GET .../customers/{customer_id}` → `assets[].id`). This array is not optional and must not be empty.
+	Assets []JobAssetInput `json:"assets"`
+
+	// BillingType Billing/charge source for the job.
+	BillingType *JobCreateRequestBillingType `json:"billing_type,omitempty"`
+
+	// CheckInNotes Check-in notes captured when the asset is received for service.
+	CheckInNotes *string `json:"check_in_notes,omitempty"`
+
+	// Customer Customer reference for public job creation.
+	Customer JobCustomerInput `json:"customer"`
+
+	// IntegrationOptions Optional till/POS integration settings for the created job. Does not describe which items or services are on the job — use `items` and `work_lines` on the job create request for that.
+	IntegrationOptions *JobIntegrationOptions `json:"integration_options,omitempty"`
+
+	// Metadata Optional partner metadata on create. v1 supports `external_job_id` (maps to partner ticket id).
+	Metadata *map[string]string `json:"metadata,omitempty"`
+
+	// Notes Internal workshop notes to attach to the job.
+	Notes *string `json:"notes,omitempty"`
+
+	// Notifications Notification side effects for public job creation.
+	Notifications *JobNotificationOptions `json:"notifications,omitempty"`
+
+	// Schedule Scheduling and logistics requested for a public job.
+	Schedule *JobScheduleInput `json:"schedule,omitempty"`
+
+	// WorkLines Work to perform per asset. Required: at least one entry; each entry needs `asset_id` and a non-empty `services` array. Each line's `asset_id` must match an `id` listed in `assets`.
+	WorkLines []JobWorkLineInput `json:"work_lines"`
+}
+
+// JobCreateRequestBillingType Billing/charge source for the job.
+type JobCreateRequestBillingType string
+
+// JobCustomerInput Customer reference for public job creation.
+type JobCustomerInput struct {
+	// ExternalReference Optional caller-side customer reference for partner reconciliation. Not persisted in the current implementation.
+	ExternalReference *string `json:"external_reference,omitempty"`
+
+	// Id Existing customer public id (`cus_...`). Required. The customer's workshop is used for the new job.
+	Id string `json:"id"`
+}
+
+// JobCustomerSchedulingOptions Customer self-service scheduling permissions on a public job.
+type JobCustomerSchedulingOptions struct {
+	// AllowBookCustomerCollection Whether the customer can book their own collection appointments.
+	AllowBookCustomerCollection *bool `json:"allow_book_customer_collection,omitempty"`
+
+	// AllowBookMechanicDropOff Whether the customer can book mechanic drop-off appointments.
+	AllowBookMechanicDropOff *bool `json:"allow_book_mechanic_drop_off,omitempty"`
+
+	// AllowRescheduleCustomerDropOff Whether the customer can reschedule their own drop-off appointments.
+	AllowRescheduleCustomerDropOff *bool `json:"allow_reschedule_customer_drop_off,omitempty"`
+
+	// AllowRescheduleMechanicCollection Whether the customer can reschedule mechanic collection appointments.
+	AllowRescheduleMechanicCollection *bool `json:"allow_reschedule_mechanic_collection,omitempty"`
+
+	// AllowRescheduleOnSiteService Whether the customer can reschedule on-site service appointments.
+	AllowRescheduleOnSiteService *bool `json:"allow_reschedule_on_site_service,omitempty"`
+}
+
+// JobCustomerSchedulingOptionsInput Customer self-service scheduling permissions requested when creating a public job.
+type JobCustomerSchedulingOptionsInput struct {
+	// AllowBookCustomerCollection Whether the customer can book their own collection appointments.
+	AllowBookCustomerCollection *bool `json:"allow_book_customer_collection,omitempty"`
+
+	// AllowBookMechanicDropOff Whether the customer can book mechanic drop-off appointments.
+	AllowBookMechanicDropOff *bool `json:"allow_book_mechanic_drop_off,omitempty"`
+
+	// AllowRescheduleCustomerDropOff Whether the customer can reschedule their own drop-off appointments.
+	AllowRescheduleCustomerDropOff *bool `json:"allow_reschedule_customer_drop_off,omitempty"`
+
+	// AllowRescheduleMechanicCollection Whether the customer can reschedule mechanic collection appointments.
+	AllowRescheduleMechanicCollection *bool `json:"allow_reschedule_mechanic_collection,omitempty"`
+
+	// AllowRescheduleOnSiteService Whether the customer can reschedule on-site service appointments.
+	AllowRescheduleOnSiteService *bool `json:"allow_reschedule_on_site_service,omitempty"`
+}
+
+// JobIntegrationOptions Optional till/POS integration settings for the created job. Does not describe which items or services are on the job — use `items` and `work_lines` on the job create request for that.
+type JobIntegrationOptions struct {
+	// AutoSync Whether Workshop should auto-sync the resulting job/invoice with connected systems when configured. Defaults should be applied by the endpoint implementation.
+	AutoSync *bool `json:"auto_sync,omitempty"`
+
+	// IntegrationStoreId External POS or integration store id to associate with the created job, when applicable.
+	IntegrationStoreId *string `json:"integration_store_id,omitempty"`
+
+	// IntegrationStoreName Display name for `integration_store_id`, when applicable.
+	IntegrationStoreName *string `json:"integration_store_name,omitempty"`
+}
+
+// JobNotificationOptions Notification side effects for public job creation.
+type JobNotificationOptions struct {
+	// CustomerConfirmation When true, send the customer booking-submitted notification if enabled in customer settings. Maps to the internal manual job create `notifyCustomer` flag.
+	CustomerConfirmation *bool `json:"customer_confirmation,omitempty"`
+}
+
+// JobReport Public representation of a job report available to authorized API clients.
+type JobReport struct {
+	// AssetId Public asset id for the reported asset, for example asset_....
+	AssetId *string `json:"asset_id,omitempty"`
+
+	// Attachments Public attachment metadata for files included with the report.
+	Attachments *[]JobReportAttachment `json:"attachments,omitempty"`
+
+	// BusinessId Public business id that owns this report.
+	BusinessId *string `json:"business_id,omitempty"`
+
+	// Checks Public quality-check summary for a job report.
+	Checks *JobReportChecks `json:"checks,omitempty"`
+
+	// Comment Public report comment or summary.
+	Comment *string `json:"comment,omitempty"`
+
+	// CreatedAt UTC timestamp when the report was created.
+	CreatedAt *time.Time `json:"created_at,omitempty"`
+
+	// CustomerId Public customer id for the report's customer, for example cus_....
+	CustomerId *string `json:"customer_id,omitempty"`
+
+	// Id Opaque resource-prefixed public identifier, such as job_... or cus_.... Internal database ids must never be assigned here.
+	Id *string `json:"id,omitempty"`
+
+	// JobId Public job id for the reported job, for example job_....
+	JobId *string `json:"job_id,omitempty"`
+
+	// Object Resource object type. Always job_report.
+	Object *JobReportObject `json:"object,omitempty"`
+
+	// ServiceItems Service item or checklist results included in the report.
+	ServiceItems *[]JobReportServiceItemResult `json:"service_items,omitempty"`
+
+	// UpdatedAt UTC timestamp when the report was last updated, when available.
+	UpdatedAt *time.Time `json:"updated_at,omitempty"`
+}
+
+// JobReportObject Resource object type. Always job_report.
+type JobReportObject string
+
+// JobReportAttachment Public attachment metadata for a job report.
+type JobReportAttachment struct {
+	// ContentType Attachment content type, for example image/jpeg or application/pdf.
+	ContentType *string `json:"content_type,omitempty"`
+
+	// FileSizeBytes Attachment file size in bytes, when known.
+	FileSizeBytes *int64 `json:"file_size_bytes,omitempty"`
+
+	// FriendlyName Human-friendly attachment display name, when available.
+	FriendlyName *string `json:"friendly_name,omitempty"`
+
+	// Id Opaque resource-prefixed public identifier, such as job_... or cus_.... Internal database ids must never be assigned here.
+	Id *string `json:"id,omitempty"`
+
+	// Name Original attachment file name, when available.
+	Name *string `json:"name,omitempty"`
+
+	// Object Resource object type. Always attachment.
+	Object *JobReportAttachmentObject `json:"object,omitempty"`
+}
+
+// JobReportAttachmentObject Resource object type. Always attachment.
+type JobReportAttachmentObject string
+
+// JobReportChecks Public quality-check summary for a job report.
+type JobReportChecks struct {
+	// MechanicalCheck True when a mechanical check was completed.
+	MechanicalCheck *bool `json:"mechanical_check,omitempty"`
+
+	// SignedOff True when the report or work was signed off.
+	SignedOff *bool `json:"signed_off,omitempty"`
+
+	// TestRidden True when the item was test ridden as part of the report.
+	TestRidden *bool `json:"test_ridden,omitempty"`
+}
+
+// JobReportServiceItemResult Public service item result documented in a job report.
+type JobReportServiceItemResult struct {
+	// Category Public service item category, when available.
+	Category *string `json:"category,omitempty"`
+
+	// Comment Comment recorded against this service item.
+	Comment *string `json:"comment,omitempty"`
+
+	// Name Service item or checklist item name.
+	Name *string `json:"name,omitempty"`
+
+	// Order Display order of the service item in the report.
+	Order *int32 `json:"order,omitempty"`
+
+	// Status Service item inspection result status.
+	Status *JobReportServiceItemResultStatus `json:"status,omitempty"`
+}
+
+// JobReportServiceItemResultStatus Service item inspection result status.
+type JobReportServiceItemResultStatus string
+
+// JobSchedule Scheduling and logistics on a public job response.
+type JobSchedule struct {
 	// Address Public postal/geographic address on a job schedule.
-	Address *JobAddressResponse `json:"address,omitempty"`
+	Address *JobAddress `json:"address,omitempty"`
 
 	// CollectionBringInDate Calendar date when the item was brought in for collection services.
 	CollectionBringInDate *openapi_types.Date `json:"collection_bring_in_date,omitempty"`
@@ -1123,42 +8353,131 @@ type JobScheduleResponse struct {
 	CustomerCollectionDate *openapi_types.Date `json:"customer_collection_date,omitempty"`
 
 	// CustomerCollectionWindow Public time window on a job schedule.
-	CustomerCollectionWindow *JobTimeWindowResponse `json:"customer_collection_window,omitempty"`
+	CustomerCollectionWindow *JobTimeWindow `json:"customer_collection_window,omitempty"`
 
 	// CustomerDropOffDate Calendar date when the customer plans to drop the item off at the business.
 	CustomerDropOffDate *openapi_types.Date `json:"customer_drop_off_date,omitempty"`
 
 	// CustomerDropOffWindow Public time window on a job schedule.
-	CustomerDropOffWindow *JobTimeWindowResponse                `json:"customer_drop_off_window,omitempty"`
-	CustomerScheduling    *JobCustomerSchedulingOptionsResponse `json:"customer_scheduling,omitempty"`
+	CustomerDropOffWindow *JobTimeWindow `json:"customer_drop_off_window,omitempty"`
+
+	// CustomerScheduling Customer self-service scheduling permissions on a public job.
+	CustomerScheduling *JobCustomerSchedulingOptions `json:"customer_scheduling,omitempty"`
 
 	// DropOffAddress Public postal/geographic address on a job schedule.
-	DropOffAddress *JobAddressResponse `json:"drop_off_address,omitempty"`
+	DropOffAddress *JobAddress `json:"drop_off_address,omitempty"`
 
 	// EstimatedTravelMinutes Estimated travel time in minutes for mobile/on-site work when calculated.
 	EstimatedTravelMinutes *float64 `json:"estimated_travel_minutes,omitempty"`
 
-	// FulfilmentType Public workflow type: `drop_off` (customer drops off at the workshop), `collection` (workshop collects and returns), or `on_site_service` (service at customer location).
-	FulfilmentType *string `json:"fulfilment_type,omitempty"`
+	// FulfilmentType Job fulfilment workflow. Allowed values: `drop_off`, `collection`, or `on_site_service`.
+	FulfilmentType *JobScheduleFulfilmentType `json:"fulfilment_type,omitempty"`
 
 	// MechanicCollectionDate Calendar date when the mechanic or business plans to collect the item from the customer.
 	MechanicCollectionDate *openapi_types.Date `json:"mechanic_collection_date,omitempty"`
 
 	// MechanicCollectionWindow Public time window on a job schedule.
-	MechanicCollectionWindow *JobTimeWindowResponse `json:"mechanic_collection_window,omitempty"`
+	MechanicCollectionWindow *JobTimeWindow `json:"mechanic_collection_window,omitempty"`
 
 	// MechanicDropOffDate Calendar date when the mechanic or business plans to return the item to the customer.
 	MechanicDropOffDate *openapi_types.Date `json:"mechanic_drop_off_date,omitempty"`
 
 	// MechanicDropOffWindow Public time window on a job schedule.
-	MechanicDropOffWindow *JobTimeWindowResponse `json:"mechanic_drop_off_window,omitempty"`
+	MechanicDropOffWindow *JobTimeWindow `json:"mechanic_drop_off_window,omitempty"`
 
 	// ShowCollectionInCalendar Whether collection and drop-off events should appear on workshop calendars.
 	ShowCollectionInCalendar *bool `json:"show_collection_in_calendar,omitempty"`
 }
 
-// JobStatusResponse Workshop job status assigned to a work line's service booking. Integrators should key off id; name is display-only and may change.
-type JobStatusResponse struct {
+// JobScheduleFulfilmentType Job fulfilment workflow. Allowed values: `drop_off`, `collection`, or `on_site_service`.
+type JobScheduleFulfilmentType string
+
+// JobScheduleChangeRequest Request body for changing job-level schedule and fulfilment details.
+type JobScheduleChangeRequest struct {
+	// Notifications Customer email options for job schedule and fulfilment changes.
+	Notifications *JobScheduleNotifications `json:"notifications,omitempty"`
+
+	// Schedule Scheduling and logistics requested for a public job.
+	Schedule *JobScheduleInput `json:"schedule,omitempty"`
+}
+
+// JobScheduleInput Scheduling and logistics requested for a public job.
+type JobScheduleInput struct {
+	// Address Public postal/geographic address input.
+	Address *JobAddressInput `json:"address,omitempty"`
+
+	// CollectionBringInDate Calendar date string in `YYYY-MM-DD` format. Do not include a time or timezone offset.
+	CollectionBringInDate *openapi_types.Date `json:"collection_bring_in_date,omitempty"`
+
+	// CustomerCollectionDate Calendar date string in `YYYY-MM-DD` format. Do not include a time or timezone offset.
+	CustomerCollectionDate *openapi_types.Date `json:"customer_collection_date,omitempty"`
+
+	// CustomerDropOffDate Calendar date string in `YYYY-MM-DD` format. Do not include a time or timezone offset.
+	CustomerDropOffDate *openapi_types.Date `json:"customer_drop_off_date,omitempty"`
+
+	// CustomerScheduling Customer self-service scheduling permissions requested when creating a public job.
+	CustomerScheduling *JobCustomerSchedulingOptionsInput `json:"customer_scheduling,omitempty"`
+
+	// DropOffAddress Public postal/geographic address input.
+	DropOffAddress *JobAddressInput `json:"drop_off_address,omitempty"`
+
+	// EstimatedTravelMinutes Estimated travel time in minutes for collection or on-site work when known.
+	EstimatedTravelMinutes *float64 `json:"estimated_travel_minutes,omitempty"`
+
+	// FulfilmentType Job fulfilment workflow. Allowed values: `drop_off`, `collection`, or `on_site_service`.
+	FulfilmentType *JobScheduleInputFulfilmentType `json:"fulfilment_type,omitempty"`
+
+	// MechanicCollectionDate Calendar date string in `YYYY-MM-DD` format. Do not include a time or timezone offset.
+	MechanicCollectionDate *openapi_types.Date `json:"mechanic_collection_date,omitempty"`
+
+	// MechanicCollectionWindow Workshop-local time window. Send `start_time` and `end_time` as `HH:mm:ss` strings using a 24-hour clock, for example `{ "start_time": "09:00:00", "end_time": "11:30:00" }`.
+	MechanicCollectionWindow *JobTimeWindowInput `json:"mechanic_collection_window,omitempty"`
+
+	// MechanicDropOffDate Calendar date string in `YYYY-MM-DD` format. Do not include a time or timezone offset.
+	MechanicDropOffDate *openapi_types.Date `json:"mechanic_drop_off_date,omitempty"`
+
+	// MechanicDropOffWindow Workshop-local time window. Send `start_time` and `end_time` as `HH:mm:ss` strings using a 24-hour clock, for example `{ "start_time": "09:00:00", "end_time": "11:30:00" }`.
+	MechanicDropOffWindow *JobTimeWindowInput `json:"mechanic_drop_off_window,omitempty"`
+
+	// PreferredDate Calendar date string in `YYYY-MM-DD` format. Do not include a time or timezone offset.
+	PreferredDate *openapi_types.Date `json:"preferred_date,omitempty"`
+
+	// PreferredWindow Workshop-local time window. Send `start_time` and `end_time` as `HH:mm:ss` strings using a 24-hour clock, for example `{ "start_time": "09:00:00", "end_time": "11:30:00" }`.
+	PreferredWindow *JobTimeWindowInput `json:"preferred_window,omitempty"`
+
+	// ShowCollectionInCalendar Whether collection and drop-off events should appear on workshop calendars.
+	ShowCollectionInCalendar *bool `json:"show_collection_in_calendar,omitempty"`
+}
+
+// JobScheduleInputFulfilmentType Job fulfilment workflow. Allowed values: `drop_off`, `collection`, or `on_site_service`.
+type JobScheduleInputFulfilmentType string
+
+// JobScheduleNotifications Customer email options for job schedule and fulfilment changes.
+type JobScheduleNotifications struct {
+	// CustomerCollectionDetailsChanged For `drop_off` jobs, email the customer that their pick-up date changed.
+	CustomerCollectionDetailsChanged *bool `json:"customer_collection_details_changed,omitempty"`
+
+	// CustomerDropOffDetailsChanged For `drop_off` jobs, email the customer that their drop-off date changed.
+	CustomerDropOffDetailsChanged *bool `json:"customer_drop_off_details_changed,omitempty"`
+
+	// MechanicCollectionDetailsChanged For `collection` jobs, email the customer that the mechanic collection details changed.
+	MechanicCollectionDetailsChanged *bool `json:"mechanic_collection_details_changed,omitempty"`
+
+	// MechanicDropOffDetailsChanged For `collection` jobs, email the customer that the mechanic return details changed.
+	MechanicDropOffDetailsChanged *bool `json:"mechanic_drop_off_details_changed,omitempty"`
+
+	// OnSiteServiceDetailsChanged For `on_site_service` jobs, email the customer that their on-site service details changed.
+	OnSiteServiceDetailsChanged *bool `json:"on_site_service_details_changed,omitempty"`
+
+	// RequestCustomerCollectionDate For `drop_off` jobs, ask the customer to choose a pick-up date from the tracking page.
+	RequestCustomerCollectionDate *bool `json:"request_customer_collection_date,omitempty"`
+
+	// RequestMechanicDropOffDate For `collection` jobs, ask the customer to choose a return date and window from the tracking page.
+	RequestMechanicDropOffDate *bool `json:"request_mechanic_drop_off_date,omitempty"`
+}
+
+// JobStatus Workshop job status assigned to a work line's service booking. Integrators should key off v1.Jobs.PublicApiJobStatusResponse.Id; v1.Jobs.PublicApiJobStatusResponse.Name is display-only and may change.
+type JobStatus struct {
 	// Colour Primary calendar/UI colour for this status.
 	Colour *string `json:"colour,omitempty"`
 
@@ -1175,7 +8494,7 @@ type JobStatusResponse struct {
 	Name *string `json:"name,omitempty"`
 
 	// Object Resource object type. Always `job_status`.
-	Object *string `json:"object,omitempty"`
+	Object *JobStatusObject `json:"object,omitempty"`
 
 	// Order Sort order configured for this status in the workshop workflow.
 	Order *int32 `json:"order,omitempty"`
@@ -1186,24 +8505,36 @@ type JobStatusResponse struct {
 	// SecondaryColour Secondary accent colour for this status.
 	SecondaryColour *string `json:"secondary_colour,omitempty"`
 
-	// Type System status category in snake_case (for example `working_on`, `custom`).
-	Type *string `json:"type,omitempty"`
+	// Type System status category in snake_case.
+	Type *JobStatusType `json:"type,omitempty"`
 
-	// TypeKey Stable status key within the workshop: custom `TypeAsString` when type is `custom`, otherwise the system type key.
+	// TypeKey Stable status key within the workshop: custom `TypeAsString` when v1.Jobs.PublicApiJobStatusResponse.Type is `custom`, otherwise the system type key.
 	TypeKey *string `json:"type_key,omitempty"`
 }
 
-// JobTimeWindowInput Public time window selected by the caller.
-type JobTimeWindowInput struct {
-	// EndTime End time of the requested window in the workshop-local schedule.
-	EndTime *string `json:"end_time,omitempty"`
+// JobStatusObject Resource object type. Always `job_status`.
+type JobStatusObject string
 
-	// StartTime Start time of the requested window in the workshop-local schedule.
-	StartTime *string `json:"start_time,omitempty"`
+// JobStatusType System status category in snake_case.
+type JobStatusType string
+
+// JobStatusList Valid job statuses configured for a workshop.
+type JobStatusList struct {
+	// BusinessId Public business id that owns the status configuration.
+	BusinessId *string `json:"business_id,omitempty"`
+
+	// Data Enabled statuses that can be assigned to public work lines.
+	Data *[]JobStatus `json:"data,omitempty"`
+
+	// Object Resource object type. Always `job_status_list`.
+	Object *JobStatusListObject `json:"object,omitempty"`
 }
 
-// JobTimeWindowResponse Public time window on a job schedule.
-type JobTimeWindowResponse struct {
+// JobStatusListObject Resource object type. Always `job_status_list`.
+type JobStatusListObject string
+
+// JobTimeWindow Public time window on a job schedule.
+type JobTimeWindow struct {
 	// EndTime End time of the window in the workshop-local schedule.
 	EndTime *string `json:"end_time,omitempty"`
 
@@ -1211,37 +8542,46 @@ type JobTimeWindowResponse struct {
 	StartTime *string `json:"start_time,omitempty"`
 }
 
-// JobWorkLineInput One asset's work on a job: an asset plus one or more catalogue services to perform on it. Maps to a single `ServiceBooking` with multiple `ServiceInstance` rows.
-type JobWorkLineInput struct {
-	// AssetClientReference Request-local asset reference when the work line applies to an asset created in this same request.
-	AssetClientReference *string `json:"asset_client_reference,omitempty"`
+// JobTimeWindowInput Workshop-local time window. Send `start_time` and `end_time` as `HH:mm:ss` strings using a 24-hour clock, for example `{ "start_time": "09:00:00", "end_time": "11:30:00" }`.
+type JobTimeWindowInput struct {
+	// EndTime End time in the workshop's local timezone. Format: `HH:mm:ss` 24-hour time, for example `11:30:00`.
+	EndTime *string `json:"end_time,omitempty"`
 
-	// AssetId Required in v1. Must match an `id` from the parent request's `assets` array.
-	AssetId string `json:"asset_id"`
-
-	// AssignedTeamMemberId Optional public staff/member id for assigning this work line.
-	AssignedTeamMemberId *string `json:"assigned_team_member_id,omitempty"`
-
-	// Notes Customer-visible notes for this work line.
-	Notes *string `json:"notes,omitempty"`
-
-	// ScheduledDate Requested scheduled calendar date for this work line, when known.
-	ScheduledDate *openapi_types.Date `json:"scheduled_date,omitempty"`
-
-	// ScheduledWindow Public time window selected by the caller.
-	ScheduledWindow *JobTimeWindowInput `json:"scheduled_window,omitempty"`
-
-	// Services Catalogue services to perform on this asset. Required: at least one entry.
-	Services []JobWorkLineServiceInput `json:"services"`
+	// StartTime Start time in the workshop's local timezone. Format: `HH:mm:ss` 24-hour time, for example `09:00:00`.
+	StartTime *string `json:"start_time,omitempty"`
 }
 
-// JobWorkLineResponse One asset's booked work on a job: a service booking with one or more catalogue services. Maps from `ServiceBooking` + its `ServiceInstance` rows.
-type JobWorkLineResponse struct {
+// JobUpdateRequest Patch body for low-side-effect job fields. Omitted properties are ignored.
+type JobUpdateRequest struct {
+	// AllDay Whether the job is treated as an all-day booking.
+	AllDay *bool `json:"all_day,omitempty"`
+
+	// BillingType Billing/charge source for the job.
+	BillingType *JobUpdateRequestBillingType `json:"billing_type,omitempty"`
+
+	// CheckInNotes Check-in notes captured when the asset is received for service.
+	CheckInNotes *string `json:"check_in_notes,omitempty"`
+
+	// Metadata Optional partner metadata on update. v1 supports `external_job_id` (maps to partner ticket id).
+	Metadata *map[string]string `json:"metadata,omitempty"`
+
+	// Notes Internal workshop notes for the job.
+	Notes *string `json:"notes,omitempty"`
+
+	// SyncWorkLineStatuses Whether future work-line status changes should be applied to all work lines by default.
+	SyncWorkLineStatuses *bool `json:"sync_work_line_statuses,omitempty"`
+}
+
+// JobUpdateRequestBillingType Billing/charge source for the job.
+type JobUpdateRequestBillingType string
+
+// JobWorkLine One asset's booked work on a job: a service booking with one or more catalogue services. Maps from `ServiceBooking` + its `ServiceInstance` rows.
+type JobWorkLine struct {
 	// AssetId Public asset id this work line applies to (`asset_...`).
 	AssetId *string `json:"asset_id,omitempty"`
 
-	// AssignedTeamMemberId Public team member id assigned to this work line, when assignment is exposed publicly.
-	AssignedTeamMemberId *string `json:"assigned_team_member_id,omitempty"`
+	// AssignedMechanicId Clerk user id assigned to this work line, when a mechanic is assigned.
+	AssignedMechanicId *string `json:"assigned_mechanic_id,omitempty"`
 
 	// CustomerNotes Customer-provided notes for this work line.
 	CustomerNotes *string `json:"customer_notes,omitempty"`
@@ -1253,78 +8593,261 @@ type JobWorkLineResponse struct {
 	JobReportId *string `json:"job_report_id,omitempty"`
 
 	// Object Resource object type. Always `work_line`.
-	Object *string `json:"object,omitempty"`
+	Object *JobWorkLineObject `json:"object,omitempty"`
 
 	// ScheduledDate Scheduled calendar date for this work line when set on the underlying service booking.
 	ScheduledDate *openapi_types.Date `json:"scheduled_date,omitempty"`
 
 	// ScheduledWindow Public time window on a job schedule.
-	ScheduledWindow *JobTimeWindowResponse `json:"scheduled_window,omitempty"`
+	ScheduledWindow *JobTimeWindow `json:"scheduled_window,omitempty"`
 
 	// Services Catalogue services performed on this work line.
-	Services *[]JobWorkLineServiceResponse `json:"services,omitempty"`
+	Services *[]ServiceInstance `json:"services,omitempty"`
 
-	// Status Workshop job status for this work line. Use `status.id` (`jst_...`) as the stable reference; `name` is display-only.
-	Status *JobStatusResponse `json:"status,omitempty"`
+	// Status Workshop job status assigned to a work line's service booking. Integrators should key off v1.Jobs.PublicApiJobStatusResponse.Id; v1.Jobs.PublicApiJobStatusResponse.Name is display-only and may change.
+	Status *JobStatus `json:"status,omitempty"`
 
 	// TotalCost Total cost for this work line, when pricing is exposed publicly.
 	TotalCost *float64 `json:"total_cost,omitempty"`
 }
 
-// JobWorkLineServiceInput One catalogue service to book on a work line.
-type JobWorkLineServiceInput struct {
-	// Quantity Quantity of this service on the work line. Defaults to `1` when omitted.
-	Quantity *float64 `json:"quantity,omitempty"`
+// JobWorkLineObject Resource object type. Always `work_line`.
+type JobWorkLineObject string
 
-	// ServiceId Required. Public catalogue service id (`svc_...` from `GET .../services`).
-	ServiceId string `json:"service_id"`
+// JobWorkLineInput One asset's work on a job: an asset plus one or more catalogue services to perform on it. Maps to a single `ServiceBooking` with multiple `ServiceInstance` rows.
+type JobWorkLineInput struct {
+	// AssetClientReference Request-local asset reference when the work line applies to an asset created in this same request.
+	AssetClientReference *string `json:"asset_client_reference,omitempty"`
+
+	// AssetId Required in v1. Must match an `id` from the parent request's `assets` array.
+	AssetId string `json:"asset_id"`
+
+	// AssignedMechanicId Optional Clerk user id for assigning this work line to a workshop member.
+	AssignedMechanicId *string `json:"assigned_mechanic_id,omitempty"`
+
+	// Notes Customer-visible notes for this work line.
+	Notes *string `json:"notes,omitempty"`
+
+	// ScheduledDate Requested scheduled calendar date for this work line, when known.
+	ScheduledDate *openapi_types.Date `json:"scheduled_date,omitempty"`
+
+	// ScheduledWindow Workshop-local time window. Send `start_time` and `end_time` as `HH:mm:ss` strings using a 24-hour clock, for example `{ "start_time": "09:00:00", "end_time": "11:30:00" }`.
+	ScheduledWindow *JobTimeWindowInput `json:"scheduled_window,omitempty"`
+
+	// Services Catalogue services to perform on this asset. Required: at least one entry.
+	Services []ServiceInstanceInput `json:"services"`
 }
 
-// JobWorkLineServiceResponse One catalogue service booked on a work line (service instance on the underlying service booking).
-type JobWorkLineServiceResponse struct {
-	// Name Catalogue service name at the time the job is returned.
-	Name *string `json:"name,omitempty"`
+// JobWorkLineMechanicAssignmentRequest Request body for assigning or clearing the mechanic on a work line.
+type JobWorkLineMechanicAssignmentRequest struct {
+	// AssignedMechanicId Clerk user id for the business member to assign. Send `null`, an empty value, or `any` to clear the assignment.
+	AssignedMechanicId *string `json:"assigned_mechanic_id,omitempty"`
 
-	// Quantity Quantity of this catalogue service on the work line.
-	Quantity *float64 `json:"quantity,omitempty"`
-
-	// ServiceId Public catalogue service id (`svc_...`).
-	ServiceId *string `json:"service_id,omitempty"`
-
-	// UnitPrice Unit price for this service, when pricing is exposed publicly.
-	UnitPrice *float64 `json:"unit_price,omitempty"`
+	// Notifications Notification options for a mechanic assignment change.
+	Notifications *MechanicAssignmentNotifications `json:"notifications,omitempty"`
 }
 
-// NextAvailableSlotResponse Public response containing the next available booking date and any known time slots.
-type NextAvailableSlotResponse struct {
+// JobWorkLineServicesUpdateRequest Request body for replacing the services on a work line.
+type JobWorkLineServicesUpdateRequest struct {
+	// ServiceIds Public service ids to keep on the work line.
+	ServiceIds []string `json:"service_ids"`
+}
+
+// JobWorkLineStatusChangeRequest Request body for changing a work line's workflow status.
+type JobWorkLineStatusChangeRequest struct {
+	// Notifications Notification options for a work-line status change.
+	Notifications *WorkLineStatusChangeNotifications `json:"notifications,omitempty"`
+
+	// StatusId Opaque public job status id (`jst_...`) to apply.
+	StatusId string `json:"status_id"`
+
+	// SyncAllWorkLines When true, applies the new status to every work line on the job. When false or omitted, only the specified work line is changed.
+	SyncAllWorkLines *bool `json:"sync_all_work_lines,omitempty"`
+}
+
+// JobWorkLineUpdateRequest Patch body for low-side-effect work-line fields. Omitted properties are ignored.
+type JobWorkLineUpdateRequest struct {
+	// CustomerNotes Customer-facing notes for this work line.
+	CustomerNotes *string `json:"customer_notes,omitempty"`
+
+	// ScheduledDate Calendar date string in `YYYY-MM-DD` format. Do not include a time or timezone offset.
+	ScheduledDate *openapi_types.Date `json:"scheduled_date,omitempty"`
+
+	// ScheduledWindow Workshop-local time window. Send `start_time` and `end_time` as `HH:mm:ss` strings using a 24-hour clock, for example `{ "start_time": "09:00:00", "end_time": "11:30:00" }`.
+	ScheduledWindow *JobTimeWindowInput `json:"scheduled_window,omitempty"`
+}
+
+// ListResponseOfAsset Standard public API list response with cursor pagination metadata.
+type ListResponseOfAsset struct {
+	// Data Page of public resources returned by the list endpoint.
+	Data *[]Asset `json:"data,omitempty"`
+
+	// Pagination Cursor pagination metadata used by public list endpoints.
+	Pagination *Pagination `json:"pagination,omitempty"`
+}
+
+// ListResponseOfBackOrder Standard public API list response with cursor pagination metadata.
+type ListResponseOfBackOrder struct {
+	// Data Page of public resources returned by the list endpoint.
+	Data *[]BackOrder `json:"data,omitempty"`
+
+	// Pagination Cursor pagination metadata used by public list endpoints.
+	Pagination *Pagination `json:"pagination,omitempty"`
+}
+
+// ListResponseOfBusiness Standard public API list response with cursor pagination metadata.
+type ListResponseOfBusiness struct {
+	// Data Page of public resources returned by the list endpoint.
+	Data *[]Business `json:"data,omitempty"`
+
+	// Pagination Cursor pagination metadata used by public list endpoints.
+	Pagination *Pagination `json:"pagination,omitempty"`
+}
+
+// ListResponseOfChatMessage Standard public API list response with cursor pagination metadata.
+type ListResponseOfChatMessage struct {
+	// Data Page of public resources returned by the list endpoint.
+	Data *[]ChatMessage `json:"data,omitempty"`
+
+	// Pagination Cursor pagination metadata used by public list endpoints.
+	Pagination *Pagination `json:"pagination,omitempty"`
+}
+
+// ListResponseOfCustomer Standard public API list response with cursor pagination metadata.
+type ListResponseOfCustomer struct {
+	// Data Page of public resources returned by the list endpoint.
+	Data *[]Customer `json:"data,omitempty"`
+
+	// Pagination Cursor pagination metadata used by public list endpoints.
+	Pagination *Pagination `json:"pagination,omitempty"`
+}
+
+// ListResponseOfInvoice Standard public API list response with cursor pagination metadata.
+type ListResponseOfInvoice struct {
+	// Data Page of public resources returned by the list endpoint.
+	Data *[]Invoice `json:"data,omitempty"`
+
+	// Pagination Cursor pagination metadata used by public list endpoints.
+	Pagination *Pagination `json:"pagination,omitempty"`
+}
+
+// ListResponseOfJob Standard public API list response with cursor pagination metadata.
+type ListResponseOfJob struct {
+	// Data Page of public resources returned by the list endpoint.
+	Data *[]Job `json:"data,omitempty"`
+
+	// Pagination Cursor pagination metadata used by public list endpoints.
+	Pagination *Pagination `json:"pagination,omitempty"`
+}
+
+// ListResponseOfJobReport Standard public API list response with cursor pagination metadata.
+type ListResponseOfJobReport struct {
+	// Data Page of public resources returned by the list endpoint.
+	Data *[]JobReport `json:"data,omitempty"`
+
+	// Pagination Cursor pagination metadata used by public list endpoints.
+	Pagination *Pagination `json:"pagination,omitempty"`
+}
+
+// ListResponseOfPartAuthorisation Standard public API list response with cursor pagination metadata.
+type ListResponseOfPartAuthorisation struct {
+	// Data Part lines on the job report. Each element includes a `pauth_...` `id` for submit decisions.
+	Data *[]PartAuthorisation `json:"data,omitempty"`
+
+	// Pagination Cursor pagination metadata used by public list endpoints.
+	Pagination *Pagination `json:"pagination,omitempty"`
+}
+
+// ListResponseOfService Standard public API list response with cursor pagination metadata.
+type ListResponseOfService struct {
+	// Data Page of public resources returned by the list endpoint.
+	Data *[]Service `json:"data,omitempty"`
+
+	// Pagination Cursor pagination metadata used by public list endpoints.
+	Pagination *Pagination `json:"pagination,omitempty"`
+}
+
+// ListResponseOfStockVariation Standard public API list response with cursor pagination metadata.
+type ListResponseOfStockVariation struct {
+	// Data Page of public resources returned by the list endpoint.
+	Data *[]StockVariation `json:"data,omitempty"`
+
+	// Pagination Cursor pagination metadata used by public list endpoints.
+	Pagination *Pagination `json:"pagination,omitempty"`
+}
+
+// ListResponseOfWebhookDelivery Standard public API list response with cursor pagination metadata.
+type ListResponseOfWebhookDelivery struct {
+	// Data Page of public resources returned by the list endpoint.
+	Data *[]WebhookDelivery `json:"data,omitempty"`
+
+	// Pagination Cursor pagination metadata used by public list endpoints.
+	Pagination *Pagination `json:"pagination,omitempty"`
+}
+
+// ListResponseOfWebhookEndpoint Standard public API list response with cursor pagination metadata.
+type ListResponseOfWebhookEndpoint struct {
+	// Data Page of public resources returned by the list endpoint.
+	Data *[]WebhookEndpoint `json:"data,omitempty"`
+
+	// Pagination Cursor pagination metadata used by public list endpoints.
+	Pagination *Pagination `json:"pagination,omitempty"`
+}
+
+// ListResponseOfWebhookEventType Standard public API list response with cursor pagination metadata.
+type ListResponseOfWebhookEventType struct {
+	// Data Page of public resources returned by the list endpoint.
+	Data *[]WebhookEventType `json:"data,omitempty"`
+
+	// Pagination Cursor pagination metadata used by public list endpoints.
+	Pagination *Pagination `json:"pagination,omitempty"`
+}
+
+// MechanicAssignmentNotifications Notification options for a mechanic assignment change.
+type MechanicAssignmentNotifications struct {
+	// Mechanic Notification control. Allowed values: `default`, `send`, or `skip`.
+	Mechanic *MechanicAssignmentNotificationsMechanic `json:"mechanic,omitempty"`
+}
+
+// MechanicAssignmentNotificationsMechanic Notification control. Allowed values: `default`, `send`, or `skip`.
+type MechanicAssignmentNotificationsMechanic string
+
+// NextAvailableSlotResult Public response containing the next available booking date and any known time slots.
+type NextAvailableSlotResult struct {
 	// BusinessId Public business id for this availability result.
 	BusinessId *string `json:"business_id,omitempty"`
 
 	// Date Calendar date (`YYYY-MM-DD`). No time or timezone offset — use the date part only. Null when no bookable day is found.
 	Date *openapi_types.Date `json:"date,omitempty"`
 
-	// FulfilmentType How the customer fulfils the booking on date: `collection` or `customer_drop_off`.
-	FulfilmentType *string `json:"fulfilment_type,omitempty"`
+	// FulfilmentType Availability fulfilment mode for the returned slot. Allowed values: `collection` or `customer_drop_off`.
+	FulfilmentType *NextAvailableSlotResultFulfilmentType `json:"fulfilment_type,omitempty"`
 
 	// Object Resource object type. Always next_available_slot.
-	Object *string `json:"object,omitempty"`
+	Object *NextAvailableSlotResultObject `json:"object,omitempty"`
 
 	// Slots Time windows for the returned date. Each slot includes `is_available` for capacity.
-	Slots *[]AvailabilitySlotResponse `json:"slots,omitempty"`
+	Slots *[]AvailabilitySlot `json:"slots,omitempty"`
 }
 
-// PartAuthorisationDecisionRequest A single approve or decline decision for one part line on the job.
-type PartAuthorisationDecisionRequest struct {
-	// Decision `approved` or `declined` (snake_case). You cannot set `pending` via the API.
-	Decision string `json:"decision"`
+// NextAvailableSlotResultFulfilmentType Availability fulfilment mode for the returned slot. Allowed values: `collection` or `customer_drop_off`.
+type NextAvailableSlotResultFulfilmentType string
 
-	// Id Public part authorisation id (`pauth_...`). Must match `PartAuthorisationResponse.id` from `GET .../part_authorisations` or `data.id` on a `part_authorisation.*` webhook.
-	Id string `json:"id"`
+// NextAvailableSlotResultObject Resource object type. Always next_available_slot.
+type NextAvailableSlotResultObject string
+
+// Pagination Cursor pagination metadata used by public list endpoints.
+type Pagination struct {
+	// HasMore True when another page is available after this response.
+	HasMore *bool `json:"has_more,omitempty"`
+
+	// NextCursor Opaque cursor to pass as the next request's cursor parameter. Null when there are no more pages.
+	NextCursor *string `json:"next_cursor,omitempty"`
 }
 
-// PartAuthorisationResponse A single part line on a job report that the customer or integration can approve or decline.
-type PartAuthorisationResponse struct {
-	// Id Public part authorisation id (`pauth_...`, for example `pauth_01h2xexample`). Copy into `decisions[].id` when submitting decisions.
+// PartAuthorisation A single part line on a job report that the customer or integration can approve or decline.
+type PartAuthorisation struct {
+	// Id Public part authorisation id, always prefixed `pauth_` (for example `pauth_01h2xexample`). Copy into `decisions[].id` when submitting approve/decline decisions.
 	Id *string `json:"id,omitempty"`
 
 	// JobId Public job id that owns the part authorisation.
@@ -1337,7 +8860,7 @@ type PartAuthorisationResponse struct {
 	Name *string `json:"name,omitempty"`
 
 	// Object Resource object type. Always part_authorisation.
-	Object *string `json:"object,omitempty"`
+	Object *PartAuthorisationObject `json:"object,omitempty"`
 
 	// Quantity Quantity requested or used.
 	Quantity *float64 `json:"quantity,omitempty"`
@@ -1345,62 +8868,101 @@ type PartAuthorisationResponse struct {
 	// ServiceItemName Public service item or checklist name associated with the part, when available.
 	ServiceItemName *string `json:"service_item_name,omitempty"`
 
-	// Status Current status: `not_sent`, `pending`, `approved`, or `declined` (snake_case).
-	Status *string `json:"status,omitempty"`
+	// Status Part authorisation status. Allowed values: `not_sent`, `pending`, `approved`, or `declined`.
+	Status *PartAuthorisationStatus `json:"status,omitempty"`
 }
 
-// RotateWebhookEndpointSecretResponse Response returned when a webhook endpoint signing secret is rotated. The new secret is only returned once.
-type RotateWebhookEndpointSecretResponse struct {
-	// BusinessIds Public business ids this endpoint is subscribed to.
-	BusinessIds *[]string `json:"business_ids,omitempty"`
+// PartAuthorisationObject Resource object type. Always part_authorisation.
+type PartAuthorisationObject string
 
-	// CreatedAt UTC timestamp when this endpoint was created.
-	CreatedAt *time.Time `json:"created_at,omitempty"`
+// PartAuthorisationStatus Part authorisation status. Allowed values: `not_sent`, `pending`, `approved`, or `declined`.
+type PartAuthorisationStatus string
 
-	// Description Human-readable description for this endpoint.
-	Description *string `json:"description,omitempty"`
+// PartAuthorisationDecisionRequest A single approve or decline decision for one part line on the job.
+type PartAuthorisationDecisionRequest struct {
+	// Decision Approval decision. Allowed values: `approved` or `declined`.
+	Decision PartAuthorisationDecisionRequestDecision `json:"decision"`
 
-	// Enabled Whether delivery to this endpoint is enabled.
-	Enabled *bool `json:"enabled,omitempty"`
+	// Id Public part authorisation id (`pauth_...`). Must match `PartAuthorisation.id` from `GET .../part_authorisations` or `data.id` on a `part_authorisation.*` webhook.
+	Id string `json:"id"`
+}
 
-	// EventTypes Event type filters. A single * means all supported events.
-	EventTypes *[]string `json:"event_types,omitempty"`
+// PartAuthorisationDecisionRequestDecision Approval decision. Allowed values: `approved` or `declined`.
+type PartAuthorisationDecisionRequestDecision string
+
+// PartAuthorisationDecisionSubmitRequest Batch of approve/decline decisions for parts that already exist on a job report.
+type PartAuthorisationDecisionSubmitRequest struct {
+	// Decisions One or more decisions. Use the `id` from each list item (for example `pauth_01h2xexample`).
+	Decisions []PartAuthorisationDecisionRequest `json:"decisions"`
+}
+
+// PartAuthorisationRequestCreateRequest Request body for asking the customer to authorise pending parts.
+type PartAuthorisationRequestCreateRequest struct {
+	// UpdateStatus Whether to move the related work line to the waiting-for-approval status when available.
+	UpdateStatus *bool `json:"update_status,omitempty"`
+}
+
+// Payment Public representation of a payment recorded against an invoice.
+type Payment struct {
+	// Amount Payment amount in invoice currency units.
+	Amount *float64 `json:"amount,omitempty"`
+
+	// ChargedOn UTC timestamp when the payment was charged or recorded.
+	ChargedOn *time.Time `json:"charged_on,omitempty"`
 
 	// Id Opaque resource-prefixed public identifier, such as job_... or cus_.... Internal database ids must never be assigned here.
 	Id *string `json:"id,omitempty"`
 
-	// Object Resource object type. Always webhook_endpoint.
-	Object *string `json:"object,omitempty"`
+	// InvoiceId Public invoice id this payment belongs to.
+	InvoiceId *string `json:"invoice_id,omitempty"`
 
-	// PreviousSigningSecretExpiresAt UTC timestamp when the previous signing secret stops being included in signatures.
-	PreviousSigningSecretExpiresAt *time.Time `json:"previous_signing_secret_expires_at,omitempty"`
+	// Object Resource object type. Always payment.
+	Object *PaymentObject `json:"object,omitempty"`
 
-	// PreviousSigningSecretPrefix Display-only prefix for the previous signing secret during rotation, when active.
-	PreviousSigningSecretPrefix *string `json:"previous_signing_secret_prefix,omitempty"`
+	// Origin Payment origin, such as workshop or stripe.
+	Origin *PaymentOrigin `json:"origin,omitempty"`
 
-	// SigningSecret One-time new signing secret used to verify Workshop webhook signatures. Store it securely.
-	SigningSecret *string `json:"signing_secret,omitempty"`
+	// PaymentMethod Payment method in snake_case.
+	PaymentMethod *PaymentPaymentMethod `json:"payment_method,omitempty"`
 
-	// SigningSecretPrefix Display-only prefix for identifying the active signing secret.
-	SigningSecretPrefix *string `json:"signing_secret_prefix,omitempty"`
-
-	// UpdatedAt UTC timestamp when this endpoint was last updated.
-	UpdatedAt *time.Time `json:"updated_at,omitempty"`
-
-	// Url HTTPS URL that Workshop posts webhook events to.
-	Url *string `json:"url,omitempty"`
+	// PaymentType Payment type, such as invoice_payment or refund.
+	PaymentType *string `json:"payment_type,omitempty"`
 }
 
-// ServiceResponse Public service catalogue entry.
-type ServiceResponse struct {
-	// BusinessId Public business id that owns this service, currently an org_... Clerk organization id.
+// PaymentObject Resource object type. Always payment.
+type PaymentObject string
+
+// PaymentOrigin Payment origin, such as workshop or stripe.
+type PaymentOrigin string
+
+// PaymentPaymentMethod Payment method in snake_case.
+type PaymentPaymentMethod string
+
+// PaymentRefundCreateRequest Request body for recording a refund against a payment.
+type PaymentRefundCreateRequest struct {
+	// Amount Refund amount in invoice currency units.
+	Amount *float64 `json:"amount,omitempty"`
+
+	// PaymentMethod Refund method recorded against the payment.
+	PaymentMethod PaymentRefundCreateRequestPaymentMethod `json:"payment_method"`
+
+	// Reason Optional refund reason.
+	Reason *string `json:"reason,omitempty"`
+}
+
+// PaymentRefundCreateRequestPaymentMethod Refund method recorded against the payment.
+type PaymentRefundCreateRequestPaymentMethod string
+
+// Service Public service catalogue entry.
+type Service struct {
+	// BusinessId Public business id that owns this service.
 	BusinessId *string `json:"business_id,omitempty"`
 
 	// Category Public category name for grouping services in the catalogue.
 	Category *string `json:"category,omitempty"`
 
-	// Currency Currency code for the service price, for example GBP.
-	Currency *string `json:"currency,omitempty"`
+	// Currency ISO 4217 currency code for the service price. Currently `GBP`.
+	Currency *ServiceCurrency `json:"currency,omitempty"`
 
 	// Description Public description of what the service includes.
 	Description *string `json:"description,omitempty"`
@@ -1408,7 +8970,7 @@ type ServiceResponse struct {
 	// DurationMinutes Estimated service duration in minutes, when configured.
 	DurationMinutes *int32 `json:"duration_minutes,omitempty"`
 
-	// Id Public catalogue service id (`svc_...`, for example `svc_8n1cexample`).
+	// Id Opaque resource-prefixed public identifier, such as job_... or cus_.... Internal database ids must never be assigned here.
 	Id *string `json:"id,omitempty"`
 
 	// ImageUrl Public image URL for the service, when configured.
@@ -1418,7 +8980,7 @@ type ServiceResponse struct {
 	Name *string `json:"name,omitempty"`
 
 	// Object Resource object type. Always service.
-	Object *string `json:"object,omitempty"`
+	Object *ServiceObject `json:"object,omitempty"`
 
 	// Order Display order within the service category.
 	Order *int32 `json:"order,omitempty"`
@@ -1426,15 +8988,123 @@ type ServiceResponse struct {
 	// Price Effective public price for set_price services. Non-fixed pricing models return 0.
 	Price *float64 `json:"price,omitempty"`
 
-	// PricingType Pricing model as a snake_case value: set_price, price_on_assessment, or price_on_request.
-	PricingType *string `json:"pricing_type,omitempty"`
+	// PricingType Pricing model. Allowed values: `set_price`, `price_on_assessment`, or `price_on_request`.
+	PricingType *ServicePricingType `json:"pricing_type,omitempty"`
 
 	// UpdatedAt UTC timestamp when the service was last updated, when available.
 	UpdatedAt *time.Time `json:"updated_at,omitempty"`
 }
 
-// StockItemSummaryResponse Parent stock item details embedded on stock variation responses.
-type StockItemSummaryResponse struct {
+// ServiceCurrency ISO 4217 currency code for the service price. Currently `GBP`.
+type ServiceCurrency string
+
+// ServiceObject Resource object type. Always service.
+type ServiceObject string
+
+// ServicePricingType Pricing model. Allowed values: `set_price`, `price_on_assessment`, or `price_on_request`.
+type ServicePricingType string
+
+// ServiceCreateRequest Public API request for creating a service in a business catalogue.
+type ServiceCreateRequest struct {
+	// Category Public category name. Workshop creates the category for the business if it does not exist.
+	Category string `json:"category"`
+
+	// Description Description of what the service includes.
+	Description *string `json:"description,omitempty"`
+
+	// DurationMinutes Estimated duration in minutes.
+	DurationMinutes *int32 `json:"duration_minutes,omitempty"`
+
+	// ImageUrl Public image URL to associate with the service.
+	ImageUrl *string `json:"image_url,omitempty"`
+
+	// Name Service name shown in the public catalogue.
+	Name string `json:"name"`
+
+	// Price Raw service price. Required by callers for set_price services; ignored in public display for other pricing models.
+	Price *float64 `json:"price,omitempty"`
+
+	// PricingType Pricing model. Allowed values: `set_price`, `price_on_assessment`, or `price_on_request`.
+	PricingType *ServiceCreateRequestPricingType `json:"pricing_type,omitempty"`
+
+	// Visibility Catalogue visibility. Allowed values: `external_and_internal`, `internal_only`, or `disabled`.
+	Visibility *ServiceCreateRequestVisibility `json:"visibility,omitempty"`
+}
+
+// ServiceCreateRequestPricingType Pricing model. Allowed values: `set_price`, `price_on_assessment`, or `price_on_request`.
+type ServiceCreateRequestPricingType string
+
+// ServiceCreateRequestVisibility Catalogue visibility. Allowed values: `external_and_internal`, `internal_only`, or `disabled`.
+type ServiceCreateRequestVisibility string
+
+// ServiceInstance One service instance booked on a work line.
+type ServiceInstance struct {
+	// Id Public service instance id (`svinst_...`).
+	Id *string `json:"id,omitempty"`
+
+	// Name Service name at the time the job is returned.
+	Name *string `json:"name,omitempty"`
+
+	// Object Resource object type. Always service_instance.
+	Object *ServiceInstanceObject `json:"object,omitempty"`
+
+	// Quantity Quantity of this service instance on the work line.
+	Quantity *float64 `json:"quantity,omitempty"`
+
+	// ServiceId Public service id (`svc_...`) this instance was created from.
+	ServiceId *string `json:"service_id,omitempty"`
+
+	// UnitPrice Unit price for this service, when pricing is exposed publicly.
+	UnitPrice *float64 `json:"unit_price,omitempty"`
+}
+
+// ServiceInstanceObject Resource object type. Always service_instance.
+type ServiceInstanceObject string
+
+// ServiceInstanceInput One catalogue service to book on a work line.
+type ServiceInstanceInput struct {
+	// Quantity Quantity of this service on the work line. Defaults to `1` when omitted.
+	Quantity *float64 `json:"quantity,omitempty"`
+
+	// ServiceId Required. Public catalogue service id (`svc_...` from `GET .../services`).
+	ServiceId string `json:"service_id"`
+}
+
+// ServiceUpdateRequest Public API request for updating selected service catalogue fields. Null properties are ignored so callers can patch only the fields they need.
+type ServiceUpdateRequest struct {
+	// Category New public category name. Workshop creates the category for the business if it does not exist.
+	Category *string `json:"category,omitempty"`
+
+	// Description New description of what the service includes.
+	Description *string `json:"description,omitempty"`
+
+	// DurationMinutes New estimated duration in minutes.
+	DurationMinutes *int32 `json:"duration_minutes,omitempty"`
+
+	// ImageUrl New public image URL. Send an empty value to clear the service image.
+	ImageUrl *string `json:"image_url,omitempty"`
+
+	// Name New service name shown in the public catalogue.
+	Name *string `json:"name,omitempty"`
+
+	// Price New raw service price. Public responses show this only when pricing_type is set_price.
+	Price *float64 `json:"price,omitempty"`
+
+	// PricingType Pricing model. Allowed values: `set_price`, `price_on_assessment`, or `price_on_request`.
+	PricingType *ServiceUpdateRequestPricingType `json:"pricing_type,omitempty"`
+
+	// Visibility Catalogue visibility. Allowed values: `external_and_internal`, `internal_only`, or `disabled`.
+	Visibility *ServiceUpdateRequestVisibility `json:"visibility,omitempty"`
+}
+
+// ServiceUpdateRequestPricingType Pricing model. Allowed values: `set_price`, `price_on_assessment`, or `price_on_request`.
+type ServiceUpdateRequestPricingType string
+
+// ServiceUpdateRequestVisibility Catalogue visibility. Allowed values: `external_and_internal`, `internal_only`, or `disabled`.
+type ServiceUpdateRequestVisibility string
+
+// StockItemSummary Parent stock item details embedded on stock variation responses.
+type StockItemSummary struct {
 	// Brand Brand or manufacturer, when configured.
 	Brand *string `json:"brand,omitempty"`
 
@@ -1460,14 +9130,17 @@ type StockItemSummaryResponse struct {
 	Name *string `json:"name,omitempty"`
 
 	// Object Resource object type. Always `stock_item`.
-	Object *string `json:"object,omitempty"`
+	Object *StockItemSummaryObject `json:"object,omitempty"`
 
 	// Vendor Supplier or vendor name, when configured.
 	Vendor *string `json:"vendor,omitempty"`
 }
 
-// StockVariationResponse Public stock variation (SKU) read model for catalogue and inventory lookup.
-type StockVariationResponse struct {
+// StockItemSummaryObject Resource object type. Always `stock_item`.
+type StockItemSummaryObject string
+
+// StockVariation Public stock variation (SKU) read model for catalogue and inventory lookup.
+type StockVariation struct {
 	// Barcode Barcode value, when configured.
 	Barcode *string `json:"barcode,omitempty"`
 
@@ -1490,7 +9163,7 @@ type StockVariationResponse struct {
 	Name *string `json:"name,omitempty"`
 
 	// Object Resource object type. Always `stock_variation`.
-	Object *string `json:"object,omitempty"`
+	Object *StockVariationObject `json:"object,omitempty"`
 
 	// Price Selling price, when configured.
 	Price *float64 `json:"price,omitempty"`
@@ -1502,7 +9175,7 @@ type StockVariationResponse struct {
 	Sku *string `json:"sku,omitempty"`
 
 	// StockItem Parent stock item details embedded on stock variation responses.
-	StockItem *StockItemSummaryResponse `json:"stock_item,omitempty"`
+	StockItem *StockItemSummary `json:"stock_item,omitempty"`
 
 	// StockItemId Parent stock item public id (`stki_...`).
 	StockItemId *string `json:"stock_item_id,omitempty"`
@@ -1511,122 +9184,11 @@ type StockVariationResponse struct {
 	TrackingEnabled *bool `json:"tracking_enabled,omitempty"`
 }
 
-// SubmitPartAuthorisationDecisionsRequest Batch of approve/decline decisions for parts that already exist on a job report.
-type SubmitPartAuthorisationDecisionsRequest struct {
-	// Decisions One or more decisions. Use the `id` from each list item (for example `pauth_01h2xexample`).
-	Decisions []PartAuthorisationDecisionRequest `json:"decisions"`
-}
+// StockVariationObject Resource object type. Always `stock_variation`.
+type StockVariationObject string
 
-// UpdateAssetRequest Request body for updating a customer's asset through an authenticated business-scoped public API key.
-type UpdateAssetRequest struct {
-	// Make Asset make or manufacturer. Omit to leave unchanged.
-	Make *string `json:"make,omitempty"`
-
-	// Model Asset model. Omit to leave unchanged.
-	Model *string `json:"model,omitempty"`
-
-	// Name Asset display name. Omit to leave unchanged.
-	Name *string `json:"name,omitempty"`
-
-	// SerialNumber Asset serial number. Omit to leave unchanged.
-	SerialNumber *string `json:"serial_number,omitempty"`
-
-	// Type Public asset type. Omit to leave unchanged.
-	Type *string `json:"type,omitempty"`
-
-	// Year Asset model year. Omit to leave unchanged.
-	Year *int32 `json:"year,omitempty"`
-}
-
-// UpdateCustomerRequest Request body for updating a customer through an authenticated business-scoped public API key.
-type UpdateCustomerRequest struct {
-	// Email Customer email address. Omit to leave unchanged.
-	Email *string `json:"email,omitempty"`
-
-	// FirstName Customer first name. Omit to leave unchanged.
-	FirstName *string `json:"first_name,omitempty"`
-
-	// Landline Customer landline phone number. Omit to leave unchanged.
-	Landline *string `json:"landline,omitempty"`
-
-	// LastName Customer last name. Omit to leave unchanged.
-	LastName *string `json:"last_name,omitempty"`
-
-	// Phone Customer mobile phone number. Omit to leave unchanged.
-	Phone *string `json:"phone,omitempty"`
-
-	// PreferredContactMethod Preferred contact method as a public value such as email, phone, whats_app, instagram, or facebook. Omit to leave unchanged.
-	PreferredContactMethod *string `json:"preferred_contact_method,omitempty"`
-}
-
-// UpdateInvoiceItemRequest Request body for updating an invoice item through the public API.
-type UpdateInvoiceItemRequest struct {
-	// AssetId Public customer asset id (`asset_...`). Omit to leave unchanged.
-	AssetId *string `json:"asset_id,omitempty"`
-
-	// Description Optional longer description. Omit to leave unchanged.
-	Description *string `json:"description,omitempty"`
-
-	// Name Display name. Omit to leave unchanged.
-	Name *string `json:"name,omitempty"`
-
-	// Order Display order of the item on the invoice. Omit to leave unchanged.
-	Order *int32 `json:"order,omitempty"`
-
-	// Quantity Quantity billed on the item. Omit to leave unchanged.
-	Quantity *float64 `json:"quantity,omitempty"`
-
-	// UnitPrice Unit price in the invoice currency. Omit to leave unchanged.
-	UnitPrice *float64 `json:"unit_price,omitempty"`
-}
-
-// UpdateServiceRequest Public API request for updating selected service catalogue fields. Null properties are ignored so callers can patch only the fields they need.
-type UpdateServiceRequest struct {
-	// Category New public category name. Workshop creates the category for the business if it does not exist.
-	Category *string `json:"category,omitempty"`
-
-	// Description New description of what the service includes.
-	Description *string `json:"description,omitempty"`
-
-	// DurationMinutes New estimated duration in minutes.
-	DurationMinutes *int32 `json:"duration_minutes,omitempty"`
-
-	// ImageUrl New public image URL. Send an empty value to clear the service image.
-	ImageUrl *string `json:"image_url,omitempty"`
-
-	// Name New service name shown in the public catalogue.
-	Name *string `json:"name,omitempty"`
-
-	// Price New raw service price. Public responses show this only when pricing_type is set_price.
-	Price *float64 `json:"price,omitempty"`
-
-	// PricingType New pricing model as a snake_case value: set_price, price_on_assessment, or price_on_request.
-	PricingType *string `json:"pricing_type,omitempty"`
-
-	// Visibility New catalogue visibility as a snake_case value: external_and_internal, internal_only, or disabled.
-	Visibility *string `json:"visibility,omitempty"`
-}
-
-// UpdateWebhookEndpointRequest Request body for updating an outbound webhook endpoint subscription.
-type UpdateWebhookEndpointRequest struct {
-	// BusinessIds Public business ids this endpoint is subscribed to. Omit to leave unchanged.
-	BusinessIds *[]string `json:"business_ids,omitempty"`
-
-	// Description Human-readable description for this endpoint. Omit to leave unchanged.
-	Description *string `json:"description,omitempty"`
-
-	// Enabled Whether delivery to this endpoint is enabled. Omit to leave unchanged.
-	Enabled *bool `json:"enabled,omitempty"`
-
-	// EventTypes Event type filters such as job.created. Use * for all supported events. Omit to leave unchanged.
-	EventTypes *[]string `json:"event_types,omitempty"`
-
-	// Url HTTPS URL that Workshop will POST webhook events to. Omit to leave unchanged.
-	Url *string `json:"url,omitempty"`
-}
-
-// WebhookDeliveryResponse Public representation of an outbound webhook delivery attempt.
-type WebhookDeliveryResponse struct {
+// WebhookDelivery Public representation of an outbound webhook delivery attempt.
+type WebhookDelivery struct {
 	// AttemptCount Number of delivery attempts made so far.
 	AttemptCount *int32 `json:"attempt_count,omitempty"`
 
@@ -1642,7 +9204,7 @@ type WebhookDeliveryResponse struct {
 	// EventType Public webhook event type, such as job.created.
 	EventType *string `json:"event_type,omitempty"`
 
-	// Id Public webhook delivery id (`whd_...`).
+	// Id Opaque resource-prefixed public identifier, such as job_... or cus_.... Internal database ids must never be assigned here.
 	Id *string `json:"id,omitempty"`
 
 	// LastErrorMessage Error summary from the most recent failed delivery attempt.
@@ -1658,7 +9220,7 @@ type WebhookDeliveryResponse struct {
 	NextRetryAt *time.Time `json:"next_retry_at,omitempty"`
 
 	// Object Resource object type. Always webhook_delivery.
-	Object *string `json:"object,omitempty"`
+	Object *WebhookDeliveryObject `json:"object,omitempty"`
 
 	// Payload Serialised JSON payload that was or will be posted to the endpoint.
 	Payload *string `json:"payload,omitempty"`
@@ -1669,15 +9231,24 @@ type WebhookDeliveryResponse struct {
 	// ReplayedFromDeliveryId Opaque delivery id that this replay was created from, when applicable.
 	ReplayedFromDeliveryId *string `json:"replayed_from_delivery_id,omitempty"`
 
-	// Status Delivery status: pending, success, or failed.
-	Status *string `json:"status,omitempty"`
+	// Status Delivery attempt status. Allowed values: `pending`, `success`, or `failed`.
+	Status *WebhookDeliveryStatus `json:"status,omitempty"`
 
 	// WebhookEndpointId Opaque webhook endpoint id that received this delivery.
 	WebhookEndpointId *string `json:"webhook_endpoint_id,omitempty"`
 }
 
-// WebhookEndpointResponse Public representation of an outbound webhook endpoint subscription.
-type WebhookEndpointResponse struct {
+// WebhookDeliveryObject Resource object type. Always webhook_delivery.
+type WebhookDeliveryObject string
+
+// WebhookDeliveryStatus Delivery attempt status. Allowed values: `pending`, `success`, or `failed`.
+type WebhookDeliveryStatus string
+
+// WebhookEndpoint Public representation of an outbound webhook endpoint subscription.
+type WebhookEndpoint struct {
+	// ApiVersion Public API payload version this subscription receives. Existing v1 endpoints remain pinned to v1.
+	ApiVersion *string `json:"api_version,omitempty"`
+
 	// BusinessIds Public business ids this endpoint is subscribed to.
 	BusinessIds *[]string `json:"business_ids,omitempty"`
 
@@ -1690,14 +9261,14 @@ type WebhookEndpointResponse struct {
 	// Enabled Whether delivery to this endpoint is enabled.
 	Enabled *bool `json:"enabled,omitempty"`
 
-	// EventTypes Event type filters. A single * means all supported events.
-	EventTypes *[]string `json:"event_types,omitempty"`
+	// EventTypes Subscribed webhook event names.
+	EventTypes *[]WebhookEndpointEventTypes `json:"event_types,omitempty"`
 
-	// Id Public webhook endpoint id (`wh_...`).
+	// Id Opaque resource-prefixed public identifier, such as job_... or cus_.... Internal database ids must never be assigned here.
 	Id *string `json:"id,omitempty"`
 
 	// Object Resource object type. Always webhook_endpoint.
-	Object *string `json:"object,omitempty"`
+	Object *WebhookEndpointObject `json:"object,omitempty"`
 
 	// PreviousSigningSecretExpiresAt UTC timestamp when the previous signing secret stops being included in signatures.
 	PreviousSigningSecretExpiresAt *time.Time `json:"previous_signing_secret_expires_at,omitempty"`
@@ -1715,38 +9286,154 @@ type WebhookEndpointResponse struct {
 	Url *string `json:"url,omitempty"`
 }
 
-// WebhookEventResponse Public webhook event catalog entry.
-type WebhookEventResponse struct {
+// WebhookEndpointEventTypes defines model for WebhookEndpoint.EventTypes.
+type WebhookEndpointEventTypes string
+
+// WebhookEndpointObject Resource object type. Always webhook_endpoint.
+type WebhookEndpointObject string
+
+// WebhookEndpointCreateRequest Request body for creating an outbound webhook endpoint subscription.
+type WebhookEndpointCreateRequest struct {
+	// BusinessIds Public business ids (`org_...`) this endpoint is subscribed to. At least one id is required; each id must be allowed for your API key.
+	BusinessIds []string `json:"business_ids"`
+
+	// Description Optional human-readable description for this endpoint.
+	Description *string `json:"description,omitempty"`
+
+	// Enabled Whether delivery to this endpoint is enabled. Defaults to true when omitted.
+	Enabled *bool `json:"enabled,omitempty"`
+
+	// EventTypes Webhook events to subscribe to. Use `*` to receive all supported events, or list specific event names.
+	EventTypes *[]WebhookEndpointCreateRequestEventTypes `json:"event_types,omitempty"`
+
+	// Url HTTPS URL that Workshop will POST webhook events to.
+	Url string `json:"url"`
+}
+
+// WebhookEndpointCreateRequestEventTypes defines model for WebhookEndpointCreateRequest.EventTypes.
+type WebhookEndpointCreateRequestEventTypes string
+
+// WebhookEndpointUpdateRequest Request body for updating an outbound webhook endpoint subscription.
+type WebhookEndpointUpdateRequest struct {
+	// BusinessIds Public business ids this endpoint is subscribed to. Omit to leave unchanged.
+	BusinessIds *[]string `json:"business_ids,omitempty"`
+
+	// Description Human-readable description for this endpoint. Omit to leave unchanged.
+	Description *string `json:"description,omitempty"`
+
+	// Enabled Whether delivery to this endpoint is enabled. Omit to leave unchanged.
+	Enabled *bool `json:"enabled,omitempty"`
+
+	// EventTypes Webhook events to subscribe to. Use `*` to receive all supported events, or list specific event names.
+	EventTypes *[]WebhookEndpointUpdateRequestEventTypes `json:"event_types,omitempty"`
+
+	// Url HTTPS URL that Workshop will POST webhook events to. Omit to leave unchanged.
+	Url *string `json:"url,omitempty"`
+}
+
+// WebhookEndpointUpdateRequestEventTypes defines model for WebhookEndpointUpdateRequest.EventTypes.
+type WebhookEndpointUpdateRequestEventTypes string
+
+// WebhookEndpointWithSecret Response returned when a webhook endpoint is created. The signing secret is only returned once.
+type WebhookEndpointWithSecret struct {
+	// ApiVersion Public API payload version this subscription receives. Existing v1 endpoints remain pinned to v1.
+	ApiVersion *string `json:"api_version,omitempty"`
+
+	// BusinessIds Public business ids this endpoint is subscribed to.
+	BusinessIds *[]string `json:"business_ids,omitempty"`
+
+	// CreatedAt UTC timestamp when this endpoint was created.
+	CreatedAt *time.Time `json:"created_at,omitempty"`
+
+	// Description Human-readable description for this endpoint.
+	Description *string `json:"description,omitempty"`
+
+	// Enabled Whether delivery to this endpoint is enabled.
+	Enabled *bool `json:"enabled,omitempty"`
+
+	// EventTypes Event type filters. A single * means all supported events.
+	EventTypes *[]WebhookEndpointWithSecretEventTypes `json:"event_types,omitempty"`
+
+	// Id Opaque resource-prefixed public identifier, such as job_... or cus_.... Internal database ids must never be assigned here.
+	Id *string `json:"id,omitempty"`
+
+	// Object Resource object type. Always webhook_endpoint.
+	Object *WebhookEndpointWithSecretObject `json:"object,omitempty"`
+
+	// PreviousSigningSecretExpiresAt UTC timestamp when the previous signing secret stops being included in signatures.
+	PreviousSigningSecretExpiresAt *time.Time `json:"previous_signing_secret_expires_at,omitempty"`
+
+	// PreviousSigningSecretPrefix Display-only prefix for the previous signing secret during rotation, when active.
+	PreviousSigningSecretPrefix *string `json:"previous_signing_secret_prefix,omitempty"`
+
+	// SigningSecret One-time signing secret used to verify Workshop webhook signatures. Store it securely.
+	SigningSecret *string `json:"signing_secret,omitempty"`
+
+	// SigningSecretPrefix Display-only prefix for identifying the active signing secret.
+	SigningSecretPrefix *string `json:"signing_secret_prefix,omitempty"`
+
+	// UpdatedAt UTC timestamp when this endpoint was last updated.
+	UpdatedAt *time.Time `json:"updated_at,omitempty"`
+
+	// Url HTTPS URL that Workshop posts webhook events to.
+	Url *string `json:"url,omitempty"`
+}
+
+// WebhookEndpointWithSecretEventTypes defines model for WebhookEndpointWithSecret.EventTypes.
+type WebhookEndpointWithSecretEventTypes string
+
+// WebhookEndpointWithSecretObject Resource object type. Always webhook_endpoint.
+type WebhookEndpointWithSecretObject string
+
+// WebhookEventType Public webhook event catalog entry.
+type WebhookEventType struct {
 	// Description Human-readable event description for API docs and UI.
 	Description *string `json:"description,omitempty"`
 
 	// Name Public event name, for example job.created.
 	Name *string `json:"name,omitempty"`
 
-	// PayloadObject Public payload object type delivered for this event.
-	PayloadObject *string `json:"payload_object,omitempty"`
+	// PayloadObject Primary resource object emitted for this event type.
+	PayloadObject *WebhookEventTypePayloadObject `json:"payload_object,omitempty"`
 
-	// Status Event availability status, for example available.
-	Status *string `json:"status,omitempty"`
+	// Status Catalog entry status. Currently `available`.
+	Status *WebhookEventTypeStatus `json:"status,omitempty"`
 }
+
+// WebhookEventTypePayloadObject Primary resource object emitted for this event type.
+type WebhookEventTypePayloadObject string
+
+// WebhookEventTypeStatus Catalog entry status. Currently `available`.
+type WebhookEventTypeStatus string
+
+// WorkLineStatusChangeNotifications Notification options for a work-line status change.
+type WorkLineStatusChangeNotifications struct {
+	// Customer Notification control. Allowed values: `default`, `send`, or `skip`.
+	Customer *WorkLineStatusChangeNotificationsCustomer `json:"customer,omitempty"`
+}
+
+// WorkLineStatusChangeNotificationsCustomer Notification control. Allowed values: `default`, `send`, or `skip`.
+type WorkLineStatusChangeNotificationsCustomer string
 
 // bearerAuthContextKey is the context key for bearerAuth security scheme
 type bearerAuthContextKey string
 
-// AssetsListParams defines parameters for AssetsList.
-type AssetsListParams struct {
+// ListAssetParams defines parameters for ListAsset.
+type ListAssetParams struct {
 	BusinessId   *string `form:"business_id,omitempty" json:"business_id,omitempty"`
 	CustomerId   *string `form:"customer_id,omitempty" json:"customer_id,omitempty"`
 	Name         *string `form:"name,omitempty" json:"name,omitempty"`
 	SerialNumber *string `form:"serial_number,omitempty" json:"serial_number,omitempty"`
 	Make         *string `form:"make,omitempty" json:"make,omitempty"`
 	Model        *string `form:"model,omitempty" json:"model,omitempty"`
-	Type         *string `form:"type,omitempty" json:"type,omitempty"`
+
+	// BikeType Exact match on bike category (bikes only). Allowed values: bmx, e_cargo, e_gravel, e_road, electric_bike, generic_bike, gravel, hybrid, kids_bike, mountain_bike, other, road_bike, single_speed, static_bike, triathlon_bike.
+	BikeType *ListAssetParamsBikeType `form:"bike_type,omitempty" json:"bike_type,omitempty"`
 
 	// Sort Sort field. Allowed values: `name`, `created_at`. Default: `name`. Prefix with `-` for descending order (for example `-name`).
 	Sort *string `form:"sort,omitempty" json:"sort,omitempty"`
 
-	// Limit Maximum number of resources to return (1–100, default 50).
+	// Limit Maximum number of resources to return (1–100, default 10).
 	Limit *int32 `form:"limit,omitempty" json:"limit,omitempty"`
 
 	// Cursor Opaque page cursor from a previous list response's `pagination.next_cursor`.
@@ -1759,8 +9446,11 @@ type AssetsListParams struct {
 	XBikebookRequestId *string `json:"X-Bikebook-Request-Id,omitempty"`
 }
 
-// AssetsCreateParams defines parameters for AssetsCreate.
-type AssetsCreateParams struct {
+// ListAssetParamsBikeType defines parameters for ListAsset.
+type ListAssetParamsBikeType string
+
+// CreateAssetParams defines parameters for CreateAsset.
+type CreateAssetParams struct {
 	// Authorization Bearer Workshop API key. Example: Bearer bbk_live_...
 	Authorization *string `json:"Authorization,omitempty"`
 
@@ -1771,17 +9461,8 @@ type AssetsCreateParams struct {
 	IdempotencyKey string `json:"Idempotency-Key"`
 }
 
-// AssetsGetParams defines parameters for AssetsGet.
-type AssetsGetParams struct {
-	// Authorization Bearer Workshop API key. Example: Bearer bbk_live_...
-	Authorization *string `json:"Authorization,omitempty"`
-
-	// XBikebookRequestId Optional request id supplied by the client for support correlation.
-	XBikebookRequestId *string `json:"X-Bikebook-Request-Id,omitempty"`
-}
-
-// AssetsUpdateParams defines parameters for AssetsUpdate.
-type AssetsUpdateParams struct {
+// DeleteAssetParams defines parameters for DeleteAsset.
+type DeleteAssetParams struct {
 	// Authorization Bearer Workshop API key. Example: Bearer bbk_live_...
 	Authorization *string `json:"Authorization,omitempty"`
 
@@ -1792,8 +9473,8 @@ type AssetsUpdateParams struct {
 	IdempotencyKey string `json:"Idempotency-Key"`
 }
 
-// BusinessesListParams defines parameters for BusinessesList.
-type BusinessesListParams struct {
+// GetAssetParams defines parameters for GetAsset.
+type GetAssetParams struct {
 	// Authorization Bearer Workshop API key. Example: Bearer bbk_live_...
 	Authorization *string `json:"Authorization,omitempty"`
 
@@ -1801,8 +9482,42 @@ type BusinessesListParams struct {
 	XBikebookRequestId *string `json:"X-Bikebook-Request-Id,omitempty"`
 }
 
-// BusinessesGetParams defines parameters for BusinessesGet.
-type BusinessesGetParams struct {
+// UpdateAssetParams defines parameters for UpdateAsset.
+type UpdateAssetParams struct {
+	// Authorization Bearer Workshop API key. Example: Bearer bbk_live_...
+	Authorization *string `json:"Authorization,omitempty"`
+
+	// XBikebookRequestId Optional request id supplied by the client for support correlation.
+	XBikebookRequestId *string `json:"X-Bikebook-Request-Id,omitempty"`
+
+	// IdempotencyKey Required for public write operations to make retries safe.
+	IdempotencyKey string `json:"Idempotency-Key"`
+}
+
+// ListParams defines parameters for List.
+type ListParams struct {
+	BusinessId *string `form:"business_id,omitempty" json:"business_id,omitempty"`
+
+	// Status Filter webhook deliveries by status: `pending`, `success`, or `failed`.
+	Status           *ListParamsStatus `form:"status,omitempty" json:"status,omitempty"`
+	StockVariationId *string           `form:"stock_variation_id,omitempty" json:"stock_variation_id,omitempty"`
+
+	// JobId Optional public job id (`job_...`) to scope chat messages to one job.
+	JobId      *string           `form:"job_id,omitempty" json:"job_id,omitempty"`
+	InvoiceId  *string           `form:"invoice_id,omitempty" json:"invoice_id,omitempty"`
+	CustomerId *string           `form:"customer_id,omitempty" json:"customer_id,omitempty"`
+	Sku        *string           `form:"sku,omitempty" json:"sku,omitempty"`
+	Source     *ListParamsSource `form:"source,omitempty" json:"source,omitempty"`
+
+	// Sort Sort field. Allowed values: `created_at`, `status`, `quantity`, `sku`. Default: `-created_at`. Prefix with `-` for descending order (for example `-created_at`).
+	Sort *string `form:"sort,omitempty" json:"sort,omitempty"`
+
+	// Limit Maximum number of resources to return (1–100, default 10).
+	Limit *int32 `form:"limit,omitempty" json:"limit,omitempty"`
+
+	// Cursor Opaque page cursor from a previous list response's `pagination.next_cursor`.
+	Cursor *string `form:"cursor,omitempty" json:"cursor,omitempty"`
+
 	// Authorization Bearer Workshop API key. Example: Bearer bbk_live_...
 	Authorization *string `json:"Authorization,omitempty"`
 
@@ -1810,8 +9525,89 @@ type BusinessesGetParams struct {
 	XBikebookRequestId *string `json:"X-Bikebook-Request-Id,omitempty"`
 }
 
-// BusinessesAvailabilityParams defines parameters for BusinessesAvailability.
-type BusinessesAvailabilityParams struct {
+// ListParamsStatus defines parameters for List.
+type ListParamsStatus string
+
+// ListParamsSource defines parameters for List.
+type ListParamsSource string
+
+// CreateParams defines parameters for Create.
+type CreateParams struct {
+	// Authorization Bearer Workshop API key. Example: Bearer bbk_live_...
+	Authorization *string `json:"Authorization,omitempty"`
+
+	// XBikebookRequestId Optional request id supplied by the client for support correlation.
+	XBikebookRequestId *string `json:"X-Bikebook-Request-Id,omitempty"`
+
+	// IdempotencyKey Required for public write operations to make retries safe.
+	IdempotencyKey string `json:"Idempotency-Key"`
+}
+
+// ReceiveParams defines parameters for Receive.
+type ReceiveParams struct {
+	// Authorization Bearer Workshop API key. Example: Bearer bbk_live_...
+	Authorization *string `json:"Authorization,omitempty"`
+
+	// XBikebookRequestId Optional request id supplied by the client for support correlation.
+	XBikebookRequestId *string `json:"X-Bikebook-Request-Id,omitempty"`
+
+	// IdempotencyKey Required for public write operations to make retries safe.
+	IdempotencyKey string `json:"Idempotency-Key"`
+}
+
+// DeleteParams defines parameters for Delete.
+type DeleteParams struct {
+	// Authorization Bearer Workshop API key. Example: Bearer bbk_live_...
+	Authorization *string `json:"Authorization,omitempty"`
+
+	// XBikebookRequestId Optional request id supplied by the client for support correlation.
+	XBikebookRequestId *string `json:"X-Bikebook-Request-Id,omitempty"`
+
+	// IdempotencyKey Required for public write operations to make retries safe.
+	IdempotencyKey string `json:"Idempotency-Key"`
+}
+
+// GetParams defines parameters for Get.
+type GetParams struct {
+	// Authorization Bearer Workshop API key. Example: Bearer bbk_live_...
+	Authorization *string `json:"Authorization,omitempty"`
+
+	// XBikebookRequestId Optional request id supplied by the client for support correlation.
+	XBikebookRequestId *string `json:"X-Bikebook-Request-Id,omitempty"`
+}
+
+// UpdateParams defines parameters for Update.
+type UpdateParams struct {
+	// Authorization Bearer Workshop API key. Example: Bearer bbk_live_...
+	Authorization *string `json:"Authorization,omitempty"`
+
+	// XBikebookRequestId Optional request id supplied by the client for support correlation.
+	XBikebookRequestId *string `json:"X-Bikebook-Request-Id,omitempty"`
+
+	// IdempotencyKey Required for public write operations to make retries safe.
+	IdempotencyKey string `json:"Idempotency-Key"`
+}
+
+// ListBusinessParams defines parameters for ListBusiness.
+type ListBusinessParams struct {
+	// Authorization Bearer Workshop API key. Example: Bearer bbk_live_...
+	Authorization *string `json:"Authorization,omitempty"`
+
+	// XBikebookRequestId Optional request id supplied by the client for support correlation.
+	XBikebookRequestId *string `json:"X-Bikebook-Request-Id,omitempty"`
+}
+
+// GetBusinessParams defines parameters for GetBusiness.
+type GetBusinessParams struct {
+	// Authorization Bearer Workshop API key. Example: Bearer bbk_live_...
+	Authorization *string `json:"Authorization,omitempty"`
+
+	// XBikebookRequestId Optional request id supplied by the client for support correlation.
+	XBikebookRequestId *string `json:"X-Bikebook-Request-Id,omitempty"`
+}
+
+// AvailabilityParams defines parameters for Availability.
+type AvailabilityParams struct {
 	// From Inclusive start date (`YYYY-MM-DD`). Optional; defaults to workshop-local today on availability and next_available_slot.
 	From *openapi_types.Date `form:"from,omitempty" json:"from,omitempty"`
 
@@ -1825,10 +9621,10 @@ type BusinessesAvailabilityParams struct {
 	XBikebookRequestId *string `json:"X-Bikebook-Request-Id,omitempty"`
 }
 
-// BusinessesAvailabilitySlotsParams defines parameters for BusinessesAvailabilitySlots.
-type BusinessesAvailabilitySlotsParams struct {
+// AvailabilitySlotsParams defines parameters for AvailabilitySlots.
+type AvailabilitySlotsParams struct {
 	// Date Calendar date for slot lookup (`YYYY-MM-DD`, required on availability/slots).
-	Date *openapi_types.Date `form:"date,omitempty" json:"date,omitempty"`
+	Date openapi_types.Date `form:"date" json:"date"`
 
 	// Authorization Bearer Workshop API key. Example: Bearer bbk_live_...
 	Authorization *string `json:"Authorization,omitempty"`
@@ -1837,8 +9633,50 @@ type BusinessesAvailabilitySlotsParams struct {
 	XBikebookRequestId *string `json:"X-Bikebook-Request-Id,omitempty"`
 }
 
-// BusinessesNextAvailableSlotParams defines parameters for BusinessesNextAvailableSlot.
-type BusinessesNextAvailableSlotParams struct {
+// BusinessIntegrationParams defines parameters for BusinessIntegration.
+type BusinessIntegrationParams struct {
+	// Authorization Bearer Workshop API key. Example: Bearer bbk_live_...
+	Authorization *string `json:"Authorization,omitempty"`
+
+	// XBikebookRequestId Optional request id supplied by the client for support correlation.
+	XBikebookRequestId *string `json:"X-Bikebook-Request-Id,omitempty"`
+}
+
+// TriggerCustomerSyncParams defines parameters for TriggerCustomerSync.
+type TriggerCustomerSyncParams struct {
+	// Authorization Bearer Workshop API key. Example: Bearer bbk_live_...
+	Authorization *string `json:"Authorization,omitempty"`
+
+	// XBikebookRequestId Optional request id supplied by the client for support correlation.
+	XBikebookRequestId *string `json:"X-Bikebook-Request-Id,omitempty"`
+
+	// IdempotencyKey Required for public write operations to make retries safe.
+	IdempotencyKey string `json:"Idempotency-Key"`
+}
+
+// TriggerStockSyncParams defines parameters for TriggerStockSync.
+type TriggerStockSyncParams struct {
+	// Authorization Bearer Workshop API key. Example: Bearer bbk_live_...
+	Authorization *string `json:"Authorization,omitempty"`
+
+	// XBikebookRequestId Optional request id supplied by the client for support correlation.
+	XBikebookRequestId *string `json:"X-Bikebook-Request-Id,omitempty"`
+
+	// IdempotencyKey Required for public write operations to make retries safe.
+	IdempotencyKey string `json:"Idempotency-Key"`
+}
+
+// JobStatusesParams defines parameters for JobStatuses.
+type JobStatusesParams struct {
+	// Authorization Bearer Workshop API key. Example: Bearer bbk_live_...
+	Authorization *string `json:"Authorization,omitempty"`
+
+	// XBikebookRequestId Optional request id supplied by the client for support correlation.
+	XBikebookRequestId *string `json:"X-Bikebook-Request-Id,omitempty"`
+}
+
+// NextAvailableSlotParams defines parameters for NextAvailableSlot.
+type NextAvailableSlotParams struct {
 	// From Inclusive start date (`YYYY-MM-DD`). Optional; defaults to workshop-local today on availability and next_available_slot.
 	From *openapi_types.Date `form:"from,omitempty" json:"from,omitempty"`
 
@@ -1852,14 +9690,14 @@ type BusinessesNextAvailableSlotParams struct {
 	XBikebookRequestId *string `json:"X-Bikebook-Request-Id,omitempty"`
 }
 
-// BusinessesServicesParams defines parameters for BusinessesServices.
-type BusinessesServicesParams struct {
+// ServicesParams defines parameters for Services.
+type ServicesParams struct {
 	Name *string `form:"name,omitempty" json:"name,omitempty"`
 
 	// Sort Sort field. Allowed values: `order`, `name`, `price`, `category`. Default: `order`. Prefix with `-` for descending order (for example `-order`).
 	Sort *string `form:"sort,omitempty" json:"sort,omitempty"`
 
-	// Limit Maximum number of resources to return (1–100, default 50).
+	// Limit Maximum number of resources to return (1–100, default 10).
 	Limit *int32 `form:"limit,omitempty" json:"limit,omitempty"`
 
 	// Cursor Opaque page cursor from a previous list response's `pagination.next_cursor`.
@@ -1872,8 +9710,8 @@ type BusinessesServicesParams struct {
 	XBikebookRequestId *string `json:"X-Bikebook-Request-Id,omitempty"`
 }
 
-// ServicesCreateParams defines parameters for ServicesCreate.
-type ServicesCreateParams struct {
+// CreateServiceParams defines parameters for CreateService.
+type CreateServiceParams struct {
 	// Authorization Bearer Workshop API key. Example: Bearer bbk_live_...
 	Authorization *string `json:"Authorization,omitempty"`
 
@@ -1884,8 +9722,8 @@ type ServicesCreateParams struct {
 	IdempotencyKey string `json:"Idempotency-Key"`
 }
 
-// ServicesUpdateParams defines parameters for ServicesUpdate.
-type ServicesUpdateParams struct {
+// UpdateServiceParams defines parameters for UpdateService.
+type UpdateServiceParams struct {
 	// Authorization Bearer Workshop API key. Example: Bearer bbk_live_...
 	Authorization *string `json:"Authorization,omitempty"`
 
@@ -1896,8 +9734,8 @@ type ServicesUpdateParams struct {
 	IdempotencyKey string `json:"Idempotency-Key"`
 }
 
-// CustomersListParams defines parameters for CustomersList.
-type CustomersListParams struct {
+// CustomersParams defines parameters for Customers.
+type CustomersParams struct {
 	BusinessId *string `form:"business_id,omitempty" json:"business_id,omitempty"`
 	Name       *string `form:"name,omitempty" json:"name,omitempty"`
 	Email      *string `form:"email,omitempty" json:"email,omitempty"`
@@ -1906,7 +9744,7 @@ type CustomersListParams struct {
 	// Sort Sort field. Allowed values: `created_at`, `name`, `email`. Default: `-created_at`. Prefix with `-` for descending order (for example `-created_at`).
 	Sort *string `form:"sort,omitempty" json:"sort,omitempty"`
 
-	// Limit Maximum number of resources to return (1–100, default 50).
+	// Limit Maximum number of resources to return (1–100, default 10).
 	Limit *int32 `form:"limit,omitempty" json:"limit,omitempty"`
 
 	// Cursor Opaque page cursor from a previous list response's `pagination.next_cursor`.
@@ -1919,17 +9757,8 @@ type CustomersListParams struct {
 	XBikebookRequestId *string `json:"X-Bikebook-Request-Id,omitempty"`
 }
 
-// CustomersGetParams defines parameters for CustomersGet.
-type CustomersGetParams struct {
-	// Authorization Bearer Workshop API key. Example: Bearer bbk_live_...
-	Authorization *string `json:"Authorization,omitempty"`
-
-	// XBikebookRequestId Optional request id supplied by the client for support correlation.
-	XBikebookRequestId *string `json:"X-Bikebook-Request-Id,omitempty"`
-}
-
-// CustomersUpdateParams defines parameters for CustomersUpdate.
-type CustomersUpdateParams struct {
+// CreateCustomerParams defines parameters for CreateCustomer.
+type CreateCustomerParams struct {
 	// Authorization Bearer Workshop API key. Example: Bearer bbk_live_...
 	Authorization *string `json:"Authorization,omitempty"`
 
@@ -1940,18 +9769,41 @@ type CustomersUpdateParams struct {
 	IdempotencyKey string `json:"Idempotency-Key"`
 }
 
-// AssetsListForCustomerParams defines parameters for AssetsListForCustomer.
-type AssetsListForCustomerParams struct {
+// CustomerParams defines parameters for Customer.
+type CustomerParams struct {
+	// Authorization Bearer Workshop API key. Example: Bearer bbk_live_...
+	Authorization *string `json:"Authorization,omitempty"`
+
+	// XBikebookRequestId Optional request id supplied by the client for support correlation.
+	XBikebookRequestId *string `json:"X-Bikebook-Request-Id,omitempty"`
+}
+
+// UpdateCustomerParams defines parameters for UpdateCustomer.
+type UpdateCustomerParams struct {
+	// Authorization Bearer Workshop API key. Example: Bearer bbk_live_...
+	Authorization *string `json:"Authorization,omitempty"`
+
+	// XBikebookRequestId Optional request id supplied by the client for support correlation.
+	XBikebookRequestId *string `json:"X-Bikebook-Request-Id,omitempty"`
+
+	// IdempotencyKey Required for public write operations to make retries safe.
+	IdempotencyKey string `json:"Idempotency-Key"`
+}
+
+// ListForCustomerParams defines parameters for ListForCustomer.
+type ListForCustomerParams struct {
 	Name         *string `form:"name,omitempty" json:"name,omitempty"`
 	SerialNumber *string `form:"serial_number,omitempty" json:"serial_number,omitempty"`
 	Make         *string `form:"make,omitempty" json:"make,omitempty"`
 	Model        *string `form:"model,omitempty" json:"model,omitempty"`
-	Type         *string `form:"type,omitempty" json:"type,omitempty"`
+
+	// BikeType Exact match on bike category (bikes only). Allowed values: bmx, e_cargo, e_gravel, e_road, electric_bike, generic_bike, gravel, hybrid, kids_bike, mountain_bike, other, road_bike, single_speed, static_bike, triathlon_bike.
+	BikeType *ListForCustomerParamsBikeType `form:"bike_type,omitempty" json:"bike_type,omitempty"`
 
 	// Sort Sort field. Allowed values: `name`, `created_at`. Default: `name`. Prefix with `-` for descending order (for example `-name`).
 	Sort *string `form:"sort,omitempty" json:"sort,omitempty"`
 
-	// Limit Maximum number of resources to return (1–100, default 50).
+	// Limit Maximum number of resources to return (1–100, default 10).
 	Limit *int32 `form:"limit,omitempty" json:"limit,omitempty"`
 
 	// Cursor Opaque page cursor from a previous list response's `pagination.next_cursor`.
@@ -1964,8 +9816,20 @@ type AssetsListForCustomerParams struct {
 	XBikebookRequestId *string `json:"X-Bikebook-Request-Id,omitempty"`
 }
 
-// ChatCreateAttachmentsParams defines parameters for ChatCreateAttachments.
-type ChatCreateAttachmentsParams struct {
+// ListForCustomerParamsBikeType defines parameters for ListForCustomer.
+type ListForCustomerParamsBikeType string
+
+// CreateChatAttachmentsMultipartBody defines parameters for CreateChatAttachments.
+type CreateChatAttachmentsMultipartBody struct {
+	// Files Binary file upload (`multipart/form-data`). Send one form part per file using the field name `files` — repeat the same field name for multiple files (up to 10 parts per request). This is not a JSON string array.
+	Files openapi_types.File `json:"files"`
+
+	// Sender Message sender: `customer` or `business`. Defaults to `customer` when omitted.
+	Sender *string `json:"sender,omitempty"`
+}
+
+// CreateChatAttachmentsParams defines parameters for CreateChatAttachments.
+type CreateChatAttachmentsParams struct {
 	// JobId Optional public job id (`job_...`) to scope chat messages to one job.
 	JobId *string `form:"job_id,omitempty" json:"job_id,omitempty"`
 
@@ -1981,10 +9845,10 @@ type ChatCreateAttachmentsParams struct {
 
 // ChatMessagesParams defines parameters for ChatMessages.
 type ChatMessagesParams struct {
-	// JobId Optional public job id (`job_...`) to scope chat messages to one job.
+	// JobId Optional public job id (`job_...`). Validates the job belongs to this customer and is echoed on each message. Does not filter the thread.
 	JobId *string `form:"job_id,omitempty" json:"job_id,omitempty"`
 
-	// Limit Maximum number of resources to return (1–100, default 50).
+	// Limit Maximum number of resources to return (1–100, default 10).
 	Limit *int32 `form:"limit,omitempty" json:"limit,omitempty"`
 
 	// Cursor Opaque page cursor from a previous list response's `pagination.next_cursor`.
@@ -1997,8 +9861,8 @@ type ChatMessagesParams struct {
 	XBikebookRequestId *string `json:"X-Bikebook-Request-Id,omitempty"`
 }
 
-// ChatCreateMessageParams defines parameters for ChatCreateMessage.
-type ChatCreateMessageParams struct {
+// CreateChatMessageParams defines parameters for CreateChatMessage.
+type CreateChatMessageParams struct {
 	// JobId Optional public job id (`job_...`) to scope chat messages to one job.
 	JobId *string `form:"job_id,omitempty" json:"job_id,omitempty"`
 
@@ -2012,8 +9876,11 @@ type ChatCreateMessageParams struct {
 	IdempotencyKey string `json:"Idempotency-Key"`
 }
 
-// InvoiceItemsCreateParams defines parameters for InvoiceItemsCreate.
-type InvoiceItemsCreateParams struct {
+// MarkReadParams defines parameters for MarkRead.
+type MarkReadParams struct {
+	// JobId Optional public job id (`job_...`) to scope chat messages to one job.
+	JobId *string `form:"job_id,omitempty" json:"job_id,omitempty"`
+
 	// Authorization Bearer Workshop API key. Example: Bearer bbk_live_...
 	Authorization *string `json:"Authorization,omitempty"`
 
@@ -2024,8 +9891,8 @@ type InvoiceItemsCreateParams struct {
 	IdempotencyKey string `json:"Idempotency-Key"`
 }
 
-// InvoiceItemsDeleteParams defines parameters for InvoiceItemsDelete.
-type InvoiceItemsDeleteParams struct {
+// CreateInvoiceItemParams defines parameters for CreateInvoiceItem.
+type CreateInvoiceItemParams struct {
 	// Authorization Bearer Workshop API key. Example: Bearer bbk_live_...
 	Authorization *string `json:"Authorization,omitempty"`
 
@@ -2036,17 +9903,8 @@ type InvoiceItemsDeleteParams struct {
 	IdempotencyKey string `json:"Idempotency-Key"`
 }
 
-// InvoiceItemsGetParams defines parameters for InvoiceItemsGet.
-type InvoiceItemsGetParams struct {
-	// Authorization Bearer Workshop API key. Example: Bearer bbk_live_...
-	Authorization *string `json:"Authorization,omitempty"`
-
-	// XBikebookRequestId Optional request id supplied by the client for support correlation.
-	XBikebookRequestId *string `json:"X-Bikebook-Request-Id,omitempty"`
-}
-
-// InvoiceItemsUpdateParams defines parameters for InvoiceItemsUpdate.
-type InvoiceItemsUpdateParams struct {
+// DeleteInvoiceItemParams defines parameters for DeleteInvoiceItem.
+type DeleteInvoiceItemParams struct {
 	// Authorization Bearer Workshop API key. Example: Bearer bbk_live_...
 	Authorization *string `json:"Authorization,omitempty"`
 
@@ -2057,8 +9915,29 @@ type InvoiceItemsUpdateParams struct {
 	IdempotencyKey string `json:"Idempotency-Key"`
 }
 
-// InvoicesListParams defines parameters for InvoicesList.
-type InvoicesListParams struct {
+// GetInvoiceItemParams defines parameters for GetInvoiceItem.
+type GetInvoiceItemParams struct {
+	// Authorization Bearer Workshop API key. Example: Bearer bbk_live_...
+	Authorization *string `json:"Authorization,omitempty"`
+
+	// XBikebookRequestId Optional request id supplied by the client for support correlation.
+	XBikebookRequestId *string `json:"X-Bikebook-Request-Id,omitempty"`
+}
+
+// UpdateInvoiceItemParams defines parameters for UpdateInvoiceItem.
+type UpdateInvoiceItemParams struct {
+	// Authorization Bearer Workshop API key. Example: Bearer bbk_live_...
+	Authorization *string `json:"Authorization,omitempty"`
+
+	// XBikebookRequestId Optional request id supplied by the client for support correlation.
+	XBikebookRequestId *string `json:"X-Bikebook-Request-Id,omitempty"`
+
+	// IdempotencyKey Required for public write operations to make retries safe.
+	IdempotencyKey string `json:"Idempotency-Key"`
+}
+
+// ListInvoiceParams defines parameters for ListInvoice.
+type ListInvoiceParams struct {
 	BusinessId *string `form:"business_id,omitempty" json:"business_id,omitempty"`
 
 	// JobId Optional public job id (`job_...`) to scope chat messages to one job.
@@ -2067,10 +9946,13 @@ type InvoicesListParams struct {
 	CustomerId    *string `form:"customer_id,omitempty" json:"customer_id,omitempty"`
 	CustomerEmail *string `form:"customer_email,omitempty" json:"customer_email,omitempty"`
 
+	// Status Filter by invoice lifecycle status. Use comma-separated values to match any supplied status. Allowed values: `draft`, `pending`, `paid`, `cancelled`. Example: `?status=pending,paid`.
+	Status *ListInvoiceParamsStatus `form:"status,omitempty" json:"status,omitempty"`
+
 	// Sort Sort field. Allowed values: `created_at`, `invoice_number`. Default: `-created_at`. Prefix with `-` for descending order (for example `-created_at`).
 	Sort *string `form:"sort,omitempty" json:"sort,omitempty"`
 
-	// Limit Maximum number of resources to return (1–100, default 50).
+	// Limit Maximum number of resources to return (1–100, default 10).
 	Limit *int32 `form:"limit,omitempty" json:"limit,omitempty"`
 
 	// Cursor Opaque page cursor from a previous list response's `pagination.next_cursor`.
@@ -2083,8 +9965,11 @@ type InvoicesListParams struct {
 	XBikebookRequestId *string `json:"X-Bikebook-Request-Id,omitempty"`
 }
 
-// InvoicesGetParams defines parameters for InvoicesGet.
-type InvoicesGetParams struct {
+// ListInvoiceParamsStatus defines parameters for ListInvoice.
+type ListInvoiceParamsStatus string
+
+// GetInvoiceParams defines parameters for GetInvoice.
+type GetInvoiceParams struct {
 	// Authorization Bearer Workshop API key. Example: Bearer bbk_live_...
 	Authorization *string `json:"Authorization,omitempty"`
 
@@ -2092,14 +9977,149 @@ type InvoicesGetParams struct {
 	XBikebookRequestId *string `json:"X-Bikebook-Request-Id,omitempty"`
 }
 
-// JobReportsListParams defines parameters for JobReportsList.
-type JobReportsListParams struct {
+// UpdateInvoiceParams defines parameters for UpdateInvoice.
+type UpdateInvoiceParams struct {
+	// Authorization Bearer Workshop API key. Example: Bearer bbk_live_...
+	Authorization *string `json:"Authorization,omitempty"`
+
+	// XBikebookRequestId Optional request id supplied by the client for support correlation.
+	XBikebookRequestId *string `json:"X-Bikebook-Request-Id,omitempty"`
+
+	// IdempotencyKey Required for public write operations to make retries safe.
+	IdempotencyKey string `json:"Idempotency-Key"`
+}
+
+// ChangeInvoiceAutoSyncParams defines parameters for ChangeInvoiceAutoSync.
+type ChangeInvoiceAutoSyncParams struct {
+	// Authorization Bearer Workshop API key. Example: Bearer bbk_live_...
+	Authorization *string `json:"Authorization,omitempty"`
+
+	// XBikebookRequestId Optional request id supplied by the client for support correlation.
+	XBikebookRequestId *string `json:"X-Bikebook-Request-Id,omitempty"`
+
+	// IdempotencyKey Required for public write operations to make retries safe.
+	IdempotencyKey string `json:"Idempotency-Key"`
+}
+
+// InvoiceIntegrationSyncParams defines parameters for InvoiceIntegrationSync.
+type InvoiceIntegrationSyncParams struct {
+	// Authorization Bearer Workshop API key. Example: Bearer bbk_live_...
+	Authorization *string `json:"Authorization,omitempty"`
+
+	// XBikebookRequestId Optional request id supplied by the client for support correlation.
+	XBikebookRequestId *string `json:"X-Bikebook-Request-Id,omitempty"`
+}
+
+// InvoiceIntegrationSyncEventsParams defines parameters for InvoiceIntegrationSyncEvents.
+type InvoiceIntegrationSyncEventsParams struct {
+	// Authorization Bearer Workshop API key. Example: Bearer bbk_live_...
+	Authorization *string `json:"Authorization,omitempty"`
+
+	// XBikebookRequestId Optional request id supplied by the client for support correlation.
+	XBikebookRequestId *string `json:"X-Bikebook-Request-Id,omitempty"`
+}
+
+// ChangeInvoiceSyncCompletionParams defines parameters for ChangeInvoiceSyncCompletion.
+type ChangeInvoiceSyncCompletionParams struct {
+	// Authorization Bearer Workshop API key. Example: Bearer bbk_live_...
+	Authorization *string `json:"Authorization,omitempty"`
+
+	// XBikebookRequestId Optional request id supplied by the client for support correlation.
+	XBikebookRequestId *string `json:"X-Bikebook-Request-Id,omitempty"`
+
+	// IdempotencyKey Required for public write operations to make retries safe.
+	IdempotencyKey string `json:"Idempotency-Key"`
+}
+
+// RetryInvoiceIntegrationSyncParams defines parameters for RetryInvoiceIntegrationSync.
+type RetryInvoiceIntegrationSyncParams struct {
+	// Authorization Bearer Workshop API key. Example: Bearer bbk_live_...
+	Authorization *string `json:"Authorization,omitempty"`
+
+	// XBikebookRequestId Optional request id supplied by the client for support correlation.
+	XBikebookRequestId *string `json:"X-Bikebook-Request-Id,omitempty"`
+
+	// IdempotencyKey Required for public write operations to make retries safe.
+	IdempotencyKey string `json:"Idempotency-Key"`
+}
+
+// TriggerInvoiceIntegrationSyncParams defines parameters for TriggerInvoiceIntegrationSync.
+type TriggerInvoiceIntegrationSyncParams struct {
+	// Authorization Bearer Workshop API key. Example: Bearer bbk_live_...
+	Authorization *string `json:"Authorization,omitempty"`
+
+	// XBikebookRequestId Optional request id supplied by the client for support correlation.
+	XBikebookRequestId *string `json:"X-Bikebook-Request-Id,omitempty"`
+
+	// IdempotencyKey Required for public write operations to make retries safe.
+	IdempotencyKey string `json:"Idempotency-Key"`
+}
+
+// PaymentLinkParams defines parameters for PaymentLink.
+type PaymentLinkParams struct {
+	// Authorization Bearer Workshop API key. Example: Bearer bbk_live_...
+	Authorization *string `json:"Authorization,omitempty"`
+
+	// XBikebookRequestId Optional request id supplied by the client for support correlation.
+	XBikebookRequestId *string `json:"X-Bikebook-Request-Id,omitempty"`
+
+	// IdempotencyKey Required for public write operations to make retries safe.
+	IdempotencyKey string `json:"Idempotency-Key"`
+}
+
+// RecordPaymentParams defines parameters for RecordPayment.
+type RecordPaymentParams struct {
+	// Authorization Bearer Workshop API key. Example: Bearer bbk_live_...
+	Authorization *string `json:"Authorization,omitempty"`
+
+	// XBikebookRequestId Optional request id supplied by the client for support correlation.
+	XBikebookRequestId *string `json:"X-Bikebook-Request-Id,omitempty"`
+
+	// IdempotencyKey Required for public write operations to make retries safe.
+	IdempotencyKey string `json:"Idempotency-Key"`
+}
+
+// PdfParams defines parameters for Pdf.
+type PdfParams struct {
+	// Authorization Bearer Workshop API key. Example: Bearer bbk_live_...
+	Authorization *string `json:"Authorization,omitempty"`
+
+	// XBikebookRequestId Optional request id supplied by the client for support correlation.
+	XBikebookRequestId *string `json:"X-Bikebook-Request-Id,omitempty"`
+}
+
+// SendParams defines parameters for Send.
+type SendParams struct {
+	// Authorization Bearer Workshop API key. Example: Bearer bbk_live_...
+	Authorization *string `json:"Authorization,omitempty"`
+
+	// XBikebookRequestId Optional request id supplied by the client for support correlation.
+	XBikebookRequestId *string `json:"X-Bikebook-Request-Id,omitempty"`
+
+	// IdempotencyKey Required for public write operations to make retries safe.
+	IdempotencyKey string `json:"Idempotency-Key"`
+}
+
+// ChangeStatusParams defines parameters for ChangeStatus.
+type ChangeStatusParams struct {
+	// Authorization Bearer Workshop API key. Example: Bearer bbk_live_...
+	Authorization *string `json:"Authorization,omitempty"`
+
+	// XBikebookRequestId Optional request id supplied by the client for support correlation.
+	XBikebookRequestId *string `json:"X-Bikebook-Request-Id,omitempty"`
+
+	// IdempotencyKey Required for public write operations to make retries safe.
+	IdempotencyKey string `json:"Idempotency-Key"`
+}
+
+// ListJobReportParams defines parameters for ListJobReport.
+type ListJobReportParams struct {
 	BusinessId *string `form:"business_id,omitempty" json:"business_id,omitempty"`
 
 	// JobId Optional public job id (`job_...`) to scope chat messages to one job.
 	JobId *string `form:"job_id,omitempty" json:"job_id,omitempty"`
 
-	// Limit Maximum number of resources to return (1–100, default 50).
+	// Limit Maximum number of resources to return (1–100, default 10).
 	Limit *int32 `form:"limit,omitempty" json:"limit,omitempty"`
 
 	// Cursor Opaque page cursor from a previous list response's `pagination.next_cursor`.
@@ -2112,8 +10132,8 @@ type JobReportsListParams struct {
 	XBikebookRequestId *string `json:"X-Bikebook-Request-Id,omitempty"`
 }
 
-// JobReportsGetParams defines parameters for JobReportsGet.
-type JobReportsGetParams struct {
+// GetJobReportParams defines parameters for GetJobReport.
+type GetJobReportParams struct {
 	// Authorization Bearer Workshop API key. Example: Bearer bbk_live_...
 	Authorization *string `json:"Authorization,omitempty"`
 
@@ -2121,17 +10141,23 @@ type JobReportsGetParams struct {
 	XBikebookRequestId *string `json:"X-Bikebook-Request-Id,omitempty"`
 }
 
-// JobsListParams defines parameters for JobsList.
-type JobsListParams struct {
+// JobsParams defines parameters for Jobs.
+type JobsParams struct {
 	BusinessId    *string `form:"business_id,omitempty" json:"business_id,omitempty"`
 	JobNumber     *string `form:"job_number,omitempty" json:"job_number,omitempty"`
 	CustomerId    *string `form:"customer_id,omitempty" json:"customer_id,omitempty"`
 	CustomerEmail *string `form:"customer_email,omitempty" json:"customer_email,omitempty"`
 
+	// AcceptedStatus Filter by job acceptance status. Use comma-separated values to match any supplied status. Allowed values: `pending`, `accepted`, `rejected`, `cancelled`. Example: `?accepted_status=accepted,rejected`.
+	AcceptedStatus *JobsParamsAcceptedStatus `form:"accepted_status,omitempty" json:"accepted_status,omitempty"`
+
+	// StatusId Filter jobs by work-line workflow status id (`jst_...`). A job matches when any work line has one of the supplied statuses. Use comma-separated values to match any supplied status. Example: `?status_id=jst_01h2xexample,jst_01h2yexample`.
+	StatusId *string `form:"status_id,omitempty" json:"status_id,omitempty"`
+
 	// Sort Sort field. Allowed values: `created_at`, `job_number`. Default: `-created_at`. Prefix with `-` for descending order (for example `-created_at`).
 	Sort *string `form:"sort,omitempty" json:"sort,omitempty"`
 
-	// Limit Maximum number of resources to return (1–100, default 50).
+	// Limit Maximum number of resources to return (1–100, default 10).
 	Limit *int32 `form:"limit,omitempty" json:"limit,omitempty"`
 
 	// Cursor Opaque page cursor from a previous list response's `pagination.next_cursor`.
@@ -2144,8 +10170,11 @@ type JobsListParams struct {
 	XBikebookRequestId *string `json:"X-Bikebook-Request-Id,omitempty"`
 }
 
-// JobsCreateParams defines parameters for JobsCreate.
-type JobsCreateParams struct {
+// JobsParamsAcceptedStatus defines parameters for Jobs.
+type JobsParamsAcceptedStatus string
+
+// CreateJobBookingParams defines parameters for CreateJobBooking.
+type CreateJobBookingParams struct {
 	// Authorization Bearer Workshop API key. Example: Bearer bbk_live_...
 	Authorization *string `json:"Authorization,omitempty"`
 
@@ -2156,8 +10185,8 @@ type JobsCreateParams struct {
 	IdempotencyKey string `json:"Idempotency-Key"`
 }
 
-// JobsGetParams defines parameters for JobsGet.
-type JobsGetParams struct {
+// JobParams defines parameters for Job.
+type JobParams struct {
 	// Authorization Bearer Workshop API key. Example: Bearer bbk_live_...
 	Authorization *string `json:"Authorization,omitempty"`
 
@@ -2165,14 +10194,38 @@ type JobsGetParams struct {
 	XBikebookRequestId *string `json:"X-Bikebook-Request-Id,omitempty"`
 }
 
-// JobReportsListForJobParams defines parameters for JobReportsListForJob.
-type JobReportsListForJobParams struct {
+// UpdateJobParams defines parameters for UpdateJob.
+type UpdateJobParams struct {
+	// Authorization Bearer Workshop API key. Example: Bearer bbk_live_...
+	Authorization *string `json:"Authorization,omitempty"`
+
+	// XBikebookRequestId Optional request id supplied by the client for support correlation.
+	XBikebookRequestId *string `json:"X-Bikebook-Request-Id,omitempty"`
+
+	// IdempotencyKey Required for public write operations to make retries safe.
+	IdempotencyKey string `json:"Idempotency-Key"`
+}
+
+// ChangeAcceptedStatusParams defines parameters for ChangeAcceptedStatus.
+type ChangeAcceptedStatusParams struct {
+	// Authorization Bearer Workshop API key. Example: Bearer bbk_live_...
+	Authorization *string `json:"Authorization,omitempty"`
+
+	// XBikebookRequestId Optional request id supplied by the client for support correlation.
+	XBikebookRequestId *string `json:"X-Bikebook-Request-Id,omitempty"`
+
+	// IdempotencyKey Required for public write operations to make retries safe.
+	IdempotencyKey string `json:"Idempotency-Key"`
+}
+
+// ListJobReportForJobParams defines parameters for ListJobReportForJob.
+type ListJobReportForJobParams struct {
 	BusinessId *string `form:"business_id,omitempty" json:"business_id,omitempty"`
 
 	// JobId Optional public job id (`job_...`) to scope chat messages to one job.
 	JobId *string `form:"job_id,omitempty" json:"job_id,omitempty"`
 
-	// Limit Maximum number of resources to return (1–100, default 50).
+	// Limit Maximum number of resources to return (1–100, default 10).
 	Limit *int32 `form:"limit,omitempty" json:"limit,omitempty"`
 
 	// Cursor Opaque page cursor from a previous list response's `pagination.next_cursor`.
@@ -2185,8 +10238,8 @@ type JobReportsListForJobParams struct {
 	XBikebookRequestId *string `json:"X-Bikebook-Request-Id,omitempty"`
 }
 
-// JobReportsGetForJobParams defines parameters for JobReportsGetForJob.
-type JobReportsGetForJobParams struct {
+// GetJobReportForJobParams defines parameters for GetJobReportForJob.
+type GetJobReportForJobParams struct {
 	// Authorization Bearer Workshop API key. Example: Bearer bbk_live_...
 	Authorization *string `json:"Authorization,omitempty"`
 
@@ -2194,9 +10247,9 @@ type JobReportsGetForJobParams struct {
 	XBikebookRequestId *string `json:"X-Bikebook-Request-Id,omitempty"`
 }
 
-// JobsPartAuthorisationsParams defines parameters for JobsPartAuthorisations.
-type JobsPartAuthorisationsParams struct {
-	// Limit Maximum number of resources to return (1–100, default 50).
+// PartAuthorisationsParams defines parameters for PartAuthorisations.
+type PartAuthorisationsParams struct {
+	// Limit Maximum number of resources to return (1–100, default 10).
 	Limit *int32 `form:"limit,omitempty" json:"limit,omitempty"`
 
 	// Cursor Opaque page cursor from a previous list response's `pagination.next_cursor`.
@@ -2209,8 +10262,8 @@ type JobsPartAuthorisationsParams struct {
 	XBikebookRequestId *string `json:"X-Bikebook-Request-Id,omitempty"`
 }
 
-// JobsSubmitPartAuthorisationDecisionsParams defines parameters for JobsSubmitPartAuthorisationDecisions.
-type JobsSubmitPartAuthorisationDecisionsParams struct {
+// SubmitPartAuthorisationDecisionsParams defines parameters for SubmitPartAuthorisationDecisions.
+type SubmitPartAuthorisationDecisionsParams struct {
 	// Authorization Bearer Workshop API key. Example: Bearer bbk_live_...
 	Authorization *string `json:"Authorization,omitempty"`
 
@@ -2221,15 +10274,99 @@ type JobsSubmitPartAuthorisationDecisionsParams struct {
 	IdempotencyKey string `json:"Idempotency-Key"`
 }
 
-// ServicesListParams defines parameters for ServicesList.
-type ServicesListParams struct {
+// RequestPartAuthorisationParams defines parameters for RequestPartAuthorisation.
+type RequestPartAuthorisationParams struct {
+	// Authorization Bearer Workshop API key. Example: Bearer bbk_live_...
+	Authorization *string `json:"Authorization,omitempty"`
+
+	// XBikebookRequestId Optional request id supplied by the client for support correlation.
+	XBikebookRequestId *string `json:"X-Bikebook-Request-Id,omitempty"`
+
+	// IdempotencyKey Required for public write operations to make retries safe.
+	IdempotencyKey string `json:"Idempotency-Key"`
+}
+
+// ChangeScheduleParams defines parameters for ChangeSchedule.
+type ChangeScheduleParams struct {
+	// Authorization Bearer Workshop API key. Example: Bearer bbk_live_...
+	Authorization *string `json:"Authorization,omitempty"`
+
+	// XBikebookRequestId Optional request id supplied by the client for support correlation.
+	XBikebookRequestId *string `json:"X-Bikebook-Request-Id,omitempty"`
+
+	// IdempotencyKey Required for public write operations to make retries safe.
+	IdempotencyKey string `json:"Idempotency-Key"`
+}
+
+// UpdateWorkLineParams defines parameters for UpdateWorkLine.
+type UpdateWorkLineParams struct {
+	// Authorization Bearer Workshop API key. Example: Bearer bbk_live_...
+	Authorization *string `json:"Authorization,omitempty"`
+
+	// XBikebookRequestId Optional request id supplied by the client for support correlation.
+	XBikebookRequestId *string `json:"X-Bikebook-Request-Id,omitempty"`
+
+	// IdempotencyKey Required for public write operations to make retries safe.
+	IdempotencyKey string `json:"Idempotency-Key"`
+}
+
+// AssignWorkLineMechanicParams defines parameters for AssignWorkLineMechanic.
+type AssignWorkLineMechanicParams struct {
+	// Authorization Bearer Workshop API key. Example: Bearer bbk_live_...
+	Authorization *string `json:"Authorization,omitempty"`
+
+	// XBikebookRequestId Optional request id supplied by the client for support correlation.
+	XBikebookRequestId *string `json:"X-Bikebook-Request-Id,omitempty"`
+
+	// IdempotencyKey Required for public write operations to make retries safe.
+	IdempotencyKey string `json:"Idempotency-Key"`
+}
+
+// ReplaceWorkLineServicesParams defines parameters for ReplaceWorkLineServices.
+type ReplaceWorkLineServicesParams struct {
+	// Authorization Bearer Workshop API key. Example: Bearer bbk_live_...
+	Authorization *string `json:"Authorization,omitempty"`
+
+	// XBikebookRequestId Optional request id supplied by the client for support correlation.
+	XBikebookRequestId *string `json:"X-Bikebook-Request-Id,omitempty"`
+
+	// IdempotencyKey Required for public write operations to make retries safe.
+	IdempotencyKey string `json:"Idempotency-Key"`
+}
+
+// ChangeWorkLineStatusParams defines parameters for ChangeWorkLineStatus.
+type ChangeWorkLineStatusParams struct {
+	// Authorization Bearer Workshop API key. Example: Bearer bbk_live_...
+	Authorization *string `json:"Authorization,omitempty"`
+
+	// XBikebookRequestId Optional request id supplied by the client for support correlation.
+	XBikebookRequestId *string `json:"X-Bikebook-Request-Id,omitempty"`
+
+	// IdempotencyKey Required for public write operations to make retries safe.
+	IdempotencyKey string `json:"Idempotency-Key"`
+}
+
+// RefundParams defines parameters for Refund.
+type RefundParams struct {
+	// Authorization Bearer Workshop API key. Example: Bearer bbk_live_...
+	Authorization *string `json:"Authorization,omitempty"`
+
+	// XBikebookRequestId Optional request id supplied by the client for support correlation.
+	XBikebookRequestId *string `json:"X-Bikebook-Request-Id,omitempty"`
+
+	// IdempotencyKey Required for public write operations to make retries safe.
+	IdempotencyKey string `json:"Idempotency-Key"`
+}
+
+// ListServiceParams defines parameters for ListService.
+type ListServiceParams struct {
 	BusinessId *string `form:"business_id,omitempty" json:"business_id,omitempty"`
 	Name       *string `form:"name,omitempty" json:"name,omitempty"`
 
 	// Sort Sort field. Allowed values: `order`, `name`, `price`, `category`. Default: `order`. Prefix with `-` for descending order (for example `-order`).
 	Sort *string `form:"sort,omitempty" json:"sort,omitempty"`
 
-	// Limit Maximum number of resources to return (1–100, default 50).
+	// Limit Maximum number of resources to return (1–100, default 10).
 	Limit *int32 `form:"limit,omitempty" json:"limit,omitempty"`
 
 	// Cursor Opaque page cursor from a previous list response's `pagination.next_cursor`.
@@ -2242,8 +10379,8 @@ type ServicesListParams struct {
 	XBikebookRequestId *string `json:"X-Bikebook-Request-Id,omitempty"`
 }
 
-// ServicesGetParams defines parameters for ServicesGet.
-type ServicesGetParams struct {
+// GetServiceParams defines parameters for GetService.
+type GetServiceParams struct {
 	// Authorization Bearer Workshop API key. Example: Bearer bbk_live_...
 	Authorization *string `json:"Authorization,omitempty"`
 
@@ -2251,8 +10388,8 @@ type ServicesGetParams struct {
 	XBikebookRequestId *string `json:"X-Bikebook-Request-Id,omitempty"`
 }
 
-// StockListParams defines parameters for StockList.
-type StockListParams struct {
+// ListStockVariationParams defines parameters for ListStockVariation.
+type ListStockVariationParams struct {
 	BusinessId *string `form:"business_id,omitempty" json:"business_id,omitempty"`
 
 	// Query Case-insensitive search across common name, email, phone, or public id fields.
@@ -2264,7 +10401,7 @@ type StockListParams struct {
 	// Sort Sort field. Allowed values: `name`, `sku`, `price`, `remaining_stock`. Default: `name`. Prefix with `-` for descending order (for example `-name`).
 	Sort *string `form:"sort,omitempty" json:"sort,omitempty"`
 
-	// Limit Maximum number of resources to return (1–100, default 50).
+	// Limit Maximum number of resources to return (1–100, default 10).
 	Limit *int32 `form:"limit,omitempty" json:"limit,omitempty"`
 
 	// Cursor Opaque page cursor from a previous list response's `pagination.next_cursor`.
@@ -2277,8 +10414,8 @@ type StockListParams struct {
 	XBikebookRequestId *string `json:"X-Bikebook-Request-Id,omitempty"`
 }
 
-// StockGetParams defines parameters for StockGet.
-type StockGetParams struct {
+// GetStockVariationParams defines parameters for GetStockVariation.
+type GetStockVariationParams struct {
 	// Authorization Bearer Workshop API key. Example: Bearer bbk_live_...
 	Authorization *string `json:"Authorization,omitempty"`
 
@@ -2286,8 +10423,8 @@ type StockGetParams struct {
 	XBikebookRequestId *string `json:"X-Bikebook-Request-Id,omitempty"`
 }
 
-// WebhookDeliveriesGetParams defines parameters for WebhookDeliveriesGet.
-type WebhookDeliveriesGetParams struct {
+// GetWebhookDeliveryParams defines parameters for GetWebhookDelivery.
+type GetWebhookDeliveryParams struct {
 	// Authorization Bearer Workshop API key. Example: Bearer bbk_live_...
 	Authorization *string `json:"Authorization,omitempty"`
 
@@ -2295,29 +10432,8 @@ type WebhookDeliveriesGetParams struct {
 	XBikebookRequestId *string `json:"X-Bikebook-Request-Id,omitempty"`
 }
 
-// WebhookDeliveriesReplayParams defines parameters for WebhookDeliveriesReplay.
-type WebhookDeliveriesReplayParams struct {
-	// Authorization Bearer Workshop API key. Example: Bearer bbk_live_...
-	Authorization *string `json:"Authorization,omitempty"`
-
-	// XBikebookRequestId Optional request id supplied by the client for support correlation.
-	XBikebookRequestId *string `json:"X-Bikebook-Request-Id,omitempty"`
-
-	// IdempotencyKey Required for public write operations to make retries safe.
-	IdempotencyKey string `json:"Idempotency-Key"`
-}
-
-// WebhookEndpointsListParams defines parameters for WebhookEndpointsList.
-type WebhookEndpointsListParams struct {
-	// Authorization Bearer Workshop API key. Example: Bearer bbk_live_...
-	Authorization *string `json:"Authorization,omitempty"`
-
-	// XBikebookRequestId Optional request id supplied by the client for support correlation.
-	XBikebookRequestId *string `json:"X-Bikebook-Request-Id,omitempty"`
-}
-
-// WebhookEndpointsCreateParams defines parameters for WebhookEndpointsCreate.
-type WebhookEndpointsCreateParams struct {
+// ReplayParams defines parameters for Replay.
+type ReplayParams struct {
 	// Authorization Bearer Workshop API key. Example: Bearer bbk_live_...
 	Authorization *string `json:"Authorization,omitempty"`
 
@@ -2328,8 +10444,17 @@ type WebhookEndpointsCreateParams struct {
 	IdempotencyKey string `json:"Idempotency-Key"`
 }
 
-// WebhookEndpointsDeleteParams defines parameters for WebhookEndpointsDelete.
-type WebhookEndpointsDeleteParams struct {
+// ListWebhookEndpointParams defines parameters for ListWebhookEndpoint.
+type ListWebhookEndpointParams struct {
+	// Authorization Bearer Workshop API key. Example: Bearer bbk_live_...
+	Authorization *string `json:"Authorization,omitempty"`
+
+	// XBikebookRequestId Optional request id supplied by the client for support correlation.
+	XBikebookRequestId *string `json:"X-Bikebook-Request-Id,omitempty"`
+}
+
+// CreateWebhookEndpointParams defines parameters for CreateWebhookEndpoint.
+type CreateWebhookEndpointParams struct {
 	// Authorization Bearer Workshop API key. Example: Bearer bbk_live_...
 	Authorization *string `json:"Authorization,omitempty"`
 
@@ -2340,17 +10465,8 @@ type WebhookEndpointsDeleteParams struct {
 	IdempotencyKey string `json:"Idempotency-Key"`
 }
 
-// WebhookEndpointsGetParams defines parameters for WebhookEndpointsGet.
-type WebhookEndpointsGetParams struct {
-	// Authorization Bearer Workshop API key. Example: Bearer bbk_live_...
-	Authorization *string `json:"Authorization,omitempty"`
-
-	// XBikebookRequestId Optional request id supplied by the client for support correlation.
-	XBikebookRequestId *string `json:"X-Bikebook-Request-Id,omitempty"`
-}
-
-// WebhookEndpointsUpdateParams defines parameters for WebhookEndpointsUpdate.
-type WebhookEndpointsUpdateParams struct {
+// DeleteWebhookEndpointParams defines parameters for DeleteWebhookEndpoint.
+type DeleteWebhookEndpointParams struct {
 	// Authorization Bearer Workshop API key. Example: Bearer bbk_live_...
 	Authorization *string `json:"Authorization,omitempty"`
 
@@ -2361,15 +10477,36 @@ type WebhookEndpointsUpdateParams struct {
 	IdempotencyKey string `json:"Idempotency-Key"`
 }
 
-// WebhookDeliveriesListForEndpointParams defines parameters for WebhookDeliveriesListForEndpoint.
-type WebhookDeliveriesListForEndpointParams struct {
+// GetWebhookEndpointParams defines parameters for GetWebhookEndpoint.
+type GetWebhookEndpointParams struct {
+	// Authorization Bearer Workshop API key. Example: Bearer bbk_live_...
+	Authorization *string `json:"Authorization,omitempty"`
+
+	// XBikebookRequestId Optional request id supplied by the client for support correlation.
+	XBikebookRequestId *string `json:"X-Bikebook-Request-Id,omitempty"`
+}
+
+// UpdateWebhookEndpointParams defines parameters for UpdateWebhookEndpoint.
+type UpdateWebhookEndpointParams struct {
+	// Authorization Bearer Workshop API key. Example: Bearer bbk_live_...
+	Authorization *string `json:"Authorization,omitempty"`
+
+	// XBikebookRequestId Optional request id supplied by the client for support correlation.
+	XBikebookRequestId *string `json:"X-Bikebook-Request-Id,omitempty"`
+
+	// IdempotencyKey Required for public write operations to make retries safe.
+	IdempotencyKey string `json:"Idempotency-Key"`
+}
+
+// ListForEndpointParams defines parameters for ListForEndpoint.
+type ListForEndpointParams struct {
 	// Status Filter webhook deliveries by status: `pending`, `success`, or `failed`.
-	Status *string `form:"status,omitempty" json:"status,omitempty"`
+	Status *ListForEndpointParamsStatus `form:"status,omitempty" json:"status,omitempty"`
 
 	// EventType Filter webhook deliveries to a single event type name.
 	EventType *string `form:"event_type,omitempty" json:"event_type,omitempty"`
 
-	// Limit Maximum number of resources to return (1–100, default 50).
+	// Limit Maximum number of resources to return (1–100, default 10).
 	Limit *int32 `form:"limit,omitempty" json:"limit,omitempty"`
 
 	// Cursor Opaque page cursor from a previous list response's `pagination.next_cursor`.
@@ -2382,8 +10519,11 @@ type WebhookDeliveriesListForEndpointParams struct {
 	XBikebookRequestId *string `json:"X-Bikebook-Request-Id,omitempty"`
 }
 
-// WebhookEndpointsRotateSecretParams defines parameters for WebhookEndpointsRotateSecret.
-type WebhookEndpointsRotateSecretParams struct {
+// ListForEndpointParamsStatus defines parameters for ListForEndpoint.
+type ListForEndpointParamsStatus string
+
+// RotateSecretParams defines parameters for RotateSecret.
+type RotateSecretParams struct {
 	// Authorization Bearer Workshop API key. Example: Bearer bbk_live_...
 	Authorization *string `json:"Authorization,omitempty"`
 
@@ -2394,8 +10534,8 @@ type WebhookEndpointsRotateSecretParams struct {
 	IdempotencyKey string `json:"Idempotency-Key"`
 }
 
-// WebhookEventsListParams defines parameters for WebhookEventsList.
-type WebhookEventsListParams struct {
+// ListWebhookEventParams defines parameters for ListWebhookEvent.
+type ListWebhookEventParams struct {
 	// Authorization Bearer Workshop API key. Example: Bearer bbk_live_...
 	Authorization *string `json:"Authorization,omitempty"`
 
@@ -2403,38 +10543,107 @@ type WebhookEventsListParams struct {
 	XBikebookRequestId *string `json:"X-Bikebook-Request-Id,omitempty"`
 }
 
-// AssetsCreateJSONRequestBody defines body for AssetsCreate for application/json ContentType.
-type AssetsCreateJSONRequestBody = CreateAssetRequest
+// CreateAssetJSONRequestBody defines body for CreateAsset for application/json ContentType.
+type CreateAssetJSONRequestBody = AssetCreateRequest
 
-// AssetsUpdateJSONRequestBody defines body for AssetsUpdate for application/json ContentType.
-type AssetsUpdateJSONRequestBody = UpdateAssetRequest
+// UpdateAssetJSONRequestBody defines body for UpdateAsset for application/json ContentType.
+type UpdateAssetJSONRequestBody = AssetUpdateRequest
 
-// ServicesCreateJSONRequestBody defines body for ServicesCreate for application/json ContentType.
-type ServicesCreateJSONRequestBody = CreateServiceRequest
+// CreateJSONRequestBody defines body for Create for application/json ContentType.
+type CreateJSONRequestBody = BackOrderCreateRequest
 
-// ServicesUpdateJSONRequestBody defines body for ServicesUpdate for application/json ContentType.
-type ServicesUpdateJSONRequestBody = UpdateServiceRequest
+// ReceiveJSONRequestBody defines body for Receive for application/json ContentType.
+type ReceiveJSONRequestBody = BackOrderReceiveRequest
 
-// CustomersUpdateJSONRequestBody defines body for CustomersUpdate for application/json ContentType.
-type CustomersUpdateJSONRequestBody = UpdateCustomerRequest
+// UpdateJSONRequestBody defines body for Update for application/json ContentType.
+type UpdateJSONRequestBody = BackOrderUpdateRequest
 
-// ChatCreateMessageJSONRequestBody defines body for ChatCreateMessage for application/json ContentType.
-type ChatCreateMessageJSONRequestBody = CreateChatMessageRequest
+// TriggerCustomerSyncJSONRequestBody defines body for TriggerCustomerSync for application/json ContentType.
+type TriggerCustomerSyncJSONRequestBody = IntegrationPullSyncRequest
 
-// InvoiceItemsCreateJSONRequestBody defines body for InvoiceItemsCreate for application/json ContentType.
-type InvoiceItemsCreateJSONRequestBody = CreateInvoiceItemRequest
+// TriggerStockSyncJSONRequestBody defines body for TriggerStockSync for application/json ContentType.
+type TriggerStockSyncJSONRequestBody = IntegrationPullSyncRequest
 
-// InvoiceItemsUpdateJSONRequestBody defines body for InvoiceItemsUpdate for application/json ContentType.
-type InvoiceItemsUpdateJSONRequestBody = UpdateInvoiceItemRequest
+// CreateServiceJSONRequestBody defines body for CreateService for application/json ContentType.
+type CreateServiceJSONRequestBody = ServiceCreateRequest
 
-// JobsCreateJSONRequestBody defines body for JobsCreate for application/json ContentType.
-type JobsCreateJSONRequestBody = CreateJobRequest
+// UpdateServiceJSONRequestBody defines body for UpdateService for application/json ContentType.
+type UpdateServiceJSONRequestBody = ServiceUpdateRequest
 
-// JobsSubmitPartAuthorisationDecisionsJSONRequestBody defines body for JobsSubmitPartAuthorisationDecisions for application/json ContentType.
-type JobsSubmitPartAuthorisationDecisionsJSONRequestBody = SubmitPartAuthorisationDecisionsRequest
+// CreateCustomerJSONRequestBody defines body for CreateCustomer for application/json ContentType.
+type CreateCustomerJSONRequestBody = CustomerCreateRequest
 
-// WebhookEndpointsCreateJSONRequestBody defines body for WebhookEndpointsCreate for application/json ContentType.
-type WebhookEndpointsCreateJSONRequestBody = CreateWebhookEndpointRequest
+// UpdateCustomerJSONRequestBody defines body for UpdateCustomer for application/json ContentType.
+type UpdateCustomerJSONRequestBody = CustomerUpdateRequest
 
-// WebhookEndpointsUpdateJSONRequestBody defines body for WebhookEndpointsUpdate for application/json ContentType.
-type WebhookEndpointsUpdateJSONRequestBody = UpdateWebhookEndpointRequest
+// CreateChatAttachmentsMultipartRequestBody defines body for CreateChatAttachments for multipart/form-data ContentType.
+type CreateChatAttachmentsMultipartRequestBody CreateChatAttachmentsMultipartBody
+
+// CreateChatMessageJSONRequestBody defines body for CreateChatMessage for application/json ContentType.
+type CreateChatMessageJSONRequestBody = ChatMessageCreateRequest
+
+// CreateInvoiceItemJSONRequestBody defines body for CreateInvoiceItem for application/json ContentType.
+type CreateInvoiceItemJSONRequestBody = InvoiceItemCreateRequest
+
+// UpdateInvoiceItemJSONRequestBody defines body for UpdateInvoiceItem for application/json ContentType.
+type UpdateInvoiceItemJSONRequestBody = InvoiceItemUpdateRequest
+
+// UpdateInvoiceJSONRequestBody defines body for UpdateInvoice for application/json ContentType.
+type UpdateInvoiceJSONRequestBody = InvoiceUpdateRequest
+
+// ChangeInvoiceAutoSyncJSONRequestBody defines body for ChangeInvoiceAutoSync for application/json ContentType.
+type ChangeInvoiceAutoSyncJSONRequestBody = IntegrationAutoSyncChangeRequest
+
+// ChangeInvoiceSyncCompletionJSONRequestBody defines body for ChangeInvoiceSyncCompletion for application/json ContentType.
+type ChangeInvoiceSyncCompletionJSONRequestBody = IntegrationSyncCompletionRequest
+
+// TriggerInvoiceIntegrationSyncJSONRequestBody defines body for TriggerInvoiceIntegrationSync for application/json ContentType.
+type TriggerInvoiceIntegrationSyncJSONRequestBody = IntegrationSyncTriggerRequest
+
+// RecordPaymentJSONRequestBody defines body for RecordPayment for application/json ContentType.
+type RecordPaymentJSONRequestBody = InvoicePaymentCreateRequest
+
+// SendJSONRequestBody defines body for Send for application/json ContentType.
+type SendJSONRequestBody = InvoiceSendRequest
+
+// ChangeStatusJSONRequestBody defines body for ChangeStatus for application/json ContentType.
+type ChangeStatusJSONRequestBody = InvoiceStatusChangeRequest
+
+// CreateJobBookingJSONRequestBody defines body for CreateJobBooking for application/json ContentType.
+type CreateJobBookingJSONRequestBody = JobCreateRequest
+
+// UpdateJobJSONRequestBody defines body for UpdateJob for application/json ContentType.
+type UpdateJobJSONRequestBody = JobUpdateRequest
+
+// ChangeAcceptedStatusJSONRequestBody defines body for ChangeAcceptedStatus for application/json ContentType.
+type ChangeAcceptedStatusJSONRequestBody = JobAcceptedStatusChangeRequest
+
+// SubmitPartAuthorisationDecisionsJSONRequestBody defines body for SubmitPartAuthorisationDecisions for application/json ContentType.
+type SubmitPartAuthorisationDecisionsJSONRequestBody = PartAuthorisationDecisionSubmitRequest
+
+// RequestPartAuthorisationJSONRequestBody defines body for RequestPartAuthorisation for application/json ContentType.
+type RequestPartAuthorisationJSONRequestBody = PartAuthorisationRequestCreateRequest
+
+// ChangeScheduleJSONRequestBody defines body for ChangeSchedule for application/json ContentType.
+type ChangeScheduleJSONRequestBody = JobScheduleChangeRequest
+
+// UpdateWorkLineJSONRequestBody defines body for UpdateWorkLine for application/json ContentType.
+type UpdateWorkLineJSONRequestBody = JobWorkLineUpdateRequest
+
+// AssignWorkLineMechanicJSONRequestBody defines body for AssignWorkLineMechanic for application/json ContentType.
+type AssignWorkLineMechanicJSONRequestBody = JobWorkLineMechanicAssignmentRequest
+
+// ReplaceWorkLineServicesJSONRequestBody defines body for ReplaceWorkLineServices for application/json ContentType.
+type ReplaceWorkLineServicesJSONRequestBody = JobWorkLineServicesUpdateRequest
+
+// ChangeWorkLineStatusJSONRequestBody defines body for ChangeWorkLineStatus for application/json ContentType.
+type ChangeWorkLineStatusJSONRequestBody = JobWorkLineStatusChangeRequest
+
+// RefundJSONRequestBody defines body for Refund for application/json ContentType.
+type RefundJSONRequestBody = PaymentRefundCreateRequest
+
+// CreateWebhookEndpointJSONRequestBody defines body for CreateWebhookEndpoint for application/json ContentType.
+type CreateWebhookEndpointJSONRequestBody = WebhookEndpointCreateRequest
+
+// UpdateWebhookEndpointJSONRequestBody defines body for UpdateWebhookEndpoint for application/json ContentType.
+type UpdateWebhookEndpointJSONRequestBody = WebhookEndpointUpdateRequest

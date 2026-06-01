@@ -22,20 +22,22 @@ Facts pulled directly from `public-v1.json` (OpenAPI 3.0.1):
   ```
   `code` is the stable machine-readable identifier (e.g. `invalid_request`, `resource_not_found`).
 - **HTTP status codes used**: 200, 201, 400, 401, 403, 404, 409, 429.
-- **No `servers` block** in the spec — base URL still needs to be confirmed.
+- **Servers block**: the latest spec declares production as `https://api.bikebook.co.uk`; the CLI keeps `/public/v1` in its default `--api-base`.
 
-**Surface**: 36 paths, 48 operations (31 GET, 10 POST, 5 PATCH, 2 DELETE) across 13 resource tags:
+**Surface**: 63 paths, 82 operations (38 GET, 30 POST, 10 PATCH, 4 DELETE) across 15 resource tags:
 
 | Tag | Reads | Writes | Notes |
 |---|---|---|---|
-| Assets | list / list-for-customer / get | create / update | customer-owned bikes & equipment |
-| Businesses | list / get / list services / availability / availability slots / next slot | — | read-only catalogue + scheduling |
-| Chat | list messages | send message / upload attachment | per-customer threads |
-| Customers | list / get | update | |
-| Invoices | list / get | — | |
+| Assets | list / list-for-customer / get | create / update / delete | customer-owned bikes |
+| Back orders | list / get | create / receive / update / delete | parts waiting to be ordered or received |
+| Businesses | list / get / list services / availability / availability slots / next slot / job statuses | — | read-only catalogue + scheduling |
+| Chat | list messages | send message / upload attachment / mark read | per-customer threads |
+| Customers | list / get | create / update | |
+| Integrations | business integration / invoice sync / sync events | trigger customer sync / trigger stock sync / invoice sync workflows | POS/integration workflows |
+| Invoices | list / get / PDF | update / status / payment link / payment / refund / send | |
 | Invoice items | get | create / update / delete | |
 | Job reports | list / list-for-job / get / get-for-job | — | |
-| Jobs | list / get / list part authorisations | create / submit part-authorisation decisions | core workflow |
+| Jobs | list / get / list part authorisations | create / update / accepted status / schedule / work lines / part authorisation workflows | core workflow |
 | Services | list / get | create / update | scoped under business |
 | Stock | list / get | — | stock variations / SKUs |
 | Webhook endpoints | list / get | create / update / delete / rotate secret | |
@@ -203,8 +205,8 @@ curl -fsSL https://bikebook.example.com/install.sh | sh
 
 ## 5. Language choice & codegen
 
-Now that we have an OpenAPI 3.0.1 spec with 74 schemas and 48 operations,
-**OpenAPI codegen is the right primitive** — hand-writing 48 request
+Now that we have an OpenAPI 3.0.1 spec with 131 schemas and 82 operations,
+**OpenAPI codegen is the right primitive** — hand-writing 82 request
 wrappers is toil, and the spec will evolve. The language decision now hinges
 on which ecosystem has the best codegen story.
 
@@ -339,9 +341,9 @@ Resolved on 2026-05-26 with the user:
 | Ownership / support | **Open-source consumer CLI** in `helopony` GitHub org. Public, MIT-licensed, no obligation to mirror official BikeBook branding. |
 | Language | **Go + `oapi-codegen`** — single static binary, ~5 ms cold start, typed client generated from `public-v1.json`. |
 | Binary name | **`bikebook`** |
-| Production base URL | **`https://api.bikebook.com/public/v1`** (path prefix included in the base) |
+| Production base URL | **`https://api.bikebook.co.uk/public/v1`** (path prefix included in the base) |
 | Sandbox / test routing | **No separate sandbox host for v1.** `bbk_test_` keys use the same default host, and `--env=test` validates the key prefix without rewriting `--api-base`. Use `--api-base` if BikeBook later provides a dedicated sandbox hostname. |
-| v1 scope | **All 48 operations at once** via codegen — generate the typed client, then write thin Cobra wrappers for every operation. |
+| v1 scope | **All 82 operations at once** via codegen — generate the typed client, then write thin Cobra wrappers for every operation. |
 | Distribution | **Public**: GitHub Releases (darwin/linux/windows × amd64/arm64) + `curl \| sh` installer + Homebrew tap. |
 | Webhook listener | **Skip for v1.** Ship `webhook_endpoints`/`webhook_deliveries`/`webhook_events` CRUD only; defer Stripe-style `listen` to a later milestone. |
 

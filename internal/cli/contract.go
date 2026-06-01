@@ -52,7 +52,7 @@ type Contract struct {
 }
 
 type CLIError struct {
-	Envelope   api.ApiErrorResponse
+	Envelope   api.ErrorResponse
 	Exit       int
 	Status     int
 	Hint       string
@@ -77,7 +77,7 @@ type cliErrorContext struct {
 }
 
 type renderedError struct {
-	Error     *api.ApiError   `json:"error,omitempty"`
+	Error     *api.Error      `json:"error,omitempty"`
 	RequestID *string         `json:"request_id,omitempty"`
 	CLI       cliErrorContext `json:"cli"`
 }
@@ -92,7 +92,7 @@ func (e *CLIError) Error() string {
 	return "unknown error"
 }
 
-func NewAPIError(status int, envelope api.ApiErrorResponse, hint, docsURL string) *CLIError {
+func NewAPIError(status int, envelope api.ErrorResponse, hint, docsURL string) *CLIError {
 	return &CLIError{
 		Envelope: envelope,
 		Exit:     ExitCodeForHTTPStatus(status),
@@ -103,8 +103,8 @@ func NewAPIError(status int, envelope api.ApiErrorResponse, hint, docsURL string
 }
 
 func NewLocalError(exit int, code, message, parameter, hint, docsURL string) *CLIError {
-	err := api.ApiError{
-		Code:    stringPtr(code),
+	err := api.Error{
+		Code:    errorCodePtr(code),
 		Message: stringPtr(message),
 	}
 	if parameter != "" {
@@ -112,7 +112,7 @@ func NewLocalError(exit int, code, message, parameter, hint, docsURL string) *CL
 	}
 
 	return &CLIError{
-		Envelope: api.ApiErrorResponse{
+		Envelope: api.ErrorResponse{
 			Error: &err,
 		},
 		Exit:       exit,
@@ -441,4 +441,9 @@ func humanValue(value any) string {
 
 func stringPtr(value string) *string {
 	return &value
+}
+
+func errorCodePtr(value string) *api.ErrorCode {
+	code := api.ErrorCode(value)
+	return &code
 }

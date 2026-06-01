@@ -325,55 +325,136 @@ func writeRequestEditor(opts rootOptions, apiKey, idempotencyKey string, query m
 func writeCommandSpecs() []writeCommandSpec {
 	return []writeCommandSpec{
 		{Group: "assets", Use: "create", Short: "Create an asset", Method: http.MethodPost, HasBody: true, Execute: func(ctx context.Context, c *api.Client, args []string, body io.Reader, contentType string, editors []api.RequestEditorFn) (*http.Response, error) {
-			return c.AssetsCreateWithBody(ctx, nil, contentType, body, editors...)
+			return c.CreateAssetWithBody(ctx, nil, contentType, body, editors...)
 		}},
 		{Group: "assets", Use: "update", Short: "Update an asset", Method: http.MethodPatch, PathArgs: []string{"asset_id"}, HasBody: true, Execute: func(ctx context.Context, c *api.Client, args []string, body io.Reader, contentType string, editors []api.RequestEditorFn) (*http.Response, error) {
-			return c.AssetsUpdateWithBody(ctx, args[0], nil, contentType, body, editors...)
+			return c.UpdateAssetWithBody(ctx, args[0], nil, contentType, body, editors...)
+		}},
+		{Group: "assets", Use: "delete", Short: "Delete an asset", Method: http.MethodDelete, PathArgs: []string{"asset_id"}, Destructive: true, Execute: func(ctx context.Context, c *api.Client, args []string, body io.Reader, contentType string, editors []api.RequestEditorFn) (*http.Response, error) {
+			return c.DeleteAsset(ctx, args[0], nil, editors...)
+		}},
+		{Group: "back-orders", Use: "create", Short: "Create a back order", Method: http.MethodPost, HasBody: true, Execute: func(ctx context.Context, c *api.Client, args []string, body io.Reader, contentType string, editors []api.RequestEditorFn) (*http.Response, error) {
+			return c.CreateWithBody(ctx, nil, contentType, body, editors...)
+		}},
+		{Group: "back-orders", Use: "receive", Short: "Receive back orders", Method: http.MethodPost, HasBody: true, Execute: func(ctx context.Context, c *api.Client, args []string, body io.Reader, contentType string, editors []api.RequestEditorFn) (*http.Response, error) {
+			return c.ReceiveWithBody(ctx, nil, contentType, body, editors...)
+		}},
+		{Group: "back-orders", Use: "update", Short: "Update a back order", Method: http.MethodPatch, PathArgs: []string{"back_order_id"}, HasBody: true, Execute: func(ctx context.Context, c *api.Client, args []string, body io.Reader, contentType string, editors []api.RequestEditorFn) (*http.Response, error) {
+			return c.UpdateWithBody(ctx, args[0], nil, contentType, body, editors...)
+		}},
+		{Group: "back-orders", Use: "delete", Short: "Delete a back order", Method: http.MethodDelete, PathArgs: []string{"back_order_id"}, Destructive: true, Execute: func(ctx context.Context, c *api.Client, args []string, body io.Reader, contentType string, editors []api.RequestEditorFn) (*http.Response, error) {
+			return c.Delete(ctx, args[0], nil, editors...)
 		}},
 		{Group: "services", Use: "create", Short: "Create a service", Method: http.MethodPost, PathArgs: []string{"business_id"}, HasBody: true, Execute: func(ctx context.Context, c *api.Client, args []string, body io.Reader, contentType string, editors []api.RequestEditorFn) (*http.Response, error) {
-			return c.ServicesCreateWithBody(ctx, args[0], nil, contentType, body, editors...)
+			return c.CreateServiceWithBody(ctx, args[0], nil, contentType, body, editors...)
 		}},
 		{Group: "chat", Use: "create-message", Short: "Create a chat message", Method: http.MethodPost, PathArgs: []string{"customer_id"}, QueryFlags: []string{"job_id"}, HasBody: true, Execute: func(ctx context.Context, c *api.Client, args []string, body io.Reader, contentType string, editors []api.RequestEditorFn) (*http.Response, error) {
-			return c.ChatCreateMessageWithBody(ctx, args[0], nil, contentType, body, editors...)
+			return c.CreateChatMessageWithBody(ctx, args[0], nil, contentType, body, editors...)
 		}},
 		{Group: "chat", Use: "create-attachments", Short: "Create chat attachments", Method: http.MethodPost, PathArgs: []string{"customer_id"}, QueryFlags: []string{"job_id"}, HasBody: true, Execute: func(ctx context.Context, c *api.Client, args []string, body io.Reader, contentType string, editors []api.RequestEditorFn) (*http.Response, error) {
-			return c.ChatCreateAttachmentsWithBody(ctx, args[0], nil, contentType, body, editors...)
+			return c.CreateChatAttachmentsWithBody(ctx, args[0], nil, contentType, body, editors...)
+		}},
+		{Group: "chat", Use: "mark-read", Short: "Mark chat messages read", Method: http.MethodPost, PathArgs: []string{"customer_id"}, QueryFlags: []string{"job_id"}, Execute: func(ctx context.Context, c *api.Client, args []string, body io.Reader, contentType string, editors []api.RequestEditorFn) (*http.Response, error) {
+			return c.MarkRead(ctx, args[0], nil, editors...)
+		}},
+		{Group: "customers", Use: "create", Short: "Create a customer", Method: http.MethodPost, HasBody: true, Execute: func(ctx context.Context, c *api.Client, args []string, body io.Reader, contentType string, editors []api.RequestEditorFn) (*http.Response, error) {
+			return c.CreateCustomerWithBody(ctx, nil, contentType, body, editors...)
 		}},
 		{Group: "customers", Use: "update", Short: "Update a customer", Method: http.MethodPatch, PathArgs: []string{"customer_id"}, HasBody: true, Execute: func(ctx context.Context, c *api.Client, args []string, body io.Reader, contentType string, editors []api.RequestEditorFn) (*http.Response, error) {
-			return c.CustomersUpdateWithBody(ctx, args[0], nil, contentType, body, editors...)
+			return c.UpdateCustomerWithBody(ctx, args[0], nil, contentType, body, editors...)
+		}},
+		{Group: "integrations", Use: "trigger-customer-sync", Short: "Trigger customer integration sync", Method: http.MethodPost, PathArgs: []string{"business_id"}, HasBody: true, Execute: func(ctx context.Context, c *api.Client, args []string, body io.Reader, contentType string, editors []api.RequestEditorFn) (*http.Response, error) {
+			return c.TriggerCustomerSyncWithBody(ctx, args[0], nil, contentType, body, editors...)
+		}},
+		{Group: "integrations", Use: "trigger-stock-sync", Short: "Trigger stock integration sync", Method: http.MethodPost, PathArgs: []string{"business_id"}, HasBody: true, Execute: func(ctx context.Context, c *api.Client, args []string, body io.Reader, contentType string, editors []api.RequestEditorFn) (*http.Response, error) {
+			return c.TriggerStockSyncWithBody(ctx, args[0], nil, contentType, body, editors...)
+		}},
+		{Group: "integrations", Use: "change-invoice-auto-sync", Short: "Change invoice integration auto-sync", Method: http.MethodPost, PathArgs: []string{"invoice_id"}, HasBody: true, Execute: func(ctx context.Context, c *api.Client, args []string, body io.Reader, contentType string, editors []api.RequestEditorFn) (*http.Response, error) {
+			return c.ChangeInvoiceAutoSyncWithBody(ctx, args[0], nil, contentType, body, editors...)
+		}},
+		{Group: "integrations", Use: "change-invoice-sync-completion", Short: "Change invoice integration sync completion", Method: http.MethodPost, PathArgs: []string{"invoice_id"}, HasBody: true, Execute: func(ctx context.Context, c *api.Client, args []string, body io.Reader, contentType string, editors []api.RequestEditorFn) (*http.Response, error) {
+			return c.ChangeInvoiceSyncCompletionWithBody(ctx, args[0], nil, contentType, body, editors...)
+		}},
+		{Group: "integrations", Use: "retry-invoice-sync", Short: "Retry invoice integration sync", Method: http.MethodPost, PathArgs: []string{"invoice_id"}, Execute: func(ctx context.Context, c *api.Client, args []string, body io.Reader, contentType string, editors []api.RequestEditorFn) (*http.Response, error) {
+			return c.RetryInvoiceIntegrationSync(ctx, args[0], nil, editors...)
+		}},
+		{Group: "integrations", Use: "trigger-invoice-sync", Short: "Trigger invoice integration sync", Method: http.MethodPost, PathArgs: []string{"invoice_id"}, HasBody: true, Execute: func(ctx context.Context, c *api.Client, args []string, body io.Reader, contentType string, editors []api.RequestEditorFn) (*http.Response, error) {
+			return c.TriggerInvoiceIntegrationSyncWithBody(ctx, args[0], nil, contentType, body, editors...)
 		}},
 		{Group: "invoice-items", Use: "update", Short: "Update an invoice item", Method: http.MethodPatch, PathArgs: []string{"invoice_item_id"}, HasBody: true, Execute: func(ctx context.Context, c *api.Client, args []string, body io.Reader, contentType string, editors []api.RequestEditorFn) (*http.Response, error) {
-			return c.InvoiceItemsUpdateWithBody(ctx, args[0], nil, contentType, body, editors...)
+			return c.UpdateInvoiceItemWithBody(ctx, args[0], nil, contentType, body, editors...)
 		}},
 		{Group: "invoice-items", Use: "delete", Short: "Delete an invoice item", Method: http.MethodDelete, PathArgs: []string{"invoice_item_id"}, Destructive: true, Execute: func(ctx context.Context, c *api.Client, args []string, body io.Reader, contentType string, editors []api.RequestEditorFn) (*http.Response, error) {
-			return c.InvoiceItemsDelete(ctx, args[0], nil, editors...)
+			return c.DeleteInvoiceItem(ctx, args[0], nil, editors...)
 		}},
 		{Group: "invoice-items", Use: "create", Short: "Create an invoice item", Method: http.MethodPost, HasBody: true, Execute: func(ctx context.Context, c *api.Client, args []string, body io.Reader, contentType string, editors []api.RequestEditorFn) (*http.Response, error) {
-			return c.InvoiceItemsCreateWithBody(ctx, nil, contentType, body, editors...)
+			return c.CreateInvoiceItemWithBody(ctx, nil, contentType, body, editors...)
+		}},
+		{Group: "invoices", Use: "update", Short: "Update an invoice", Method: http.MethodPatch, PathArgs: []string{"invoice_id"}, HasBody: true, Execute: func(ctx context.Context, c *api.Client, args []string, body io.Reader, contentType string, editors []api.RequestEditorFn) (*http.Response, error) {
+			return c.UpdateInvoiceWithBody(ctx, args[0], nil, contentType, body, editors...)
+		}},
+		{Group: "invoices", Use: "change-status", Short: "Change invoice status", Method: http.MethodPost, PathArgs: []string{"invoice_id"}, HasBody: true, Execute: func(ctx context.Context, c *api.Client, args []string, body io.Reader, contentType string, editors []api.RequestEditorFn) (*http.Response, error) {
+			return c.ChangeStatusWithBody(ctx, args[0], nil, contentType, body, editors...)
+		}},
+		{Group: "invoices", Use: "payment-link", Short: "Create invoice payment link", Method: http.MethodPost, PathArgs: []string{"invoice_id"}, Execute: func(ctx context.Context, c *api.Client, args []string, body io.Reader, contentType string, editors []api.RequestEditorFn) (*http.Response, error) {
+			return c.PaymentLink(ctx, args[0], nil, editors...)
+		}},
+		{Group: "invoices", Use: "record-payment", Short: "Record invoice payment", Method: http.MethodPost, PathArgs: []string{"invoice_id"}, HasBody: true, Execute: func(ctx context.Context, c *api.Client, args []string, body io.Reader, contentType string, editors []api.RequestEditorFn) (*http.Response, error) {
+			return c.RecordPaymentWithBody(ctx, args[0], nil, contentType, body, editors...)
+		}},
+		{Group: "invoices", Use: "send", Short: "Send an invoice", Method: http.MethodPost, PathArgs: []string{"invoice_id"}, HasBody: true, Execute: func(ctx context.Context, c *api.Client, args []string, body io.Reader, contentType string, editors []api.RequestEditorFn) (*http.Response, error) {
+			return c.SendWithBody(ctx, args[0], nil, contentType, body, editors...)
+		}},
+		{Group: "invoices", Use: "refund", Short: "Refund a payment", Method: http.MethodPost, PathArgs: []string{"payment_id"}, HasBody: true, Execute: func(ctx context.Context, c *api.Client, args []string, body io.Reader, contentType string, editors []api.RequestEditorFn) (*http.Response, error) {
+			return c.RefundWithBody(ctx, args[0], nil, contentType, body, editors...)
 		}},
 		{Group: "jobs", Use: "submit-part-authorisation-decisions", Short: "Submit part authorisation decisions", Method: http.MethodPost, PathArgs: []string{"job_id"}, HasBody: true, Execute: func(ctx context.Context, c *api.Client, args []string, body io.Reader, contentType string, editors []api.RequestEditorFn) (*http.Response, error) {
-			return c.JobsSubmitPartAuthorisationDecisionsWithBody(ctx, args[0], nil, contentType, body, editors...)
+			return c.SubmitPartAuthorisationDecisionsWithBody(ctx, args[0], nil, contentType, body, editors...)
 		}},
 		{Group: "jobs", Use: "create", Short: "Create a job", Method: http.MethodPost, HasBody: true, Execute: func(ctx context.Context, c *api.Client, args []string, body io.Reader, contentType string, editors []api.RequestEditorFn) (*http.Response, error) {
-			return c.JobsCreateWithBody(ctx, nil, contentType, body, editors...)
+			return c.CreateJobBookingWithBody(ctx, nil, contentType, body, editors...)
+		}},
+		{Group: "jobs", Use: "update", Short: "Update a job", Method: http.MethodPatch, PathArgs: []string{"job_id"}, HasBody: true, Execute: func(ctx context.Context, c *api.Client, args []string, body io.Reader, contentType string, editors []api.RequestEditorFn) (*http.Response, error) {
+			return c.UpdateJobWithBody(ctx, args[0], nil, contentType, body, editors...)
+		}},
+		{Group: "jobs", Use: "change-accepted-status", Short: "Change job accepted status", Method: http.MethodPost, PathArgs: []string{"job_id"}, HasBody: true, Execute: func(ctx context.Context, c *api.Client, args []string, body io.Reader, contentType string, editors []api.RequestEditorFn) (*http.Response, error) {
+			return c.ChangeAcceptedStatusWithBody(ctx, args[0], nil, contentType, body, editors...)
+		}},
+		{Group: "jobs", Use: "request-part-authorisation", Short: "Request part authorisation", Method: http.MethodPost, PathArgs: []string{"job_id"}, HasBody: true, Execute: func(ctx context.Context, c *api.Client, args []string, body io.Reader, contentType string, editors []api.RequestEditorFn) (*http.Response, error) {
+			return c.RequestPartAuthorisationWithBody(ctx, args[0], nil, contentType, body, editors...)
+		}},
+		{Group: "jobs", Use: "change-schedule", Short: "Change job schedule", Method: http.MethodPost, PathArgs: []string{"job_id"}, HasBody: true, Execute: func(ctx context.Context, c *api.Client, args []string, body io.Reader, contentType string, editors []api.RequestEditorFn) (*http.Response, error) {
+			return c.ChangeScheduleWithBody(ctx, args[0], nil, contentType, body, editors...)
+		}},
+		{Group: "jobs", Use: "update-work-line", Short: "Update a job work line", Method: http.MethodPatch, PathArgs: []string{"job_id", "work_line_id"}, HasBody: true, Execute: func(ctx context.Context, c *api.Client, args []string, body io.Reader, contentType string, editors []api.RequestEditorFn) (*http.Response, error) {
+			return c.UpdateWorkLineWithBody(ctx, args[0], args[1], nil, contentType, body, editors...)
+		}},
+		{Group: "jobs", Use: "assign-work-line-mechanic", Short: "Assign a work line mechanic", Method: http.MethodPost, PathArgs: []string{"job_id", "work_line_id"}, HasBody: true, Execute: func(ctx context.Context, c *api.Client, args []string, body io.Reader, contentType string, editors []api.RequestEditorFn) (*http.Response, error) {
+			return c.AssignWorkLineMechanicWithBody(ctx, args[0], args[1], nil, contentType, body, editors...)
+		}},
+		{Group: "jobs", Use: "replace-work-line-services", Short: "Replace work line services", Method: http.MethodPatch, PathArgs: []string{"job_id", "work_line_id"}, HasBody: true, Execute: func(ctx context.Context, c *api.Client, args []string, body io.Reader, contentType string, editors []api.RequestEditorFn) (*http.Response, error) {
+			return c.ReplaceWorkLineServicesWithBody(ctx, args[0], args[1], nil, contentType, body, editors...)
+		}},
+		{Group: "jobs", Use: "change-work-line-status", Short: "Change work line status", Method: http.MethodPost, PathArgs: []string{"job_id", "work_line_id"}, HasBody: true, Execute: func(ctx context.Context, c *api.Client, args []string, body io.Reader, contentType string, editors []api.RequestEditorFn) (*http.Response, error) {
+			return c.ChangeWorkLineStatusWithBody(ctx, args[0], args[1], nil, contentType, body, editors...)
 		}},
 		{Group: "services", Use: "update", Short: "Update a service", Method: http.MethodPatch, PathArgs: []string{"business_id", "service_id"}, HasBody: true, Execute: func(ctx context.Context, c *api.Client, args []string, body io.Reader, contentType string, editors []api.RequestEditorFn) (*http.Response, error) {
-			return c.ServicesUpdateWithBody(ctx, args[0], args[1], nil, contentType, body, editors...)
+			return c.UpdateServiceWithBody(ctx, args[0], args[1], nil, contentType, body, editors...)
 		}},
 		{Group: "webhook-deliveries", Use: "replay", Short: "Replay a webhook delivery", Method: http.MethodPost, PathArgs: []string{"delivery_id"}, Execute: func(ctx context.Context, c *api.Client, args []string, body io.Reader, contentType string, editors []api.RequestEditorFn) (*http.Response, error) {
-			return c.WebhookDeliveriesReplay(ctx, args[0], nil, editors...)
+			return c.Replay(ctx, args[0], nil, editors...)
 		}},
 		{Group: "webhook-endpoints", Use: "create", Short: "Create a webhook endpoint", Method: http.MethodPost, HasBody: true, Execute: func(ctx context.Context, c *api.Client, args []string, body io.Reader, contentType string, editors []api.RequestEditorFn) (*http.Response, error) {
-			return c.WebhookEndpointsCreateWithBody(ctx, nil, contentType, body, editors...)
+			return c.CreateWebhookEndpointWithBody(ctx, nil, contentType, body, editors...)
 		}},
 		{Group: "webhook-endpoints", Use: "update", Short: "Update a webhook endpoint", Method: http.MethodPatch, PathArgs: []string{"endpoint_id"}, HasBody: true, Execute: func(ctx context.Context, c *api.Client, args []string, body io.Reader, contentType string, editors []api.RequestEditorFn) (*http.Response, error) {
-			return c.WebhookEndpointsUpdateWithBody(ctx, args[0], nil, contentType, body, editors...)
+			return c.UpdateWebhookEndpointWithBody(ctx, args[0], nil, contentType, body, editors...)
 		}},
 		{Group: "webhook-endpoints", Use: "delete", Short: "Delete a webhook endpoint", Method: http.MethodDelete, PathArgs: []string{"endpoint_id"}, Destructive: true, Execute: func(ctx context.Context, c *api.Client, args []string, body io.Reader, contentType string, editors []api.RequestEditorFn) (*http.Response, error) {
-			return c.WebhookEndpointsDelete(ctx, args[0], nil, editors...)
+			return c.DeleteWebhookEndpoint(ctx, args[0], nil, editors...)
 		}},
 		{Group: "webhook-endpoints", Use: "rotate-secret", Short: "Rotate a webhook endpoint secret", Method: http.MethodPost, PathArgs: []string{"endpoint_id"}, Destructive: true, Execute: func(ctx context.Context, c *api.Client, args []string, body io.Reader, contentType string, editors []api.RequestEditorFn) (*http.Response, error) {
-			return c.WebhookEndpointsRotateSecret(ctx, args[0], nil, editors...)
+			return c.RotateSecret(ctx, args[0], nil, editors...)
 		}},
 	}
 }

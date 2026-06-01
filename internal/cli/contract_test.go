@@ -67,12 +67,11 @@ func TestExitCodeForHTTPStatus(t *testing.T) {
 
 func TestRenderAPIErrorIncludesEnvelopeAndCLIBlock(t *testing.T) {
 	requestID := "req_123"
-	code := "resource_not_found"
 	message := "Job not found"
 	parameter := "job_id"
-	err := NewAPIError(404, api.ApiErrorResponse{
-		Error: &api.ApiError{
-			Code:      &code,
+	err := NewAPIError(404, api.ErrorResponse{
+		Error: &api.Error{
+			Code:      errorCodePtr("resource_not_found"),
 			Message:   &message,
 			Parameter: &parameter,
 		},
