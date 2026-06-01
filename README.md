@@ -33,8 +33,10 @@ go install github.com/helopony/bikebook-cli/cmd/bikebook@latest
 - `bikebook --help` and `bikebook <cmd> --help` — per-command help.
 - `bikebook upgrade` — self-update from the latest GitHub Release; set `BIKEBOOK_NO_UPGRADE=1` to disable.
 - [`AGENTS.md`](./AGENTS.md) — task-shaped command recipes for agents.
+- [`AGENT_SETUP.md`](./AGENT_SETUP.md) — simple manual for adding the CLI to agent runtimes.
 - [`llms.txt`](./llms.txt) — curated Markdown link map for LLM tools.
-- [`.claude/skills/bikebook.md`](./.claude/skills/bikebook.md) — Claude Code skill with install and common command patterns.
+- [`skills/claude/bikebook.md`](./skills/claude/bikebook.md) — Claude Code skill distribution file.
+- [`skills/codex/bikebook/SKILL.md`](./skills/codex/bikebook/SKILL.md) — Codex and ChatGPT skill distribution package.
 
 ## Spec
 

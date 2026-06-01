@@ -7,6 +7,9 @@
 - [Repository](https://github.com/helopony/bikebook-cli): Source, releases, issues, and pull requests.
 - [README](https://github.com/helopony/bikebook-cli/blob/main/README.md): Install commands, project overview, and core agent entry points.
 - [Agent Guide](https://github.com/helopony/bikebook-cli/blob/main/AGENTS.md): Task-shaped command recipes for agents.
+- [Agent Setup Manual](https://github.com/helopony/bikebook-cli/blob/main/AGENT_SETUP.md): Short setup guide for adding the CLI to agent runtimes.
+- [OpenAI Skill](https://github.com/helopony/bikebook-cli/blob/main/skills/codex/bikebook/SKILL.md): Codex and ChatGPT skill with BikeBook CLI operating rules.
+- [Claude Code Skill](https://github.com/helopony/bikebook-cli/blob/main/skills/claude/bikebook.md): Claude Code skill with install and command patterns.
 - [Design Research](https://github.com/helopony/bikebook-cli/blob/main/RESEARCH.md): CLI contract, distribution model, and design rationale.
 - [Implementation Stories](https://github.com/helopony/bikebook-cli/blob/main/LINEAR_STORIES.md): Story-level acceptance criteria for v1.
 

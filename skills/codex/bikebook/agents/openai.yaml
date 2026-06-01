@@ -1,0 +1,4 @@
+interface:
+  display_name: "BikeBook CLI"
+  short_description: "Use BikeBook API through the bikebook CLI"
+  default_prompt: "Use $bikebook to inspect BikeBook CLI commands and work with the BikeBook Workshop Public API."
