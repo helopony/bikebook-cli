@@ -116,7 +116,7 @@ func probeConnectivity(ctx context.Context, client *http.Client, apiBase, apiKey
 		return DoctorCheck{Name: "connectivity", Status: "ok", Detail: "GET /jobs?limit=1 " + resp.Status + " in " + elapsed.String(), ExitCode: ExitSuccess}, ExitSuccess
 	}
 
-	apiError := api.ApiErrorResponse{}
+	apiError := api.ErrorResponse{}
 	_ = json.NewDecoder(resp.Body).Decode(&apiError)
 	detail := "GET /jobs?limit=1 " + resp.Status
 	if apiError.Error != nil && apiError.Error.Message != nil {

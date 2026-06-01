@@ -89,177 +89,323 @@ func WithRequestEditorFn(fn RequestEditorFn) ClientOption {
 
 // The interface specification for the client above.
 type ClientInterface interface {
-	// AssetsList request
-	AssetsList(ctx context.Context, params *AssetsListParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// ListAsset request
+	ListAsset(ctx context.Context, params *ListAssetParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// AssetsCreateWithBody request with any body
-	AssetsCreateWithBody(ctx context.Context, params *AssetsCreateParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// CreateAssetWithBody request with any body
+	CreateAssetWithBody(ctx context.Context, params *CreateAssetParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	AssetsCreate(ctx context.Context, params *AssetsCreateParams, body AssetsCreateJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	CreateAsset(ctx context.Context, params *CreateAssetParams, body CreateAssetJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// AssetsGet request
-	AssetsGet(ctx context.Context, assetId string, params *AssetsGetParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// DeleteAsset request
+	DeleteAsset(ctx context.Context, assetId string, params *DeleteAssetParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// AssetsUpdateWithBody request with any body
-	AssetsUpdateWithBody(ctx context.Context, assetId string, params *AssetsUpdateParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// GetAsset request
+	GetAsset(ctx context.Context, assetId string, params *GetAssetParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	AssetsUpdate(ctx context.Context, assetId string, params *AssetsUpdateParams, body AssetsUpdateJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// UpdateAssetWithBody request with any body
+	UpdateAssetWithBody(ctx context.Context, assetId string, params *UpdateAssetParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// BusinessesList request
-	BusinessesList(ctx context.Context, params *BusinessesListParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	UpdateAsset(ctx context.Context, assetId string, params *UpdateAssetParams, body UpdateAssetJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// BusinessesGet request
-	BusinessesGet(ctx context.Context, businessId string, params *BusinessesGetParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// List request
+	List(ctx context.Context, params *ListParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// BusinessesAvailability request
-	BusinessesAvailability(ctx context.Context, businessId string, params *BusinessesAvailabilityParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// CreateWithBody request with any body
+	CreateWithBody(ctx context.Context, params *CreateParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// BusinessesAvailabilitySlots request
-	BusinessesAvailabilitySlots(ctx context.Context, businessId string, params *BusinessesAvailabilitySlotsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	Create(ctx context.Context, params *CreateParams, body CreateJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// BusinessesNextAvailableSlot request
-	BusinessesNextAvailableSlot(ctx context.Context, businessId string, params *BusinessesNextAvailableSlotParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// ReceiveWithBody request with any body
+	ReceiveWithBody(ctx context.Context, params *ReceiveParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// BusinessesServices request
-	BusinessesServices(ctx context.Context, businessId string, params *BusinessesServicesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	Receive(ctx context.Context, params *ReceiveParams, body ReceiveJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// ServicesCreateWithBody request with any body
-	ServicesCreateWithBody(ctx context.Context, businessId string, params *ServicesCreateParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// Delete request
+	Delete(ctx context.Context, backOrderId string, params *DeleteParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	ServicesCreate(ctx context.Context, businessId string, params *ServicesCreateParams, body ServicesCreateJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// Get request
+	Get(ctx context.Context, backOrderId string, params *GetParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// ServicesUpdateWithBody request with any body
-	ServicesUpdateWithBody(ctx context.Context, businessId string, serviceId string, params *ServicesUpdateParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// UpdateWithBody request with any body
+	UpdateWithBody(ctx context.Context, backOrderId string, params *UpdateParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	ServicesUpdate(ctx context.Context, businessId string, serviceId string, params *ServicesUpdateParams, body ServicesUpdateJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	Update(ctx context.Context, backOrderId string, params *UpdateParams, body UpdateJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// CustomersList request
-	CustomersList(ctx context.Context, params *CustomersListParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// ListBusiness request
+	ListBusiness(ctx context.Context, params *ListBusinessParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// CustomersGet request
-	CustomersGet(ctx context.Context, customerId string, params *CustomersGetParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// GetBusiness request
+	GetBusiness(ctx context.Context, businessId string, params *GetBusinessParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// CustomersUpdateWithBody request with any body
-	CustomersUpdateWithBody(ctx context.Context, customerId string, params *CustomersUpdateParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// Availability request
+	Availability(ctx context.Context, businessId string, params *AvailabilityParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	CustomersUpdate(ctx context.Context, customerId string, params *CustomersUpdateParams, body CustomersUpdateJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// AvailabilitySlots request
+	AvailabilitySlots(ctx context.Context, businessId string, params *AvailabilitySlotsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// AssetsListForCustomer request
-	AssetsListForCustomer(ctx context.Context, customerId string, params *AssetsListForCustomerParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// BusinessIntegration request
+	BusinessIntegration(ctx context.Context, businessId string, params *BusinessIntegrationParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// ChatCreateAttachmentsWithBody request with any body
-	ChatCreateAttachmentsWithBody(ctx context.Context, customerId string, params *ChatCreateAttachmentsParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// TriggerCustomerSyncWithBody request with any body
+	TriggerCustomerSyncWithBody(ctx context.Context, businessId string, params *TriggerCustomerSyncParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	TriggerCustomerSync(ctx context.Context, businessId string, params *TriggerCustomerSyncParams, body TriggerCustomerSyncJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// TriggerStockSyncWithBody request with any body
+	TriggerStockSyncWithBody(ctx context.Context, businessId string, params *TriggerStockSyncParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	TriggerStockSync(ctx context.Context, businessId string, params *TriggerStockSyncParams, body TriggerStockSyncJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// JobStatuses request
+	JobStatuses(ctx context.Context, businessId string, params *JobStatusesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// NextAvailableSlot request
+	NextAvailableSlot(ctx context.Context, businessId string, params *NextAvailableSlotParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// Services request
+	Services(ctx context.Context, businessId string, params *ServicesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// CreateServiceWithBody request with any body
+	CreateServiceWithBody(ctx context.Context, businessId string, params *CreateServiceParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	CreateService(ctx context.Context, businessId string, params *CreateServiceParams, body CreateServiceJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// UpdateServiceWithBody request with any body
+	UpdateServiceWithBody(ctx context.Context, businessId string, serviceId string, params *UpdateServiceParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	UpdateService(ctx context.Context, businessId string, serviceId string, params *UpdateServiceParams, body UpdateServiceJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// Customers request
+	Customers(ctx context.Context, params *CustomersParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// CreateCustomerWithBody request with any body
+	CreateCustomerWithBody(ctx context.Context, params *CreateCustomerParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	CreateCustomer(ctx context.Context, params *CreateCustomerParams, body CreateCustomerJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// Customer request
+	Customer(ctx context.Context, customerId string, params *CustomerParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// UpdateCustomerWithBody request with any body
+	UpdateCustomerWithBody(ctx context.Context, customerId string, params *UpdateCustomerParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	UpdateCustomer(ctx context.Context, customerId string, params *UpdateCustomerParams, body UpdateCustomerJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ListForCustomer request
+	ListForCustomer(ctx context.Context, customerId string, params *ListForCustomerParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// CreateChatAttachmentsWithBody request with any body
+	CreateChatAttachmentsWithBody(ctx context.Context, customerId string, params *CreateChatAttachmentsParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ChatMessages request
 	ChatMessages(ctx context.Context, customerId string, params *ChatMessagesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// ChatCreateMessageWithBody request with any body
-	ChatCreateMessageWithBody(ctx context.Context, customerId string, params *ChatCreateMessageParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// CreateChatMessageWithBody request with any body
+	CreateChatMessageWithBody(ctx context.Context, customerId string, params *CreateChatMessageParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	ChatCreateMessage(ctx context.Context, customerId string, params *ChatCreateMessageParams, body ChatCreateMessageJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	CreateChatMessage(ctx context.Context, customerId string, params *CreateChatMessageParams, body CreateChatMessageJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// InvoiceItemsCreateWithBody request with any body
-	InvoiceItemsCreateWithBody(ctx context.Context, params *InvoiceItemsCreateParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// MarkRead request
+	MarkRead(ctx context.Context, customerId string, params *MarkReadParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	InvoiceItemsCreate(ctx context.Context, params *InvoiceItemsCreateParams, body InvoiceItemsCreateJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// CreateInvoiceItemWithBody request with any body
+	CreateInvoiceItemWithBody(ctx context.Context, params *CreateInvoiceItemParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// InvoiceItemsDelete request
-	InvoiceItemsDelete(ctx context.Context, invoiceItemId string, params *InvoiceItemsDeleteParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	CreateInvoiceItem(ctx context.Context, params *CreateInvoiceItemParams, body CreateInvoiceItemJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// InvoiceItemsGet request
-	InvoiceItemsGet(ctx context.Context, invoiceItemId string, params *InvoiceItemsGetParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// DeleteInvoiceItem request
+	DeleteInvoiceItem(ctx context.Context, invoiceItemId string, params *DeleteInvoiceItemParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// InvoiceItemsUpdateWithBody request with any body
-	InvoiceItemsUpdateWithBody(ctx context.Context, invoiceItemId string, params *InvoiceItemsUpdateParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// GetInvoiceItem request
+	GetInvoiceItem(ctx context.Context, invoiceItemId string, params *GetInvoiceItemParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	InvoiceItemsUpdate(ctx context.Context, invoiceItemId string, params *InvoiceItemsUpdateParams, body InvoiceItemsUpdateJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// UpdateInvoiceItemWithBody request with any body
+	UpdateInvoiceItemWithBody(ctx context.Context, invoiceItemId string, params *UpdateInvoiceItemParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// InvoicesList request
-	InvoicesList(ctx context.Context, params *InvoicesListParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	UpdateInvoiceItem(ctx context.Context, invoiceItemId string, params *UpdateInvoiceItemParams, body UpdateInvoiceItemJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// InvoicesGet request
-	InvoicesGet(ctx context.Context, invoiceId string, params *InvoicesGetParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// ListInvoice request
+	ListInvoice(ctx context.Context, params *ListInvoiceParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// JobReportsList request
-	JobReportsList(ctx context.Context, params *JobReportsListParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// GetInvoice request
+	GetInvoice(ctx context.Context, invoiceId string, params *GetInvoiceParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// JobReportsGet request
-	JobReportsGet(ctx context.Context, jobReportId string, params *JobReportsGetParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// UpdateInvoiceWithBody request with any body
+	UpdateInvoiceWithBody(ctx context.Context, invoiceId string, params *UpdateInvoiceParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// JobsList request
-	JobsList(ctx context.Context, params *JobsListParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	UpdateInvoice(ctx context.Context, invoiceId string, params *UpdateInvoiceParams, body UpdateInvoiceJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// JobsCreateWithBody request with any body
-	JobsCreateWithBody(ctx context.Context, params *JobsCreateParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// ChangeInvoiceAutoSyncWithBody request with any body
+	ChangeInvoiceAutoSyncWithBody(ctx context.Context, invoiceId string, params *ChangeInvoiceAutoSyncParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	JobsCreate(ctx context.Context, params *JobsCreateParams, body JobsCreateJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	ChangeInvoiceAutoSync(ctx context.Context, invoiceId string, params *ChangeInvoiceAutoSyncParams, body ChangeInvoiceAutoSyncJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// JobsGet request
-	JobsGet(ctx context.Context, jobId string, params *JobsGetParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// InvoiceIntegrationSync request
+	InvoiceIntegrationSync(ctx context.Context, invoiceId string, params *InvoiceIntegrationSyncParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// JobReportsListForJob request
-	JobReportsListForJob(ctx context.Context, jobId string, params *JobReportsListForJobParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// InvoiceIntegrationSyncEvents request
+	InvoiceIntegrationSyncEvents(ctx context.Context, invoiceId string, params *InvoiceIntegrationSyncEventsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// JobReportsGetForJob request
-	JobReportsGetForJob(ctx context.Context, jobId string, jobReportId string, params *JobReportsGetForJobParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// ChangeInvoiceSyncCompletionWithBody request with any body
+	ChangeInvoiceSyncCompletionWithBody(ctx context.Context, invoiceId string, params *ChangeInvoiceSyncCompletionParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// JobsPartAuthorisations request
-	JobsPartAuthorisations(ctx context.Context, jobId string, params *JobsPartAuthorisationsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	ChangeInvoiceSyncCompletion(ctx context.Context, invoiceId string, params *ChangeInvoiceSyncCompletionParams, body ChangeInvoiceSyncCompletionJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// JobsSubmitPartAuthorisationDecisionsWithBody request with any body
-	JobsSubmitPartAuthorisationDecisionsWithBody(ctx context.Context, jobId string, params *JobsSubmitPartAuthorisationDecisionsParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// RetryInvoiceIntegrationSync request
+	RetryInvoiceIntegrationSync(ctx context.Context, invoiceId string, params *RetryInvoiceIntegrationSyncParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	JobsSubmitPartAuthorisationDecisions(ctx context.Context, jobId string, params *JobsSubmitPartAuthorisationDecisionsParams, body JobsSubmitPartAuthorisationDecisionsJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// TriggerInvoiceIntegrationSyncWithBody request with any body
+	TriggerInvoiceIntegrationSyncWithBody(ctx context.Context, invoiceId string, params *TriggerInvoiceIntegrationSyncParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// ServicesList request
-	ServicesList(ctx context.Context, params *ServicesListParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	TriggerInvoiceIntegrationSync(ctx context.Context, invoiceId string, params *TriggerInvoiceIntegrationSyncParams, body TriggerInvoiceIntegrationSyncJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// ServicesGet request
-	ServicesGet(ctx context.Context, serviceId string, params *ServicesGetParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// PaymentLink request
+	PaymentLink(ctx context.Context, invoiceId string, params *PaymentLinkParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// StockList request
-	StockList(ctx context.Context, params *StockListParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// RecordPaymentWithBody request with any body
+	RecordPaymentWithBody(ctx context.Context, invoiceId string, params *RecordPaymentParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// StockGet request
-	StockGet(ctx context.Context, stockVariationId string, params *StockGetParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	RecordPayment(ctx context.Context, invoiceId string, params *RecordPaymentParams, body RecordPaymentJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// WebhookDeliveriesGet request
-	WebhookDeliveriesGet(ctx context.Context, deliveryId string, params *WebhookDeliveriesGetParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// Pdf request
+	Pdf(ctx context.Context, invoiceId string, params *PdfParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// WebhookDeliveriesReplay request
-	WebhookDeliveriesReplay(ctx context.Context, deliveryId string, params *WebhookDeliveriesReplayParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// SendWithBody request with any body
+	SendWithBody(ctx context.Context, invoiceId string, params *SendParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// WebhookEndpointsList request
-	WebhookEndpointsList(ctx context.Context, params *WebhookEndpointsListParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	Send(ctx context.Context, invoiceId string, params *SendParams, body SendJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// WebhookEndpointsCreateWithBody request with any body
-	WebhookEndpointsCreateWithBody(ctx context.Context, params *WebhookEndpointsCreateParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// ChangeStatusWithBody request with any body
+	ChangeStatusWithBody(ctx context.Context, invoiceId string, params *ChangeStatusParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	WebhookEndpointsCreate(ctx context.Context, params *WebhookEndpointsCreateParams, body WebhookEndpointsCreateJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	ChangeStatus(ctx context.Context, invoiceId string, params *ChangeStatusParams, body ChangeStatusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// WebhookEndpointsDelete request
-	WebhookEndpointsDelete(ctx context.Context, endpointId string, params *WebhookEndpointsDeleteParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// ListJobReport request
+	ListJobReport(ctx context.Context, params *ListJobReportParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// WebhookEndpointsGet request
-	WebhookEndpointsGet(ctx context.Context, endpointId string, params *WebhookEndpointsGetParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// GetJobReport request
+	GetJobReport(ctx context.Context, jobReportId string, params *GetJobReportParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// WebhookEndpointsUpdateWithBody request with any body
-	WebhookEndpointsUpdateWithBody(ctx context.Context, endpointId string, params *WebhookEndpointsUpdateParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// Jobs request
+	Jobs(ctx context.Context, params *JobsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	WebhookEndpointsUpdate(ctx context.Context, endpointId string, params *WebhookEndpointsUpdateParams, body WebhookEndpointsUpdateJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// CreateJobBookingWithBody request with any body
+	CreateJobBookingWithBody(ctx context.Context, params *CreateJobBookingParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// WebhookDeliveriesListForEndpoint request
-	WebhookDeliveriesListForEndpoint(ctx context.Context, endpointId string, params *WebhookDeliveriesListForEndpointParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	CreateJobBooking(ctx context.Context, params *CreateJobBookingParams, body CreateJobBookingJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// WebhookEndpointsRotateSecret request
-	WebhookEndpointsRotateSecret(ctx context.Context, endpointId string, params *WebhookEndpointsRotateSecretParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// Job request
+	Job(ctx context.Context, jobId string, params *JobParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// WebhookEventsList request
-	WebhookEventsList(ctx context.Context, params *WebhookEventsListParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// UpdateJobWithBody request with any body
+	UpdateJobWithBody(ctx context.Context, jobId string, params *UpdateJobParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	UpdateJob(ctx context.Context, jobId string, params *UpdateJobParams, body UpdateJobJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ChangeAcceptedStatusWithBody request with any body
+	ChangeAcceptedStatusWithBody(ctx context.Context, jobId string, params *ChangeAcceptedStatusParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	ChangeAcceptedStatus(ctx context.Context, jobId string, params *ChangeAcceptedStatusParams, body ChangeAcceptedStatusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ListJobReportForJob request
+	ListJobReportForJob(ctx context.Context, jobId string, params *ListJobReportForJobParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetJobReportForJob request
+	GetJobReportForJob(ctx context.Context, jobId string, jobReportId string, params *GetJobReportForJobParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// PartAuthorisations request
+	PartAuthorisations(ctx context.Context, jobId string, params *PartAuthorisationsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// SubmitPartAuthorisationDecisionsWithBody request with any body
+	SubmitPartAuthorisationDecisionsWithBody(ctx context.Context, jobId string, params *SubmitPartAuthorisationDecisionsParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	SubmitPartAuthorisationDecisions(ctx context.Context, jobId string, params *SubmitPartAuthorisationDecisionsParams, body SubmitPartAuthorisationDecisionsJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// RequestPartAuthorisationWithBody request with any body
+	RequestPartAuthorisationWithBody(ctx context.Context, jobId string, params *RequestPartAuthorisationParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	RequestPartAuthorisation(ctx context.Context, jobId string, params *RequestPartAuthorisationParams, body RequestPartAuthorisationJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ChangeScheduleWithBody request with any body
+	ChangeScheduleWithBody(ctx context.Context, jobId string, params *ChangeScheduleParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	ChangeSchedule(ctx context.Context, jobId string, params *ChangeScheduleParams, body ChangeScheduleJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// UpdateWorkLineWithBody request with any body
+	UpdateWorkLineWithBody(ctx context.Context, jobId string, workLineId string, params *UpdateWorkLineParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	UpdateWorkLine(ctx context.Context, jobId string, workLineId string, params *UpdateWorkLineParams, body UpdateWorkLineJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// AssignWorkLineMechanicWithBody request with any body
+	AssignWorkLineMechanicWithBody(ctx context.Context, jobId string, workLineId string, params *AssignWorkLineMechanicParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	AssignWorkLineMechanic(ctx context.Context, jobId string, workLineId string, params *AssignWorkLineMechanicParams, body AssignWorkLineMechanicJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ReplaceWorkLineServicesWithBody request with any body
+	ReplaceWorkLineServicesWithBody(ctx context.Context, jobId string, workLineId string, params *ReplaceWorkLineServicesParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	ReplaceWorkLineServices(ctx context.Context, jobId string, workLineId string, params *ReplaceWorkLineServicesParams, body ReplaceWorkLineServicesJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ChangeWorkLineStatusWithBody request with any body
+	ChangeWorkLineStatusWithBody(ctx context.Context, jobId string, workLineId string, params *ChangeWorkLineStatusParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	ChangeWorkLineStatus(ctx context.Context, jobId string, workLineId string, params *ChangeWorkLineStatusParams, body ChangeWorkLineStatusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// RefundWithBody request with any body
+	RefundWithBody(ctx context.Context, paymentId string, params *RefundParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	Refund(ctx context.Context, paymentId string, params *RefundParams, body RefundJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ListService request
+	ListService(ctx context.Context, params *ListServiceParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetService request
+	GetService(ctx context.Context, serviceId string, params *GetServiceParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ListStockVariation request
+	ListStockVariation(ctx context.Context, params *ListStockVariationParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetStockVariation request
+	GetStockVariation(ctx context.Context, stockVariationId string, params *GetStockVariationParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetWebhookDelivery request
+	GetWebhookDelivery(ctx context.Context, deliveryId string, params *GetWebhookDeliveryParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// Replay request
+	Replay(ctx context.Context, deliveryId string, params *ReplayParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ListWebhookEndpoint request
+	ListWebhookEndpoint(ctx context.Context, params *ListWebhookEndpointParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// CreateWebhookEndpointWithBody request with any body
+	CreateWebhookEndpointWithBody(ctx context.Context, params *CreateWebhookEndpointParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	CreateWebhookEndpoint(ctx context.Context, params *CreateWebhookEndpointParams, body CreateWebhookEndpointJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// DeleteWebhookEndpoint request
+	DeleteWebhookEndpoint(ctx context.Context, endpointId string, params *DeleteWebhookEndpointParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetWebhookEndpoint request
+	GetWebhookEndpoint(ctx context.Context, endpointId string, params *GetWebhookEndpointParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// UpdateWebhookEndpointWithBody request with any body
+	UpdateWebhookEndpointWithBody(ctx context.Context, endpointId string, params *UpdateWebhookEndpointParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	UpdateWebhookEndpoint(ctx context.Context, endpointId string, params *UpdateWebhookEndpointParams, body UpdateWebhookEndpointJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ListForEndpoint request
+	ListForEndpoint(ctx context.Context, endpointId string, params *ListForEndpointParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// RotateSecret request
+	RotateSecret(ctx context.Context, endpointId string, params *RotateSecretParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ListWebhookEvent request
+	ListWebhookEvent(ctx context.Context, params *ListWebhookEventParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 }
 
-func (c *Client) AssetsList(ctx context.Context, params *AssetsListParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewAssetsListRequest(c.Server, params)
+func (c *Client) ListAsset(ctx context.Context, params *ListAssetParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewListAssetRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -270,8 +416,8 @@ func (c *Client) AssetsList(ctx context.Context, params *AssetsListParams, reqEd
 	return c.Client.Do(req)
 }
 
-func (c *Client) AssetsCreateWithBody(ctx context.Context, params *AssetsCreateParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewAssetsCreateRequestWithBody(c.Server, params, contentType, body)
+func (c *Client) CreateAssetWithBody(ctx context.Context, params *CreateAssetParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateAssetRequestWithBody(c.Server, params, contentType, body)
 	if err != nil {
 		return nil, err
 	}
@@ -282,8 +428,8 @@ func (c *Client) AssetsCreateWithBody(ctx context.Context, params *AssetsCreateP
 	return c.Client.Do(req)
 }
 
-func (c *Client) AssetsCreate(ctx context.Context, params *AssetsCreateParams, body AssetsCreateJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewAssetsCreateRequest(c.Server, params, body)
+func (c *Client) CreateAsset(ctx context.Context, params *CreateAssetParams, body CreateAssetJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateAssetRequest(c.Server, params, body)
 	if err != nil {
 		return nil, err
 	}
@@ -294,8 +440,8 @@ func (c *Client) AssetsCreate(ctx context.Context, params *AssetsCreateParams, b
 	return c.Client.Do(req)
 }
 
-func (c *Client) AssetsGet(ctx context.Context, assetId string, params *AssetsGetParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewAssetsGetRequest(c.Server, assetId, params)
+func (c *Client) DeleteAsset(ctx context.Context, assetId string, params *DeleteAssetParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDeleteAssetRequest(c.Server, assetId, params)
 	if err != nil {
 		return nil, err
 	}
@@ -306,8 +452,8 @@ func (c *Client) AssetsGet(ctx context.Context, assetId string, params *AssetsGe
 	return c.Client.Do(req)
 }
 
-func (c *Client) AssetsUpdateWithBody(ctx context.Context, assetId string, params *AssetsUpdateParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewAssetsUpdateRequestWithBody(c.Server, assetId, params, contentType, body)
+func (c *Client) GetAsset(ctx context.Context, assetId string, params *GetAssetParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetAssetRequest(c.Server, assetId, params)
 	if err != nil {
 		return nil, err
 	}
@@ -318,8 +464,8 @@ func (c *Client) AssetsUpdateWithBody(ctx context.Context, assetId string, param
 	return c.Client.Do(req)
 }
 
-func (c *Client) AssetsUpdate(ctx context.Context, assetId string, params *AssetsUpdateParams, body AssetsUpdateJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewAssetsUpdateRequest(c.Server, assetId, params, body)
+func (c *Client) UpdateAssetWithBody(ctx context.Context, assetId string, params *UpdateAssetParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateAssetRequestWithBody(c.Server, assetId, params, contentType, body)
 	if err != nil {
 		return nil, err
 	}
@@ -330,8 +476,8 @@ func (c *Client) AssetsUpdate(ctx context.Context, assetId string, params *Asset
 	return c.Client.Do(req)
 }
 
-func (c *Client) BusinessesList(ctx context.Context, params *BusinessesListParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewBusinessesListRequest(c.Server, params)
+func (c *Client) UpdateAsset(ctx context.Context, assetId string, params *UpdateAssetParams, body UpdateAssetJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateAssetRequest(c.Server, assetId, params, body)
 	if err != nil {
 		return nil, err
 	}
@@ -342,8 +488,8 @@ func (c *Client) BusinessesList(ctx context.Context, params *BusinessesListParam
 	return c.Client.Do(req)
 }
 
-func (c *Client) BusinessesGet(ctx context.Context, businessId string, params *BusinessesGetParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewBusinessesGetRequest(c.Server, businessId, params)
+func (c *Client) List(ctx context.Context, params *ListParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewListRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -354,8 +500,8 @@ func (c *Client) BusinessesGet(ctx context.Context, businessId string, params *B
 	return c.Client.Do(req)
 }
 
-func (c *Client) BusinessesAvailability(ctx context.Context, businessId string, params *BusinessesAvailabilityParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewBusinessesAvailabilityRequest(c.Server, businessId, params)
+func (c *Client) CreateWithBody(ctx context.Context, params *CreateParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateRequestWithBody(c.Server, params, contentType, body)
 	if err != nil {
 		return nil, err
 	}
@@ -366,8 +512,8 @@ func (c *Client) BusinessesAvailability(ctx context.Context, businessId string, 
 	return c.Client.Do(req)
 }
 
-func (c *Client) BusinessesAvailabilitySlots(ctx context.Context, businessId string, params *BusinessesAvailabilitySlotsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewBusinessesAvailabilitySlotsRequest(c.Server, businessId, params)
+func (c *Client) Create(ctx context.Context, params *CreateParams, body CreateJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateRequest(c.Server, params, body)
 	if err != nil {
 		return nil, err
 	}
@@ -378,8 +524,8 @@ func (c *Client) BusinessesAvailabilitySlots(ctx context.Context, businessId str
 	return c.Client.Do(req)
 }
 
-func (c *Client) BusinessesNextAvailableSlot(ctx context.Context, businessId string, params *BusinessesNextAvailableSlotParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewBusinessesNextAvailableSlotRequest(c.Server, businessId, params)
+func (c *Client) ReceiveWithBody(ctx context.Context, params *ReceiveParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewReceiveRequestWithBody(c.Server, params, contentType, body)
 	if err != nil {
 		return nil, err
 	}
@@ -390,8 +536,8 @@ func (c *Client) BusinessesNextAvailableSlot(ctx context.Context, businessId str
 	return c.Client.Do(req)
 }
 
-func (c *Client) BusinessesServices(ctx context.Context, businessId string, params *BusinessesServicesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewBusinessesServicesRequest(c.Server, businessId, params)
+func (c *Client) Receive(ctx context.Context, params *ReceiveParams, body ReceiveJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewReceiveRequest(c.Server, params, body)
 	if err != nil {
 		return nil, err
 	}
@@ -402,8 +548,8 @@ func (c *Client) BusinessesServices(ctx context.Context, businessId string, para
 	return c.Client.Do(req)
 }
 
-func (c *Client) ServicesCreateWithBody(ctx context.Context, businessId string, params *ServicesCreateParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewServicesCreateRequestWithBody(c.Server, businessId, params, contentType, body)
+func (c *Client) Delete(ctx context.Context, backOrderId string, params *DeleteParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDeleteRequest(c.Server, backOrderId, params)
 	if err != nil {
 		return nil, err
 	}
@@ -414,8 +560,8 @@ func (c *Client) ServicesCreateWithBody(ctx context.Context, businessId string, 
 	return c.Client.Do(req)
 }
 
-func (c *Client) ServicesCreate(ctx context.Context, businessId string, params *ServicesCreateParams, body ServicesCreateJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewServicesCreateRequest(c.Server, businessId, params, body)
+func (c *Client) Get(ctx context.Context, backOrderId string, params *GetParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetRequest(c.Server, backOrderId, params)
 	if err != nil {
 		return nil, err
 	}
@@ -426,8 +572,8 @@ func (c *Client) ServicesCreate(ctx context.Context, businessId string, params *
 	return c.Client.Do(req)
 }
 
-func (c *Client) ServicesUpdateWithBody(ctx context.Context, businessId string, serviceId string, params *ServicesUpdateParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewServicesUpdateRequestWithBody(c.Server, businessId, serviceId, params, contentType, body)
+func (c *Client) UpdateWithBody(ctx context.Context, backOrderId string, params *UpdateParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateRequestWithBody(c.Server, backOrderId, params, contentType, body)
 	if err != nil {
 		return nil, err
 	}
@@ -438,8 +584,8 @@ func (c *Client) ServicesUpdateWithBody(ctx context.Context, businessId string, 
 	return c.Client.Do(req)
 }
 
-func (c *Client) ServicesUpdate(ctx context.Context, businessId string, serviceId string, params *ServicesUpdateParams, body ServicesUpdateJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewServicesUpdateRequest(c.Server, businessId, serviceId, params, body)
+func (c *Client) Update(ctx context.Context, backOrderId string, params *UpdateParams, body UpdateJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateRequest(c.Server, backOrderId, params, body)
 	if err != nil {
 		return nil, err
 	}
@@ -450,8 +596,8 @@ func (c *Client) ServicesUpdate(ctx context.Context, businessId string, serviceI
 	return c.Client.Do(req)
 }
 
-func (c *Client) CustomersList(ctx context.Context, params *CustomersListParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewCustomersListRequest(c.Server, params)
+func (c *Client) ListBusiness(ctx context.Context, params *ListBusinessParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewListBusinessRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -462,8 +608,8 @@ func (c *Client) CustomersList(ctx context.Context, params *CustomersListParams,
 	return c.Client.Do(req)
 }
 
-func (c *Client) CustomersGet(ctx context.Context, customerId string, params *CustomersGetParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewCustomersGetRequest(c.Server, customerId, params)
+func (c *Client) GetBusiness(ctx context.Context, businessId string, params *GetBusinessParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetBusinessRequest(c.Server, businessId, params)
 	if err != nil {
 		return nil, err
 	}
@@ -474,8 +620,8 @@ func (c *Client) CustomersGet(ctx context.Context, customerId string, params *Cu
 	return c.Client.Do(req)
 }
 
-func (c *Client) CustomersUpdateWithBody(ctx context.Context, customerId string, params *CustomersUpdateParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewCustomersUpdateRequestWithBody(c.Server, customerId, params, contentType, body)
+func (c *Client) Availability(ctx context.Context, businessId string, params *AvailabilityParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewAvailabilityRequest(c.Server, businessId, params)
 	if err != nil {
 		return nil, err
 	}
@@ -486,8 +632,8 @@ func (c *Client) CustomersUpdateWithBody(ctx context.Context, customerId string,
 	return c.Client.Do(req)
 }
 
-func (c *Client) CustomersUpdate(ctx context.Context, customerId string, params *CustomersUpdateParams, body CustomersUpdateJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewCustomersUpdateRequest(c.Server, customerId, params, body)
+func (c *Client) AvailabilitySlots(ctx context.Context, businessId string, params *AvailabilitySlotsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewAvailabilitySlotsRequest(c.Server, businessId, params)
 	if err != nil {
 		return nil, err
 	}
@@ -498,8 +644,8 @@ func (c *Client) CustomersUpdate(ctx context.Context, customerId string, params 
 	return c.Client.Do(req)
 }
 
-func (c *Client) AssetsListForCustomer(ctx context.Context, customerId string, params *AssetsListForCustomerParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewAssetsListForCustomerRequest(c.Server, customerId, params)
+func (c *Client) BusinessIntegration(ctx context.Context, businessId string, params *BusinessIntegrationParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewBusinessIntegrationRequest(c.Server, businessId, params)
 	if err != nil {
 		return nil, err
 	}
@@ -510,8 +656,224 @@ func (c *Client) AssetsListForCustomer(ctx context.Context, customerId string, p
 	return c.Client.Do(req)
 }
 
-func (c *Client) ChatCreateAttachmentsWithBody(ctx context.Context, customerId string, params *ChatCreateAttachmentsParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewChatCreateAttachmentsRequestWithBody(c.Server, customerId, params, contentType, body)
+func (c *Client) TriggerCustomerSyncWithBody(ctx context.Context, businessId string, params *TriggerCustomerSyncParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewTriggerCustomerSyncRequestWithBody(c.Server, businessId, params, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) TriggerCustomerSync(ctx context.Context, businessId string, params *TriggerCustomerSyncParams, body TriggerCustomerSyncJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewTriggerCustomerSyncRequest(c.Server, businessId, params, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) TriggerStockSyncWithBody(ctx context.Context, businessId string, params *TriggerStockSyncParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewTriggerStockSyncRequestWithBody(c.Server, businessId, params, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) TriggerStockSync(ctx context.Context, businessId string, params *TriggerStockSyncParams, body TriggerStockSyncJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewTriggerStockSyncRequest(c.Server, businessId, params, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) JobStatuses(ctx context.Context, businessId string, params *JobStatusesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewJobStatusesRequest(c.Server, businessId, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) NextAvailableSlot(ctx context.Context, businessId string, params *NextAvailableSlotParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewNextAvailableSlotRequest(c.Server, businessId, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) Services(ctx context.Context, businessId string, params *ServicesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewServicesRequest(c.Server, businessId, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateServiceWithBody(ctx context.Context, businessId string, params *CreateServiceParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateServiceRequestWithBody(c.Server, businessId, params, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateService(ctx context.Context, businessId string, params *CreateServiceParams, body CreateServiceJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateServiceRequest(c.Server, businessId, params, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdateServiceWithBody(ctx context.Context, businessId string, serviceId string, params *UpdateServiceParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateServiceRequestWithBody(c.Server, businessId, serviceId, params, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdateService(ctx context.Context, businessId string, serviceId string, params *UpdateServiceParams, body UpdateServiceJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateServiceRequest(c.Server, businessId, serviceId, params, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) Customers(ctx context.Context, params *CustomersParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCustomersRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateCustomerWithBody(ctx context.Context, params *CreateCustomerParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateCustomerRequestWithBody(c.Server, params, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateCustomer(ctx context.Context, params *CreateCustomerParams, body CreateCustomerJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateCustomerRequest(c.Server, params, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) Customer(ctx context.Context, customerId string, params *CustomerParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCustomerRequest(c.Server, customerId, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdateCustomerWithBody(ctx context.Context, customerId string, params *UpdateCustomerParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateCustomerRequestWithBody(c.Server, customerId, params, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdateCustomer(ctx context.Context, customerId string, params *UpdateCustomerParams, body UpdateCustomerJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateCustomerRequest(c.Server, customerId, params, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) ListForCustomer(ctx context.Context, customerId string, params *ListForCustomerParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewListForCustomerRequest(c.Server, customerId, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateChatAttachmentsWithBody(ctx context.Context, customerId string, params *CreateChatAttachmentsParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateChatAttachmentsRequestWithBody(c.Server, customerId, params, contentType, body)
 	if err != nil {
 		return nil, err
 	}
@@ -534,8 +896,8 @@ func (c *Client) ChatMessages(ctx context.Context, customerId string, params *Ch
 	return c.Client.Do(req)
 }
 
-func (c *Client) ChatCreateMessageWithBody(ctx context.Context, customerId string, params *ChatCreateMessageParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewChatCreateMessageRequestWithBody(c.Server, customerId, params, contentType, body)
+func (c *Client) CreateChatMessageWithBody(ctx context.Context, customerId string, params *CreateChatMessageParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateChatMessageRequestWithBody(c.Server, customerId, params, contentType, body)
 	if err != nil {
 		return nil, err
 	}
@@ -546,8 +908,8 @@ func (c *Client) ChatCreateMessageWithBody(ctx context.Context, customerId strin
 	return c.Client.Do(req)
 }
 
-func (c *Client) ChatCreateMessage(ctx context.Context, customerId string, params *ChatCreateMessageParams, body ChatCreateMessageJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewChatCreateMessageRequest(c.Server, customerId, params, body)
+func (c *Client) CreateChatMessage(ctx context.Context, customerId string, params *CreateChatMessageParams, body CreateChatMessageJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateChatMessageRequest(c.Server, customerId, params, body)
 	if err != nil {
 		return nil, err
 	}
@@ -558,8 +920,8 @@ func (c *Client) ChatCreateMessage(ctx context.Context, customerId string, param
 	return c.Client.Do(req)
 }
 
-func (c *Client) InvoiceItemsCreateWithBody(ctx context.Context, params *InvoiceItemsCreateParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewInvoiceItemsCreateRequestWithBody(c.Server, params, contentType, body)
+func (c *Client) MarkRead(ctx context.Context, customerId string, params *MarkReadParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewMarkReadRequest(c.Server, customerId, params)
 	if err != nil {
 		return nil, err
 	}
@@ -570,8 +932,8 @@ func (c *Client) InvoiceItemsCreateWithBody(ctx context.Context, params *Invoice
 	return c.Client.Do(req)
 }
 
-func (c *Client) InvoiceItemsCreate(ctx context.Context, params *InvoiceItemsCreateParams, body InvoiceItemsCreateJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewInvoiceItemsCreateRequest(c.Server, params, body)
+func (c *Client) CreateInvoiceItemWithBody(ctx context.Context, params *CreateInvoiceItemParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateInvoiceItemRequestWithBody(c.Server, params, contentType, body)
 	if err != nil {
 		return nil, err
 	}
@@ -582,8 +944,8 @@ func (c *Client) InvoiceItemsCreate(ctx context.Context, params *InvoiceItemsCre
 	return c.Client.Do(req)
 }
 
-func (c *Client) InvoiceItemsDelete(ctx context.Context, invoiceItemId string, params *InvoiceItemsDeleteParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewInvoiceItemsDeleteRequest(c.Server, invoiceItemId, params)
+func (c *Client) CreateInvoiceItem(ctx context.Context, params *CreateInvoiceItemParams, body CreateInvoiceItemJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateInvoiceItemRequest(c.Server, params, body)
 	if err != nil {
 		return nil, err
 	}
@@ -594,8 +956,8 @@ func (c *Client) InvoiceItemsDelete(ctx context.Context, invoiceItemId string, p
 	return c.Client.Do(req)
 }
 
-func (c *Client) InvoiceItemsGet(ctx context.Context, invoiceItemId string, params *InvoiceItemsGetParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewInvoiceItemsGetRequest(c.Server, invoiceItemId, params)
+func (c *Client) DeleteInvoiceItem(ctx context.Context, invoiceItemId string, params *DeleteInvoiceItemParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDeleteInvoiceItemRequest(c.Server, invoiceItemId, params)
 	if err != nil {
 		return nil, err
 	}
@@ -606,8 +968,8 @@ func (c *Client) InvoiceItemsGet(ctx context.Context, invoiceItemId string, para
 	return c.Client.Do(req)
 }
 
-func (c *Client) InvoiceItemsUpdateWithBody(ctx context.Context, invoiceItemId string, params *InvoiceItemsUpdateParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewInvoiceItemsUpdateRequestWithBody(c.Server, invoiceItemId, params, contentType, body)
+func (c *Client) GetInvoiceItem(ctx context.Context, invoiceItemId string, params *GetInvoiceItemParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetInvoiceItemRequest(c.Server, invoiceItemId, params)
 	if err != nil {
 		return nil, err
 	}
@@ -618,8 +980,8 @@ func (c *Client) InvoiceItemsUpdateWithBody(ctx context.Context, invoiceItemId s
 	return c.Client.Do(req)
 }
 
-func (c *Client) InvoiceItemsUpdate(ctx context.Context, invoiceItemId string, params *InvoiceItemsUpdateParams, body InvoiceItemsUpdateJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewInvoiceItemsUpdateRequest(c.Server, invoiceItemId, params, body)
+func (c *Client) UpdateInvoiceItemWithBody(ctx context.Context, invoiceItemId string, params *UpdateInvoiceItemParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateInvoiceItemRequestWithBody(c.Server, invoiceItemId, params, contentType, body)
 	if err != nil {
 		return nil, err
 	}
@@ -630,8 +992,8 @@ func (c *Client) InvoiceItemsUpdate(ctx context.Context, invoiceItemId string, p
 	return c.Client.Do(req)
 }
 
-func (c *Client) InvoicesList(ctx context.Context, params *InvoicesListParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewInvoicesListRequest(c.Server, params)
+func (c *Client) UpdateInvoiceItem(ctx context.Context, invoiceItemId string, params *UpdateInvoiceItemParams, body UpdateInvoiceItemJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateInvoiceItemRequest(c.Server, invoiceItemId, params, body)
 	if err != nil {
 		return nil, err
 	}
@@ -642,8 +1004,8 @@ func (c *Client) InvoicesList(ctx context.Context, params *InvoicesListParams, r
 	return c.Client.Do(req)
 }
 
-func (c *Client) InvoicesGet(ctx context.Context, invoiceId string, params *InvoicesGetParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewInvoicesGetRequest(c.Server, invoiceId, params)
+func (c *Client) ListInvoice(ctx context.Context, params *ListInvoiceParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewListInvoiceRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -654,8 +1016,8 @@ func (c *Client) InvoicesGet(ctx context.Context, invoiceId string, params *Invo
 	return c.Client.Do(req)
 }
 
-func (c *Client) JobReportsList(ctx context.Context, params *JobReportsListParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewJobReportsListRequest(c.Server, params)
+func (c *Client) GetInvoice(ctx context.Context, invoiceId string, params *GetInvoiceParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetInvoiceRequest(c.Server, invoiceId, params)
 	if err != nil {
 		return nil, err
 	}
@@ -666,8 +1028,8 @@ func (c *Client) JobReportsList(ctx context.Context, params *JobReportsListParam
 	return c.Client.Do(req)
 }
 
-func (c *Client) JobReportsGet(ctx context.Context, jobReportId string, params *JobReportsGetParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewJobReportsGetRequest(c.Server, jobReportId, params)
+func (c *Client) UpdateInvoiceWithBody(ctx context.Context, invoiceId string, params *UpdateInvoiceParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateInvoiceRequestWithBody(c.Server, invoiceId, params, contentType, body)
 	if err != nil {
 		return nil, err
 	}
@@ -678,8 +1040,8 @@ func (c *Client) JobReportsGet(ctx context.Context, jobReportId string, params *
 	return c.Client.Do(req)
 }
 
-func (c *Client) JobsList(ctx context.Context, params *JobsListParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewJobsListRequest(c.Server, params)
+func (c *Client) UpdateInvoice(ctx context.Context, invoiceId string, params *UpdateInvoiceParams, body UpdateInvoiceJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateInvoiceRequest(c.Server, invoiceId, params, body)
 	if err != nil {
 		return nil, err
 	}
@@ -690,8 +1052,8 @@ func (c *Client) JobsList(ctx context.Context, params *JobsListParams, reqEditor
 	return c.Client.Do(req)
 }
 
-func (c *Client) JobsCreateWithBody(ctx context.Context, params *JobsCreateParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewJobsCreateRequestWithBody(c.Server, params, contentType, body)
+func (c *Client) ChangeInvoiceAutoSyncWithBody(ctx context.Context, invoiceId string, params *ChangeInvoiceAutoSyncParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewChangeInvoiceAutoSyncRequestWithBody(c.Server, invoiceId, params, contentType, body)
 	if err != nil {
 		return nil, err
 	}
@@ -702,8 +1064,8 @@ func (c *Client) JobsCreateWithBody(ctx context.Context, params *JobsCreateParam
 	return c.Client.Do(req)
 }
 
-func (c *Client) JobsCreate(ctx context.Context, params *JobsCreateParams, body JobsCreateJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewJobsCreateRequest(c.Server, params, body)
+func (c *Client) ChangeInvoiceAutoSync(ctx context.Context, invoiceId string, params *ChangeInvoiceAutoSyncParams, body ChangeInvoiceAutoSyncJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewChangeInvoiceAutoSyncRequest(c.Server, invoiceId, params, body)
 	if err != nil {
 		return nil, err
 	}
@@ -714,8 +1076,8 @@ func (c *Client) JobsCreate(ctx context.Context, params *JobsCreateParams, body 
 	return c.Client.Do(req)
 }
 
-func (c *Client) JobsGet(ctx context.Context, jobId string, params *JobsGetParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewJobsGetRequest(c.Server, jobId, params)
+func (c *Client) InvoiceIntegrationSync(ctx context.Context, invoiceId string, params *InvoiceIntegrationSyncParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewInvoiceIntegrationSyncRequest(c.Server, invoiceId, params)
 	if err != nil {
 		return nil, err
 	}
@@ -726,8 +1088,8 @@ func (c *Client) JobsGet(ctx context.Context, jobId string, params *JobsGetParam
 	return c.Client.Do(req)
 }
 
-func (c *Client) JobReportsListForJob(ctx context.Context, jobId string, params *JobReportsListForJobParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewJobReportsListForJobRequest(c.Server, jobId, params)
+func (c *Client) InvoiceIntegrationSyncEvents(ctx context.Context, invoiceId string, params *InvoiceIntegrationSyncEventsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewInvoiceIntegrationSyncEventsRequest(c.Server, invoiceId, params)
 	if err != nil {
 		return nil, err
 	}
@@ -738,8 +1100,8 @@ func (c *Client) JobReportsListForJob(ctx context.Context, jobId string, params 
 	return c.Client.Do(req)
 }
 
-func (c *Client) JobReportsGetForJob(ctx context.Context, jobId string, jobReportId string, params *JobReportsGetForJobParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewJobReportsGetForJobRequest(c.Server, jobId, jobReportId, params)
+func (c *Client) ChangeInvoiceSyncCompletionWithBody(ctx context.Context, invoiceId string, params *ChangeInvoiceSyncCompletionParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewChangeInvoiceSyncCompletionRequestWithBody(c.Server, invoiceId, params, contentType, body)
 	if err != nil {
 		return nil, err
 	}
@@ -750,8 +1112,8 @@ func (c *Client) JobReportsGetForJob(ctx context.Context, jobId string, jobRepor
 	return c.Client.Do(req)
 }
 
-func (c *Client) JobsPartAuthorisations(ctx context.Context, jobId string, params *JobsPartAuthorisationsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewJobsPartAuthorisationsRequest(c.Server, jobId, params)
+func (c *Client) ChangeInvoiceSyncCompletion(ctx context.Context, invoiceId string, params *ChangeInvoiceSyncCompletionParams, body ChangeInvoiceSyncCompletionJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewChangeInvoiceSyncCompletionRequest(c.Server, invoiceId, params, body)
 	if err != nil {
 		return nil, err
 	}
@@ -762,8 +1124,8 @@ func (c *Client) JobsPartAuthorisations(ctx context.Context, jobId string, param
 	return c.Client.Do(req)
 }
 
-func (c *Client) JobsSubmitPartAuthorisationDecisionsWithBody(ctx context.Context, jobId string, params *JobsSubmitPartAuthorisationDecisionsParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewJobsSubmitPartAuthorisationDecisionsRequestWithBody(c.Server, jobId, params, contentType, body)
+func (c *Client) RetryInvoiceIntegrationSync(ctx context.Context, invoiceId string, params *RetryInvoiceIntegrationSyncParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewRetryInvoiceIntegrationSyncRequest(c.Server, invoiceId, params)
 	if err != nil {
 		return nil, err
 	}
@@ -774,8 +1136,8 @@ func (c *Client) JobsSubmitPartAuthorisationDecisionsWithBody(ctx context.Contex
 	return c.Client.Do(req)
 }
 
-func (c *Client) JobsSubmitPartAuthorisationDecisions(ctx context.Context, jobId string, params *JobsSubmitPartAuthorisationDecisionsParams, body JobsSubmitPartAuthorisationDecisionsJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewJobsSubmitPartAuthorisationDecisionsRequest(c.Server, jobId, params, body)
+func (c *Client) TriggerInvoiceIntegrationSyncWithBody(ctx context.Context, invoiceId string, params *TriggerInvoiceIntegrationSyncParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewTriggerInvoiceIntegrationSyncRequestWithBody(c.Server, invoiceId, params, contentType, body)
 	if err != nil {
 		return nil, err
 	}
@@ -786,8 +1148,8 @@ func (c *Client) JobsSubmitPartAuthorisationDecisions(ctx context.Context, jobId
 	return c.Client.Do(req)
 }
 
-func (c *Client) ServicesList(ctx context.Context, params *ServicesListParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewServicesListRequest(c.Server, params)
+func (c *Client) TriggerInvoiceIntegrationSync(ctx context.Context, invoiceId string, params *TriggerInvoiceIntegrationSyncParams, body TriggerInvoiceIntegrationSyncJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewTriggerInvoiceIntegrationSyncRequest(c.Server, invoiceId, params, body)
 	if err != nil {
 		return nil, err
 	}
@@ -798,8 +1160,8 @@ func (c *Client) ServicesList(ctx context.Context, params *ServicesListParams, r
 	return c.Client.Do(req)
 }
 
-func (c *Client) ServicesGet(ctx context.Context, serviceId string, params *ServicesGetParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewServicesGetRequest(c.Server, serviceId, params)
+func (c *Client) PaymentLink(ctx context.Context, invoiceId string, params *PaymentLinkParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewPaymentLinkRequest(c.Server, invoiceId, params)
 	if err != nil {
 		return nil, err
 	}
@@ -810,8 +1172,8 @@ func (c *Client) ServicesGet(ctx context.Context, serviceId string, params *Serv
 	return c.Client.Do(req)
 }
 
-func (c *Client) StockList(ctx context.Context, params *StockListParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewStockListRequest(c.Server, params)
+func (c *Client) RecordPaymentWithBody(ctx context.Context, invoiceId string, params *RecordPaymentParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewRecordPaymentRequestWithBody(c.Server, invoiceId, params, contentType, body)
 	if err != nil {
 		return nil, err
 	}
@@ -822,8 +1184,8 @@ func (c *Client) StockList(ctx context.Context, params *StockListParams, reqEdit
 	return c.Client.Do(req)
 }
 
-func (c *Client) StockGet(ctx context.Context, stockVariationId string, params *StockGetParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewStockGetRequest(c.Server, stockVariationId, params)
+func (c *Client) RecordPayment(ctx context.Context, invoiceId string, params *RecordPaymentParams, body RecordPaymentJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewRecordPaymentRequest(c.Server, invoiceId, params, body)
 	if err != nil {
 		return nil, err
 	}
@@ -834,8 +1196,8 @@ func (c *Client) StockGet(ctx context.Context, stockVariationId string, params *
 	return c.Client.Do(req)
 }
 
-func (c *Client) WebhookDeliveriesGet(ctx context.Context, deliveryId string, params *WebhookDeliveriesGetParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewWebhookDeliveriesGetRequest(c.Server, deliveryId, params)
+func (c *Client) Pdf(ctx context.Context, invoiceId string, params *PdfParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewPdfRequest(c.Server, invoiceId, params)
 	if err != nil {
 		return nil, err
 	}
@@ -846,8 +1208,8 @@ func (c *Client) WebhookDeliveriesGet(ctx context.Context, deliveryId string, pa
 	return c.Client.Do(req)
 }
 
-func (c *Client) WebhookDeliveriesReplay(ctx context.Context, deliveryId string, params *WebhookDeliveriesReplayParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewWebhookDeliveriesReplayRequest(c.Server, deliveryId, params)
+func (c *Client) SendWithBody(ctx context.Context, invoiceId string, params *SendParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewSendRequestWithBody(c.Server, invoiceId, params, contentType, body)
 	if err != nil {
 		return nil, err
 	}
@@ -858,8 +1220,8 @@ func (c *Client) WebhookDeliveriesReplay(ctx context.Context, deliveryId string,
 	return c.Client.Do(req)
 }
 
-func (c *Client) WebhookEndpointsList(ctx context.Context, params *WebhookEndpointsListParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewWebhookEndpointsListRequest(c.Server, params)
+func (c *Client) Send(ctx context.Context, invoiceId string, params *SendParams, body SendJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewSendRequest(c.Server, invoiceId, params, body)
 	if err != nil {
 		return nil, err
 	}
@@ -870,8 +1232,8 @@ func (c *Client) WebhookEndpointsList(ctx context.Context, params *WebhookEndpoi
 	return c.Client.Do(req)
 }
 
-func (c *Client) WebhookEndpointsCreateWithBody(ctx context.Context, params *WebhookEndpointsCreateParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewWebhookEndpointsCreateRequestWithBody(c.Server, params, contentType, body)
+func (c *Client) ChangeStatusWithBody(ctx context.Context, invoiceId string, params *ChangeStatusParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewChangeStatusRequestWithBody(c.Server, invoiceId, params, contentType, body)
 	if err != nil {
 		return nil, err
 	}
@@ -882,8 +1244,8 @@ func (c *Client) WebhookEndpointsCreateWithBody(ctx context.Context, params *Web
 	return c.Client.Do(req)
 }
 
-func (c *Client) WebhookEndpointsCreate(ctx context.Context, params *WebhookEndpointsCreateParams, body WebhookEndpointsCreateJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewWebhookEndpointsCreateRequest(c.Server, params, body)
+func (c *Client) ChangeStatus(ctx context.Context, invoiceId string, params *ChangeStatusParams, body ChangeStatusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewChangeStatusRequest(c.Server, invoiceId, params, body)
 	if err != nil {
 		return nil, err
 	}
@@ -894,8 +1256,8 @@ func (c *Client) WebhookEndpointsCreate(ctx context.Context, params *WebhookEndp
 	return c.Client.Do(req)
 }
 
-func (c *Client) WebhookEndpointsDelete(ctx context.Context, endpointId string, params *WebhookEndpointsDeleteParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewWebhookEndpointsDeleteRequest(c.Server, endpointId, params)
+func (c *Client) ListJobReport(ctx context.Context, params *ListJobReportParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewListJobReportRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -906,8 +1268,8 @@ func (c *Client) WebhookEndpointsDelete(ctx context.Context, endpointId string, 
 	return c.Client.Do(req)
 }
 
-func (c *Client) WebhookEndpointsGet(ctx context.Context, endpointId string, params *WebhookEndpointsGetParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewWebhookEndpointsGetRequest(c.Server, endpointId, params)
+func (c *Client) GetJobReport(ctx context.Context, jobReportId string, params *GetJobReportParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetJobReportRequest(c.Server, jobReportId, params)
 	if err != nil {
 		return nil, err
 	}
@@ -918,8 +1280,8 @@ func (c *Client) WebhookEndpointsGet(ctx context.Context, endpointId string, par
 	return c.Client.Do(req)
 }
 
-func (c *Client) WebhookEndpointsUpdateWithBody(ctx context.Context, endpointId string, params *WebhookEndpointsUpdateParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewWebhookEndpointsUpdateRequestWithBody(c.Server, endpointId, params, contentType, body)
+func (c *Client) Jobs(ctx context.Context, params *JobsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewJobsRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -930,8 +1292,8 @@ func (c *Client) WebhookEndpointsUpdateWithBody(ctx context.Context, endpointId 
 	return c.Client.Do(req)
 }
 
-func (c *Client) WebhookEndpointsUpdate(ctx context.Context, endpointId string, params *WebhookEndpointsUpdateParams, body WebhookEndpointsUpdateJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewWebhookEndpointsUpdateRequest(c.Server, endpointId, params, body)
+func (c *Client) CreateJobBookingWithBody(ctx context.Context, params *CreateJobBookingParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateJobBookingRequestWithBody(c.Server, params, contentType, body)
 	if err != nil {
 		return nil, err
 	}
@@ -942,8 +1304,8 @@ func (c *Client) WebhookEndpointsUpdate(ctx context.Context, endpointId string, 
 	return c.Client.Do(req)
 }
 
-func (c *Client) WebhookDeliveriesListForEndpoint(ctx context.Context, endpointId string, params *WebhookDeliveriesListForEndpointParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewWebhookDeliveriesListForEndpointRequest(c.Server, endpointId, params)
+func (c *Client) CreateJobBooking(ctx context.Context, params *CreateJobBookingParams, body CreateJobBookingJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateJobBookingRequest(c.Server, params, body)
 	if err != nil {
 		return nil, err
 	}
@@ -954,8 +1316,8 @@ func (c *Client) WebhookDeliveriesListForEndpoint(ctx context.Context, endpointI
 	return c.Client.Do(req)
 }
 
-func (c *Client) WebhookEndpointsRotateSecret(ctx context.Context, endpointId string, params *WebhookEndpointsRotateSecretParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewWebhookEndpointsRotateSecretRequest(c.Server, endpointId, params)
+func (c *Client) Job(ctx context.Context, jobId string, params *JobParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewJobRequest(c.Server, jobId, params)
 	if err != nil {
 		return nil, err
 	}
@@ -966,8 +1328,8 @@ func (c *Client) WebhookEndpointsRotateSecret(ctx context.Context, endpointId st
 	return c.Client.Do(req)
 }
 
-func (c *Client) WebhookEventsList(ctx context.Context, params *WebhookEventsListParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewWebhookEventsListRequest(c.Server, params)
+func (c *Client) UpdateJobWithBody(ctx context.Context, jobId string, params *UpdateJobParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateJobRequestWithBody(c.Server, jobId, params, contentType, body)
 	if err != nil {
 		return nil, err
 	}
@@ -978,8 +1340,464 @@ func (c *Client) WebhookEventsList(ctx context.Context, params *WebhookEventsLis
 	return c.Client.Do(req)
 }
 
-// NewAssetsListRequest generates requests for AssetsList
-func NewAssetsListRequest(server string, params *AssetsListParams) (*http.Request, error) {
+func (c *Client) UpdateJob(ctx context.Context, jobId string, params *UpdateJobParams, body UpdateJobJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateJobRequest(c.Server, jobId, params, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) ChangeAcceptedStatusWithBody(ctx context.Context, jobId string, params *ChangeAcceptedStatusParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewChangeAcceptedStatusRequestWithBody(c.Server, jobId, params, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) ChangeAcceptedStatus(ctx context.Context, jobId string, params *ChangeAcceptedStatusParams, body ChangeAcceptedStatusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewChangeAcceptedStatusRequest(c.Server, jobId, params, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) ListJobReportForJob(ctx context.Context, jobId string, params *ListJobReportForJobParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewListJobReportForJobRequest(c.Server, jobId, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetJobReportForJob(ctx context.Context, jobId string, jobReportId string, params *GetJobReportForJobParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetJobReportForJobRequest(c.Server, jobId, jobReportId, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) PartAuthorisations(ctx context.Context, jobId string, params *PartAuthorisationsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewPartAuthorisationsRequest(c.Server, jobId, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) SubmitPartAuthorisationDecisionsWithBody(ctx context.Context, jobId string, params *SubmitPartAuthorisationDecisionsParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewSubmitPartAuthorisationDecisionsRequestWithBody(c.Server, jobId, params, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) SubmitPartAuthorisationDecisions(ctx context.Context, jobId string, params *SubmitPartAuthorisationDecisionsParams, body SubmitPartAuthorisationDecisionsJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewSubmitPartAuthorisationDecisionsRequest(c.Server, jobId, params, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) RequestPartAuthorisationWithBody(ctx context.Context, jobId string, params *RequestPartAuthorisationParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewRequestPartAuthorisationRequestWithBody(c.Server, jobId, params, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) RequestPartAuthorisation(ctx context.Context, jobId string, params *RequestPartAuthorisationParams, body RequestPartAuthorisationJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewRequestPartAuthorisationRequest(c.Server, jobId, params, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) ChangeScheduleWithBody(ctx context.Context, jobId string, params *ChangeScheduleParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewChangeScheduleRequestWithBody(c.Server, jobId, params, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) ChangeSchedule(ctx context.Context, jobId string, params *ChangeScheduleParams, body ChangeScheduleJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewChangeScheduleRequest(c.Server, jobId, params, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdateWorkLineWithBody(ctx context.Context, jobId string, workLineId string, params *UpdateWorkLineParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateWorkLineRequestWithBody(c.Server, jobId, workLineId, params, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdateWorkLine(ctx context.Context, jobId string, workLineId string, params *UpdateWorkLineParams, body UpdateWorkLineJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateWorkLineRequest(c.Server, jobId, workLineId, params, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) AssignWorkLineMechanicWithBody(ctx context.Context, jobId string, workLineId string, params *AssignWorkLineMechanicParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewAssignWorkLineMechanicRequestWithBody(c.Server, jobId, workLineId, params, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) AssignWorkLineMechanic(ctx context.Context, jobId string, workLineId string, params *AssignWorkLineMechanicParams, body AssignWorkLineMechanicJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewAssignWorkLineMechanicRequest(c.Server, jobId, workLineId, params, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) ReplaceWorkLineServicesWithBody(ctx context.Context, jobId string, workLineId string, params *ReplaceWorkLineServicesParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewReplaceWorkLineServicesRequestWithBody(c.Server, jobId, workLineId, params, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) ReplaceWorkLineServices(ctx context.Context, jobId string, workLineId string, params *ReplaceWorkLineServicesParams, body ReplaceWorkLineServicesJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewReplaceWorkLineServicesRequest(c.Server, jobId, workLineId, params, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) ChangeWorkLineStatusWithBody(ctx context.Context, jobId string, workLineId string, params *ChangeWorkLineStatusParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewChangeWorkLineStatusRequestWithBody(c.Server, jobId, workLineId, params, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) ChangeWorkLineStatus(ctx context.Context, jobId string, workLineId string, params *ChangeWorkLineStatusParams, body ChangeWorkLineStatusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewChangeWorkLineStatusRequest(c.Server, jobId, workLineId, params, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) RefundWithBody(ctx context.Context, paymentId string, params *RefundParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewRefundRequestWithBody(c.Server, paymentId, params, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) Refund(ctx context.Context, paymentId string, params *RefundParams, body RefundJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewRefundRequest(c.Server, paymentId, params, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) ListService(ctx context.Context, params *ListServiceParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewListServiceRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetService(ctx context.Context, serviceId string, params *GetServiceParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetServiceRequest(c.Server, serviceId, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) ListStockVariation(ctx context.Context, params *ListStockVariationParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewListStockVariationRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetStockVariation(ctx context.Context, stockVariationId string, params *GetStockVariationParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetStockVariationRequest(c.Server, stockVariationId, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetWebhookDelivery(ctx context.Context, deliveryId string, params *GetWebhookDeliveryParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetWebhookDeliveryRequest(c.Server, deliveryId, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) Replay(ctx context.Context, deliveryId string, params *ReplayParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewReplayRequest(c.Server, deliveryId, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) ListWebhookEndpoint(ctx context.Context, params *ListWebhookEndpointParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewListWebhookEndpointRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateWebhookEndpointWithBody(ctx context.Context, params *CreateWebhookEndpointParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateWebhookEndpointRequestWithBody(c.Server, params, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateWebhookEndpoint(ctx context.Context, params *CreateWebhookEndpointParams, body CreateWebhookEndpointJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateWebhookEndpointRequest(c.Server, params, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) DeleteWebhookEndpoint(ctx context.Context, endpointId string, params *DeleteWebhookEndpointParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDeleteWebhookEndpointRequest(c.Server, endpointId, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetWebhookEndpoint(ctx context.Context, endpointId string, params *GetWebhookEndpointParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetWebhookEndpointRequest(c.Server, endpointId, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdateWebhookEndpointWithBody(ctx context.Context, endpointId string, params *UpdateWebhookEndpointParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateWebhookEndpointRequestWithBody(c.Server, endpointId, params, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdateWebhookEndpoint(ctx context.Context, endpointId string, params *UpdateWebhookEndpointParams, body UpdateWebhookEndpointJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateWebhookEndpointRequest(c.Server, endpointId, params, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) ListForEndpoint(ctx context.Context, endpointId string, params *ListForEndpointParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewListForEndpointRequest(c.Server, endpointId, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) RotateSecret(ctx context.Context, endpointId string, params *RotateSecretParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewRotateSecretRequest(c.Server, endpointId, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) ListWebhookEvent(ctx context.Context, params *ListWebhookEventParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewListWebhookEventRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// NewListAssetRequest generates requests for ListAsset
+func NewListAssetRequest(server string, params *ListAssetParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -1078,9 +1896,9 @@ func NewAssetsListRequest(server string, params *AssetsListParams) (*http.Reques
 
 		}
 
-		if params.Type != nil {
+		if params.BikeType != nil {
 
-			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "type", *params.Type, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "bike_type", *params.BikeType, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
 				return nil, err
 			} else {
 				for _, qp := range strings.Split(queryFrag, "&") {
@@ -1166,19 +1984,19 @@ func NewAssetsListRequest(server string, params *AssetsListParams) (*http.Reques
 	return req, nil
 }
 
-// NewAssetsCreateRequest calls the generic AssetsCreate builder with application/json body
-func NewAssetsCreateRequest(server string, params *AssetsCreateParams, body AssetsCreateJSONRequestBody) (*http.Request, error) {
+// NewCreateAssetRequest calls the generic CreateAsset builder with application/json body
+func NewCreateAssetRequest(server string, params *CreateAssetParams, body CreateAssetJSONRequestBody) (*http.Request, error) {
 	var bodyReader io.Reader
 	buf, err := json.Marshal(body)
 	if err != nil {
 		return nil, err
 	}
 	bodyReader = bytes.NewReader(buf)
-	return NewAssetsCreateRequestWithBody(server, params, "application/json", bodyReader)
+	return NewCreateAssetRequestWithBody(server, params, "application/json", bodyReader)
 }
 
-// NewAssetsCreateRequestWithBody generates requests for AssetsCreate with any type of body
-func NewAssetsCreateRequestWithBody(server string, params *AssetsCreateParams, contentType string, body io.Reader) (*http.Request, error) {
+// NewCreateAssetRequestWithBody generates requests for CreateAsset with any type of body
+func NewCreateAssetRequestWithBody(server string, params *CreateAssetParams, contentType string, body io.Reader) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -1241,8 +2059,77 @@ func NewAssetsCreateRequestWithBody(server string, params *AssetsCreateParams, c
 	return req, nil
 }
 
-// NewAssetsGetRequest generates requests for AssetsGet
-func NewAssetsGetRequest(server string, assetId string, params *AssetsGetParams) (*http.Request, error) {
+// NewDeleteAssetRequest generates requests for DeleteAsset
+func NewDeleteAssetRequest(server string, assetId string, params *DeleteAssetParams) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "asset_id", assetId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/public/v1/assets/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodDelete, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+
+		if params.Authorization != nil {
+			var headerParam0 string
+
+			headerParam0, err = runtime.StyleParamWithOptions("simple", false, "Authorization", *params.Authorization, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+			if err != nil {
+				return nil, err
+			}
+
+			req.Header.Set("Authorization", headerParam0)
+		}
+
+		if params.XBikebookRequestId != nil {
+			var headerParam1 string
+
+			headerParam1, err = runtime.StyleParamWithOptions("simple", false, "X-Bikebook-Request-Id", *params.XBikebookRequestId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+			if err != nil {
+				return nil, err
+			}
+
+			req.Header.Set("X-Bikebook-Request-Id", headerParam1)
+		}
+
+		var headerParam2 string
+
+		headerParam2, err = runtime.StyleParamWithOptions("simple", false, "Idempotency-Key", params.IdempotencyKey, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+		if err != nil {
+			return nil, err
+		}
+
+		req.Header.Set("Idempotency-Key", headerParam2)
+
+	}
+
+	return req, nil
+}
+
+// NewGetAssetRequest generates requests for GetAsset
+func NewGetAssetRequest(server string, assetId string, params *GetAssetParams) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -1301,19 +2188,19 @@ func NewAssetsGetRequest(server string, assetId string, params *AssetsGetParams)
 	return req, nil
 }
 
-// NewAssetsUpdateRequest calls the generic AssetsUpdate builder with application/json body
-func NewAssetsUpdateRequest(server string, assetId string, params *AssetsUpdateParams, body AssetsUpdateJSONRequestBody) (*http.Request, error) {
+// NewUpdateAssetRequest calls the generic UpdateAsset builder with application/json body
+func NewUpdateAssetRequest(server string, assetId string, params *UpdateAssetParams, body UpdateAssetJSONRequestBody) (*http.Request, error) {
 	var bodyReader io.Reader
 	buf, err := json.Marshal(body)
 	if err != nil {
 		return nil, err
 	}
 	bodyReader = bytes.NewReader(buf)
-	return NewAssetsUpdateRequestWithBody(server, assetId, params, "application/json", bodyReader)
+	return NewUpdateAssetRequestWithBody(server, assetId, params, "application/json", bodyReader)
 }
 
-// NewAssetsUpdateRequestWithBody generates requests for AssetsUpdate with any type of body
-func NewAssetsUpdateRequestWithBody(server string, assetId string, params *AssetsUpdateParams, contentType string, body io.Reader) (*http.Request, error) {
+// NewUpdateAssetRequestWithBody generates requests for UpdateAsset with any type of body
+func NewUpdateAssetRequestWithBody(server string, assetId string, params *UpdateAssetParams, contentType string, body io.Reader) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -1383,8 +2270,569 @@ func NewAssetsUpdateRequestWithBody(server string, assetId string, params *Asset
 	return req, nil
 }
 
-// NewBusinessesListRequest generates requests for BusinessesList
-func NewBusinessesListRequest(server string, params *BusinessesListParams) (*http.Request, error) {
+// NewListRequest generates requests for List
+func NewListRequest(server string, params *ListParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/public/v1/back_orders")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		// queryValues collects non-styled parameters (passthrough, JSON)
+		// that are safe to round-trip through url.Values.Encode().
+		queryValues := queryURL.Query()
+		// rawQueryFragments collects pre-encoded query fragments from
+		// styled parameters, preserving literal commas as delimiters
+		// per the OpenAPI spec (e.g. "color=blue,black,brown").
+		var rawQueryFragments []string
+
+		if params.BusinessId != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "business_id", *params.BusinessId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.Status != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "status", *params.Status, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.StockVariationId != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "stock_variation_id", *params.StockVariationId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.JobId != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "job_id", *params.JobId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.InvoiceId != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "invoice_id", *params.InvoiceId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.CustomerId != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "customer_id", *params.CustomerId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.Sku != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "sku", *params.Sku, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.Source != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "source", *params.Source, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.Sort != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "sort", *params.Sort, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.Limit != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "limit", *params.Limit, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.Cursor != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "cursor", *params.Cursor, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if encoded := queryValues.Encode(); encoded != "" {
+			rawQueryFragments = append(rawQueryFragments, encoded)
+		}
+		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+
+		if params.Authorization != nil {
+			var headerParam0 string
+
+			headerParam0, err = runtime.StyleParamWithOptions("simple", false, "Authorization", *params.Authorization, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+			if err != nil {
+				return nil, err
+			}
+
+			req.Header.Set("Authorization", headerParam0)
+		}
+
+		if params.XBikebookRequestId != nil {
+			var headerParam1 string
+
+			headerParam1, err = runtime.StyleParamWithOptions("simple", false, "X-Bikebook-Request-Id", *params.XBikebookRequestId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+			if err != nil {
+				return nil, err
+			}
+
+			req.Header.Set("X-Bikebook-Request-Id", headerParam1)
+		}
+
+	}
+
+	return req, nil
+}
+
+// NewCreateRequest calls the generic Create builder with application/json body
+func NewCreateRequest(server string, params *CreateParams, body CreateJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewCreateRequestWithBody(server, params, "application/json", bodyReader)
+}
+
+// NewCreateRequestWithBody generates requests for Create with any type of body
+func NewCreateRequestWithBody(server string, params *CreateParams, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/public/v1/back_orders")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	if params != nil {
+
+		if params.Authorization != nil {
+			var headerParam0 string
+
+			headerParam0, err = runtime.StyleParamWithOptions("simple", false, "Authorization", *params.Authorization, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+			if err != nil {
+				return nil, err
+			}
+
+			req.Header.Set("Authorization", headerParam0)
+		}
+
+		if params.XBikebookRequestId != nil {
+			var headerParam1 string
+
+			headerParam1, err = runtime.StyleParamWithOptions("simple", false, "X-Bikebook-Request-Id", *params.XBikebookRequestId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+			if err != nil {
+				return nil, err
+			}
+
+			req.Header.Set("X-Bikebook-Request-Id", headerParam1)
+		}
+
+		var headerParam2 string
+
+		headerParam2, err = runtime.StyleParamWithOptions("simple", false, "Idempotency-Key", params.IdempotencyKey, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+		if err != nil {
+			return nil, err
+		}
+
+		req.Header.Set("Idempotency-Key", headerParam2)
+
+	}
+
+	return req, nil
+}
+
+// NewReceiveRequest calls the generic Receive builder with application/json body
+func NewReceiveRequest(server string, params *ReceiveParams, body ReceiveJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewReceiveRequestWithBody(server, params, "application/json", bodyReader)
+}
+
+// NewReceiveRequestWithBody generates requests for Receive with any type of body
+func NewReceiveRequestWithBody(server string, params *ReceiveParams, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/public/v1/back_orders/received")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	if params != nil {
+
+		if params.Authorization != nil {
+			var headerParam0 string
+
+			headerParam0, err = runtime.StyleParamWithOptions("simple", false, "Authorization", *params.Authorization, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+			if err != nil {
+				return nil, err
+			}
+
+			req.Header.Set("Authorization", headerParam0)
+		}
+
+		if params.XBikebookRequestId != nil {
+			var headerParam1 string
+
+			headerParam1, err = runtime.StyleParamWithOptions("simple", false, "X-Bikebook-Request-Id", *params.XBikebookRequestId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+			if err != nil {
+				return nil, err
+			}
+
+			req.Header.Set("X-Bikebook-Request-Id", headerParam1)
+		}
+
+		var headerParam2 string
+
+		headerParam2, err = runtime.StyleParamWithOptions("simple", false, "Idempotency-Key", params.IdempotencyKey, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+		if err != nil {
+			return nil, err
+		}
+
+		req.Header.Set("Idempotency-Key", headerParam2)
+
+	}
+
+	return req, nil
+}
+
+// NewDeleteRequest generates requests for Delete
+func NewDeleteRequest(server string, backOrderId string, params *DeleteParams) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "back_order_id", backOrderId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/public/v1/back_orders/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodDelete, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+
+		if params.Authorization != nil {
+			var headerParam0 string
+
+			headerParam0, err = runtime.StyleParamWithOptions("simple", false, "Authorization", *params.Authorization, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+			if err != nil {
+				return nil, err
+			}
+
+			req.Header.Set("Authorization", headerParam0)
+		}
+
+		if params.XBikebookRequestId != nil {
+			var headerParam1 string
+
+			headerParam1, err = runtime.StyleParamWithOptions("simple", false, "X-Bikebook-Request-Id", *params.XBikebookRequestId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+			if err != nil {
+				return nil, err
+			}
+
+			req.Header.Set("X-Bikebook-Request-Id", headerParam1)
+		}
+
+		var headerParam2 string
+
+		headerParam2, err = runtime.StyleParamWithOptions("simple", false, "Idempotency-Key", params.IdempotencyKey, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+		if err != nil {
+			return nil, err
+		}
+
+		req.Header.Set("Idempotency-Key", headerParam2)
+
+	}
+
+	return req, nil
+}
+
+// NewGetRequest generates requests for Get
+func NewGetRequest(server string, backOrderId string, params *GetParams) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "back_order_id", backOrderId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/public/v1/back_orders/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+
+		if params.Authorization != nil {
+			var headerParam0 string
+
+			headerParam0, err = runtime.StyleParamWithOptions("simple", false, "Authorization", *params.Authorization, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+			if err != nil {
+				return nil, err
+			}
+
+			req.Header.Set("Authorization", headerParam0)
+		}
+
+		if params.XBikebookRequestId != nil {
+			var headerParam1 string
+
+			headerParam1, err = runtime.StyleParamWithOptions("simple", false, "X-Bikebook-Request-Id", *params.XBikebookRequestId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+			if err != nil {
+				return nil, err
+			}
+
+			req.Header.Set("X-Bikebook-Request-Id", headerParam1)
+		}
+
+	}
+
+	return req, nil
+}
+
+// NewUpdateRequest calls the generic Update builder with application/json body
+func NewUpdateRequest(server string, backOrderId string, params *UpdateParams, body UpdateJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewUpdateRequestWithBody(server, backOrderId, params, "application/json", bodyReader)
+}
+
+// NewUpdateRequestWithBody generates requests for Update with any type of body
+func NewUpdateRequestWithBody(server string, backOrderId string, params *UpdateParams, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "back_order_id", backOrderId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/public/v1/back_orders/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPatch, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	if params != nil {
+
+		if params.Authorization != nil {
+			var headerParam0 string
+
+			headerParam0, err = runtime.StyleParamWithOptions("simple", false, "Authorization", *params.Authorization, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+			if err != nil {
+				return nil, err
+			}
+
+			req.Header.Set("Authorization", headerParam0)
+		}
+
+		if params.XBikebookRequestId != nil {
+			var headerParam1 string
+
+			headerParam1, err = runtime.StyleParamWithOptions("simple", false, "X-Bikebook-Request-Id", *params.XBikebookRequestId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+			if err != nil {
+				return nil, err
+			}
+
+			req.Header.Set("X-Bikebook-Request-Id", headerParam1)
+		}
+
+		var headerParam2 string
+
+		headerParam2, err = runtime.StyleParamWithOptions("simple", false, "Idempotency-Key", params.IdempotencyKey, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+		if err != nil {
+			return nil, err
+		}
+
+		req.Header.Set("Idempotency-Key", headerParam2)
+
+	}
+
+	return req, nil
+}
+
+// NewListBusinessRequest generates requests for ListBusiness
+func NewListBusinessRequest(server string, params *ListBusinessParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -1436,8 +2884,8 @@ func NewBusinessesListRequest(server string, params *BusinessesListParams) (*htt
 	return req, nil
 }
 
-// NewBusinessesGetRequest generates requests for BusinessesGet
-func NewBusinessesGetRequest(server string, businessId string, params *BusinessesGetParams) (*http.Request, error) {
+// NewGetBusinessRequest generates requests for GetBusiness
+func NewGetBusinessRequest(server string, businessId string, params *GetBusinessParams) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -1496,8 +2944,8 @@ func NewBusinessesGetRequest(server string, businessId string, params *Businesse
 	return req, nil
 }
 
-// NewBusinessesAvailabilityRequest generates requests for BusinessesAvailability
-func NewBusinessesAvailabilityRequest(server string, businessId string, params *BusinessesAvailabilityParams) (*http.Request, error) {
+// NewAvailabilityRequest generates requests for Availability
+func NewAvailabilityRequest(server string, businessId string, params *AvailabilityParams) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -1595,8 +3043,8 @@ func NewBusinessesAvailabilityRequest(server string, businessId string, params *
 	return req, nil
 }
 
-// NewBusinessesAvailabilitySlotsRequest generates requests for BusinessesAvailabilitySlots
-func NewBusinessesAvailabilitySlotsRequest(server string, businessId string, params *BusinessesAvailabilitySlotsParams) (*http.Request, error) {
+// NewAvailabilitySlotsRequest generates requests for AvailabilitySlots
+func NewAvailabilitySlotsRequest(server string, businessId string, params *AvailabilitySlotsParams) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -1630,16 +3078,12 @@ func NewBusinessesAvailabilitySlotsRequest(server string, businessId string, par
 		// per the OpenAPI spec (e.g. "color=blue,black,brown").
 		var rawQueryFragments []string
 
-		if params.Date != nil {
-
-			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "date", *params.Date, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: "date"}); err != nil {
-				return nil, err
-			} else {
-				for _, qp := range strings.Split(queryFrag, "&") {
-					rawQueryFragments = append(rawQueryFragments, qp)
-				}
+		if queryFrag, err := runtime.StyleParamWithOptions("form", true, "date", params.Date, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: "date"}); err != nil {
+			return nil, err
+		} else {
+			for _, qp := range strings.Split(queryFrag, "&") {
+				rawQueryFragments = append(rawQueryFragments, qp)
 			}
-
 		}
 
 		if encoded := queryValues.Encode(); encoded != "" {
@@ -1682,8 +3126,292 @@ func NewBusinessesAvailabilitySlotsRequest(server string, businessId string, par
 	return req, nil
 }
 
-// NewBusinessesNextAvailableSlotRequest generates requests for BusinessesNextAvailableSlot
-func NewBusinessesNextAvailableSlotRequest(server string, businessId string, params *BusinessesNextAvailableSlotParams) (*http.Request, error) {
+// NewBusinessIntegrationRequest generates requests for BusinessIntegration
+func NewBusinessIntegrationRequest(server string, businessId string, params *BusinessIntegrationParams) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "business_id", businessId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/public/v1/businesses/%s/integration", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+
+		if params.Authorization != nil {
+			var headerParam0 string
+
+			headerParam0, err = runtime.StyleParamWithOptions("simple", false, "Authorization", *params.Authorization, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+			if err != nil {
+				return nil, err
+			}
+
+			req.Header.Set("Authorization", headerParam0)
+		}
+
+		if params.XBikebookRequestId != nil {
+			var headerParam1 string
+
+			headerParam1, err = runtime.StyleParamWithOptions("simple", false, "X-Bikebook-Request-Id", *params.XBikebookRequestId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+			if err != nil {
+				return nil, err
+			}
+
+			req.Header.Set("X-Bikebook-Request-Id", headerParam1)
+		}
+
+	}
+
+	return req, nil
+}
+
+// NewTriggerCustomerSyncRequest calls the generic TriggerCustomerSync builder with application/json body
+func NewTriggerCustomerSyncRequest(server string, businessId string, params *TriggerCustomerSyncParams, body TriggerCustomerSyncJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewTriggerCustomerSyncRequestWithBody(server, businessId, params, "application/json", bodyReader)
+}
+
+// NewTriggerCustomerSyncRequestWithBody generates requests for TriggerCustomerSync with any type of body
+func NewTriggerCustomerSyncRequestWithBody(server string, businessId string, params *TriggerCustomerSyncParams, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "business_id", businessId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/public/v1/businesses/%s/integration/customer_syncs", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	if params != nil {
+
+		if params.Authorization != nil {
+			var headerParam0 string
+
+			headerParam0, err = runtime.StyleParamWithOptions("simple", false, "Authorization", *params.Authorization, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+			if err != nil {
+				return nil, err
+			}
+
+			req.Header.Set("Authorization", headerParam0)
+		}
+
+		if params.XBikebookRequestId != nil {
+			var headerParam1 string
+
+			headerParam1, err = runtime.StyleParamWithOptions("simple", false, "X-Bikebook-Request-Id", *params.XBikebookRequestId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+			if err != nil {
+				return nil, err
+			}
+
+			req.Header.Set("X-Bikebook-Request-Id", headerParam1)
+		}
+
+		var headerParam2 string
+
+		headerParam2, err = runtime.StyleParamWithOptions("simple", false, "Idempotency-Key", params.IdempotencyKey, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+		if err != nil {
+			return nil, err
+		}
+
+		req.Header.Set("Idempotency-Key", headerParam2)
+
+	}
+
+	return req, nil
+}
+
+// NewTriggerStockSyncRequest calls the generic TriggerStockSync builder with application/json body
+func NewTriggerStockSyncRequest(server string, businessId string, params *TriggerStockSyncParams, body TriggerStockSyncJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewTriggerStockSyncRequestWithBody(server, businessId, params, "application/json", bodyReader)
+}
+
+// NewTriggerStockSyncRequestWithBody generates requests for TriggerStockSync with any type of body
+func NewTriggerStockSyncRequestWithBody(server string, businessId string, params *TriggerStockSyncParams, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "business_id", businessId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/public/v1/businesses/%s/integration/stock_syncs", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	if params != nil {
+
+		if params.Authorization != nil {
+			var headerParam0 string
+
+			headerParam0, err = runtime.StyleParamWithOptions("simple", false, "Authorization", *params.Authorization, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+			if err != nil {
+				return nil, err
+			}
+
+			req.Header.Set("Authorization", headerParam0)
+		}
+
+		if params.XBikebookRequestId != nil {
+			var headerParam1 string
+
+			headerParam1, err = runtime.StyleParamWithOptions("simple", false, "X-Bikebook-Request-Id", *params.XBikebookRequestId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+			if err != nil {
+				return nil, err
+			}
+
+			req.Header.Set("X-Bikebook-Request-Id", headerParam1)
+		}
+
+		var headerParam2 string
+
+		headerParam2, err = runtime.StyleParamWithOptions("simple", false, "Idempotency-Key", params.IdempotencyKey, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+		if err != nil {
+			return nil, err
+		}
+
+		req.Header.Set("Idempotency-Key", headerParam2)
+
+	}
+
+	return req, nil
+}
+
+// NewJobStatusesRequest generates requests for JobStatuses
+func NewJobStatusesRequest(server string, businessId string, params *JobStatusesParams) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "business_id", businessId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/public/v1/businesses/%s/job_statuses", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+
+		if params.Authorization != nil {
+			var headerParam0 string
+
+			headerParam0, err = runtime.StyleParamWithOptions("simple", false, "Authorization", *params.Authorization, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+			if err != nil {
+				return nil, err
+			}
+
+			req.Header.Set("Authorization", headerParam0)
+		}
+
+		if params.XBikebookRequestId != nil {
+			var headerParam1 string
+
+			headerParam1, err = runtime.StyleParamWithOptions("simple", false, "X-Bikebook-Request-Id", *params.XBikebookRequestId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+			if err != nil {
+				return nil, err
+			}
+
+			req.Header.Set("X-Bikebook-Request-Id", headerParam1)
+		}
+
+	}
+
+	return req, nil
+}
+
+// NewNextAvailableSlotRequest generates requests for NextAvailableSlot
+func NewNextAvailableSlotRequest(server string, businessId string, params *NextAvailableSlotParams) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -1781,8 +3509,8 @@ func NewBusinessesNextAvailableSlotRequest(server string, businessId string, par
 	return req, nil
 }
 
-// NewBusinessesServicesRequest generates requests for BusinessesServices
-func NewBusinessesServicesRequest(server string, businessId string, params *BusinessesServicesParams) (*http.Request, error) {
+// NewServicesRequest generates requests for Services
+func NewServicesRequest(server string, businessId string, params *ServicesParams) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -1904,19 +3632,19 @@ func NewBusinessesServicesRequest(server string, businessId string, params *Busi
 	return req, nil
 }
 
-// NewServicesCreateRequest calls the generic ServicesCreate builder with application/json body
-func NewServicesCreateRequest(server string, businessId string, params *ServicesCreateParams, body ServicesCreateJSONRequestBody) (*http.Request, error) {
+// NewCreateServiceRequest calls the generic CreateService builder with application/json body
+func NewCreateServiceRequest(server string, businessId string, params *CreateServiceParams, body CreateServiceJSONRequestBody) (*http.Request, error) {
 	var bodyReader io.Reader
 	buf, err := json.Marshal(body)
 	if err != nil {
 		return nil, err
 	}
 	bodyReader = bytes.NewReader(buf)
-	return NewServicesCreateRequestWithBody(server, businessId, params, "application/json", bodyReader)
+	return NewCreateServiceRequestWithBody(server, businessId, params, "application/json", bodyReader)
 }
 
-// NewServicesCreateRequestWithBody generates requests for ServicesCreate with any type of body
-func NewServicesCreateRequestWithBody(server string, businessId string, params *ServicesCreateParams, contentType string, body io.Reader) (*http.Request, error) {
+// NewCreateServiceRequestWithBody generates requests for CreateService with any type of body
+func NewCreateServiceRequestWithBody(server string, businessId string, params *CreateServiceParams, contentType string, body io.Reader) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -1986,19 +3714,19 @@ func NewServicesCreateRequestWithBody(server string, businessId string, params *
 	return req, nil
 }
 
-// NewServicesUpdateRequest calls the generic ServicesUpdate builder with application/json body
-func NewServicesUpdateRequest(server string, businessId string, serviceId string, params *ServicesUpdateParams, body ServicesUpdateJSONRequestBody) (*http.Request, error) {
+// NewUpdateServiceRequest calls the generic UpdateService builder with application/json body
+func NewUpdateServiceRequest(server string, businessId string, serviceId string, params *UpdateServiceParams, body UpdateServiceJSONRequestBody) (*http.Request, error) {
 	var bodyReader io.Reader
 	buf, err := json.Marshal(body)
 	if err != nil {
 		return nil, err
 	}
 	bodyReader = bytes.NewReader(buf)
-	return NewServicesUpdateRequestWithBody(server, businessId, serviceId, params, "application/json", bodyReader)
+	return NewUpdateServiceRequestWithBody(server, businessId, serviceId, params, "application/json", bodyReader)
 }
 
-// NewServicesUpdateRequestWithBody generates requests for ServicesUpdate with any type of body
-func NewServicesUpdateRequestWithBody(server string, businessId string, serviceId string, params *ServicesUpdateParams, contentType string, body io.Reader) (*http.Request, error) {
+// NewUpdateServiceRequestWithBody generates requests for UpdateService with any type of body
+func NewUpdateServiceRequestWithBody(server string, businessId string, serviceId string, params *UpdateServiceParams, contentType string, body io.Reader) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -2075,8 +3803,8 @@ func NewServicesUpdateRequestWithBody(server string, businessId string, serviceI
 	return req, nil
 }
 
-// NewCustomersListRequest generates requests for CustomersList
-func NewCustomersListRequest(server string, params *CustomersListParams) (*http.Request, error) {
+// NewCustomersRequest generates requests for Customers
+func NewCustomersRequest(server string, params *CustomersParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -2227,8 +3955,83 @@ func NewCustomersListRequest(server string, params *CustomersListParams) (*http.
 	return req, nil
 }
 
-// NewCustomersGetRequest generates requests for CustomersGet
-func NewCustomersGetRequest(server string, customerId string, params *CustomersGetParams) (*http.Request, error) {
+// NewCreateCustomerRequest calls the generic CreateCustomer builder with application/json body
+func NewCreateCustomerRequest(server string, params *CreateCustomerParams, body CreateCustomerJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewCreateCustomerRequestWithBody(server, params, "application/json", bodyReader)
+}
+
+// NewCreateCustomerRequestWithBody generates requests for CreateCustomer with any type of body
+func NewCreateCustomerRequestWithBody(server string, params *CreateCustomerParams, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/public/v1/customers")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	if params != nil {
+
+		if params.Authorization != nil {
+			var headerParam0 string
+
+			headerParam0, err = runtime.StyleParamWithOptions("simple", false, "Authorization", *params.Authorization, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+			if err != nil {
+				return nil, err
+			}
+
+			req.Header.Set("Authorization", headerParam0)
+		}
+
+		if params.XBikebookRequestId != nil {
+			var headerParam1 string
+
+			headerParam1, err = runtime.StyleParamWithOptions("simple", false, "X-Bikebook-Request-Id", *params.XBikebookRequestId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+			if err != nil {
+				return nil, err
+			}
+
+			req.Header.Set("X-Bikebook-Request-Id", headerParam1)
+		}
+
+		var headerParam2 string
+
+		headerParam2, err = runtime.StyleParamWithOptions("simple", false, "Idempotency-Key", params.IdempotencyKey, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+		if err != nil {
+			return nil, err
+		}
+
+		req.Header.Set("Idempotency-Key", headerParam2)
+
+	}
+
+	return req, nil
+}
+
+// NewCustomerRequest generates requests for Customer
+func NewCustomerRequest(server string, customerId string, params *CustomerParams) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -2287,19 +4090,19 @@ func NewCustomersGetRequest(server string, customerId string, params *CustomersG
 	return req, nil
 }
 
-// NewCustomersUpdateRequest calls the generic CustomersUpdate builder with application/json body
-func NewCustomersUpdateRequest(server string, customerId string, params *CustomersUpdateParams, body CustomersUpdateJSONRequestBody) (*http.Request, error) {
+// NewUpdateCustomerRequest calls the generic UpdateCustomer builder with application/json body
+func NewUpdateCustomerRequest(server string, customerId string, params *UpdateCustomerParams, body UpdateCustomerJSONRequestBody) (*http.Request, error) {
 	var bodyReader io.Reader
 	buf, err := json.Marshal(body)
 	if err != nil {
 		return nil, err
 	}
 	bodyReader = bytes.NewReader(buf)
-	return NewCustomersUpdateRequestWithBody(server, customerId, params, "application/json", bodyReader)
+	return NewUpdateCustomerRequestWithBody(server, customerId, params, "application/json", bodyReader)
 }
 
-// NewCustomersUpdateRequestWithBody generates requests for CustomersUpdate with any type of body
-func NewCustomersUpdateRequestWithBody(server string, customerId string, params *CustomersUpdateParams, contentType string, body io.Reader) (*http.Request, error) {
+// NewUpdateCustomerRequestWithBody generates requests for UpdateCustomer with any type of body
+func NewUpdateCustomerRequestWithBody(server string, customerId string, params *UpdateCustomerParams, contentType string, body io.Reader) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -2369,8 +4172,8 @@ func NewCustomersUpdateRequestWithBody(server string, customerId string, params 
 	return req, nil
 }
 
-// NewAssetsListForCustomerRequest generates requests for AssetsListForCustomer
-func NewAssetsListForCustomerRequest(server string, customerId string, params *AssetsListForCustomerParams) (*http.Request, error) {
+// NewListForCustomerRequest generates requests for ListForCustomer
+func NewListForCustomerRequest(server string, customerId string, params *ListForCustomerParams) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -2452,9 +4255,9 @@ func NewAssetsListForCustomerRequest(server string, customerId string, params *A
 
 		}
 
-		if params.Type != nil {
+		if params.BikeType != nil {
 
-			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "type", *params.Type, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "bike_type", *params.BikeType, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
 				return nil, err
 			} else {
 				for _, qp := range strings.Split(queryFrag, "&") {
@@ -2540,8 +4343,8 @@ func NewAssetsListForCustomerRequest(server string, customerId string, params *A
 	return req, nil
 }
 
-// NewChatCreateAttachmentsRequestWithBody generates requests for ChatCreateAttachments with any type of body
-func NewChatCreateAttachmentsRequestWithBody(server string, customerId string, params *ChatCreateAttachmentsParams, contentType string, body io.Reader) (*http.Request, error) {
+// NewCreateChatAttachmentsRequestWithBody generates requests for CreateChatAttachments with any type of body
+func NewCreateChatAttachmentsRequestWithBody(server string, customerId string, params *CreateChatAttachmentsParams, contentType string, body io.Reader) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -2749,19 +4552,19 @@ func NewChatMessagesRequest(server string, customerId string, params *ChatMessag
 	return req, nil
 }
 
-// NewChatCreateMessageRequest calls the generic ChatCreateMessage builder with application/json body
-func NewChatCreateMessageRequest(server string, customerId string, params *ChatCreateMessageParams, body ChatCreateMessageJSONRequestBody) (*http.Request, error) {
+// NewCreateChatMessageRequest calls the generic CreateChatMessage builder with application/json body
+func NewCreateChatMessageRequest(server string, customerId string, params *CreateChatMessageParams, body CreateChatMessageJSONRequestBody) (*http.Request, error) {
 	var bodyReader io.Reader
 	buf, err := json.Marshal(body)
 	if err != nil {
 		return nil, err
 	}
 	bodyReader = bytes.NewReader(buf)
-	return NewChatCreateMessageRequestWithBody(server, customerId, params, "application/json", bodyReader)
+	return NewCreateChatMessageRequestWithBody(server, customerId, params, "application/json", bodyReader)
 }
 
-// NewChatCreateMessageRequestWithBody generates requests for ChatCreateMessage with any type of body
-func NewChatCreateMessageRequestWithBody(server string, customerId string, params *ChatCreateMessageParams, contentType string, body io.Reader) (*http.Request, error) {
+// NewCreateChatMessageRequestWithBody generates requests for CreateChatMessage with any type of body
+func NewCreateChatMessageRequestWithBody(server string, customerId string, params *CreateChatMessageParams, contentType string, body io.Reader) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -2858,19 +4661,115 @@ func NewChatCreateMessageRequestWithBody(server string, customerId string, param
 	return req, nil
 }
 
-// NewInvoiceItemsCreateRequest calls the generic InvoiceItemsCreate builder with application/json body
-func NewInvoiceItemsCreateRequest(server string, params *InvoiceItemsCreateParams, body InvoiceItemsCreateJSONRequestBody) (*http.Request, error) {
+// NewMarkReadRequest generates requests for MarkRead
+func NewMarkReadRequest(server string, customerId string, params *MarkReadParams) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "customer_id", customerId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/public/v1/customers/%s/chat_messages/mark_read", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		// queryValues collects non-styled parameters (passthrough, JSON)
+		// that are safe to round-trip through url.Values.Encode().
+		queryValues := queryURL.Query()
+		// rawQueryFragments collects pre-encoded query fragments from
+		// styled parameters, preserving literal commas as delimiters
+		// per the OpenAPI spec (e.g. "color=blue,black,brown").
+		var rawQueryFragments []string
+
+		if params.JobId != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "job_id", *params.JobId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if encoded := queryValues.Encode(); encoded != "" {
+			rawQueryFragments = append(rawQueryFragments, encoded)
+		}
+		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+
+		if params.Authorization != nil {
+			var headerParam0 string
+
+			headerParam0, err = runtime.StyleParamWithOptions("simple", false, "Authorization", *params.Authorization, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+			if err != nil {
+				return nil, err
+			}
+
+			req.Header.Set("Authorization", headerParam0)
+		}
+
+		if params.XBikebookRequestId != nil {
+			var headerParam1 string
+
+			headerParam1, err = runtime.StyleParamWithOptions("simple", false, "X-Bikebook-Request-Id", *params.XBikebookRequestId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+			if err != nil {
+				return nil, err
+			}
+
+			req.Header.Set("X-Bikebook-Request-Id", headerParam1)
+		}
+
+		var headerParam2 string
+
+		headerParam2, err = runtime.StyleParamWithOptions("simple", false, "Idempotency-Key", params.IdempotencyKey, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+		if err != nil {
+			return nil, err
+		}
+
+		req.Header.Set("Idempotency-Key", headerParam2)
+
+	}
+
+	return req, nil
+}
+
+// NewCreateInvoiceItemRequest calls the generic CreateInvoiceItem builder with application/json body
+func NewCreateInvoiceItemRequest(server string, params *CreateInvoiceItemParams, body CreateInvoiceItemJSONRequestBody) (*http.Request, error) {
 	var bodyReader io.Reader
 	buf, err := json.Marshal(body)
 	if err != nil {
 		return nil, err
 	}
 	bodyReader = bytes.NewReader(buf)
-	return NewInvoiceItemsCreateRequestWithBody(server, params, "application/json", bodyReader)
+	return NewCreateInvoiceItemRequestWithBody(server, params, "application/json", bodyReader)
 }
 
-// NewInvoiceItemsCreateRequestWithBody generates requests for InvoiceItemsCreate with any type of body
-func NewInvoiceItemsCreateRequestWithBody(server string, params *InvoiceItemsCreateParams, contentType string, body io.Reader) (*http.Request, error) {
+// NewCreateInvoiceItemRequestWithBody generates requests for CreateInvoiceItem with any type of body
+func NewCreateInvoiceItemRequestWithBody(server string, params *CreateInvoiceItemParams, contentType string, body io.Reader) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -2933,8 +4832,8 @@ func NewInvoiceItemsCreateRequestWithBody(server string, params *InvoiceItemsCre
 	return req, nil
 }
 
-// NewInvoiceItemsDeleteRequest generates requests for InvoiceItemsDelete
-func NewInvoiceItemsDeleteRequest(server string, invoiceItemId string, params *InvoiceItemsDeleteParams) (*http.Request, error) {
+// NewDeleteInvoiceItemRequest generates requests for DeleteInvoiceItem
+func NewDeleteInvoiceItemRequest(server string, invoiceItemId string, params *DeleteInvoiceItemParams) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -3002,8 +4901,8 @@ func NewInvoiceItemsDeleteRequest(server string, invoiceItemId string, params *I
 	return req, nil
 }
 
-// NewInvoiceItemsGetRequest generates requests for InvoiceItemsGet
-func NewInvoiceItemsGetRequest(server string, invoiceItemId string, params *InvoiceItemsGetParams) (*http.Request, error) {
+// NewGetInvoiceItemRequest generates requests for GetInvoiceItem
+func NewGetInvoiceItemRequest(server string, invoiceItemId string, params *GetInvoiceItemParams) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -3062,19 +4961,19 @@ func NewInvoiceItemsGetRequest(server string, invoiceItemId string, params *Invo
 	return req, nil
 }
 
-// NewInvoiceItemsUpdateRequest calls the generic InvoiceItemsUpdate builder with application/json body
-func NewInvoiceItemsUpdateRequest(server string, invoiceItemId string, params *InvoiceItemsUpdateParams, body InvoiceItemsUpdateJSONRequestBody) (*http.Request, error) {
+// NewUpdateInvoiceItemRequest calls the generic UpdateInvoiceItem builder with application/json body
+func NewUpdateInvoiceItemRequest(server string, invoiceItemId string, params *UpdateInvoiceItemParams, body UpdateInvoiceItemJSONRequestBody) (*http.Request, error) {
 	var bodyReader io.Reader
 	buf, err := json.Marshal(body)
 	if err != nil {
 		return nil, err
 	}
 	bodyReader = bytes.NewReader(buf)
-	return NewInvoiceItemsUpdateRequestWithBody(server, invoiceItemId, params, "application/json", bodyReader)
+	return NewUpdateInvoiceItemRequestWithBody(server, invoiceItemId, params, "application/json", bodyReader)
 }
 
-// NewInvoiceItemsUpdateRequestWithBody generates requests for InvoiceItemsUpdate with any type of body
-func NewInvoiceItemsUpdateRequestWithBody(server string, invoiceItemId string, params *InvoiceItemsUpdateParams, contentType string, body io.Reader) (*http.Request, error) {
+// NewUpdateInvoiceItemRequestWithBody generates requests for UpdateInvoiceItem with any type of body
+func NewUpdateInvoiceItemRequestWithBody(server string, invoiceItemId string, params *UpdateInvoiceItemParams, contentType string, body io.Reader) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -3144,8 +5043,8 @@ func NewInvoiceItemsUpdateRequestWithBody(server string, invoiceItemId string, p
 	return req, nil
 }
 
-// NewInvoicesListRequest generates requests for InvoicesList
-func NewInvoicesListRequest(server string, params *InvoicesListParams) (*http.Request, error) {
+// NewListInvoiceRequest generates requests for ListInvoice
+func NewListInvoiceRequest(server string, params *ListInvoiceParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -3232,6 +5131,18 @@ func NewInvoicesListRequest(server string, params *InvoicesListParams) (*http.Re
 
 		}
 
+		if params.Status != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "status", *params.Status, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
 		if params.Sort != nil {
 
 			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "sort", *params.Sort, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
@@ -3308,8 +5219,8 @@ func NewInvoicesListRequest(server string, params *InvoicesListParams) (*http.Re
 	return req, nil
 }
 
-// NewInvoicesGetRequest generates requests for InvoicesGet
-func NewInvoicesGetRequest(server string, invoiceId string, params *InvoicesGetParams) (*http.Request, error) {
+// NewGetInvoiceRequest generates requests for GetInvoice
+func NewGetInvoiceRequest(server string, invoiceId string, params *GetInvoiceParams) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -3368,8 +5279,900 @@ func NewInvoicesGetRequest(server string, invoiceId string, params *InvoicesGetP
 	return req, nil
 }
 
-// NewJobReportsListRequest generates requests for JobReportsList
-func NewJobReportsListRequest(server string, params *JobReportsListParams) (*http.Request, error) {
+// NewUpdateInvoiceRequest calls the generic UpdateInvoice builder with application/json body
+func NewUpdateInvoiceRequest(server string, invoiceId string, params *UpdateInvoiceParams, body UpdateInvoiceJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewUpdateInvoiceRequestWithBody(server, invoiceId, params, "application/json", bodyReader)
+}
+
+// NewUpdateInvoiceRequestWithBody generates requests for UpdateInvoice with any type of body
+func NewUpdateInvoiceRequestWithBody(server string, invoiceId string, params *UpdateInvoiceParams, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "invoice_id", invoiceId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/public/v1/invoices/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPatch, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	if params != nil {
+
+		if params.Authorization != nil {
+			var headerParam0 string
+
+			headerParam0, err = runtime.StyleParamWithOptions("simple", false, "Authorization", *params.Authorization, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+			if err != nil {
+				return nil, err
+			}
+
+			req.Header.Set("Authorization", headerParam0)
+		}
+
+		if params.XBikebookRequestId != nil {
+			var headerParam1 string
+
+			headerParam1, err = runtime.StyleParamWithOptions("simple", false, "X-Bikebook-Request-Id", *params.XBikebookRequestId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+			if err != nil {
+				return nil, err
+			}
+
+			req.Header.Set("X-Bikebook-Request-Id", headerParam1)
+		}
+
+		var headerParam2 string
+
+		headerParam2, err = runtime.StyleParamWithOptions("simple", false, "Idempotency-Key", params.IdempotencyKey, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+		if err != nil {
+			return nil, err
+		}
+
+		req.Header.Set("Idempotency-Key", headerParam2)
+
+	}
+
+	return req, nil
+}
+
+// NewChangeInvoiceAutoSyncRequest calls the generic ChangeInvoiceAutoSync builder with application/json body
+func NewChangeInvoiceAutoSyncRequest(server string, invoiceId string, params *ChangeInvoiceAutoSyncParams, body ChangeInvoiceAutoSyncJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewChangeInvoiceAutoSyncRequestWithBody(server, invoiceId, params, "application/json", bodyReader)
+}
+
+// NewChangeInvoiceAutoSyncRequestWithBody generates requests for ChangeInvoiceAutoSync with any type of body
+func NewChangeInvoiceAutoSyncRequestWithBody(server string, invoiceId string, params *ChangeInvoiceAutoSyncParams, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "invoice_id", invoiceId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/public/v1/invoices/%s/integration_auto_sync_changes", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	if params != nil {
+
+		if params.Authorization != nil {
+			var headerParam0 string
+
+			headerParam0, err = runtime.StyleParamWithOptions("simple", false, "Authorization", *params.Authorization, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+			if err != nil {
+				return nil, err
+			}
+
+			req.Header.Set("Authorization", headerParam0)
+		}
+
+		if params.XBikebookRequestId != nil {
+			var headerParam1 string
+
+			headerParam1, err = runtime.StyleParamWithOptions("simple", false, "X-Bikebook-Request-Id", *params.XBikebookRequestId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+			if err != nil {
+				return nil, err
+			}
+
+			req.Header.Set("X-Bikebook-Request-Id", headerParam1)
+		}
+
+		var headerParam2 string
+
+		headerParam2, err = runtime.StyleParamWithOptions("simple", false, "Idempotency-Key", params.IdempotencyKey, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+		if err != nil {
+			return nil, err
+		}
+
+		req.Header.Set("Idempotency-Key", headerParam2)
+
+	}
+
+	return req, nil
+}
+
+// NewInvoiceIntegrationSyncRequest generates requests for InvoiceIntegrationSync
+func NewInvoiceIntegrationSyncRequest(server string, invoiceId string, params *InvoiceIntegrationSyncParams) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "invoice_id", invoiceId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/public/v1/invoices/%s/integration_sync", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+
+		if params.Authorization != nil {
+			var headerParam0 string
+
+			headerParam0, err = runtime.StyleParamWithOptions("simple", false, "Authorization", *params.Authorization, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+			if err != nil {
+				return nil, err
+			}
+
+			req.Header.Set("Authorization", headerParam0)
+		}
+
+		if params.XBikebookRequestId != nil {
+			var headerParam1 string
+
+			headerParam1, err = runtime.StyleParamWithOptions("simple", false, "X-Bikebook-Request-Id", *params.XBikebookRequestId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+			if err != nil {
+				return nil, err
+			}
+
+			req.Header.Set("X-Bikebook-Request-Id", headerParam1)
+		}
+
+	}
+
+	return req, nil
+}
+
+// NewInvoiceIntegrationSyncEventsRequest generates requests for InvoiceIntegrationSyncEvents
+func NewInvoiceIntegrationSyncEventsRequest(server string, invoiceId string, params *InvoiceIntegrationSyncEventsParams) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "invoice_id", invoiceId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/public/v1/invoices/%s/integration_sync/events", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+
+		if params.Authorization != nil {
+			var headerParam0 string
+
+			headerParam0, err = runtime.StyleParamWithOptions("simple", false, "Authorization", *params.Authorization, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+			if err != nil {
+				return nil, err
+			}
+
+			req.Header.Set("Authorization", headerParam0)
+		}
+
+		if params.XBikebookRequestId != nil {
+			var headerParam1 string
+
+			headerParam1, err = runtime.StyleParamWithOptions("simple", false, "X-Bikebook-Request-Id", *params.XBikebookRequestId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+			if err != nil {
+				return nil, err
+			}
+
+			req.Header.Set("X-Bikebook-Request-Id", headerParam1)
+		}
+
+	}
+
+	return req, nil
+}
+
+// NewChangeInvoiceSyncCompletionRequest calls the generic ChangeInvoiceSyncCompletion builder with application/json body
+func NewChangeInvoiceSyncCompletionRequest(server string, invoiceId string, params *ChangeInvoiceSyncCompletionParams, body ChangeInvoiceSyncCompletionJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewChangeInvoiceSyncCompletionRequestWithBody(server, invoiceId, params, "application/json", bodyReader)
+}
+
+// NewChangeInvoiceSyncCompletionRequestWithBody generates requests for ChangeInvoiceSyncCompletion with any type of body
+func NewChangeInvoiceSyncCompletionRequestWithBody(server string, invoiceId string, params *ChangeInvoiceSyncCompletionParams, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "invoice_id", invoiceId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/public/v1/invoices/%s/integration_sync_completions", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	if params != nil {
+
+		if params.Authorization != nil {
+			var headerParam0 string
+
+			headerParam0, err = runtime.StyleParamWithOptions("simple", false, "Authorization", *params.Authorization, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+			if err != nil {
+				return nil, err
+			}
+
+			req.Header.Set("Authorization", headerParam0)
+		}
+
+		if params.XBikebookRequestId != nil {
+			var headerParam1 string
+
+			headerParam1, err = runtime.StyleParamWithOptions("simple", false, "X-Bikebook-Request-Id", *params.XBikebookRequestId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+			if err != nil {
+				return nil, err
+			}
+
+			req.Header.Set("X-Bikebook-Request-Id", headerParam1)
+		}
+
+		var headerParam2 string
+
+		headerParam2, err = runtime.StyleParamWithOptions("simple", false, "Idempotency-Key", params.IdempotencyKey, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+		if err != nil {
+			return nil, err
+		}
+
+		req.Header.Set("Idempotency-Key", headerParam2)
+
+	}
+
+	return req, nil
+}
+
+// NewRetryInvoiceIntegrationSyncRequest generates requests for RetryInvoiceIntegrationSync
+func NewRetryInvoiceIntegrationSyncRequest(server string, invoiceId string, params *RetryInvoiceIntegrationSyncParams) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "invoice_id", invoiceId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/public/v1/invoices/%s/integration_sync_retries", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+
+		if params.Authorization != nil {
+			var headerParam0 string
+
+			headerParam0, err = runtime.StyleParamWithOptions("simple", false, "Authorization", *params.Authorization, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+			if err != nil {
+				return nil, err
+			}
+
+			req.Header.Set("Authorization", headerParam0)
+		}
+
+		if params.XBikebookRequestId != nil {
+			var headerParam1 string
+
+			headerParam1, err = runtime.StyleParamWithOptions("simple", false, "X-Bikebook-Request-Id", *params.XBikebookRequestId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+			if err != nil {
+				return nil, err
+			}
+
+			req.Header.Set("X-Bikebook-Request-Id", headerParam1)
+		}
+
+		var headerParam2 string
+
+		headerParam2, err = runtime.StyleParamWithOptions("simple", false, "Idempotency-Key", params.IdempotencyKey, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+		if err != nil {
+			return nil, err
+		}
+
+		req.Header.Set("Idempotency-Key", headerParam2)
+
+	}
+
+	return req, nil
+}
+
+// NewTriggerInvoiceIntegrationSyncRequest calls the generic TriggerInvoiceIntegrationSync builder with application/json body
+func NewTriggerInvoiceIntegrationSyncRequest(server string, invoiceId string, params *TriggerInvoiceIntegrationSyncParams, body TriggerInvoiceIntegrationSyncJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewTriggerInvoiceIntegrationSyncRequestWithBody(server, invoiceId, params, "application/json", bodyReader)
+}
+
+// NewTriggerInvoiceIntegrationSyncRequestWithBody generates requests for TriggerInvoiceIntegrationSync with any type of body
+func NewTriggerInvoiceIntegrationSyncRequestWithBody(server string, invoiceId string, params *TriggerInvoiceIntegrationSyncParams, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "invoice_id", invoiceId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/public/v1/invoices/%s/integration_sync_triggers", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	if params != nil {
+
+		if params.Authorization != nil {
+			var headerParam0 string
+
+			headerParam0, err = runtime.StyleParamWithOptions("simple", false, "Authorization", *params.Authorization, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+			if err != nil {
+				return nil, err
+			}
+
+			req.Header.Set("Authorization", headerParam0)
+		}
+
+		if params.XBikebookRequestId != nil {
+			var headerParam1 string
+
+			headerParam1, err = runtime.StyleParamWithOptions("simple", false, "X-Bikebook-Request-Id", *params.XBikebookRequestId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+			if err != nil {
+				return nil, err
+			}
+
+			req.Header.Set("X-Bikebook-Request-Id", headerParam1)
+		}
+
+		var headerParam2 string
+
+		headerParam2, err = runtime.StyleParamWithOptions("simple", false, "Idempotency-Key", params.IdempotencyKey, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+		if err != nil {
+			return nil, err
+		}
+
+		req.Header.Set("Idempotency-Key", headerParam2)
+
+	}
+
+	return req, nil
+}
+
+// NewPaymentLinkRequest generates requests for PaymentLink
+func NewPaymentLinkRequest(server string, invoiceId string, params *PaymentLinkParams) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "invoice_id", invoiceId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/public/v1/invoices/%s/payment_link", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+
+		if params.Authorization != nil {
+			var headerParam0 string
+
+			headerParam0, err = runtime.StyleParamWithOptions("simple", false, "Authorization", *params.Authorization, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+			if err != nil {
+				return nil, err
+			}
+
+			req.Header.Set("Authorization", headerParam0)
+		}
+
+		if params.XBikebookRequestId != nil {
+			var headerParam1 string
+
+			headerParam1, err = runtime.StyleParamWithOptions("simple", false, "X-Bikebook-Request-Id", *params.XBikebookRequestId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+			if err != nil {
+				return nil, err
+			}
+
+			req.Header.Set("X-Bikebook-Request-Id", headerParam1)
+		}
+
+		var headerParam2 string
+
+		headerParam2, err = runtime.StyleParamWithOptions("simple", false, "Idempotency-Key", params.IdempotencyKey, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+		if err != nil {
+			return nil, err
+		}
+
+		req.Header.Set("Idempotency-Key", headerParam2)
+
+	}
+
+	return req, nil
+}
+
+// NewRecordPaymentRequest calls the generic RecordPayment builder with application/json body
+func NewRecordPaymentRequest(server string, invoiceId string, params *RecordPaymentParams, body RecordPaymentJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewRecordPaymentRequestWithBody(server, invoiceId, params, "application/json", bodyReader)
+}
+
+// NewRecordPaymentRequestWithBody generates requests for RecordPayment with any type of body
+func NewRecordPaymentRequestWithBody(server string, invoiceId string, params *RecordPaymentParams, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "invoice_id", invoiceId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/public/v1/invoices/%s/payments", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	if params != nil {
+
+		if params.Authorization != nil {
+			var headerParam0 string
+
+			headerParam0, err = runtime.StyleParamWithOptions("simple", false, "Authorization", *params.Authorization, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+			if err != nil {
+				return nil, err
+			}
+
+			req.Header.Set("Authorization", headerParam0)
+		}
+
+		if params.XBikebookRequestId != nil {
+			var headerParam1 string
+
+			headerParam1, err = runtime.StyleParamWithOptions("simple", false, "X-Bikebook-Request-Id", *params.XBikebookRequestId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+			if err != nil {
+				return nil, err
+			}
+
+			req.Header.Set("X-Bikebook-Request-Id", headerParam1)
+		}
+
+		var headerParam2 string
+
+		headerParam2, err = runtime.StyleParamWithOptions("simple", false, "Idempotency-Key", params.IdempotencyKey, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+		if err != nil {
+			return nil, err
+		}
+
+		req.Header.Set("Idempotency-Key", headerParam2)
+
+	}
+
+	return req, nil
+}
+
+// NewPdfRequest generates requests for Pdf
+func NewPdfRequest(server string, invoiceId string, params *PdfParams) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "invoice_id", invoiceId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/public/v1/invoices/%s/pdf", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+
+		if params.Authorization != nil {
+			var headerParam0 string
+
+			headerParam0, err = runtime.StyleParamWithOptions("simple", false, "Authorization", *params.Authorization, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+			if err != nil {
+				return nil, err
+			}
+
+			req.Header.Set("Authorization", headerParam0)
+		}
+
+		if params.XBikebookRequestId != nil {
+			var headerParam1 string
+
+			headerParam1, err = runtime.StyleParamWithOptions("simple", false, "X-Bikebook-Request-Id", *params.XBikebookRequestId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+			if err != nil {
+				return nil, err
+			}
+
+			req.Header.Set("X-Bikebook-Request-Id", headerParam1)
+		}
+
+	}
+
+	return req, nil
+}
+
+// NewSendRequest calls the generic Send builder with application/json body
+func NewSendRequest(server string, invoiceId string, params *SendParams, body SendJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewSendRequestWithBody(server, invoiceId, params, "application/json", bodyReader)
+}
+
+// NewSendRequestWithBody generates requests for Send with any type of body
+func NewSendRequestWithBody(server string, invoiceId string, params *SendParams, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "invoice_id", invoiceId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/public/v1/invoices/%s/send", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	if params != nil {
+
+		if params.Authorization != nil {
+			var headerParam0 string
+
+			headerParam0, err = runtime.StyleParamWithOptions("simple", false, "Authorization", *params.Authorization, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+			if err != nil {
+				return nil, err
+			}
+
+			req.Header.Set("Authorization", headerParam0)
+		}
+
+		if params.XBikebookRequestId != nil {
+			var headerParam1 string
+
+			headerParam1, err = runtime.StyleParamWithOptions("simple", false, "X-Bikebook-Request-Id", *params.XBikebookRequestId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+			if err != nil {
+				return nil, err
+			}
+
+			req.Header.Set("X-Bikebook-Request-Id", headerParam1)
+		}
+
+		var headerParam2 string
+
+		headerParam2, err = runtime.StyleParamWithOptions("simple", false, "Idempotency-Key", params.IdempotencyKey, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+		if err != nil {
+			return nil, err
+		}
+
+		req.Header.Set("Idempotency-Key", headerParam2)
+
+	}
+
+	return req, nil
+}
+
+// NewChangeStatusRequest calls the generic ChangeStatus builder with application/json body
+func NewChangeStatusRequest(server string, invoiceId string, params *ChangeStatusParams, body ChangeStatusJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewChangeStatusRequestWithBody(server, invoiceId, params, "application/json", bodyReader)
+}
+
+// NewChangeStatusRequestWithBody generates requests for ChangeStatus with any type of body
+func NewChangeStatusRequestWithBody(server string, invoiceId string, params *ChangeStatusParams, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "invoice_id", invoiceId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/public/v1/invoices/%s/status_changes", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	if params != nil {
+
+		if params.Authorization != nil {
+			var headerParam0 string
+
+			headerParam0, err = runtime.StyleParamWithOptions("simple", false, "Authorization", *params.Authorization, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+			if err != nil {
+				return nil, err
+			}
+
+			req.Header.Set("Authorization", headerParam0)
+		}
+
+		if params.XBikebookRequestId != nil {
+			var headerParam1 string
+
+			headerParam1, err = runtime.StyleParamWithOptions("simple", false, "X-Bikebook-Request-Id", *params.XBikebookRequestId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+			if err != nil {
+				return nil, err
+			}
+
+			req.Header.Set("X-Bikebook-Request-Id", headerParam1)
+		}
+
+		var headerParam2 string
+
+		headerParam2, err = runtime.StyleParamWithOptions("simple", false, "Idempotency-Key", params.IdempotencyKey, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+		if err != nil {
+			return nil, err
+		}
+
+		req.Header.Set("Idempotency-Key", headerParam2)
+
+	}
+
+	return req, nil
+}
+
+// NewListJobReportRequest generates requests for ListJobReport
+func NewListJobReportRequest(server string, params *ListJobReportParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -3484,8 +6287,8 @@ func NewJobReportsListRequest(server string, params *JobReportsListParams) (*htt
 	return req, nil
 }
 
-// NewJobReportsGetRequest generates requests for JobReportsGet
-func NewJobReportsGetRequest(server string, jobReportId string, params *JobReportsGetParams) (*http.Request, error) {
+// NewGetJobReportRequest generates requests for GetJobReport
+func NewGetJobReportRequest(server string, jobReportId string, params *GetJobReportParams) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -3544,8 +6347,8 @@ func NewJobReportsGetRequest(server string, jobReportId string, params *JobRepor
 	return req, nil
 }
 
-// NewJobsListRequest generates requests for JobsList
-func NewJobsListRequest(server string, params *JobsListParams) (*http.Request, error) {
+// NewJobsRequest generates requests for Jobs
+func NewJobsRequest(server string, params *JobsParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -3611,6 +6414,30 @@ func NewJobsListRequest(server string, params *JobsListParams) (*http.Request, e
 		if params.CustomerEmail != nil {
 
 			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "customer_email", *params.CustomerEmail, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.AcceptedStatus != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "accepted_status", *params.AcceptedStatus, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.StatusId != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "status_id", *params.StatusId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
 				return nil, err
 			} else {
 				for _, qp := range strings.Split(queryFrag, "&") {
@@ -3696,19 +6523,19 @@ func NewJobsListRequest(server string, params *JobsListParams) (*http.Request, e
 	return req, nil
 }
 
-// NewJobsCreateRequest calls the generic JobsCreate builder with application/json body
-func NewJobsCreateRequest(server string, params *JobsCreateParams, body JobsCreateJSONRequestBody) (*http.Request, error) {
+// NewCreateJobBookingRequest calls the generic CreateJobBooking builder with application/json body
+func NewCreateJobBookingRequest(server string, params *CreateJobBookingParams, body CreateJobBookingJSONRequestBody) (*http.Request, error) {
 	var bodyReader io.Reader
 	buf, err := json.Marshal(body)
 	if err != nil {
 		return nil, err
 	}
 	bodyReader = bytes.NewReader(buf)
-	return NewJobsCreateRequestWithBody(server, params, "application/json", bodyReader)
+	return NewCreateJobBookingRequestWithBody(server, params, "application/json", bodyReader)
 }
 
-// NewJobsCreateRequestWithBody generates requests for JobsCreate with any type of body
-func NewJobsCreateRequestWithBody(server string, params *JobsCreateParams, contentType string, body io.Reader) (*http.Request, error) {
+// NewCreateJobBookingRequestWithBody generates requests for CreateJobBooking with any type of body
+func NewCreateJobBookingRequestWithBody(server string, params *CreateJobBookingParams, contentType string, body io.Reader) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -3771,8 +6598,8 @@ func NewJobsCreateRequestWithBody(server string, params *JobsCreateParams, conte
 	return req, nil
 }
 
-// NewJobsGetRequest generates requests for JobsGet
-func NewJobsGetRequest(server string, jobId string, params *JobsGetParams) (*http.Request, error) {
+// NewJobRequest generates requests for Job
+func NewJobRequest(server string, jobId string, params *JobParams) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -3831,8 +6658,172 @@ func NewJobsGetRequest(server string, jobId string, params *JobsGetParams) (*htt
 	return req, nil
 }
 
-// NewJobReportsListForJobRequest generates requests for JobReportsListForJob
-func NewJobReportsListForJobRequest(server string, jobId string, params *JobReportsListForJobParams) (*http.Request, error) {
+// NewUpdateJobRequest calls the generic UpdateJob builder with application/json body
+func NewUpdateJobRequest(server string, jobId string, params *UpdateJobParams, body UpdateJobJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewUpdateJobRequestWithBody(server, jobId, params, "application/json", bodyReader)
+}
+
+// NewUpdateJobRequestWithBody generates requests for UpdateJob with any type of body
+func NewUpdateJobRequestWithBody(server string, jobId string, params *UpdateJobParams, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "job_id", jobId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/public/v1/jobs/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPatch, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	if params != nil {
+
+		if params.Authorization != nil {
+			var headerParam0 string
+
+			headerParam0, err = runtime.StyleParamWithOptions("simple", false, "Authorization", *params.Authorization, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+			if err != nil {
+				return nil, err
+			}
+
+			req.Header.Set("Authorization", headerParam0)
+		}
+
+		if params.XBikebookRequestId != nil {
+			var headerParam1 string
+
+			headerParam1, err = runtime.StyleParamWithOptions("simple", false, "X-Bikebook-Request-Id", *params.XBikebookRequestId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+			if err != nil {
+				return nil, err
+			}
+
+			req.Header.Set("X-Bikebook-Request-Id", headerParam1)
+		}
+
+		var headerParam2 string
+
+		headerParam2, err = runtime.StyleParamWithOptions("simple", false, "Idempotency-Key", params.IdempotencyKey, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+		if err != nil {
+			return nil, err
+		}
+
+		req.Header.Set("Idempotency-Key", headerParam2)
+
+	}
+
+	return req, nil
+}
+
+// NewChangeAcceptedStatusRequest calls the generic ChangeAcceptedStatus builder with application/json body
+func NewChangeAcceptedStatusRequest(server string, jobId string, params *ChangeAcceptedStatusParams, body ChangeAcceptedStatusJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewChangeAcceptedStatusRequestWithBody(server, jobId, params, "application/json", bodyReader)
+}
+
+// NewChangeAcceptedStatusRequestWithBody generates requests for ChangeAcceptedStatus with any type of body
+func NewChangeAcceptedStatusRequestWithBody(server string, jobId string, params *ChangeAcceptedStatusParams, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "job_id", jobId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/public/v1/jobs/%s/accepted_status_changes", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	if params != nil {
+
+		if params.Authorization != nil {
+			var headerParam0 string
+
+			headerParam0, err = runtime.StyleParamWithOptions("simple", false, "Authorization", *params.Authorization, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+			if err != nil {
+				return nil, err
+			}
+
+			req.Header.Set("Authorization", headerParam0)
+		}
+
+		if params.XBikebookRequestId != nil {
+			var headerParam1 string
+
+			headerParam1, err = runtime.StyleParamWithOptions("simple", false, "X-Bikebook-Request-Id", *params.XBikebookRequestId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+			if err != nil {
+				return nil, err
+			}
+
+			req.Header.Set("X-Bikebook-Request-Id", headerParam1)
+		}
+
+		var headerParam2 string
+
+		headerParam2, err = runtime.StyleParamWithOptions("simple", false, "Idempotency-Key", params.IdempotencyKey, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+		if err != nil {
+			return nil, err
+		}
+
+		req.Header.Set("Idempotency-Key", headerParam2)
+
+	}
+
+	return req, nil
+}
+
+// NewListJobReportForJobRequest generates requests for ListJobReportForJob
+func NewListJobReportForJobRequest(server string, jobId string, params *ListJobReportForJobParams) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -3954,8 +6945,8 @@ func NewJobReportsListForJobRequest(server string, jobId string, params *JobRepo
 	return req, nil
 }
 
-// NewJobReportsGetForJobRequest generates requests for JobReportsGetForJob
-func NewJobReportsGetForJobRequest(server string, jobId string, jobReportId string, params *JobReportsGetForJobParams) (*http.Request, error) {
+// NewGetJobReportForJobRequest generates requests for GetJobReportForJob
+func NewGetJobReportForJobRequest(server string, jobId string, jobReportId string, params *GetJobReportForJobParams) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -4021,8 +7012,8 @@ func NewJobReportsGetForJobRequest(server string, jobId string, jobReportId stri
 	return req, nil
 }
 
-// NewJobsPartAuthorisationsRequest generates requests for JobsPartAuthorisations
-func NewJobsPartAuthorisationsRequest(server string, jobId string, params *JobsPartAuthorisationsParams) (*http.Request, error) {
+// NewPartAuthorisationsRequest generates requests for PartAuthorisations
+func NewPartAuthorisationsRequest(server string, jobId string, params *PartAuthorisationsParams) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -4120,19 +7111,19 @@ func NewJobsPartAuthorisationsRequest(server string, jobId string, params *JobsP
 	return req, nil
 }
 
-// NewJobsSubmitPartAuthorisationDecisionsRequest calls the generic JobsSubmitPartAuthorisationDecisions builder with application/json body
-func NewJobsSubmitPartAuthorisationDecisionsRequest(server string, jobId string, params *JobsSubmitPartAuthorisationDecisionsParams, body JobsSubmitPartAuthorisationDecisionsJSONRequestBody) (*http.Request, error) {
+// NewSubmitPartAuthorisationDecisionsRequest calls the generic SubmitPartAuthorisationDecisions builder with application/json body
+func NewSubmitPartAuthorisationDecisionsRequest(server string, jobId string, params *SubmitPartAuthorisationDecisionsParams, body SubmitPartAuthorisationDecisionsJSONRequestBody) (*http.Request, error) {
 	var bodyReader io.Reader
 	buf, err := json.Marshal(body)
 	if err != nil {
 		return nil, err
 	}
 	bodyReader = bytes.NewReader(buf)
-	return NewJobsSubmitPartAuthorisationDecisionsRequestWithBody(server, jobId, params, "application/json", bodyReader)
+	return NewSubmitPartAuthorisationDecisionsRequestWithBody(server, jobId, params, "application/json", bodyReader)
 }
 
-// NewJobsSubmitPartAuthorisationDecisionsRequestWithBody generates requests for JobsSubmitPartAuthorisationDecisions with any type of body
-func NewJobsSubmitPartAuthorisationDecisionsRequestWithBody(server string, jobId string, params *JobsSubmitPartAuthorisationDecisionsParams, contentType string, body io.Reader) (*http.Request, error) {
+// NewSubmitPartAuthorisationDecisionsRequestWithBody generates requests for SubmitPartAuthorisationDecisions with any type of body
+func NewSubmitPartAuthorisationDecisionsRequestWithBody(server string, jobId string, params *SubmitPartAuthorisationDecisionsParams, contentType string, body io.Reader) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -4202,8 +7193,610 @@ func NewJobsSubmitPartAuthorisationDecisionsRequestWithBody(server string, jobId
 	return req, nil
 }
 
-// NewServicesListRequest generates requests for ServicesList
-func NewServicesListRequest(server string, params *ServicesListParams) (*http.Request, error) {
+// NewRequestPartAuthorisationRequest calls the generic RequestPartAuthorisation builder with application/json body
+func NewRequestPartAuthorisationRequest(server string, jobId string, params *RequestPartAuthorisationParams, body RequestPartAuthorisationJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewRequestPartAuthorisationRequestWithBody(server, jobId, params, "application/json", bodyReader)
+}
+
+// NewRequestPartAuthorisationRequestWithBody generates requests for RequestPartAuthorisation with any type of body
+func NewRequestPartAuthorisationRequestWithBody(server string, jobId string, params *RequestPartAuthorisationParams, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "job_id", jobId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/public/v1/jobs/%s/part_authorisations/request", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	if params != nil {
+
+		if params.Authorization != nil {
+			var headerParam0 string
+
+			headerParam0, err = runtime.StyleParamWithOptions("simple", false, "Authorization", *params.Authorization, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+			if err != nil {
+				return nil, err
+			}
+
+			req.Header.Set("Authorization", headerParam0)
+		}
+
+		if params.XBikebookRequestId != nil {
+			var headerParam1 string
+
+			headerParam1, err = runtime.StyleParamWithOptions("simple", false, "X-Bikebook-Request-Id", *params.XBikebookRequestId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+			if err != nil {
+				return nil, err
+			}
+
+			req.Header.Set("X-Bikebook-Request-Id", headerParam1)
+		}
+
+		var headerParam2 string
+
+		headerParam2, err = runtime.StyleParamWithOptions("simple", false, "Idempotency-Key", params.IdempotencyKey, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+		if err != nil {
+			return nil, err
+		}
+
+		req.Header.Set("Idempotency-Key", headerParam2)
+
+	}
+
+	return req, nil
+}
+
+// NewChangeScheduleRequest calls the generic ChangeSchedule builder with application/json body
+func NewChangeScheduleRequest(server string, jobId string, params *ChangeScheduleParams, body ChangeScheduleJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewChangeScheduleRequestWithBody(server, jobId, params, "application/json", bodyReader)
+}
+
+// NewChangeScheduleRequestWithBody generates requests for ChangeSchedule with any type of body
+func NewChangeScheduleRequestWithBody(server string, jobId string, params *ChangeScheduleParams, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "job_id", jobId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/public/v1/jobs/%s/schedule_changes", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	if params != nil {
+
+		if params.Authorization != nil {
+			var headerParam0 string
+
+			headerParam0, err = runtime.StyleParamWithOptions("simple", false, "Authorization", *params.Authorization, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+			if err != nil {
+				return nil, err
+			}
+
+			req.Header.Set("Authorization", headerParam0)
+		}
+
+		if params.XBikebookRequestId != nil {
+			var headerParam1 string
+
+			headerParam1, err = runtime.StyleParamWithOptions("simple", false, "X-Bikebook-Request-Id", *params.XBikebookRequestId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+			if err != nil {
+				return nil, err
+			}
+
+			req.Header.Set("X-Bikebook-Request-Id", headerParam1)
+		}
+
+		var headerParam2 string
+
+		headerParam2, err = runtime.StyleParamWithOptions("simple", false, "Idempotency-Key", params.IdempotencyKey, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+		if err != nil {
+			return nil, err
+		}
+
+		req.Header.Set("Idempotency-Key", headerParam2)
+
+	}
+
+	return req, nil
+}
+
+// NewUpdateWorkLineRequest calls the generic UpdateWorkLine builder with application/json body
+func NewUpdateWorkLineRequest(server string, jobId string, workLineId string, params *UpdateWorkLineParams, body UpdateWorkLineJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewUpdateWorkLineRequestWithBody(server, jobId, workLineId, params, "application/json", bodyReader)
+}
+
+// NewUpdateWorkLineRequestWithBody generates requests for UpdateWorkLine with any type of body
+func NewUpdateWorkLineRequestWithBody(server string, jobId string, workLineId string, params *UpdateWorkLineParams, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "job_id", jobId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "work_line_id", workLineId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/public/v1/jobs/%s/work_lines/%s", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPatch, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	if params != nil {
+
+		if params.Authorization != nil {
+			var headerParam0 string
+
+			headerParam0, err = runtime.StyleParamWithOptions("simple", false, "Authorization", *params.Authorization, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+			if err != nil {
+				return nil, err
+			}
+
+			req.Header.Set("Authorization", headerParam0)
+		}
+
+		if params.XBikebookRequestId != nil {
+			var headerParam1 string
+
+			headerParam1, err = runtime.StyleParamWithOptions("simple", false, "X-Bikebook-Request-Id", *params.XBikebookRequestId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+			if err != nil {
+				return nil, err
+			}
+
+			req.Header.Set("X-Bikebook-Request-Id", headerParam1)
+		}
+
+		var headerParam2 string
+
+		headerParam2, err = runtime.StyleParamWithOptions("simple", false, "Idempotency-Key", params.IdempotencyKey, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+		if err != nil {
+			return nil, err
+		}
+
+		req.Header.Set("Idempotency-Key", headerParam2)
+
+	}
+
+	return req, nil
+}
+
+// NewAssignWorkLineMechanicRequest calls the generic AssignWorkLineMechanic builder with application/json body
+func NewAssignWorkLineMechanicRequest(server string, jobId string, workLineId string, params *AssignWorkLineMechanicParams, body AssignWorkLineMechanicJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewAssignWorkLineMechanicRequestWithBody(server, jobId, workLineId, params, "application/json", bodyReader)
+}
+
+// NewAssignWorkLineMechanicRequestWithBody generates requests for AssignWorkLineMechanic with any type of body
+func NewAssignWorkLineMechanicRequestWithBody(server string, jobId string, workLineId string, params *AssignWorkLineMechanicParams, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "job_id", jobId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "work_line_id", workLineId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/public/v1/jobs/%s/work_lines/%s/mechanic_assignments", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	if params != nil {
+
+		if params.Authorization != nil {
+			var headerParam0 string
+
+			headerParam0, err = runtime.StyleParamWithOptions("simple", false, "Authorization", *params.Authorization, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+			if err != nil {
+				return nil, err
+			}
+
+			req.Header.Set("Authorization", headerParam0)
+		}
+
+		if params.XBikebookRequestId != nil {
+			var headerParam1 string
+
+			headerParam1, err = runtime.StyleParamWithOptions("simple", false, "X-Bikebook-Request-Id", *params.XBikebookRequestId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+			if err != nil {
+				return nil, err
+			}
+
+			req.Header.Set("X-Bikebook-Request-Id", headerParam1)
+		}
+
+		var headerParam2 string
+
+		headerParam2, err = runtime.StyleParamWithOptions("simple", false, "Idempotency-Key", params.IdempotencyKey, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+		if err != nil {
+			return nil, err
+		}
+
+		req.Header.Set("Idempotency-Key", headerParam2)
+
+	}
+
+	return req, nil
+}
+
+// NewReplaceWorkLineServicesRequest calls the generic ReplaceWorkLineServices builder with application/json body
+func NewReplaceWorkLineServicesRequest(server string, jobId string, workLineId string, params *ReplaceWorkLineServicesParams, body ReplaceWorkLineServicesJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewReplaceWorkLineServicesRequestWithBody(server, jobId, workLineId, params, "application/json", bodyReader)
+}
+
+// NewReplaceWorkLineServicesRequestWithBody generates requests for ReplaceWorkLineServices with any type of body
+func NewReplaceWorkLineServicesRequestWithBody(server string, jobId string, workLineId string, params *ReplaceWorkLineServicesParams, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "job_id", jobId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "work_line_id", workLineId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/public/v1/jobs/%s/work_lines/%s/services", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPatch, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	if params != nil {
+
+		if params.Authorization != nil {
+			var headerParam0 string
+
+			headerParam0, err = runtime.StyleParamWithOptions("simple", false, "Authorization", *params.Authorization, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+			if err != nil {
+				return nil, err
+			}
+
+			req.Header.Set("Authorization", headerParam0)
+		}
+
+		if params.XBikebookRequestId != nil {
+			var headerParam1 string
+
+			headerParam1, err = runtime.StyleParamWithOptions("simple", false, "X-Bikebook-Request-Id", *params.XBikebookRequestId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+			if err != nil {
+				return nil, err
+			}
+
+			req.Header.Set("X-Bikebook-Request-Id", headerParam1)
+		}
+
+		var headerParam2 string
+
+		headerParam2, err = runtime.StyleParamWithOptions("simple", false, "Idempotency-Key", params.IdempotencyKey, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+		if err != nil {
+			return nil, err
+		}
+
+		req.Header.Set("Idempotency-Key", headerParam2)
+
+	}
+
+	return req, nil
+}
+
+// NewChangeWorkLineStatusRequest calls the generic ChangeWorkLineStatus builder with application/json body
+func NewChangeWorkLineStatusRequest(server string, jobId string, workLineId string, params *ChangeWorkLineStatusParams, body ChangeWorkLineStatusJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewChangeWorkLineStatusRequestWithBody(server, jobId, workLineId, params, "application/json", bodyReader)
+}
+
+// NewChangeWorkLineStatusRequestWithBody generates requests for ChangeWorkLineStatus with any type of body
+func NewChangeWorkLineStatusRequestWithBody(server string, jobId string, workLineId string, params *ChangeWorkLineStatusParams, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "job_id", jobId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "work_line_id", workLineId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/public/v1/jobs/%s/work_lines/%s/status_changes", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	if params != nil {
+
+		if params.Authorization != nil {
+			var headerParam0 string
+
+			headerParam0, err = runtime.StyleParamWithOptions("simple", false, "Authorization", *params.Authorization, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+			if err != nil {
+				return nil, err
+			}
+
+			req.Header.Set("Authorization", headerParam0)
+		}
+
+		if params.XBikebookRequestId != nil {
+			var headerParam1 string
+
+			headerParam1, err = runtime.StyleParamWithOptions("simple", false, "X-Bikebook-Request-Id", *params.XBikebookRequestId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+			if err != nil {
+				return nil, err
+			}
+
+			req.Header.Set("X-Bikebook-Request-Id", headerParam1)
+		}
+
+		var headerParam2 string
+
+		headerParam2, err = runtime.StyleParamWithOptions("simple", false, "Idempotency-Key", params.IdempotencyKey, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+		if err != nil {
+			return nil, err
+		}
+
+		req.Header.Set("Idempotency-Key", headerParam2)
+
+	}
+
+	return req, nil
+}
+
+// NewRefundRequest calls the generic Refund builder with application/json body
+func NewRefundRequest(server string, paymentId string, params *RefundParams, body RefundJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewRefundRequestWithBody(server, paymentId, params, "application/json", bodyReader)
+}
+
+// NewRefundRequestWithBody generates requests for Refund with any type of body
+func NewRefundRequestWithBody(server string, paymentId string, params *RefundParams, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "payment_id", paymentId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/public/v1/payments/%s/refunds", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	if params != nil {
+
+		if params.Authorization != nil {
+			var headerParam0 string
+
+			headerParam0, err = runtime.StyleParamWithOptions("simple", false, "Authorization", *params.Authorization, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+			if err != nil {
+				return nil, err
+			}
+
+			req.Header.Set("Authorization", headerParam0)
+		}
+
+		if params.XBikebookRequestId != nil {
+			var headerParam1 string
+
+			headerParam1, err = runtime.StyleParamWithOptions("simple", false, "X-Bikebook-Request-Id", *params.XBikebookRequestId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+			if err != nil {
+				return nil, err
+			}
+
+			req.Header.Set("X-Bikebook-Request-Id", headerParam1)
+		}
+
+		var headerParam2 string
+
+		headerParam2, err = runtime.StyleParamWithOptions("simple", false, "Idempotency-Key", params.IdempotencyKey, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+		if err != nil {
+			return nil, err
+		}
+
+		req.Header.Set("Idempotency-Key", headerParam2)
+
+	}
+
+	return req, nil
+}
+
+// NewListServiceRequest generates requests for ListService
+func NewListServiceRequest(server string, params *ListServiceParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -4330,8 +7923,8 @@ func NewServicesListRequest(server string, params *ServicesListParams) (*http.Re
 	return req, nil
 }
 
-// NewServicesGetRequest generates requests for ServicesGet
-func NewServicesGetRequest(server string, serviceId string, params *ServicesGetParams) (*http.Request, error) {
+// NewGetServiceRequest generates requests for GetService
+func NewGetServiceRequest(server string, serviceId string, params *GetServiceParams) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -4390,8 +7983,8 @@ func NewServicesGetRequest(server string, serviceId string, params *ServicesGetP
 	return req, nil
 }
 
-// NewStockListRequest generates requests for StockList
-func NewStockListRequest(server string, params *StockListParams) (*http.Request, error) {
+// NewListStockVariationRequest generates requests for ListStockVariation
+func NewListStockVariationRequest(server string, params *ListStockVariationParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -4554,8 +8147,8 @@ func NewStockListRequest(server string, params *StockListParams) (*http.Request,
 	return req, nil
 }
 
-// NewStockGetRequest generates requests for StockGet
-func NewStockGetRequest(server string, stockVariationId string, params *StockGetParams) (*http.Request, error) {
+// NewGetStockVariationRequest generates requests for GetStockVariation
+func NewGetStockVariationRequest(server string, stockVariationId string, params *GetStockVariationParams) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -4614,8 +8207,8 @@ func NewStockGetRequest(server string, stockVariationId string, params *StockGet
 	return req, nil
 }
 
-// NewWebhookDeliveriesGetRequest generates requests for WebhookDeliveriesGet
-func NewWebhookDeliveriesGetRequest(server string, deliveryId string, params *WebhookDeliveriesGetParams) (*http.Request, error) {
+// NewGetWebhookDeliveryRequest generates requests for GetWebhookDelivery
+func NewGetWebhookDeliveryRequest(server string, deliveryId string, params *GetWebhookDeliveryParams) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -4674,8 +8267,8 @@ func NewWebhookDeliveriesGetRequest(server string, deliveryId string, params *We
 	return req, nil
 }
 
-// NewWebhookDeliveriesReplayRequest generates requests for WebhookDeliveriesReplay
-func NewWebhookDeliveriesReplayRequest(server string, deliveryId string, params *WebhookDeliveriesReplayParams) (*http.Request, error) {
+// NewReplayRequest generates requests for Replay
+func NewReplayRequest(server string, deliveryId string, params *ReplayParams) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -4743,8 +8336,8 @@ func NewWebhookDeliveriesReplayRequest(server string, deliveryId string, params 
 	return req, nil
 }
 
-// NewWebhookEndpointsListRequest generates requests for WebhookEndpointsList
-func NewWebhookEndpointsListRequest(server string, params *WebhookEndpointsListParams) (*http.Request, error) {
+// NewListWebhookEndpointRequest generates requests for ListWebhookEndpoint
+func NewListWebhookEndpointRequest(server string, params *ListWebhookEndpointParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -4796,19 +8389,19 @@ func NewWebhookEndpointsListRequest(server string, params *WebhookEndpointsListP
 	return req, nil
 }
 
-// NewWebhookEndpointsCreateRequest calls the generic WebhookEndpointsCreate builder with application/json body
-func NewWebhookEndpointsCreateRequest(server string, params *WebhookEndpointsCreateParams, body WebhookEndpointsCreateJSONRequestBody) (*http.Request, error) {
+// NewCreateWebhookEndpointRequest calls the generic CreateWebhookEndpoint builder with application/json body
+func NewCreateWebhookEndpointRequest(server string, params *CreateWebhookEndpointParams, body CreateWebhookEndpointJSONRequestBody) (*http.Request, error) {
 	var bodyReader io.Reader
 	buf, err := json.Marshal(body)
 	if err != nil {
 		return nil, err
 	}
 	bodyReader = bytes.NewReader(buf)
-	return NewWebhookEndpointsCreateRequestWithBody(server, params, "application/json", bodyReader)
+	return NewCreateWebhookEndpointRequestWithBody(server, params, "application/json", bodyReader)
 }
 
-// NewWebhookEndpointsCreateRequestWithBody generates requests for WebhookEndpointsCreate with any type of body
-func NewWebhookEndpointsCreateRequestWithBody(server string, params *WebhookEndpointsCreateParams, contentType string, body io.Reader) (*http.Request, error) {
+// NewCreateWebhookEndpointRequestWithBody generates requests for CreateWebhookEndpoint with any type of body
+func NewCreateWebhookEndpointRequestWithBody(server string, params *CreateWebhookEndpointParams, contentType string, body io.Reader) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -4871,8 +8464,8 @@ func NewWebhookEndpointsCreateRequestWithBody(server string, params *WebhookEndp
 	return req, nil
 }
 
-// NewWebhookEndpointsDeleteRequest generates requests for WebhookEndpointsDelete
-func NewWebhookEndpointsDeleteRequest(server string, endpointId string, params *WebhookEndpointsDeleteParams) (*http.Request, error) {
+// NewDeleteWebhookEndpointRequest generates requests for DeleteWebhookEndpoint
+func NewDeleteWebhookEndpointRequest(server string, endpointId string, params *DeleteWebhookEndpointParams) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -4940,8 +8533,8 @@ func NewWebhookEndpointsDeleteRequest(server string, endpointId string, params *
 	return req, nil
 }
 
-// NewWebhookEndpointsGetRequest generates requests for WebhookEndpointsGet
-func NewWebhookEndpointsGetRequest(server string, endpointId string, params *WebhookEndpointsGetParams) (*http.Request, error) {
+// NewGetWebhookEndpointRequest generates requests for GetWebhookEndpoint
+func NewGetWebhookEndpointRequest(server string, endpointId string, params *GetWebhookEndpointParams) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -5000,19 +8593,19 @@ func NewWebhookEndpointsGetRequest(server string, endpointId string, params *Web
 	return req, nil
 }
 
-// NewWebhookEndpointsUpdateRequest calls the generic WebhookEndpointsUpdate builder with application/json body
-func NewWebhookEndpointsUpdateRequest(server string, endpointId string, params *WebhookEndpointsUpdateParams, body WebhookEndpointsUpdateJSONRequestBody) (*http.Request, error) {
+// NewUpdateWebhookEndpointRequest calls the generic UpdateWebhookEndpoint builder with application/json body
+func NewUpdateWebhookEndpointRequest(server string, endpointId string, params *UpdateWebhookEndpointParams, body UpdateWebhookEndpointJSONRequestBody) (*http.Request, error) {
 	var bodyReader io.Reader
 	buf, err := json.Marshal(body)
 	if err != nil {
 		return nil, err
 	}
 	bodyReader = bytes.NewReader(buf)
-	return NewWebhookEndpointsUpdateRequestWithBody(server, endpointId, params, "application/json", bodyReader)
+	return NewUpdateWebhookEndpointRequestWithBody(server, endpointId, params, "application/json", bodyReader)
 }
 
-// NewWebhookEndpointsUpdateRequestWithBody generates requests for WebhookEndpointsUpdate with any type of body
-func NewWebhookEndpointsUpdateRequestWithBody(server string, endpointId string, params *WebhookEndpointsUpdateParams, contentType string, body io.Reader) (*http.Request, error) {
+// NewUpdateWebhookEndpointRequestWithBody generates requests for UpdateWebhookEndpoint with any type of body
+func NewUpdateWebhookEndpointRequestWithBody(server string, endpointId string, params *UpdateWebhookEndpointParams, contentType string, body io.Reader) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -5082,8 +8675,8 @@ func NewWebhookEndpointsUpdateRequestWithBody(server string, endpointId string, 
 	return req, nil
 }
 
-// NewWebhookDeliveriesListForEndpointRequest generates requests for WebhookDeliveriesListForEndpoint
-func NewWebhookDeliveriesListForEndpointRequest(server string, endpointId string, params *WebhookDeliveriesListForEndpointParams) (*http.Request, error) {
+// NewListForEndpointRequest generates requests for ListForEndpoint
+func NewListForEndpointRequest(server string, endpointId string, params *ListForEndpointParams) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -5205,8 +8798,8 @@ func NewWebhookDeliveriesListForEndpointRequest(server string, endpointId string
 	return req, nil
 }
 
-// NewWebhookEndpointsRotateSecretRequest generates requests for WebhookEndpointsRotateSecret
-func NewWebhookEndpointsRotateSecretRequest(server string, endpointId string, params *WebhookEndpointsRotateSecretParams) (*http.Request, error) {
+// NewRotateSecretRequest generates requests for RotateSecret
+func NewRotateSecretRequest(server string, endpointId string, params *RotateSecretParams) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -5274,8 +8867,8 @@ func NewWebhookEndpointsRotateSecretRequest(server string, endpointId string, pa
 	return req, nil
 }
 
-// NewWebhookEventsListRequest generates requests for WebhookEventsList
-func NewWebhookEventsListRequest(server string, params *WebhookEventsListParams) (*http.Request, error) {
+// NewListWebhookEventRequest generates requests for ListWebhookEvent
+func NewListWebhookEventRequest(server string, params *ListWebhookEventParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -5370,188 +8963,335 @@ func WithBaseURL(baseURL string) ClientOption {
 
 // ClientWithResponsesInterface is the interface specification for the client with responses above.
 type ClientWithResponsesInterface interface {
-	// AssetsListWithResponse request
-	AssetsListWithResponse(ctx context.Context, params *AssetsListParams, reqEditors ...RequestEditorFn) (*AssetsListResponse, error)
+	// ListAssetWithResponse request
+	ListAssetWithResponse(ctx context.Context, params *ListAssetParams, reqEditors ...RequestEditorFn) (*ListAssetResponse, error)
 
-	// AssetsCreateWithBodyWithResponse request with any body
-	AssetsCreateWithBodyWithResponse(ctx context.Context, params *AssetsCreateParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*AssetsCreateResponse, error)
+	// CreateAssetWithBodyWithResponse request with any body
+	CreateAssetWithBodyWithResponse(ctx context.Context, params *CreateAssetParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateAssetResponse, error)
 
-	AssetsCreateWithResponse(ctx context.Context, params *AssetsCreateParams, body AssetsCreateJSONRequestBody, reqEditors ...RequestEditorFn) (*AssetsCreateResponse, error)
+	CreateAssetWithResponse(ctx context.Context, params *CreateAssetParams, body CreateAssetJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateAssetResponse, error)
 
-	// AssetsGetWithResponse request
-	AssetsGetWithResponse(ctx context.Context, assetId string, params *AssetsGetParams, reqEditors ...RequestEditorFn) (*AssetsGetResponse, error)
+	// DeleteAssetWithResponse request
+	DeleteAssetWithResponse(ctx context.Context, assetId string, params *DeleteAssetParams, reqEditors ...RequestEditorFn) (*DeleteAssetResponse, error)
 
-	// AssetsUpdateWithBodyWithResponse request with any body
-	AssetsUpdateWithBodyWithResponse(ctx context.Context, assetId string, params *AssetsUpdateParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*AssetsUpdateResponse, error)
+	// GetAssetWithResponse request
+	GetAssetWithResponse(ctx context.Context, assetId string, params *GetAssetParams, reqEditors ...RequestEditorFn) (*GetAssetResponse, error)
 
-	AssetsUpdateWithResponse(ctx context.Context, assetId string, params *AssetsUpdateParams, body AssetsUpdateJSONRequestBody, reqEditors ...RequestEditorFn) (*AssetsUpdateResponse, error)
+	// UpdateAssetWithBodyWithResponse request with any body
+	UpdateAssetWithBodyWithResponse(ctx context.Context, assetId string, params *UpdateAssetParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateAssetResponse, error)
 
-	// BusinessesListWithResponse request
-	BusinessesListWithResponse(ctx context.Context, params *BusinessesListParams, reqEditors ...RequestEditorFn) (*BusinessesListResponse, error)
+	UpdateAssetWithResponse(ctx context.Context, assetId string, params *UpdateAssetParams, body UpdateAssetJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateAssetResponse, error)
 
-	// BusinessesGetWithResponse request
-	BusinessesGetWithResponse(ctx context.Context, businessId string, params *BusinessesGetParams, reqEditors ...RequestEditorFn) (*BusinessesGetResponse, error)
+	// ListWithResponse request
+	ListWithResponse(ctx context.Context, params *ListParams, reqEditors ...RequestEditorFn) (*ListResponse, error)
 
-	// BusinessesAvailabilityWithResponse request
-	BusinessesAvailabilityWithResponse(ctx context.Context, businessId string, params *BusinessesAvailabilityParams, reqEditors ...RequestEditorFn) (*BusinessesAvailabilityResponse, error)
+	// CreateWithBodyWithResponse request with any body
+	CreateWithBodyWithResponse(ctx context.Context, params *CreateParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateResponse, error)
 
-	// BusinessesAvailabilitySlotsWithResponse request
-	BusinessesAvailabilitySlotsWithResponse(ctx context.Context, businessId string, params *BusinessesAvailabilitySlotsParams, reqEditors ...RequestEditorFn) (*BusinessesAvailabilitySlotsResponse, error)
+	CreateWithResponse(ctx context.Context, params *CreateParams, body CreateJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateResponse, error)
 
-	// BusinessesNextAvailableSlotWithResponse request
-	BusinessesNextAvailableSlotWithResponse(ctx context.Context, businessId string, params *BusinessesNextAvailableSlotParams, reqEditors ...RequestEditorFn) (*BusinessesNextAvailableSlotResponse, error)
+	// ReceiveWithBodyWithResponse request with any body
+	ReceiveWithBodyWithResponse(ctx context.Context, params *ReceiveParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*ReceiveResponse, error)
 
-	// BusinessesServicesWithResponse request
-	BusinessesServicesWithResponse(ctx context.Context, businessId string, params *BusinessesServicesParams, reqEditors ...RequestEditorFn) (*BusinessesServicesResponse, error)
+	ReceiveWithResponse(ctx context.Context, params *ReceiveParams, body ReceiveJSONRequestBody, reqEditors ...RequestEditorFn) (*ReceiveResponse, error)
 
-	// ServicesCreateWithBodyWithResponse request with any body
-	ServicesCreateWithBodyWithResponse(ctx context.Context, businessId string, params *ServicesCreateParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*ServicesCreateResponse, error)
+	// DeleteWithResponse request
+	DeleteWithResponse(ctx context.Context, backOrderId string, params *DeleteParams, reqEditors ...RequestEditorFn) (*DeleteResponse, error)
 
-	ServicesCreateWithResponse(ctx context.Context, businessId string, params *ServicesCreateParams, body ServicesCreateJSONRequestBody, reqEditors ...RequestEditorFn) (*ServicesCreateResponse, error)
+	// GetWithResponse request
+	GetWithResponse(ctx context.Context, backOrderId string, params *GetParams, reqEditors ...RequestEditorFn) (*GetResponse, error)
 
-	// ServicesUpdateWithBodyWithResponse request with any body
-	ServicesUpdateWithBodyWithResponse(ctx context.Context, businessId string, serviceId string, params *ServicesUpdateParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*ServicesUpdateResponse, error)
+	// UpdateWithBodyWithResponse request with any body
+	UpdateWithBodyWithResponse(ctx context.Context, backOrderId string, params *UpdateParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateResponse, error)
 
-	ServicesUpdateWithResponse(ctx context.Context, businessId string, serviceId string, params *ServicesUpdateParams, body ServicesUpdateJSONRequestBody, reqEditors ...RequestEditorFn) (*ServicesUpdateResponse, error)
+	UpdateWithResponse(ctx context.Context, backOrderId string, params *UpdateParams, body UpdateJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateResponse, error)
 
-	// CustomersListWithResponse request
-	CustomersListWithResponse(ctx context.Context, params *CustomersListParams, reqEditors ...RequestEditorFn) (*CustomersListResponse, error)
+	// ListBusinessWithResponse request
+	ListBusinessWithResponse(ctx context.Context, params *ListBusinessParams, reqEditors ...RequestEditorFn) (*ListBusinessResponse, error)
 
-	// CustomersGetWithResponse request
-	CustomersGetWithResponse(ctx context.Context, customerId string, params *CustomersGetParams, reqEditors ...RequestEditorFn) (*CustomersGetResponse, error)
+	// GetBusinessWithResponse request
+	GetBusinessWithResponse(ctx context.Context, businessId string, params *GetBusinessParams, reqEditors ...RequestEditorFn) (*GetBusinessResponse, error)
 
-	// CustomersUpdateWithBodyWithResponse request with any body
-	CustomersUpdateWithBodyWithResponse(ctx context.Context, customerId string, params *CustomersUpdateParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CustomersUpdateResponse, error)
+	// AvailabilityWithResponse request
+	AvailabilityWithResponse(ctx context.Context, businessId string, params *AvailabilityParams, reqEditors ...RequestEditorFn) (*AvailabilityResponse, error)
 
-	CustomersUpdateWithResponse(ctx context.Context, customerId string, params *CustomersUpdateParams, body CustomersUpdateJSONRequestBody, reqEditors ...RequestEditorFn) (*CustomersUpdateResponse, error)
+	// AvailabilitySlotsWithResponse request
+	AvailabilitySlotsWithResponse(ctx context.Context, businessId string, params *AvailabilitySlotsParams, reqEditors ...RequestEditorFn) (*AvailabilitySlotsResponse, error)
 
-	// AssetsListForCustomerWithResponse request
-	AssetsListForCustomerWithResponse(ctx context.Context, customerId string, params *AssetsListForCustomerParams, reqEditors ...RequestEditorFn) (*AssetsListForCustomerResponse, error)
+	// BusinessIntegrationWithResponse request
+	BusinessIntegrationWithResponse(ctx context.Context, businessId string, params *BusinessIntegrationParams, reqEditors ...RequestEditorFn) (*BusinessIntegrationResponse, error)
 
-	// ChatCreateAttachmentsWithBodyWithResponse request with any body
-	ChatCreateAttachmentsWithBodyWithResponse(ctx context.Context, customerId string, params *ChatCreateAttachmentsParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*ChatCreateAttachmentsResponse, error)
+	// TriggerCustomerSyncWithBodyWithResponse request with any body
+	TriggerCustomerSyncWithBodyWithResponse(ctx context.Context, businessId string, params *TriggerCustomerSyncParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*TriggerCustomerSyncResponse, error)
+
+	TriggerCustomerSyncWithResponse(ctx context.Context, businessId string, params *TriggerCustomerSyncParams, body TriggerCustomerSyncJSONRequestBody, reqEditors ...RequestEditorFn) (*TriggerCustomerSyncResponse, error)
+
+	// TriggerStockSyncWithBodyWithResponse request with any body
+	TriggerStockSyncWithBodyWithResponse(ctx context.Context, businessId string, params *TriggerStockSyncParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*TriggerStockSyncResponse, error)
+
+	TriggerStockSyncWithResponse(ctx context.Context, businessId string, params *TriggerStockSyncParams, body TriggerStockSyncJSONRequestBody, reqEditors ...RequestEditorFn) (*TriggerStockSyncResponse, error)
+
+	// JobStatusesWithResponse request
+	JobStatusesWithResponse(ctx context.Context, businessId string, params *JobStatusesParams, reqEditors ...RequestEditorFn) (*JobStatusesResponse, error)
+
+	// NextAvailableSlotWithResponse request
+	NextAvailableSlotWithResponse(ctx context.Context, businessId string, params *NextAvailableSlotParams, reqEditors ...RequestEditorFn) (*NextAvailableSlotResponse, error)
+
+	// ServicesWithResponse request
+	ServicesWithResponse(ctx context.Context, businessId string, params *ServicesParams, reqEditors ...RequestEditorFn) (*ServicesResponse, error)
+
+	// CreateServiceWithBodyWithResponse request with any body
+	CreateServiceWithBodyWithResponse(ctx context.Context, businessId string, params *CreateServiceParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateServiceResponse, error)
+
+	CreateServiceWithResponse(ctx context.Context, businessId string, params *CreateServiceParams, body CreateServiceJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateServiceResponse, error)
+
+	// UpdateServiceWithBodyWithResponse request with any body
+	UpdateServiceWithBodyWithResponse(ctx context.Context, businessId string, serviceId string, params *UpdateServiceParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateServiceResponse, error)
+
+	UpdateServiceWithResponse(ctx context.Context, businessId string, serviceId string, params *UpdateServiceParams, body UpdateServiceJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateServiceResponse, error)
+
+	// CustomersWithResponse request
+	CustomersWithResponse(ctx context.Context, params *CustomersParams, reqEditors ...RequestEditorFn) (*CustomersResponse, error)
+
+	// CreateCustomerWithBodyWithResponse request with any body
+	CreateCustomerWithBodyWithResponse(ctx context.Context, params *CreateCustomerParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateCustomerResponse, error)
+
+	CreateCustomerWithResponse(ctx context.Context, params *CreateCustomerParams, body CreateCustomerJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateCustomerResponse, error)
+
+	// CustomerWithResponse request
+	CustomerWithResponse(ctx context.Context, customerId string, params *CustomerParams, reqEditors ...RequestEditorFn) (*CustomerResponse, error)
+
+	// UpdateCustomerWithBodyWithResponse request with any body
+	UpdateCustomerWithBodyWithResponse(ctx context.Context, customerId string, params *UpdateCustomerParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateCustomerResponse, error)
+
+	UpdateCustomerWithResponse(ctx context.Context, customerId string, params *UpdateCustomerParams, body UpdateCustomerJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateCustomerResponse, error)
+
+	// ListForCustomerWithResponse request
+	ListForCustomerWithResponse(ctx context.Context, customerId string, params *ListForCustomerParams, reqEditors ...RequestEditorFn) (*ListForCustomerResponse, error)
+
+	// CreateChatAttachmentsWithBodyWithResponse request with any body
+	CreateChatAttachmentsWithBodyWithResponse(ctx context.Context, customerId string, params *CreateChatAttachmentsParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateChatAttachmentsResponse, error)
 
 	// ChatMessagesWithResponse request
 	ChatMessagesWithResponse(ctx context.Context, customerId string, params *ChatMessagesParams, reqEditors ...RequestEditorFn) (*ChatMessagesResponse, error)
 
-	// ChatCreateMessageWithBodyWithResponse request with any body
-	ChatCreateMessageWithBodyWithResponse(ctx context.Context, customerId string, params *ChatCreateMessageParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*ChatCreateMessageResponse, error)
+	// CreateChatMessageWithBodyWithResponse request with any body
+	CreateChatMessageWithBodyWithResponse(ctx context.Context, customerId string, params *CreateChatMessageParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateChatMessageResponse, error)
 
-	ChatCreateMessageWithResponse(ctx context.Context, customerId string, params *ChatCreateMessageParams, body ChatCreateMessageJSONRequestBody, reqEditors ...RequestEditorFn) (*ChatCreateMessageResponse, error)
+	CreateChatMessageWithResponse(ctx context.Context, customerId string, params *CreateChatMessageParams, body CreateChatMessageJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateChatMessageResponse, error)
 
-	// InvoiceItemsCreateWithBodyWithResponse request with any body
-	InvoiceItemsCreateWithBodyWithResponse(ctx context.Context, params *InvoiceItemsCreateParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*InvoiceItemsCreateResponse, error)
+	// MarkReadWithResponse request
+	MarkReadWithResponse(ctx context.Context, customerId string, params *MarkReadParams, reqEditors ...RequestEditorFn) (*MarkReadResponse, error)
 
-	InvoiceItemsCreateWithResponse(ctx context.Context, params *InvoiceItemsCreateParams, body InvoiceItemsCreateJSONRequestBody, reqEditors ...RequestEditorFn) (*InvoiceItemsCreateResponse, error)
+	// CreateInvoiceItemWithBodyWithResponse request with any body
+	CreateInvoiceItemWithBodyWithResponse(ctx context.Context, params *CreateInvoiceItemParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateInvoiceItemResponse, error)
 
-	// InvoiceItemsDeleteWithResponse request
-	InvoiceItemsDeleteWithResponse(ctx context.Context, invoiceItemId string, params *InvoiceItemsDeleteParams, reqEditors ...RequestEditorFn) (*InvoiceItemsDeleteResponse, error)
+	CreateInvoiceItemWithResponse(ctx context.Context, params *CreateInvoiceItemParams, body CreateInvoiceItemJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateInvoiceItemResponse, error)
 
-	// InvoiceItemsGetWithResponse request
-	InvoiceItemsGetWithResponse(ctx context.Context, invoiceItemId string, params *InvoiceItemsGetParams, reqEditors ...RequestEditorFn) (*InvoiceItemsGetResponse, error)
+	// DeleteInvoiceItemWithResponse request
+	DeleteInvoiceItemWithResponse(ctx context.Context, invoiceItemId string, params *DeleteInvoiceItemParams, reqEditors ...RequestEditorFn) (*DeleteInvoiceItemResponse, error)
 
-	// InvoiceItemsUpdateWithBodyWithResponse request with any body
-	InvoiceItemsUpdateWithBodyWithResponse(ctx context.Context, invoiceItemId string, params *InvoiceItemsUpdateParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*InvoiceItemsUpdateResponse, error)
+	// GetInvoiceItemWithResponse request
+	GetInvoiceItemWithResponse(ctx context.Context, invoiceItemId string, params *GetInvoiceItemParams, reqEditors ...RequestEditorFn) (*GetInvoiceItemResponse, error)
 
-	InvoiceItemsUpdateWithResponse(ctx context.Context, invoiceItemId string, params *InvoiceItemsUpdateParams, body InvoiceItemsUpdateJSONRequestBody, reqEditors ...RequestEditorFn) (*InvoiceItemsUpdateResponse, error)
+	// UpdateInvoiceItemWithBodyWithResponse request with any body
+	UpdateInvoiceItemWithBodyWithResponse(ctx context.Context, invoiceItemId string, params *UpdateInvoiceItemParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateInvoiceItemResponse, error)
 
-	// InvoicesListWithResponse request
-	InvoicesListWithResponse(ctx context.Context, params *InvoicesListParams, reqEditors ...RequestEditorFn) (*InvoicesListResponse, error)
+	UpdateInvoiceItemWithResponse(ctx context.Context, invoiceItemId string, params *UpdateInvoiceItemParams, body UpdateInvoiceItemJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateInvoiceItemResponse, error)
 
-	// InvoicesGetWithResponse request
-	InvoicesGetWithResponse(ctx context.Context, invoiceId string, params *InvoicesGetParams, reqEditors ...RequestEditorFn) (*InvoicesGetResponse, error)
+	// ListInvoiceWithResponse request
+	ListInvoiceWithResponse(ctx context.Context, params *ListInvoiceParams, reqEditors ...RequestEditorFn) (*ListInvoiceResponse, error)
 
-	// JobReportsListWithResponse request
-	JobReportsListWithResponse(ctx context.Context, params *JobReportsListParams, reqEditors ...RequestEditorFn) (*JobReportsListResponse, error)
+	// GetInvoiceWithResponse request
+	GetInvoiceWithResponse(ctx context.Context, invoiceId string, params *GetInvoiceParams, reqEditors ...RequestEditorFn) (*GetInvoiceResponse, error)
 
-	// JobReportsGetWithResponse request
-	JobReportsGetWithResponse(ctx context.Context, jobReportId string, params *JobReportsGetParams, reqEditors ...RequestEditorFn) (*JobReportsGetResponse, error)
+	// UpdateInvoiceWithBodyWithResponse request with any body
+	UpdateInvoiceWithBodyWithResponse(ctx context.Context, invoiceId string, params *UpdateInvoiceParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateInvoiceResponse, error)
 
-	// JobsListWithResponse request
-	JobsListWithResponse(ctx context.Context, params *JobsListParams, reqEditors ...RequestEditorFn) (*JobsListResponse, error)
+	UpdateInvoiceWithResponse(ctx context.Context, invoiceId string, params *UpdateInvoiceParams, body UpdateInvoiceJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateInvoiceResponse, error)
 
-	// JobsCreateWithBodyWithResponse request with any body
-	JobsCreateWithBodyWithResponse(ctx context.Context, params *JobsCreateParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*JobsCreateResponse, error)
+	// ChangeInvoiceAutoSyncWithBodyWithResponse request with any body
+	ChangeInvoiceAutoSyncWithBodyWithResponse(ctx context.Context, invoiceId string, params *ChangeInvoiceAutoSyncParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*ChangeInvoiceAutoSyncResponse, error)
 
-	JobsCreateWithResponse(ctx context.Context, params *JobsCreateParams, body JobsCreateJSONRequestBody, reqEditors ...RequestEditorFn) (*JobsCreateResponse, error)
+	ChangeInvoiceAutoSyncWithResponse(ctx context.Context, invoiceId string, params *ChangeInvoiceAutoSyncParams, body ChangeInvoiceAutoSyncJSONRequestBody, reqEditors ...RequestEditorFn) (*ChangeInvoiceAutoSyncResponse, error)
 
-	// JobsGetWithResponse request
-	JobsGetWithResponse(ctx context.Context, jobId string, params *JobsGetParams, reqEditors ...RequestEditorFn) (*JobsGetResponse, error)
+	// InvoiceIntegrationSyncWithResponse request
+	InvoiceIntegrationSyncWithResponse(ctx context.Context, invoiceId string, params *InvoiceIntegrationSyncParams, reqEditors ...RequestEditorFn) (*InvoiceIntegrationSyncResponse, error)
 
-	// JobReportsListForJobWithResponse request
-	JobReportsListForJobWithResponse(ctx context.Context, jobId string, params *JobReportsListForJobParams, reqEditors ...RequestEditorFn) (*JobReportsListForJobResponse, error)
+	// InvoiceIntegrationSyncEventsWithResponse request
+	InvoiceIntegrationSyncEventsWithResponse(ctx context.Context, invoiceId string, params *InvoiceIntegrationSyncEventsParams, reqEditors ...RequestEditorFn) (*InvoiceIntegrationSyncEventsResponse, error)
 
-	// JobReportsGetForJobWithResponse request
-	JobReportsGetForJobWithResponse(ctx context.Context, jobId string, jobReportId string, params *JobReportsGetForJobParams, reqEditors ...RequestEditorFn) (*JobReportsGetForJobResponse, error)
+	// ChangeInvoiceSyncCompletionWithBodyWithResponse request with any body
+	ChangeInvoiceSyncCompletionWithBodyWithResponse(ctx context.Context, invoiceId string, params *ChangeInvoiceSyncCompletionParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*ChangeInvoiceSyncCompletionResponse, error)
 
-	// JobsPartAuthorisationsWithResponse request
-	JobsPartAuthorisationsWithResponse(ctx context.Context, jobId string, params *JobsPartAuthorisationsParams, reqEditors ...RequestEditorFn) (*JobsPartAuthorisationsResponse, error)
+	ChangeInvoiceSyncCompletionWithResponse(ctx context.Context, invoiceId string, params *ChangeInvoiceSyncCompletionParams, body ChangeInvoiceSyncCompletionJSONRequestBody, reqEditors ...RequestEditorFn) (*ChangeInvoiceSyncCompletionResponse, error)
 
-	// JobsSubmitPartAuthorisationDecisionsWithBodyWithResponse request with any body
-	JobsSubmitPartAuthorisationDecisionsWithBodyWithResponse(ctx context.Context, jobId string, params *JobsSubmitPartAuthorisationDecisionsParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*JobsSubmitPartAuthorisationDecisionsResponse, error)
+	// RetryInvoiceIntegrationSyncWithResponse request
+	RetryInvoiceIntegrationSyncWithResponse(ctx context.Context, invoiceId string, params *RetryInvoiceIntegrationSyncParams, reqEditors ...RequestEditorFn) (*RetryInvoiceIntegrationSyncResponse, error)
 
-	JobsSubmitPartAuthorisationDecisionsWithResponse(ctx context.Context, jobId string, params *JobsSubmitPartAuthorisationDecisionsParams, body JobsSubmitPartAuthorisationDecisionsJSONRequestBody, reqEditors ...RequestEditorFn) (*JobsSubmitPartAuthorisationDecisionsResponse, error)
+	// TriggerInvoiceIntegrationSyncWithBodyWithResponse request with any body
+	TriggerInvoiceIntegrationSyncWithBodyWithResponse(ctx context.Context, invoiceId string, params *TriggerInvoiceIntegrationSyncParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*TriggerInvoiceIntegrationSyncResponse, error)
 
-	// ServicesListWithResponse request
-	ServicesListWithResponse(ctx context.Context, params *ServicesListParams, reqEditors ...RequestEditorFn) (*ServicesListResponse, error)
+	TriggerInvoiceIntegrationSyncWithResponse(ctx context.Context, invoiceId string, params *TriggerInvoiceIntegrationSyncParams, body TriggerInvoiceIntegrationSyncJSONRequestBody, reqEditors ...RequestEditorFn) (*TriggerInvoiceIntegrationSyncResponse, error)
 
-	// ServicesGetWithResponse request
-	ServicesGetWithResponse(ctx context.Context, serviceId string, params *ServicesGetParams, reqEditors ...RequestEditorFn) (*ServicesGetResponse, error)
+	// PaymentLinkWithResponse request
+	PaymentLinkWithResponse(ctx context.Context, invoiceId string, params *PaymentLinkParams, reqEditors ...RequestEditorFn) (*PaymentLinkResponse, error)
 
-	// StockListWithResponse request
-	StockListWithResponse(ctx context.Context, params *StockListParams, reqEditors ...RequestEditorFn) (*StockListResponse, error)
+	// RecordPaymentWithBodyWithResponse request with any body
+	RecordPaymentWithBodyWithResponse(ctx context.Context, invoiceId string, params *RecordPaymentParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*RecordPaymentResponse, error)
 
-	// StockGetWithResponse request
-	StockGetWithResponse(ctx context.Context, stockVariationId string, params *StockGetParams, reqEditors ...RequestEditorFn) (*StockGetResponse, error)
+	RecordPaymentWithResponse(ctx context.Context, invoiceId string, params *RecordPaymentParams, body RecordPaymentJSONRequestBody, reqEditors ...RequestEditorFn) (*RecordPaymentResponse, error)
 
-	// WebhookDeliveriesGetWithResponse request
-	WebhookDeliveriesGetWithResponse(ctx context.Context, deliveryId string, params *WebhookDeliveriesGetParams, reqEditors ...RequestEditorFn) (*WebhookDeliveriesGetResponse, error)
+	// PdfWithResponse request
+	PdfWithResponse(ctx context.Context, invoiceId string, params *PdfParams, reqEditors ...RequestEditorFn) (*PdfResponse, error)
 
-	// WebhookDeliveriesReplayWithResponse request
-	WebhookDeliveriesReplayWithResponse(ctx context.Context, deliveryId string, params *WebhookDeliveriesReplayParams, reqEditors ...RequestEditorFn) (*WebhookDeliveriesReplayResponse, error)
+	// SendWithBodyWithResponse request with any body
+	SendWithBodyWithResponse(ctx context.Context, invoiceId string, params *SendParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*SendResponse, error)
 
-	// WebhookEndpointsListWithResponse request
-	WebhookEndpointsListWithResponse(ctx context.Context, params *WebhookEndpointsListParams, reqEditors ...RequestEditorFn) (*WebhookEndpointsListResponse, error)
+	SendWithResponse(ctx context.Context, invoiceId string, params *SendParams, body SendJSONRequestBody, reqEditors ...RequestEditorFn) (*SendResponse, error)
 
-	// WebhookEndpointsCreateWithBodyWithResponse request with any body
-	WebhookEndpointsCreateWithBodyWithResponse(ctx context.Context, params *WebhookEndpointsCreateParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*WebhookEndpointsCreateResponse, error)
+	// ChangeStatusWithBodyWithResponse request with any body
+	ChangeStatusWithBodyWithResponse(ctx context.Context, invoiceId string, params *ChangeStatusParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*ChangeStatusResponse, error)
 
-	WebhookEndpointsCreateWithResponse(ctx context.Context, params *WebhookEndpointsCreateParams, body WebhookEndpointsCreateJSONRequestBody, reqEditors ...RequestEditorFn) (*WebhookEndpointsCreateResponse, error)
+	ChangeStatusWithResponse(ctx context.Context, invoiceId string, params *ChangeStatusParams, body ChangeStatusJSONRequestBody, reqEditors ...RequestEditorFn) (*ChangeStatusResponse, error)
 
-	// WebhookEndpointsDeleteWithResponse request
-	WebhookEndpointsDeleteWithResponse(ctx context.Context, endpointId string, params *WebhookEndpointsDeleteParams, reqEditors ...RequestEditorFn) (*WebhookEndpointsDeleteResponse, error)
+	// ListJobReportWithResponse request
+	ListJobReportWithResponse(ctx context.Context, params *ListJobReportParams, reqEditors ...RequestEditorFn) (*ListJobReportResponse, error)
 
-	// WebhookEndpointsGetWithResponse request
-	WebhookEndpointsGetWithResponse(ctx context.Context, endpointId string, params *WebhookEndpointsGetParams, reqEditors ...RequestEditorFn) (*WebhookEndpointsGetResponse, error)
+	// GetJobReportWithResponse request
+	GetJobReportWithResponse(ctx context.Context, jobReportId string, params *GetJobReportParams, reqEditors ...RequestEditorFn) (*GetJobReportResponse, error)
 
-	// WebhookEndpointsUpdateWithBodyWithResponse request with any body
-	WebhookEndpointsUpdateWithBodyWithResponse(ctx context.Context, endpointId string, params *WebhookEndpointsUpdateParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*WebhookEndpointsUpdateResponse, error)
+	// JobsWithResponse request
+	JobsWithResponse(ctx context.Context, params *JobsParams, reqEditors ...RequestEditorFn) (*JobsResponse, error)
 
-	WebhookEndpointsUpdateWithResponse(ctx context.Context, endpointId string, params *WebhookEndpointsUpdateParams, body WebhookEndpointsUpdateJSONRequestBody, reqEditors ...RequestEditorFn) (*WebhookEndpointsUpdateResponse, error)
+	// CreateJobBookingWithBodyWithResponse request with any body
+	CreateJobBookingWithBodyWithResponse(ctx context.Context, params *CreateJobBookingParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateJobBookingResponse, error)
 
-	// WebhookDeliveriesListForEndpointWithResponse request
-	WebhookDeliveriesListForEndpointWithResponse(ctx context.Context, endpointId string, params *WebhookDeliveriesListForEndpointParams, reqEditors ...RequestEditorFn) (*WebhookDeliveriesListForEndpointResponse, error)
+	CreateJobBookingWithResponse(ctx context.Context, params *CreateJobBookingParams, body CreateJobBookingJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateJobBookingResponse, error)
 
-	// WebhookEndpointsRotateSecretWithResponse request
-	WebhookEndpointsRotateSecretWithResponse(ctx context.Context, endpointId string, params *WebhookEndpointsRotateSecretParams, reqEditors ...RequestEditorFn) (*WebhookEndpointsRotateSecretResponse, error)
+	// JobWithResponse request
+	JobWithResponse(ctx context.Context, jobId string, params *JobParams, reqEditors ...RequestEditorFn) (*JobResponse, error)
 
-	// WebhookEventsListWithResponse request
-	WebhookEventsListWithResponse(ctx context.Context, params *WebhookEventsListParams, reqEditors ...RequestEditorFn) (*WebhookEventsListResponse, error)
+	// UpdateJobWithBodyWithResponse request with any body
+	UpdateJobWithBodyWithResponse(ctx context.Context, jobId string, params *UpdateJobParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateJobResponse, error)
+
+	UpdateJobWithResponse(ctx context.Context, jobId string, params *UpdateJobParams, body UpdateJobJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateJobResponse, error)
+
+	// ChangeAcceptedStatusWithBodyWithResponse request with any body
+	ChangeAcceptedStatusWithBodyWithResponse(ctx context.Context, jobId string, params *ChangeAcceptedStatusParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*ChangeAcceptedStatusResponse, error)
+
+	ChangeAcceptedStatusWithResponse(ctx context.Context, jobId string, params *ChangeAcceptedStatusParams, body ChangeAcceptedStatusJSONRequestBody, reqEditors ...RequestEditorFn) (*ChangeAcceptedStatusResponse, error)
+
+	// ListJobReportForJobWithResponse request
+	ListJobReportForJobWithResponse(ctx context.Context, jobId string, params *ListJobReportForJobParams, reqEditors ...RequestEditorFn) (*ListJobReportForJobResponse, error)
+
+	// GetJobReportForJobWithResponse request
+	GetJobReportForJobWithResponse(ctx context.Context, jobId string, jobReportId string, params *GetJobReportForJobParams, reqEditors ...RequestEditorFn) (*GetJobReportForJobResponse, error)
+
+	// PartAuthorisationsWithResponse request
+	PartAuthorisationsWithResponse(ctx context.Context, jobId string, params *PartAuthorisationsParams, reqEditors ...RequestEditorFn) (*PartAuthorisationsResponse, error)
+
+	// SubmitPartAuthorisationDecisionsWithBodyWithResponse request with any body
+	SubmitPartAuthorisationDecisionsWithBodyWithResponse(ctx context.Context, jobId string, params *SubmitPartAuthorisationDecisionsParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*SubmitPartAuthorisationDecisionsResponse, error)
+
+	SubmitPartAuthorisationDecisionsWithResponse(ctx context.Context, jobId string, params *SubmitPartAuthorisationDecisionsParams, body SubmitPartAuthorisationDecisionsJSONRequestBody, reqEditors ...RequestEditorFn) (*SubmitPartAuthorisationDecisionsResponse, error)
+
+	// RequestPartAuthorisationWithBodyWithResponse request with any body
+	RequestPartAuthorisationWithBodyWithResponse(ctx context.Context, jobId string, params *RequestPartAuthorisationParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*RequestPartAuthorisationResponse, error)
+
+	RequestPartAuthorisationWithResponse(ctx context.Context, jobId string, params *RequestPartAuthorisationParams, body RequestPartAuthorisationJSONRequestBody, reqEditors ...RequestEditorFn) (*RequestPartAuthorisationResponse, error)
+
+	// ChangeScheduleWithBodyWithResponse request with any body
+	ChangeScheduleWithBodyWithResponse(ctx context.Context, jobId string, params *ChangeScheduleParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*ChangeScheduleResponse, error)
+
+	ChangeScheduleWithResponse(ctx context.Context, jobId string, params *ChangeScheduleParams, body ChangeScheduleJSONRequestBody, reqEditors ...RequestEditorFn) (*ChangeScheduleResponse, error)
+
+	// UpdateWorkLineWithBodyWithResponse request with any body
+	UpdateWorkLineWithBodyWithResponse(ctx context.Context, jobId string, workLineId string, params *UpdateWorkLineParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateWorkLineResponse, error)
+
+	UpdateWorkLineWithResponse(ctx context.Context, jobId string, workLineId string, params *UpdateWorkLineParams, body UpdateWorkLineJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateWorkLineResponse, error)
+
+	// AssignWorkLineMechanicWithBodyWithResponse request with any body
+	AssignWorkLineMechanicWithBodyWithResponse(ctx context.Context, jobId string, workLineId string, params *AssignWorkLineMechanicParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*AssignWorkLineMechanicResponse, error)
+
+	AssignWorkLineMechanicWithResponse(ctx context.Context, jobId string, workLineId string, params *AssignWorkLineMechanicParams, body AssignWorkLineMechanicJSONRequestBody, reqEditors ...RequestEditorFn) (*AssignWorkLineMechanicResponse, error)
+
+	// ReplaceWorkLineServicesWithBodyWithResponse request with any body
+	ReplaceWorkLineServicesWithBodyWithResponse(ctx context.Context, jobId string, workLineId string, params *ReplaceWorkLineServicesParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*ReplaceWorkLineServicesResponse, error)
+
+	ReplaceWorkLineServicesWithResponse(ctx context.Context, jobId string, workLineId string, params *ReplaceWorkLineServicesParams, body ReplaceWorkLineServicesJSONRequestBody, reqEditors ...RequestEditorFn) (*ReplaceWorkLineServicesResponse, error)
+
+	// ChangeWorkLineStatusWithBodyWithResponse request with any body
+	ChangeWorkLineStatusWithBodyWithResponse(ctx context.Context, jobId string, workLineId string, params *ChangeWorkLineStatusParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*ChangeWorkLineStatusResponse, error)
+
+	ChangeWorkLineStatusWithResponse(ctx context.Context, jobId string, workLineId string, params *ChangeWorkLineStatusParams, body ChangeWorkLineStatusJSONRequestBody, reqEditors ...RequestEditorFn) (*ChangeWorkLineStatusResponse, error)
+
+	// RefundWithBodyWithResponse request with any body
+	RefundWithBodyWithResponse(ctx context.Context, paymentId string, params *RefundParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*RefundResponse, error)
+
+	RefundWithResponse(ctx context.Context, paymentId string, params *RefundParams, body RefundJSONRequestBody, reqEditors ...RequestEditorFn) (*RefundResponse, error)
+
+	// ListServiceWithResponse request
+	ListServiceWithResponse(ctx context.Context, params *ListServiceParams, reqEditors ...RequestEditorFn) (*ListServiceResponse, error)
+
+	// GetServiceWithResponse request
+	GetServiceWithResponse(ctx context.Context, serviceId string, params *GetServiceParams, reqEditors ...RequestEditorFn) (*GetServiceResponse, error)
+
+	// ListStockVariationWithResponse request
+	ListStockVariationWithResponse(ctx context.Context, params *ListStockVariationParams, reqEditors ...RequestEditorFn) (*ListStockVariationResponse, error)
+
+	// GetStockVariationWithResponse request
+	GetStockVariationWithResponse(ctx context.Context, stockVariationId string, params *GetStockVariationParams, reqEditors ...RequestEditorFn) (*GetStockVariationResponse, error)
+
+	// GetWebhookDeliveryWithResponse request
+	GetWebhookDeliveryWithResponse(ctx context.Context, deliveryId string, params *GetWebhookDeliveryParams, reqEditors ...RequestEditorFn) (*GetWebhookDeliveryResponse, error)
+
+	// ReplayWithResponse request
+	ReplayWithResponse(ctx context.Context, deliveryId string, params *ReplayParams, reqEditors ...RequestEditorFn) (*ReplayResponse, error)
+
+	// ListWebhookEndpointWithResponse request
+	ListWebhookEndpointWithResponse(ctx context.Context, params *ListWebhookEndpointParams, reqEditors ...RequestEditorFn) (*ListWebhookEndpointResponse, error)
+
+	// CreateWebhookEndpointWithBodyWithResponse request with any body
+	CreateWebhookEndpointWithBodyWithResponse(ctx context.Context, params *CreateWebhookEndpointParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateWebhookEndpointResponse, error)
+
+	CreateWebhookEndpointWithResponse(ctx context.Context, params *CreateWebhookEndpointParams, body CreateWebhookEndpointJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateWebhookEndpointResponse, error)
+
+	// DeleteWebhookEndpointWithResponse request
+	DeleteWebhookEndpointWithResponse(ctx context.Context, endpointId string, params *DeleteWebhookEndpointParams, reqEditors ...RequestEditorFn) (*DeleteWebhookEndpointResponse, error)
+
+	// GetWebhookEndpointWithResponse request
+	GetWebhookEndpointWithResponse(ctx context.Context, endpointId string, params *GetWebhookEndpointParams, reqEditors ...RequestEditorFn) (*GetWebhookEndpointResponse, error)
+
+	// UpdateWebhookEndpointWithBodyWithResponse request with any body
+	UpdateWebhookEndpointWithBodyWithResponse(ctx context.Context, endpointId string, params *UpdateWebhookEndpointParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateWebhookEndpointResponse, error)
+
+	UpdateWebhookEndpointWithResponse(ctx context.Context, endpointId string, params *UpdateWebhookEndpointParams, body UpdateWebhookEndpointJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateWebhookEndpointResponse, error)
+
+	// ListForEndpointWithResponse request
+	ListForEndpointWithResponse(ctx context.Context, endpointId string, params *ListForEndpointParams, reqEditors ...RequestEditorFn) (*ListForEndpointResponse, error)
+
+	// RotateSecretWithResponse request
+	RotateSecretWithResponse(ctx context.Context, endpointId string, params *RotateSecretParams, reqEditors ...RequestEditorFn) (*RotateSecretResponse, error)
+
+	// ListWebhookEventWithResponse request
+	ListWebhookEventWithResponse(ctx context.Context, params *ListWebhookEventParams, reqEditors ...RequestEditorFn) (*ListWebhookEventResponse, error)
 }
 
-type AssetsListResponse struct {
+type ListAssetResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *ApiListResponseOfAssetResponse
-	JSON400      *ApiErrorResponse
-	JSON401      *ApiErrorResponse
-	JSON403      *ApiErrorResponse
-	JSON404      *ApiErrorResponse
-	JSON429      *ApiErrorResponse
+	JSON200      *ListResponseOfAsset
+	JSON400      *ErrorResponse
+	JSON401      *ErrorResponse
+	JSON403      *ErrorResponse
+	JSON404      *ErrorResponse
+	JSON429      *ErrorResponse
+	JSON500      *ErrorResponse
 }
 
 // Status returns HTTPResponse.Status
-func (r AssetsListResponse) Status() string {
+func (r ListAssetResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -5559,7 +9299,7 @@ func (r AssetsListResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r AssetsListResponse) StatusCode() int {
+func (r ListAssetResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -5567,27 +9307,28 @@ func (r AssetsListResponse) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r AssetsListResponse) ContentType() string {
+func (r ListAssetResponse) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type AssetsCreateResponse struct {
+type CreateAssetResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON201      *AssetResponse
-	JSON400      *ApiErrorResponse
-	JSON401      *ApiErrorResponse
-	JSON403      *ApiErrorResponse
-	JSON404      *ApiErrorResponse
-	JSON409      *ApiErrorResponse
-	JSON429      *ApiErrorResponse
+	JSON201      *Asset
+	JSON400      *ErrorResponse
+	JSON401      *ErrorResponse
+	JSON403      *ErrorResponse
+	JSON404      *ErrorResponse
+	JSON409      *ErrorResponse
+	JSON429      *ErrorResponse
+	JSON500      *ErrorResponse
 }
 
 // Status returns HTTPResponse.Status
-func (r AssetsCreateResponse) Status() string {
+func (r CreateAssetResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -5595,7 +9336,7 @@ func (r AssetsCreateResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r AssetsCreateResponse) StatusCode() int {
+func (r CreateAssetResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -5603,26 +9344,28 @@ func (r AssetsCreateResponse) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r AssetsCreateResponse) ContentType() string {
+func (r CreateAssetResponse) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type AssetsGetResponse struct {
+type DeleteAssetResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *AssetResponse
-	JSON400      *ApiErrorResponse
-	JSON401      *ApiErrorResponse
-	JSON403      *ApiErrorResponse
-	JSON404      *ApiErrorResponse
-	JSON429      *ApiErrorResponse
+	JSON200      *AssetDeleted
+	JSON400      *ErrorResponse
+	JSON401      *ErrorResponse
+	JSON403      *ErrorResponse
+	JSON404      *ErrorResponse
+	JSON409      *ErrorResponse
+	JSON429      *ErrorResponse
+	JSON500      *ErrorResponse
 }
 
 // Status returns HTTPResponse.Status
-func (r AssetsGetResponse) Status() string {
+func (r DeleteAssetResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -5630,7 +9373,7 @@ func (r AssetsGetResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r AssetsGetResponse) StatusCode() int {
+func (r DeleteAssetResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -5638,27 +9381,27 @@ func (r AssetsGetResponse) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r AssetsGetResponse) ContentType() string {
+func (r DeleteAssetResponse) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type AssetsUpdateResponse struct {
+type GetAssetResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *AssetResponse
-	JSON400      *ApiErrorResponse
-	JSON401      *ApiErrorResponse
-	JSON403      *ApiErrorResponse
-	JSON404      *ApiErrorResponse
-	JSON409      *ApiErrorResponse
-	JSON429      *ApiErrorResponse
+	JSON200      *Asset
+	JSON400      *ErrorResponse
+	JSON401      *ErrorResponse
+	JSON403      *ErrorResponse
+	JSON404      *ErrorResponse
+	JSON429      *ErrorResponse
+	JSON500      *ErrorResponse
 }
 
 // Status returns HTTPResponse.Status
-func (r AssetsUpdateResponse) Status() string {
+func (r GetAssetResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -5666,7 +9409,7 @@ func (r AssetsUpdateResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r AssetsUpdateResponse) StatusCode() int {
+func (r GetAssetResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -5674,26 +9417,28 @@ func (r AssetsUpdateResponse) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r AssetsUpdateResponse) ContentType() string {
+func (r GetAssetResponse) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type BusinessesListResponse struct {
+type UpdateAssetResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *ApiListResponseOfBusinessResponse
-	JSON400      *ApiErrorResponse
-	JSON401      *ApiErrorResponse
-	JSON403      *ApiErrorResponse
-	JSON404      *ApiErrorResponse
-	JSON429      *ApiErrorResponse
+	JSON200      *Asset
+	JSON400      *ErrorResponse
+	JSON401      *ErrorResponse
+	JSON403      *ErrorResponse
+	JSON404      *ErrorResponse
+	JSON409      *ErrorResponse
+	JSON429      *ErrorResponse
+	JSON500      *ErrorResponse
 }
 
 // Status returns HTTPResponse.Status
-func (r BusinessesListResponse) Status() string {
+func (r UpdateAssetResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -5701,7 +9446,7 @@ func (r BusinessesListResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r BusinessesListResponse) StatusCode() int {
+func (r UpdateAssetResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -5709,26 +9454,27 @@ func (r BusinessesListResponse) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r BusinessesListResponse) ContentType() string {
+func (r UpdateAssetResponse) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type BusinessesGetResponse struct {
+type ListResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *BusinessResponse
-	JSON400      *ApiErrorResponse
-	JSON401      *ApiErrorResponse
-	JSON403      *ApiErrorResponse
-	JSON404      *ApiErrorResponse
-	JSON429      *ApiErrorResponse
+	JSON200      *ListResponseOfBackOrder
+	JSON400      *ErrorResponse
+	JSON401      *ErrorResponse
+	JSON403      *ErrorResponse
+	JSON404      *ErrorResponse
+	JSON429      *ErrorResponse
+	JSON500      *ErrorResponse
 }
 
 // Status returns HTTPResponse.Status
-func (r BusinessesGetResponse) Status() string {
+func (r ListResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -5736,7 +9482,7 @@ func (r BusinessesGetResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r BusinessesGetResponse) StatusCode() int {
+func (r ListResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -5744,26 +9490,28 @@ func (r BusinessesGetResponse) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r BusinessesGetResponse) ContentType() string {
+func (r ListResponse) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type BusinessesAvailabilityResponse struct {
+type CreateResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *AvailabilityResponse
-	JSON400      *ApiErrorResponse
-	JSON401      *ApiErrorResponse
-	JSON403      *ApiErrorResponse
-	JSON404      *ApiErrorResponse
-	JSON429      *ApiErrorResponse
+	JSON201      *BackOrder
+	JSON400      *ErrorResponse
+	JSON401      *ErrorResponse
+	JSON403      *ErrorResponse
+	JSON404      *ErrorResponse
+	JSON409      *ErrorResponse
+	JSON429      *ErrorResponse
+	JSON500      *ErrorResponse
 }
 
 // Status returns HTTPResponse.Status
-func (r BusinessesAvailabilityResponse) Status() string {
+func (r CreateResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -5771,7 +9519,7 @@ func (r BusinessesAvailabilityResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r BusinessesAvailabilityResponse) StatusCode() int {
+func (r CreateResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -5779,26 +9527,28 @@ func (r BusinessesAvailabilityResponse) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r BusinessesAvailabilityResponse) ContentType() string {
+func (r CreateResponse) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type BusinessesAvailabilitySlotsResponse struct {
+type ReceiveResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *AvailabilitySlotsResponse
-	JSON400      *ApiErrorResponse
-	JSON401      *ApiErrorResponse
-	JSON403      *ApiErrorResponse
-	JSON404      *ApiErrorResponse
-	JSON429      *ApiErrorResponse
+	JSON200      *CommandResponseOfBatchResponseOfBackOrder
+	JSON400      *ErrorResponse
+	JSON401      *ErrorResponse
+	JSON403      *ErrorResponse
+	JSON404      *ErrorResponse
+	JSON409      *ErrorResponse
+	JSON429      *ErrorResponse
+	JSON500      *ErrorResponse
 }
 
 // Status returns HTTPResponse.Status
-func (r BusinessesAvailabilitySlotsResponse) Status() string {
+func (r ReceiveResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -5806,7 +9556,7 @@ func (r BusinessesAvailabilitySlotsResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r BusinessesAvailabilitySlotsResponse) StatusCode() int {
+func (r ReceiveResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -5814,26 +9564,28 @@ func (r BusinessesAvailabilitySlotsResponse) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r BusinessesAvailabilitySlotsResponse) ContentType() string {
+func (r ReceiveResponse) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type BusinessesNextAvailableSlotResponse struct {
+type DeleteResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *NextAvailableSlotResponse
-	JSON400      *ApiErrorResponse
-	JSON401      *ApiErrorResponse
-	JSON403      *ApiErrorResponse
-	JSON404      *ApiErrorResponse
-	JSON429      *ApiErrorResponse
+	JSON200      *BackOrderDeleted
+	JSON400      *ErrorResponse
+	JSON401      *ErrorResponse
+	JSON403      *ErrorResponse
+	JSON404      *ErrorResponse
+	JSON409      *ErrorResponse
+	JSON429      *ErrorResponse
+	JSON500      *ErrorResponse
 }
 
 // Status returns HTTPResponse.Status
-func (r BusinessesNextAvailableSlotResponse) Status() string {
+func (r DeleteResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -5841,7 +9593,7 @@ func (r BusinessesNextAvailableSlotResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r BusinessesNextAvailableSlotResponse) StatusCode() int {
+func (r DeleteResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -5849,26 +9601,27 @@ func (r BusinessesNextAvailableSlotResponse) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r BusinessesNextAvailableSlotResponse) ContentType() string {
+func (r DeleteResponse) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type BusinessesServicesResponse struct {
+type GetResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *ApiListResponseOfServiceResponse
-	JSON400      *ApiErrorResponse
-	JSON401      *ApiErrorResponse
-	JSON403      *ApiErrorResponse
-	JSON404      *ApiErrorResponse
-	JSON429      *ApiErrorResponse
+	JSON200      *BackOrder
+	JSON400      *ErrorResponse
+	JSON401      *ErrorResponse
+	JSON403      *ErrorResponse
+	JSON404      *ErrorResponse
+	JSON429      *ErrorResponse
+	JSON500      *ErrorResponse
 }
 
 // Status returns HTTPResponse.Status
-func (r BusinessesServicesResponse) Status() string {
+func (r GetResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -5876,7 +9629,7 @@ func (r BusinessesServicesResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r BusinessesServicesResponse) StatusCode() int {
+func (r GetResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -5884,27 +9637,28 @@ func (r BusinessesServicesResponse) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r BusinessesServicesResponse) ContentType() string {
+func (r GetResponse) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type ServicesCreateResponse struct {
+type UpdateResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON201      *ServiceResponse
-	JSON400      *ApiErrorResponse
-	JSON401      *ApiErrorResponse
-	JSON403      *ApiErrorResponse
-	JSON404      *ApiErrorResponse
-	JSON409      *ApiErrorResponse
-	JSON429      *ApiErrorResponse
+	JSON200      *BackOrder
+	JSON400      *ErrorResponse
+	JSON401      *ErrorResponse
+	JSON403      *ErrorResponse
+	JSON404      *ErrorResponse
+	JSON409      *ErrorResponse
+	JSON429      *ErrorResponse
+	JSON500      *ErrorResponse
 }
 
 // Status returns HTTPResponse.Status
-func (r ServicesCreateResponse) Status() string {
+func (r UpdateResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -5912,7 +9666,7 @@ func (r ServicesCreateResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r ServicesCreateResponse) StatusCode() int {
+func (r UpdateResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -5920,27 +9674,27 @@ func (r ServicesCreateResponse) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r ServicesCreateResponse) ContentType() string {
+func (r UpdateResponse) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type ServicesUpdateResponse struct {
+type ListBusinessResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *ServiceResponse
-	JSON400      *ApiErrorResponse
-	JSON401      *ApiErrorResponse
-	JSON403      *ApiErrorResponse
-	JSON404      *ApiErrorResponse
-	JSON409      *ApiErrorResponse
-	JSON429      *ApiErrorResponse
+	JSON200      *ListResponseOfBusiness
+	JSON400      *ErrorResponse
+	JSON401      *ErrorResponse
+	JSON403      *ErrorResponse
+	JSON404      *ErrorResponse
+	JSON429      *ErrorResponse
+	JSON500      *ErrorResponse
 }
 
 // Status returns HTTPResponse.Status
-func (r ServicesUpdateResponse) Status() string {
+func (r ListBusinessResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -5948,7 +9702,7 @@ func (r ServicesUpdateResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r ServicesUpdateResponse) StatusCode() int {
+func (r ListBusinessResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -5956,26 +9710,27 @@ func (r ServicesUpdateResponse) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r ServicesUpdateResponse) ContentType() string {
+func (r ListBusinessResponse) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type CustomersListResponse struct {
+type GetBusinessResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *ApiListResponseOfCustomerResponse
-	JSON400      *ApiErrorResponse
-	JSON401      *ApiErrorResponse
-	JSON403      *ApiErrorResponse
-	JSON404      *ApiErrorResponse
-	JSON429      *ApiErrorResponse
+	JSON200      *Business
+	JSON400      *ErrorResponse
+	JSON401      *ErrorResponse
+	JSON403      *ErrorResponse
+	JSON404      *ErrorResponse
+	JSON429      *ErrorResponse
+	JSON500      *ErrorResponse
 }
 
 // Status returns HTTPResponse.Status
-func (r CustomersListResponse) Status() string {
+func (r GetBusinessResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -5983,7 +9738,7 @@ func (r CustomersListResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r CustomersListResponse) StatusCode() int {
+func (r GetBusinessResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -5991,26 +9746,27 @@ func (r CustomersListResponse) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r CustomersListResponse) ContentType() string {
+func (r GetBusinessResponse) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type CustomersGetResponse struct {
+type AvailabilityResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *CustomerResponse
-	JSON400      *ApiErrorResponse
-	JSON401      *ApiErrorResponse
-	JSON403      *ApiErrorResponse
-	JSON404      *ApiErrorResponse
-	JSON429      *ApiErrorResponse
+	JSON200      *AvailabilityCalendar
+	JSON400      *ErrorResponse
+	JSON401      *ErrorResponse
+	JSON403      *ErrorResponse
+	JSON404      *ErrorResponse
+	JSON429      *ErrorResponse
+	JSON500      *ErrorResponse
 }
 
 // Status returns HTTPResponse.Status
-func (r CustomersGetResponse) Status() string {
+func (r AvailabilityResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -6018,7 +9774,7 @@ func (r CustomersGetResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r CustomersGetResponse) StatusCode() int {
+func (r AvailabilityResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -6026,27 +9782,27 @@ func (r CustomersGetResponse) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r CustomersGetResponse) ContentType() string {
+func (r AvailabilityResponse) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type CustomersUpdateResponse struct {
+type AvailabilitySlotsResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *CustomerResponse
-	JSON400      *ApiErrorResponse
-	JSON401      *ApiErrorResponse
-	JSON403      *ApiErrorResponse
-	JSON404      *ApiErrorResponse
-	JSON409      *ApiErrorResponse
-	JSON429      *ApiErrorResponse
+	JSON200      *AvailabilitySlotsResult
+	JSON400      *ErrorResponse
+	JSON401      *ErrorResponse
+	JSON403      *ErrorResponse
+	JSON404      *ErrorResponse
+	JSON429      *ErrorResponse
+	JSON500      *ErrorResponse
 }
 
 // Status returns HTTPResponse.Status
-func (r CustomersUpdateResponse) Status() string {
+func (r AvailabilitySlotsResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -6054,7 +9810,7 @@ func (r CustomersUpdateResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r CustomersUpdateResponse) StatusCode() int {
+func (r AvailabilitySlotsResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -6062,26 +9818,27 @@ func (r CustomersUpdateResponse) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r CustomersUpdateResponse) ContentType() string {
+func (r AvailabilitySlotsResponse) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type AssetsListForCustomerResponse struct {
+type BusinessIntegrationResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *ApiListResponseOfAssetResponse
-	JSON400      *ApiErrorResponse
-	JSON401      *ApiErrorResponse
-	JSON403      *ApiErrorResponse
-	JSON404      *ApiErrorResponse
-	JSON429      *ApiErrorResponse
+	JSON200      *BusinessIntegration
+	JSON400      *ErrorResponse
+	JSON401      *ErrorResponse
+	JSON403      *ErrorResponse
+	JSON404      *ErrorResponse
+	JSON429      *ErrorResponse
+	JSON500      *ErrorResponse
 }
 
 // Status returns HTTPResponse.Status
-func (r AssetsListForCustomerResponse) Status() string {
+func (r BusinessIntegrationResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -6089,7 +9846,7 @@ func (r AssetsListForCustomerResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r AssetsListForCustomerResponse) StatusCode() int {
+func (r BusinessIntegrationResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -6097,27 +9854,28 @@ func (r AssetsListForCustomerResponse) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r AssetsListForCustomerResponse) ContentType() string {
+func (r BusinessIntegrationResponse) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type ChatCreateAttachmentsResponse struct {
+type TriggerCustomerSyncResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON201      *ApiListResponseOfChatMessageResponse
-	JSON400      *ApiErrorResponse
-	JSON401      *ApiErrorResponse
-	JSON403      *ApiErrorResponse
-	JSON404      *ApiErrorResponse
-	JSON409      *ApiErrorResponse
-	JSON429      *ApiErrorResponse
+	JSON202      *IntegrationPullSyncAccepted
+	JSON400      *ErrorResponse
+	JSON401      *ErrorResponse
+	JSON403      *ErrorResponse
+	JSON404      *ErrorResponse
+	JSON409      *ErrorResponse
+	JSON429      *ErrorResponse
+	JSON500      *ErrorResponse
 }
 
 // Status returns HTTPResponse.Status
-func (r ChatCreateAttachmentsResponse) Status() string {
+func (r TriggerCustomerSyncResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -6125,7 +9883,7 @@ func (r ChatCreateAttachmentsResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r ChatCreateAttachmentsResponse) StatusCode() int {
+func (r TriggerCustomerSyncResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -6133,7 +9891,445 @@ func (r ChatCreateAttachmentsResponse) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r ChatCreateAttachmentsResponse) ContentType() string {
+func (r TriggerCustomerSyncResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type TriggerStockSyncResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON202      *IntegrationPullSyncAccepted
+	JSON400      *ErrorResponse
+	JSON401      *ErrorResponse
+	JSON403      *ErrorResponse
+	JSON404      *ErrorResponse
+	JSON409      *ErrorResponse
+	JSON429      *ErrorResponse
+	JSON500      *ErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r TriggerStockSyncResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r TriggerStockSyncResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r TriggerStockSyncResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type JobStatusesResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *JobStatusList
+	JSON400      *ErrorResponse
+	JSON401      *ErrorResponse
+	JSON403      *ErrorResponse
+	JSON404      *ErrorResponse
+	JSON429      *ErrorResponse
+	JSON500      *ErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r JobStatusesResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r JobStatusesResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r JobStatusesResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type NextAvailableSlotResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *NextAvailableSlotResult
+	JSON400      *ErrorResponse
+	JSON401      *ErrorResponse
+	JSON403      *ErrorResponse
+	JSON404      *ErrorResponse
+	JSON429      *ErrorResponse
+	JSON500      *ErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r NextAvailableSlotResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r NextAvailableSlotResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r NextAvailableSlotResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type ServicesResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *ListResponseOfService
+	JSON400      *ErrorResponse
+	JSON401      *ErrorResponse
+	JSON403      *ErrorResponse
+	JSON404      *ErrorResponse
+	JSON429      *ErrorResponse
+	JSON500      *ErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r ServicesResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ServicesResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r ServicesResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type CreateServiceResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON201      *Service
+	JSON400      *ErrorResponse
+	JSON401      *ErrorResponse
+	JSON403      *ErrorResponse
+	JSON404      *ErrorResponse
+	JSON409      *ErrorResponse
+	JSON429      *ErrorResponse
+	JSON500      *ErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r CreateServiceResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r CreateServiceResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r CreateServiceResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type UpdateServiceResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *Service
+	JSON400      *ErrorResponse
+	JSON401      *ErrorResponse
+	JSON403      *ErrorResponse
+	JSON404      *ErrorResponse
+	JSON409      *ErrorResponse
+	JSON429      *ErrorResponse
+	JSON500      *ErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r UpdateServiceResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r UpdateServiceResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r UpdateServiceResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type CustomersResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *ListResponseOfCustomer
+	JSON400      *ErrorResponse
+	JSON401      *ErrorResponse
+	JSON403      *ErrorResponse
+	JSON404      *ErrorResponse
+	JSON429      *ErrorResponse
+	JSON500      *ErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r CustomersResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r CustomersResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r CustomersResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type CreateCustomerResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON201      *Customer
+	JSON400      *ErrorResponse
+	JSON401      *ErrorResponse
+	JSON403      *ErrorResponse
+	JSON404      *ErrorResponse
+	JSON409      *ErrorResponse
+	JSON429      *ErrorResponse
+	JSON500      *ErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r CreateCustomerResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r CreateCustomerResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r CreateCustomerResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type CustomerResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *Customer
+	JSON400      *ErrorResponse
+	JSON401      *ErrorResponse
+	JSON403      *ErrorResponse
+	JSON404      *ErrorResponse
+	JSON429      *ErrorResponse
+	JSON500      *ErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r CustomerResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r CustomerResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r CustomerResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type UpdateCustomerResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *Customer
+	JSON400      *ErrorResponse
+	JSON401      *ErrorResponse
+	JSON403      *ErrorResponse
+	JSON404      *ErrorResponse
+	JSON409      *ErrorResponse
+	JSON429      *ErrorResponse
+	JSON500      *ErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r UpdateCustomerResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r UpdateCustomerResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r UpdateCustomerResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type ListForCustomerResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *ListResponseOfAsset
+	JSON400      *ErrorResponse
+	JSON401      *ErrorResponse
+	JSON403      *ErrorResponse
+	JSON404      *ErrorResponse
+	JSON429      *ErrorResponse
+	JSON500      *ErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r ListForCustomerResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ListForCustomerResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r ListForCustomerResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type CreateChatAttachmentsResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON201      *CommandResponseOfBatchResponseOfChatMessage
+	JSON400      *ErrorResponse
+	JSON401      *ErrorResponse
+	JSON403      *ErrorResponse
+	JSON404      *ErrorResponse
+	JSON409      *ErrorResponse
+	JSON429      *ErrorResponse
+	JSON500      *ErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r CreateChatAttachmentsResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r CreateChatAttachmentsResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r CreateChatAttachmentsResponse) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -6143,12 +10339,13 @@ func (r ChatCreateAttachmentsResponse) ContentType() string {
 type ChatMessagesResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *ApiListResponseOfChatMessageResponse
-	JSON400      *ApiErrorResponse
-	JSON401      *ApiErrorResponse
-	JSON403      *ApiErrorResponse
-	JSON404      *ApiErrorResponse
-	JSON429      *ApiErrorResponse
+	JSON200      *ListResponseOfChatMessage
+	JSON400      *ErrorResponse
+	JSON401      *ErrorResponse
+	JSON403      *ErrorResponse
+	JSON404      *ErrorResponse
+	JSON429      *ErrorResponse
+	JSON500      *ErrorResponse
 }
 
 // Status returns HTTPResponse.Status
@@ -6175,20 +10372,21 @@ func (r ChatMessagesResponse) ContentType() string {
 	return ""
 }
 
-type ChatCreateMessageResponse struct {
+type CreateChatMessageResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON201      *ChatMessageResponse
-	JSON400      *ApiErrorResponse
-	JSON401      *ApiErrorResponse
-	JSON403      *ApiErrorResponse
-	JSON404      *ApiErrorResponse
-	JSON409      *ApiErrorResponse
-	JSON429      *ApiErrorResponse
+	JSON201      *CommandResponseOfChatMessage
+	JSON400      *ErrorResponse
+	JSON401      *ErrorResponse
+	JSON403      *ErrorResponse
+	JSON404      *ErrorResponse
+	JSON409      *ErrorResponse
+	JSON429      *ErrorResponse
+	JSON500      *ErrorResponse
 }
 
 // Status returns HTTPResponse.Status
-func (r ChatCreateMessageResponse) Status() string {
+func (r CreateChatMessageResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -6196,7 +10394,7 @@ func (r ChatCreateMessageResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r ChatCreateMessageResponse) StatusCode() int {
+func (r CreateChatMessageResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -6204,27 +10402,28 @@ func (r ChatCreateMessageResponse) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r ChatCreateMessageResponse) ContentType() string {
+func (r CreateChatMessageResponse) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type InvoiceItemsCreateResponse struct {
+type MarkReadResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON201      *InvoiceItemResponse
-	JSON400      *ApiErrorResponse
-	JSON401      *ApiErrorResponse
-	JSON403      *ApiErrorResponse
-	JSON404      *ApiErrorResponse
-	JSON409      *ApiErrorResponse
-	JSON429      *ApiErrorResponse
+	JSON200      *ChatMarkRead
+	JSON400      *ErrorResponse
+	JSON401      *ErrorResponse
+	JSON403      *ErrorResponse
+	JSON404      *ErrorResponse
+	JSON409      *ErrorResponse
+	JSON429      *ErrorResponse
+	JSON500      *ErrorResponse
 }
 
 // Status returns HTTPResponse.Status
-func (r InvoiceItemsCreateResponse) Status() string {
+func (r MarkReadResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -6232,7 +10431,7 @@ func (r InvoiceItemsCreateResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r InvoiceItemsCreateResponse) StatusCode() int {
+func (r MarkReadResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -6240,27 +10439,28 @@ func (r InvoiceItemsCreateResponse) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r InvoiceItemsCreateResponse) ContentType() string {
+func (r MarkReadResponse) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type InvoiceItemsDeleteResponse struct {
+type CreateInvoiceItemResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *InvoiceItemDeleteResponse
-	JSON400      *ApiErrorResponse
-	JSON401      *ApiErrorResponse
-	JSON403      *ApiErrorResponse
-	JSON404      *ApiErrorResponse
-	JSON409      *ApiErrorResponse
-	JSON429      *ApiErrorResponse
+	JSON201      *InvoiceItem
+	JSON400      *ErrorResponse
+	JSON401      *ErrorResponse
+	JSON403      *ErrorResponse
+	JSON404      *ErrorResponse
+	JSON409      *ErrorResponse
+	JSON429      *ErrorResponse
+	JSON500      *ErrorResponse
 }
 
 // Status returns HTTPResponse.Status
-func (r InvoiceItemsDeleteResponse) Status() string {
+func (r CreateInvoiceItemResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -6268,7 +10468,7 @@ func (r InvoiceItemsDeleteResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r InvoiceItemsDeleteResponse) StatusCode() int {
+func (r CreateInvoiceItemResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -6276,26 +10476,28 @@ func (r InvoiceItemsDeleteResponse) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r InvoiceItemsDeleteResponse) ContentType() string {
+func (r CreateInvoiceItemResponse) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type InvoiceItemsGetResponse struct {
+type DeleteInvoiceItemResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *InvoiceItemResponse
-	JSON400      *ApiErrorResponse
-	JSON401      *ApiErrorResponse
-	JSON403      *ApiErrorResponse
-	JSON404      *ApiErrorResponse
-	JSON429      *ApiErrorResponse
+	JSON200      *InvoiceItemDeleted
+	JSON400      *ErrorResponse
+	JSON401      *ErrorResponse
+	JSON403      *ErrorResponse
+	JSON404      *ErrorResponse
+	JSON409      *ErrorResponse
+	JSON429      *ErrorResponse
+	JSON500      *ErrorResponse
 }
 
 // Status returns HTTPResponse.Status
-func (r InvoiceItemsGetResponse) Status() string {
+func (r DeleteInvoiceItemResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -6303,7 +10505,7 @@ func (r InvoiceItemsGetResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r InvoiceItemsGetResponse) StatusCode() int {
+func (r DeleteInvoiceItemResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -6311,27 +10513,27 @@ func (r InvoiceItemsGetResponse) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r InvoiceItemsGetResponse) ContentType() string {
+func (r DeleteInvoiceItemResponse) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type InvoiceItemsUpdateResponse struct {
+type GetInvoiceItemResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *InvoiceItemResponse
-	JSON400      *ApiErrorResponse
-	JSON401      *ApiErrorResponse
-	JSON403      *ApiErrorResponse
-	JSON404      *ApiErrorResponse
-	JSON409      *ApiErrorResponse
-	JSON429      *ApiErrorResponse
+	JSON200      *InvoiceItem
+	JSON400      *ErrorResponse
+	JSON401      *ErrorResponse
+	JSON403      *ErrorResponse
+	JSON404      *ErrorResponse
+	JSON429      *ErrorResponse
+	JSON500      *ErrorResponse
 }
 
 // Status returns HTTPResponse.Status
-func (r InvoiceItemsUpdateResponse) Status() string {
+func (r GetInvoiceItemResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -6339,7 +10541,7 @@ func (r InvoiceItemsUpdateResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r InvoiceItemsUpdateResponse) StatusCode() int {
+func (r GetInvoiceItemResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -6347,26 +10549,28 @@ func (r InvoiceItemsUpdateResponse) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r InvoiceItemsUpdateResponse) ContentType() string {
+func (r GetInvoiceItemResponse) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type InvoicesListResponse struct {
+type UpdateInvoiceItemResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *ApiListResponseOfInvoiceResponse
-	JSON400      *ApiErrorResponse
-	JSON401      *ApiErrorResponse
-	JSON403      *ApiErrorResponse
-	JSON404      *ApiErrorResponse
-	JSON429      *ApiErrorResponse
+	JSON200      *InvoiceItem
+	JSON400      *ErrorResponse
+	JSON401      *ErrorResponse
+	JSON403      *ErrorResponse
+	JSON404      *ErrorResponse
+	JSON409      *ErrorResponse
+	JSON429      *ErrorResponse
+	JSON500      *ErrorResponse
 }
 
 // Status returns HTTPResponse.Status
-func (r InvoicesListResponse) Status() string {
+func (r UpdateInvoiceItemResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -6374,7 +10578,7 @@ func (r InvoicesListResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r InvoicesListResponse) StatusCode() int {
+func (r UpdateInvoiceItemResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -6382,26 +10586,27 @@ func (r InvoicesListResponse) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r InvoicesListResponse) ContentType() string {
+func (r UpdateInvoiceItemResponse) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type InvoicesGetResponse struct {
+type ListInvoiceResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *InvoiceResponse
-	JSON400      *ApiErrorResponse
-	JSON401      *ApiErrorResponse
-	JSON403      *ApiErrorResponse
-	JSON404      *ApiErrorResponse
-	JSON429      *ApiErrorResponse
+	JSON200      *ListResponseOfInvoice
+	JSON400      *ErrorResponse
+	JSON401      *ErrorResponse
+	JSON403      *ErrorResponse
+	JSON404      *ErrorResponse
+	JSON429      *ErrorResponse
+	JSON500      *ErrorResponse
 }
 
 // Status returns HTTPResponse.Status
-func (r InvoicesGetResponse) Status() string {
+func (r ListInvoiceResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -6409,7 +10614,7 @@ func (r InvoicesGetResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r InvoicesGetResponse) StatusCode() int {
+func (r ListInvoiceResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -6417,26 +10622,27 @@ func (r InvoicesGetResponse) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r InvoicesGetResponse) ContentType() string {
+func (r ListInvoiceResponse) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type JobReportsListResponse struct {
+type GetInvoiceResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *ApiListResponseOfJobReportResponse
-	JSON400      *ApiErrorResponse
-	JSON401      *ApiErrorResponse
-	JSON403      *ApiErrorResponse
-	JSON404      *ApiErrorResponse
-	JSON429      *ApiErrorResponse
+	JSON200      *Invoice
+	JSON400      *ErrorResponse
+	JSON401      *ErrorResponse
+	JSON403      *ErrorResponse
+	JSON404      *ErrorResponse
+	JSON429      *ErrorResponse
+	JSON500      *ErrorResponse
 }
 
 // Status returns HTTPResponse.Status
-func (r JobReportsListResponse) Status() string {
+func (r GetInvoiceResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -6444,7 +10650,7 @@ func (r JobReportsListResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r JobReportsListResponse) StatusCode() int {
+func (r GetInvoiceResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -6452,26 +10658,28 @@ func (r JobReportsListResponse) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r JobReportsListResponse) ContentType() string {
+func (r GetInvoiceResponse) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type JobReportsGetResponse struct {
+type UpdateInvoiceResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *JobReportResponse
-	JSON400      *ApiErrorResponse
-	JSON401      *ApiErrorResponse
-	JSON403      *ApiErrorResponse
-	JSON404      *ApiErrorResponse
-	JSON429      *ApiErrorResponse
+	JSON200      *CommandResponseOfInvoice
+	JSON400      *ErrorResponse
+	JSON401      *ErrorResponse
+	JSON403      *ErrorResponse
+	JSON404      *ErrorResponse
+	JSON409      *ErrorResponse
+	JSON429      *ErrorResponse
+	JSON500      *ErrorResponse
 }
 
 // Status returns HTTPResponse.Status
-func (r JobReportsGetResponse) Status() string {
+func (r UpdateInvoiceResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -6479,7 +10687,7 @@ func (r JobReportsGetResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r JobReportsGetResponse) StatusCode() int {
+func (r UpdateInvoiceResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -6487,26 +10695,28 @@ func (r JobReportsGetResponse) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r JobReportsGetResponse) ContentType() string {
+func (r UpdateInvoiceResponse) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type JobsListResponse struct {
+type ChangeInvoiceAutoSyncResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *ApiListResponseOfJobResponse
-	JSON400      *ApiErrorResponse
-	JSON401      *ApiErrorResponse
-	JSON403      *ApiErrorResponse
-	JSON404      *ApiErrorResponse
-	JSON429      *ApiErrorResponse
+	JSON200      *IntegrationSyncCommand
+	JSON400      *ErrorResponse
+	JSON401      *ErrorResponse
+	JSON403      *ErrorResponse
+	JSON404      *ErrorResponse
+	JSON409      *ErrorResponse
+	JSON429      *ErrorResponse
+	JSON500      *ErrorResponse
 }
 
 // Status returns HTTPResponse.Status
-func (r JobsListResponse) Status() string {
+func (r ChangeInvoiceAutoSyncResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -6514,7 +10724,7 @@ func (r JobsListResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r JobsListResponse) StatusCode() int {
+func (r ChangeInvoiceAutoSyncResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -6522,27 +10732,27 @@ func (r JobsListResponse) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r JobsListResponse) ContentType() string {
+func (r ChangeInvoiceAutoSyncResponse) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type JobsCreateResponse struct {
+type InvoiceIntegrationSyncResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON201      *JobResponse
-	JSON400      *ApiErrorResponse
-	JSON401      *ApiErrorResponse
-	JSON403      *ApiErrorResponse
-	JSON404      *ApiErrorResponse
-	JSON409      *ApiErrorResponse
-	JSON429      *ApiErrorResponse
+	JSON200      *InvoiceIntegrationSync
+	JSON400      *ErrorResponse
+	JSON401      *ErrorResponse
+	JSON403      *ErrorResponse
+	JSON404      *ErrorResponse
+	JSON429      *ErrorResponse
+	JSON500      *ErrorResponse
 }
 
 // Status returns HTTPResponse.Status
-func (r JobsCreateResponse) Status() string {
+func (r InvoiceIntegrationSyncResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -6550,7 +10760,7 @@ func (r JobsCreateResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r JobsCreateResponse) StatusCode() int {
+func (r InvoiceIntegrationSyncResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -6558,26 +10768,27 @@ func (r JobsCreateResponse) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r JobsCreateResponse) ContentType() string {
+func (r InvoiceIntegrationSyncResponse) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type JobsGetResponse struct {
+type InvoiceIntegrationSyncEventsResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *JobResponse
-	JSON400      *ApiErrorResponse
-	JSON401      *ApiErrorResponse
-	JSON403      *ApiErrorResponse
-	JSON404      *ApiErrorResponse
-	JSON429      *ApiErrorResponse
+	JSON200      *IntegrationSyncEventList
+	JSON400      *ErrorResponse
+	JSON401      *ErrorResponse
+	JSON403      *ErrorResponse
+	JSON404      *ErrorResponse
+	JSON429      *ErrorResponse
+	JSON500      *ErrorResponse
 }
 
 // Status returns HTTPResponse.Status
-func (r JobsGetResponse) Status() string {
+func (r InvoiceIntegrationSyncEventsResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -6585,7 +10796,7 @@ func (r JobsGetResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r JobsGetResponse) StatusCode() int {
+func (r InvoiceIntegrationSyncEventsResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -6593,26 +10804,28 @@ func (r JobsGetResponse) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r JobsGetResponse) ContentType() string {
+func (r InvoiceIntegrationSyncEventsResponse) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type JobReportsListForJobResponse struct {
+type ChangeInvoiceSyncCompletionResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *ApiListResponseOfJobReportResponse
-	JSON400      *ApiErrorResponse
-	JSON401      *ApiErrorResponse
-	JSON403      *ApiErrorResponse
-	JSON404      *ApiErrorResponse
-	JSON429      *ApiErrorResponse
+	JSON200      *IntegrationSyncCommand
+	JSON400      *ErrorResponse
+	JSON401      *ErrorResponse
+	JSON403      *ErrorResponse
+	JSON404      *ErrorResponse
+	JSON409      *ErrorResponse
+	JSON429      *ErrorResponse
+	JSON500      *ErrorResponse
 }
 
 // Status returns HTTPResponse.Status
-func (r JobReportsListForJobResponse) Status() string {
+func (r ChangeInvoiceSyncCompletionResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -6620,7 +10833,7 @@ func (r JobReportsListForJobResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r JobReportsListForJobResponse) StatusCode() int {
+func (r ChangeInvoiceSyncCompletionResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -6628,26 +10841,28 @@ func (r JobReportsListForJobResponse) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r JobReportsListForJobResponse) ContentType() string {
+func (r ChangeInvoiceSyncCompletionResponse) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type JobReportsGetForJobResponse struct {
+type RetryInvoiceIntegrationSyncResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *JobReportResponse
-	JSON400      *ApiErrorResponse
-	JSON401      *ApiErrorResponse
-	JSON403      *ApiErrorResponse
-	JSON404      *ApiErrorResponse
-	JSON429      *ApiErrorResponse
+	JSON200      *IntegrationSyncCommand
+	JSON400      *ErrorResponse
+	JSON401      *ErrorResponse
+	JSON403      *ErrorResponse
+	JSON404      *ErrorResponse
+	JSON409      *ErrorResponse
+	JSON429      *ErrorResponse
+	JSON500      *ErrorResponse
 }
 
 // Status returns HTTPResponse.Status
-func (r JobReportsGetForJobResponse) Status() string {
+func (r RetryInvoiceIntegrationSyncResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -6655,7 +10870,7 @@ func (r JobReportsGetForJobResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r JobReportsGetForJobResponse) StatusCode() int {
+func (r RetryInvoiceIntegrationSyncResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -6663,26 +10878,28 @@ func (r JobReportsGetForJobResponse) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r JobReportsGetForJobResponse) ContentType() string {
+func (r RetryInvoiceIntegrationSyncResponse) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type JobsPartAuthorisationsResponse struct {
+type TriggerInvoiceIntegrationSyncResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *ApiListResponseOfPartAuthorisationResponse
-	JSON400      *ApiErrorResponse
-	JSON401      *ApiErrorResponse
-	JSON403      *ApiErrorResponse
-	JSON404      *ApiErrorResponse
-	JSON429      *ApiErrorResponse
+	JSON200      *IntegrationSyncCommand
+	JSON400      *ErrorResponse
+	JSON401      *ErrorResponse
+	JSON403      *ErrorResponse
+	JSON404      *ErrorResponse
+	JSON409      *ErrorResponse
+	JSON429      *ErrorResponse
+	JSON500      *ErrorResponse
 }
 
 // Status returns HTTPResponse.Status
-func (r JobsPartAuthorisationsResponse) Status() string {
+func (r TriggerInvoiceIntegrationSyncResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -6690,7 +10907,7 @@ func (r JobsPartAuthorisationsResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r JobsPartAuthorisationsResponse) StatusCode() int {
+func (r TriggerInvoiceIntegrationSyncResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -6698,27 +10915,28 @@ func (r JobsPartAuthorisationsResponse) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r JobsPartAuthorisationsResponse) ContentType() string {
+func (r TriggerInvoiceIntegrationSyncResponse) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type JobsSubmitPartAuthorisationDecisionsResponse struct {
+type PaymentLinkResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *ApiListResponseOfPartAuthorisationResponse
-	JSON400      *ApiErrorResponse
-	JSON401      *ApiErrorResponse
-	JSON403      *ApiErrorResponse
-	JSON404      *ApiErrorResponse
-	JSON409      *ApiErrorResponse
-	JSON429      *ApiErrorResponse
+	JSON200      *CommandResponseOfInvoicePaymentLink
+	JSON400      *ErrorResponse
+	JSON401      *ErrorResponse
+	JSON403      *ErrorResponse
+	JSON404      *ErrorResponse
+	JSON409      *ErrorResponse
+	JSON429      *ErrorResponse
+	JSON500      *ErrorResponse
 }
 
 // Status returns HTTPResponse.Status
-func (r JobsSubmitPartAuthorisationDecisionsResponse) Status() string {
+func (r PaymentLinkResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -6726,7 +10944,7 @@ func (r JobsSubmitPartAuthorisationDecisionsResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r JobsSubmitPartAuthorisationDecisionsResponse) StatusCode() int {
+func (r PaymentLinkResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -6734,26 +10952,28 @@ func (r JobsSubmitPartAuthorisationDecisionsResponse) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r JobsSubmitPartAuthorisationDecisionsResponse) ContentType() string {
+func (r PaymentLinkResponse) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type ServicesListResponse struct {
+type RecordPaymentResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *ApiListResponseOfServiceResponse
-	JSON400      *ApiErrorResponse
-	JSON401      *ApiErrorResponse
-	JSON403      *ApiErrorResponse
-	JSON404      *ApiErrorResponse
-	JSON429      *ApiErrorResponse
+	JSON201      *CommandResponseOfPayment
+	JSON400      *ErrorResponse
+	JSON401      *ErrorResponse
+	JSON403      *ErrorResponse
+	JSON404      *ErrorResponse
+	JSON409      *ErrorResponse
+	JSON429      *ErrorResponse
+	JSON500      *ErrorResponse
 }
 
 // Status returns HTTPResponse.Status
-func (r ServicesListResponse) Status() string {
+func (r RecordPaymentResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -6761,7 +10981,7 @@ func (r ServicesListResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r ServicesListResponse) StatusCode() int {
+func (r RecordPaymentResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -6769,26 +10989,27 @@ func (r ServicesListResponse) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r ServicesListResponse) ContentType() string {
+func (r RecordPaymentResponse) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type ServicesGetResponse struct {
+type PdfResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *ServiceResponse
-	JSON400      *ApiErrorResponse
-	JSON401      *ApiErrorResponse
-	JSON403      *ApiErrorResponse
-	JSON404      *ApiErrorResponse
-	JSON429      *ApiErrorResponse
+	JSON200      *InvoicePdf
+	JSON400      *ErrorResponse
+	JSON401      *ErrorResponse
+	JSON403      *ErrorResponse
+	JSON404      *ErrorResponse
+	JSON429      *ErrorResponse
+	JSON500      *ErrorResponse
 }
 
 // Status returns HTTPResponse.Status
-func (r ServicesGetResponse) Status() string {
+func (r PdfResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -6796,7 +11017,7 @@ func (r ServicesGetResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r ServicesGetResponse) StatusCode() int {
+func (r PdfResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -6804,26 +11025,28 @@ func (r ServicesGetResponse) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r ServicesGetResponse) ContentType() string {
+func (r PdfResponse) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type StockListResponse struct {
+type SendResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *ApiListResponseOfStockVariationResponse
-	JSON400      *ApiErrorResponse
-	JSON401      *ApiErrorResponse
-	JSON403      *ApiErrorResponse
-	JSON404      *ApiErrorResponse
-	JSON429      *ApiErrorResponse
+	JSON200      *CommandResponseOfInvoice
+	JSON400      *ErrorResponse
+	JSON401      *ErrorResponse
+	JSON403      *ErrorResponse
+	JSON404      *ErrorResponse
+	JSON409      *ErrorResponse
+	JSON429      *ErrorResponse
+	JSON500      *ErrorResponse
 }
 
 // Status returns HTTPResponse.Status
-func (r StockListResponse) Status() string {
+func (r SendResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -6831,7 +11054,7 @@ func (r StockListResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r StockListResponse) StatusCode() int {
+func (r SendResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -6839,26 +11062,28 @@ func (r StockListResponse) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r StockListResponse) ContentType() string {
+func (r SendResponse) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type StockGetResponse struct {
+type ChangeStatusResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *StockVariationResponse
-	JSON400      *ApiErrorResponse
-	JSON401      *ApiErrorResponse
-	JSON403      *ApiErrorResponse
-	JSON404      *ApiErrorResponse
-	JSON429      *ApiErrorResponse
+	JSON200      *CommandResponseOfInvoice
+	JSON400      *ErrorResponse
+	JSON401      *ErrorResponse
+	JSON403      *ErrorResponse
+	JSON404      *ErrorResponse
+	JSON409      *ErrorResponse
+	JSON429      *ErrorResponse
+	JSON500      *ErrorResponse
 }
 
 // Status returns HTTPResponse.Status
-func (r StockGetResponse) Status() string {
+func (r ChangeStatusResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -6866,7 +11091,7 @@ func (r StockGetResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r StockGetResponse) StatusCode() int {
+func (r ChangeStatusResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -6874,26 +11099,27 @@ func (r StockGetResponse) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r StockGetResponse) ContentType() string {
+func (r ChangeStatusResponse) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type WebhookDeliveriesGetResponse struct {
+type ListJobReportResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *WebhookDeliveryResponse
-	JSON400      *ApiErrorResponse
-	JSON401      *ApiErrorResponse
-	JSON403      *ApiErrorResponse
-	JSON404      *ApiErrorResponse
-	JSON429      *ApiErrorResponse
+	JSON200      *ListResponseOfJobReport
+	JSON400      *ErrorResponse
+	JSON401      *ErrorResponse
+	JSON403      *ErrorResponse
+	JSON404      *ErrorResponse
+	JSON429      *ErrorResponse
+	JSON500      *ErrorResponse
 }
 
 // Status returns HTTPResponse.Status
-func (r WebhookDeliveriesGetResponse) Status() string {
+func (r ListJobReportResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -6901,7 +11127,7 @@ func (r WebhookDeliveriesGetResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r WebhookDeliveriesGetResponse) StatusCode() int {
+func (r ListJobReportResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -6909,27 +11135,27 @@ func (r WebhookDeliveriesGetResponse) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r WebhookDeliveriesGetResponse) ContentType() string {
+func (r ListJobReportResponse) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type WebhookDeliveriesReplayResponse struct {
+type GetJobReportResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON201      *WebhookDeliveryResponse
-	JSON400      *ApiErrorResponse
-	JSON401      *ApiErrorResponse
-	JSON403      *ApiErrorResponse
-	JSON404      *ApiErrorResponse
-	JSON409      *ApiErrorResponse
-	JSON429      *ApiErrorResponse
+	JSON200      *JobReport
+	JSON400      *ErrorResponse
+	JSON401      *ErrorResponse
+	JSON403      *ErrorResponse
+	JSON404      *ErrorResponse
+	JSON429      *ErrorResponse
+	JSON500      *ErrorResponse
 }
 
 // Status returns HTTPResponse.Status
-func (r WebhookDeliveriesReplayResponse) Status() string {
+func (r GetJobReportResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -6937,7 +11163,7 @@ func (r WebhookDeliveriesReplayResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r WebhookDeliveriesReplayResponse) StatusCode() int {
+func (r GetJobReportResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -6945,26 +11171,27 @@ func (r WebhookDeliveriesReplayResponse) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r WebhookDeliveriesReplayResponse) ContentType() string {
+func (r GetJobReportResponse) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type WebhookEndpointsListResponse struct {
+type JobsResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *ApiListResponseOfWebhookEndpointResponse
-	JSON400      *ApiErrorResponse
-	JSON401      *ApiErrorResponse
-	JSON403      *ApiErrorResponse
-	JSON404      *ApiErrorResponse
-	JSON429      *ApiErrorResponse
+	JSON200      *ListResponseOfJob
+	JSON400      *ErrorResponse
+	JSON401      *ErrorResponse
+	JSON403      *ErrorResponse
+	JSON404      *ErrorResponse
+	JSON429      *ErrorResponse
+	JSON500      *ErrorResponse
 }
 
 // Status returns HTTPResponse.Status
-func (r WebhookEndpointsListResponse) Status() string {
+func (r JobsResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -6972,7 +11199,7 @@ func (r WebhookEndpointsListResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r WebhookEndpointsListResponse) StatusCode() int {
+func (r JobsResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -6980,27 +11207,28 @@ func (r WebhookEndpointsListResponse) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r WebhookEndpointsListResponse) ContentType() string {
+func (r JobsResponse) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type WebhookEndpointsCreateResponse struct {
+type CreateJobBookingResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON201      *CreateWebhookEndpointResponse
-	JSON400      *ApiErrorResponse
-	JSON401      *ApiErrorResponse
-	JSON403      *ApiErrorResponse
-	JSON404      *ApiErrorResponse
-	JSON409      *ApiErrorResponse
-	JSON429      *ApiErrorResponse
+	JSON201      *CommandResponseOfJob
+	JSON400      *ErrorResponse
+	JSON401      *ErrorResponse
+	JSON403      *ErrorResponse
+	JSON404      *ErrorResponse
+	JSON409      *ErrorResponse
+	JSON429      *ErrorResponse
+	JSON500      *ErrorResponse
 }
 
 // Status returns HTTPResponse.Status
-func (r WebhookEndpointsCreateResponse) Status() string {
+func (r CreateJobBookingResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -7008,7 +11236,7 @@ func (r WebhookEndpointsCreateResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r WebhookEndpointsCreateResponse) StatusCode() int {
+func (r CreateJobBookingResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -7016,27 +11244,27 @@ func (r WebhookEndpointsCreateResponse) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r WebhookEndpointsCreateResponse) ContentType() string {
+func (r CreateJobBookingResponse) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type WebhookEndpointsDeleteResponse struct {
+type JobResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *WebhookEndpointResponse
-	JSON400      *ApiErrorResponse
-	JSON401      *ApiErrorResponse
-	JSON403      *ApiErrorResponse
-	JSON404      *ApiErrorResponse
-	JSON409      *ApiErrorResponse
-	JSON429      *ApiErrorResponse
+	JSON200      *Job
+	JSON400      *ErrorResponse
+	JSON401      *ErrorResponse
+	JSON403      *ErrorResponse
+	JSON404      *ErrorResponse
+	JSON429      *ErrorResponse
+	JSON500      *ErrorResponse
 }
 
 // Status returns HTTPResponse.Status
-func (r WebhookEndpointsDeleteResponse) Status() string {
+func (r JobResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -7044,7 +11272,7 @@ func (r WebhookEndpointsDeleteResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r WebhookEndpointsDeleteResponse) StatusCode() int {
+func (r JobResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -7052,26 +11280,28 @@ func (r WebhookEndpointsDeleteResponse) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r WebhookEndpointsDeleteResponse) ContentType() string {
+func (r JobResponse) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type WebhookEndpointsGetResponse struct {
+type UpdateJobResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *WebhookEndpointResponse
-	JSON400      *ApiErrorResponse
-	JSON401      *ApiErrorResponse
-	JSON403      *ApiErrorResponse
-	JSON404      *ApiErrorResponse
-	JSON429      *ApiErrorResponse
+	JSON200      *CommandResponseOfJob
+	JSON400      *ErrorResponse
+	JSON401      *ErrorResponse
+	JSON403      *ErrorResponse
+	JSON404      *ErrorResponse
+	JSON409      *ErrorResponse
+	JSON429      *ErrorResponse
+	JSON500      *ErrorResponse
 }
 
 // Status returns HTTPResponse.Status
-func (r WebhookEndpointsGetResponse) Status() string {
+func (r UpdateJobResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -7079,7 +11309,7 @@ func (r WebhookEndpointsGetResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r WebhookEndpointsGetResponse) StatusCode() int {
+func (r UpdateJobResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -7087,27 +11317,28 @@ func (r WebhookEndpointsGetResponse) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r WebhookEndpointsGetResponse) ContentType() string {
+func (r UpdateJobResponse) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type WebhookEndpointsUpdateResponse struct {
+type ChangeAcceptedStatusResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *WebhookEndpointResponse
-	JSON400      *ApiErrorResponse
-	JSON401      *ApiErrorResponse
-	JSON403      *ApiErrorResponse
-	JSON404      *ApiErrorResponse
-	JSON409      *ApiErrorResponse
-	JSON429      *ApiErrorResponse
+	JSON200      *CommandResponseOfJob
+	JSON400      *ErrorResponse
+	JSON401      *ErrorResponse
+	JSON403      *ErrorResponse
+	JSON404      *ErrorResponse
+	JSON409      *ErrorResponse
+	JSON429      *ErrorResponse
+	JSON500      *ErrorResponse
 }
 
 // Status returns HTTPResponse.Status
-func (r WebhookEndpointsUpdateResponse) Status() string {
+func (r ChangeAcceptedStatusResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -7115,7 +11346,7 @@ func (r WebhookEndpointsUpdateResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r WebhookEndpointsUpdateResponse) StatusCode() int {
+func (r ChangeAcceptedStatusResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -7123,26 +11354,27 @@ func (r WebhookEndpointsUpdateResponse) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r WebhookEndpointsUpdateResponse) ContentType() string {
+func (r ChangeAcceptedStatusResponse) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type WebhookDeliveriesListForEndpointResponse struct {
+type ListJobReportForJobResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *ApiListResponseOfWebhookDeliveryResponse
-	JSON400      *ApiErrorResponse
-	JSON401      *ApiErrorResponse
-	JSON403      *ApiErrorResponse
-	JSON404      *ApiErrorResponse
-	JSON429      *ApiErrorResponse
+	JSON200      *ListResponseOfJobReport
+	JSON400      *ErrorResponse
+	JSON401      *ErrorResponse
+	JSON403      *ErrorResponse
+	JSON404      *ErrorResponse
+	JSON429      *ErrorResponse
+	JSON500      *ErrorResponse
 }
 
 // Status returns HTTPResponse.Status
-func (r WebhookDeliveriesListForEndpointResponse) Status() string {
+func (r ListJobReportForJobResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -7150,7 +11382,7 @@ func (r WebhookDeliveriesListForEndpointResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r WebhookDeliveriesListForEndpointResponse) StatusCode() int {
+func (r ListJobReportForJobResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -7158,27 +11390,27 @@ func (r WebhookDeliveriesListForEndpointResponse) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r WebhookDeliveriesListForEndpointResponse) ContentType() string {
+func (r ListJobReportForJobResponse) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type WebhookEndpointsRotateSecretResponse struct {
+type GetJobReportForJobResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *RotateWebhookEndpointSecretResponse
-	JSON400      *ApiErrorResponse
-	JSON401      *ApiErrorResponse
-	JSON403      *ApiErrorResponse
-	JSON404      *ApiErrorResponse
-	JSON409      *ApiErrorResponse
-	JSON429      *ApiErrorResponse
+	JSON200      *JobReport
+	JSON400      *ErrorResponse
+	JSON401      *ErrorResponse
+	JSON403      *ErrorResponse
+	JSON404      *ErrorResponse
+	JSON429      *ErrorResponse
+	JSON500      *ErrorResponse
 }
 
 // Status returns HTTPResponse.Status
-func (r WebhookEndpointsRotateSecretResponse) Status() string {
+func (r GetJobReportForJobResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -7186,7 +11418,7 @@ func (r WebhookEndpointsRotateSecretResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r WebhookEndpointsRotateSecretResponse) StatusCode() int {
+func (r GetJobReportForJobResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -7194,26 +11426,27 @@ func (r WebhookEndpointsRotateSecretResponse) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r WebhookEndpointsRotateSecretResponse) ContentType() string {
+func (r GetJobReportForJobResponse) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type WebhookEventsListResponse struct {
+type PartAuthorisationsResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *ApiListResponseOfWebhookEventResponse
-	JSON400      *ApiErrorResponse
-	JSON401      *ApiErrorResponse
-	JSON403      *ApiErrorResponse
-	JSON404      *ApiErrorResponse
-	JSON429      *ApiErrorResponse
+	JSON200      *ListResponseOfPartAuthorisation
+	JSON400      *ErrorResponse
+	JSON401      *ErrorResponse
+	JSON403      *ErrorResponse
+	JSON404      *ErrorResponse
+	JSON429      *ErrorResponse
+	JSON500      *ErrorResponse
 }
 
 // Status returns HTTPResponse.Status
-func (r WebhookEventsListResponse) Status() string {
+func (r PartAuthorisationsResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -7221,7 +11454,7 @@ func (r WebhookEventsListResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r WebhookEventsListResponse) StatusCode() int {
+func (r PartAuthorisationsResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -7229,204 +11462,1165 @@ func (r WebhookEventsListResponse) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r WebhookEventsListResponse) ContentType() string {
+func (r PartAuthorisationsResponse) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-// AssetsListWithResponse request returning *AssetsListResponse
-func (c *ClientWithResponses) AssetsListWithResponse(ctx context.Context, params *AssetsListParams, reqEditors ...RequestEditorFn) (*AssetsListResponse, error) {
-	rsp, err := c.AssetsList(ctx, params, reqEditors...)
+type SubmitPartAuthorisationDecisionsResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *CommandResponseOfBatchResponseOfPartAuthorisation
+	JSON400      *ErrorResponse
+	JSON401      *ErrorResponse
+	JSON403      *ErrorResponse
+	JSON404      *ErrorResponse
+	JSON409      *ErrorResponse
+	JSON429      *ErrorResponse
+	JSON500      *ErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r SubmitPartAuthorisationDecisionsResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r SubmitPartAuthorisationDecisionsResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r SubmitPartAuthorisationDecisionsResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type RequestPartAuthorisationResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *CommandResponseOfBatchResponseOfPartAuthorisation
+	JSON400      *ErrorResponse
+	JSON401      *ErrorResponse
+	JSON403      *ErrorResponse
+	JSON404      *ErrorResponse
+	JSON409      *ErrorResponse
+	JSON429      *ErrorResponse
+	JSON500      *ErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r RequestPartAuthorisationResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r RequestPartAuthorisationResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r RequestPartAuthorisationResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type ChangeScheduleResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *CommandResponseOfJob
+	JSON400      *ErrorResponse
+	JSON401      *ErrorResponse
+	JSON403      *ErrorResponse
+	JSON404      *ErrorResponse
+	JSON409      *ErrorResponse
+	JSON429      *ErrorResponse
+	JSON500      *ErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r ChangeScheduleResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ChangeScheduleResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r ChangeScheduleResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type UpdateWorkLineResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *CommandResponseOfJob
+	JSON400      *ErrorResponse
+	JSON401      *ErrorResponse
+	JSON403      *ErrorResponse
+	JSON404      *ErrorResponse
+	JSON409      *ErrorResponse
+	JSON429      *ErrorResponse
+	JSON500      *ErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r UpdateWorkLineResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r UpdateWorkLineResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r UpdateWorkLineResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type AssignWorkLineMechanicResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *CommandResponseOfJob
+	JSON400      *ErrorResponse
+	JSON401      *ErrorResponse
+	JSON403      *ErrorResponse
+	JSON404      *ErrorResponse
+	JSON409      *ErrorResponse
+	JSON429      *ErrorResponse
+	JSON500      *ErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r AssignWorkLineMechanicResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r AssignWorkLineMechanicResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r AssignWorkLineMechanicResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type ReplaceWorkLineServicesResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *CommandResponseOfJob
+	JSON400      *ErrorResponse
+	JSON401      *ErrorResponse
+	JSON403      *ErrorResponse
+	JSON404      *ErrorResponse
+	JSON409      *ErrorResponse
+	JSON429      *ErrorResponse
+	JSON500      *ErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r ReplaceWorkLineServicesResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ReplaceWorkLineServicesResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r ReplaceWorkLineServicesResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type ChangeWorkLineStatusResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *CommandResponseOfJob
+	JSON400      *ErrorResponse
+	JSON401      *ErrorResponse
+	JSON403      *ErrorResponse
+	JSON404      *ErrorResponse
+	JSON409      *ErrorResponse
+	JSON429      *ErrorResponse
+	JSON500      *ErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r ChangeWorkLineStatusResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ChangeWorkLineStatusResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r ChangeWorkLineStatusResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type RefundResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON201      *CommandResponseOfPayment
+	JSON400      *ErrorResponse
+	JSON401      *ErrorResponse
+	JSON403      *ErrorResponse
+	JSON404      *ErrorResponse
+	JSON409      *ErrorResponse
+	JSON429      *ErrorResponse
+	JSON500      *ErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r RefundResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r RefundResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r RefundResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type ListServiceResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *ListResponseOfService
+	JSON400      *ErrorResponse
+	JSON401      *ErrorResponse
+	JSON403      *ErrorResponse
+	JSON404      *ErrorResponse
+	JSON429      *ErrorResponse
+	JSON500      *ErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r ListServiceResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ListServiceResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r ListServiceResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type GetServiceResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *Service
+	JSON400      *ErrorResponse
+	JSON401      *ErrorResponse
+	JSON403      *ErrorResponse
+	JSON404      *ErrorResponse
+	JSON429      *ErrorResponse
+	JSON500      *ErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r GetServiceResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetServiceResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GetServiceResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type ListStockVariationResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *ListResponseOfStockVariation
+	JSON400      *ErrorResponse
+	JSON401      *ErrorResponse
+	JSON403      *ErrorResponse
+	JSON404      *ErrorResponse
+	JSON429      *ErrorResponse
+	JSON500      *ErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r ListStockVariationResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ListStockVariationResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r ListStockVariationResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type GetStockVariationResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *StockVariation
+	JSON400      *ErrorResponse
+	JSON401      *ErrorResponse
+	JSON403      *ErrorResponse
+	JSON404      *ErrorResponse
+	JSON429      *ErrorResponse
+	JSON500      *ErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r GetStockVariationResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetStockVariationResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GetStockVariationResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type GetWebhookDeliveryResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *WebhookDelivery
+	JSON400      *ErrorResponse
+	JSON401      *ErrorResponse
+	JSON403      *ErrorResponse
+	JSON404      *ErrorResponse
+	JSON429      *ErrorResponse
+	JSON500      *ErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r GetWebhookDeliveryResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetWebhookDeliveryResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GetWebhookDeliveryResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type ReplayResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON201      *CommandResponseOfWebhookDelivery
+	JSON400      *ErrorResponse
+	JSON401      *ErrorResponse
+	JSON403      *ErrorResponse
+	JSON404      *ErrorResponse
+	JSON409      *ErrorResponse
+	JSON429      *ErrorResponse
+	JSON500      *ErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r ReplayResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ReplayResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r ReplayResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type ListWebhookEndpointResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *ListResponseOfWebhookEndpoint
+	JSON400      *ErrorResponse
+	JSON401      *ErrorResponse
+	JSON403      *ErrorResponse
+	JSON404      *ErrorResponse
+	JSON429      *ErrorResponse
+	JSON500      *ErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r ListWebhookEndpointResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ListWebhookEndpointResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r ListWebhookEndpointResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type CreateWebhookEndpointResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON201      *WebhookEndpointWithSecret
+	JSON400      *ErrorResponse
+	JSON401      *ErrorResponse
+	JSON403      *ErrorResponse
+	JSON404      *ErrorResponse
+	JSON409      *ErrorResponse
+	JSON429      *ErrorResponse
+	JSON500      *ErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r CreateWebhookEndpointResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r CreateWebhookEndpointResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r CreateWebhookEndpointResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type DeleteWebhookEndpointResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *WebhookEndpoint
+	JSON400      *ErrorResponse
+	JSON401      *ErrorResponse
+	JSON403      *ErrorResponse
+	JSON404      *ErrorResponse
+	JSON409      *ErrorResponse
+	JSON429      *ErrorResponse
+	JSON500      *ErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r DeleteWebhookEndpointResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r DeleteWebhookEndpointResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r DeleteWebhookEndpointResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type GetWebhookEndpointResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *WebhookEndpoint
+	JSON400      *ErrorResponse
+	JSON401      *ErrorResponse
+	JSON403      *ErrorResponse
+	JSON404      *ErrorResponse
+	JSON429      *ErrorResponse
+	JSON500      *ErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r GetWebhookEndpointResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetWebhookEndpointResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GetWebhookEndpointResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type UpdateWebhookEndpointResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *WebhookEndpoint
+	JSON400      *ErrorResponse
+	JSON401      *ErrorResponse
+	JSON403      *ErrorResponse
+	JSON404      *ErrorResponse
+	JSON409      *ErrorResponse
+	JSON429      *ErrorResponse
+	JSON500      *ErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r UpdateWebhookEndpointResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r UpdateWebhookEndpointResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r UpdateWebhookEndpointResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type ListForEndpointResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *ListResponseOfWebhookDelivery
+	JSON400      *ErrorResponse
+	JSON401      *ErrorResponse
+	JSON403      *ErrorResponse
+	JSON404      *ErrorResponse
+	JSON429      *ErrorResponse
+	JSON500      *ErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r ListForEndpointResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ListForEndpointResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r ListForEndpointResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type RotateSecretResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *CommandResponseOfWebhookEndpointWithSecret
+	JSON400      *ErrorResponse
+	JSON401      *ErrorResponse
+	JSON403      *ErrorResponse
+	JSON404      *ErrorResponse
+	JSON409      *ErrorResponse
+	JSON429      *ErrorResponse
+	JSON500      *ErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r RotateSecretResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r RotateSecretResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r RotateSecretResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type ListWebhookEventResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *ListResponseOfWebhookEventType
+	JSON400      *ErrorResponse
+	JSON401      *ErrorResponse
+	JSON403      *ErrorResponse
+	JSON404      *ErrorResponse
+	JSON429      *ErrorResponse
+	JSON500      *ErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r ListWebhookEventResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ListWebhookEventResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r ListWebhookEventResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+// ListAssetWithResponse request returning *ListAssetResponse
+func (c *ClientWithResponses) ListAssetWithResponse(ctx context.Context, params *ListAssetParams, reqEditors ...RequestEditorFn) (*ListAssetResponse, error) {
+	rsp, err := c.ListAsset(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseAssetsListResponse(rsp)
+	return ParseListAssetResponse(rsp)
 }
 
-// AssetsCreateWithBodyWithResponse request with arbitrary body returning *AssetsCreateResponse
-func (c *ClientWithResponses) AssetsCreateWithBodyWithResponse(ctx context.Context, params *AssetsCreateParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*AssetsCreateResponse, error) {
-	rsp, err := c.AssetsCreateWithBody(ctx, params, contentType, body, reqEditors...)
+// CreateAssetWithBodyWithResponse request with arbitrary body returning *CreateAssetResponse
+func (c *ClientWithResponses) CreateAssetWithBodyWithResponse(ctx context.Context, params *CreateAssetParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateAssetResponse, error) {
+	rsp, err := c.CreateAssetWithBody(ctx, params, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseAssetsCreateResponse(rsp)
+	return ParseCreateAssetResponse(rsp)
 }
 
-func (c *ClientWithResponses) AssetsCreateWithResponse(ctx context.Context, params *AssetsCreateParams, body AssetsCreateJSONRequestBody, reqEditors ...RequestEditorFn) (*AssetsCreateResponse, error) {
-	rsp, err := c.AssetsCreate(ctx, params, body, reqEditors...)
+func (c *ClientWithResponses) CreateAssetWithResponse(ctx context.Context, params *CreateAssetParams, body CreateAssetJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateAssetResponse, error) {
+	rsp, err := c.CreateAsset(ctx, params, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseAssetsCreateResponse(rsp)
+	return ParseCreateAssetResponse(rsp)
 }
 
-// AssetsGetWithResponse request returning *AssetsGetResponse
-func (c *ClientWithResponses) AssetsGetWithResponse(ctx context.Context, assetId string, params *AssetsGetParams, reqEditors ...RequestEditorFn) (*AssetsGetResponse, error) {
-	rsp, err := c.AssetsGet(ctx, assetId, params, reqEditors...)
+// DeleteAssetWithResponse request returning *DeleteAssetResponse
+func (c *ClientWithResponses) DeleteAssetWithResponse(ctx context.Context, assetId string, params *DeleteAssetParams, reqEditors ...RequestEditorFn) (*DeleteAssetResponse, error) {
+	rsp, err := c.DeleteAsset(ctx, assetId, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseAssetsGetResponse(rsp)
+	return ParseDeleteAssetResponse(rsp)
 }
 
-// AssetsUpdateWithBodyWithResponse request with arbitrary body returning *AssetsUpdateResponse
-func (c *ClientWithResponses) AssetsUpdateWithBodyWithResponse(ctx context.Context, assetId string, params *AssetsUpdateParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*AssetsUpdateResponse, error) {
-	rsp, err := c.AssetsUpdateWithBody(ctx, assetId, params, contentType, body, reqEditors...)
+// GetAssetWithResponse request returning *GetAssetResponse
+func (c *ClientWithResponses) GetAssetWithResponse(ctx context.Context, assetId string, params *GetAssetParams, reqEditors ...RequestEditorFn) (*GetAssetResponse, error) {
+	rsp, err := c.GetAsset(ctx, assetId, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseAssetsUpdateResponse(rsp)
+	return ParseGetAssetResponse(rsp)
 }
 
-func (c *ClientWithResponses) AssetsUpdateWithResponse(ctx context.Context, assetId string, params *AssetsUpdateParams, body AssetsUpdateJSONRequestBody, reqEditors ...RequestEditorFn) (*AssetsUpdateResponse, error) {
-	rsp, err := c.AssetsUpdate(ctx, assetId, params, body, reqEditors...)
+// UpdateAssetWithBodyWithResponse request with arbitrary body returning *UpdateAssetResponse
+func (c *ClientWithResponses) UpdateAssetWithBodyWithResponse(ctx context.Context, assetId string, params *UpdateAssetParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateAssetResponse, error) {
+	rsp, err := c.UpdateAssetWithBody(ctx, assetId, params, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseAssetsUpdateResponse(rsp)
+	return ParseUpdateAssetResponse(rsp)
 }
 
-// BusinessesListWithResponse request returning *BusinessesListResponse
-func (c *ClientWithResponses) BusinessesListWithResponse(ctx context.Context, params *BusinessesListParams, reqEditors ...RequestEditorFn) (*BusinessesListResponse, error) {
-	rsp, err := c.BusinessesList(ctx, params, reqEditors...)
+func (c *ClientWithResponses) UpdateAssetWithResponse(ctx context.Context, assetId string, params *UpdateAssetParams, body UpdateAssetJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateAssetResponse, error) {
+	rsp, err := c.UpdateAsset(ctx, assetId, params, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseBusinessesListResponse(rsp)
+	return ParseUpdateAssetResponse(rsp)
 }
 
-// BusinessesGetWithResponse request returning *BusinessesGetResponse
-func (c *ClientWithResponses) BusinessesGetWithResponse(ctx context.Context, businessId string, params *BusinessesGetParams, reqEditors ...RequestEditorFn) (*BusinessesGetResponse, error) {
-	rsp, err := c.BusinessesGet(ctx, businessId, params, reqEditors...)
+// ListWithResponse request returning *ListResponse
+func (c *ClientWithResponses) ListWithResponse(ctx context.Context, params *ListParams, reqEditors ...RequestEditorFn) (*ListResponse, error) {
+	rsp, err := c.List(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseBusinessesGetResponse(rsp)
+	return ParseListResponse(rsp)
 }
 
-// BusinessesAvailabilityWithResponse request returning *BusinessesAvailabilityResponse
-func (c *ClientWithResponses) BusinessesAvailabilityWithResponse(ctx context.Context, businessId string, params *BusinessesAvailabilityParams, reqEditors ...RequestEditorFn) (*BusinessesAvailabilityResponse, error) {
-	rsp, err := c.BusinessesAvailability(ctx, businessId, params, reqEditors...)
+// CreateWithBodyWithResponse request with arbitrary body returning *CreateResponse
+func (c *ClientWithResponses) CreateWithBodyWithResponse(ctx context.Context, params *CreateParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateResponse, error) {
+	rsp, err := c.CreateWithBody(ctx, params, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseBusinessesAvailabilityResponse(rsp)
+	return ParseCreateResponse(rsp)
 }
 
-// BusinessesAvailabilitySlotsWithResponse request returning *BusinessesAvailabilitySlotsResponse
-func (c *ClientWithResponses) BusinessesAvailabilitySlotsWithResponse(ctx context.Context, businessId string, params *BusinessesAvailabilitySlotsParams, reqEditors ...RequestEditorFn) (*BusinessesAvailabilitySlotsResponse, error) {
-	rsp, err := c.BusinessesAvailabilitySlots(ctx, businessId, params, reqEditors...)
+func (c *ClientWithResponses) CreateWithResponse(ctx context.Context, params *CreateParams, body CreateJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateResponse, error) {
+	rsp, err := c.Create(ctx, params, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseBusinessesAvailabilitySlotsResponse(rsp)
+	return ParseCreateResponse(rsp)
 }
 
-// BusinessesNextAvailableSlotWithResponse request returning *BusinessesNextAvailableSlotResponse
-func (c *ClientWithResponses) BusinessesNextAvailableSlotWithResponse(ctx context.Context, businessId string, params *BusinessesNextAvailableSlotParams, reqEditors ...RequestEditorFn) (*BusinessesNextAvailableSlotResponse, error) {
-	rsp, err := c.BusinessesNextAvailableSlot(ctx, businessId, params, reqEditors...)
+// ReceiveWithBodyWithResponse request with arbitrary body returning *ReceiveResponse
+func (c *ClientWithResponses) ReceiveWithBodyWithResponse(ctx context.Context, params *ReceiveParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*ReceiveResponse, error) {
+	rsp, err := c.ReceiveWithBody(ctx, params, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseBusinessesNextAvailableSlotResponse(rsp)
+	return ParseReceiveResponse(rsp)
 }
 
-// BusinessesServicesWithResponse request returning *BusinessesServicesResponse
-func (c *ClientWithResponses) BusinessesServicesWithResponse(ctx context.Context, businessId string, params *BusinessesServicesParams, reqEditors ...RequestEditorFn) (*BusinessesServicesResponse, error) {
-	rsp, err := c.BusinessesServices(ctx, businessId, params, reqEditors...)
+func (c *ClientWithResponses) ReceiveWithResponse(ctx context.Context, params *ReceiveParams, body ReceiveJSONRequestBody, reqEditors ...RequestEditorFn) (*ReceiveResponse, error) {
+	rsp, err := c.Receive(ctx, params, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseBusinessesServicesResponse(rsp)
+	return ParseReceiveResponse(rsp)
 }
 
-// ServicesCreateWithBodyWithResponse request with arbitrary body returning *ServicesCreateResponse
-func (c *ClientWithResponses) ServicesCreateWithBodyWithResponse(ctx context.Context, businessId string, params *ServicesCreateParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*ServicesCreateResponse, error) {
-	rsp, err := c.ServicesCreateWithBody(ctx, businessId, params, contentType, body, reqEditors...)
+// DeleteWithResponse request returning *DeleteResponse
+func (c *ClientWithResponses) DeleteWithResponse(ctx context.Context, backOrderId string, params *DeleteParams, reqEditors ...RequestEditorFn) (*DeleteResponse, error) {
+	rsp, err := c.Delete(ctx, backOrderId, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseServicesCreateResponse(rsp)
+	return ParseDeleteResponse(rsp)
 }
 
-func (c *ClientWithResponses) ServicesCreateWithResponse(ctx context.Context, businessId string, params *ServicesCreateParams, body ServicesCreateJSONRequestBody, reqEditors ...RequestEditorFn) (*ServicesCreateResponse, error) {
-	rsp, err := c.ServicesCreate(ctx, businessId, params, body, reqEditors...)
+// GetWithResponse request returning *GetResponse
+func (c *ClientWithResponses) GetWithResponse(ctx context.Context, backOrderId string, params *GetParams, reqEditors ...RequestEditorFn) (*GetResponse, error) {
+	rsp, err := c.Get(ctx, backOrderId, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseServicesCreateResponse(rsp)
+	return ParseGetResponse(rsp)
 }
 
-// ServicesUpdateWithBodyWithResponse request with arbitrary body returning *ServicesUpdateResponse
-func (c *ClientWithResponses) ServicesUpdateWithBodyWithResponse(ctx context.Context, businessId string, serviceId string, params *ServicesUpdateParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*ServicesUpdateResponse, error) {
-	rsp, err := c.ServicesUpdateWithBody(ctx, businessId, serviceId, params, contentType, body, reqEditors...)
+// UpdateWithBodyWithResponse request with arbitrary body returning *UpdateResponse
+func (c *ClientWithResponses) UpdateWithBodyWithResponse(ctx context.Context, backOrderId string, params *UpdateParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateResponse, error) {
+	rsp, err := c.UpdateWithBody(ctx, backOrderId, params, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseServicesUpdateResponse(rsp)
+	return ParseUpdateResponse(rsp)
 }
 
-func (c *ClientWithResponses) ServicesUpdateWithResponse(ctx context.Context, businessId string, serviceId string, params *ServicesUpdateParams, body ServicesUpdateJSONRequestBody, reqEditors ...RequestEditorFn) (*ServicesUpdateResponse, error) {
-	rsp, err := c.ServicesUpdate(ctx, businessId, serviceId, params, body, reqEditors...)
+func (c *ClientWithResponses) UpdateWithResponse(ctx context.Context, backOrderId string, params *UpdateParams, body UpdateJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateResponse, error) {
+	rsp, err := c.Update(ctx, backOrderId, params, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseServicesUpdateResponse(rsp)
+	return ParseUpdateResponse(rsp)
 }
 
-// CustomersListWithResponse request returning *CustomersListResponse
-func (c *ClientWithResponses) CustomersListWithResponse(ctx context.Context, params *CustomersListParams, reqEditors ...RequestEditorFn) (*CustomersListResponse, error) {
-	rsp, err := c.CustomersList(ctx, params, reqEditors...)
+// ListBusinessWithResponse request returning *ListBusinessResponse
+func (c *ClientWithResponses) ListBusinessWithResponse(ctx context.Context, params *ListBusinessParams, reqEditors ...RequestEditorFn) (*ListBusinessResponse, error) {
+	rsp, err := c.ListBusiness(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseCustomersListResponse(rsp)
+	return ParseListBusinessResponse(rsp)
 }
 
-// CustomersGetWithResponse request returning *CustomersGetResponse
-func (c *ClientWithResponses) CustomersGetWithResponse(ctx context.Context, customerId string, params *CustomersGetParams, reqEditors ...RequestEditorFn) (*CustomersGetResponse, error) {
-	rsp, err := c.CustomersGet(ctx, customerId, params, reqEditors...)
+// GetBusinessWithResponse request returning *GetBusinessResponse
+func (c *ClientWithResponses) GetBusinessWithResponse(ctx context.Context, businessId string, params *GetBusinessParams, reqEditors ...RequestEditorFn) (*GetBusinessResponse, error) {
+	rsp, err := c.GetBusiness(ctx, businessId, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseCustomersGetResponse(rsp)
+	return ParseGetBusinessResponse(rsp)
 }
 
-// CustomersUpdateWithBodyWithResponse request with arbitrary body returning *CustomersUpdateResponse
-func (c *ClientWithResponses) CustomersUpdateWithBodyWithResponse(ctx context.Context, customerId string, params *CustomersUpdateParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CustomersUpdateResponse, error) {
-	rsp, err := c.CustomersUpdateWithBody(ctx, customerId, params, contentType, body, reqEditors...)
+// AvailabilityWithResponse request returning *AvailabilityResponse
+func (c *ClientWithResponses) AvailabilityWithResponse(ctx context.Context, businessId string, params *AvailabilityParams, reqEditors ...RequestEditorFn) (*AvailabilityResponse, error) {
+	rsp, err := c.Availability(ctx, businessId, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseCustomersUpdateResponse(rsp)
+	return ParseAvailabilityResponse(rsp)
 }
 
-func (c *ClientWithResponses) CustomersUpdateWithResponse(ctx context.Context, customerId string, params *CustomersUpdateParams, body CustomersUpdateJSONRequestBody, reqEditors ...RequestEditorFn) (*CustomersUpdateResponse, error) {
-	rsp, err := c.CustomersUpdate(ctx, customerId, params, body, reqEditors...)
+// AvailabilitySlotsWithResponse request returning *AvailabilitySlotsResponse
+func (c *ClientWithResponses) AvailabilitySlotsWithResponse(ctx context.Context, businessId string, params *AvailabilitySlotsParams, reqEditors ...RequestEditorFn) (*AvailabilitySlotsResponse, error) {
+	rsp, err := c.AvailabilitySlots(ctx, businessId, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseCustomersUpdateResponse(rsp)
+	return ParseAvailabilitySlotsResponse(rsp)
 }
 
-// AssetsListForCustomerWithResponse request returning *AssetsListForCustomerResponse
-func (c *ClientWithResponses) AssetsListForCustomerWithResponse(ctx context.Context, customerId string, params *AssetsListForCustomerParams, reqEditors ...RequestEditorFn) (*AssetsListForCustomerResponse, error) {
-	rsp, err := c.AssetsListForCustomer(ctx, customerId, params, reqEditors...)
+// BusinessIntegrationWithResponse request returning *BusinessIntegrationResponse
+func (c *ClientWithResponses) BusinessIntegrationWithResponse(ctx context.Context, businessId string, params *BusinessIntegrationParams, reqEditors ...RequestEditorFn) (*BusinessIntegrationResponse, error) {
+	rsp, err := c.BusinessIntegration(ctx, businessId, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseAssetsListForCustomerResponse(rsp)
+	return ParseBusinessIntegrationResponse(rsp)
 }
 
-// ChatCreateAttachmentsWithBodyWithResponse request with arbitrary body returning *ChatCreateAttachmentsResponse
-func (c *ClientWithResponses) ChatCreateAttachmentsWithBodyWithResponse(ctx context.Context, customerId string, params *ChatCreateAttachmentsParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*ChatCreateAttachmentsResponse, error) {
-	rsp, err := c.ChatCreateAttachmentsWithBody(ctx, customerId, params, contentType, body, reqEditors...)
+// TriggerCustomerSyncWithBodyWithResponse request with arbitrary body returning *TriggerCustomerSyncResponse
+func (c *ClientWithResponses) TriggerCustomerSyncWithBodyWithResponse(ctx context.Context, businessId string, params *TriggerCustomerSyncParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*TriggerCustomerSyncResponse, error) {
+	rsp, err := c.TriggerCustomerSyncWithBody(ctx, businessId, params, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseChatCreateAttachmentsResponse(rsp)
+	return ParseTriggerCustomerSyncResponse(rsp)
+}
+
+func (c *ClientWithResponses) TriggerCustomerSyncWithResponse(ctx context.Context, businessId string, params *TriggerCustomerSyncParams, body TriggerCustomerSyncJSONRequestBody, reqEditors ...RequestEditorFn) (*TriggerCustomerSyncResponse, error) {
+	rsp, err := c.TriggerCustomerSync(ctx, businessId, params, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseTriggerCustomerSyncResponse(rsp)
+}
+
+// TriggerStockSyncWithBodyWithResponse request with arbitrary body returning *TriggerStockSyncResponse
+func (c *ClientWithResponses) TriggerStockSyncWithBodyWithResponse(ctx context.Context, businessId string, params *TriggerStockSyncParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*TriggerStockSyncResponse, error) {
+	rsp, err := c.TriggerStockSyncWithBody(ctx, businessId, params, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseTriggerStockSyncResponse(rsp)
+}
+
+func (c *ClientWithResponses) TriggerStockSyncWithResponse(ctx context.Context, businessId string, params *TriggerStockSyncParams, body TriggerStockSyncJSONRequestBody, reqEditors ...RequestEditorFn) (*TriggerStockSyncResponse, error) {
+	rsp, err := c.TriggerStockSync(ctx, businessId, params, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseTriggerStockSyncResponse(rsp)
+}
+
+// JobStatusesWithResponse request returning *JobStatusesResponse
+func (c *ClientWithResponses) JobStatusesWithResponse(ctx context.Context, businessId string, params *JobStatusesParams, reqEditors ...RequestEditorFn) (*JobStatusesResponse, error) {
+	rsp, err := c.JobStatuses(ctx, businessId, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseJobStatusesResponse(rsp)
+}
+
+// NextAvailableSlotWithResponse request returning *NextAvailableSlotResponse
+func (c *ClientWithResponses) NextAvailableSlotWithResponse(ctx context.Context, businessId string, params *NextAvailableSlotParams, reqEditors ...RequestEditorFn) (*NextAvailableSlotResponse, error) {
+	rsp, err := c.NextAvailableSlot(ctx, businessId, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseNextAvailableSlotResponse(rsp)
+}
+
+// ServicesWithResponse request returning *ServicesResponse
+func (c *ClientWithResponses) ServicesWithResponse(ctx context.Context, businessId string, params *ServicesParams, reqEditors ...RequestEditorFn) (*ServicesResponse, error) {
+	rsp, err := c.Services(ctx, businessId, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseServicesResponse(rsp)
+}
+
+// CreateServiceWithBodyWithResponse request with arbitrary body returning *CreateServiceResponse
+func (c *ClientWithResponses) CreateServiceWithBodyWithResponse(ctx context.Context, businessId string, params *CreateServiceParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateServiceResponse, error) {
+	rsp, err := c.CreateServiceWithBody(ctx, businessId, params, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateServiceResponse(rsp)
+}
+
+func (c *ClientWithResponses) CreateServiceWithResponse(ctx context.Context, businessId string, params *CreateServiceParams, body CreateServiceJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateServiceResponse, error) {
+	rsp, err := c.CreateService(ctx, businessId, params, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateServiceResponse(rsp)
+}
+
+// UpdateServiceWithBodyWithResponse request with arbitrary body returning *UpdateServiceResponse
+func (c *ClientWithResponses) UpdateServiceWithBodyWithResponse(ctx context.Context, businessId string, serviceId string, params *UpdateServiceParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateServiceResponse, error) {
+	rsp, err := c.UpdateServiceWithBody(ctx, businessId, serviceId, params, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateServiceResponse(rsp)
+}
+
+func (c *ClientWithResponses) UpdateServiceWithResponse(ctx context.Context, businessId string, serviceId string, params *UpdateServiceParams, body UpdateServiceJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateServiceResponse, error) {
+	rsp, err := c.UpdateService(ctx, businessId, serviceId, params, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateServiceResponse(rsp)
+}
+
+// CustomersWithResponse request returning *CustomersResponse
+func (c *ClientWithResponses) CustomersWithResponse(ctx context.Context, params *CustomersParams, reqEditors ...RequestEditorFn) (*CustomersResponse, error) {
+	rsp, err := c.Customers(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCustomersResponse(rsp)
+}
+
+// CreateCustomerWithBodyWithResponse request with arbitrary body returning *CreateCustomerResponse
+func (c *ClientWithResponses) CreateCustomerWithBodyWithResponse(ctx context.Context, params *CreateCustomerParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateCustomerResponse, error) {
+	rsp, err := c.CreateCustomerWithBody(ctx, params, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateCustomerResponse(rsp)
+}
+
+func (c *ClientWithResponses) CreateCustomerWithResponse(ctx context.Context, params *CreateCustomerParams, body CreateCustomerJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateCustomerResponse, error) {
+	rsp, err := c.CreateCustomer(ctx, params, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateCustomerResponse(rsp)
+}
+
+// CustomerWithResponse request returning *CustomerResponse
+func (c *ClientWithResponses) CustomerWithResponse(ctx context.Context, customerId string, params *CustomerParams, reqEditors ...RequestEditorFn) (*CustomerResponse, error) {
+	rsp, err := c.Customer(ctx, customerId, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCustomerResponse(rsp)
+}
+
+// UpdateCustomerWithBodyWithResponse request with arbitrary body returning *UpdateCustomerResponse
+func (c *ClientWithResponses) UpdateCustomerWithBodyWithResponse(ctx context.Context, customerId string, params *UpdateCustomerParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateCustomerResponse, error) {
+	rsp, err := c.UpdateCustomerWithBody(ctx, customerId, params, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateCustomerResponse(rsp)
+}
+
+func (c *ClientWithResponses) UpdateCustomerWithResponse(ctx context.Context, customerId string, params *UpdateCustomerParams, body UpdateCustomerJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateCustomerResponse, error) {
+	rsp, err := c.UpdateCustomer(ctx, customerId, params, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateCustomerResponse(rsp)
+}
+
+// ListForCustomerWithResponse request returning *ListForCustomerResponse
+func (c *ClientWithResponses) ListForCustomerWithResponse(ctx context.Context, customerId string, params *ListForCustomerParams, reqEditors ...RequestEditorFn) (*ListForCustomerResponse, error) {
+	rsp, err := c.ListForCustomer(ctx, customerId, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseListForCustomerResponse(rsp)
+}
+
+// CreateChatAttachmentsWithBodyWithResponse request with arbitrary body returning *CreateChatAttachmentsResponse
+func (c *ClientWithResponses) CreateChatAttachmentsWithBodyWithResponse(ctx context.Context, customerId string, params *CreateChatAttachmentsParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateChatAttachmentsResponse, error) {
+	rsp, err := c.CreateChatAttachmentsWithBody(ctx, customerId, params, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateChatAttachmentsResponse(rsp)
 }
 
 // ChatMessagesWithResponse request returning *ChatMessagesResponse
@@ -7438,1405 +12632,2722 @@ func (c *ClientWithResponses) ChatMessagesWithResponse(ctx context.Context, cust
 	return ParseChatMessagesResponse(rsp)
 }
 
-// ChatCreateMessageWithBodyWithResponse request with arbitrary body returning *ChatCreateMessageResponse
-func (c *ClientWithResponses) ChatCreateMessageWithBodyWithResponse(ctx context.Context, customerId string, params *ChatCreateMessageParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*ChatCreateMessageResponse, error) {
-	rsp, err := c.ChatCreateMessageWithBody(ctx, customerId, params, contentType, body, reqEditors...)
+// CreateChatMessageWithBodyWithResponse request with arbitrary body returning *CreateChatMessageResponse
+func (c *ClientWithResponses) CreateChatMessageWithBodyWithResponse(ctx context.Context, customerId string, params *CreateChatMessageParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateChatMessageResponse, error) {
+	rsp, err := c.CreateChatMessageWithBody(ctx, customerId, params, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseChatCreateMessageResponse(rsp)
+	return ParseCreateChatMessageResponse(rsp)
 }
 
-func (c *ClientWithResponses) ChatCreateMessageWithResponse(ctx context.Context, customerId string, params *ChatCreateMessageParams, body ChatCreateMessageJSONRequestBody, reqEditors ...RequestEditorFn) (*ChatCreateMessageResponse, error) {
-	rsp, err := c.ChatCreateMessage(ctx, customerId, params, body, reqEditors...)
+func (c *ClientWithResponses) CreateChatMessageWithResponse(ctx context.Context, customerId string, params *CreateChatMessageParams, body CreateChatMessageJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateChatMessageResponse, error) {
+	rsp, err := c.CreateChatMessage(ctx, customerId, params, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseChatCreateMessageResponse(rsp)
+	return ParseCreateChatMessageResponse(rsp)
 }
 
-// InvoiceItemsCreateWithBodyWithResponse request with arbitrary body returning *InvoiceItemsCreateResponse
-func (c *ClientWithResponses) InvoiceItemsCreateWithBodyWithResponse(ctx context.Context, params *InvoiceItemsCreateParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*InvoiceItemsCreateResponse, error) {
-	rsp, err := c.InvoiceItemsCreateWithBody(ctx, params, contentType, body, reqEditors...)
+// MarkReadWithResponse request returning *MarkReadResponse
+func (c *ClientWithResponses) MarkReadWithResponse(ctx context.Context, customerId string, params *MarkReadParams, reqEditors ...RequestEditorFn) (*MarkReadResponse, error) {
+	rsp, err := c.MarkRead(ctx, customerId, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseInvoiceItemsCreateResponse(rsp)
+	return ParseMarkReadResponse(rsp)
 }
 
-func (c *ClientWithResponses) InvoiceItemsCreateWithResponse(ctx context.Context, params *InvoiceItemsCreateParams, body InvoiceItemsCreateJSONRequestBody, reqEditors ...RequestEditorFn) (*InvoiceItemsCreateResponse, error) {
-	rsp, err := c.InvoiceItemsCreate(ctx, params, body, reqEditors...)
+// CreateInvoiceItemWithBodyWithResponse request with arbitrary body returning *CreateInvoiceItemResponse
+func (c *ClientWithResponses) CreateInvoiceItemWithBodyWithResponse(ctx context.Context, params *CreateInvoiceItemParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateInvoiceItemResponse, error) {
+	rsp, err := c.CreateInvoiceItemWithBody(ctx, params, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseInvoiceItemsCreateResponse(rsp)
+	return ParseCreateInvoiceItemResponse(rsp)
 }
 
-// InvoiceItemsDeleteWithResponse request returning *InvoiceItemsDeleteResponse
-func (c *ClientWithResponses) InvoiceItemsDeleteWithResponse(ctx context.Context, invoiceItemId string, params *InvoiceItemsDeleteParams, reqEditors ...RequestEditorFn) (*InvoiceItemsDeleteResponse, error) {
-	rsp, err := c.InvoiceItemsDelete(ctx, invoiceItemId, params, reqEditors...)
+func (c *ClientWithResponses) CreateInvoiceItemWithResponse(ctx context.Context, params *CreateInvoiceItemParams, body CreateInvoiceItemJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateInvoiceItemResponse, error) {
+	rsp, err := c.CreateInvoiceItem(ctx, params, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseInvoiceItemsDeleteResponse(rsp)
+	return ParseCreateInvoiceItemResponse(rsp)
 }
 
-// InvoiceItemsGetWithResponse request returning *InvoiceItemsGetResponse
-func (c *ClientWithResponses) InvoiceItemsGetWithResponse(ctx context.Context, invoiceItemId string, params *InvoiceItemsGetParams, reqEditors ...RequestEditorFn) (*InvoiceItemsGetResponse, error) {
-	rsp, err := c.InvoiceItemsGet(ctx, invoiceItemId, params, reqEditors...)
+// DeleteInvoiceItemWithResponse request returning *DeleteInvoiceItemResponse
+func (c *ClientWithResponses) DeleteInvoiceItemWithResponse(ctx context.Context, invoiceItemId string, params *DeleteInvoiceItemParams, reqEditors ...RequestEditorFn) (*DeleteInvoiceItemResponse, error) {
+	rsp, err := c.DeleteInvoiceItem(ctx, invoiceItemId, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseInvoiceItemsGetResponse(rsp)
+	return ParseDeleteInvoiceItemResponse(rsp)
 }
 
-// InvoiceItemsUpdateWithBodyWithResponse request with arbitrary body returning *InvoiceItemsUpdateResponse
-func (c *ClientWithResponses) InvoiceItemsUpdateWithBodyWithResponse(ctx context.Context, invoiceItemId string, params *InvoiceItemsUpdateParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*InvoiceItemsUpdateResponse, error) {
-	rsp, err := c.InvoiceItemsUpdateWithBody(ctx, invoiceItemId, params, contentType, body, reqEditors...)
+// GetInvoiceItemWithResponse request returning *GetInvoiceItemResponse
+func (c *ClientWithResponses) GetInvoiceItemWithResponse(ctx context.Context, invoiceItemId string, params *GetInvoiceItemParams, reqEditors ...RequestEditorFn) (*GetInvoiceItemResponse, error) {
+	rsp, err := c.GetInvoiceItem(ctx, invoiceItemId, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseInvoiceItemsUpdateResponse(rsp)
+	return ParseGetInvoiceItemResponse(rsp)
 }
 
-func (c *ClientWithResponses) InvoiceItemsUpdateWithResponse(ctx context.Context, invoiceItemId string, params *InvoiceItemsUpdateParams, body InvoiceItemsUpdateJSONRequestBody, reqEditors ...RequestEditorFn) (*InvoiceItemsUpdateResponse, error) {
-	rsp, err := c.InvoiceItemsUpdate(ctx, invoiceItemId, params, body, reqEditors...)
+// UpdateInvoiceItemWithBodyWithResponse request with arbitrary body returning *UpdateInvoiceItemResponse
+func (c *ClientWithResponses) UpdateInvoiceItemWithBodyWithResponse(ctx context.Context, invoiceItemId string, params *UpdateInvoiceItemParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateInvoiceItemResponse, error) {
+	rsp, err := c.UpdateInvoiceItemWithBody(ctx, invoiceItemId, params, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseInvoiceItemsUpdateResponse(rsp)
+	return ParseUpdateInvoiceItemResponse(rsp)
 }
 
-// InvoicesListWithResponse request returning *InvoicesListResponse
-func (c *ClientWithResponses) InvoicesListWithResponse(ctx context.Context, params *InvoicesListParams, reqEditors ...RequestEditorFn) (*InvoicesListResponse, error) {
-	rsp, err := c.InvoicesList(ctx, params, reqEditors...)
+func (c *ClientWithResponses) UpdateInvoiceItemWithResponse(ctx context.Context, invoiceItemId string, params *UpdateInvoiceItemParams, body UpdateInvoiceItemJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateInvoiceItemResponse, error) {
+	rsp, err := c.UpdateInvoiceItem(ctx, invoiceItemId, params, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseInvoicesListResponse(rsp)
+	return ParseUpdateInvoiceItemResponse(rsp)
 }
 
-// InvoicesGetWithResponse request returning *InvoicesGetResponse
-func (c *ClientWithResponses) InvoicesGetWithResponse(ctx context.Context, invoiceId string, params *InvoicesGetParams, reqEditors ...RequestEditorFn) (*InvoicesGetResponse, error) {
-	rsp, err := c.InvoicesGet(ctx, invoiceId, params, reqEditors...)
+// ListInvoiceWithResponse request returning *ListInvoiceResponse
+func (c *ClientWithResponses) ListInvoiceWithResponse(ctx context.Context, params *ListInvoiceParams, reqEditors ...RequestEditorFn) (*ListInvoiceResponse, error) {
+	rsp, err := c.ListInvoice(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseInvoicesGetResponse(rsp)
+	return ParseListInvoiceResponse(rsp)
 }
 
-// JobReportsListWithResponse request returning *JobReportsListResponse
-func (c *ClientWithResponses) JobReportsListWithResponse(ctx context.Context, params *JobReportsListParams, reqEditors ...RequestEditorFn) (*JobReportsListResponse, error) {
-	rsp, err := c.JobReportsList(ctx, params, reqEditors...)
+// GetInvoiceWithResponse request returning *GetInvoiceResponse
+func (c *ClientWithResponses) GetInvoiceWithResponse(ctx context.Context, invoiceId string, params *GetInvoiceParams, reqEditors ...RequestEditorFn) (*GetInvoiceResponse, error) {
+	rsp, err := c.GetInvoice(ctx, invoiceId, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseJobReportsListResponse(rsp)
+	return ParseGetInvoiceResponse(rsp)
 }
 
-// JobReportsGetWithResponse request returning *JobReportsGetResponse
-func (c *ClientWithResponses) JobReportsGetWithResponse(ctx context.Context, jobReportId string, params *JobReportsGetParams, reqEditors ...RequestEditorFn) (*JobReportsGetResponse, error) {
-	rsp, err := c.JobReportsGet(ctx, jobReportId, params, reqEditors...)
+// UpdateInvoiceWithBodyWithResponse request with arbitrary body returning *UpdateInvoiceResponse
+func (c *ClientWithResponses) UpdateInvoiceWithBodyWithResponse(ctx context.Context, invoiceId string, params *UpdateInvoiceParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateInvoiceResponse, error) {
+	rsp, err := c.UpdateInvoiceWithBody(ctx, invoiceId, params, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseJobReportsGetResponse(rsp)
+	return ParseUpdateInvoiceResponse(rsp)
 }
 
-// JobsListWithResponse request returning *JobsListResponse
-func (c *ClientWithResponses) JobsListWithResponse(ctx context.Context, params *JobsListParams, reqEditors ...RequestEditorFn) (*JobsListResponse, error) {
-	rsp, err := c.JobsList(ctx, params, reqEditors...)
+func (c *ClientWithResponses) UpdateInvoiceWithResponse(ctx context.Context, invoiceId string, params *UpdateInvoiceParams, body UpdateInvoiceJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateInvoiceResponse, error) {
+	rsp, err := c.UpdateInvoice(ctx, invoiceId, params, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseJobsListResponse(rsp)
+	return ParseUpdateInvoiceResponse(rsp)
 }
 
-// JobsCreateWithBodyWithResponse request with arbitrary body returning *JobsCreateResponse
-func (c *ClientWithResponses) JobsCreateWithBodyWithResponse(ctx context.Context, params *JobsCreateParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*JobsCreateResponse, error) {
-	rsp, err := c.JobsCreateWithBody(ctx, params, contentType, body, reqEditors...)
+// ChangeInvoiceAutoSyncWithBodyWithResponse request with arbitrary body returning *ChangeInvoiceAutoSyncResponse
+func (c *ClientWithResponses) ChangeInvoiceAutoSyncWithBodyWithResponse(ctx context.Context, invoiceId string, params *ChangeInvoiceAutoSyncParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*ChangeInvoiceAutoSyncResponse, error) {
+	rsp, err := c.ChangeInvoiceAutoSyncWithBody(ctx, invoiceId, params, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseJobsCreateResponse(rsp)
+	return ParseChangeInvoiceAutoSyncResponse(rsp)
 }
 
-func (c *ClientWithResponses) JobsCreateWithResponse(ctx context.Context, params *JobsCreateParams, body JobsCreateJSONRequestBody, reqEditors ...RequestEditorFn) (*JobsCreateResponse, error) {
-	rsp, err := c.JobsCreate(ctx, params, body, reqEditors...)
+func (c *ClientWithResponses) ChangeInvoiceAutoSyncWithResponse(ctx context.Context, invoiceId string, params *ChangeInvoiceAutoSyncParams, body ChangeInvoiceAutoSyncJSONRequestBody, reqEditors ...RequestEditorFn) (*ChangeInvoiceAutoSyncResponse, error) {
+	rsp, err := c.ChangeInvoiceAutoSync(ctx, invoiceId, params, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseJobsCreateResponse(rsp)
+	return ParseChangeInvoiceAutoSyncResponse(rsp)
 }
 
-// JobsGetWithResponse request returning *JobsGetResponse
-func (c *ClientWithResponses) JobsGetWithResponse(ctx context.Context, jobId string, params *JobsGetParams, reqEditors ...RequestEditorFn) (*JobsGetResponse, error) {
-	rsp, err := c.JobsGet(ctx, jobId, params, reqEditors...)
+// InvoiceIntegrationSyncWithResponse request returning *InvoiceIntegrationSyncResponse
+func (c *ClientWithResponses) InvoiceIntegrationSyncWithResponse(ctx context.Context, invoiceId string, params *InvoiceIntegrationSyncParams, reqEditors ...RequestEditorFn) (*InvoiceIntegrationSyncResponse, error) {
+	rsp, err := c.InvoiceIntegrationSync(ctx, invoiceId, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseJobsGetResponse(rsp)
+	return ParseInvoiceIntegrationSyncResponse(rsp)
 }
 
-// JobReportsListForJobWithResponse request returning *JobReportsListForJobResponse
-func (c *ClientWithResponses) JobReportsListForJobWithResponse(ctx context.Context, jobId string, params *JobReportsListForJobParams, reqEditors ...RequestEditorFn) (*JobReportsListForJobResponse, error) {
-	rsp, err := c.JobReportsListForJob(ctx, jobId, params, reqEditors...)
+// InvoiceIntegrationSyncEventsWithResponse request returning *InvoiceIntegrationSyncEventsResponse
+func (c *ClientWithResponses) InvoiceIntegrationSyncEventsWithResponse(ctx context.Context, invoiceId string, params *InvoiceIntegrationSyncEventsParams, reqEditors ...RequestEditorFn) (*InvoiceIntegrationSyncEventsResponse, error) {
+	rsp, err := c.InvoiceIntegrationSyncEvents(ctx, invoiceId, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseJobReportsListForJobResponse(rsp)
+	return ParseInvoiceIntegrationSyncEventsResponse(rsp)
 }
 
-// JobReportsGetForJobWithResponse request returning *JobReportsGetForJobResponse
-func (c *ClientWithResponses) JobReportsGetForJobWithResponse(ctx context.Context, jobId string, jobReportId string, params *JobReportsGetForJobParams, reqEditors ...RequestEditorFn) (*JobReportsGetForJobResponse, error) {
-	rsp, err := c.JobReportsGetForJob(ctx, jobId, jobReportId, params, reqEditors...)
+// ChangeInvoiceSyncCompletionWithBodyWithResponse request with arbitrary body returning *ChangeInvoiceSyncCompletionResponse
+func (c *ClientWithResponses) ChangeInvoiceSyncCompletionWithBodyWithResponse(ctx context.Context, invoiceId string, params *ChangeInvoiceSyncCompletionParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*ChangeInvoiceSyncCompletionResponse, error) {
+	rsp, err := c.ChangeInvoiceSyncCompletionWithBody(ctx, invoiceId, params, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseJobReportsGetForJobResponse(rsp)
+	return ParseChangeInvoiceSyncCompletionResponse(rsp)
 }
 
-// JobsPartAuthorisationsWithResponse request returning *JobsPartAuthorisationsResponse
-func (c *ClientWithResponses) JobsPartAuthorisationsWithResponse(ctx context.Context, jobId string, params *JobsPartAuthorisationsParams, reqEditors ...RequestEditorFn) (*JobsPartAuthorisationsResponse, error) {
-	rsp, err := c.JobsPartAuthorisations(ctx, jobId, params, reqEditors...)
+func (c *ClientWithResponses) ChangeInvoiceSyncCompletionWithResponse(ctx context.Context, invoiceId string, params *ChangeInvoiceSyncCompletionParams, body ChangeInvoiceSyncCompletionJSONRequestBody, reqEditors ...RequestEditorFn) (*ChangeInvoiceSyncCompletionResponse, error) {
+	rsp, err := c.ChangeInvoiceSyncCompletion(ctx, invoiceId, params, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseJobsPartAuthorisationsResponse(rsp)
+	return ParseChangeInvoiceSyncCompletionResponse(rsp)
 }
 
-// JobsSubmitPartAuthorisationDecisionsWithBodyWithResponse request with arbitrary body returning *JobsSubmitPartAuthorisationDecisionsResponse
-func (c *ClientWithResponses) JobsSubmitPartAuthorisationDecisionsWithBodyWithResponse(ctx context.Context, jobId string, params *JobsSubmitPartAuthorisationDecisionsParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*JobsSubmitPartAuthorisationDecisionsResponse, error) {
-	rsp, err := c.JobsSubmitPartAuthorisationDecisionsWithBody(ctx, jobId, params, contentType, body, reqEditors...)
+// RetryInvoiceIntegrationSyncWithResponse request returning *RetryInvoiceIntegrationSyncResponse
+func (c *ClientWithResponses) RetryInvoiceIntegrationSyncWithResponse(ctx context.Context, invoiceId string, params *RetryInvoiceIntegrationSyncParams, reqEditors ...RequestEditorFn) (*RetryInvoiceIntegrationSyncResponse, error) {
+	rsp, err := c.RetryInvoiceIntegrationSync(ctx, invoiceId, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseJobsSubmitPartAuthorisationDecisionsResponse(rsp)
+	return ParseRetryInvoiceIntegrationSyncResponse(rsp)
 }
 
-func (c *ClientWithResponses) JobsSubmitPartAuthorisationDecisionsWithResponse(ctx context.Context, jobId string, params *JobsSubmitPartAuthorisationDecisionsParams, body JobsSubmitPartAuthorisationDecisionsJSONRequestBody, reqEditors ...RequestEditorFn) (*JobsSubmitPartAuthorisationDecisionsResponse, error) {
-	rsp, err := c.JobsSubmitPartAuthorisationDecisions(ctx, jobId, params, body, reqEditors...)
+// TriggerInvoiceIntegrationSyncWithBodyWithResponse request with arbitrary body returning *TriggerInvoiceIntegrationSyncResponse
+func (c *ClientWithResponses) TriggerInvoiceIntegrationSyncWithBodyWithResponse(ctx context.Context, invoiceId string, params *TriggerInvoiceIntegrationSyncParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*TriggerInvoiceIntegrationSyncResponse, error) {
+	rsp, err := c.TriggerInvoiceIntegrationSyncWithBody(ctx, invoiceId, params, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseJobsSubmitPartAuthorisationDecisionsResponse(rsp)
+	return ParseTriggerInvoiceIntegrationSyncResponse(rsp)
 }
 
-// ServicesListWithResponse request returning *ServicesListResponse
-func (c *ClientWithResponses) ServicesListWithResponse(ctx context.Context, params *ServicesListParams, reqEditors ...RequestEditorFn) (*ServicesListResponse, error) {
-	rsp, err := c.ServicesList(ctx, params, reqEditors...)
+func (c *ClientWithResponses) TriggerInvoiceIntegrationSyncWithResponse(ctx context.Context, invoiceId string, params *TriggerInvoiceIntegrationSyncParams, body TriggerInvoiceIntegrationSyncJSONRequestBody, reqEditors ...RequestEditorFn) (*TriggerInvoiceIntegrationSyncResponse, error) {
+	rsp, err := c.TriggerInvoiceIntegrationSync(ctx, invoiceId, params, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseServicesListResponse(rsp)
+	return ParseTriggerInvoiceIntegrationSyncResponse(rsp)
 }
 
-// ServicesGetWithResponse request returning *ServicesGetResponse
-func (c *ClientWithResponses) ServicesGetWithResponse(ctx context.Context, serviceId string, params *ServicesGetParams, reqEditors ...RequestEditorFn) (*ServicesGetResponse, error) {
-	rsp, err := c.ServicesGet(ctx, serviceId, params, reqEditors...)
+// PaymentLinkWithResponse request returning *PaymentLinkResponse
+func (c *ClientWithResponses) PaymentLinkWithResponse(ctx context.Context, invoiceId string, params *PaymentLinkParams, reqEditors ...RequestEditorFn) (*PaymentLinkResponse, error) {
+	rsp, err := c.PaymentLink(ctx, invoiceId, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseServicesGetResponse(rsp)
+	return ParsePaymentLinkResponse(rsp)
 }
 
-// StockListWithResponse request returning *StockListResponse
-func (c *ClientWithResponses) StockListWithResponse(ctx context.Context, params *StockListParams, reqEditors ...RequestEditorFn) (*StockListResponse, error) {
-	rsp, err := c.StockList(ctx, params, reqEditors...)
+// RecordPaymentWithBodyWithResponse request with arbitrary body returning *RecordPaymentResponse
+func (c *ClientWithResponses) RecordPaymentWithBodyWithResponse(ctx context.Context, invoiceId string, params *RecordPaymentParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*RecordPaymentResponse, error) {
+	rsp, err := c.RecordPaymentWithBody(ctx, invoiceId, params, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseStockListResponse(rsp)
+	return ParseRecordPaymentResponse(rsp)
 }
 
-// StockGetWithResponse request returning *StockGetResponse
-func (c *ClientWithResponses) StockGetWithResponse(ctx context.Context, stockVariationId string, params *StockGetParams, reqEditors ...RequestEditorFn) (*StockGetResponse, error) {
-	rsp, err := c.StockGet(ctx, stockVariationId, params, reqEditors...)
+func (c *ClientWithResponses) RecordPaymentWithResponse(ctx context.Context, invoiceId string, params *RecordPaymentParams, body RecordPaymentJSONRequestBody, reqEditors ...RequestEditorFn) (*RecordPaymentResponse, error) {
+	rsp, err := c.RecordPayment(ctx, invoiceId, params, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseStockGetResponse(rsp)
+	return ParseRecordPaymentResponse(rsp)
 }
 
-// WebhookDeliveriesGetWithResponse request returning *WebhookDeliveriesGetResponse
-func (c *ClientWithResponses) WebhookDeliveriesGetWithResponse(ctx context.Context, deliveryId string, params *WebhookDeliveriesGetParams, reqEditors ...RequestEditorFn) (*WebhookDeliveriesGetResponse, error) {
-	rsp, err := c.WebhookDeliveriesGet(ctx, deliveryId, params, reqEditors...)
+// PdfWithResponse request returning *PdfResponse
+func (c *ClientWithResponses) PdfWithResponse(ctx context.Context, invoiceId string, params *PdfParams, reqEditors ...RequestEditorFn) (*PdfResponse, error) {
+	rsp, err := c.Pdf(ctx, invoiceId, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseWebhookDeliveriesGetResponse(rsp)
+	return ParsePdfResponse(rsp)
 }
 
-// WebhookDeliveriesReplayWithResponse request returning *WebhookDeliveriesReplayResponse
-func (c *ClientWithResponses) WebhookDeliveriesReplayWithResponse(ctx context.Context, deliveryId string, params *WebhookDeliveriesReplayParams, reqEditors ...RequestEditorFn) (*WebhookDeliveriesReplayResponse, error) {
-	rsp, err := c.WebhookDeliveriesReplay(ctx, deliveryId, params, reqEditors...)
+// SendWithBodyWithResponse request with arbitrary body returning *SendResponse
+func (c *ClientWithResponses) SendWithBodyWithResponse(ctx context.Context, invoiceId string, params *SendParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*SendResponse, error) {
+	rsp, err := c.SendWithBody(ctx, invoiceId, params, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseWebhookDeliveriesReplayResponse(rsp)
+	return ParseSendResponse(rsp)
 }
 
-// WebhookEndpointsListWithResponse request returning *WebhookEndpointsListResponse
-func (c *ClientWithResponses) WebhookEndpointsListWithResponse(ctx context.Context, params *WebhookEndpointsListParams, reqEditors ...RequestEditorFn) (*WebhookEndpointsListResponse, error) {
-	rsp, err := c.WebhookEndpointsList(ctx, params, reqEditors...)
+func (c *ClientWithResponses) SendWithResponse(ctx context.Context, invoiceId string, params *SendParams, body SendJSONRequestBody, reqEditors ...RequestEditorFn) (*SendResponse, error) {
+	rsp, err := c.Send(ctx, invoiceId, params, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseWebhookEndpointsListResponse(rsp)
+	return ParseSendResponse(rsp)
 }
 
-// WebhookEndpointsCreateWithBodyWithResponse request with arbitrary body returning *WebhookEndpointsCreateResponse
-func (c *ClientWithResponses) WebhookEndpointsCreateWithBodyWithResponse(ctx context.Context, params *WebhookEndpointsCreateParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*WebhookEndpointsCreateResponse, error) {
-	rsp, err := c.WebhookEndpointsCreateWithBody(ctx, params, contentType, body, reqEditors...)
+// ChangeStatusWithBodyWithResponse request with arbitrary body returning *ChangeStatusResponse
+func (c *ClientWithResponses) ChangeStatusWithBodyWithResponse(ctx context.Context, invoiceId string, params *ChangeStatusParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*ChangeStatusResponse, error) {
+	rsp, err := c.ChangeStatusWithBody(ctx, invoiceId, params, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseWebhookEndpointsCreateResponse(rsp)
+	return ParseChangeStatusResponse(rsp)
 }
 
-func (c *ClientWithResponses) WebhookEndpointsCreateWithResponse(ctx context.Context, params *WebhookEndpointsCreateParams, body WebhookEndpointsCreateJSONRequestBody, reqEditors ...RequestEditorFn) (*WebhookEndpointsCreateResponse, error) {
-	rsp, err := c.WebhookEndpointsCreate(ctx, params, body, reqEditors...)
+func (c *ClientWithResponses) ChangeStatusWithResponse(ctx context.Context, invoiceId string, params *ChangeStatusParams, body ChangeStatusJSONRequestBody, reqEditors ...RequestEditorFn) (*ChangeStatusResponse, error) {
+	rsp, err := c.ChangeStatus(ctx, invoiceId, params, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseWebhookEndpointsCreateResponse(rsp)
+	return ParseChangeStatusResponse(rsp)
 }
 
-// WebhookEndpointsDeleteWithResponse request returning *WebhookEndpointsDeleteResponse
-func (c *ClientWithResponses) WebhookEndpointsDeleteWithResponse(ctx context.Context, endpointId string, params *WebhookEndpointsDeleteParams, reqEditors ...RequestEditorFn) (*WebhookEndpointsDeleteResponse, error) {
-	rsp, err := c.WebhookEndpointsDelete(ctx, endpointId, params, reqEditors...)
+// ListJobReportWithResponse request returning *ListJobReportResponse
+func (c *ClientWithResponses) ListJobReportWithResponse(ctx context.Context, params *ListJobReportParams, reqEditors ...RequestEditorFn) (*ListJobReportResponse, error) {
+	rsp, err := c.ListJobReport(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseWebhookEndpointsDeleteResponse(rsp)
+	return ParseListJobReportResponse(rsp)
 }
 
-// WebhookEndpointsGetWithResponse request returning *WebhookEndpointsGetResponse
-func (c *ClientWithResponses) WebhookEndpointsGetWithResponse(ctx context.Context, endpointId string, params *WebhookEndpointsGetParams, reqEditors ...RequestEditorFn) (*WebhookEndpointsGetResponse, error) {
-	rsp, err := c.WebhookEndpointsGet(ctx, endpointId, params, reqEditors...)
+// GetJobReportWithResponse request returning *GetJobReportResponse
+func (c *ClientWithResponses) GetJobReportWithResponse(ctx context.Context, jobReportId string, params *GetJobReportParams, reqEditors ...RequestEditorFn) (*GetJobReportResponse, error) {
+	rsp, err := c.GetJobReport(ctx, jobReportId, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseWebhookEndpointsGetResponse(rsp)
+	return ParseGetJobReportResponse(rsp)
 }
 
-// WebhookEndpointsUpdateWithBodyWithResponse request with arbitrary body returning *WebhookEndpointsUpdateResponse
-func (c *ClientWithResponses) WebhookEndpointsUpdateWithBodyWithResponse(ctx context.Context, endpointId string, params *WebhookEndpointsUpdateParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*WebhookEndpointsUpdateResponse, error) {
-	rsp, err := c.WebhookEndpointsUpdateWithBody(ctx, endpointId, params, contentType, body, reqEditors...)
+// JobsWithResponse request returning *JobsResponse
+func (c *ClientWithResponses) JobsWithResponse(ctx context.Context, params *JobsParams, reqEditors ...RequestEditorFn) (*JobsResponse, error) {
+	rsp, err := c.Jobs(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseWebhookEndpointsUpdateResponse(rsp)
+	return ParseJobsResponse(rsp)
 }
 
-func (c *ClientWithResponses) WebhookEndpointsUpdateWithResponse(ctx context.Context, endpointId string, params *WebhookEndpointsUpdateParams, body WebhookEndpointsUpdateJSONRequestBody, reqEditors ...RequestEditorFn) (*WebhookEndpointsUpdateResponse, error) {
-	rsp, err := c.WebhookEndpointsUpdate(ctx, endpointId, params, body, reqEditors...)
+// CreateJobBookingWithBodyWithResponse request with arbitrary body returning *CreateJobBookingResponse
+func (c *ClientWithResponses) CreateJobBookingWithBodyWithResponse(ctx context.Context, params *CreateJobBookingParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateJobBookingResponse, error) {
+	rsp, err := c.CreateJobBookingWithBody(ctx, params, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseWebhookEndpointsUpdateResponse(rsp)
+	return ParseCreateJobBookingResponse(rsp)
 }
 
-// WebhookDeliveriesListForEndpointWithResponse request returning *WebhookDeliveriesListForEndpointResponse
-func (c *ClientWithResponses) WebhookDeliveriesListForEndpointWithResponse(ctx context.Context, endpointId string, params *WebhookDeliveriesListForEndpointParams, reqEditors ...RequestEditorFn) (*WebhookDeliveriesListForEndpointResponse, error) {
-	rsp, err := c.WebhookDeliveriesListForEndpoint(ctx, endpointId, params, reqEditors...)
+func (c *ClientWithResponses) CreateJobBookingWithResponse(ctx context.Context, params *CreateJobBookingParams, body CreateJobBookingJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateJobBookingResponse, error) {
+	rsp, err := c.CreateJobBooking(ctx, params, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseWebhookDeliveriesListForEndpointResponse(rsp)
+	return ParseCreateJobBookingResponse(rsp)
 }
 
-// WebhookEndpointsRotateSecretWithResponse request returning *WebhookEndpointsRotateSecretResponse
-func (c *ClientWithResponses) WebhookEndpointsRotateSecretWithResponse(ctx context.Context, endpointId string, params *WebhookEndpointsRotateSecretParams, reqEditors ...RequestEditorFn) (*WebhookEndpointsRotateSecretResponse, error) {
-	rsp, err := c.WebhookEndpointsRotateSecret(ctx, endpointId, params, reqEditors...)
+// JobWithResponse request returning *JobResponse
+func (c *ClientWithResponses) JobWithResponse(ctx context.Context, jobId string, params *JobParams, reqEditors ...RequestEditorFn) (*JobResponse, error) {
+	rsp, err := c.Job(ctx, jobId, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseWebhookEndpointsRotateSecretResponse(rsp)
+	return ParseJobResponse(rsp)
 }
 
-// WebhookEventsListWithResponse request returning *WebhookEventsListResponse
-func (c *ClientWithResponses) WebhookEventsListWithResponse(ctx context.Context, params *WebhookEventsListParams, reqEditors ...RequestEditorFn) (*WebhookEventsListResponse, error) {
-	rsp, err := c.WebhookEventsList(ctx, params, reqEditors...)
+// UpdateJobWithBodyWithResponse request with arbitrary body returning *UpdateJobResponse
+func (c *ClientWithResponses) UpdateJobWithBodyWithResponse(ctx context.Context, jobId string, params *UpdateJobParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateJobResponse, error) {
+	rsp, err := c.UpdateJobWithBody(ctx, jobId, params, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseWebhookEventsListResponse(rsp)
+	return ParseUpdateJobResponse(rsp)
 }
 
-// ParseAssetsListResponse parses an HTTP response from a AssetsListWithResponse call
-func ParseAssetsListResponse(rsp *http.Response) (*AssetsListResponse, error) {
+func (c *ClientWithResponses) UpdateJobWithResponse(ctx context.Context, jobId string, params *UpdateJobParams, body UpdateJobJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateJobResponse, error) {
+	rsp, err := c.UpdateJob(ctx, jobId, params, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateJobResponse(rsp)
+}
+
+// ChangeAcceptedStatusWithBodyWithResponse request with arbitrary body returning *ChangeAcceptedStatusResponse
+func (c *ClientWithResponses) ChangeAcceptedStatusWithBodyWithResponse(ctx context.Context, jobId string, params *ChangeAcceptedStatusParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*ChangeAcceptedStatusResponse, error) {
+	rsp, err := c.ChangeAcceptedStatusWithBody(ctx, jobId, params, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseChangeAcceptedStatusResponse(rsp)
+}
+
+func (c *ClientWithResponses) ChangeAcceptedStatusWithResponse(ctx context.Context, jobId string, params *ChangeAcceptedStatusParams, body ChangeAcceptedStatusJSONRequestBody, reqEditors ...RequestEditorFn) (*ChangeAcceptedStatusResponse, error) {
+	rsp, err := c.ChangeAcceptedStatus(ctx, jobId, params, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseChangeAcceptedStatusResponse(rsp)
+}
+
+// ListJobReportForJobWithResponse request returning *ListJobReportForJobResponse
+func (c *ClientWithResponses) ListJobReportForJobWithResponse(ctx context.Context, jobId string, params *ListJobReportForJobParams, reqEditors ...RequestEditorFn) (*ListJobReportForJobResponse, error) {
+	rsp, err := c.ListJobReportForJob(ctx, jobId, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseListJobReportForJobResponse(rsp)
+}
+
+// GetJobReportForJobWithResponse request returning *GetJobReportForJobResponse
+func (c *ClientWithResponses) GetJobReportForJobWithResponse(ctx context.Context, jobId string, jobReportId string, params *GetJobReportForJobParams, reqEditors ...RequestEditorFn) (*GetJobReportForJobResponse, error) {
+	rsp, err := c.GetJobReportForJob(ctx, jobId, jobReportId, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetJobReportForJobResponse(rsp)
+}
+
+// PartAuthorisationsWithResponse request returning *PartAuthorisationsResponse
+func (c *ClientWithResponses) PartAuthorisationsWithResponse(ctx context.Context, jobId string, params *PartAuthorisationsParams, reqEditors ...RequestEditorFn) (*PartAuthorisationsResponse, error) {
+	rsp, err := c.PartAuthorisations(ctx, jobId, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParsePartAuthorisationsResponse(rsp)
+}
+
+// SubmitPartAuthorisationDecisionsWithBodyWithResponse request with arbitrary body returning *SubmitPartAuthorisationDecisionsResponse
+func (c *ClientWithResponses) SubmitPartAuthorisationDecisionsWithBodyWithResponse(ctx context.Context, jobId string, params *SubmitPartAuthorisationDecisionsParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*SubmitPartAuthorisationDecisionsResponse, error) {
+	rsp, err := c.SubmitPartAuthorisationDecisionsWithBody(ctx, jobId, params, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseSubmitPartAuthorisationDecisionsResponse(rsp)
+}
+
+func (c *ClientWithResponses) SubmitPartAuthorisationDecisionsWithResponse(ctx context.Context, jobId string, params *SubmitPartAuthorisationDecisionsParams, body SubmitPartAuthorisationDecisionsJSONRequestBody, reqEditors ...RequestEditorFn) (*SubmitPartAuthorisationDecisionsResponse, error) {
+	rsp, err := c.SubmitPartAuthorisationDecisions(ctx, jobId, params, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseSubmitPartAuthorisationDecisionsResponse(rsp)
+}
+
+// RequestPartAuthorisationWithBodyWithResponse request with arbitrary body returning *RequestPartAuthorisationResponse
+func (c *ClientWithResponses) RequestPartAuthorisationWithBodyWithResponse(ctx context.Context, jobId string, params *RequestPartAuthorisationParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*RequestPartAuthorisationResponse, error) {
+	rsp, err := c.RequestPartAuthorisationWithBody(ctx, jobId, params, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseRequestPartAuthorisationResponse(rsp)
+}
+
+func (c *ClientWithResponses) RequestPartAuthorisationWithResponse(ctx context.Context, jobId string, params *RequestPartAuthorisationParams, body RequestPartAuthorisationJSONRequestBody, reqEditors ...RequestEditorFn) (*RequestPartAuthorisationResponse, error) {
+	rsp, err := c.RequestPartAuthorisation(ctx, jobId, params, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseRequestPartAuthorisationResponse(rsp)
+}
+
+// ChangeScheduleWithBodyWithResponse request with arbitrary body returning *ChangeScheduleResponse
+func (c *ClientWithResponses) ChangeScheduleWithBodyWithResponse(ctx context.Context, jobId string, params *ChangeScheduleParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*ChangeScheduleResponse, error) {
+	rsp, err := c.ChangeScheduleWithBody(ctx, jobId, params, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseChangeScheduleResponse(rsp)
+}
+
+func (c *ClientWithResponses) ChangeScheduleWithResponse(ctx context.Context, jobId string, params *ChangeScheduleParams, body ChangeScheduleJSONRequestBody, reqEditors ...RequestEditorFn) (*ChangeScheduleResponse, error) {
+	rsp, err := c.ChangeSchedule(ctx, jobId, params, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseChangeScheduleResponse(rsp)
+}
+
+// UpdateWorkLineWithBodyWithResponse request with arbitrary body returning *UpdateWorkLineResponse
+func (c *ClientWithResponses) UpdateWorkLineWithBodyWithResponse(ctx context.Context, jobId string, workLineId string, params *UpdateWorkLineParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateWorkLineResponse, error) {
+	rsp, err := c.UpdateWorkLineWithBody(ctx, jobId, workLineId, params, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateWorkLineResponse(rsp)
+}
+
+func (c *ClientWithResponses) UpdateWorkLineWithResponse(ctx context.Context, jobId string, workLineId string, params *UpdateWorkLineParams, body UpdateWorkLineJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateWorkLineResponse, error) {
+	rsp, err := c.UpdateWorkLine(ctx, jobId, workLineId, params, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateWorkLineResponse(rsp)
+}
+
+// AssignWorkLineMechanicWithBodyWithResponse request with arbitrary body returning *AssignWorkLineMechanicResponse
+func (c *ClientWithResponses) AssignWorkLineMechanicWithBodyWithResponse(ctx context.Context, jobId string, workLineId string, params *AssignWorkLineMechanicParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*AssignWorkLineMechanicResponse, error) {
+	rsp, err := c.AssignWorkLineMechanicWithBody(ctx, jobId, workLineId, params, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseAssignWorkLineMechanicResponse(rsp)
+}
+
+func (c *ClientWithResponses) AssignWorkLineMechanicWithResponse(ctx context.Context, jobId string, workLineId string, params *AssignWorkLineMechanicParams, body AssignWorkLineMechanicJSONRequestBody, reqEditors ...RequestEditorFn) (*AssignWorkLineMechanicResponse, error) {
+	rsp, err := c.AssignWorkLineMechanic(ctx, jobId, workLineId, params, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseAssignWorkLineMechanicResponse(rsp)
+}
+
+// ReplaceWorkLineServicesWithBodyWithResponse request with arbitrary body returning *ReplaceWorkLineServicesResponse
+func (c *ClientWithResponses) ReplaceWorkLineServicesWithBodyWithResponse(ctx context.Context, jobId string, workLineId string, params *ReplaceWorkLineServicesParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*ReplaceWorkLineServicesResponse, error) {
+	rsp, err := c.ReplaceWorkLineServicesWithBody(ctx, jobId, workLineId, params, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseReplaceWorkLineServicesResponse(rsp)
+}
+
+func (c *ClientWithResponses) ReplaceWorkLineServicesWithResponse(ctx context.Context, jobId string, workLineId string, params *ReplaceWorkLineServicesParams, body ReplaceWorkLineServicesJSONRequestBody, reqEditors ...RequestEditorFn) (*ReplaceWorkLineServicesResponse, error) {
+	rsp, err := c.ReplaceWorkLineServices(ctx, jobId, workLineId, params, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseReplaceWorkLineServicesResponse(rsp)
+}
+
+// ChangeWorkLineStatusWithBodyWithResponse request with arbitrary body returning *ChangeWorkLineStatusResponse
+func (c *ClientWithResponses) ChangeWorkLineStatusWithBodyWithResponse(ctx context.Context, jobId string, workLineId string, params *ChangeWorkLineStatusParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*ChangeWorkLineStatusResponse, error) {
+	rsp, err := c.ChangeWorkLineStatusWithBody(ctx, jobId, workLineId, params, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseChangeWorkLineStatusResponse(rsp)
+}
+
+func (c *ClientWithResponses) ChangeWorkLineStatusWithResponse(ctx context.Context, jobId string, workLineId string, params *ChangeWorkLineStatusParams, body ChangeWorkLineStatusJSONRequestBody, reqEditors ...RequestEditorFn) (*ChangeWorkLineStatusResponse, error) {
+	rsp, err := c.ChangeWorkLineStatus(ctx, jobId, workLineId, params, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseChangeWorkLineStatusResponse(rsp)
+}
+
+// RefundWithBodyWithResponse request with arbitrary body returning *RefundResponse
+func (c *ClientWithResponses) RefundWithBodyWithResponse(ctx context.Context, paymentId string, params *RefundParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*RefundResponse, error) {
+	rsp, err := c.RefundWithBody(ctx, paymentId, params, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseRefundResponse(rsp)
+}
+
+func (c *ClientWithResponses) RefundWithResponse(ctx context.Context, paymentId string, params *RefundParams, body RefundJSONRequestBody, reqEditors ...RequestEditorFn) (*RefundResponse, error) {
+	rsp, err := c.Refund(ctx, paymentId, params, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseRefundResponse(rsp)
+}
+
+// ListServiceWithResponse request returning *ListServiceResponse
+func (c *ClientWithResponses) ListServiceWithResponse(ctx context.Context, params *ListServiceParams, reqEditors ...RequestEditorFn) (*ListServiceResponse, error) {
+	rsp, err := c.ListService(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseListServiceResponse(rsp)
+}
+
+// GetServiceWithResponse request returning *GetServiceResponse
+func (c *ClientWithResponses) GetServiceWithResponse(ctx context.Context, serviceId string, params *GetServiceParams, reqEditors ...RequestEditorFn) (*GetServiceResponse, error) {
+	rsp, err := c.GetService(ctx, serviceId, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetServiceResponse(rsp)
+}
+
+// ListStockVariationWithResponse request returning *ListStockVariationResponse
+func (c *ClientWithResponses) ListStockVariationWithResponse(ctx context.Context, params *ListStockVariationParams, reqEditors ...RequestEditorFn) (*ListStockVariationResponse, error) {
+	rsp, err := c.ListStockVariation(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseListStockVariationResponse(rsp)
+}
+
+// GetStockVariationWithResponse request returning *GetStockVariationResponse
+func (c *ClientWithResponses) GetStockVariationWithResponse(ctx context.Context, stockVariationId string, params *GetStockVariationParams, reqEditors ...RequestEditorFn) (*GetStockVariationResponse, error) {
+	rsp, err := c.GetStockVariation(ctx, stockVariationId, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetStockVariationResponse(rsp)
+}
+
+// GetWebhookDeliveryWithResponse request returning *GetWebhookDeliveryResponse
+func (c *ClientWithResponses) GetWebhookDeliveryWithResponse(ctx context.Context, deliveryId string, params *GetWebhookDeliveryParams, reqEditors ...RequestEditorFn) (*GetWebhookDeliveryResponse, error) {
+	rsp, err := c.GetWebhookDelivery(ctx, deliveryId, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetWebhookDeliveryResponse(rsp)
+}
+
+// ReplayWithResponse request returning *ReplayResponse
+func (c *ClientWithResponses) ReplayWithResponse(ctx context.Context, deliveryId string, params *ReplayParams, reqEditors ...RequestEditorFn) (*ReplayResponse, error) {
+	rsp, err := c.Replay(ctx, deliveryId, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseReplayResponse(rsp)
+}
+
+// ListWebhookEndpointWithResponse request returning *ListWebhookEndpointResponse
+func (c *ClientWithResponses) ListWebhookEndpointWithResponse(ctx context.Context, params *ListWebhookEndpointParams, reqEditors ...RequestEditorFn) (*ListWebhookEndpointResponse, error) {
+	rsp, err := c.ListWebhookEndpoint(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseListWebhookEndpointResponse(rsp)
+}
+
+// CreateWebhookEndpointWithBodyWithResponse request with arbitrary body returning *CreateWebhookEndpointResponse
+func (c *ClientWithResponses) CreateWebhookEndpointWithBodyWithResponse(ctx context.Context, params *CreateWebhookEndpointParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateWebhookEndpointResponse, error) {
+	rsp, err := c.CreateWebhookEndpointWithBody(ctx, params, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateWebhookEndpointResponse(rsp)
+}
+
+func (c *ClientWithResponses) CreateWebhookEndpointWithResponse(ctx context.Context, params *CreateWebhookEndpointParams, body CreateWebhookEndpointJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateWebhookEndpointResponse, error) {
+	rsp, err := c.CreateWebhookEndpoint(ctx, params, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateWebhookEndpointResponse(rsp)
+}
+
+// DeleteWebhookEndpointWithResponse request returning *DeleteWebhookEndpointResponse
+func (c *ClientWithResponses) DeleteWebhookEndpointWithResponse(ctx context.Context, endpointId string, params *DeleteWebhookEndpointParams, reqEditors ...RequestEditorFn) (*DeleteWebhookEndpointResponse, error) {
+	rsp, err := c.DeleteWebhookEndpoint(ctx, endpointId, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDeleteWebhookEndpointResponse(rsp)
+}
+
+// GetWebhookEndpointWithResponse request returning *GetWebhookEndpointResponse
+func (c *ClientWithResponses) GetWebhookEndpointWithResponse(ctx context.Context, endpointId string, params *GetWebhookEndpointParams, reqEditors ...RequestEditorFn) (*GetWebhookEndpointResponse, error) {
+	rsp, err := c.GetWebhookEndpoint(ctx, endpointId, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetWebhookEndpointResponse(rsp)
+}
+
+// UpdateWebhookEndpointWithBodyWithResponse request with arbitrary body returning *UpdateWebhookEndpointResponse
+func (c *ClientWithResponses) UpdateWebhookEndpointWithBodyWithResponse(ctx context.Context, endpointId string, params *UpdateWebhookEndpointParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateWebhookEndpointResponse, error) {
+	rsp, err := c.UpdateWebhookEndpointWithBody(ctx, endpointId, params, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateWebhookEndpointResponse(rsp)
+}
+
+func (c *ClientWithResponses) UpdateWebhookEndpointWithResponse(ctx context.Context, endpointId string, params *UpdateWebhookEndpointParams, body UpdateWebhookEndpointJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateWebhookEndpointResponse, error) {
+	rsp, err := c.UpdateWebhookEndpoint(ctx, endpointId, params, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateWebhookEndpointResponse(rsp)
+}
+
+// ListForEndpointWithResponse request returning *ListForEndpointResponse
+func (c *ClientWithResponses) ListForEndpointWithResponse(ctx context.Context, endpointId string, params *ListForEndpointParams, reqEditors ...RequestEditorFn) (*ListForEndpointResponse, error) {
+	rsp, err := c.ListForEndpoint(ctx, endpointId, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseListForEndpointResponse(rsp)
+}
+
+// RotateSecretWithResponse request returning *RotateSecretResponse
+func (c *ClientWithResponses) RotateSecretWithResponse(ctx context.Context, endpointId string, params *RotateSecretParams, reqEditors ...RequestEditorFn) (*RotateSecretResponse, error) {
+	rsp, err := c.RotateSecret(ctx, endpointId, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseRotateSecretResponse(rsp)
+}
+
+// ListWebhookEventWithResponse request returning *ListWebhookEventResponse
+func (c *ClientWithResponses) ListWebhookEventWithResponse(ctx context.Context, params *ListWebhookEventParams, reqEditors ...RequestEditorFn) (*ListWebhookEventResponse, error) {
+	rsp, err := c.ListWebhookEvent(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseListWebhookEventResponse(rsp)
+}
+
+// ParseListAssetResponse parses an HTTP response from a ListAssetWithResponse call
+func ParseListAssetResponse(rsp *http.Response) (*ListAssetResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &AssetsListResponse{
+	response := &ListAssetResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest ApiListResponseOfAssetResponse
+		var dest ListResponseOfAsset
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON200 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON400 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON401 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON403 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON404 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
 
 	}
 
 	return response, nil
 }
 
-// ParseAssetsCreateResponse parses an HTTP response from a AssetsCreateWithResponse call
-func ParseAssetsCreateResponse(rsp *http.Response) (*AssetsCreateResponse, error) {
+// ParseCreateAssetResponse parses an HTTP response from a CreateAssetWithResponse call
+func ParseCreateAssetResponse(rsp *http.Response) (*CreateAssetResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &AssetsCreateResponse{
+	response := &CreateAssetResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 201:
-		var dest AssetResponse
+		var dest Asset
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON201 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON400 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON401 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON403 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON404 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 409:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON409 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
 
 	}
 
 	return response, nil
 }
 
-// ParseAssetsGetResponse parses an HTTP response from a AssetsGetWithResponse call
-func ParseAssetsGetResponse(rsp *http.Response) (*AssetsGetResponse, error) {
+// ParseDeleteAssetResponse parses an HTTP response from a DeleteAssetWithResponse call
+func ParseDeleteAssetResponse(rsp *http.Response) (*DeleteAssetResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &AssetsGetResponse{
+	response := &DeleteAssetResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest AssetResponse
+		var dest AssetDeleted
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON200 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON400 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON401 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON403 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
-		var dest ApiErrorResponse
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON404 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
-		var dest ApiErrorResponse
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON429 = &dest
-
-	}
-
-	return response, nil
-}
-
-// ParseAssetsUpdateResponse parses an HTTP response from a AssetsUpdateWithResponse call
-func ParseAssetsUpdateResponse(rsp *http.Response) (*AssetsUpdateResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &AssetsUpdateResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest AssetResponse
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON200 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
-		var dest ApiErrorResponse
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON400 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
-		var dest ApiErrorResponse
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON401 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
-		var dest ApiErrorResponse
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON403 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON404 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 409:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON409 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
 
 	}
 
 	return response, nil
 }
 
-// ParseBusinessesListResponse parses an HTTP response from a BusinessesListWithResponse call
-func ParseBusinessesListResponse(rsp *http.Response) (*BusinessesListResponse, error) {
+// ParseGetAssetResponse parses an HTTP response from a GetAssetWithResponse call
+func ParseGetAssetResponse(rsp *http.Response) (*GetAssetResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &BusinessesListResponse{
+	response := &GetAssetResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest ApiListResponseOfBusinessResponse
+		var dest Asset
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON200 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON400 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON401 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON403 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON404 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
 
 	}
 
 	return response, nil
 }
 
-// ParseBusinessesGetResponse parses an HTTP response from a BusinessesGetWithResponse call
-func ParseBusinessesGetResponse(rsp *http.Response) (*BusinessesGetResponse, error) {
+// ParseUpdateAssetResponse parses an HTTP response from a UpdateAssetWithResponse call
+func ParseUpdateAssetResponse(rsp *http.Response) (*UpdateAssetResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &BusinessesGetResponse{
+	response := &UpdateAssetResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest BusinessResponse
+		var dest Asset
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON200 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON400 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON401 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON403 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON404 = &dest
 
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 409:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON409 = &dest
+
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
 
 	}
 
 	return response, nil
 }
 
-// ParseBusinessesAvailabilityResponse parses an HTTP response from a BusinessesAvailabilityWithResponse call
-func ParseBusinessesAvailabilityResponse(rsp *http.Response) (*BusinessesAvailabilityResponse, error) {
+// ParseListResponse parses an HTTP response from a ListWithResponse call
+func ParseListResponse(rsp *http.Response) (*ListResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &BusinessesAvailabilityResponse{
+	response := &ListResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest AvailabilityResponse
+		var dest ListResponseOfBackOrder
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON200 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON400 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON401 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON403 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON404 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
 
 	}
 
 	return response, nil
 }
 
-// ParseBusinessesAvailabilitySlotsResponse parses an HTTP response from a BusinessesAvailabilitySlotsWithResponse call
-func ParseBusinessesAvailabilitySlotsResponse(rsp *http.Response) (*BusinessesAvailabilitySlotsResponse, error) {
+// ParseCreateResponse parses an HTTP response from a CreateWithResponse call
+func ParseCreateResponse(rsp *http.Response) (*CreateResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &BusinessesAvailabilitySlotsResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest AvailabilitySlotsResponse
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON200 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
-		var dest ApiErrorResponse
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON400 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
-		var dest ApiErrorResponse
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON401 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
-		var dest ApiErrorResponse
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON403 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
-		var dest ApiErrorResponse
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON404 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
-		var dest ApiErrorResponse
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON429 = &dest
-
-	}
-
-	return response, nil
-}
-
-// ParseBusinessesNextAvailableSlotResponse parses an HTTP response from a BusinessesNextAvailableSlotWithResponse call
-func ParseBusinessesNextAvailableSlotResponse(rsp *http.Response) (*BusinessesNextAvailableSlotResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &BusinessesNextAvailableSlotResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest NextAvailableSlotResponse
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON200 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
-		var dest ApiErrorResponse
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON400 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
-		var dest ApiErrorResponse
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON401 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
-		var dest ApiErrorResponse
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON403 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
-		var dest ApiErrorResponse
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON404 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
-		var dest ApiErrorResponse
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON429 = &dest
-
-	}
-
-	return response, nil
-}
-
-// ParseBusinessesServicesResponse parses an HTTP response from a BusinessesServicesWithResponse call
-func ParseBusinessesServicesResponse(rsp *http.Response) (*BusinessesServicesResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &BusinessesServicesResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest ApiListResponseOfServiceResponse
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON200 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
-		var dest ApiErrorResponse
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON400 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
-		var dest ApiErrorResponse
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON401 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
-		var dest ApiErrorResponse
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON403 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
-		var dest ApiErrorResponse
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON404 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
-		var dest ApiErrorResponse
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON429 = &dest
-
-	}
-
-	return response, nil
-}
-
-// ParseServicesCreateResponse parses an HTTP response from a ServicesCreateWithResponse call
-func ParseServicesCreateResponse(rsp *http.Response) (*ServicesCreateResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &ServicesCreateResponse{
+	response := &CreateResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 201:
-		var dest ServiceResponse
+		var dest BackOrder
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON201 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON400 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON401 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON403 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON404 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 409:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON409 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
 
 	}
 
 	return response, nil
 }
 
-// ParseServicesUpdateResponse parses an HTTP response from a ServicesUpdateWithResponse call
-func ParseServicesUpdateResponse(rsp *http.Response) (*ServicesUpdateResponse, error) {
+// ParseReceiveResponse parses an HTTP response from a ReceiveWithResponse call
+func ParseReceiveResponse(rsp *http.Response) (*ReceiveResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &ServicesUpdateResponse{
+	response := &ReceiveResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest ServiceResponse
+		var dest CommandResponseOfBatchResponseOfBackOrder
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON200 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON400 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON401 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON403 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON404 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 409:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON409 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
 
 	}
 
 	return response, nil
 }
 
-// ParseCustomersListResponse parses an HTTP response from a CustomersListWithResponse call
-func ParseCustomersListResponse(rsp *http.Response) (*CustomersListResponse, error) {
+// ParseDeleteResponse parses an HTTP response from a DeleteWithResponse call
+func ParseDeleteResponse(rsp *http.Response) (*DeleteResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &CustomersListResponse{
+	response := &DeleteResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest ApiListResponseOfCustomerResponse
+		var dest BackOrderDeleted
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON200 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON400 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON401 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON403 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
-		var dest ApiErrorResponse
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON404 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
-		var dest ApiErrorResponse
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON429 = &dest
-
-	}
-
-	return response, nil
-}
-
-// ParseCustomersGetResponse parses an HTTP response from a CustomersGetWithResponse call
-func ParseCustomersGetResponse(rsp *http.Response) (*CustomersGetResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &CustomersGetResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest CustomerResponse
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON200 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
-		var dest ApiErrorResponse
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON400 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
-		var dest ApiErrorResponse
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON401 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
-		var dest ApiErrorResponse
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON403 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
-		var dest ApiErrorResponse
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON404 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
-		var dest ApiErrorResponse
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON429 = &dest
-
-	}
-
-	return response, nil
-}
-
-// ParseCustomersUpdateResponse parses an HTTP response from a CustomersUpdateWithResponse call
-func ParseCustomersUpdateResponse(rsp *http.Response) (*CustomersUpdateResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &CustomersUpdateResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest CustomerResponse
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON200 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
-		var dest ApiErrorResponse
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON400 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
-		var dest ApiErrorResponse
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON401 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
-		var dest ApiErrorResponse
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON403 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON404 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 409:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON409 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
 
 	}
 
 	return response, nil
 }
 
-// ParseAssetsListForCustomerResponse parses an HTTP response from a AssetsListForCustomerWithResponse call
-func ParseAssetsListForCustomerResponse(rsp *http.Response) (*AssetsListForCustomerResponse, error) {
+// ParseGetResponse parses an HTTP response from a GetWithResponse call
+func ParseGetResponse(rsp *http.Response) (*GetResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &AssetsListForCustomerResponse{
+	response := &GetResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest ApiListResponseOfAssetResponse
+		var dest BackOrder
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON200 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON400 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON401 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON403 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON404 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
 
 	}
 
 	return response, nil
 }
 
-// ParseChatCreateAttachmentsResponse parses an HTTP response from a ChatCreateAttachmentsWithResponse call
-func ParseChatCreateAttachmentsResponse(rsp *http.Response) (*ChatCreateAttachmentsResponse, error) {
+// ParseUpdateResponse parses an HTTP response from a UpdateWithResponse call
+func ParseUpdateResponse(rsp *http.Response) (*UpdateResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &ChatCreateAttachmentsResponse{
+	response := &UpdateResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest BackOrder
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 409:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON409 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseListBusinessResponse parses an HTTP response from a ListBusinessWithResponse call
+func ParseListBusinessResponse(rsp *http.Response) (*ListBusinessResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ListBusinessResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest ListResponseOfBusiness
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetBusinessResponse parses an HTTP response from a GetBusinessWithResponse call
+func ParseGetBusinessResponse(rsp *http.Response) (*GetBusinessResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetBusinessResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest Business
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseAvailabilityResponse parses an HTTP response from a AvailabilityWithResponse call
+func ParseAvailabilityResponse(rsp *http.Response) (*AvailabilityResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &AvailabilityResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest AvailabilityCalendar
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseAvailabilitySlotsResponse parses an HTTP response from a AvailabilitySlotsWithResponse call
+func ParseAvailabilitySlotsResponse(rsp *http.Response) (*AvailabilitySlotsResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &AvailabilitySlotsResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest AvailabilitySlotsResult
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseBusinessIntegrationResponse parses an HTTP response from a BusinessIntegrationWithResponse call
+func ParseBusinessIntegrationResponse(rsp *http.Response) (*BusinessIntegrationResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &BusinessIntegrationResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest BusinessIntegration
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseTriggerCustomerSyncResponse parses an HTTP response from a TriggerCustomerSyncWithResponse call
+func ParseTriggerCustomerSyncResponse(rsp *http.Response) (*TriggerCustomerSyncResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &TriggerCustomerSyncResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 202:
+		var dest IntegrationPullSyncAccepted
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON202 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 409:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON409 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseTriggerStockSyncResponse parses an HTTP response from a TriggerStockSyncWithResponse call
+func ParseTriggerStockSyncResponse(rsp *http.Response) (*TriggerStockSyncResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &TriggerStockSyncResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 202:
+		var dest IntegrationPullSyncAccepted
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON202 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 409:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON409 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseJobStatusesResponse parses an HTTP response from a JobStatusesWithResponse call
+func ParseJobStatusesResponse(rsp *http.Response) (*JobStatusesResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &JobStatusesResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest JobStatusList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseNextAvailableSlotResponse parses an HTTP response from a NextAvailableSlotWithResponse call
+func ParseNextAvailableSlotResponse(rsp *http.Response) (*NextAvailableSlotResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &NextAvailableSlotResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest NextAvailableSlotResult
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseServicesResponse parses an HTTP response from a ServicesWithResponse call
+func ParseServicesResponse(rsp *http.Response) (*ServicesResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ServicesResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest ListResponseOfService
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseCreateServiceResponse parses an HTTP response from a CreateServiceWithResponse call
+func ParseCreateServiceResponse(rsp *http.Response) (*CreateServiceResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &CreateServiceResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 201:
-		var dest ApiListResponseOfChatMessageResponse
+		var dest Service
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON201 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON400 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON401 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON403 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON404 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 409:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON409 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseUpdateServiceResponse parses an HTTP response from a UpdateServiceWithResponse call
+func ParseUpdateServiceResponse(rsp *http.Response) (*UpdateServiceResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &UpdateServiceResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest Service
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 409:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON409 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseCustomersResponse parses an HTTP response from a CustomersWithResponse call
+func ParseCustomersResponse(rsp *http.Response) (*CustomersResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &CustomersResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest ListResponseOfCustomer
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseCreateCustomerResponse parses an HTTP response from a CreateCustomerWithResponse call
+func ParseCreateCustomerResponse(rsp *http.Response) (*CreateCustomerResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &CreateCustomerResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 201:
+		var dest Customer
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON201 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 409:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON409 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseCustomerResponse parses an HTTP response from a CustomerWithResponse call
+func ParseCustomerResponse(rsp *http.Response) (*CustomerResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &CustomerResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest Customer
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseUpdateCustomerResponse parses an HTTP response from a UpdateCustomerWithResponse call
+func ParseUpdateCustomerResponse(rsp *http.Response) (*UpdateCustomerResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &UpdateCustomerResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest Customer
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 409:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON409 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseListForCustomerResponse parses an HTTP response from a ListForCustomerWithResponse call
+func ParseListForCustomerResponse(rsp *http.Response) (*ListForCustomerResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ListForCustomerResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest ListResponseOfAsset
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseCreateChatAttachmentsResponse parses an HTTP response from a CreateChatAttachmentsWithResponse call
+func ParseCreateChatAttachmentsResponse(rsp *http.Response) (*CreateChatAttachmentsResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &CreateChatAttachmentsResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 201:
+		var dest CommandResponseOfBatchResponseOfChatMessage
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON201 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 409:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON409 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
 
 	}
 
@@ -8858,1953 +15369,3799 @@ func ParseChatMessagesResponse(rsp *http.Response) (*ChatMessagesResponse, error
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest ApiListResponseOfChatMessageResponse
+		var dest ListResponseOfChatMessage
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON200 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON400 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON401 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON403 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON404 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
 
 	}
 
 	return response, nil
 }
 
-// ParseChatCreateMessageResponse parses an HTTP response from a ChatCreateMessageWithResponse call
-func ParseChatCreateMessageResponse(rsp *http.Response) (*ChatCreateMessageResponse, error) {
+// ParseCreateChatMessageResponse parses an HTTP response from a CreateChatMessageWithResponse call
+func ParseCreateChatMessageResponse(rsp *http.Response) (*CreateChatMessageResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &ChatCreateMessageResponse{
+	response := &CreateChatMessageResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 201:
-		var dest ChatMessageResponse
+		var dest CommandResponseOfChatMessage
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON201 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON400 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON401 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON403 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON404 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 409:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON409 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
 
 	}
 
 	return response, nil
 }
 
-// ParseInvoiceItemsCreateResponse parses an HTTP response from a InvoiceItemsCreateWithResponse call
-func ParseInvoiceItemsCreateResponse(rsp *http.Response) (*InvoiceItemsCreateResponse, error) {
+// ParseMarkReadResponse parses an HTTP response from a MarkReadWithResponse call
+func ParseMarkReadResponse(rsp *http.Response) (*MarkReadResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &InvoiceItemsCreateResponse{
+	response := &MarkReadResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest ChatMarkRead
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 409:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON409 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseCreateInvoiceItemResponse parses an HTTP response from a CreateInvoiceItemWithResponse call
+func ParseCreateInvoiceItemResponse(rsp *http.Response) (*CreateInvoiceItemResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &CreateInvoiceItemResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 201:
-		var dest InvoiceItemResponse
+		var dest InvoiceItem
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON201 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON400 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON401 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON403 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON404 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 409:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON409 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
 
 	}
 
 	return response, nil
 }
 
-// ParseInvoiceItemsDeleteResponse parses an HTTP response from a InvoiceItemsDeleteWithResponse call
-func ParseInvoiceItemsDeleteResponse(rsp *http.Response) (*InvoiceItemsDeleteResponse, error) {
+// ParseDeleteInvoiceItemResponse parses an HTTP response from a DeleteInvoiceItemWithResponse call
+func ParseDeleteInvoiceItemResponse(rsp *http.Response) (*DeleteInvoiceItemResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &InvoiceItemsDeleteResponse{
+	response := &DeleteInvoiceItemResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest InvoiceItemDeleteResponse
+		var dest InvoiceItemDeleted
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON200 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON400 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON401 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON403 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON404 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 409:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON409 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
 
 	}
 
 	return response, nil
 }
 
-// ParseInvoiceItemsGetResponse parses an HTTP response from a InvoiceItemsGetWithResponse call
-func ParseInvoiceItemsGetResponse(rsp *http.Response) (*InvoiceItemsGetResponse, error) {
+// ParseGetInvoiceItemResponse parses an HTTP response from a GetInvoiceItemWithResponse call
+func ParseGetInvoiceItemResponse(rsp *http.Response) (*GetInvoiceItemResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &InvoiceItemsGetResponse{
+	response := &GetInvoiceItemResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest InvoiceItemResponse
+		var dest InvoiceItem
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON200 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON400 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON401 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON403 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON404 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
 
 	}
 
 	return response, nil
 }
 
-// ParseInvoiceItemsUpdateResponse parses an HTTP response from a InvoiceItemsUpdateWithResponse call
-func ParseInvoiceItemsUpdateResponse(rsp *http.Response) (*InvoiceItemsUpdateResponse, error) {
+// ParseUpdateInvoiceItemResponse parses an HTTP response from a UpdateInvoiceItemWithResponse call
+func ParseUpdateInvoiceItemResponse(rsp *http.Response) (*UpdateInvoiceItemResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &InvoiceItemsUpdateResponse{
+	response := &UpdateInvoiceItemResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest InvoiceItemResponse
+		var dest InvoiceItem
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON200 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON400 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON401 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON403 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON404 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 409:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON409 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
 
 	}
 
 	return response, nil
 }
 
-// ParseInvoicesListResponse parses an HTTP response from a InvoicesListWithResponse call
-func ParseInvoicesListResponse(rsp *http.Response) (*InvoicesListResponse, error) {
+// ParseListInvoiceResponse parses an HTTP response from a ListInvoiceWithResponse call
+func ParseListInvoiceResponse(rsp *http.Response) (*ListInvoiceResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &InvoicesListResponse{
+	response := &ListInvoiceResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest ApiListResponseOfInvoiceResponse
+		var dest ListResponseOfInvoice
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON200 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON400 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON401 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON403 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON404 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
 
 	}
 
 	return response, nil
 }
 
-// ParseInvoicesGetResponse parses an HTTP response from a InvoicesGetWithResponse call
-func ParseInvoicesGetResponse(rsp *http.Response) (*InvoicesGetResponse, error) {
+// ParseGetInvoiceResponse parses an HTTP response from a GetInvoiceWithResponse call
+func ParseGetInvoiceResponse(rsp *http.Response) (*GetInvoiceResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &InvoicesGetResponse{
+	response := &GetInvoiceResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest InvoiceResponse
+		var dest Invoice
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON200 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON400 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON401 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON403 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON404 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
 
 	}
 
 	return response, nil
 }
 
-// ParseJobReportsListResponse parses an HTTP response from a JobReportsListWithResponse call
-func ParseJobReportsListResponse(rsp *http.Response) (*JobReportsListResponse, error) {
+// ParseUpdateInvoiceResponse parses an HTTP response from a UpdateInvoiceWithResponse call
+func ParseUpdateInvoiceResponse(rsp *http.Response) (*UpdateInvoiceResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &JobReportsListResponse{
+	response := &UpdateInvoiceResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest ApiListResponseOfJobReportResponse
+		var dest CommandResponseOfInvoice
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON200 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON400 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON401 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON403 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON404 = &dest
 
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 409:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON409 = &dest
+
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
 
 	}
 
 	return response, nil
 }
 
-// ParseJobReportsGetResponse parses an HTTP response from a JobReportsGetWithResponse call
-func ParseJobReportsGetResponse(rsp *http.Response) (*JobReportsGetResponse, error) {
+// ParseChangeInvoiceAutoSyncResponse parses an HTTP response from a ChangeInvoiceAutoSyncWithResponse call
+func ParseChangeInvoiceAutoSyncResponse(rsp *http.Response) (*ChangeInvoiceAutoSyncResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &JobReportsGetResponse{
+	response := &ChangeInvoiceAutoSyncResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest JobReportResponse
+		var dest IntegrationSyncCommand
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON200 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON400 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON401 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON403 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON404 = &dest
 
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 409:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON409 = &dest
+
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
 
 	}
 
 	return response, nil
 }
 
-// ParseJobsListResponse parses an HTTP response from a JobsListWithResponse call
-func ParseJobsListResponse(rsp *http.Response) (*JobsListResponse, error) {
+// ParseInvoiceIntegrationSyncResponse parses an HTTP response from a InvoiceIntegrationSyncWithResponse call
+func ParseInvoiceIntegrationSyncResponse(rsp *http.Response) (*InvoiceIntegrationSyncResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &JobsListResponse{
+	response := &InvoiceIntegrationSyncResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest ApiListResponseOfJobResponse
+		var dest InvoiceIntegrationSync
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON200 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON400 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON401 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON403 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON404 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
 
 	}
 
 	return response, nil
 }
 
-// ParseJobsCreateResponse parses an HTTP response from a JobsCreateWithResponse call
-func ParseJobsCreateResponse(rsp *http.Response) (*JobsCreateResponse, error) {
+// ParseInvoiceIntegrationSyncEventsResponse parses an HTTP response from a InvoiceIntegrationSyncEventsWithResponse call
+func ParseInvoiceIntegrationSyncEventsResponse(rsp *http.Response) (*InvoiceIntegrationSyncEventsResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &JobsCreateResponse{
+	response := &InvoiceIntegrationSyncEventsResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest IntegrationSyncEventList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseChangeInvoiceSyncCompletionResponse parses an HTTP response from a ChangeInvoiceSyncCompletionWithResponse call
+func ParseChangeInvoiceSyncCompletionResponse(rsp *http.Response) (*ChangeInvoiceSyncCompletionResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ChangeInvoiceSyncCompletionResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest IntegrationSyncCommand
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 409:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON409 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseRetryInvoiceIntegrationSyncResponse parses an HTTP response from a RetryInvoiceIntegrationSyncWithResponse call
+func ParseRetryInvoiceIntegrationSyncResponse(rsp *http.Response) (*RetryInvoiceIntegrationSyncResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &RetryInvoiceIntegrationSyncResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest IntegrationSyncCommand
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 409:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON409 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseTriggerInvoiceIntegrationSyncResponse parses an HTTP response from a TriggerInvoiceIntegrationSyncWithResponse call
+func ParseTriggerInvoiceIntegrationSyncResponse(rsp *http.Response) (*TriggerInvoiceIntegrationSyncResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &TriggerInvoiceIntegrationSyncResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest IntegrationSyncCommand
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 409:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON409 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParsePaymentLinkResponse parses an HTTP response from a PaymentLinkWithResponse call
+func ParsePaymentLinkResponse(rsp *http.Response) (*PaymentLinkResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &PaymentLinkResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CommandResponseOfInvoicePaymentLink
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 409:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON409 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseRecordPaymentResponse parses an HTTP response from a RecordPaymentWithResponse call
+func ParseRecordPaymentResponse(rsp *http.Response) (*RecordPaymentResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &RecordPaymentResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 201:
-		var dest JobResponse
+		var dest CommandResponseOfPayment
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON201 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON400 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON401 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON403 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON404 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 409:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON409 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
 
 	}
 
 	return response, nil
 }
 
-// ParseJobsGetResponse parses an HTTP response from a JobsGetWithResponse call
-func ParseJobsGetResponse(rsp *http.Response) (*JobsGetResponse, error) {
+// ParsePdfResponse parses an HTTP response from a PdfWithResponse call
+func ParsePdfResponse(rsp *http.Response) (*PdfResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &JobsGetResponse{
+	response := &PdfResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest JobResponse
+		var dest InvoicePdf
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON200 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON400 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON401 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON403 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON404 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
 
 	}
 
 	return response, nil
 }
 
-// ParseJobReportsListForJobResponse parses an HTTP response from a JobReportsListForJobWithResponse call
-func ParseJobReportsListForJobResponse(rsp *http.Response) (*JobReportsListForJobResponse, error) {
+// ParseSendResponse parses an HTTP response from a SendWithResponse call
+func ParseSendResponse(rsp *http.Response) (*SendResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &JobReportsListForJobResponse{
+	response := &SendResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest ApiListResponseOfJobReportResponse
+		var dest CommandResponseOfInvoice
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON200 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON400 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON401 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON403 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
-		var dest ApiErrorResponse
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON404 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
-		var dest ApiErrorResponse
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON429 = &dest
-
-	}
-
-	return response, nil
-}
-
-// ParseJobReportsGetForJobResponse parses an HTTP response from a JobReportsGetForJobWithResponse call
-func ParseJobReportsGetForJobResponse(rsp *http.Response) (*JobReportsGetForJobResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &JobReportsGetForJobResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest JobReportResponse
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON200 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
-		var dest ApiErrorResponse
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON400 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
-		var dest ApiErrorResponse
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON401 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
-		var dest ApiErrorResponse
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON403 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
-		var dest ApiErrorResponse
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON404 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
-		var dest ApiErrorResponse
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON429 = &dest
-
-	}
-
-	return response, nil
-}
-
-// ParseJobsPartAuthorisationsResponse parses an HTTP response from a JobsPartAuthorisationsWithResponse call
-func ParseJobsPartAuthorisationsResponse(rsp *http.Response) (*JobsPartAuthorisationsResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &JobsPartAuthorisationsResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest ApiListResponseOfPartAuthorisationResponse
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON200 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
-		var dest ApiErrorResponse
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON400 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
-		var dest ApiErrorResponse
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON401 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
-		var dest ApiErrorResponse
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON403 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
-		var dest ApiErrorResponse
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON404 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
-		var dest ApiErrorResponse
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON429 = &dest
-
-	}
-
-	return response, nil
-}
-
-// ParseJobsSubmitPartAuthorisationDecisionsResponse parses an HTTP response from a JobsSubmitPartAuthorisationDecisionsWithResponse call
-func ParseJobsSubmitPartAuthorisationDecisionsResponse(rsp *http.Response) (*JobsSubmitPartAuthorisationDecisionsResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &JobsSubmitPartAuthorisationDecisionsResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest ApiListResponseOfPartAuthorisationResponse
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON200 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
-		var dest ApiErrorResponse
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON400 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
-		var dest ApiErrorResponse
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON401 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
-		var dest ApiErrorResponse
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON403 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON404 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 409:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON409 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
 
 	}
 
 	return response, nil
 }
 
-// ParseServicesListResponse parses an HTTP response from a ServicesListWithResponse call
-func ParseServicesListResponse(rsp *http.Response) (*ServicesListResponse, error) {
+// ParseChangeStatusResponse parses an HTTP response from a ChangeStatusWithResponse call
+func ParseChangeStatusResponse(rsp *http.Response) (*ChangeStatusResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &ServicesListResponse{
+	response := &ChangeStatusResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest ApiListResponseOfServiceResponse
+		var dest CommandResponseOfInvoice
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON200 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON400 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON401 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON403 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON404 = &dest
 
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 409:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON409 = &dest
+
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
 
 	}
 
 	return response, nil
 }
 
-// ParseServicesGetResponse parses an HTTP response from a ServicesGetWithResponse call
-func ParseServicesGetResponse(rsp *http.Response) (*ServicesGetResponse, error) {
+// ParseListJobReportResponse parses an HTTP response from a ListJobReportWithResponse call
+func ParseListJobReportResponse(rsp *http.Response) (*ListJobReportResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &ServicesGetResponse{
+	response := &ListJobReportResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest ServiceResponse
+		var dest ListResponseOfJobReport
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON200 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON400 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON401 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON403 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON404 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
 
 	}
 
 	return response, nil
 }
 
-// ParseStockListResponse parses an HTTP response from a StockListWithResponse call
-func ParseStockListResponse(rsp *http.Response) (*StockListResponse, error) {
+// ParseGetJobReportResponse parses an HTTP response from a GetJobReportWithResponse call
+func ParseGetJobReportResponse(rsp *http.Response) (*GetJobReportResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &StockListResponse{
+	response := &GetJobReportResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest ApiListResponseOfStockVariationResponse
+		var dest JobReport
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON200 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON400 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON401 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON403 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON404 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
 
 	}
 
 	return response, nil
 }
 
-// ParseStockGetResponse parses an HTTP response from a StockGetWithResponse call
-func ParseStockGetResponse(rsp *http.Response) (*StockGetResponse, error) {
+// ParseJobsResponse parses an HTTP response from a JobsWithResponse call
+func ParseJobsResponse(rsp *http.Response) (*JobsResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &StockGetResponse{
+	response := &JobsResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest StockVariationResponse
+		var dest ListResponseOfJob
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON200 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON400 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON401 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON403 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON404 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
 
 	}
 
 	return response, nil
 }
 
-// ParseWebhookDeliveriesGetResponse parses an HTTP response from a WebhookDeliveriesGetWithResponse call
-func ParseWebhookDeliveriesGetResponse(rsp *http.Response) (*WebhookDeliveriesGetResponse, error) {
+// ParseCreateJobBookingResponse parses an HTTP response from a CreateJobBookingWithResponse call
+func ParseCreateJobBookingResponse(rsp *http.Response) (*CreateJobBookingResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &WebhookDeliveriesGetResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest WebhookDeliveryResponse
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON200 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
-		var dest ApiErrorResponse
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON400 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
-		var dest ApiErrorResponse
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON401 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
-		var dest ApiErrorResponse
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON403 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
-		var dest ApiErrorResponse
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON404 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
-		var dest ApiErrorResponse
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON429 = &dest
-
-	}
-
-	return response, nil
-}
-
-// ParseWebhookDeliveriesReplayResponse parses an HTTP response from a WebhookDeliveriesReplayWithResponse call
-func ParseWebhookDeliveriesReplayResponse(rsp *http.Response) (*WebhookDeliveriesReplayResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &WebhookDeliveriesReplayResponse{
+	response := &CreateJobBookingResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 201:
-		var dest WebhookDeliveryResponse
+		var dest CommandResponseOfJob
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON201 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON400 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON401 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON403 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON404 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 409:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON409 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
 
 	}
 
 	return response, nil
 }
 
-// ParseWebhookEndpointsListResponse parses an HTTP response from a WebhookEndpointsListWithResponse call
-func ParseWebhookEndpointsListResponse(rsp *http.Response) (*WebhookEndpointsListResponse, error) {
+// ParseJobResponse parses an HTTP response from a JobWithResponse call
+func ParseJobResponse(rsp *http.Response) (*JobResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &WebhookEndpointsListResponse{
+	response := &JobResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest ApiListResponseOfWebhookEndpointResponse
+		var dest Job
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON200 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON400 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON401 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON403 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON404 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
 
 	}
 
 	return response, nil
 }
 
-// ParseWebhookEndpointsCreateResponse parses an HTTP response from a WebhookEndpointsCreateWithResponse call
-func ParseWebhookEndpointsCreateResponse(rsp *http.Response) (*WebhookEndpointsCreateResponse, error) {
+// ParseUpdateJobResponse parses an HTTP response from a UpdateJobWithResponse call
+func ParseUpdateJobResponse(rsp *http.Response) (*UpdateJobResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &WebhookEndpointsCreateResponse{
+	response := &UpdateJobResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CommandResponseOfJob
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 409:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON409 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseChangeAcceptedStatusResponse parses an HTTP response from a ChangeAcceptedStatusWithResponse call
+func ParseChangeAcceptedStatusResponse(rsp *http.Response) (*ChangeAcceptedStatusResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ChangeAcceptedStatusResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CommandResponseOfJob
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 409:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON409 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseListJobReportForJobResponse parses an HTTP response from a ListJobReportForJobWithResponse call
+func ParseListJobReportForJobResponse(rsp *http.Response) (*ListJobReportForJobResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ListJobReportForJobResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest ListResponseOfJobReport
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetJobReportForJobResponse parses an HTTP response from a GetJobReportForJobWithResponse call
+func ParseGetJobReportForJobResponse(rsp *http.Response) (*GetJobReportForJobResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetJobReportForJobResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest JobReport
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParsePartAuthorisationsResponse parses an HTTP response from a PartAuthorisationsWithResponse call
+func ParsePartAuthorisationsResponse(rsp *http.Response) (*PartAuthorisationsResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &PartAuthorisationsResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest ListResponseOfPartAuthorisation
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseSubmitPartAuthorisationDecisionsResponse parses an HTTP response from a SubmitPartAuthorisationDecisionsWithResponse call
+func ParseSubmitPartAuthorisationDecisionsResponse(rsp *http.Response) (*SubmitPartAuthorisationDecisionsResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &SubmitPartAuthorisationDecisionsResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CommandResponseOfBatchResponseOfPartAuthorisation
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 409:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON409 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseRequestPartAuthorisationResponse parses an HTTP response from a RequestPartAuthorisationWithResponse call
+func ParseRequestPartAuthorisationResponse(rsp *http.Response) (*RequestPartAuthorisationResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &RequestPartAuthorisationResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CommandResponseOfBatchResponseOfPartAuthorisation
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 409:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON409 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseChangeScheduleResponse parses an HTTP response from a ChangeScheduleWithResponse call
+func ParseChangeScheduleResponse(rsp *http.Response) (*ChangeScheduleResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ChangeScheduleResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CommandResponseOfJob
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 409:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON409 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseUpdateWorkLineResponse parses an HTTP response from a UpdateWorkLineWithResponse call
+func ParseUpdateWorkLineResponse(rsp *http.Response) (*UpdateWorkLineResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &UpdateWorkLineResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CommandResponseOfJob
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 409:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON409 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseAssignWorkLineMechanicResponse parses an HTTP response from a AssignWorkLineMechanicWithResponse call
+func ParseAssignWorkLineMechanicResponse(rsp *http.Response) (*AssignWorkLineMechanicResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &AssignWorkLineMechanicResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CommandResponseOfJob
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 409:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON409 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseReplaceWorkLineServicesResponse parses an HTTP response from a ReplaceWorkLineServicesWithResponse call
+func ParseReplaceWorkLineServicesResponse(rsp *http.Response) (*ReplaceWorkLineServicesResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ReplaceWorkLineServicesResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CommandResponseOfJob
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 409:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON409 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseChangeWorkLineStatusResponse parses an HTTP response from a ChangeWorkLineStatusWithResponse call
+func ParseChangeWorkLineStatusResponse(rsp *http.Response) (*ChangeWorkLineStatusResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ChangeWorkLineStatusResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CommandResponseOfJob
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 409:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON409 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseRefundResponse parses an HTTP response from a RefundWithResponse call
+func ParseRefundResponse(rsp *http.Response) (*RefundResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &RefundResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 201:
-		var dest CreateWebhookEndpointResponse
+		var dest CommandResponseOfPayment
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON201 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON400 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON401 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON403 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON404 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 409:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON409 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
 
 	}
 
 	return response, nil
 }
 
-// ParseWebhookEndpointsDeleteResponse parses an HTTP response from a WebhookEndpointsDeleteWithResponse call
-func ParseWebhookEndpointsDeleteResponse(rsp *http.Response) (*WebhookEndpointsDeleteResponse, error) {
+// ParseListServiceResponse parses an HTTP response from a ListServiceWithResponse call
+func ParseListServiceResponse(rsp *http.Response) (*ListServiceResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &WebhookEndpointsDeleteResponse{
+	response := &ListServiceResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest WebhookEndpointResponse
+		var dest ListResponseOfService
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON200 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON400 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON401 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON403 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetServiceResponse parses an HTTP response from a GetServiceWithResponse call
+func ParseGetServiceResponse(rsp *http.Response) (*GetServiceResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetServiceResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest Service
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseListStockVariationResponse parses an HTTP response from a ListStockVariationWithResponse call
+func ParseListStockVariationResponse(rsp *http.Response) (*ListStockVariationResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ListStockVariationResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest ListResponseOfStockVariation
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetStockVariationResponse parses an HTTP response from a GetStockVariationWithResponse call
+func ParseGetStockVariationResponse(rsp *http.Response) (*GetStockVariationResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetStockVariationResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest StockVariation
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetWebhookDeliveryResponse parses an HTTP response from a GetWebhookDeliveryWithResponse call
+func ParseGetWebhookDeliveryResponse(rsp *http.Response) (*GetWebhookDeliveryResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetWebhookDeliveryResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest WebhookDelivery
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseReplayResponse parses an HTTP response from a ReplayWithResponse call
+func ParseReplayResponse(rsp *http.Response) (*ReplayResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ReplayResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 201:
+		var dest CommandResponseOfWebhookDelivery
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON201 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON404 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 409:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON409 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
 
 	}
 
 	return response, nil
 }
 
-// ParseWebhookEndpointsGetResponse parses an HTTP response from a WebhookEndpointsGetWithResponse call
-func ParseWebhookEndpointsGetResponse(rsp *http.Response) (*WebhookEndpointsGetResponse, error) {
+// ParseListWebhookEndpointResponse parses an HTTP response from a ListWebhookEndpointWithResponse call
+func ParseListWebhookEndpointResponse(rsp *http.Response) (*ListWebhookEndpointResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &WebhookEndpointsGetResponse{
+	response := &ListWebhookEndpointResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest WebhookEndpointResponse
+		var dest ListResponseOfWebhookEndpoint
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON200 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON400 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON401 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON403 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON404 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
 
 	}
 
 	return response, nil
 }
 
-// ParseWebhookEndpointsUpdateResponse parses an HTTP response from a WebhookEndpointsUpdateWithResponse call
-func ParseWebhookEndpointsUpdateResponse(rsp *http.Response) (*WebhookEndpointsUpdateResponse, error) {
+// ParseCreateWebhookEndpointResponse parses an HTTP response from a CreateWebhookEndpointWithResponse call
+func ParseCreateWebhookEndpointResponse(rsp *http.Response) (*CreateWebhookEndpointResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &WebhookEndpointsUpdateResponse{
+	response := &CreateWebhookEndpointResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest WebhookEndpointResponse
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 201:
+		var dest WebhookEndpointWithSecret
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.JSON200 = &dest
+		response.JSON201 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON400 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON401 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON403 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON404 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 409:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON409 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
 
 	}
 
 	return response, nil
 }
 
-// ParseWebhookDeliveriesListForEndpointResponse parses an HTTP response from a WebhookDeliveriesListForEndpointWithResponse call
-func ParseWebhookDeliveriesListForEndpointResponse(rsp *http.Response) (*WebhookDeliveriesListForEndpointResponse, error) {
+// ParseDeleteWebhookEndpointResponse parses an HTTP response from a DeleteWebhookEndpointWithResponse call
+func ParseDeleteWebhookEndpointResponse(rsp *http.Response) (*DeleteWebhookEndpointResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &WebhookDeliveriesListForEndpointResponse{
+	response := &DeleteWebhookEndpointResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest ApiListResponseOfWebhookDeliveryResponse
+		var dest WebhookEndpoint
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON200 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON400 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON401 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON403 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
-		var dest ApiErrorResponse
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON404 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
-		var dest ApiErrorResponse
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON429 = &dest
-
-	}
-
-	return response, nil
-}
-
-// ParseWebhookEndpointsRotateSecretResponse parses an HTTP response from a WebhookEndpointsRotateSecretWithResponse call
-func ParseWebhookEndpointsRotateSecretResponse(rsp *http.Response) (*WebhookEndpointsRotateSecretResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &WebhookEndpointsRotateSecretResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest RotateWebhookEndpointSecretResponse
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON200 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
-		var dest ApiErrorResponse
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON400 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
-		var dest ApiErrorResponse
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON401 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
-		var dest ApiErrorResponse
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON403 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON404 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 409:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON409 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
 
 	}
 
 	return response, nil
 }
 
-// ParseWebhookEventsListResponse parses an HTTP response from a WebhookEventsListWithResponse call
-func ParseWebhookEventsListResponse(rsp *http.Response) (*WebhookEventsListResponse, error) {
+// ParseGetWebhookEndpointResponse parses an HTTP response from a GetWebhookEndpointWithResponse call
+func ParseGetWebhookEndpointResponse(rsp *http.Response) (*GetWebhookEndpointResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &WebhookEventsListResponse{
+	response := &GetWebhookEndpointResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest ApiListResponseOfWebhookEventResponse
+		var dest WebhookEndpoint
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON200 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON400 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON401 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON403 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON404 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
-		var dest ApiErrorResponse
+		var dest ErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseUpdateWebhookEndpointResponse parses an HTTP response from a UpdateWebhookEndpointWithResponse call
+func ParseUpdateWebhookEndpointResponse(rsp *http.Response) (*UpdateWebhookEndpointResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &UpdateWebhookEndpointResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest WebhookEndpoint
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 409:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON409 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseListForEndpointResponse parses an HTTP response from a ListForEndpointWithResponse call
+func ParseListForEndpointResponse(rsp *http.Response) (*ListForEndpointResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ListForEndpointResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest ListResponseOfWebhookDelivery
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseRotateSecretResponse parses an HTTP response from a RotateSecretWithResponse call
+func ParseRotateSecretResponse(rsp *http.Response) (*RotateSecretResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &RotateSecretResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CommandResponseOfWebhookEndpointWithSecret
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 409:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON409 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseListWebhookEventResponse parses an HTTP response from a ListWebhookEventWithResponse call
+func ParseListWebhookEventResponse(rsp *http.Response) (*ListWebhookEventResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ListWebhookEventResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest ListResponseOfWebhookEventType
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
 
 	}
 

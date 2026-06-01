@@ -212,7 +212,7 @@ func rawResponseError(status int, parsedBody any, rawBytes []byte) error {
 }
 
 func responseErrorWithHint(status int, parsedBody any, rawBytes []byte, hint, docsURL string) error {
-	envelope := api.ApiErrorResponse{}
+	envelope := api.ErrorResponse{}
 	if len(rawBytes) > 0 {
 		_ = json.Unmarshal(rawBytes, &envelope)
 	}
@@ -224,7 +224,7 @@ func responseErrorWithHint(status int, parsedBody any, rawBytes []byte, hint, do
 		if text, ok := parsedBody.(string); ok && strings.TrimSpace(text) != "" {
 			message = strings.TrimSpace(text)
 		}
-		envelope.Error = &api.ApiError{Code: stringPtr("upstream_error"), Message: stringPtr(message)}
+		envelope.Error = &api.Error{Code: errorCodePtr("upstream_error"), Message: stringPtr(message)}
 	}
 	return NewAPIError(status, envelope, hint, docsURL)
 }

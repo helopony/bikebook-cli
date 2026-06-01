@@ -7,7 +7,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
-const defaultAPIBase = "https://api.bikebook.com/public/v1"
+const defaultAPIBase = "https://api.bikebook.co.uk/public/v1"
 
 var (
 	version = "dev"

@@ -270,104 +270,129 @@ func (a *paginatedAccumulator) nextCursor() string {
 
 func readCommandSpecs() []readCommandSpec {
 	return []readCommandSpec{
-		{Group: "assets", Use: "list", Short: "List assets", QueryFlags: []string{"business_id", "customer_id", "name", "serial_number", "make", "model", "type", "sort", "limit", "cursor"}, Pageable: true, ExecutePage: func(ctx context.Context, c *api.Client, args []string, editors []api.RequestEditorFn) (*http.Response, error) {
-			return c.AssetsList(ctx, nil, editors...)
+		{Group: "assets", Use: "list", Short: "List assets", QueryFlags: []string{"business_id", "customer_id", "name", "serial_number", "make", "model", "bike_type", "sort", "limit", "cursor"}, Pageable: true, ExecutePage: func(ctx context.Context, c *api.Client, args []string, editors []api.RequestEditorFn) (*http.Response, error) {
+			return c.ListAsset(ctx, nil, editors...)
 		}},
-		{Group: "assets", Use: "list-for-customer", Short: "List assets for a customer", PathArgs: []string{"customer_id"}, QueryFlags: []string{"name", "serial_number", "make", "model", "type", "sort", "limit", "cursor"}, Pageable: true, ExecutePage: func(ctx context.Context, c *api.Client, args []string, editors []api.RequestEditorFn) (*http.Response, error) {
-			return c.AssetsListForCustomer(ctx, args[0], nil, editors...)
+		{Group: "assets", Use: "list-for-customer", Short: "List assets for a customer", PathArgs: []string{"customer_id"}, QueryFlags: []string{"name", "serial_number", "make", "model", "bike_type", "sort", "limit", "cursor"}, Pageable: true, ExecutePage: func(ctx context.Context, c *api.Client, args []string, editors []api.RequestEditorFn) (*http.Response, error) {
+			return c.ListForCustomer(ctx, args[0], nil, editors...)
 		}},
 		{Group: "assets", Use: "get", Short: "Get an asset", PathArgs: []string{"asset_id"}, ExecutePage: func(ctx context.Context, c *api.Client, args []string, editors []api.RequestEditorFn) (*http.Response, error) {
-			return c.AssetsGet(ctx, args[0], nil, editors...)
+			return c.GetAsset(ctx, args[0], nil, editors...)
+		}},
+		{Group: "back-orders", Use: "list", Short: "List back orders", QueryFlags: []string{"business_id", "status", "stock_variation_id", "job_id", "invoice_id", "customer_id", "sku", "source", "sort", "limit", "cursor"}, Pageable: true, ExecutePage: func(ctx context.Context, c *api.Client, args []string, editors []api.RequestEditorFn) (*http.Response, error) {
+			return c.List(ctx, nil, editors...)
+		}},
+		{Group: "back-orders", Use: "get", Short: "Get a back order", PathArgs: []string{"back_order_id"}, ExecutePage: func(ctx context.Context, c *api.Client, args []string, editors []api.RequestEditorFn) (*http.Response, error) {
+			return c.Get(ctx, args[0], nil, editors...)
 		}},
 		{Group: "businesses", Use: "list", Short: "List businesses", Pageable: true, ExecutePage: func(ctx context.Context, c *api.Client, args []string, editors []api.RequestEditorFn) (*http.Response, error) {
-			return c.BusinessesList(ctx, nil, editors...)
+			return c.ListBusiness(ctx, nil, editors...)
 		}},
 		{Group: "businesses", Use: "get", Short: "Get a business", PathArgs: []string{"business_id"}, ExecutePage: func(ctx context.Context, c *api.Client, args []string, editors []api.RequestEditorFn) (*http.Response, error) {
-			return c.BusinessesGet(ctx, args[0], nil, editors...)
+			return c.GetBusiness(ctx, args[0], nil, editors...)
 		}},
 		{Group: "businesses", Use: "services", Short: "List services for a business", PathArgs: []string{"business_id"}, QueryFlags: []string{"name", "sort", "limit", "cursor"}, Pageable: true, ExecutePage: func(ctx context.Context, c *api.Client, args []string, editors []api.RequestEditorFn) (*http.Response, error) {
-			return c.BusinessesServices(ctx, args[0], nil, editors...)
+			return c.Services(ctx, args[0], nil, editors...)
 		}},
 		{Group: "businesses", Use: "availability", Short: "Get business availability", PathArgs: []string{"business_id"}, QueryFlags: []string{"from", "to"}, ExecutePage: func(ctx context.Context, c *api.Client, args []string, editors []api.RequestEditorFn) (*http.Response, error) {
-			return c.BusinessesAvailability(ctx, args[0], nil, editors...)
+			return c.Availability(ctx, args[0], nil, editors...)
 		}},
 		{Group: "businesses", Use: "availability-slots", Short: "Get business availability slots", PathArgs: []string{"business_id"}, QueryFlags: []string{"date"}, ExecutePage: func(ctx context.Context, c *api.Client, args []string, editors []api.RequestEditorFn) (*http.Response, error) {
-			return c.BusinessesAvailabilitySlots(ctx, args[0], nil, editors...)
+			return c.AvailabilitySlots(ctx, args[0], nil, editors...)
 		}},
 		{Group: "businesses", Use: "next-available-slot", Short: "Get the next available slot for a business", PathArgs: []string{"business_id"}, QueryFlags: []string{"from", "to"}, ExecutePage: func(ctx context.Context, c *api.Client, args []string, editors []api.RequestEditorFn) (*http.Response, error) {
-			return c.BusinessesNextAvailableSlot(ctx, args[0], nil, editors...)
+			return c.NextAvailableSlot(ctx, args[0], nil, editors...)
+		}},
+		{Group: "businesses", Use: "job-statuses", Short: "List job statuses for a business", PathArgs: []string{"business_id"}, ExecutePage: func(ctx context.Context, c *api.Client, args []string, editors []api.RequestEditorFn) (*http.Response, error) {
+			return c.JobStatuses(ctx, args[0], nil, editors...)
 		}},
 		{Group: "chat", Use: "messages", Short: "List customer chat messages", PathArgs: []string{"customer_id"}, QueryFlags: []string{"job_id", "limit", "cursor"}, Pageable: true, ExecutePage: func(ctx context.Context, c *api.Client, args []string, editors []api.RequestEditorFn) (*http.Response, error) {
 			return c.ChatMessages(ctx, args[0], nil, editors...)
 		}},
 		{Group: "customers", Use: "list", Short: "List customers", QueryFlags: []string{"business_id", "name", "email", "phone", "sort", "limit", "cursor"}, Pageable: true, ExecutePage: func(ctx context.Context, c *api.Client, args []string, editors []api.RequestEditorFn) (*http.Response, error) {
-			return c.CustomersList(ctx, nil, editors...)
+			return c.Customers(ctx, nil, editors...)
 		}},
 		{Group: "customers", Use: "get", Short: "Get a customer", PathArgs: []string{"customer_id"}, ExecutePage: func(ctx context.Context, c *api.Client, args []string, editors []api.RequestEditorFn) (*http.Response, error) {
-			return c.CustomersGet(ctx, args[0], nil, editors...)
+			return c.Customer(ctx, args[0], nil, editors...)
 		}},
 		{Group: "invoice-items", Use: "get", Short: "Get an invoice item", PathArgs: []string{"invoice_item_id"}, ExecutePage: func(ctx context.Context, c *api.Client, args []string, editors []api.RequestEditorFn) (*http.Response, error) {
-			return c.InvoiceItemsGet(ctx, args[0], nil, editors...)
+			return c.GetInvoiceItem(ctx, args[0], nil, editors...)
 		}},
-		{Group: "invoices", Use: "list", Short: "List invoices", QueryFlags: []string{"business_id", "job_id", "invoice_number", "customer_id", "customer_email", "sort", "limit", "cursor"}, Pageable: true, ExecutePage: func(ctx context.Context, c *api.Client, args []string, editors []api.RequestEditorFn) (*http.Response, error) {
-			return c.InvoicesList(ctx, nil, editors...)
+		{Group: "integrations", Use: "business", Short: "Get business integration", PathArgs: []string{"business_id"}, ExecutePage: func(ctx context.Context, c *api.Client, args []string, editors []api.RequestEditorFn) (*http.Response, error) {
+			return c.BusinessIntegration(ctx, args[0], nil, editors...)
+		}},
+		{Group: "integrations", Use: "invoice-sync", Short: "Get invoice integration sync", PathArgs: []string{"invoice_id"}, ExecutePage: func(ctx context.Context, c *api.Client, args []string, editors []api.RequestEditorFn) (*http.Response, error) {
+			return c.InvoiceIntegrationSync(ctx, args[0], nil, editors...)
+		}},
+		{Group: "integrations", Use: "invoice-sync-events", Short: "List invoice integration sync events", PathArgs: []string{"invoice_id"}, ExecutePage: func(ctx context.Context, c *api.Client, args []string, editors []api.RequestEditorFn) (*http.Response, error) {
+			return c.InvoiceIntegrationSyncEvents(ctx, args[0], nil, editors...)
+		}},
+		{Group: "invoices", Use: "list", Short: "List invoices", QueryFlags: []string{"business_id", "job_id", "invoice_number", "customer_id", "customer_email", "status", "sort", "limit", "cursor"}, Pageable: true, ExecutePage: func(ctx context.Context, c *api.Client, args []string, editors []api.RequestEditorFn) (*http.Response, error) {
+			return c.ListInvoice(ctx, nil, editors...)
 		}},
 		{Group: "invoices", Use: "get", Short: "Get an invoice", PathArgs: []string{"invoice_id"}, ExecutePage: func(ctx context.Context, c *api.Client, args []string, editors []api.RequestEditorFn) (*http.Response, error) {
-			return c.InvoicesGet(ctx, args[0], nil, editors...)
+			return c.GetInvoice(ctx, args[0], nil, editors...)
+		}},
+		{Group: "invoices", Use: "pdf", Short: "Get invoice PDF metadata", PathArgs: []string{"invoice_id"}, ExecutePage: func(ctx context.Context, c *api.Client, args []string, editors []api.RequestEditorFn) (*http.Response, error) {
+			return c.Pdf(ctx, args[0], nil, editors...)
 		}},
 		{Group: "job-reports", Use: "list", Short: "List job reports", QueryFlags: []string{"business_id", "job_id", "limit", "cursor"}, Pageable: true, ExecutePage: func(ctx context.Context, c *api.Client, args []string, editors []api.RequestEditorFn) (*http.Response, error) {
-			return c.JobReportsList(ctx, nil, editors...)
+			return c.ListJobReport(ctx, nil, editors...)
 		}},
 		{Group: "job-reports", Use: "list-for-job", Short: "List reports for a job", PathArgs: []string{"job_id"}, QueryFlags: []string{"business_id", "job_id", "limit", "cursor"}, Pageable: true, ExecutePage: func(ctx context.Context, c *api.Client, args []string, editors []api.RequestEditorFn) (*http.Response, error) {
-			return c.JobReportsListForJob(ctx, args[0], nil, editors...)
+			return c.ListJobReportForJob(ctx, args[0], nil, editors...)
 		}},
 		{Group: "job-reports", Use: "get", Short: "Get a job report", PathArgs: []string{"job_report_id"}, ExecutePage: func(ctx context.Context, c *api.Client, args []string, editors []api.RequestEditorFn) (*http.Response, error) {
-			return c.JobReportsGet(ctx, args[0], nil, editors...)
+			return c.GetJobReport(ctx, args[0], nil, editors...)
 		}},
 		{Group: "job-reports", Use: "get-for-job", Short: "Get a report for a job", PathArgs: []string{"job_id", "job_report_id"}, ExecutePage: func(ctx context.Context, c *api.Client, args []string, editors []api.RequestEditorFn) (*http.Response, error) {
-			return c.JobReportsGetForJob(ctx, args[0], args[1], nil, editors...)
+			return c.GetJobReportForJob(ctx, args[0], args[1], nil, editors...)
 		}},
-		{Group: "jobs", Use: "list", Short: "List jobs", QueryFlags: []string{"business_id", "job_number", "customer_id", "customer_email", "sort", "limit", "cursor"}, Pageable: true, ExecutePage: func(ctx context.Context, c *api.Client, args []string, editors []api.RequestEditorFn) (*http.Response, error) {
-			return c.JobsList(ctx, nil, editors...)
+		{Group: "jobs", Use: "list", Short: "List jobs", QueryFlags: []string{"business_id", "job_number", "customer_id", "customer_email", "accepted_status", "status_id", "sort", "limit", "cursor"}, Pageable: true, ExecutePage: func(ctx context.Context, c *api.Client, args []string, editors []api.RequestEditorFn) (*http.Response, error) {
+			return c.Jobs(ctx, nil, editors...)
 		}},
 		{Group: "jobs", Use: "get", Short: "Get a job", PathArgs: []string{"job_id"}, ExecutePage: func(ctx context.Context, c *api.Client, args []string, editors []api.RequestEditorFn) (*http.Response, error) {
-			return c.JobsGet(ctx, args[0], nil, editors...)
+			return c.Job(ctx, args[0], nil, editors...)
 		}},
 		{Group: "jobs", Use: "part-authorisations", Short: "List part authorisations for a job", PathArgs: []string{"job_id"}, QueryFlags: []string{"limit", "cursor"}, Pageable: true, ExecutePage: func(ctx context.Context, c *api.Client, args []string, editors []api.RequestEditorFn) (*http.Response, error) {
-			return c.JobsPartAuthorisations(ctx, args[0], nil, editors...)
+			return c.PartAuthorisations(ctx, args[0], nil, editors...)
 		}},
 		{Group: "services", Use: "list", Short: "List services", QueryFlags: []string{"business_id", "name", "sort", "limit", "cursor"}, Pageable: true, ExecutePage: func(ctx context.Context, c *api.Client, args []string, editors []api.RequestEditorFn) (*http.Response, error) {
-			return c.ServicesList(ctx, nil, editors...)
+			return c.ListService(ctx, nil, editors...)
 		}},
 		{Group: "services", Use: "get", Short: "Get a service", PathArgs: []string{"service_id"}, ExecutePage: func(ctx context.Context, c *api.Client, args []string, editors []api.RequestEditorFn) (*http.Response, error) {
-			return c.ServicesGet(ctx, args[0], nil, editors...)
+			return c.GetService(ctx, args[0], nil, editors...)
 		}},
 		{Group: "stock", Use: "list", Short: "List stock variations", QueryFlags: []string{"business_id", "query", "sku", "ean", "barcode", "sort", "limit", "cursor"}, Pageable: true, ExecutePage: func(ctx context.Context, c *api.Client, args []string, editors []api.RequestEditorFn) (*http.Response, error) {
-			return c.StockList(ctx, nil, editors...)
+			return c.ListStockVariation(ctx, nil, editors...)
 		}},
 		{Group: "stock", Use: "get", Short: "Get a stock variation", PathArgs: []string{"stock_variation_id"}, ExecutePage: func(ctx context.Context, c *api.Client, args []string, editors []api.RequestEditorFn) (*http.Response, error) {
-			return c.StockGet(ctx, args[0], nil, editors...)
+			return c.GetStockVariation(ctx, args[0], nil, editors...)
 		}},
 		{Group: "webhook-deliveries", Use: "list-for-endpoint", Short: "List deliveries for a webhook endpoint", PathArgs: []string{"endpoint_id"}, QueryFlags: []string{"status", "event_type", "limit", "cursor"}, Pageable: true, ExecutePage: func(ctx context.Context, c *api.Client, args []string, editors []api.RequestEditorFn) (*http.Response, error) {
-			return c.WebhookDeliveriesListForEndpoint(ctx, args[0], nil, editors...)
+			return c.ListForEndpoint(ctx, args[0], nil, editors...)
 		}},
 		{Group: "webhook-deliveries", Use: "get", Short: "Get a webhook delivery", PathArgs: []string{"delivery_id"}, ExecutePage: func(ctx context.Context, c *api.Client, args []string, editors []api.RequestEditorFn) (*http.Response, error) {
-			return c.WebhookDeliveriesGet(ctx, args[0], nil, editors...)
+			return c.GetWebhookDelivery(ctx, args[0], nil, editors...)
 		}},
 		{Group: "webhook-endpoints", Use: "list", Short: "List webhook endpoints", Pageable: true, ExecutePage: func(ctx context.Context, c *api.Client, args []string, editors []api.RequestEditorFn) (*http.Response, error) {
-			return c.WebhookEndpointsList(ctx, nil, editors...)
+			return c.ListWebhookEndpoint(ctx, nil, editors...)
 		}},
 		{Group: "webhook-endpoints", Use: "get", Short: "Get a webhook endpoint", PathArgs: []string{"endpoint_id"}, ExecutePage: func(ctx context.Context, c *api.Client, args []string, editors []api.RequestEditorFn) (*http.Response, error) {
-			return c.WebhookEndpointsGet(ctx, args[0], nil, editors...)
+			return c.GetWebhookEndpoint(ctx, args[0], nil, editors...)
 		}},
 		{Group: "webhook-events", Use: "list", Short: "List webhook event types", Pageable: true, ExecutePage: func(ctx context.Context, c *api.Client, args []string, editors []api.RequestEditorFn) (*http.Response, error) {
-			return c.WebhookEventsList(ctx, nil, editors...)
+			return c.ListWebhookEvent(ctx, nil, editors...)
 		}},
 	}
 }
 
 func readGroupShort(group string) string {
 	switch group {
+	case "back-orders":
+		return "Read back order resources"
+	case "integrations":
+		return "Read integration resources"
 	case "invoice-items":
 		return "Read invoice item resources"
 	case "job-reports":
