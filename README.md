@@ -2,17 +2,12 @@
 
 Agent-first command-line interface for the [BikeBook Workshop Public API][api].
 
-> Status: v1 implementation in progress. See [`RESEARCH.md`](./RESEARCH.md)
-> for the design doc and [`LINEAR_STORIES.md`](./LINEAR_STORIES.md) for the
-> implementation plan.
-
 ## Why
 
 AI agents are the primary consumer of this CLI. The interface is built around
-the agent-friendly conventions distilled in `RESEARCH.md`: structured JSON
-output, deterministic exit codes, mandatory idempotency on writes, and a
-machine-readable `bikebook describe` schema generated from the API's OpenAPI
-spec.
+agent-friendly conventions: structured JSON output, deterministic exit codes,
+mandatory idempotency on writes, and a machine-readable `bikebook describe`
+schema generated from the API's OpenAPI spec.
 
 ## Install
 
