@@ -357,6 +357,12 @@ func readCommandSpecs() []readCommandSpec {
 		{Group: "jobs", Use: "part-authorisations", Short: "List part authorisations for a job", PathArgs: []string{"job_id"}, QueryFlags: []string{"limit", "cursor"}, Pageable: true, ExecutePage: func(ctx context.Context, c *api.Client, args []string, editors []api.RequestEditorFn) (*http.Response, error) {
 			return c.PartAuthorisations(ctx, args[0], nil, editors...)
 		}},
+		{Group: "payments", Use: "list", Short: "List payments", QueryFlags: []string{"business_id", "invoice_id", "sort", "limit", "cursor"}, Pageable: true, ExecutePage: func(ctx context.Context, c *api.Client, args []string, editors []api.RequestEditorFn) (*http.Response, error) {
+			return c.ListPayment(ctx, nil, editors...)
+		}},
+		{Group: "payments", Use: "get", Short: "Get a payment", PathArgs: []string{"payment_id"}, ExecutePage: func(ctx context.Context, c *api.Client, args []string, editors []api.RequestEditorFn) (*http.Response, error) {
+			return c.GetPayment(ctx, args[0], nil, editors...)
+		}},
 		{Group: "services", Use: "list", Short: "List services", QueryFlags: []string{"business_id", "name", "sort", "limit", "cursor"}, Pageable: true, ExecutePage: func(ctx context.Context, c *api.Client, args []string, editors []api.RequestEditorFn) (*http.Response, error) {
 			return c.ListService(ctx, nil, editors...)
 		}},

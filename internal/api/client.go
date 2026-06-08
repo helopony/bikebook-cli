@@ -228,6 +228,11 @@ type ClientInterface interface {
 	// ListInvoice request
 	ListInvoice(ctx context.Context, params *ListInvoiceParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// InvoiceIntegrationSyncBatchWithBody request with any body
+	InvoiceIntegrationSyncBatchWithBody(ctx context.Context, params *InvoiceIntegrationSyncBatchParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	InvoiceIntegrationSyncBatch(ctx context.Context, params *InvoiceIntegrationSyncBatchParams, body InvoiceIntegrationSyncBatchJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
 	// GetInvoice request
 	GetInvoice(ctx context.Context, invoiceId string, params *GetInvoiceParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
@@ -351,6 +356,12 @@ type ClientInterface interface {
 	ChangeWorkLineStatusWithBody(ctx context.Context, jobId string, workLineId string, params *ChangeWorkLineStatusParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	ChangeWorkLineStatus(ctx context.Context, jobId string, workLineId string, params *ChangeWorkLineStatusParams, body ChangeWorkLineStatusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ListPayment request
+	ListPayment(ctx context.Context, params *ListPaymentParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetPayment request
+	GetPayment(ctx context.Context, paymentId string, params *GetPaymentParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// RefundWithBody request with any body
 	RefundWithBody(ctx context.Context, paymentId string, params *RefundParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -1016,6 +1027,30 @@ func (c *Client) ListInvoice(ctx context.Context, params *ListInvoiceParams, req
 	return c.Client.Do(req)
 }
 
+func (c *Client) InvoiceIntegrationSyncBatchWithBody(ctx context.Context, params *InvoiceIntegrationSyncBatchParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewInvoiceIntegrationSyncBatchRequestWithBody(c.Server, params, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) InvoiceIntegrationSyncBatch(ctx context.Context, params *InvoiceIntegrationSyncBatchParams, body InvoiceIntegrationSyncBatchJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewInvoiceIntegrationSyncBatchRequest(c.Server, params, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
 func (c *Client) GetInvoice(ctx context.Context, invoiceId string, params *GetInvoiceParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetInvoiceRequest(c.Server, invoiceId, params)
 	if err != nil {
@@ -1570,6 +1605,30 @@ func (c *Client) ChangeWorkLineStatusWithBody(ctx context.Context, jobId string,
 
 func (c *Client) ChangeWorkLineStatus(ctx context.Context, jobId string, workLineId string, params *ChangeWorkLineStatusParams, body ChangeWorkLineStatusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewChangeWorkLineStatusRequest(c.Server, jobId, workLineId, params, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) ListPayment(ctx context.Context, params *ListPaymentParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewListPaymentRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetPayment(ctx context.Context, paymentId string, params *GetPaymentParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetPaymentRequest(c.Server, paymentId, params)
 	if err != nil {
 		return nil, err
 	}
@@ -5143,6 +5202,30 @@ func NewListInvoiceRequest(server string, params *ListInvoiceParams) (*http.Requ
 
 		}
 
+		if params.CreatedFrom != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "created_from", *params.CreatedFrom, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.CreatedTo != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "created_to", *params.CreatedTo, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
 		if params.Sort != nil {
 
 			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "sort", *params.Sort, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
@@ -5213,6 +5296,81 @@ func NewListInvoiceRequest(server string, params *ListInvoiceParams) (*http.Requ
 
 			req.Header.Set("X-Bikebook-Request-Id", headerParam1)
 		}
+
+	}
+
+	return req, nil
+}
+
+// NewInvoiceIntegrationSyncBatchRequest calls the generic InvoiceIntegrationSyncBatch builder with application/json body
+func NewInvoiceIntegrationSyncBatchRequest(server string, params *InvoiceIntegrationSyncBatchParams, body InvoiceIntegrationSyncBatchJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewInvoiceIntegrationSyncBatchRequestWithBody(server, params, "application/json", bodyReader)
+}
+
+// NewInvoiceIntegrationSyncBatchRequestWithBody generates requests for InvoiceIntegrationSyncBatch with any type of body
+func NewInvoiceIntegrationSyncBatchRequestWithBody(server string, params *InvoiceIntegrationSyncBatchParams, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/public/v1/invoices/integration_sync/batch")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	if params != nil {
+
+		if params.Authorization != nil {
+			var headerParam0 string
+
+			headerParam0, err = runtime.StyleParamWithOptions("simple", false, "Authorization", *params.Authorization, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+			if err != nil {
+				return nil, err
+			}
+
+			req.Header.Set("Authorization", headerParam0)
+		}
+
+		if params.XBikebookRequestId != nil {
+			var headerParam1 string
+
+			headerParam1, err = runtime.StyleParamWithOptions("simple", false, "X-Bikebook-Request-Id", *params.XBikebookRequestId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+			if err != nil {
+				return nil, err
+			}
+
+			req.Header.Set("X-Bikebook-Request-Id", headerParam1)
+		}
+
+		var headerParam2 string
+
+		headerParam2, err = runtime.StyleParamWithOptions("simple", false, "Idempotency-Key", params.IdempotencyKey, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+		if err != nil {
+			return nil, err
+		}
+
+		req.Header.Set("Idempotency-Key", headerParam2)
 
 	}
 
@@ -6438,6 +6596,30 @@ func NewJobsRequest(server string, params *JobsParams) (*http.Request, error) {
 		if params.StatusId != nil {
 
 			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "status_id", *params.StatusId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.CreatedFrom != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "created_from", *params.CreatedFrom, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.CreatedTo != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "created_to", *params.CreatedTo, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
 				return nil, err
 			} else {
 				for _, qp := range strings.Split(queryFrag, "&") {
@@ -7707,6 +7889,194 @@ func NewChangeWorkLineStatusRequestWithBody(server string, jobId string, workLin
 		}
 
 		req.Header.Set("Idempotency-Key", headerParam2)
+
+	}
+
+	return req, nil
+}
+
+// NewListPaymentRequest generates requests for ListPayment
+func NewListPaymentRequest(server string, params *ListPaymentParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/public/v1/payments")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		// queryValues collects non-styled parameters (passthrough, JSON)
+		// that are safe to round-trip through url.Values.Encode().
+		queryValues := queryURL.Query()
+		// rawQueryFragments collects pre-encoded query fragments from
+		// styled parameters, preserving literal commas as delimiters
+		// per the OpenAPI spec (e.g. "color=blue,black,brown").
+		var rawQueryFragments []string
+
+		if params.BusinessId != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "business_id", *params.BusinessId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.InvoiceId != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "invoice_id", *params.InvoiceId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.Sort != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "sort", *params.Sort, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.Limit != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "limit", *params.Limit, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.Cursor != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "cursor", *params.Cursor, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if encoded := queryValues.Encode(); encoded != "" {
+			rawQueryFragments = append(rawQueryFragments, encoded)
+		}
+		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+
+		if params.Authorization != nil {
+			var headerParam0 string
+
+			headerParam0, err = runtime.StyleParamWithOptions("simple", false, "Authorization", *params.Authorization, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+			if err != nil {
+				return nil, err
+			}
+
+			req.Header.Set("Authorization", headerParam0)
+		}
+
+		if params.XBikebookRequestId != nil {
+			var headerParam1 string
+
+			headerParam1, err = runtime.StyleParamWithOptions("simple", false, "X-Bikebook-Request-Id", *params.XBikebookRequestId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+			if err != nil {
+				return nil, err
+			}
+
+			req.Header.Set("X-Bikebook-Request-Id", headerParam1)
+		}
+
+	}
+
+	return req, nil
+}
+
+// NewGetPaymentRequest generates requests for GetPayment
+func NewGetPaymentRequest(server string, paymentId string, params *GetPaymentParams) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "payment_id", paymentId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/public/v1/payments/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+
+		if params.Authorization != nil {
+			var headerParam0 string
+
+			headerParam0, err = runtime.StyleParamWithOptions("simple", false, "Authorization", *params.Authorization, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+			if err != nil {
+				return nil, err
+			}
+
+			req.Header.Set("Authorization", headerParam0)
+		}
+
+		if params.XBikebookRequestId != nil {
+			var headerParam1 string
+
+			headerParam1, err = runtime.StyleParamWithOptions("simple", false, "X-Bikebook-Request-Id", *params.XBikebookRequestId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+			if err != nil {
+				return nil, err
+			}
+
+			req.Header.Set("X-Bikebook-Request-Id", headerParam1)
+		}
 
 	}
 
@@ -9102,6 +9472,11 @@ type ClientWithResponsesInterface interface {
 	// ListInvoiceWithResponse request
 	ListInvoiceWithResponse(ctx context.Context, params *ListInvoiceParams, reqEditors ...RequestEditorFn) (*ListInvoiceResponse, error)
 
+	// InvoiceIntegrationSyncBatchWithBodyWithResponse request with any body
+	InvoiceIntegrationSyncBatchWithBodyWithResponse(ctx context.Context, params *InvoiceIntegrationSyncBatchParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*InvoiceIntegrationSyncBatchResponse, error)
+
+	InvoiceIntegrationSyncBatchWithResponse(ctx context.Context, params *InvoiceIntegrationSyncBatchParams, body InvoiceIntegrationSyncBatchJSONRequestBody, reqEditors ...RequestEditorFn) (*InvoiceIntegrationSyncBatchResponse, error)
+
 	// GetInvoiceWithResponse request
 	GetInvoiceWithResponse(ctx context.Context, invoiceId string, params *GetInvoiceParams, reqEditors ...RequestEditorFn) (*GetInvoiceResponse, error)
 
@@ -9225,6 +9600,12 @@ type ClientWithResponsesInterface interface {
 	ChangeWorkLineStatusWithBodyWithResponse(ctx context.Context, jobId string, workLineId string, params *ChangeWorkLineStatusParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*ChangeWorkLineStatusResponse, error)
 
 	ChangeWorkLineStatusWithResponse(ctx context.Context, jobId string, workLineId string, params *ChangeWorkLineStatusParams, body ChangeWorkLineStatusJSONRequestBody, reqEditors ...RequestEditorFn) (*ChangeWorkLineStatusResponse, error)
+
+	// ListPaymentWithResponse request
+	ListPaymentWithResponse(ctx context.Context, params *ListPaymentParams, reqEditors ...RequestEditorFn) (*ListPaymentResponse, error)
+
+	// GetPaymentWithResponse request
+	GetPaymentWithResponse(ctx context.Context, paymentId string, params *GetPaymentParams, reqEditors ...RequestEditorFn) (*GetPaymentResponse, error)
 
 	// RefundWithBodyWithResponse request with any body
 	RefundWithBodyWithResponse(ctx context.Context, paymentId string, params *RefundParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*RefundResponse, error)
@@ -10629,6 +11010,43 @@ func (r ListInvoiceResponse) ContentType() string {
 	return ""
 }
 
+type InvoiceIntegrationSyncBatchResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *InvoiceIntegrationSyncBatch
+	JSON400      *ErrorResponse
+	JSON401      *ErrorResponse
+	JSON403      *ErrorResponse
+	JSON404      *ErrorResponse
+	JSON409      *ErrorResponse
+	JSON429      *ErrorResponse
+	JSON500      *ErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r InvoiceIntegrationSyncBatchResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r InvoiceIntegrationSyncBatchResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r InvoiceIntegrationSyncBatchResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type GetInvoiceResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
@@ -11728,6 +12146,78 @@ func (r ChangeWorkLineStatusResponse) ContentType() string {
 	return ""
 }
 
+type ListPaymentResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *ListResponseOfPayment
+	JSON400      *ErrorResponse
+	JSON401      *ErrorResponse
+	JSON403      *ErrorResponse
+	JSON404      *ErrorResponse
+	JSON429      *ErrorResponse
+	JSON500      *ErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r ListPaymentResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ListPaymentResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r ListPaymentResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type GetPaymentResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *Payment
+	JSON400      *ErrorResponse
+	JSON401      *ErrorResponse
+	JSON403      *ErrorResponse
+	JSON404      *ErrorResponse
+	JSON429      *ErrorResponse
+	JSON500      *ErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r GetPaymentResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetPaymentResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GetPaymentResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type RefundResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
@@ -12719,6 +13209,23 @@ func (c *ClientWithResponses) ListInvoiceWithResponse(ctx context.Context, param
 	return ParseListInvoiceResponse(rsp)
 }
 
+// InvoiceIntegrationSyncBatchWithBodyWithResponse request with arbitrary body returning *InvoiceIntegrationSyncBatchResponse
+func (c *ClientWithResponses) InvoiceIntegrationSyncBatchWithBodyWithResponse(ctx context.Context, params *InvoiceIntegrationSyncBatchParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*InvoiceIntegrationSyncBatchResponse, error) {
+	rsp, err := c.InvoiceIntegrationSyncBatchWithBody(ctx, params, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseInvoiceIntegrationSyncBatchResponse(rsp)
+}
+
+func (c *ClientWithResponses) InvoiceIntegrationSyncBatchWithResponse(ctx context.Context, params *InvoiceIntegrationSyncBatchParams, body InvoiceIntegrationSyncBatchJSONRequestBody, reqEditors ...RequestEditorFn) (*InvoiceIntegrationSyncBatchResponse, error) {
+	rsp, err := c.InvoiceIntegrationSyncBatch(ctx, params, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseInvoiceIntegrationSyncBatchResponse(rsp)
+}
+
 // GetInvoiceWithResponse request returning *GetInvoiceResponse
 func (c *ClientWithResponses) GetInvoiceWithResponse(ctx context.Context, invoiceId string, params *GetInvoiceParams, reqEditors ...RequestEditorFn) (*GetInvoiceResponse, error) {
 	rsp, err := c.GetInvoice(ctx, invoiceId, params, reqEditors...)
@@ -13123,6 +13630,24 @@ func (c *ClientWithResponses) ChangeWorkLineStatusWithResponse(ctx context.Conte
 		return nil, err
 	}
 	return ParseChangeWorkLineStatusResponse(rsp)
+}
+
+// ListPaymentWithResponse request returning *ListPaymentResponse
+func (c *ClientWithResponses) ListPaymentWithResponse(ctx context.Context, params *ListPaymentParams, reqEditors ...RequestEditorFn) (*ListPaymentResponse, error) {
+	rsp, err := c.ListPayment(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseListPaymentResponse(rsp)
+}
+
+// GetPaymentWithResponse request returning *GetPaymentResponse
+func (c *ClientWithResponses) GetPaymentWithResponse(ctx context.Context, paymentId string, params *GetPaymentParams, reqEditors ...RequestEditorFn) (*GetPaymentResponse, error) {
+	rsp, err := c.GetPayment(ctx, paymentId, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetPaymentResponse(rsp)
 }
 
 // RefundWithBodyWithResponse request with arbitrary body returning *RefundResponse
@@ -15933,6 +16458,81 @@ func ParseListInvoiceResponse(rsp *http.Response) (*ListInvoiceResponse, error) 
 	return response, nil
 }
 
+// ParseInvoiceIntegrationSyncBatchResponse parses an HTTP response from a InvoiceIntegrationSyncBatchWithResponse call
+func ParseInvoiceIntegrationSyncBatchResponse(rsp *http.Response) (*InvoiceIntegrationSyncBatchResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &InvoiceIntegrationSyncBatchResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest InvoiceIntegrationSyncBatch
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 409:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON409 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
 // ParseGetInvoiceResponse parses an HTTP response from a GetInvoiceWithResponse call
 func ParseGetInvoiceResponse(rsp *http.Response) (*GetInvoiceResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
@@ -18086,6 +18686,142 @@ func ParseChangeWorkLineStatusResponse(rsp *http.Response) (*ChangeWorkLineStatu
 			return nil, err
 		}
 		response.JSON409 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseListPaymentResponse parses an HTTP response from a ListPaymentWithResponse call
+func ParseListPaymentResponse(rsp *http.Response) (*ListPaymentResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ListPaymentResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest ListResponseOfPayment
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetPaymentResponse parses an HTTP response from a GetPaymentWithResponse call
+func ParseGetPaymentResponse(rsp *http.Response) (*GetPaymentResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetPaymentResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest Payment
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
 		var dest ErrorResponse

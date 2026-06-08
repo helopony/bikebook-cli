@@ -36,7 +36,7 @@ go install github.com/helopony/bikebook-cli/cmd/bikebook@latest
 ## Spec
 
 The full API spec lives at [`public-v1.json`](./public-v1.json) (OpenAPI 3.0.1,
-82 operations across 15 resource tags). The CLI is a thin, faithful projection
+85 operations across 16 resource tags). The CLI is a thin, faithful projection
 of this spec — every subcommand maps to exactly one HTTP operation.
 
 ## License

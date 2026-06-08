@@ -5643,19 +5643,25 @@ func (e PaymentObject) Valid() bool {
 
 // Defines values for PaymentOrigin.
 const (
-	PaymentOriginAdHoc PaymentOrigin = "ad_hoc"
-	PaymentOriginJob   PaymentOrigin = "job"
-	PaymentOriginSale  PaymentOrigin = "sale"
+	Square   PaymentOrigin = "square"
+	Stripe   PaymentOrigin = "stripe"
+	SumUp    PaymentOrigin = "sum_up"
+	Workshop PaymentOrigin = "workshop"
+	Zettle   PaymentOrigin = "zettle"
 )
 
 // Valid indicates whether the value is a known member of the PaymentOrigin enum.
 func (e PaymentOrigin) Valid() bool {
 	switch e {
-	case PaymentOriginAdHoc:
+	case Square:
 		return true
-	case PaymentOriginJob:
+	case Stripe:
 		return true
-	case PaymentOriginSale:
+	case SumUp:
+		return true
+	case Workshop:
+		return true
+	case Zettle:
 		return true
 	default:
 		return false
@@ -5683,6 +5689,27 @@ func (e PaymentPaymentMethod) Valid() bool {
 	case PaymentPaymentMethodLayaway:
 		return true
 	case PaymentPaymentMethodOther:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for PaymentPaymentType.
+const (
+	InvoicePayment PaymentPaymentType = "invoice_payment"
+	PrePayment     PaymentPaymentType = "pre_payment"
+	Refund         PaymentPaymentType = "refund"
+)
+
+// Valid indicates whether the value is a known member of the PaymentPaymentType enum.
+func (e PaymentPaymentType) Valid() bool {
+	switch e {
+	case InvoicePayment:
+		return true
+	case PrePayment:
+		return true
+	case Refund:
 		return true
 	default:
 		return false
@@ -7623,6 +7650,9 @@ type Invoice struct {
 	// PaidAmount Amount already paid against the invoice.
 	PaidAmount *float64 `json:"paid_amount,omitempty"`
 
+	// PaidAt UTC timestamp when the invoice became fully paid, when available.
+	PaidAt *time.Time `json:"paid_at,omitempty"`
+
 	// PaymentLink Customer payment link when configured.
 	PaymentLink *string `json:"payment_link,omitempty"`
 
@@ -7692,6 +7722,33 @@ type InvoiceIntegrationSyncObject string
 
 // InvoiceIntegrationSyncStatus Current invoice integration sync status.
 type InvoiceIntegrationSyncStatus string
+
+// InvoiceIntegrationSyncBatch Batch response containing per-invoice integration sync status or errors.
+type InvoiceIntegrationSyncBatch struct {
+	// Results Per-invoice results in the same order as the request.
+	Results *[]InvoiceIntegrationSyncBatchItem `json:"results,omitempty"`
+}
+
+// InvoiceIntegrationSyncBatchItem One invoice result from a batch integration sync status lookup.
+type InvoiceIntegrationSyncBatchItem struct {
+	// Error Public API error details. Codes are stable machine-readable values.
+	Error *Error `json:"error,omitempty"`
+
+	// InvoiceId Public invoice id from the request.
+	InvoiceId *string `json:"invoice_id,omitempty"`
+
+	// Resource Public invoice sync state for the invoice's active business integration.
+	Resource *InvoiceIntegrationSync `json:"resource,omitempty"`
+
+	// Succeeded True when v1.Integrations.PublicApiInvoiceIntegrationSyncBatchItemResponse.Resource is populated.
+	Succeeded *bool `json:"succeeded,omitempty"`
+}
+
+// InvoiceIntegrationSyncBatchRequest Request body for batch invoice integration sync status lookups.
+type InvoiceIntegrationSyncBatchRequest struct {
+	// InvoiceIds Public invoice ids to resolve. Capped by maximum_batch_invoice_integration_sync_ids.
+	InvoiceIds *[]string `json:"invoice_ids,omitempty"`
+}
 
 // InvoiceItem One billable item on a public invoice (internal `InvoiceItem`).
 type InvoiceItem struct {
@@ -7920,6 +7977,9 @@ type Job struct {
 	// CheckInNotes Check-in notes captured when the item is received for service.
 	CheckInNotes *string `json:"check_in_notes,omitempty"`
 
+	// CompletedAt UTC timestamp when the job was marked completed, when available.
+	CompletedAt *time.Time `json:"completed_at,omitempty"`
+
 	// CreatedAt UTC timestamp when the job was created.
 	CreatedAt *time.Time `json:"created_at,omitempty"`
 
@@ -8095,13 +8155,31 @@ type JobAddressInput struct {
 // JobAddressInputCountry Country label for the job address. Stored as provided and not validated against ISO alpha-3 on write.
 type JobAddressInputCountry string
 
-// JobAssetInput One customer asset to include on the job. v1 does not create assets inline — reference an existing asset only.
+// JobAssetInput One customer asset to include on the job. Supply an existing `id` (`asset_...`) or a request-local `client_reference` for inline asset creation.
 type JobAssetInput struct {
-	// ClientReference Request-local reference used by work lines when inline asset creation is supported in future. Not used while `id` is required on each asset.
+	// BikeType Bike category (bikes only). Snake_case enum (for example `road_bike`). Defaults to `generic_bike` when omitted on inline create.
+	BikeType *string `json:"bike_type,omitempty"`
+
+	// ClientReference Request-local reference used by work lines when the asset is created inline in this request. Required when `id` is omitted. Must be unique within the request.
 	ClientReference *string `json:"client_reference,omitempty"`
 
-	// Id Required. Existing public asset id on the customer (`asset_...` from the customer record). Example: `{ "id": "asset_4f2bexample" }`.
-	Id string `json:"id"`
+	// Id Existing public asset id on the customer (`asset_...` from the customer record). Required when `client_reference` is omitted.
+	Id *string `json:"id,omitempty"`
+
+	// Make Asset make or manufacturer when creating the asset inline.
+	Make *string `json:"make,omitempty"`
+
+	// Model Asset model when creating the asset inline.
+	Model *string `json:"model,omitempty"`
+
+	// Name Asset display name when creating the asset inline.
+	Name *string `json:"name,omitempty"`
+
+	// SerialNumber Asset serial number when creating the asset inline.
+	SerialNumber *string `json:"serial_number,omitempty"`
+
+	// Year Asset model year when creating the asset inline.
+	Year *int32 `json:"year,omitempty"`
 }
 
 // JobAssetSummary Public customer asset summary embedded in job responses.
@@ -8145,7 +8223,7 @@ type JobCreateRequest struct {
 	// AllDay Whether the job is treated as an all-day booking in scheduling views.
 	AllDay *bool `json:"all_day,omitempty"`
 
-	// Assets Customer assets included on this job (bikes or other serviced assets). Required: at least one entry. Each entry must use `assets[].id` — an existing public asset id already on the customer (from `GET .../customers/{customer_id}` → `assets[].id`). This array is not optional and must not be empty.
+	// Assets Customer assets included on this job (bikes or other serviced assets). Required: at least one entry.
 	Assets []JobAssetInput `json:"assets"`
 
 	// BillingType Billing/charge source for the job.
@@ -8172,7 +8250,7 @@ type JobCreateRequest struct {
 	// Schedule Scheduling and logistics requested for a public job.
 	Schedule *JobScheduleInput `json:"schedule,omitempty"`
 
-	// WorkLines Work to perform per asset. Required: at least one entry; each entry needs `asset_id` and a non-empty `services` array. Each line's `asset_id` must match an `id` listed in `assets`.
+	// WorkLines Work to perform per asset. Required: at least one entry with a non-empty `services` array.
 	WorkLines []JobWorkLineInput `json:"work_lines"`
 }
 
@@ -8616,11 +8694,11 @@ type JobWorkLineObject string
 
 // JobWorkLineInput One asset's work on a job: an asset plus one or more catalogue services to perform on it. Maps to a single `ServiceBooking` with multiple `ServiceInstance` rows.
 type JobWorkLineInput struct {
-	// AssetClientReference Request-local asset reference when the work line applies to an asset created in this same request.
+	// AssetClientReference Request-local asset reference when the work line applies to an asset created inline in this request. Required when `asset_id` is omitted.
 	AssetClientReference *string `json:"asset_client_reference,omitempty"`
 
-	// AssetId Required in v1. Must match an `id` from the parent request's `assets` array.
-	AssetId string `json:"asset_id"`
+	// AssetId Existing asset public id from the parent request's `assets[]` array. Required when `asset_client_reference` is omitted.
+	AssetId *string `json:"asset_id,omitempty"`
 
 	// AssignedMechanicId Optional Clerk user id for assigning this work line to a workshop member.
 	AssignedMechanicId *string `json:"assigned_mechanic_id,omitempty"`
@@ -8753,6 +8831,15 @@ type ListResponseOfJobReport struct {
 type ListResponseOfPartAuthorisation struct {
 	// Data Part lines on the job report. Each element includes a `pauth_...` `id` for submit decisions.
 	Data *[]PartAuthorisation `json:"data,omitempty"`
+
+	// Pagination Cursor pagination metadata used by public list endpoints.
+	Pagination *Pagination `json:"pagination,omitempty"`
+}
+
+// ListResponseOfPayment Standard public API list response with cursor pagination metadata.
+type ListResponseOfPayment struct {
+	// Data Page of public resources returned by the list endpoint.
+	Data *[]Payment `json:"data,omitempty"`
 
 	// Pagination Cursor pagination metadata used by public list endpoints.
 	Pagination *Pagination `json:"pagination,omitempty"`
@@ -8919,24 +9006,27 @@ type Payment struct {
 	// Object Resource object type. Always payment.
 	Object *PaymentObject `json:"object,omitempty"`
 
-	// Origin Payment origin, such as workshop or stripe.
+	// Origin Where the payment was processed. Allowed values: `workshop`, `stripe`, `sum_up`, `square`, or `zettle`.
 	Origin *PaymentOrigin `json:"origin,omitempty"`
 
-	// PaymentMethod Payment method in snake_case.
+	// PaymentMethod Payment method recorded against the invoice. Allowed values: `cash`, `card`, `layaway`, `bacs`, or `other`.
 	PaymentMethod *PaymentPaymentMethod `json:"payment_method,omitempty"`
 
-	// PaymentType Payment type, such as invoice_payment or refund.
-	PaymentType *string `json:"payment_type,omitempty"`
+	// PaymentType Payment type. Allowed values: `pre_payment`, `invoice_payment`, or `refund`.
+	PaymentType *PaymentPaymentType `json:"payment_type,omitempty"`
 }
 
 // PaymentObject Resource object type. Always payment.
 type PaymentObject string
 
-// PaymentOrigin Payment origin, such as workshop or stripe.
+// PaymentOrigin Where the payment was processed. Allowed values: `workshop`, `stripe`, `sum_up`, `square`, or `zettle`.
 type PaymentOrigin string
 
-// PaymentPaymentMethod Payment method in snake_case.
+// PaymentPaymentMethod Payment method recorded against the invoice. Allowed values: `cash`, `card`, `layaway`, `bacs`, or `other`.
 type PaymentPaymentMethod string
+
+// PaymentPaymentType Payment type. Allowed values: `pre_payment`, `invoice_payment`, or `refund`.
+type PaymentPaymentType string
 
 // PaymentRefundCreateRequest Request body for recording a refund against a payment.
 type PaymentRefundCreateRequest struct {
@@ -9947,9 +10037,11 @@ type ListInvoiceParams struct {
 	CustomerEmail *string `form:"customer_email,omitempty" json:"customer_email,omitempty"`
 
 	// Status Filter by invoice lifecycle status. Use comma-separated values to match any supplied status. Allowed values: `draft`, `pending`, `paid`, `cancelled`. Example: `?status=pending,paid`.
-	Status *ListInvoiceParamsStatus `form:"status,omitempty" json:"status,omitempty"`
+	Status      *ListInvoiceParamsStatus `form:"status,omitempty" json:"status,omitempty"`
+	CreatedFrom *string                  `form:"created_from,omitempty" json:"created_from,omitempty"`
+	CreatedTo   *string                  `form:"created_to,omitempty" json:"created_to,omitempty"`
 
-	// Sort Sort field. Allowed values: `created_at`, `invoice_number`. Default: `-created_at`. Prefix with `-` for descending order (for example `-created_at`).
+	// Sort Sort field. Allowed values: `created_at`, `updated_at`, `invoice_number`. Default: `-created_at`. Prefix with `-` for descending order (for example `-created_at`).
 	Sort *string `form:"sort,omitempty" json:"sort,omitempty"`
 
 	// Limit Maximum number of resources to return (1–100, default 10).
@@ -9967,6 +10059,18 @@ type ListInvoiceParams struct {
 
 // ListInvoiceParamsStatus defines parameters for ListInvoice.
 type ListInvoiceParamsStatus string
+
+// InvoiceIntegrationSyncBatchParams defines parameters for InvoiceIntegrationSyncBatch.
+type InvoiceIntegrationSyncBatchParams struct {
+	// Authorization Bearer Workshop API key. Example: Bearer bbk_live_...
+	Authorization *string `json:"Authorization,omitempty"`
+
+	// XBikebookRequestId Optional request id supplied by the client for support correlation.
+	XBikebookRequestId *string `json:"X-Bikebook-Request-Id,omitempty"`
+
+	// IdempotencyKey Required for public write operations to make retries safe.
+	IdempotencyKey string `json:"Idempotency-Key"`
+}
 
 // GetInvoiceParams defines parameters for GetInvoice.
 type GetInvoiceParams struct {
@@ -10152,7 +10256,9 @@ type JobsParams struct {
 	AcceptedStatus *JobsParamsAcceptedStatus `form:"accepted_status,omitempty" json:"accepted_status,omitempty"`
 
 	// StatusId Filter jobs by work-line workflow status id (`jst_...`). A job matches when any work line has one of the supplied statuses. Use comma-separated values to match any supplied status. Example: `?status_id=jst_01h2xexample,jst_01h2yexample`.
-	StatusId *string `form:"status_id,omitempty" json:"status_id,omitempty"`
+	StatusId    *string `form:"status_id,omitempty" json:"status_id,omitempty"`
+	CreatedFrom *string `form:"created_from,omitempty" json:"created_from,omitempty"`
+	CreatedTo   *string `form:"created_to,omitempty" json:"created_to,omitempty"`
 
 	// Sort Sort field. Allowed values: `created_at`, `job_number`. Default: `-created_at`. Prefix with `-` for descending order (for example `-created_at`).
 	Sort *string `form:"sort,omitempty" json:"sort,omitempty"`
@@ -10344,6 +10450,36 @@ type ChangeWorkLineStatusParams struct {
 
 	// IdempotencyKey Required for public write operations to make retries safe.
 	IdempotencyKey string `json:"Idempotency-Key"`
+}
+
+// ListPaymentParams defines parameters for ListPayment.
+type ListPaymentParams struct {
+	BusinessId *string `form:"business_id,omitempty" json:"business_id,omitempty"`
+	InvoiceId  *string `form:"invoice_id,omitempty" json:"invoice_id,omitempty"`
+
+	// Sort Sort field. Allowed values: `charged_on`, `created_at`. Default: `-charged_on`. Prefix with `-` for descending order (for example `-charged_on`).
+	Sort *string `form:"sort,omitempty" json:"sort,omitempty"`
+
+	// Limit Maximum number of resources to return (1–100, default 10).
+	Limit *int32 `form:"limit,omitempty" json:"limit,omitempty"`
+
+	// Cursor Opaque page cursor from a previous list response's `pagination.next_cursor`.
+	Cursor *string `form:"cursor,omitempty" json:"cursor,omitempty"`
+
+	// Authorization Bearer Workshop API key. Example: Bearer bbk_live_...
+	Authorization *string `json:"Authorization,omitempty"`
+
+	// XBikebookRequestId Optional request id supplied by the client for support correlation.
+	XBikebookRequestId *string `json:"X-Bikebook-Request-Id,omitempty"`
+}
+
+// GetPaymentParams defines parameters for GetPayment.
+type GetPaymentParams struct {
+	// Authorization Bearer Workshop API key. Example: Bearer bbk_live_...
+	Authorization *string `json:"Authorization,omitempty"`
+
+	// XBikebookRequestId Optional request id supplied by the client for support correlation.
+	XBikebookRequestId *string `json:"X-Bikebook-Request-Id,omitempty"`
 }
 
 // RefundParams defines parameters for Refund.
@@ -10587,6 +10723,9 @@ type CreateInvoiceItemJSONRequestBody = InvoiceItemCreateRequest
 
 // UpdateInvoiceItemJSONRequestBody defines body for UpdateInvoiceItem for application/json ContentType.
 type UpdateInvoiceItemJSONRequestBody = InvoiceItemUpdateRequest
+
+// InvoiceIntegrationSyncBatchJSONRequestBody defines body for InvoiceIntegrationSyncBatch for application/json ContentType.
+type InvoiceIntegrationSyncBatchJSONRequestBody = InvoiceIntegrationSyncBatchRequest
 
 // UpdateInvoiceJSONRequestBody defines body for UpdateInvoice for application/json ContentType.
 type UpdateInvoiceJSONRequestBody = InvoiceUpdateRequest

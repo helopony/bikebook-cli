@@ -15,8 +15,8 @@ import (
 
 func TestWriteCommandsAllEndpointsHaveHappyPath(t *testing.T) {
 	withTempHome(t)
-	if got := len(writeCommandSpecs()); got != 44 {
-		t.Fatalf("write command count = %d, want 44", got)
+	if got := len(writeCommandSpecs()); got != 45 {
+		t.Fatalf("write command count = %d, want 45", got)
 	}
 
 	for _, spec := range writeCommandSpecs() {

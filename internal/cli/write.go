@@ -381,6 +381,9 @@ func writeCommandSpecs() []writeCommandSpec {
 		{Group: "integrations", Use: "trigger-invoice-sync", Short: "Trigger invoice integration sync", Method: http.MethodPost, PathArgs: []string{"invoice_id"}, HasBody: true, Execute: func(ctx context.Context, c *api.Client, args []string, body io.Reader, contentType string, editors []api.RequestEditorFn) (*http.Response, error) {
 			return c.TriggerInvoiceIntegrationSyncWithBody(ctx, args[0], nil, contentType, body, editors...)
 		}},
+		{Group: "integrations", Use: "invoice-sync-batch", Short: "Batch invoice integration sync status", Method: http.MethodPost, HasBody: true, Execute: func(ctx context.Context, c *api.Client, args []string, body io.Reader, contentType string, editors []api.RequestEditorFn) (*http.Response, error) {
+			return c.InvoiceIntegrationSyncBatchWithBody(ctx, nil, contentType, body, editors...)
+		}},
 		{Group: "invoice-items", Use: "update", Short: "Update an invoice item", Method: http.MethodPatch, PathArgs: []string{"invoice_item_id"}, HasBody: true, Execute: func(ctx context.Context, c *api.Client, args []string, body io.Reader, contentType string, editors []api.RequestEditorFn) (*http.Response, error) {
 			return c.UpdateInvoiceItemWithBody(ctx, args[0], nil, contentType, body, editors...)
 		}},
@@ -405,7 +408,7 @@ func writeCommandSpecs() []writeCommandSpec {
 		{Group: "invoices", Use: "send", Short: "Send an invoice", Method: http.MethodPost, PathArgs: []string{"invoice_id"}, HasBody: true, Execute: func(ctx context.Context, c *api.Client, args []string, body io.Reader, contentType string, editors []api.RequestEditorFn) (*http.Response, error) {
 			return c.SendWithBody(ctx, args[0], nil, contentType, body, editors...)
 		}},
-		{Group: "invoices", Use: "refund", Short: "Refund a payment", Method: http.MethodPost, PathArgs: []string{"payment_id"}, HasBody: true, Execute: func(ctx context.Context, c *api.Client, args []string, body io.Reader, contentType string, editors []api.RequestEditorFn) (*http.Response, error) {
+		{Group: "payments", Use: "refund", Short: "Refund a payment", Method: http.MethodPost, PathArgs: []string{"payment_id"}, HasBody: true, Execute: func(ctx context.Context, c *api.Client, args []string, body io.Reader, contentType string, editors []api.RequestEditorFn) (*http.Response, error) {
 			return c.RefundWithBody(ctx, args[0], nil, contentType, body, editors...)
 		}},
 		{Group: "jobs", Use: "submit-part-authorisation-decisions", Short: "Submit part authorisation decisions", Method: http.MethodPost, PathArgs: []string{"job_id"}, HasBody: true, Execute: func(ctx context.Context, c *api.Client, args []string, body io.Reader, contentType string, editors []api.RequestEditorFn) (*http.Response, error) {

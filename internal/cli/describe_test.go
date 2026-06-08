@@ -19,8 +19,8 @@ func TestDescribeDocumentIncludesCommandsAndOpenAPI(t *testing.T) {
 	if len(doc.Commands) == 0 {
 		t.Fatal("describe document has no commands")
 	}
-	if len(doc.OpenAPI.Operations) != 82 {
-		t.Fatalf("OpenAPI operations = %d, want 82", len(doc.OpenAPI.Operations))
+	if len(doc.OpenAPI.Operations) != 85 {
+		t.Fatalf("OpenAPI operations = %d, want 85", len(doc.OpenAPI.Operations))
 	}
 
 	commandsByName := map[string]DescribeCommand{}

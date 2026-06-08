@@ -9,7 +9,7 @@
       "url": "https://bikebook.co.uk/contact"
     },
     "version": "v1",
-    "x-bikebook-openapi-generated-at": "2026-05-29T11:37:29.241Z"
+    "x-bikebook-openapi-generated-at": "2026-06-05T15:16:04.799Z"
   },
   "paths": {
     "/public/v1/assets": {
@@ -6990,6 +6990,245 @@
         "x-bikebook-lifecycle-label": "Current"
       }
     },
+    "/public/v1/invoices/integration_sync/batch": {
+      "post": {
+        "tags": [
+          "Integrations"
+        ],
+        "summary": "Batch invoice integration sync status",
+        "description": "Resolves integration sync state for up to maximum_batch_invoice_integration_sync_ids invoices in one request. Each result is returned independently so one missing invoice does not fail the whole batch.",
+        "operationId": "InvoiceIntegrationSyncBatch",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Bearer Workshop API key. Example: Bearer bbk_live_...",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "X-Bikebook-Request-Id",
+            "in": "header",
+            "description": "Optional request id supplied by the client for support correlation.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "description": "Required for public write operations to make retries safe.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InvoiceIntegrationSyncBatchRequest"
+              },
+              "example": {
+                "invoice_ids": []
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Per-invoice integration sync status results.",
+            "headers": {
+              "X-Bikebook-Request-Id": {
+                "description": "Echoed or generated request correlation id. Log this with support.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InvoiceIntegrationSyncBatch"
+                },
+                "example": {
+                  "results": [
+                    {
+                      "invoice_id": "inv_01h2example",
+                      "succeeded": false,
+                      "resource": {
+                        "object": "invoice_integration_sync",
+                        "invoice_id": "inv_01h2example",
+                        "business_id": "org_2abc8example",
+                        "sync_id": "sync_01h2example",
+                        "has_sync": false,
+                        "provider": "shopify",
+                        "status": "synced",
+                        "auto_sync_enabled": false,
+                        "external_system_id": "gid://shopify/Order/1234567890",
+                        "external_system_reference": "#1001",
+                        "last_synced_at": "2026-05-20T10:00:00Z",
+                        "latest_event": {
+                          "id": "syncevt_01h2example",
+                          "status": "success",
+                          "trigger": "manual",
+                          "operation": "update",
+                          "direction": "push",
+                          "trigger_description": "Manual invoice sync requested through the public API.",
+                          "created_at": "2026-05-20T10:00:00Z",
+                          "processing_started_at": "2026-05-20T10:00:00Z",
+                          "completed_at": "2026-05-20T10:00:00Z",
+                          "http_status_code": 200,
+                          "error_message": "Provider request timed out.",
+                          "retryable": false
+                        }
+                      },
+                      "error": {
+                        "code": "invalid_request",
+                        "message": "example",
+                        "parameter": "example"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request. Request body, query, route, or headers failed validation (`invalid_request`, `idempotency_key_required`).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication required. Missing or invalid API key (`authentication_required`).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Permission denied. API key lacks scope or cannot access this business (`permission_denied`).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Resource not found. Resource does not exist or is outside the caller's allowed scope (`resource_not_found`).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Idempotency conflict. Same Idempotency-Key reused with a different payload (`idempotency_conflict`).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limited. Caller exceeded rate limits (`rate_limited`). Back off with exponential delay.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error. Unexpected server failure (`internal_error`). Retry later or contact support with the `request_id`.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          }
+        },
+        "x-required-scope": "integration.read",
+        "x-bikebook-lifecycle-status": "current",
+        "x-bikebook-lifecycle-label": "Current"
+      }
+    },
     "/public/v1/invoices/{invoice_id}/integration_sync/events": {
       "get": {
         "tags": [
@@ -9005,7 +9244,7 @@
           "Invoices"
         ],
         "summary": "List invoices",
-        "description": "Lists invoices for every business allowed by the API key. Supports cursor pagination via `limit` and `cursor`. Optional `business_id` narrows results to one workshop. Optional `job_id` filters to invoices linked to that job. Optional filters: `invoice_number` (exact), `customer_id` (exact public id), `customer_email` (exact), and `status` (`draft`, `pending`, `paid`, `cancelled`). Use comma-separated values to match any supplied status, for example `?status=pending,paid`.",
+        "description": "Lists invoices for every business allowed by the API key. Supports cursor pagination via `limit` and `cursor`. Optional `business_id` narrows results to one workshop. Optional `job_id` filters to invoices linked to that job. Optional filters: `invoice_number` (exact), `customer_id` (exact public id), `customer_email` (exact), and `status` (`draft`, `pending`, `paid`, `cancelled`). Use comma-separated values to match any supplied status, for example `?status=pending,paid`. Optional `created_from` and `created_to` filter by invoice creation time (UTC instants, inclusive).",
         "operationId": "ListInvoice",
         "parameters": [
           {
@@ -9060,9 +9299,23 @@
             "example": "pending,paid"
           },
           {
+            "name": "created_from",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "created_to",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
             "name": "sort",
             "in": "query",
-            "description": "Sort field. Allowed values: `created_at`, `invoice_number`. Default: `-created_at`. Prefix with `-` for descending order (for example `-created_at`).",
+            "description": "Sort field. Allowed values: `created_at`, `updated_at`, `invoice_number`. Default: `-created_at`. Prefix with `-` for descending order (for example `-created_at`).",
             "schema": {
               "type": "string"
             }
@@ -10476,240 +10729,6 @@
         "x-bikebook-lifecycle-label": "Current"
       }
     },
-    "/public/v1/invoices/{invoice_id}/payments": {
-      "post": {
-        "tags": [
-          "Invoices"
-        ],
-        "summary": "Record invoice payment",
-        "description": "Records an external/manual payment against the invoice. This does not charge a card or contact the customer. Set `mark_invoice_as_paid` to also move the invoice to `paid`.",
-        "operationId": "RecordPayment",
-        "parameters": [
-          {
-            "name": "invoice_id",
-            "in": "path",
-            "description": "Opaque public id of the invoice (`inv_...`). Workshop costs.",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Bearer Workshop API key. Example: Bearer bbk_live_...",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "X-Bikebook-Request-Id",
-            "in": "header",
-            "description": "Optional request id supplied by the client for support correlation.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "Idempotency-Key",
-            "in": "header",
-            "description": "Required for public write operations to make retries safe.",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/InvoicePaymentCreateRequest"
-              },
-              "example": {
-                "amount": 125.5,
-                "payment_method": "card",
-                "mark_invoice_as_paid": true
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "201": {
-            "description": "Recorded invoice payment.",
-            "headers": {
-              "X-Bikebook-Request-Id": {
-                "description": "Echoed or generated request correlation id. Log this with support.",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CommandResponseOfPayment"
-                },
-                "example": {
-                  "resource": {
-                    "object": "payment",
-                    "id": "pay_01h2example",
-                    "invoice_id": "inv_01h2example",
-                    "amount": 125.5,
-                    "payment_method": "card",
-                    "payment_type": "invoice_payment",
-                    "origin": "ad_hoc",
-                    "charged_on": "2026-05-20T15:00:00Z"
-                  },
-                  "effects": {
-                    "emails_sent": [],
-                    "emails_skipped": [],
-                    "webhooks_enqueued": [
-                      "invoice.updated",
-                      "invoice.status_changed"
-                    ],
-                    "sync_enqueued": true,
-                    "audit_logged": true,
-                    "notifications_created": false,
-                    "warnings": []
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Invalid request. Request body, query, route, or headers failed validation (`invalid_request`, `idempotency_key_required`).",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                },
-                "example": {
-                  "error": {
-                    "code": "invalid_request",
-                    "message": "The request body failed validation.",
-                    "parameter": "assets"
-                  },
-                  "request_id": "req_01h2example"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Authentication required. Missing or invalid API key (`authentication_required`).",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                },
-                "example": {
-                  "error": {
-                    "code": "invalid_request",
-                    "message": "The request body failed validation.",
-                    "parameter": "assets"
-                  },
-                  "request_id": "req_01h2example"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Permission denied. API key lacks scope or cannot access this business (`permission_denied`).",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                },
-                "example": {
-                  "error": {
-                    "code": "invalid_request",
-                    "message": "The request body failed validation.",
-                    "parameter": "assets"
-                  },
-                  "request_id": "req_01h2example"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Resource not found. Resource does not exist or is outside the caller's allowed scope (`resource_not_found`).",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                },
-                "example": {
-                  "error": {
-                    "code": "invalid_request",
-                    "message": "The request body failed validation.",
-                    "parameter": "assets"
-                  },
-                  "request_id": "req_01h2example"
-                }
-              }
-            }
-          },
-          "409": {
-            "description": "Idempotency conflict. Same Idempotency-Key reused with a different payload (`idempotency_conflict`).",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                },
-                "example": {
-                  "error": {
-                    "code": "invalid_request",
-                    "message": "The request body failed validation.",
-                    "parameter": "assets"
-                  },
-                  "request_id": "req_01h2example"
-                }
-              }
-            }
-          },
-          "429": {
-            "description": "Rate limited. Caller exceeded rate limits (`rate_limited`). Back off with exponential delay.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                },
-                "example": {
-                  "error": {
-                    "code": "invalid_request",
-                    "message": "The request body failed validation.",
-                    "parameter": "assets"
-                  },
-                  "request_id": "req_01h2example"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Internal error. Unexpected server failure (`internal_error`). Retry later or contact support with the `request_id`.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                },
-                "example": {
-                  "error": {
-                    "code": "invalid_request",
-                    "message": "The request body failed validation.",
-                    "parameter": "assets"
-                  },
-                  "request_id": "req_01h2example"
-                }
-              }
-            }
-          }
-        },
-        "x-required-scope": "invoice.write",
-        "x-bikebook-lifecycle-status": "current",
-        "x-bikebook-lifecycle-label": "Current"
-      }
-    },
     "/public/v1/invoices/{invoice_id}/pdf": {
       "get": {
         "tags": [
@@ -10879,239 +10898,6 @@
           }
         },
         "x-required-scope": "invoice.read",
-        "x-bikebook-lifecycle-status": "current",
-        "x-bikebook-lifecycle-label": "Current"
-      }
-    },
-    "/public/v1/payments/{payment_id}/refunds": {
-      "post": {
-        "tags": [
-          "Invoices"
-        ],
-        "summary": "Record payment refund",
-        "description": "Records an external/manual refund against an existing payment. This does not process money through a payment provider or email the customer.",
-        "operationId": "Refund",
-        "parameters": [
-          {
-            "name": "payment_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Bearer Workshop API key. Example: Bearer bbk_live_...",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "X-Bikebook-Request-Id",
-            "in": "header",
-            "description": "Optional request id supplied by the client for support correlation.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "Idempotency-Key",
-            "in": "header",
-            "description": "Required for public write operations to make retries safe.",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/PaymentRefundCreateRequest"
-              },
-              "example": {
-                "amount": 25,
-                "payment_method": "card",
-                "reason": "Goodwill refund."
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "201": {
-            "description": "Recorded payment refund.",
-            "headers": {
-              "X-Bikebook-Request-Id": {
-                "description": "Echoed or generated request correlation id. Log this with support.",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CommandResponseOfPayment"
-                },
-                "example": {
-                  "resource": {
-                    "object": "payment",
-                    "id": "pay_01h2example",
-                    "invoice_id": "inv_01h2example",
-                    "amount": 125.5,
-                    "payment_method": "card",
-                    "payment_type": "invoice_payment",
-                    "origin": "ad_hoc",
-                    "charged_on": "2026-05-20T15:00:00Z"
-                  },
-                  "effects": {
-                    "emails_sent": [],
-                    "emails_skipped": [],
-                    "webhooks_enqueued": [
-                      "invoice.updated",
-                      "invoice.status_changed"
-                    ],
-                    "sync_enqueued": true,
-                    "audit_logged": true,
-                    "notifications_created": false,
-                    "warnings": []
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Invalid request. Request body, query, route, or headers failed validation (`invalid_request`, `idempotency_key_required`).",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                },
-                "example": {
-                  "error": {
-                    "code": "invalid_request",
-                    "message": "The request body failed validation.",
-                    "parameter": "assets"
-                  },
-                  "request_id": "req_01h2example"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Authentication required. Missing or invalid API key (`authentication_required`).",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                },
-                "example": {
-                  "error": {
-                    "code": "invalid_request",
-                    "message": "The request body failed validation.",
-                    "parameter": "assets"
-                  },
-                  "request_id": "req_01h2example"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Permission denied. API key lacks scope or cannot access this business (`permission_denied`).",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                },
-                "example": {
-                  "error": {
-                    "code": "invalid_request",
-                    "message": "The request body failed validation.",
-                    "parameter": "assets"
-                  },
-                  "request_id": "req_01h2example"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Resource not found. Resource does not exist or is outside the caller's allowed scope (`resource_not_found`).",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                },
-                "example": {
-                  "error": {
-                    "code": "invalid_request",
-                    "message": "The request body failed validation.",
-                    "parameter": "assets"
-                  },
-                  "request_id": "req_01h2example"
-                }
-              }
-            }
-          },
-          "409": {
-            "description": "Idempotency conflict. Same Idempotency-Key reused with a different payload (`idempotency_conflict`).",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                },
-                "example": {
-                  "error": {
-                    "code": "invalid_request",
-                    "message": "The request body failed validation.",
-                    "parameter": "assets"
-                  },
-                  "request_id": "req_01h2example"
-                }
-              }
-            }
-          },
-          "429": {
-            "description": "Rate limited. Caller exceeded rate limits (`rate_limited`). Back off with exponential delay.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                },
-                "example": {
-                  "error": {
-                    "code": "invalid_request",
-                    "message": "The request body failed validation.",
-                    "parameter": "assets"
-                  },
-                  "request_id": "req_01h2example"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Internal error. Unexpected server failure (`internal_error`). Retry later or contact support with the `request_id`.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                },
-                "example": {
-                  "error": {
-                    "code": "invalid_request",
-                    "message": "The request body failed validation.",
-                    "parameter": "assets"
-                  },
-                  "request_id": "req_01h2example"
-                }
-              }
-            }
-          }
-        },
-        "x-required-scope": "invoice.write",
         "x-bikebook-lifecycle-status": "current",
         "x-bikebook-lifecycle-label": "Current"
       }
@@ -12616,7 +12402,7 @@
           "Jobs"
         ],
         "summary": "List jobs",
-        "description": "Supports cursor pagination. Optional `business_id` narrows results to one workshop. Optional filters: `job_number` (exact), `customer_id` (exact public id), `customer_email` (exact), `accepted_status` (`pending`, `accepted`, `rejected`, `cancelled`), and `status_id` (work-line status id such as `jst_...`). Use comma-separated values to match any supplied value, for example `?accepted_status=accepted,rejected` or `?status_id=jst_123,jst_456`.",
+        "description": "Supports cursor pagination. Optional `business_id` narrows results to one workshop. Optional filters: `job_number` (exact), `customer_id` (exact public id), `customer_email` (exact), `accepted_status` (`pending`, `accepted`, `rejected`, `cancelled`), and `status_id` (work-line status id such as `jst_...`). Use comma-separated values to match any supplied value, for example `?accepted_status=accepted,rejected` or `?status_id=jst_123,jst_456`. Optional `created_from` and `created_to` filter by job creation time (UTC instants, inclusive).",
         "operationId": "Jobs",
         "parameters": [
           {
@@ -12670,6 +12456,20 @@
               "type": "string"
             },
             "example": "jst_01h2xexample"
+          },
+          {
+            "name": "created_from",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "created_to",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
           },
           {
             "name": "sort",
@@ -12865,7 +12665,7 @@
           "Jobs"
         ],
         "summary": "Create job",
-        "description": "Requires `job.write` and a unique `Idempotency-Key` header. The workshop is determined by `customer.id`: the customer must already exist and belong to a business your API key can access. If your key spans multiple workshops, use a customer id scoped to the target workshop. v1 requires existing `customer.id` and `assets[].id` values. The request body is workflow-shaped: customer, assets, work_lines, schedule, notifications, and integration_options. Send the body as `application/json` (not JSON Patch). See the development guide for minimal and full JSON examples.",
+        "description": "Requires `job.write` and a unique `Idempotency-Key` header. The workshop is determined by `customer.id`: the customer must already exist and belong to a business your API key can access. If your key spans multiple workshops, use a customer id scoped to the target workshop. Each asset entry must supply either an existing `assets[].id` or a request-local `client_reference` for inline asset creation. Each work line must supply either `asset_id` or `asset_client_reference` matching an asset on the request. The request body is workflow-shaped: customer, assets, work_lines, schedule, notifications, and integration_options. Send the body as `application/json` (not JSON Patch). See the development guide for minimal and full JSON examples.",
         "operationId": "CreateJobBooking",
         "parameters": [
           {
@@ -15427,6 +15227,866 @@
           }
         },
         "x-required-scope": "job.write",
+        "x-bikebook-lifecycle-status": "current",
+        "x-bikebook-lifecycle-label": "Current"
+      }
+    },
+    "/public/v1/invoices/{invoice_id}/payments": {
+      "post": {
+        "tags": [
+          "Payments"
+        ],
+        "summary": "Record invoice payment",
+        "description": "Records an external/manual payment against the invoice. This does not charge a card or contact the customer. Set `mark_invoice_as_paid` to also move the invoice to `paid`.",
+        "operationId": "RecordPayment",
+        "parameters": [
+          {
+            "name": "invoice_id",
+            "in": "path",
+            "description": "Opaque public id of the invoice (`inv_...`). Workshop costs.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Bearer Workshop API key. Example: Bearer bbk_live_...",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "X-Bikebook-Request-Id",
+            "in": "header",
+            "description": "Optional request id supplied by the client for support correlation.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "description": "Required for public write operations to make retries safe.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InvoicePaymentCreateRequest"
+              },
+              "example": {
+                "amount": 125.5,
+                "payment_method": "card",
+                "mark_invoice_as_paid": true
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Recorded invoice payment.",
+            "headers": {
+              "X-Bikebook-Request-Id": {
+                "description": "Echoed or generated request correlation id. Log this with support.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommandResponseOfPayment"
+                },
+                "example": {
+                  "resource": {
+                    "object": "payment",
+                    "id": "pay_01h2example",
+                    "invoice_id": "inv_01h2example",
+                    "amount": 125.5,
+                    "payment_method": "card",
+                    "payment_type": "invoice_payment",
+                    "origin": "workshop",
+                    "charged_on": "2026-05-20T15:00:00Z"
+                  },
+                  "effects": {
+                    "emails_sent": [],
+                    "emails_skipped": [],
+                    "webhooks_enqueued": [
+                      "invoice.updated",
+                      "invoice.status_changed"
+                    ],
+                    "sync_enqueued": true,
+                    "audit_logged": true,
+                    "notifications_created": false,
+                    "warnings": []
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request. Request body, query, route, or headers failed validation (`invalid_request`, `idempotency_key_required`).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication required. Missing or invalid API key (`authentication_required`).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Permission denied. API key lacks scope or cannot access this business (`permission_denied`).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Resource not found. Resource does not exist or is outside the caller's allowed scope (`resource_not_found`).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Idempotency conflict. Same Idempotency-Key reused with a different payload (`idempotency_conflict`).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limited. Caller exceeded rate limits (`rate_limited`). Back off with exponential delay.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error. Unexpected server failure (`internal_error`). Retry later or contact support with the `request_id`.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          }
+        },
+        "x-required-scope": "invoice.write",
+        "x-bikebook-lifecycle-status": "current",
+        "x-bikebook-lifecycle-label": "Current"
+      }
+    },
+    "/public/v1/payments": {
+      "get": {
+        "tags": [
+          "Payments"
+        ],
+        "summary": "List payments",
+        "description": "Lists payments recorded against invoices for businesses allowed by the API key. Supports cursor pagination via `limit` and `cursor`. Optional filters: `business_id`, `invoice_id`. Requires `invoice.read`.",
+        "operationId": "ListPayment",
+        "parameters": [
+          {
+            "name": "business_id",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "invoice_id",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "Sort field. Allowed values: `charged_on`, `created_at`. Default: `-charged_on`. Prefix with `-` for descending order (for example `-charged_on`).",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Maximum number of resources to return (1–100, default 10).",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "description": "Opaque page cursor from a previous list response's `pagination.next_cursor`.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Bearer Workshop API key. Example: Bearer bbk_live_...",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "X-Bikebook-Request-Id",
+            "in": "header",
+            "description": "Optional request id supplied by the client for support correlation.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Page of invoice payments.",
+            "headers": {
+              "X-Bikebook-Request-Id": {
+                "description": "Echoed or generated request correlation id. Log this with support.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListResponseOfPayment"
+                },
+                "example": {
+                  "data": [
+                    {
+                      "object": "payment",
+                      "invoice_id": "inv_01h2example",
+                      "amount": 1,
+                      "payment_method": "b_a_c_s",
+                      "payment_type": "invoice_payment",
+                      "origin": "square",
+                      "charged_on": "2026-05-20T10:00:00Z",
+                      "id": "id_01h2example"
+                    }
+                  ],
+                  "pagination": {
+                    "has_more": false,
+                    "next_cursor": "example"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request. Request body, query, route, or headers failed validation (`invalid_request`, `idempotency_key_required`).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication required. Missing or invalid API key (`authentication_required`).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Permission denied. API key lacks scope or cannot access this business (`permission_denied`).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Resource not found. Resource does not exist or is outside the caller's allowed scope (`resource_not_found`).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limited. Caller exceeded rate limits (`rate_limited`). Back off with exponential delay.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error. Unexpected server failure (`internal_error`). Retry later or contact support with the `request_id`.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          }
+        },
+        "x-required-scope": "invoice.read",
+        "x-bikebook-lifecycle-status": "current",
+        "x-bikebook-lifecycle-label": "Current"
+      }
+    },
+    "/public/v1/payments/{payment_id}": {
+      "get": {
+        "tags": [
+          "Payments"
+        ],
+        "summary": "Get payment",
+        "description": "Returns one payment recorded against an invoice. Requires `invoice.read`.",
+        "operationId": "GetPayment",
+        "parameters": [
+          {
+            "name": "payment_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Bearer Workshop API key. Example: Bearer bbk_live_...",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "X-Bikebook-Request-Id",
+            "in": "header",
+            "description": "Optional request id supplied by the client for support correlation.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Payment recorded against an invoice.",
+            "headers": {
+              "X-Bikebook-Request-Id": {
+                "description": "Echoed or generated request correlation id. Log this with support.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Payment"
+                },
+                "example": {
+                  "object": "payment",
+                  "invoice_id": "inv_01h2example",
+                  "amount": 1,
+                  "payment_method": "b_a_c_s",
+                  "payment_type": "invoice_payment",
+                  "origin": "square",
+                  "charged_on": "2026-05-20T10:00:00Z",
+                  "id": "id_01h2example"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request. Request body, query, route, or headers failed validation (`invalid_request`, `idempotency_key_required`).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication required. Missing or invalid API key (`authentication_required`).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Permission denied. API key lacks scope or cannot access this business (`permission_denied`).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Resource not found. Resource does not exist or is outside the caller's allowed scope (`resource_not_found`).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limited. Caller exceeded rate limits (`rate_limited`). Back off with exponential delay.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error. Unexpected server failure (`internal_error`). Retry later or contact support with the `request_id`.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          }
+        },
+        "x-required-scope": "invoice.read",
+        "x-bikebook-lifecycle-status": "current",
+        "x-bikebook-lifecycle-label": "Current"
+      }
+    },
+    "/public/v1/payments/{payment_id}/refunds": {
+      "post": {
+        "tags": [
+          "Payments"
+        ],
+        "summary": "Record payment refund",
+        "description": "Records an external/manual refund against an existing payment. This does not process money through a payment provider or email the customer. Requires `invoice.write`.",
+        "operationId": "Refund",
+        "parameters": [
+          {
+            "name": "payment_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Bearer Workshop API key. Example: Bearer bbk_live_...",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "X-Bikebook-Request-Id",
+            "in": "header",
+            "description": "Optional request id supplied by the client for support correlation.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "description": "Required for public write operations to make retries safe.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PaymentRefundCreateRequest"
+              },
+              "example": {
+                "amount": 25,
+                "payment_method": "card",
+                "reason": "Goodwill refund."
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Recorded payment refund.",
+            "headers": {
+              "X-Bikebook-Request-Id": {
+                "description": "Echoed or generated request correlation id. Log this with support.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommandResponseOfPayment"
+                },
+                "example": {
+                  "resource": {
+                    "object": "payment",
+                    "id": "pay_01h2example",
+                    "invoice_id": "inv_01h2example",
+                    "amount": 125.5,
+                    "payment_method": "card",
+                    "payment_type": "invoice_payment",
+                    "origin": "workshop",
+                    "charged_on": "2026-05-20T15:00:00Z"
+                  },
+                  "effects": {
+                    "emails_sent": [],
+                    "emails_skipped": [],
+                    "webhooks_enqueued": [
+                      "invoice.updated",
+                      "invoice.status_changed"
+                    ],
+                    "sync_enqueued": true,
+                    "audit_logged": true,
+                    "notifications_created": false,
+                    "warnings": []
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request. Request body, query, route, or headers failed validation (`invalid_request`, `idempotency_key_required`).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication required. Missing or invalid API key (`authentication_required`).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Permission denied. API key lacks scope or cannot access this business (`permission_denied`).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Resource not found. Resource does not exist or is outside the caller's allowed scope (`resource_not_found`).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Idempotency conflict. Same Idempotency-Key reused with a different payload (`idempotency_conflict`).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limited. Caller exceeded rate limits (`rate_limited`). Back off with exponential delay.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error. Unexpected server failure (`internal_error`). Retry later or contact support with the `request_id`.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          }
+        },
+        "x-required-scope": "invoice.write",
         "x-bikebook-lifecycle-status": "current",
         "x-bikebook-lifecycle-label": "Current"
       }
@@ -21531,6 +22191,59 @@
         "additionalProperties": false,
         "description": "Public summary of an integration sync attempt."
       },
+      "InvoiceIntegrationSyncBatchRequest": {
+        "type": "object",
+        "properties": {
+          "invoice_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Public invoice ids to resolve. Capped by maximum_batch_invoice_integration_sync_ids.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Request body for batch invoice integration sync status lookups."
+      },
+      "InvoiceIntegrationSyncBatch": {
+        "type": "object",
+        "properties": {
+          "results": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/InvoiceIntegrationSyncBatchItem"
+            },
+            "description": "Per-invoice results in the same order as the request.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Batch response containing per-invoice integration sync status or errors."
+      },
+      "InvoiceIntegrationSyncBatchItem": {
+        "type": "object",
+        "properties": {
+          "invoice_id": {
+            "type": "string",
+            "description": "Public invoice id from the request.",
+            "nullable": true,
+            "example": "inv_01h2example"
+          },
+          "succeeded": {
+            "type": "boolean",
+            "description": "True when v1.Integrations.PublicApiInvoiceIntegrationSyncBatchItemResponse.Resource is populated."
+          },
+          "resource": {
+            "$ref": "#/components/schemas/InvoiceIntegrationSync"
+          },
+          "error": {
+            "$ref": "#/components/schemas/Error"
+          }
+        },
+        "additionalProperties": false,
+        "description": "One invoice result from a batch integration sync status lookup."
+      },
       "IntegrationSyncEventList": {
         "type": "object",
         "properties": {
@@ -22003,6 +22716,12 @@
             "format": "date-time",
             "nullable": true
           },
+          "paid_at": {
+            "type": "string",
+            "description": "UTC timestamp when the invoice became fully paid, when available.",
+            "format": "date-time",
+            "nullable": true
+          },
           "id": {
             "type": "string",
             "description": "Opaque resource-prefixed public identifier, such as job_... or cus_.... Internal database ids must never be assigned here.",
@@ -22166,123 +22885,6 @@
         "additionalProperties": false,
         "description": "Workshop-hosted payment link generated for an invoice."
       },
-      "InvoicePaymentCreateRequest": {
-        "required": [
-          "payment_method"
-        ],
-        "type": "object",
-        "properties": {
-          "amount": {
-            "maximum": 999999,
-            "minimum": 0.01,
-            "type": "number",
-            "description": "Payment amount in invoice currency units.",
-            "format": "double"
-          },
-          "payment_method": {
-            "minLength": 1,
-            "enum": [
-              "b_a_c_s",
-              "card",
-              "cash",
-              "layaway",
-              "other"
-            ],
-            "type": "string",
-            "description": "Payment method recorded against the invoice. Allowed values: `cash`, `card`, `layaway`, `bacs`, or `other`."
-          },
-          "custom_payment_method_label": {
-            "maxLength": 120,
-            "type": "string",
-            "description": "Optional custom label when `payment_method` is `other`.",
-            "nullable": true
-          },
-          "mark_invoice_as_paid": {
-            "type": "boolean",
-            "description": "Whether to mark the invoice as paid after recording the payment.",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false,
-        "description": "Request body for recording a manual or external invoice payment."
-      },
-      "CommandResponseOfPayment": {
-        "type": "object",
-        "properties": {
-          "resource": {
-            "$ref": "#/components/schemas/Payment"
-          },
-          "effects": {
-            "$ref": "#/components/schemas/CommandEffects"
-          }
-        },
-        "additionalProperties": false,
-        "description": "Standard response envelope for public API workflow commands."
-      },
-      "Payment": {
-        "type": "object",
-        "properties": {
-          "object": {
-            "enum": [
-              "payment"
-            ],
-            "type": "string",
-            "description": "Resource object type. Always payment.",
-            "nullable": true,
-            "example": "payment"
-          },
-          "invoice_id": {
-            "type": "string",
-            "description": "Public invoice id this payment belongs to.",
-            "nullable": true
-          },
-          "amount": {
-            "type": "number",
-            "description": "Payment amount in invoice currency units.",
-            "format": "double"
-          },
-          "payment_method": {
-            "enum": [
-              "b_a_c_s",
-              "card",
-              "cash",
-              "layaway",
-              "other"
-            ],
-            "type": "string",
-            "description": "Payment method in snake_case.",
-            "nullable": true
-          },
-          "payment_type": {
-            "type": "string",
-            "description": "Payment type, such as invoice_payment or refund.",
-            "nullable": true
-          },
-          "origin": {
-            "enum": [
-              "ad_hoc",
-              "job",
-              "sale"
-            ],
-            "type": "string",
-            "description": "Payment origin, such as workshop or stripe.",
-            "nullable": true
-          },
-          "charged_on": {
-            "type": "string",
-            "description": "UTC timestamp when the payment was charged or recorded.",
-            "format": "date-time",
-            "nullable": true
-          },
-          "id": {
-            "type": "string",
-            "description": "Opaque resource-prefixed public identifier, such as job_... or cus_.... Internal database ids must never be assigned here.",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false,
-        "description": "Public representation of a payment recorded against an invoice."
-      },
       "InvoicePdf": {
         "type": "object",
         "properties": {
@@ -22304,41 +22906,6 @@
         },
         "additionalProperties": false,
         "description": "Stable invoice PDF viewer link."
-      },
-      "PaymentRefundCreateRequest": {
-        "required": [
-          "payment_method"
-        ],
-        "type": "object",
-        "properties": {
-          "amount": {
-            "maximum": 999999,
-            "minimum": 0.01,
-            "type": "number",
-            "description": "Refund amount in invoice currency units.",
-            "format": "double"
-          },
-          "payment_method": {
-            "minLength": 1,
-            "enum": [
-              "b_a_c_s",
-              "card",
-              "cash",
-              "layaway",
-              "other"
-            ],
-            "type": "string",
-            "description": "Refund method recorded against the payment."
-          },
-          "reason": {
-            "maxLength": 1000,
-            "type": "string",
-            "description": "Optional refund reason.",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false,
-        "description": "Request body for recording a refund against a payment."
       },
       "ListResponseOfJobReport": {
         "type": "object",
@@ -22914,6 +23481,12 @@
           "updated_at": {
             "type": "string",
             "description": "UTC timestamp when the job was last updated, when available.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "completed_at": {
+            "type": "string",
+            "description": "UTC timestamp when the job was marked completed, when available.",
             "format": "date-time",
             "nullable": true
           },
@@ -23586,7 +24159,7 @@
             "items": {
               "$ref": "#/components/schemas/JobAssetInput"
             },
-            "description": "Customer assets included on this job (bikes or other serviced assets). Required: at least one entry. Each entry must use `assets[].id` — an existing public asset id already on the customer (from `GET .../customers/{customer_id}` → `assets[].id`). This array is not optional and must not be empty."
+            "description": "Customer assets included on this job (bikes or other serviced assets). Required: at least one entry."
           },
           "work_lines": {
             "maxItems": 50,
@@ -23595,7 +24168,7 @@
             "items": {
               "$ref": "#/components/schemas/JobWorkLineInput"
             },
-            "description": "Work to perform per asset. Required: at least one entry; each entry needs `asset_id` and a non-empty `services` array. Each line's `asset_id` must match an `id` listed in `assets`."
+            "description": "Work to perform per asset. Required: at least one entry with a non-empty `services` array."
           },
           "schedule": {
             "$ref": "#/components/schemas/JobScheduleInput"
@@ -23677,40 +24250,67 @@
         "description": "Customer reference for public job creation."
       },
       "JobAssetInput": {
-        "required": [
-          "id"
-        ],
         "type": "object",
         "properties": {
           "id": {
-            "minLength": 1,
             "type": "string",
-            "description": "Required. Existing public asset id on the customer (`asset_...` from the customer record). Example: `{ \"id\": \"asset_4f2bexample\" }`."
+            "description": "Existing public asset id on the customer (`asset_...` from the customer record). Required when `client_reference` is omitted.",
+            "nullable": true
           },
           "client_reference": {
             "type": "string",
-            "description": "Request-local reference used by work lines when inline asset creation is supported in future. Not used while `id` is required on each asset.",
+            "description": "Request-local reference used by work lines when the asset is created inline in this request. Required when `id` is omitted. Must be unique within the request.",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "description": "Asset display name when creating the asset inline.",
+            "nullable": true
+          },
+          "bike_type": {
+            "type": "string",
+            "description": "Bike category (bikes only). Snake_case enum (for example `road_bike`). Defaults to `generic_bike` when omitted on inline create.",
+            "nullable": true
+          },
+          "make": {
+            "type": "string",
+            "description": "Asset make or manufacturer when creating the asset inline.",
+            "nullable": true
+          },
+          "model": {
+            "type": "string",
+            "description": "Asset model when creating the asset inline.",
+            "nullable": true
+          },
+          "year": {
+            "type": "integer",
+            "description": "Asset model year when creating the asset inline.",
+            "format": "int32",
+            "nullable": true
+          },
+          "serial_number": {
+            "type": "string",
+            "description": "Asset serial number when creating the asset inline.",
             "nullable": true
           }
         },
         "additionalProperties": false,
-        "description": "One customer asset to include on the job. v1 does not create assets inline — reference an existing asset only."
+        "description": "One customer asset to include on the job. Supply an existing `id` (`asset_...`) or a request-local `client_reference` for inline asset creation."
       },
       "JobWorkLineInput": {
         "required": [
-          "asset_id",
           "services"
         ],
         "type": "object",
         "properties": {
           "asset_id": {
-            "minLength": 1,
             "type": "string",
-            "description": "Required in v1. Must match an `id` from the parent request's `assets` array."
+            "description": "Existing asset public id from the parent request's `assets[]` array. Required when `asset_client_reference` is omitted.",
+            "nullable": true
           },
           "asset_client_reference": {
             "type": "string",
-            "description": "Request-local asset reference when the work line applies to an asset created in this same request.",
+            "description": "Request-local asset reference when the work line applies to an asset created inline in this request. Required when `asset_id` is omitted.",
             "nullable": true
           },
           "services": {
@@ -24523,6 +25123,183 @@
         "additionalProperties": false,
         "description": "Request body for replacing the services on a work line."
       },
+      "InvoicePaymentCreateRequest": {
+        "required": [
+          "payment_method"
+        ],
+        "type": "object",
+        "properties": {
+          "amount": {
+            "maximum": 999999,
+            "minimum": 0.01,
+            "type": "number",
+            "description": "Payment amount in invoice currency units.",
+            "format": "double"
+          },
+          "payment_method": {
+            "minLength": 1,
+            "enum": [
+              "b_a_c_s",
+              "card",
+              "cash",
+              "layaway",
+              "other"
+            ],
+            "type": "string",
+            "description": "Payment method recorded against the invoice. Allowed values: `cash`, `card`, `layaway`, `bacs`, or `other`."
+          },
+          "custom_payment_method_label": {
+            "maxLength": 120,
+            "type": "string",
+            "description": "Optional custom label when `payment_method` is `other`.",
+            "nullable": true
+          },
+          "mark_invoice_as_paid": {
+            "type": "boolean",
+            "description": "Whether to mark the invoice as paid after recording the payment.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Request body for recording a manual or external invoice payment."
+      },
+      "CommandResponseOfPayment": {
+        "type": "object",
+        "properties": {
+          "resource": {
+            "$ref": "#/components/schemas/Payment"
+          },
+          "effects": {
+            "$ref": "#/components/schemas/CommandEffects"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Standard response envelope for public API workflow commands."
+      },
+      "Payment": {
+        "type": "object",
+        "properties": {
+          "object": {
+            "enum": [
+              "payment"
+            ],
+            "type": "string",
+            "description": "Resource object type. Always payment.",
+            "nullable": true,
+            "example": "payment"
+          },
+          "invoice_id": {
+            "type": "string",
+            "description": "Public invoice id this payment belongs to.",
+            "nullable": true
+          },
+          "amount": {
+            "type": "number",
+            "description": "Payment amount in invoice currency units.",
+            "format": "double"
+          },
+          "payment_method": {
+            "enum": [
+              "b_a_c_s",
+              "card",
+              "cash",
+              "layaway",
+              "other"
+            ],
+            "type": "string",
+            "description": "Payment method recorded against the invoice. Allowed values: `cash`, `card`, `layaway`, `bacs`, or `other`.",
+            "nullable": true
+          },
+          "payment_type": {
+            "enum": [
+              "invoice_payment",
+              "pre_payment",
+              "refund"
+            ],
+            "type": "string",
+            "description": "Payment type. Allowed values: `pre_payment`, `invoice_payment`, or `refund`.",
+            "nullable": true
+          },
+          "origin": {
+            "enum": [
+              "square",
+              "stripe",
+              "sum_up",
+              "workshop",
+              "zettle"
+            ],
+            "type": "string",
+            "description": "Where the payment was processed. Allowed values: `workshop`, `stripe`, `sum_up`, `square`, or `zettle`.",
+            "nullable": true
+          },
+          "charged_on": {
+            "type": "string",
+            "description": "UTC timestamp when the payment was charged or recorded.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "id": {
+            "type": "string",
+            "description": "Opaque resource-prefixed public identifier, such as job_... or cus_.... Internal database ids must never be assigned here.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Public representation of a payment recorded against an invoice."
+      },
+      "ListResponseOfPayment": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Payment"
+            },
+            "description": "Page of public resources returned by the list endpoint.",
+            "nullable": true
+          },
+          "pagination": {
+            "$ref": "#/components/schemas/Pagination"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Standard public API list response with cursor pagination metadata."
+      },
+      "PaymentRefundCreateRequest": {
+        "required": [
+          "payment_method"
+        ],
+        "type": "object",
+        "properties": {
+          "amount": {
+            "maximum": 999999,
+            "minimum": 0.01,
+            "type": "number",
+            "description": "Refund amount in invoice currency units.",
+            "format": "double"
+          },
+          "payment_method": {
+            "minLength": 1,
+            "enum": [
+              "b_a_c_s",
+              "card",
+              "cash",
+              "layaway",
+              "other"
+            ],
+            "type": "string",
+            "description": "Refund method recorded against the payment."
+          },
+          "reason": {
+            "maxLength": 1000,
+            "type": "string",
+            "description": "Optional refund reason.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Request body for recording a refund against a payment."
+      },
       "ServiceUpdateRequest": {
         "type": "object",
         "properties": {
@@ -25234,6 +26011,10 @@
     {
       "name": "Jobs",
       "description": "Jobs and part authorisation decisions on a job."
+    },
+    {
+      "name": "Payments",
+      "description": "Payments recorded against invoices: list, get, record, and refund."
     },
     {
       "name": "Services",

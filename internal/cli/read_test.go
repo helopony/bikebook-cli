@@ -11,8 +11,8 @@ import (
 
 func TestReadCommandsAllGETsHaveHappyPath(t *testing.T) {
 	withTempHome(t)
-	if got := len(readCommandSpecs()); got != 38 {
-		t.Fatalf("read command count = %d, want 38", got)
+	if got := len(readCommandSpecs()); got != 40 {
+		t.Fatalf("read command count = %d, want 40", got)
 	}
 	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		if r.Header.Get("Authorization") != "Bearer bbk_live_secret" {
