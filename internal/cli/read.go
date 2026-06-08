@@ -327,7 +327,7 @@ func readCommandSpecs() []readCommandSpec {
 		{Group: "integrations", Use: "invoice-sync-events", Short: "List invoice integration sync events", PathArgs: []string{"invoice_id"}, ExecutePage: func(ctx context.Context, c *api.Client, args []string, editors []api.RequestEditorFn) (*http.Response, error) {
 			return c.InvoiceIntegrationSyncEvents(ctx, args[0], nil, editors...)
 		}},
-		{Group: "invoices", Use: "list", Short: "List invoices", QueryFlags: []string{"business_id", "job_id", "invoice_number", "customer_id", "customer_email", "status", "sort", "limit", "cursor"}, Pageable: true, ExecutePage: func(ctx context.Context, c *api.Client, args []string, editors []api.RequestEditorFn) (*http.Response, error) {
+		{Group: "invoices", Use: "list", Short: "List invoices", QueryFlags: []string{"business_id", "job_id", "invoice_number", "customer_id", "customer_email", "status", "created_from", "created_to", "sort", "limit", "cursor"}, Pageable: true, ExecutePage: func(ctx context.Context, c *api.Client, args []string, editors []api.RequestEditorFn) (*http.Response, error) {
 			return c.ListInvoice(ctx, nil, editors...)
 		}},
 		{Group: "invoices", Use: "get", Short: "Get an invoice", PathArgs: []string{"invoice_id"}, ExecutePage: func(ctx context.Context, c *api.Client, args []string, editors []api.RequestEditorFn) (*http.Response, error) {
@@ -348,7 +348,7 @@ func readCommandSpecs() []readCommandSpec {
 		{Group: "job-reports", Use: "get-for-job", Short: "Get a report for a job", PathArgs: []string{"job_id", "job_report_id"}, ExecutePage: func(ctx context.Context, c *api.Client, args []string, editors []api.RequestEditorFn) (*http.Response, error) {
 			return c.GetJobReportForJob(ctx, args[0], args[1], nil, editors...)
 		}},
-		{Group: "jobs", Use: "list", Short: "List jobs", QueryFlags: []string{"business_id", "job_number", "customer_id", "customer_email", "accepted_status", "status_id", "sort", "limit", "cursor"}, Pageable: true, ExecutePage: func(ctx context.Context, c *api.Client, args []string, editors []api.RequestEditorFn) (*http.Response, error) {
+		{Group: "jobs", Use: "list", Short: "List jobs", QueryFlags: []string{"business_id", "job_number", "customer_id", "customer_email", "accepted_status", "status_id", "created_from", "created_to", "sort", "limit", "cursor"}, Pageable: true, ExecutePage: func(ctx context.Context, c *api.Client, args []string, editors []api.RequestEditorFn) (*http.Response, error) {
 			return c.Jobs(ctx, nil, editors...)
 		}},
 		{Group: "jobs", Use: "get", Short: "Get a job", PathArgs: []string{"job_id"}, ExecutePage: func(ctx context.Context, c *api.Client, args []string, editors []api.RequestEditorFn) (*http.Response, error) {

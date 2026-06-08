@@ -96,6 +96,45 @@ func TestJobsListJSONFollowsCursorPagination(t *testing.T) {
 	}
 }
 
+func TestCreatedDateFiltersForwardedForJobsAndInvoices(t *testing.T) {
+	withTempHome(t)
+	tests := []struct {
+		group string
+	}{
+		{group: "jobs"},
+		{group: "invoices"},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.group, func(t *testing.T) {
+			server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+				if r.URL.Query().Get("created_from") != "2026-06-07" {
+					t.Fatalf("created_from = %q", r.URL.Query().Get("created_from"))
+				}
+				if r.URL.Query().Get("created_to") != "2026-06-08" {
+					t.Fatalf("created_to = %q", r.URL.Query().Get("created_to"))
+				}
+				w.Header().Set("Content-Type", "application/json")
+				_, _ = w.Write([]byte(`{"data":[],"pagination":{"has_more":false,"next_cursor":null}}`))
+			}))
+			t.Cleanup(server.Close)
+
+			var stdout, stderr bytes.Buffer
+			code := ExecuteWithArgs([]string{
+				"--api-key", "bbk_live_secret",
+				"--api-base", server.URL,
+				"--json",
+				tt.group, "list",
+				"--created-from", "2026-06-07",
+				"--created-to", "2026-06-08",
+			}, &stdout, &stderr)
+			if code != ExitSuccess {
+				t.Fatalf("exit = %d, stderr = %s", code, stderr.String())
+			}
+		})
+	}
+}
+
 func TestJobsListRawEmitsNDJSONDataRows(t *testing.T) {
 	withTempHome(t)
 	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
