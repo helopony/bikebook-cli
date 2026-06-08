@@ -30,7 +30,7 @@ go install github.com/helopony/bikebook-cli/cmd/bikebook@latest
 - [`AGENTS.md`](./AGENTS.md) — task-shaped command recipes for agents.
 - [`AGENT_SETUP.md`](./AGENT_SETUP.md) — simple manual for adding the CLI to agent runtimes.
 - [`llms.txt`](./llms.txt) — curated Markdown link map for LLM tools.
-- [`skills/claude/bikebook.md`](./skills/claude/bikebook.md) — Claude Code skill distribution file.
+- [`skills/claude/bikebook/SKILL.md`](./skills/claude/bikebook/SKILL.md) — Claude Code skill distribution package.
 - [`skills/codex/bikebook/SKILL.md`](./skills/codex/bikebook/SKILL.md) — Codex and ChatGPT skill distribution package.
 
 ## Spec

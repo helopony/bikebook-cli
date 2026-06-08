@@ -1,3 +1,8 @@
+---
+name: bikebook
+description: Use the `bikebook` command-line tool as the stable interface to the BikeBook Workshop Public API. Use when Claude needs to install or verify BikeBook CLI, configure API authentication, discover supported commands and flags, read BikeBook resources, perform idempotent writes, inspect raw HTTP behavior, parse structured CLI errors, or help another agent integrate the CLI.
+---
+
 # BikeBook CLI
 
 Use this skill when working with the BikeBook Workshop Public API through the `bikebook` command-line tool.

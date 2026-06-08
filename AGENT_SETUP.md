@@ -53,8 +53,15 @@ The `skills/` directory in this repository is the distribution source. Copy the 
 Claude Code:
 
 ```sh
-mkdir -p .claude/skills
-cp skills/claude/bikebook.md /path/to/target-repo/.claude/skills/bikebook.md
+mkdir -p /path/to/target-repo/.claude/skills
+cp -R skills/claude/bikebook /path/to/target-repo/.claude/skills/
+```
+
+For a personal Claude Code install across all projects:
+
+```sh
+mkdir -p "$HOME/.claude/skills"
+cp -R skills/claude/bikebook "$HOME/.claude/skills/"
 ```
 
 Codex or ChatGPT:
