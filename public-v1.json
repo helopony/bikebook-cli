@@ -9,9 +9,1206 @@
       "url": "https://bikebook.co.uk/contact"
     },
     "version": "v1",
-    "x-bikebook-openapi-generated-at": "2026-06-05T15:16:04.799Z"
+    "x-bikebook-openapi-generated-at": "2026-07-03T12:20:42.515Z"
   },
   "paths": {
+    "/public/v1/activities": {
+      "get": {
+        "tags": [
+          "Activities"
+        ],
+        "summary": "List activities",
+        "description": "Search activities across allowed workshops. Requires at least one anchor filter: `job_id`, `invoice_id`, `work_line_id`, or `payment_id`. Scope depends on the anchor: job/work-line filters require `job.read`; invoice/payment filters require `invoice.read`. When multiple anchors are supplied, either matching scope is sufficient. Supports cursor pagination via `limit` and `cursor` (max 100 per page). Optional filters: `business_id`, `activity_type` (comma-separated), `created_from`, `created_to`, `sort`.",
+        "operationId": "ListActivity",
+        "parameters": [
+          {
+            "name": "business_id",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "job_id",
+            "in": "query",
+            "description": "Optional public job id (`job_...`) to scope chat messages to one job.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "invoice_id",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "work_line_id",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "payment_id",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "activity_type",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "created_from",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "created_to",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "Sort field. Allowed values: `created_at`. Default: `-created_at`. Prefix with `-` for descending order (for example `-created_at`).",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Maximum number of resources to return (1–100, default 10).",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "description": "Opaque page cursor from a previous list response's `pagination.next_cursor`.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Bearer Workshop API key. Example: Bearer bbk_live_...",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "X-Bikebook-Request-Id",
+            "in": "header",
+            "description": "Optional request id supplied by the client for support correlation.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Page of activities.",
+            "headers": {
+              "X-Bikebook-Request-Id": {
+                "description": "Echoed or generated request correlation id. Log this with support.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListResponseOfActivity"
+                },
+                "example": {
+                  "data": [
+                    {
+                      "object": "activity",
+                      "activity_type": "status_changed",
+                      "created_at": "2026-05-20T10:00:00Z",
+                      "actor_name": "Alex Rider",
+                      "actor_id": "bmem_01h2example",
+                      "actor_user_id": "user_01h2example",
+                      "job_id": "job_01h2example",
+                      "invoice_id": "inv_01h2example",
+                      "work_line_id": "wl_01h2xexample",
+                      "payment_id": "pay_01h2example",
+                      "change": {
+                        "from": "jst_01h2xexample",
+                        "to": "jst_01h2yexample"
+                      },
+                      "text": "Spoke to customer — ok to proceed",
+                      "payment": {
+                        "amount_capturable": "50.00",
+                        "amount_received": "50.00",
+                        "item_name": "Deposit"
+                      },
+                      "asset_name": "Trek Marlin 7",
+                      "id": "actv_01h2example"
+                    }
+                  ],
+                  "pagination": {
+                    "has_more": false,
+                    "next_cursor": "example"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request. Request body, query, route, or headers failed validation (`invalid_request`, `idempotency_key_required`).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication required. Missing or invalid API key (`authentication_required`).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Permission denied. API key lacks scope or cannot access this business (`permission_denied`).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Resource not found. Resource does not exist or is outside the caller's allowed scope (`resource_not_found`).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limited. Caller exceeded rate limits (`rate_limited`). Back off with exponential delay.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error. Unexpected server failure (`internal_error`). Retry later or contact support with the `request_id`.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          }
+        },
+        "x-bikebook-lifecycle-status": "current",
+        "x-bikebook-lifecycle-label": "Current"
+      }
+    },
+    "/public/v1/jobs/{job_id}/activities": {
+      "get": {
+        "tags": [
+          "Activities"
+        ],
+        "summary": "List job activities",
+        "description": "Lists activities for one job. Optional query filters mirror `GET /activities` except `job_id` comes from the route. Rejects a conflicting `job_id` query parameter. Requires `job.read`.",
+        "operationId": "ListForJob",
+        "parameters": [
+          {
+            "name": "job_id",
+            "in": "path",
+            "description": "Opaque public id of the job (`job_...`).",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "job_id",
+            "in": "query",
+            "description": "Optional public job id (`job_...`) to scope chat messages to one job.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "work_line_id",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "payment_id",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "activity_type",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "created_from",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "created_to",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "Sort field. Allowed values: `created_at`. Default: `-created_at`. Prefix with `-` for descending order (for example `-created_at`).",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Maximum number of resources to return (1–100, default 10).",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "description": "Opaque page cursor from a previous list response's `pagination.next_cursor`.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Bearer Workshop API key. Example: Bearer bbk_live_...",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "X-Bikebook-Request-Id",
+            "in": "header",
+            "description": "Optional request id supplied by the client for support correlation.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Page of activities for the job.",
+            "headers": {
+              "X-Bikebook-Request-Id": {
+                "description": "Echoed or generated request correlation id. Log this with support.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListResponseOfActivity"
+                },
+                "example": {
+                  "data": [
+                    {
+                      "object": "activity",
+                      "activity_type": "status_changed",
+                      "created_at": "2026-05-20T10:00:00Z",
+                      "actor_name": "Alex Rider",
+                      "actor_id": "bmem_01h2example",
+                      "actor_user_id": "user_01h2example",
+                      "job_id": "job_01h2example",
+                      "invoice_id": "inv_01h2example",
+                      "work_line_id": "wl_01h2xexample",
+                      "payment_id": "pay_01h2example",
+                      "change": {
+                        "from": "jst_01h2xexample",
+                        "to": "jst_01h2yexample"
+                      },
+                      "text": "Spoke to customer — ok to proceed",
+                      "payment": {
+                        "amount_capturable": "50.00",
+                        "amount_received": "50.00",
+                        "item_name": "Deposit"
+                      },
+                      "asset_name": "Trek Marlin 7",
+                      "id": "actv_01h2example"
+                    }
+                  ],
+                  "pagination": {
+                    "has_more": false,
+                    "next_cursor": "example"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request. Request body, query, route, or headers failed validation (`invalid_request`, `idempotency_key_required`).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication required. Missing or invalid API key (`authentication_required`).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Permission denied. API key lacks scope or cannot access this business (`permission_denied`).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Resource not found. Resource does not exist or is outside the caller's allowed scope (`resource_not_found`).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limited. Caller exceeded rate limits (`rate_limited`). Back off with exponential delay.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error. Unexpected server failure (`internal_error`). Retry later or contact support with the `request_id`.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          }
+        },
+        "x-required-scope": "job.read",
+        "x-bikebook-lifecycle-status": "current",
+        "x-bikebook-lifecycle-label": "Current"
+      }
+    },
+    "/public/v1/invoices/{invoice_id}/activities": {
+      "get": {
+        "tags": [
+          "Activities"
+        ],
+        "summary": "List invoice activities",
+        "description": "Lists activities for one invoice. Optional query filters mirror `GET /activities` except `invoice_id` comes from the route. Rejects a conflicting `invoice_id` query parameter. Requires `invoice.read`.",
+        "operationId": "ListForInvoice",
+        "parameters": [
+          {
+            "name": "invoice_id",
+            "in": "path",
+            "description": "Opaque public id of the invoice (`inv_...`). Workshop costs.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "invoice_id",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "work_line_id",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "payment_id",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "activity_type",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "created_from",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "created_to",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "Sort field. Allowed values: `created_at`. Default: `-created_at`. Prefix with `-` for descending order (for example `-created_at`).",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Maximum number of resources to return (1–100, default 10).",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "description": "Opaque page cursor from a previous list response's `pagination.next_cursor`.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Bearer Workshop API key. Example: Bearer bbk_live_...",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "X-Bikebook-Request-Id",
+            "in": "header",
+            "description": "Optional request id supplied by the client for support correlation.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Page of activities for the invoice.",
+            "headers": {
+              "X-Bikebook-Request-Id": {
+                "description": "Echoed or generated request correlation id. Log this with support.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListResponseOfActivity"
+                },
+                "example": {
+                  "data": [
+                    {
+                      "object": "activity",
+                      "activity_type": "status_changed",
+                      "created_at": "2026-05-20T10:00:00Z",
+                      "actor_name": "Alex Rider",
+                      "actor_id": "bmem_01h2example",
+                      "actor_user_id": "user_01h2example",
+                      "job_id": "job_01h2example",
+                      "invoice_id": "inv_01h2example",
+                      "work_line_id": "wl_01h2xexample",
+                      "payment_id": "pay_01h2example",
+                      "change": {
+                        "from": "jst_01h2xexample",
+                        "to": "jst_01h2yexample"
+                      },
+                      "text": "Spoke to customer — ok to proceed",
+                      "payment": {
+                        "amount_capturable": "50.00",
+                        "amount_received": "50.00",
+                        "item_name": "Deposit"
+                      },
+                      "asset_name": "Trek Marlin 7",
+                      "id": "actv_01h2example"
+                    }
+                  ],
+                  "pagination": {
+                    "has_more": false,
+                    "next_cursor": "example"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request. Request body, query, route, or headers failed validation (`invalid_request`, `idempotency_key_required`).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication required. Missing or invalid API key (`authentication_required`).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Permission denied. API key lacks scope or cannot access this business (`permission_denied`).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Resource not found. Resource does not exist or is outside the caller's allowed scope (`resource_not_found`).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limited. Caller exceeded rate limits (`rate_limited`). Back off with exponential delay.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error. Unexpected server failure (`internal_error`). Retry later or contact support with the `request_id`.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          }
+        },
+        "x-required-scope": "invoice.read",
+        "x-bikebook-lifecycle-status": "current",
+        "x-bikebook-lifecycle-label": "Current"
+      }
+    },
+    "/public/v1/activities/{activity_id}": {
+      "get": {
+        "tags": [
+          "Activities"
+        ],
+        "summary": "Get activity",
+        "description": "Returns one activity by `actv_...` id. Requires `job.read` when the row links to a job, `invoice.read` when it is invoice-only, or either scope when both are linked.",
+        "operationId": "GetActivity",
+        "parameters": [
+          {
+            "name": "activity_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Bearer Workshop API key. Example: Bearer bbk_live_...",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "X-Bikebook-Request-Id",
+            "in": "header",
+            "description": "Optional request id supplied by the client for support correlation.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Activity timeline entry.",
+            "headers": {
+              "X-Bikebook-Request-Id": {
+                "description": "Echoed or generated request correlation id. Log this with support.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Activity"
+                },
+                "example": {
+                  "object": "activity",
+                  "activity_type": "status_changed",
+                  "created_at": "2026-05-20T10:00:00Z",
+                  "actor_name": "Alex Rider",
+                  "actor_id": "bmem_01h2example",
+                  "actor_user_id": "user_01h2example",
+                  "job_id": "job_01h2example",
+                  "invoice_id": "inv_01h2example",
+                  "work_line_id": "wl_01h2xexample",
+                  "payment_id": "pay_01h2example",
+                  "change": {
+                    "from": "jst_01h2xexample",
+                    "to": "jst_01h2yexample"
+                  },
+                  "text": "Spoke to customer — ok to proceed",
+                  "payment": {
+                    "amount_capturable": "50.00",
+                    "amount_received": "50.00",
+                    "item_name": "Deposit"
+                  },
+                  "asset_name": "Trek Marlin 7",
+                  "id": "actv_01h2example"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request. Request body, query, route, or headers failed validation (`invalid_request`, `idempotency_key_required`).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication required. Missing or invalid API key (`authentication_required`).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Permission denied. API key lacks scope or cannot access this business (`permission_denied`).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Resource not found. Resource does not exist or is outside the caller's allowed scope (`resource_not_found`).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limited. Caller exceeded rate limits (`rate_limited`). Back off with exponential delay.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error. Unexpected server failure (`internal_error`). Retry later or contact support with the `request_id`.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          }
+        },
+        "x-bikebook-lifecycle-status": "current",
+        "x-bikebook-lifecycle-label": "Current"
+      }
+    },
+    "/public/v1/jobs/{job_id}/activities/{activity_id}": {
+      "get": {
+        "tags": [
+          "Activities"
+        ],
+        "summary": "Get job activity",
+        "description": "Returns one activity and validates that it belongs to the supplied job. Requires `job.read`.",
+        "operationId": "GetForJob",
+        "parameters": [
+          {
+            "name": "job_id",
+            "in": "path",
+            "description": "Opaque public id of the job (`job_...`).",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "activity_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Bearer Workshop API key. Example: Bearer bbk_live_...",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "X-Bikebook-Request-Id",
+            "in": "header",
+            "description": "Optional request id supplied by the client for support correlation.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Activity timeline entry for the job.",
+            "headers": {
+              "X-Bikebook-Request-Id": {
+                "description": "Echoed or generated request correlation id. Log this with support.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Activity"
+                },
+                "example": {
+                  "object": "activity",
+                  "activity_type": "status_changed",
+                  "created_at": "2026-05-20T10:00:00Z",
+                  "actor_name": "Alex Rider",
+                  "actor_id": "bmem_01h2example",
+                  "actor_user_id": "user_01h2example",
+                  "job_id": "job_01h2example",
+                  "invoice_id": "inv_01h2example",
+                  "work_line_id": "wl_01h2xexample",
+                  "payment_id": "pay_01h2example",
+                  "change": {
+                    "from": "jst_01h2xexample",
+                    "to": "jst_01h2yexample"
+                  },
+                  "text": "Spoke to customer — ok to proceed",
+                  "payment": {
+                    "amount_capturable": "50.00",
+                    "amount_received": "50.00",
+                    "item_name": "Deposit"
+                  },
+                  "asset_name": "Trek Marlin 7",
+                  "id": "actv_01h2example"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request. Request body, query, route, or headers failed validation (`invalid_request`, `idempotency_key_required`).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication required. Missing or invalid API key (`authentication_required`).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Permission denied. API key lacks scope or cannot access this business (`permission_denied`).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Resource not found. Resource does not exist or is outside the caller's allowed scope (`resource_not_found`).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limited. Caller exceeded rate limits (`rate_limited`). Back off with exponential delay.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error. Unexpected server failure (`internal_error`). Retry later or contact support with the `request_id`.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          }
+        },
+        "x-required-scope": "job.read",
+        "x-bikebook-lifecycle-status": "current",
+        "x-bikebook-lifecycle-label": "Current"
+      }
+    },
     "/public/v1/assets": {
       "get": {
         "tags": [
@@ -13774,7 +14971,7 @@
           "Jobs"
         ],
         "summary": "Assign work-line mechanic",
-        "description": "Assigns or clears the mechanic for one work line using the same assignment normalisation as Workshop. `assigned_mechanic_id` must be the Clerk user id of an enabled member of the job's workshop. Send `null`, an empty value, or `any` to clear the assignment. `notifications.mechanic` controls the mechanic assignment notification when the assignment changes.",
+        "description": "Assigns or clears the mechanic for one work line using the same assignment normalisation as Workshop. `assigned_mechanic_id` must be the public team member id (`bmem_...`) of an enabled member of the job's workshop. Send `null`, an empty value, or `any` to clear the assignment. `notifications.mechanic` controls the mechanic assignment notification when the assignment changes.",
         "operationId": "AssignWorkLineMechanic",
         "parameters": [
           {
@@ -14067,7 +15264,7 @@
           "Jobs"
         ],
         "summary": "Change work-line status",
-        "description": "Applies a workflow status to one work line, or to every work line when `sync_all_work_lines` is true. Use `GET /public/v1/businesses/{business_id}/job_statuses` to find valid `status_id` values. `notifications.customer` only controls the bike-ready customer email. Workshop attempts that email when the selected status has type `bike_ready`, `notifications.customer` is not `skip`, and workshop/customer settings allow it. Other status changes create internal chat/audit activity and the `job.updated` webhook, but do not email the customer.",
+        "description": "Applies a workflow status to one work line, or to every work line when `sync_all_work_lines` is true. Use `GET /public/v1/businesses/{business_id}/job_statuses` to find valid `status_id` values. `notifications.customer` only controls the bike-ready customer email. Workshop attempts that email when the selected status has type `bike_ready`, `notifications.customer` is not `skip`, and workshop/customer settings allow it. Other status changes create internal chat/audit activity and the `work_line.status_changed` webhook, but do not email the customer.",
         "operationId": "ChangeWorkLineStatus",
         "parameters": [
           {
@@ -14207,16 +15404,14 @@
                     "updated_at": "2026-05-20T10:00:00Z"
                   },
                   "effects": {
-                    "emails_sent": [
-                      "mechanic_collection_details_changed"
-                    ],
+                    "emails_sent": [],
                     "emails_skipped": [],
                     "webhooks_enqueued": [
-                      "job.updated"
+                      "work_line.status_changed"
                     ],
                     "sync_enqueued": false,
                     "audit_logged": true,
-                    "notifications_created": false,
+                    "notifications_created": true,
                     "warnings": []
                   }
                 }
@@ -15471,7 +16666,7 @@
           "Payments"
         ],
         "summary": "List payments",
-        "description": "Lists payments recorded against invoices for businesses allowed by the API key. Supports cursor pagination via `limit` and `cursor`. Optional filters: `business_id`, `invoice_id`. Requires `invoice.read`.",
+        "description": "Lists payments recorded against invoices for businesses allowed by the API key. Supports cursor pagination via `limit` and `cursor`. Optional filters: `business_id`, `invoice_id`, `charged_on_from`, `charged_on_to`, `amount_min`, and `amount_max`. Requires `invoice.read`.",
         "operationId": "ListPayment",
         "parameters": [
           {
@@ -15483,6 +16678,34 @@
           },
           {
             "name": "invoice_id",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "charged_on_from",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "charged_on_to",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "amount_min",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "amount_max",
             "in": "query",
             "schema": {
               "type": "string"
@@ -15552,11 +16775,13 @@
                       "object": "payment",
                       "invoice_id": "inv_01h2example",
                       "amount": 1,
-                      "payment_method": "b_a_c_s",
+                      "payment_method": "bacs",
                       "payment_type": "invoice_payment",
                       "origin": "square",
+                      "processor_reference": "example",
+                      "processor_reference_type": "example",
                       "charged_on": "2026-05-20T10:00:00Z",
-                      "id": "id_01h2example"
+                      "id": "pay_01h2example"
                     }
                   ],
                   "pagination": {
@@ -15735,11 +16960,13 @@
                   "object": "payment",
                   "invoice_id": "inv_01h2example",
                   "amount": 1,
-                  "payment_method": "b_a_c_s",
+                  "payment_method": "bacs",
                   "payment_type": "invoice_payment",
                   "origin": "square",
+                  "processor_reference": "example",
+                  "processor_reference_type": "example",
                   "charged_on": "2026-05-20T10:00:00Z",
-                  "id": "id_01h2example"
+                  "id": "pay_01h2example"
                 }
               }
             }
@@ -17146,6 +18373,402 @@
         "x-bikebook-lifecycle-label": "Current"
       }
     },
+    "/public/v1/team_members": {
+      "get": {
+        "tags": [
+          "Team members"
+        ],
+        "summary": "List team members",
+        "description": "Lists team members for businesses allowed by the API key. Optional filters: `business_id`, `is_mechanic`, and `enabled`. Supports cursor pagination via `limit` and `cursor`. Requires `job.read`.",
+        "operationId": "ListTeamMember",
+        "parameters": [
+          {
+            "name": "business_id",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "is_mechanic",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "enabled",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Maximum number of resources to return (1–100, default 10).",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "description": "Opaque page cursor from a previous list response's `pagination.next_cursor`.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Bearer Workshop API key. Example: Bearer bbk_live_...",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "X-Bikebook-Request-Id",
+            "in": "header",
+            "description": "Optional request id supplied by the client for support correlation.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Page of workshop team members.",
+            "headers": {
+              "X-Bikebook-Request-Id": {
+                "description": "Echoed or generated request correlation id. Log this with support.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListResponseOfTeamMember"
+                },
+                "example": {
+                  "data": [
+                    {
+                      "object": "team_member",
+                      "business_id": "org_2abc8example",
+                      "user_id": "req_01h2example",
+                      "display_name": "example",
+                      "enabled": false,
+                      "is_mechanic": false,
+                      "role_key": "example",
+                      "role_name": "example",
+                      "image_url": "example",
+                      "id": "req_01h2example"
+                    }
+                  ],
+                  "pagination": {
+                    "has_more": false,
+                    "next_cursor": "example"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request. Request body, query, route, or headers failed validation (`invalid_request`, `idempotency_key_required`).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication required. Missing or invalid API key (`authentication_required`).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Permission denied. API key lacks scope or cannot access this business (`permission_denied`).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Resource not found. Resource does not exist or is outside the caller's allowed scope (`resource_not_found`).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limited. Caller exceeded rate limits (`rate_limited`). Back off with exponential delay.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error. Unexpected server failure (`internal_error`). Retry later or contact support with the `request_id`.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          }
+        },
+        "x-required-scope": "job.read",
+        "x-bikebook-lifecycle-status": "current",
+        "x-bikebook-lifecycle-label": "Current"
+      }
+    },
+    "/public/v1/team_members/{team_member_id}": {
+      "get": {
+        "tags": [
+          "Team members"
+        ],
+        "summary": "Get team member",
+        "description": "Returns one workshop team member allowed by the API key. Requires `job.read`.",
+        "operationId": "GetTeamMember",
+        "parameters": [
+          {
+            "name": "team_member_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Bearer Workshop API key. Example: Bearer bbk_live_...",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "X-Bikebook-Request-Id",
+            "in": "header",
+            "description": "Optional request id supplied by the client for support correlation.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Workshop team member.",
+            "headers": {
+              "X-Bikebook-Request-Id": {
+                "description": "Echoed or generated request correlation id. Log this with support.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TeamMember"
+                },
+                "example": {
+                  "object": "team_member",
+                  "business_id": "org_2abc8example",
+                  "user_id": "req_01h2example",
+                  "display_name": "example",
+                  "enabled": false,
+                  "is_mechanic": false,
+                  "role_key": "example",
+                  "role_name": "example",
+                  "image_url": "example",
+                  "id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request. Request body, query, route, or headers failed validation (`invalid_request`, `idempotency_key_required`).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication required. Missing or invalid API key (`authentication_required`).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Permission denied. API key lacks scope or cannot access this business (`permission_denied`).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Resource not found. Resource does not exist or is outside the caller's allowed scope (`resource_not_found`).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limited. Caller exceeded rate limits (`rate_limited`). Back off with exponential delay.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error. Unexpected server failure (`internal_error`). Retry later or contact support with the `request_id`.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          }
+        },
+        "x-required-scope": "job.read",
+        "x-bikebook-lifecycle-status": "current",
+        "x-bikebook-lifecycle-label": "Current"
+      }
+    },
     "/public/v1/webhook_endpoints/{endpoint_id}/deliveries": {
       "get": {
         "tags": [
@@ -18450,6 +20073,7 @@
                   "event_types": [
                     "job.created",
                     "job.updated",
+                    "work_line.status_changed",
                     "invoice.status_changed"
                   ],
                   "signing_secret_prefix": "whsec_abc123",
@@ -19203,6 +20827,263 @@
   },
   "components": {
     "schemas": {
+      "ListResponseOfActivity": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Activity"
+            },
+            "description": "Page of public resources returned by the list endpoint.",
+            "nullable": true
+          },
+          "pagination": {
+            "$ref": "#/components/schemas/Pagination"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Standard public API list response with cursor pagination metadata."
+      },
+      "Activity": {
+        "type": "object",
+        "properties": {
+          "object": {
+            "enum": [
+              "activity"
+            ],
+            "type": "string",
+            "description": "Resource object type. Always activity.",
+            "nullable": true,
+            "example": "activity"
+          },
+          "activity_type": {
+            "enum": [
+              "accepted_status_changed",
+              "collection_area_changed",
+              "collection_bring_in_changed",
+              "collection_location_changed",
+              "comment",
+              "customer_booked_customer_collection",
+              "customer_booked_mechanic_drop_off",
+              "customer_collection_date_changed",
+              "customer_drop_off_date_changed",
+              "customer_rescheduled_collection",
+              "customer_rescheduled_drop_off",
+              "customer_rescheduled_on_site_service",
+              "email_sent_to_customer",
+              "end_date_changed",
+              "general",
+              "invoice_created",
+              "invoice_sent_to_customer",
+              "invoice_status_updated",
+              "job_authorisation_status_changed",
+              "mechanic_collection_date_changed",
+              "mechanic_collection_window_changed",
+              "mechanic_drop_off_date_changed",
+              "mechanic_drop_off_window_changed",
+              "payment_cancelled",
+              "payment_captured",
+              "payment_created",
+              "services_changed",
+              "start_date_changed",
+              "status_changed"
+            ],
+            "type": "string",
+            "description": "Activity type in snake_case, such as status_changed or comment.",
+            "nullable": true,
+            "example": "status_changed"
+          },
+          "created_at": {
+            "type": "string",
+            "description": "UTC timestamp when the activity was recorded.",
+            "format": "date-time"
+          },
+          "actor_name": {
+            "type": "string",
+            "description": "Display name of the staff member who performed the action, when known.",
+            "nullable": true,
+            "example": "Alex Rider"
+          },
+          "actor_id": {
+            "type": "string",
+            "description": "Public team member id for the staff member who performed the action, when known.",
+            "nullable": true,
+            "example": "bmem_01h2example"
+          },
+          "actor_user_id": {
+            "type": "string",
+            "description": "Stable user id for the staff member who performed the action, when known. Matches `team_members.user_id`.",
+            "nullable": true,
+            "example": "user_01h2example"
+          },
+          "job_id": {
+            "type": "string",
+            "description": "Public job id when the activity relates to a job.",
+            "nullable": true,
+            "example": "job_01h2example"
+          },
+          "invoice_id": {
+            "type": "string",
+            "description": "Public invoice id when the activity relates to an invoice.",
+            "nullable": true,
+            "example": "inv_01h2example"
+          },
+          "work_line_id": {
+            "type": "string",
+            "description": "Public work line id when the activity relates to one work line.",
+            "nullable": true,
+            "example": "wl_01h2xexample"
+          },
+          "payment_id": {
+            "type": "string",
+            "description": "Public payment id when the activity relates to a payment.",
+            "nullable": true,
+            "example": "pay_01h2example"
+          },
+          "change": {
+            "$ref": "#/components/schemas/ActivityChange"
+          },
+          "text": {
+            "type": "string",
+            "description": "Text content for comments, general notes, and opaque template keys.",
+            "nullable": true,
+            "example": "Spoke to customer — ok to proceed"
+          },
+          "payment": {
+            "$ref": "#/components/schemas/ActivityPaymentDetails"
+          },
+          "asset_name": {
+            "type": "string",
+            "description": "Asset name for work-line context, such as services_changed events.",
+            "nullable": true,
+            "example": "Trek Marlin 7"
+          },
+          "id": {
+            "type": "string",
+            "description": "Opaque resource-prefixed public identifier, such as job_... or cus_.... Internal database ids must never be assigned here.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Public representation of a workshop activity (audit trail entry)."
+      },
+      "ActivityChange": {
+        "type": "object",
+        "properties": {
+          "from": {
+            "type": "string",
+            "description": "Previous value before the change, when known.",
+            "nullable": true,
+            "example": "jst_01h2xexample"
+          },
+          "to": {
+            "type": "string",
+            "description": "New value after the change, when known.",
+            "nullable": true,
+            "example": "jst_01h2yexample"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Before/after values for activity types that represent a transition."
+      },
+      "ActivityPaymentDetails": {
+        "type": "object",
+        "properties": {
+          "amount_capturable": {
+            "type": "string",
+            "description": "Amount that can be captured for the payment.",
+            "nullable": true,
+            "example": "50.00"
+          },
+          "amount_received": {
+            "type": "string",
+            "description": "Amount received for the payment.",
+            "nullable": true,
+            "example": "50.00"
+          },
+          "item_name": {
+            "type": "string",
+            "description": "Display name of the payment item, such as a deposit label.",
+            "nullable": true,
+            "example": "Deposit"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Payment amounts and label for payment-related activities."
+      },
+      "Pagination": {
+        "type": "object",
+        "properties": {
+          "has_more": {
+            "type": "boolean",
+            "description": "True when another page is available after this response."
+          },
+          "next_cursor": {
+            "type": "string",
+            "description": "Opaque cursor to pass as the next request's cursor parameter. Null when there are no more pages.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Cursor pagination metadata used by public list endpoints."
+      },
+      "ErrorResponse": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "$ref": "#/components/schemas/Error"
+          },
+          "request_id": {
+            "type": "string",
+            "description": "Request correlation id. Matches X-Bikebook-Request-Id when the caller supplies one.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Standard error envelope returned by public API endpoints."
+      },
+      "Error": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "enum": [
+              "invalid_request",
+              "authentication_required",
+              "permission_denied",
+              "resource_not_found",
+              "idempotency_key_required",
+              "idempotency_conflict",
+              "rate_limited",
+              "internal_error",
+              "invalid_status_transition",
+              "notification_not_allowed",
+              "notification_disabled",
+              "sync_unavailable",
+              "resource_locked",
+              "invoice_already_paid",
+              "invoice_not_payable",
+              "cannot_delete_resource_with_open_jobs",
+              "invalid_workflow_action"
+            ],
+            "type": "string",
+            "description": "Machine-readable error code.",
+            "nullable": true
+          },
+          "message": {
+            "type": "string",
+            "description": "Human-readable explanation of the error.",
+            "nullable": true
+          },
+          "parameter": {
+            "type": "string",
+            "description": "Request parameter related to the error, when the failure can be tied to one field.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Public API error details. Codes are stable machine-readable values."
+      },
       "ListResponseOfAsset": {
         "type": "object",
         "properties": {
@@ -19299,78 +21180,6 @@
         },
         "additionalProperties": false,
         "description": "Public customer bike asset read model. Assets are bikes today; `bike_type` classifies the bike category."
-      },
-      "Pagination": {
-        "type": "object",
-        "properties": {
-          "has_more": {
-            "type": "boolean",
-            "description": "True when another page is available after this response."
-          },
-          "next_cursor": {
-            "type": "string",
-            "description": "Opaque cursor to pass as the next request's cursor parameter. Null when there are no more pages.",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false,
-        "description": "Cursor pagination metadata used by public list endpoints."
-      },
-      "ErrorResponse": {
-        "type": "object",
-        "properties": {
-          "error": {
-            "$ref": "#/components/schemas/Error"
-          },
-          "request_id": {
-            "type": "string",
-            "description": "Request correlation id. Matches X-Bikebook-Request-Id when the caller supplies one.",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false,
-        "description": "Standard error envelope returned by public API endpoints."
-      },
-      "Error": {
-        "type": "object",
-        "properties": {
-          "code": {
-            "enum": [
-              "invalid_request",
-              "authentication_required",
-              "permission_denied",
-              "resource_not_found",
-              "idempotency_key_required",
-              "idempotency_conflict",
-              "rate_limited",
-              "internal_error",
-              "invalid_status_transition",
-              "notification_not_allowed",
-              "notification_disabled",
-              "sync_unavailable",
-              "resource_locked",
-              "invoice_already_paid",
-              "invoice_not_payable",
-              "cannot_delete_resource_with_open_jobs",
-              "invalid_workflow_action"
-            ],
-            "type": "string",
-            "description": "Machine-readable error code.",
-            "nullable": true
-          },
-          "message": {
-            "type": "string",
-            "description": "Human-readable explanation of the error.",
-            "nullable": true
-          },
-          "parameter": {
-            "type": "string",
-            "description": "Request parameter related to the error, when the failure can be tied to one field.",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false,
-        "description": "Public API error details. Codes are stable machine-readable values."
       },
       "AssetCreateRequest": {
         "required": [
@@ -22425,6 +24234,18 @@
             "format": "double",
             "nullable": true
           },
+          "unit_price_excluding_tax": {
+            "type": "number",
+            "description": "Discount-adjusted unit price excluding tax, when quantity is available.",
+            "format": "double",
+            "nullable": true
+          },
+          "unit_price_including_tax": {
+            "type": "number",
+            "description": "Discount-adjusted unit price including tax, when quantity is available.",
+            "format": "double",
+            "nullable": true
+          },
           "quantity": {
             "type": "number",
             "description": "Quantity billed on the item.",
@@ -22434,6 +24255,30 @@
           "total": {
             "type": "number",
             "description": "Row total (unit_price × quantity) in the invoice currency.",
+            "format": "double",
+            "nullable": true
+          },
+          "tax_rate_percent": {
+            "type": "number",
+            "description": "Effective tax rate percentage for this line, when the business is tax registered.",
+            "format": "double",
+            "nullable": true
+          },
+          "tax_amount": {
+            "type": "number",
+            "description": "Tax amount allocated to this line after invoice-level discounts.",
+            "format": "double",
+            "nullable": true
+          },
+          "total_excluding_tax": {
+            "type": "number",
+            "description": "Line total excluding tax after invoice-level discount allocation.",
+            "format": "double",
+            "nullable": true
+          },
+          "total_including_tax": {
+            "type": "number",
+            "description": "Line total including tax after invoice-level discount allocation.",
             "format": "double",
             "nullable": true
           },
@@ -22655,6 +24500,12 @@
             "description": "Invoice total after discounts, in currency units.",
             "format": "double"
           },
+          "tax": {
+            "$ref": "#/components/schemas/InvoiceTaxBreakdown"
+          },
+          "revenue_breakdown": {
+            "$ref": "#/components/schemas/InvoiceRevenueBreakdown"
+          },
           "outstanding_amount": {
             "type": "number",
             "description": "Amount still outstanding on the invoice.",
@@ -22730,6 +24581,71 @@
         },
         "additionalProperties": false,
         "description": "Public invoice for a job or standalone sale (Workshop costs)."
+      },
+      "InvoiceTaxBreakdown": {
+        "type": "object",
+        "properties": {
+          "label": {
+            "type": "string",
+            "description": "Tax label configured by the business, for example VAT.",
+            "nullable": true
+          },
+          "rate_percent": {
+            "type": "number",
+            "description": "Effective tax rate percentage, when the business is tax registered.",
+            "format": "double",
+            "nullable": true
+          },
+          "inclusivity": {
+            "type": "string",
+            "description": "Whether invoice prices are treated as inclusive or exclusive of tax.",
+            "nullable": true
+          },
+          "amount": {
+            "type": "number",
+            "description": "Tax amount included in the invoice total.",
+            "format": "double"
+          },
+          "total_excluding_tax": {
+            "type": "number",
+            "description": "Invoice total excluding tax.",
+            "format": "double"
+          },
+          "total_including_tax": {
+            "type": "number",
+            "description": "Invoice total including tax.",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Structured tax totals for a public invoice."
+      },
+      "InvoiceRevenueBreakdown": {
+        "type": "object",
+        "properties": {
+          "service": {
+            "type": "number",
+            "description": "Revenue from catalogue service line items.",
+            "format": "double"
+          },
+          "parts": {
+            "type": "number",
+            "description": "Revenue from approved part line items.",
+            "format": "double"
+          },
+          "free_text": {
+            "type": "number",
+            "description": "Revenue from custom/free-text line items.",
+            "format": "double"
+          },
+          "collection": {
+            "type": "number",
+            "description": "Collection or on-site service revenue from the job collection area.",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Revenue category totals for a public invoice."
       },
       "InvoiceUpdateRequest": {
         "type": "object",
@@ -23406,6 +25322,11 @@
             "description": "Reason the job was rejected, when `accepted_status` is `rejected`.",
             "nullable": true
           },
+          "notes": {
+            "type": "string",
+            "description": "Internal job notes visible to workshop staff.",
+            "nullable": true
+          },
           "check_in_notes": {
             "type": "string",
             "description": "Check-in notes captured when the item is received for service.",
@@ -23445,6 +25366,12 @@
           "invoice_last_sent_at": {
             "type": "string",
             "description": "UTC timestamp when the job invoice was last sent to the customer.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "required_by_date": {
+            "type": "string",
+            "description": "Date/time the job is required by, when set.",
             "format": "date-time",
             "nullable": true
           },
@@ -24075,7 +26002,12 @@
           },
           "assigned_mechanic_id": {
             "type": "string",
-            "description": "Clerk user id assigned to this work line, when a mechanic is assigned.",
+            "description": "Public team member id (`bmem_...`) assigned to this work line, when a mechanic is assigned.",
+            "nullable": true
+          },
+          "assigned_mechanic_name": {
+            "type": "string",
+            "description": "Display name of the assigned mechanic, when known.",
             "nullable": true
           },
           "total_cost": {
@@ -24324,7 +26256,7 @@
           },
           "assigned_mechanic_id": {
             "type": "string",
-            "description": "Optional Clerk user id for assigning this work line to a workshop member.",
+            "description": "Optional public team member id (`bmem_...`) for assigning this work line to a mechanic.",
             "nullable": true
           },
           "scheduled_date": {
@@ -24937,7 +26869,7 @@
         "properties": {
           "assigned_mechanic_id": {
             "type": "string",
-            "description": "Clerk user id for the business member to assign. Send `null`, an empty value, or `any` to clear the assignment.",
+            "description": "Public team member id (`bmem_...`) for the mechanic to assign. Send `null`, an empty value, or `any` to clear the assignment.",
             "nullable": true
           },
           "notifications": {
@@ -25139,7 +27071,7 @@
           "payment_method": {
             "minLength": 1,
             "enum": [
-              "b_a_c_s",
+              "bacs",
               "card",
               "cash",
               "layaway",
@@ -25200,7 +27132,7 @@
           },
           "payment_method": {
             "enum": [
-              "b_a_c_s",
+              "bacs",
               "card",
               "cash",
               "layaway",
@@ -25230,6 +27162,16 @@
             ],
             "type": "string",
             "description": "Where the payment was processed. Allowed values: `workshop`, `stripe`, `sum_up`, `square`, or `zettle`.",
+            "nullable": true
+          },
+          "processor_reference": {
+            "type": "string",
+            "description": "External processor reference id for reconciliation, when available.",
+            "nullable": true
+          },
+          "processor_reference_type": {
+            "type": "string",
+            "description": "Type of external processor reference, for example stripe_payment_intent_id or square_payment_id.",
             "nullable": true
           },
           "charged_on": {
@@ -25281,7 +27223,7 @@
           "payment_method": {
             "minLength": 1,
             "enum": [
-              "b_a_c_s",
+              "bacs",
               "card",
               "cash",
               "layaway",
@@ -25381,6 +27323,83 @@
         },
         "additionalProperties": false,
         "description": "Standard public API list response with cursor pagination metadata."
+      },
+      "ListResponseOfTeamMember": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TeamMember"
+            },
+            "description": "Page of public resources returned by the list endpoint.",
+            "nullable": true
+          },
+          "pagination": {
+            "$ref": "#/components/schemas/Pagination"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Standard public API list response with cursor pagination metadata."
+      },
+      "TeamMember": {
+        "type": "object",
+        "properties": {
+          "object": {
+            "enum": [
+              "team_member"
+            ],
+            "type": "string",
+            "description": "Resource object type. Always team_member.",
+            "nullable": true,
+            "example": "team_member"
+          },
+          "business_id": {
+            "type": "string",
+            "description": "Public business id for the workshop this membership belongs to.",
+            "nullable": true
+          },
+          "user_id": {
+            "type": "string",
+            "description": "Stable BikeBook user id that can be used to group the same person across multiple businesses.",
+            "nullable": true
+          },
+          "display_name": {
+            "type": "string",
+            "description": "Display name for the team member when known.",
+            "nullable": true
+          },
+          "enabled": {
+            "type": "boolean",
+            "description": "True when this member is enabled for the business."
+          },
+          "is_mechanic": {
+            "type": "boolean",
+            "description": "True when this member can be assigned as a mechanic."
+          },
+          "role_key": {
+            "type": "string",
+            "description": "Public role key for the member, when known.",
+            "nullable": true
+          },
+          "role_name": {
+            "type": "string",
+            "description": "Public role display name for the member, when known.",
+            "nullable": true
+          },
+          "image_url": {
+            "type": "string",
+            "description": "Profile image URL for the team member when known.",
+            "nullable": true
+          },
+          "id": {
+            "type": "string",
+            "description": "Opaque resource-prefixed public identifier, such as job_... or cus_.... Internal database ids must never be assigned here.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Public representation of a workshop team member."
       },
       "ListResponseOfWebhookDelivery": {
         "type": "object",
@@ -25596,7 +27615,8 @@
                 "message.sent",
                 "part_authorisation.created",
                 "part_authorisation.deleted",
-                "part_authorisation.updated"
+                "part_authorisation.updated",
+                "work_line.status_changed"
               ],
               "type": "string"
             },
@@ -25696,7 +27716,8 @@
                 "message.sent",
                 "part_authorisation.created",
                 "part_authorisation.deleted",
-                "part_authorisation.updated"
+                "part_authorisation.updated",
+                "work_line.status_changed"
               ],
               "type": "string"
             },
@@ -25778,7 +27799,8 @@
                 "message.sent",
                 "part_authorisation.created",
                 "part_authorisation.deleted",
-                "part_authorisation.updated"
+                "part_authorisation.updated",
+                "work_line.status_changed"
               ],
               "type": "string"
             },
@@ -25875,7 +27897,8 @@
                 "message.sent",
                 "part_authorisation.created",
                 "part_authorisation.deleted",
-                "part_authorisation.updated"
+                "part_authorisation.updated",
+                "work_line.status_changed"
               ],
               "type": "string"
             },
@@ -25939,7 +27962,8 @@
               "job",
               "job_report",
               "message",
-              "part_authorisation"
+              "part_authorisation",
+              "work_line"
             ],
             "type": "string",
             "description": "Primary resource object emitted for this event type.",
@@ -25973,6 +27997,9 @@
     }
   ],
   "tags": [
+    {
+      "name": "Activities"
+    },
     {
       "name": "Assets",
       "description": "Customer-owned bikes booked on jobs. Public assets are bikes today; use bike_type for category."
@@ -26023,6 +28050,9 @@
     {
       "name": "Stock",
       "description": "Stock variations, SKUs, and inventory lookup."
+    },
+    {
+      "name": "Team members"
     },
     {
       "name": "Webhook deliveries",

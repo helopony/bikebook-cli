@@ -34,6 +34,120 @@ func (e AcceptedStatusChangeNotificationsCustomer) Valid() bool {
 	}
 }
 
+// Defines values for ActivityActivityType.
+const (
+	ActivityActivityTypeAcceptedStatusChanged            ActivityActivityType = "accepted_status_changed"
+	ActivityActivityTypeCollectionAreaChanged            ActivityActivityType = "collection_area_changed"
+	ActivityActivityTypeCollectionBringInChanged         ActivityActivityType = "collection_bring_in_changed"
+	ActivityActivityTypeCollectionLocationChanged        ActivityActivityType = "collection_location_changed"
+	ActivityActivityTypeComment                          ActivityActivityType = "comment"
+	ActivityActivityTypeCustomerBookedCustomerCollection ActivityActivityType = "customer_booked_customer_collection"
+	ActivityActivityTypeCustomerBookedMechanicDropOff    ActivityActivityType = "customer_booked_mechanic_drop_off"
+	ActivityActivityTypeCustomerCollectionDateChanged    ActivityActivityType = "customer_collection_date_changed"
+	ActivityActivityTypeCustomerDropOffDateChanged       ActivityActivityType = "customer_drop_off_date_changed"
+	ActivityActivityTypeCustomerRescheduledCollection    ActivityActivityType = "customer_rescheduled_collection"
+	ActivityActivityTypeCustomerRescheduledDropOff       ActivityActivityType = "customer_rescheduled_drop_off"
+	ActivityActivityTypeCustomerRescheduledOnSiteService ActivityActivityType = "customer_rescheduled_on_site_service"
+	ActivityActivityTypeEmailSentToCustomer              ActivityActivityType = "email_sent_to_customer"
+	ActivityActivityTypeEndDateChanged                   ActivityActivityType = "end_date_changed"
+	ActivityActivityTypeGeneral                          ActivityActivityType = "general"
+	ActivityActivityTypeInvoiceCreated                   ActivityActivityType = "invoice_created"
+	ActivityActivityTypeInvoiceSentToCustomer            ActivityActivityType = "invoice_sent_to_customer"
+	ActivityActivityTypeInvoiceStatusUpdated             ActivityActivityType = "invoice_status_updated"
+	ActivityActivityTypeJobAuthorisationStatusChanged    ActivityActivityType = "job_authorisation_status_changed"
+	ActivityActivityTypeMechanicCollectionDateChanged    ActivityActivityType = "mechanic_collection_date_changed"
+	ActivityActivityTypeMechanicCollectionWindowChanged  ActivityActivityType = "mechanic_collection_window_changed"
+	ActivityActivityTypeMechanicDropOffDateChanged       ActivityActivityType = "mechanic_drop_off_date_changed"
+	ActivityActivityTypeMechanicDropOffWindowChanged     ActivityActivityType = "mechanic_drop_off_window_changed"
+	ActivityActivityTypePaymentCancelled                 ActivityActivityType = "payment_cancelled"
+	ActivityActivityTypePaymentCaptured                  ActivityActivityType = "payment_captured"
+	ActivityActivityTypePaymentCreated                   ActivityActivityType = "payment_created"
+	ActivityActivityTypeServicesChanged                  ActivityActivityType = "services_changed"
+	ActivityActivityTypeStartDateChanged                 ActivityActivityType = "start_date_changed"
+	ActivityActivityTypeStatusChanged                    ActivityActivityType = "status_changed"
+)
+
+// Valid indicates whether the value is a known member of the ActivityActivityType enum.
+func (e ActivityActivityType) Valid() bool {
+	switch e {
+	case ActivityActivityTypeAcceptedStatusChanged:
+		return true
+	case ActivityActivityTypeCollectionAreaChanged:
+		return true
+	case ActivityActivityTypeCollectionBringInChanged:
+		return true
+	case ActivityActivityTypeCollectionLocationChanged:
+		return true
+	case ActivityActivityTypeComment:
+		return true
+	case ActivityActivityTypeCustomerBookedCustomerCollection:
+		return true
+	case ActivityActivityTypeCustomerBookedMechanicDropOff:
+		return true
+	case ActivityActivityTypeCustomerCollectionDateChanged:
+		return true
+	case ActivityActivityTypeCustomerDropOffDateChanged:
+		return true
+	case ActivityActivityTypeCustomerRescheduledCollection:
+		return true
+	case ActivityActivityTypeCustomerRescheduledDropOff:
+		return true
+	case ActivityActivityTypeCustomerRescheduledOnSiteService:
+		return true
+	case ActivityActivityTypeEmailSentToCustomer:
+		return true
+	case ActivityActivityTypeEndDateChanged:
+		return true
+	case ActivityActivityTypeGeneral:
+		return true
+	case ActivityActivityTypeInvoiceCreated:
+		return true
+	case ActivityActivityTypeInvoiceSentToCustomer:
+		return true
+	case ActivityActivityTypeInvoiceStatusUpdated:
+		return true
+	case ActivityActivityTypeJobAuthorisationStatusChanged:
+		return true
+	case ActivityActivityTypeMechanicCollectionDateChanged:
+		return true
+	case ActivityActivityTypeMechanicCollectionWindowChanged:
+		return true
+	case ActivityActivityTypeMechanicDropOffDateChanged:
+		return true
+	case ActivityActivityTypeMechanicDropOffWindowChanged:
+		return true
+	case ActivityActivityTypePaymentCancelled:
+		return true
+	case ActivityActivityTypePaymentCaptured:
+		return true
+	case ActivityActivityTypePaymentCreated:
+		return true
+	case ActivityActivityTypeServicesChanged:
+		return true
+	case ActivityActivityTypeStartDateChanged:
+		return true
+	case ActivityActivityTypeStatusChanged:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for ActivityObject.
+const (
+	ActivityObjectActivity ActivityObject = "activity"
+)
+
+// Valid indicates whether the value is a known member of the ActivityObject enum.
+func (e ActivityObject) Valid() bool {
+	switch e {
+	case ActivityObjectActivity:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for AssetBikeType.
 const (
 	AssetBikeTypeBmx           AssetBikeType = "bmx"
@@ -3336,7 +3450,7 @@ func (e InvoiceItemDeletedObject) Valid() bool {
 
 // Defines values for InvoicePaymentCreateRequestPaymentMethod.
 const (
-	InvoicePaymentCreateRequestPaymentMethodBACS    InvoicePaymentCreateRequestPaymentMethod = "b_a_c_s"
+	InvoicePaymentCreateRequestPaymentMethodBacs    InvoicePaymentCreateRequestPaymentMethod = "bacs"
 	InvoicePaymentCreateRequestPaymentMethodCard    InvoicePaymentCreateRequestPaymentMethod = "card"
 	InvoicePaymentCreateRequestPaymentMethodCash    InvoicePaymentCreateRequestPaymentMethod = "cash"
 	InvoicePaymentCreateRequestPaymentMethodLayaway InvoicePaymentCreateRequestPaymentMethod = "layaway"
@@ -3346,7 +3460,7 @@ const (
 // Valid indicates whether the value is a known member of the InvoicePaymentCreateRequestPaymentMethod enum.
 func (e InvoicePaymentCreateRequestPaymentMethod) Valid() bool {
 	switch e {
-	case InvoicePaymentCreateRequestPaymentMethodBACS:
+	case InvoicePaymentCreateRequestPaymentMethodBacs:
 		return true
 	case InvoicePaymentCreateRequestPaymentMethodCard:
 		return true
@@ -5670,7 +5784,7 @@ func (e PaymentOrigin) Valid() bool {
 
 // Defines values for PaymentPaymentMethod.
 const (
-	PaymentPaymentMethodBACS    PaymentPaymentMethod = "b_a_c_s"
+	PaymentPaymentMethodBacs    PaymentPaymentMethod = "bacs"
 	PaymentPaymentMethodCard    PaymentPaymentMethod = "card"
 	PaymentPaymentMethodCash    PaymentPaymentMethod = "cash"
 	PaymentPaymentMethodLayaway PaymentPaymentMethod = "layaway"
@@ -5680,7 +5794,7 @@ const (
 // Valid indicates whether the value is a known member of the PaymentPaymentMethod enum.
 func (e PaymentPaymentMethod) Valid() bool {
 	switch e {
-	case PaymentPaymentMethodBACS:
+	case PaymentPaymentMethodBacs:
 		return true
 	case PaymentPaymentMethodCard:
 		return true
@@ -5718,7 +5832,7 @@ func (e PaymentPaymentType) Valid() bool {
 
 // Defines values for PaymentRefundCreateRequestPaymentMethod.
 const (
-	PaymentRefundCreateRequestPaymentMethodBACS    PaymentRefundCreateRequestPaymentMethod = "b_a_c_s"
+	PaymentRefundCreateRequestPaymentMethodBacs    PaymentRefundCreateRequestPaymentMethod = "bacs"
 	PaymentRefundCreateRequestPaymentMethodCard    PaymentRefundCreateRequestPaymentMethod = "card"
 	PaymentRefundCreateRequestPaymentMethodCash    PaymentRefundCreateRequestPaymentMethod = "cash"
 	PaymentRefundCreateRequestPaymentMethodLayaway PaymentRefundCreateRequestPaymentMethod = "layaway"
@@ -5728,7 +5842,7 @@ const (
 // Valid indicates whether the value is a known member of the PaymentRefundCreateRequestPaymentMethod enum.
 func (e PaymentRefundCreateRequestPaymentMethod) Valid() bool {
 	switch e {
-	case PaymentRefundCreateRequestPaymentMethodBACS:
+	case PaymentRefundCreateRequestPaymentMethodBacs:
 		return true
 	case PaymentRefundCreateRequestPaymentMethodCard:
 		return true
@@ -5923,6 +6037,21 @@ func (e StockVariationObject) Valid() bool {
 	}
 }
 
+// Defines values for TeamMemberObject.
+const (
+	TeamMemberObjectTeamMember TeamMemberObject = "team_member"
+)
+
+// Valid indicates whether the value is a known member of the TeamMemberObject enum.
+func (e TeamMemberObject) Valid() bool {
+	switch e {
+	case TeamMemberObjectTeamMember:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for WebhookDeliveryObject.
 const (
 	WebhookDeliveryObjectWebhookDelivery WebhookDeliveryObject = "webhook_delivery"
@@ -5985,6 +6114,7 @@ const (
 	WebhookEndpointEventTypesPartAuthorisationCreated WebhookEndpointEventTypes = "part_authorisation.created"
 	WebhookEndpointEventTypesPartAuthorisationDeleted WebhookEndpointEventTypes = "part_authorisation.deleted"
 	WebhookEndpointEventTypesPartAuthorisationUpdated WebhookEndpointEventTypes = "part_authorisation.updated"
+	WebhookEndpointEventTypesWorkLineStatusChanged    WebhookEndpointEventTypes = "work_line.status_changed"
 )
 
 // Valid indicates whether the value is a known member of the WebhookEndpointEventTypes enum.
@@ -6038,6 +6168,8 @@ func (e WebhookEndpointEventTypes) Valid() bool {
 		return true
 	case WebhookEndpointEventTypesPartAuthorisationUpdated:
 		return true
+	case WebhookEndpointEventTypesWorkLineStatusChanged:
+		return true
 	default:
 		return false
 	}
@@ -6085,6 +6217,7 @@ const (
 	WebhookEndpointCreateRequestEventTypesPartAuthorisationCreated WebhookEndpointCreateRequestEventTypes = "part_authorisation.created"
 	WebhookEndpointCreateRequestEventTypesPartAuthorisationDeleted WebhookEndpointCreateRequestEventTypes = "part_authorisation.deleted"
 	WebhookEndpointCreateRequestEventTypesPartAuthorisationUpdated WebhookEndpointCreateRequestEventTypes = "part_authorisation.updated"
+	WebhookEndpointCreateRequestEventTypesWorkLineStatusChanged    WebhookEndpointCreateRequestEventTypes = "work_line.status_changed"
 )
 
 // Valid indicates whether the value is a known member of the WebhookEndpointCreateRequestEventTypes enum.
@@ -6140,6 +6273,8 @@ func (e WebhookEndpointCreateRequestEventTypes) Valid() bool {
 		return true
 	case WebhookEndpointCreateRequestEventTypesPartAuthorisationUpdated:
 		return true
+	case WebhookEndpointCreateRequestEventTypesWorkLineStatusChanged:
+		return true
 	default:
 		return false
 	}
@@ -6172,6 +6307,7 @@ const (
 	WebhookEndpointUpdateRequestEventTypesPartAuthorisationCreated WebhookEndpointUpdateRequestEventTypes = "part_authorisation.created"
 	WebhookEndpointUpdateRequestEventTypesPartAuthorisationDeleted WebhookEndpointUpdateRequestEventTypes = "part_authorisation.deleted"
 	WebhookEndpointUpdateRequestEventTypesPartAuthorisationUpdated WebhookEndpointUpdateRequestEventTypes = "part_authorisation.updated"
+	WebhookEndpointUpdateRequestEventTypesWorkLineStatusChanged    WebhookEndpointUpdateRequestEventTypes = "work_line.status_changed"
 )
 
 // Valid indicates whether the value is a known member of the WebhookEndpointUpdateRequestEventTypes enum.
@@ -6227,6 +6363,8 @@ func (e WebhookEndpointUpdateRequestEventTypes) Valid() bool {
 		return true
 	case WebhookEndpointUpdateRequestEventTypesPartAuthorisationUpdated:
 		return true
+	case WebhookEndpointUpdateRequestEventTypesWorkLineStatusChanged:
+		return true
 	default:
 		return false
 	}
@@ -6258,6 +6396,7 @@ const (
 	WebhookEndpointWithSecretEventTypesPartAuthorisationCreated WebhookEndpointWithSecretEventTypes = "part_authorisation.created"
 	WebhookEndpointWithSecretEventTypesPartAuthorisationDeleted WebhookEndpointWithSecretEventTypes = "part_authorisation.deleted"
 	WebhookEndpointWithSecretEventTypesPartAuthorisationUpdated WebhookEndpointWithSecretEventTypes = "part_authorisation.updated"
+	WebhookEndpointWithSecretEventTypesWorkLineStatusChanged    WebhookEndpointWithSecretEventTypes = "work_line.status_changed"
 )
 
 // Valid indicates whether the value is a known member of the WebhookEndpointWithSecretEventTypes enum.
@@ -6311,6 +6450,8 @@ func (e WebhookEndpointWithSecretEventTypes) Valid() bool {
 		return true
 	case WebhookEndpointWithSecretEventTypesPartAuthorisationUpdated:
 		return true
+	case WebhookEndpointWithSecretEventTypesWorkLineStatusChanged:
+		return true
 	default:
 		return false
 	}
@@ -6341,6 +6482,7 @@ const (
 	WebhookEventTypePayloadObjectJobReport         WebhookEventTypePayloadObject = "job_report"
 	WebhookEventTypePayloadObjectMessage           WebhookEventTypePayloadObject = "message"
 	WebhookEventTypePayloadObjectPartAuthorisation WebhookEventTypePayloadObject = "part_authorisation"
+	WebhookEventTypePayloadObjectWorkLine          WebhookEventTypePayloadObject = "work_line"
 )
 
 // Valid indicates whether the value is a known member of the WebhookEventTypePayloadObject enum.
@@ -6361,6 +6503,8 @@ func (e WebhookEventTypePayloadObject) Valid() bool {
 	case WebhookEventTypePayloadObjectMessage:
 		return true
 	case WebhookEventTypePayloadObjectPartAuthorisation:
+		return true
+	case WebhookEventTypePayloadObjectWorkLine:
 		return true
 	default:
 		return false
@@ -6636,6 +6780,81 @@ type AcceptedStatusChangeNotifications struct {
 
 // AcceptedStatusChangeNotificationsCustomer Notification control. Allowed values: `default`, `send`, or `skip`.
 type AcceptedStatusChangeNotificationsCustomer string
+
+// Activity Public representation of a workshop activity (audit trail entry).
+type Activity struct {
+	// ActivityType Activity type in snake_case, such as status_changed or comment.
+	ActivityType *ActivityActivityType `json:"activity_type,omitempty"`
+
+	// ActorId Public team member id for the staff member who performed the action, when known.
+	ActorId *string `json:"actor_id,omitempty"`
+
+	// ActorName Display name of the staff member who performed the action, when known.
+	ActorName *string `json:"actor_name,omitempty"`
+
+	// ActorUserId Stable user id for the staff member who performed the action, when known. Matches `team_members.user_id`.
+	ActorUserId *string `json:"actor_user_id,omitempty"`
+
+	// AssetName Asset name for work-line context, such as services_changed events.
+	AssetName *string `json:"asset_name,omitempty"`
+
+	// Change Before/after values for activity types that represent a transition.
+	Change *ActivityChange `json:"change,omitempty"`
+
+	// CreatedAt UTC timestamp when the activity was recorded.
+	CreatedAt *time.Time `json:"created_at,omitempty"`
+
+	// Id Opaque resource-prefixed public identifier, such as job_... or cus_.... Internal database ids must never be assigned here.
+	Id *string `json:"id,omitempty"`
+
+	// InvoiceId Public invoice id when the activity relates to an invoice.
+	InvoiceId *string `json:"invoice_id,omitempty"`
+
+	// JobId Public job id when the activity relates to a job.
+	JobId *string `json:"job_id,omitempty"`
+
+	// Object Resource object type. Always activity.
+	Object *ActivityObject `json:"object,omitempty"`
+
+	// Payment Payment amounts and label for payment-related activities.
+	Payment *ActivityPaymentDetails `json:"payment,omitempty"`
+
+	// PaymentId Public payment id when the activity relates to a payment.
+	PaymentId *string `json:"payment_id,omitempty"`
+
+	// Text Text content for comments, general notes, and opaque template keys.
+	Text *string `json:"text,omitempty"`
+
+	// WorkLineId Public work line id when the activity relates to one work line.
+	WorkLineId *string `json:"work_line_id,omitempty"`
+}
+
+// ActivityActivityType Activity type in snake_case, such as status_changed or comment.
+type ActivityActivityType string
+
+// ActivityObject Resource object type. Always activity.
+type ActivityObject string
+
+// ActivityChange Before/after values for activity types that represent a transition.
+type ActivityChange struct {
+	// From Previous value before the change, when known.
+	From *string `json:"from,omitempty"`
+
+	// To New value after the change, when known.
+	To *string `json:"to,omitempty"`
+}
+
+// ActivityPaymentDetails Payment amounts and label for payment-related activities.
+type ActivityPaymentDetails struct {
+	// AmountCapturable Amount that can be captured for the payment.
+	AmountCapturable *string `json:"amount_capturable,omitempty"`
+
+	// AmountReceived Amount received for the payment.
+	AmountReceived *string `json:"amount_received,omitempty"`
+
+	// ItemName Display name of the payment item, such as a deposit label.
+	ItemName *string `json:"item_name,omitempty"`
+}
 
 // Asset Public customer bike asset read model. Assets are bikes today; `bike_type` classifies the bike category.
 type Asset struct {
@@ -7656,8 +7875,14 @@ type Invoice struct {
 	// PaymentLink Customer payment link when configured.
 	PaymentLink *string `json:"payment_link,omitempty"`
 
+	// RevenueBreakdown Revenue category totals for a public invoice.
+	RevenueBreakdown *InvoiceRevenueBreakdown `json:"revenue_breakdown,omitempty"`
+
 	// Status Invoice lifecycle status. Allowed values: `draft`, `pending`, `paid`, or `cancelled`.
 	Status *InvoiceStatus `json:"status,omitempty"`
+
+	// Tax Structured tax totals for a public invoice.
+	Tax *InvoiceTaxBreakdown `json:"tax,omitempty"`
 
 	// Total Invoice total after discounts, in currency units.
 	Total *float64 `json:"total,omitempty"`
@@ -7779,11 +8004,29 @@ type InvoiceItem struct {
 	// Quantity Quantity billed on the item.
 	Quantity *float64 `json:"quantity,omitempty"`
 
+	// TaxAmount Tax amount allocated to this line after invoice-level discounts.
+	TaxAmount *float64 `json:"tax_amount,omitempty"`
+
+	// TaxRatePercent Effective tax rate percentage for this line, when the business is tax registered.
+	TaxRatePercent *float64 `json:"tax_rate_percent,omitempty"`
+
 	// Total Row total (unit_price × quantity) in the invoice currency.
 	Total *float64 `json:"total,omitempty"`
 
+	// TotalExcludingTax Line total excluding tax after invoice-level discount allocation.
+	TotalExcludingTax *float64 `json:"total_excluding_tax,omitempty"`
+
+	// TotalIncludingTax Line total including tax after invoice-level discount allocation.
+	TotalIncludingTax *float64 `json:"total_including_tax,omitempty"`
+
 	// UnitPrice Unit price in the invoice currency.
 	UnitPrice *float64 `json:"unit_price,omitempty"`
+
+	// UnitPriceExcludingTax Discount-adjusted unit price excluding tax, when quantity is available.
+	UnitPriceExcludingTax *float64 `json:"unit_price_excluding_tax,omitempty"`
+
+	// UnitPriceIncludingTax Discount-adjusted unit price including tax, when quantity is available.
+	UnitPriceIncludingTax *float64 `json:"unit_price_including_tax,omitempty"`
 }
 
 // InvoiceItemLineType Line item type. Allowed values: `service`, `part`, or `custom`.
@@ -7900,6 +8143,21 @@ type InvoicePdf struct {
 	InvoiceUrl *string `json:"invoice_url,omitempty"`
 }
 
+// InvoiceRevenueBreakdown Revenue category totals for a public invoice.
+type InvoiceRevenueBreakdown struct {
+	// Collection Collection or on-site service revenue from the job collection area.
+	Collection *float64 `json:"collection,omitempty"`
+
+	// FreeText Revenue from custom/free-text line items.
+	FreeText *float64 `json:"free_text,omitempty"`
+
+	// Parts Revenue from approved part line items.
+	Parts *float64 `json:"parts,omitempty"`
+
+	// Service Revenue from catalogue service line items.
+	Service *float64 `json:"service,omitempty"`
+}
+
 // InvoiceSendRequest Request body for sending an invoice to a customer.
 type InvoiceSendRequest struct {
 	// Body Optional message body to include in the invoice email.
@@ -7932,6 +8190,27 @@ type InvoiceStatusChangeRequest struct {
 
 // InvoiceStatusChangeRequestStatus Target invoice status. Allowed values: `draft`, `pending`, `paid`, or `cancelled`.
 type InvoiceStatusChangeRequestStatus string
+
+// InvoiceTaxBreakdown Structured tax totals for a public invoice.
+type InvoiceTaxBreakdown struct {
+	// Amount Tax amount included in the invoice total.
+	Amount *float64 `json:"amount,omitempty"`
+
+	// Inclusivity Whether invoice prices are treated as inclusive or exclusive of tax.
+	Inclusivity *string `json:"inclusivity,omitempty"`
+
+	// Label Tax label configured by the business, for example VAT.
+	Label *string `json:"label,omitempty"`
+
+	// RatePercent Effective tax rate percentage, when the business is tax registered.
+	RatePercent *float64 `json:"rate_percent,omitempty"`
+
+	// TotalExcludingTax Invoice total excluding tax.
+	TotalExcludingTax *float64 `json:"total_excluding_tax,omitempty"`
+
+	// TotalIncludingTax Invoice total including tax.
+	TotalIncludingTax *float64 `json:"total_including_tax,omitempty"`
+}
 
 // InvoiceUpdateRequest Patch body for low-side-effect invoice metadata. Omitted properties are ignored.
 type InvoiceUpdateRequest struct {
@@ -8025,6 +8304,9 @@ type Job struct {
 	// JobNumber Human-readable job number shown in workshop and customer communications.
 	JobNumber *int64 `json:"job_number,omitempty"`
 
+	// Notes Internal job notes visible to workshop staff.
+	Notes *string `json:"notes,omitempty"`
+
 	// Object Resource object type. Always job.
 	Object *JobObject `json:"object,omitempty"`
 
@@ -8042,6 +8324,9 @@ type Job struct {
 
 	// RejectionReason Reason the job was rejected, when `accepted_status` is `rejected`.
 	RejectionReason *string `json:"rejection_reason,omitempty"`
+
+	// RequiredByDate Date/time the job is required by, when set.
+	RequiredByDate *time.Time `json:"required_by_date,omitempty"`
 
 	// Schedule Scheduling and logistics on a public job response.
 	Schedule *JobSchedule `json:"schedule,omitempty"`
@@ -8658,8 +8943,11 @@ type JobWorkLine struct {
 	// AssetId Public asset id this work line applies to (`asset_...`).
 	AssetId *string `json:"asset_id,omitempty"`
 
-	// AssignedMechanicId Clerk user id assigned to this work line, when a mechanic is assigned.
+	// AssignedMechanicId Public team member id (`bmem_...`) assigned to this work line, when a mechanic is assigned.
 	AssignedMechanicId *string `json:"assigned_mechanic_id,omitempty"`
+
+	// AssignedMechanicName Display name of the assigned mechanic, when known.
+	AssignedMechanicName *string `json:"assigned_mechanic_name,omitempty"`
 
 	// CustomerNotes Customer-provided notes for this work line.
 	CustomerNotes *string `json:"customer_notes,omitempty"`
@@ -8700,7 +8988,7 @@ type JobWorkLineInput struct {
 	// AssetId Existing asset public id from the parent request's `assets[]` array. Required when `asset_client_reference` is omitted.
 	AssetId *string `json:"asset_id,omitempty"`
 
-	// AssignedMechanicId Optional Clerk user id for assigning this work line to a workshop member.
+	// AssignedMechanicId Optional public team member id (`bmem_...`) for assigning this work line to a mechanic.
 	AssignedMechanicId *string `json:"assigned_mechanic_id,omitempty"`
 
 	// Notes Customer-visible notes for this work line.
@@ -8718,7 +9006,7 @@ type JobWorkLineInput struct {
 
 // JobWorkLineMechanicAssignmentRequest Request body for assigning or clearing the mechanic on a work line.
 type JobWorkLineMechanicAssignmentRequest struct {
-	// AssignedMechanicId Clerk user id for the business member to assign. Send `null`, an empty value, or `any` to clear the assignment.
+	// AssignedMechanicId Public team member id (`bmem_...`) for the mechanic to assign. Send `null`, an empty value, or `any` to clear the assignment.
 	AssignedMechanicId *string `json:"assigned_mechanic_id,omitempty"`
 
 	// Notifications Notification options for a mechanic assignment change.
@@ -8753,6 +9041,15 @@ type JobWorkLineUpdateRequest struct {
 
 	// ScheduledWindow Workshop-local time window. Send `start_time` and `end_time` as `HH:mm:ss` strings using a 24-hour clock, for example `{ "start_time": "09:00:00", "end_time": "11:30:00" }`.
 	ScheduledWindow *JobTimeWindowInput `json:"scheduled_window,omitempty"`
+}
+
+// ListResponseOfActivity Standard public API list response with cursor pagination metadata.
+type ListResponseOfActivity struct {
+	// Data Page of public resources returned by the list endpoint.
+	Data *[]Activity `json:"data,omitempty"`
+
+	// Pagination Cursor pagination metadata used by public list endpoints.
+	Pagination *Pagination `json:"pagination,omitempty"`
 }
 
 // ListResponseOfAsset Standard public API list response with cursor pagination metadata.
@@ -8858,6 +9155,15 @@ type ListResponseOfService struct {
 type ListResponseOfStockVariation struct {
 	// Data Page of public resources returned by the list endpoint.
 	Data *[]StockVariation `json:"data,omitempty"`
+
+	// Pagination Cursor pagination metadata used by public list endpoints.
+	Pagination *Pagination `json:"pagination,omitempty"`
+}
+
+// ListResponseOfTeamMember Standard public API list response with cursor pagination metadata.
+type ListResponseOfTeamMember struct {
+	// Data Page of public resources returned by the list endpoint.
+	Data *[]TeamMember `json:"data,omitempty"`
 
 	// Pagination Cursor pagination metadata used by public list endpoints.
 	Pagination *Pagination `json:"pagination,omitempty"`
@@ -9014,6 +9320,12 @@ type Payment struct {
 
 	// PaymentType Payment type. Allowed values: `pre_payment`, `invoice_payment`, or `refund`.
 	PaymentType *PaymentPaymentType `json:"payment_type,omitempty"`
+
+	// ProcessorReference External processor reference id for reconciliation, when available.
+	ProcessorReference *string `json:"processor_reference,omitempty"`
+
+	// ProcessorReferenceType Type of external processor reference, for example stripe_payment_intent_id or square_payment_id.
+	ProcessorReferenceType *string `json:"processor_reference_type,omitempty"`
 }
 
 // PaymentObject Resource object type. Always payment.
@@ -9277,6 +9589,42 @@ type StockVariation struct {
 // StockVariationObject Resource object type. Always `stock_variation`.
 type StockVariationObject string
 
+// TeamMember Public representation of a workshop team member.
+type TeamMember struct {
+	// BusinessId Public business id for the workshop this membership belongs to.
+	BusinessId *string `json:"business_id,omitempty"`
+
+	// DisplayName Display name for the team member when known.
+	DisplayName *string `json:"display_name,omitempty"`
+
+	// Enabled True when this member is enabled for the business.
+	Enabled *bool `json:"enabled,omitempty"`
+
+	// Id Opaque resource-prefixed public identifier, such as job_... or cus_.... Internal database ids must never be assigned here.
+	Id *string `json:"id,omitempty"`
+
+	// ImageUrl Profile image URL for the team member when known.
+	ImageUrl *string `json:"image_url,omitempty"`
+
+	// IsMechanic True when this member can be assigned as a mechanic.
+	IsMechanic *bool `json:"is_mechanic,omitempty"`
+
+	// Object Resource object type. Always team_member.
+	Object *TeamMemberObject `json:"object,omitempty"`
+
+	// RoleKey Public role key for the member, when known.
+	RoleKey *string `json:"role_key,omitempty"`
+
+	// RoleName Public role display name for the member, when known.
+	RoleName *string `json:"role_name,omitempty"`
+
+	// UserId Stable BikeBook user id that can be used to group the same person across multiple businesses.
+	UserId *string `json:"user_id,omitempty"`
+}
+
+// TeamMemberObject Resource object type. Always team_member.
+type TeamMemberObject string
+
 // WebhookDelivery Public representation of an outbound webhook delivery attempt.
 type WebhookDelivery struct {
 	// AttemptCount Number of delivery attempts made so far.
@@ -9507,6 +9855,44 @@ type WorkLineStatusChangeNotificationsCustomer string
 
 // bearerAuthContextKey is the context key for bearerAuth security scheme
 type bearerAuthContextKey string
+
+// ListActivityParams defines parameters for ListActivity.
+type ListActivityParams struct {
+	BusinessId *string `form:"business_id,omitempty" json:"business_id,omitempty"`
+
+	// JobId Optional public job id (`job_...`) to scope chat messages to one job.
+	JobId        *string `form:"job_id,omitempty" json:"job_id,omitempty"`
+	InvoiceId    *string `form:"invoice_id,omitempty" json:"invoice_id,omitempty"`
+	WorkLineId   *string `form:"work_line_id,omitempty" json:"work_line_id,omitempty"`
+	PaymentId    *string `form:"payment_id,omitempty" json:"payment_id,omitempty"`
+	ActivityType *string `form:"activity_type,omitempty" json:"activity_type,omitempty"`
+	CreatedFrom  *string `form:"created_from,omitempty" json:"created_from,omitempty"`
+	CreatedTo    *string `form:"created_to,omitempty" json:"created_to,omitempty"`
+
+	// Sort Sort field. Allowed values: `created_at`. Default: `-created_at`. Prefix with `-` for descending order (for example `-created_at`).
+	Sort *string `form:"sort,omitempty" json:"sort,omitempty"`
+
+	// Limit Maximum number of resources to return (1–100, default 10).
+	Limit *int32 `form:"limit,omitempty" json:"limit,omitempty"`
+
+	// Cursor Opaque page cursor from a previous list response's `pagination.next_cursor`.
+	Cursor *string `form:"cursor,omitempty" json:"cursor,omitempty"`
+
+	// Authorization Bearer Workshop API key. Example: Bearer bbk_live_...
+	Authorization *string `json:"Authorization,omitempty"`
+
+	// XBikebookRequestId Optional request id supplied by the client for support correlation.
+	XBikebookRequestId *string `json:"X-Bikebook-Request-Id,omitempty"`
+}
+
+// GetActivityParams defines parameters for GetActivity.
+type GetActivityParams struct {
+	// Authorization Bearer Workshop API key. Example: Bearer bbk_live_...
+	Authorization *string `json:"Authorization,omitempty"`
+
+	// XBikebookRequestId Optional request id supplied by the client for support correlation.
+	XBikebookRequestId *string `json:"X-Bikebook-Request-Id,omitempty"`
+}
 
 // ListAssetParams defines parameters for ListAsset.
 type ListAssetParams struct {
@@ -10093,6 +10479,31 @@ type UpdateInvoiceParams struct {
 	IdempotencyKey string `json:"Idempotency-Key"`
 }
 
+// ListForInvoiceParams defines parameters for ListForInvoice.
+type ListForInvoiceParams struct {
+	InvoiceId    *string `form:"invoice_id,omitempty" json:"invoice_id,omitempty"`
+	WorkLineId   *string `form:"work_line_id,omitempty" json:"work_line_id,omitempty"`
+	PaymentId    *string `form:"payment_id,omitempty" json:"payment_id,omitempty"`
+	ActivityType *string `form:"activity_type,omitempty" json:"activity_type,omitempty"`
+	CreatedFrom  *string `form:"created_from,omitempty" json:"created_from,omitempty"`
+	CreatedTo    *string `form:"created_to,omitempty" json:"created_to,omitempty"`
+
+	// Sort Sort field. Allowed values: `created_at`. Default: `-created_at`. Prefix with `-` for descending order (for example `-created_at`).
+	Sort *string `form:"sort,omitempty" json:"sort,omitempty"`
+
+	// Limit Maximum number of resources to return (1–100, default 10).
+	Limit *int32 `form:"limit,omitempty" json:"limit,omitempty"`
+
+	// Cursor Opaque page cursor from a previous list response's `pagination.next_cursor`.
+	Cursor *string `form:"cursor,omitempty" json:"cursor,omitempty"`
+
+	// Authorization Bearer Workshop API key. Example: Bearer bbk_live_...
+	Authorization *string `json:"Authorization,omitempty"`
+
+	// XBikebookRequestId Optional request id supplied by the client for support correlation.
+	XBikebookRequestId *string `json:"X-Bikebook-Request-Id,omitempty"`
+}
+
 // ChangeInvoiceAutoSyncParams defines parameters for ChangeInvoiceAutoSync.
 type ChangeInvoiceAutoSyncParams struct {
 	// Authorization Bearer Workshop API key. Example: Bearer bbk_live_...
@@ -10324,6 +10735,41 @@ type ChangeAcceptedStatusParams struct {
 	IdempotencyKey string `json:"Idempotency-Key"`
 }
 
+// ListForJobParams defines parameters for ListForJob.
+type ListForJobParams struct {
+	// JobId Optional public job id (`job_...`) to scope chat messages to one job.
+	JobId        *string `form:"job_id,omitempty" json:"job_id,omitempty"`
+	WorkLineId   *string `form:"work_line_id,omitempty" json:"work_line_id,omitempty"`
+	PaymentId    *string `form:"payment_id,omitempty" json:"payment_id,omitempty"`
+	ActivityType *string `form:"activity_type,omitempty" json:"activity_type,omitempty"`
+	CreatedFrom  *string `form:"created_from,omitempty" json:"created_from,omitempty"`
+	CreatedTo    *string `form:"created_to,omitempty" json:"created_to,omitempty"`
+
+	// Sort Sort field. Allowed values: `created_at`. Default: `-created_at`. Prefix with `-` for descending order (for example `-created_at`).
+	Sort *string `form:"sort,omitempty" json:"sort,omitempty"`
+
+	// Limit Maximum number of resources to return (1–100, default 10).
+	Limit *int32 `form:"limit,omitempty" json:"limit,omitempty"`
+
+	// Cursor Opaque page cursor from a previous list response's `pagination.next_cursor`.
+	Cursor *string `form:"cursor,omitempty" json:"cursor,omitempty"`
+
+	// Authorization Bearer Workshop API key. Example: Bearer bbk_live_...
+	Authorization *string `json:"Authorization,omitempty"`
+
+	// XBikebookRequestId Optional request id supplied by the client for support correlation.
+	XBikebookRequestId *string `json:"X-Bikebook-Request-Id,omitempty"`
+}
+
+// GetForJobParams defines parameters for GetForJob.
+type GetForJobParams struct {
+	// Authorization Bearer Workshop API key. Example: Bearer bbk_live_...
+	Authorization *string `json:"Authorization,omitempty"`
+
+	// XBikebookRequestId Optional request id supplied by the client for support correlation.
+	XBikebookRequestId *string `json:"X-Bikebook-Request-Id,omitempty"`
+}
+
 // ListJobReportForJobParams defines parameters for ListJobReportForJob.
 type ListJobReportForJobParams struct {
 	BusinessId *string `form:"business_id,omitempty" json:"business_id,omitempty"`
@@ -10454,8 +10900,12 @@ type ChangeWorkLineStatusParams struct {
 
 // ListPaymentParams defines parameters for ListPayment.
 type ListPaymentParams struct {
-	BusinessId *string `form:"business_id,omitempty" json:"business_id,omitempty"`
-	InvoiceId  *string `form:"invoice_id,omitempty" json:"invoice_id,omitempty"`
+	BusinessId    *string `form:"business_id,omitempty" json:"business_id,omitempty"`
+	InvoiceId     *string `form:"invoice_id,omitempty" json:"invoice_id,omitempty"`
+	ChargedOnFrom *string `form:"charged_on_from,omitempty" json:"charged_on_from,omitempty"`
+	ChargedOnTo   *string `form:"charged_on_to,omitempty" json:"charged_on_to,omitempty"`
+	AmountMin     *string `form:"amount_min,omitempty" json:"amount_min,omitempty"`
+	AmountMax     *string `form:"amount_max,omitempty" json:"amount_max,omitempty"`
 
 	// Sort Sort field. Allowed values: `charged_on`, `created_at`. Default: `-charged_on`. Prefix with `-` for descending order (for example `-charged_on`).
 	Sort *string `form:"sort,omitempty" json:"sort,omitempty"`
@@ -10552,6 +11002,34 @@ type ListStockVariationParams struct {
 
 // GetStockVariationParams defines parameters for GetStockVariation.
 type GetStockVariationParams struct {
+	// Authorization Bearer Workshop API key. Example: Bearer bbk_live_...
+	Authorization *string `json:"Authorization,omitempty"`
+
+	// XBikebookRequestId Optional request id supplied by the client for support correlation.
+	XBikebookRequestId *string `json:"X-Bikebook-Request-Id,omitempty"`
+}
+
+// ListTeamMemberParams defines parameters for ListTeamMember.
+type ListTeamMemberParams struct {
+	BusinessId *string `form:"business_id,omitempty" json:"business_id,omitempty"`
+	IsMechanic *string `form:"is_mechanic,omitempty" json:"is_mechanic,omitempty"`
+	Enabled    *string `form:"enabled,omitempty" json:"enabled,omitempty"`
+
+	// Limit Maximum number of resources to return (1–100, default 10).
+	Limit *int32 `form:"limit,omitempty" json:"limit,omitempty"`
+
+	// Cursor Opaque page cursor from a previous list response's `pagination.next_cursor`.
+	Cursor *string `form:"cursor,omitempty" json:"cursor,omitempty"`
+
+	// Authorization Bearer Workshop API key. Example: Bearer bbk_live_...
+	Authorization *string `json:"Authorization,omitempty"`
+
+	// XBikebookRequestId Optional request id supplied by the client for support correlation.
+	XBikebookRequestId *string `json:"X-Bikebook-Request-Id,omitempty"`
+}
+
+// GetTeamMemberParams defines parameters for GetTeamMember.
+type GetTeamMemberParams struct {
 	// Authorization Bearer Workshop API key. Example: Bearer bbk_live_...
 	Authorization *string `json:"Authorization,omitempty"`
 

@@ -89,6 +89,12 @@ func WithRequestEditorFn(fn RequestEditorFn) ClientOption {
 
 // The interface specification for the client above.
 type ClientInterface interface {
+	// ListActivity request
+	ListActivity(ctx context.Context, params *ListActivityParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetActivity request
+	GetActivity(ctx context.Context, activityId string, params *GetActivityParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
 	// ListAsset request
 	ListAsset(ctx context.Context, params *ListAssetParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
@@ -241,6 +247,9 @@ type ClientInterface interface {
 
 	UpdateInvoice(ctx context.Context, invoiceId string, params *UpdateInvoiceParams, body UpdateInvoiceJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// ListForInvoice request
+	ListForInvoice(ctx context.Context, invoiceId string, params *ListForInvoiceParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
 	// ChangeInvoiceAutoSyncWithBody request with any body
 	ChangeInvoiceAutoSyncWithBody(ctx context.Context, invoiceId string, params *ChangeInvoiceAutoSyncParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
@@ -313,6 +322,12 @@ type ClientInterface interface {
 
 	ChangeAcceptedStatus(ctx context.Context, jobId string, params *ChangeAcceptedStatusParams, body ChangeAcceptedStatusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// ListForJob request
+	ListForJob(ctx context.Context, jobId string, params *ListForJobParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetForJob request
+	GetForJob(ctx context.Context, jobId string, activityId string, params *GetForJobParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
 	// ListJobReportForJob request
 	ListJobReportForJob(ctx context.Context, jobId string, params *ListJobReportForJobParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
@@ -380,6 +395,12 @@ type ClientInterface interface {
 	// GetStockVariation request
 	GetStockVariation(ctx context.Context, stockVariationId string, params *GetStockVariationParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// ListTeamMember request
+	ListTeamMember(ctx context.Context, params *ListTeamMemberParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetTeamMember request
+	GetTeamMember(ctx context.Context, teamMemberId string, params *GetTeamMemberParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
 	// GetWebhookDelivery request
 	GetWebhookDelivery(ctx context.Context, deliveryId string, params *GetWebhookDeliveryParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
@@ -413,6 +434,30 @@ type ClientInterface interface {
 
 	// ListWebhookEvent request
 	ListWebhookEvent(ctx context.Context, params *ListWebhookEventParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+}
+
+func (c *Client) ListActivity(ctx context.Context, params *ListActivityParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewListActivityRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetActivity(ctx context.Context, activityId string, params *GetActivityParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetActivityRequest(c.Server, activityId, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
 }
 
 func (c *Client) ListAsset(ctx context.Context, params *ListAssetParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
@@ -1087,6 +1132,18 @@ func (c *Client) UpdateInvoice(ctx context.Context, invoiceId string, params *Up
 	return c.Client.Do(req)
 }
 
+func (c *Client) ListForInvoice(ctx context.Context, invoiceId string, params *ListForInvoiceParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewListForInvoiceRequest(c.Server, invoiceId, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
 func (c *Client) ChangeInvoiceAutoSyncWithBody(ctx context.Context, invoiceId string, params *ChangeInvoiceAutoSyncParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewChangeInvoiceAutoSyncRequestWithBody(c.Server, invoiceId, params, contentType, body)
 	if err != nil {
@@ -1411,6 +1468,30 @@ func (c *Client) ChangeAcceptedStatus(ctx context.Context, jobId string, params 
 	return c.Client.Do(req)
 }
 
+func (c *Client) ListForJob(ctx context.Context, jobId string, params *ListForJobParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewListForJobRequest(c.Server, jobId, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetForJob(ctx context.Context, jobId string, activityId string, params *GetForJobParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetForJobRequest(c.Server, jobId, activityId, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
 func (c *Client) ListJobReportForJob(ctx context.Context, jobId string, params *ListJobReportForJobParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListJobReportForJobRequest(c.Server, jobId, params)
 	if err != nil {
@@ -1711,6 +1792,30 @@ func (c *Client) GetStockVariation(ctx context.Context, stockVariationId string,
 	return c.Client.Do(req)
 }
 
+func (c *Client) ListTeamMember(ctx context.Context, params *ListTeamMemberParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewListTeamMemberRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetTeamMember(ctx context.Context, teamMemberId string, params *GetTeamMemberParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetTeamMemberRequest(c.Server, teamMemberId, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
 func (c *Client) GetWebhookDelivery(ctx context.Context, deliveryId string, params *GetWebhookDeliveryParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetWebhookDeliveryRequest(c.Server, deliveryId, params)
 	if err != nil {
@@ -1853,6 +1958,266 @@ func (c *Client) ListWebhookEvent(ctx context.Context, params *ListWebhookEventP
 		return nil, err
 	}
 	return c.Client.Do(req)
+}
+
+// NewListActivityRequest generates requests for ListActivity
+func NewListActivityRequest(server string, params *ListActivityParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/public/v1/activities")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		// queryValues collects non-styled parameters (passthrough, JSON)
+		// that are safe to round-trip through url.Values.Encode().
+		queryValues := queryURL.Query()
+		// rawQueryFragments collects pre-encoded query fragments from
+		// styled parameters, preserving literal commas as delimiters
+		// per the OpenAPI spec (e.g. "color=blue,black,brown").
+		var rawQueryFragments []string
+
+		if params.BusinessId != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "business_id", *params.BusinessId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.JobId != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "job_id", *params.JobId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.InvoiceId != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "invoice_id", *params.InvoiceId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.WorkLineId != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "work_line_id", *params.WorkLineId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.PaymentId != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "payment_id", *params.PaymentId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.ActivityType != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "activity_type", *params.ActivityType, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.CreatedFrom != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "created_from", *params.CreatedFrom, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.CreatedTo != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "created_to", *params.CreatedTo, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.Sort != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "sort", *params.Sort, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.Limit != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "limit", *params.Limit, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.Cursor != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "cursor", *params.Cursor, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if encoded := queryValues.Encode(); encoded != "" {
+			rawQueryFragments = append(rawQueryFragments, encoded)
+		}
+		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+
+		if params.Authorization != nil {
+			var headerParam0 string
+
+			headerParam0, err = runtime.StyleParamWithOptions("simple", false, "Authorization", *params.Authorization, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+			if err != nil {
+				return nil, err
+			}
+
+			req.Header.Set("Authorization", headerParam0)
+		}
+
+		if params.XBikebookRequestId != nil {
+			var headerParam1 string
+
+			headerParam1, err = runtime.StyleParamWithOptions("simple", false, "X-Bikebook-Request-Id", *params.XBikebookRequestId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+			if err != nil {
+				return nil, err
+			}
+
+			req.Header.Set("X-Bikebook-Request-Id", headerParam1)
+		}
+
+	}
+
+	return req, nil
+}
+
+// NewGetActivityRequest generates requests for GetActivity
+func NewGetActivityRequest(server string, activityId string, params *GetActivityParams) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "activity_id", activityId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/public/v1/activities/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+
+		if params.Authorization != nil {
+			var headerParam0 string
+
+			headerParam0, err = runtime.StyleParamWithOptions("simple", false, "Authorization", *params.Authorization, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+			if err != nil {
+				return nil, err
+			}
+
+			req.Header.Set("Authorization", headerParam0)
+		}
+
+		if params.XBikebookRequestId != nil {
+			var headerParam1 string
+
+			headerParam1, err = runtime.StyleParamWithOptions("simple", false, "X-Bikebook-Request-Id", *params.XBikebookRequestId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+			if err != nil {
+				return nil, err
+			}
+
+			req.Header.Set("X-Bikebook-Request-Id", headerParam1)
+		}
+
+	}
+
+	return req, nil
 }
 
 // NewListAssetRequest generates requests for ListAsset
@@ -5519,6 +5884,189 @@ func NewUpdateInvoiceRequestWithBody(server string, invoiceId string, params *Up
 	return req, nil
 }
 
+// NewListForInvoiceRequest generates requests for ListForInvoice
+func NewListForInvoiceRequest(server string, invoiceId string, params *ListForInvoiceParams) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "invoice_id", invoiceId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/public/v1/invoices/%s/activities", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		// queryValues collects non-styled parameters (passthrough, JSON)
+		// that are safe to round-trip through url.Values.Encode().
+		queryValues := queryURL.Query()
+		// rawQueryFragments collects pre-encoded query fragments from
+		// styled parameters, preserving literal commas as delimiters
+		// per the OpenAPI spec (e.g. "color=blue,black,brown").
+		var rawQueryFragments []string
+
+		if params.InvoiceId != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "invoice_id", *params.InvoiceId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.WorkLineId != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "work_line_id", *params.WorkLineId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.PaymentId != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "payment_id", *params.PaymentId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.ActivityType != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "activity_type", *params.ActivityType, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.CreatedFrom != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "created_from", *params.CreatedFrom, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.CreatedTo != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "created_to", *params.CreatedTo, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.Sort != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "sort", *params.Sort, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.Limit != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "limit", *params.Limit, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.Cursor != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "cursor", *params.Cursor, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if encoded := queryValues.Encode(); encoded != "" {
+			rawQueryFragments = append(rawQueryFragments, encoded)
+		}
+		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+
+		if params.Authorization != nil {
+			var headerParam0 string
+
+			headerParam0, err = runtime.StyleParamWithOptions("simple", false, "Authorization", *params.Authorization, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+			if err != nil {
+				return nil, err
+			}
+
+			req.Header.Set("Authorization", headerParam0)
+		}
+
+		if params.XBikebookRequestId != nil {
+			var headerParam1 string
+
+			headerParam1, err = runtime.StyleParamWithOptions("simple", false, "X-Bikebook-Request-Id", *params.XBikebookRequestId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+			if err != nil {
+				return nil, err
+			}
+
+			req.Header.Set("X-Bikebook-Request-Id", headerParam1)
+		}
+
+	}
+
+	return req, nil
+}
+
 // NewChangeInvoiceAutoSyncRequest calls the generic ChangeInvoiceAutoSync builder with application/json body
 func NewChangeInvoiceAutoSyncRequest(server string, invoiceId string, params *ChangeInvoiceAutoSyncParams, body ChangeInvoiceAutoSyncJSONRequestBody) (*http.Request, error) {
 	var bodyReader io.Reader
@@ -7004,6 +7552,256 @@ func NewChangeAcceptedStatusRequestWithBody(server string, jobId string, params 
 	return req, nil
 }
 
+// NewListForJobRequest generates requests for ListForJob
+func NewListForJobRequest(server string, jobId string, params *ListForJobParams) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "job_id", jobId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/public/v1/jobs/%s/activities", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		// queryValues collects non-styled parameters (passthrough, JSON)
+		// that are safe to round-trip through url.Values.Encode().
+		queryValues := queryURL.Query()
+		// rawQueryFragments collects pre-encoded query fragments from
+		// styled parameters, preserving literal commas as delimiters
+		// per the OpenAPI spec (e.g. "color=blue,black,brown").
+		var rawQueryFragments []string
+
+		if params.JobId != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "job_id", *params.JobId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.WorkLineId != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "work_line_id", *params.WorkLineId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.PaymentId != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "payment_id", *params.PaymentId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.ActivityType != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "activity_type", *params.ActivityType, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.CreatedFrom != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "created_from", *params.CreatedFrom, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.CreatedTo != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "created_to", *params.CreatedTo, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.Sort != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "sort", *params.Sort, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.Limit != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "limit", *params.Limit, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.Cursor != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "cursor", *params.Cursor, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if encoded := queryValues.Encode(); encoded != "" {
+			rawQueryFragments = append(rawQueryFragments, encoded)
+		}
+		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+
+		if params.Authorization != nil {
+			var headerParam0 string
+
+			headerParam0, err = runtime.StyleParamWithOptions("simple", false, "Authorization", *params.Authorization, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+			if err != nil {
+				return nil, err
+			}
+
+			req.Header.Set("Authorization", headerParam0)
+		}
+
+		if params.XBikebookRequestId != nil {
+			var headerParam1 string
+
+			headerParam1, err = runtime.StyleParamWithOptions("simple", false, "X-Bikebook-Request-Id", *params.XBikebookRequestId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+			if err != nil {
+				return nil, err
+			}
+
+			req.Header.Set("X-Bikebook-Request-Id", headerParam1)
+		}
+
+	}
+
+	return req, nil
+}
+
+// NewGetForJobRequest generates requests for GetForJob
+func NewGetForJobRequest(server string, jobId string, activityId string, params *GetForJobParams) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "job_id", jobId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "activity_id", activityId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/public/v1/jobs/%s/activities/%s", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+
+		if params.Authorization != nil {
+			var headerParam0 string
+
+			headerParam0, err = runtime.StyleParamWithOptions("simple", false, "Authorization", *params.Authorization, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+			if err != nil {
+				return nil, err
+			}
+
+			req.Header.Set("Authorization", headerParam0)
+		}
+
+		if params.XBikebookRequestId != nil {
+			var headerParam1 string
+
+			headerParam1, err = runtime.StyleParamWithOptions("simple", false, "X-Bikebook-Request-Id", *params.XBikebookRequestId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+			if err != nil {
+				return nil, err
+			}
+
+			req.Header.Set("X-Bikebook-Request-Id", headerParam1)
+		}
+
+	}
+
+	return req, nil
+}
+
 // NewListJobReportForJobRequest generates requests for ListJobReportForJob
 func NewListJobReportForJobRequest(server string, jobId string, params *ListJobReportForJobParams) (*http.Request, error) {
 	var err error
@@ -7947,6 +8745,54 @@ func NewListPaymentRequest(server string, params *ListPaymentParams) (*http.Requ
 
 		}
 
+		if params.ChargedOnFrom != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "charged_on_from", *params.ChargedOnFrom, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.ChargedOnTo != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "charged_on_to", *params.ChargedOnTo, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.AmountMin != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "amount_min", *params.AmountMin, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.AmountMax != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "amount_max", *params.AmountMax, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
 		if params.Sort != nil {
 
 			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "sort", *params.Sort, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
@@ -8534,6 +9380,194 @@ func NewGetStockVariationRequest(server string, stockVariationId string, params 
 	}
 
 	operationPath := fmt.Sprintf("/public/v1/stock_variations/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+
+		if params.Authorization != nil {
+			var headerParam0 string
+
+			headerParam0, err = runtime.StyleParamWithOptions("simple", false, "Authorization", *params.Authorization, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+			if err != nil {
+				return nil, err
+			}
+
+			req.Header.Set("Authorization", headerParam0)
+		}
+
+		if params.XBikebookRequestId != nil {
+			var headerParam1 string
+
+			headerParam1, err = runtime.StyleParamWithOptions("simple", false, "X-Bikebook-Request-Id", *params.XBikebookRequestId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+			if err != nil {
+				return nil, err
+			}
+
+			req.Header.Set("X-Bikebook-Request-Id", headerParam1)
+		}
+
+	}
+
+	return req, nil
+}
+
+// NewListTeamMemberRequest generates requests for ListTeamMember
+func NewListTeamMemberRequest(server string, params *ListTeamMemberParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/public/v1/team_members")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		// queryValues collects non-styled parameters (passthrough, JSON)
+		// that are safe to round-trip through url.Values.Encode().
+		queryValues := queryURL.Query()
+		// rawQueryFragments collects pre-encoded query fragments from
+		// styled parameters, preserving literal commas as delimiters
+		// per the OpenAPI spec (e.g. "color=blue,black,brown").
+		var rawQueryFragments []string
+
+		if params.BusinessId != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "business_id", *params.BusinessId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.IsMechanic != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "is_mechanic", *params.IsMechanic, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.Enabled != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "enabled", *params.Enabled, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.Limit != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "limit", *params.Limit, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.Cursor != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "cursor", *params.Cursor, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if encoded := queryValues.Encode(); encoded != "" {
+			rawQueryFragments = append(rawQueryFragments, encoded)
+		}
+		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+
+		if params.Authorization != nil {
+			var headerParam0 string
+
+			headerParam0, err = runtime.StyleParamWithOptions("simple", false, "Authorization", *params.Authorization, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+			if err != nil {
+				return nil, err
+			}
+
+			req.Header.Set("Authorization", headerParam0)
+		}
+
+		if params.XBikebookRequestId != nil {
+			var headerParam1 string
+
+			headerParam1, err = runtime.StyleParamWithOptions("simple", false, "X-Bikebook-Request-Id", *params.XBikebookRequestId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+			if err != nil {
+				return nil, err
+			}
+
+			req.Header.Set("X-Bikebook-Request-Id", headerParam1)
+		}
+
+	}
+
+	return req, nil
+}
+
+// NewGetTeamMemberRequest generates requests for GetTeamMember
+func NewGetTeamMemberRequest(server string, teamMemberId string, params *GetTeamMemberParams) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "team_member_id", teamMemberId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/public/v1/team_members/%s", pathParam0)
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -9333,6 +10367,12 @@ func WithBaseURL(baseURL string) ClientOption {
 
 // ClientWithResponsesInterface is the interface specification for the client with responses above.
 type ClientWithResponsesInterface interface {
+	// ListActivityWithResponse request
+	ListActivityWithResponse(ctx context.Context, params *ListActivityParams, reqEditors ...RequestEditorFn) (*ListActivityResponse, error)
+
+	// GetActivityWithResponse request
+	GetActivityWithResponse(ctx context.Context, activityId string, params *GetActivityParams, reqEditors ...RequestEditorFn) (*GetActivityResponse, error)
+
 	// ListAssetWithResponse request
 	ListAssetWithResponse(ctx context.Context, params *ListAssetParams, reqEditors ...RequestEditorFn) (*ListAssetResponse, error)
 
@@ -9485,6 +10525,9 @@ type ClientWithResponsesInterface interface {
 
 	UpdateInvoiceWithResponse(ctx context.Context, invoiceId string, params *UpdateInvoiceParams, body UpdateInvoiceJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateInvoiceResponse, error)
 
+	// ListForInvoiceWithResponse request
+	ListForInvoiceWithResponse(ctx context.Context, invoiceId string, params *ListForInvoiceParams, reqEditors ...RequestEditorFn) (*ListForInvoiceResponse, error)
+
 	// ChangeInvoiceAutoSyncWithBodyWithResponse request with any body
 	ChangeInvoiceAutoSyncWithBodyWithResponse(ctx context.Context, invoiceId string, params *ChangeInvoiceAutoSyncParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*ChangeInvoiceAutoSyncResponse, error)
 
@@ -9557,6 +10600,12 @@ type ClientWithResponsesInterface interface {
 
 	ChangeAcceptedStatusWithResponse(ctx context.Context, jobId string, params *ChangeAcceptedStatusParams, body ChangeAcceptedStatusJSONRequestBody, reqEditors ...RequestEditorFn) (*ChangeAcceptedStatusResponse, error)
 
+	// ListForJobWithResponse request
+	ListForJobWithResponse(ctx context.Context, jobId string, params *ListForJobParams, reqEditors ...RequestEditorFn) (*ListForJobResponse, error)
+
+	// GetForJobWithResponse request
+	GetForJobWithResponse(ctx context.Context, jobId string, activityId string, params *GetForJobParams, reqEditors ...RequestEditorFn) (*GetForJobResponse, error)
+
 	// ListJobReportForJobWithResponse request
 	ListJobReportForJobWithResponse(ctx context.Context, jobId string, params *ListJobReportForJobParams, reqEditors ...RequestEditorFn) (*ListJobReportForJobResponse, error)
 
@@ -9624,6 +10673,12 @@ type ClientWithResponsesInterface interface {
 	// GetStockVariationWithResponse request
 	GetStockVariationWithResponse(ctx context.Context, stockVariationId string, params *GetStockVariationParams, reqEditors ...RequestEditorFn) (*GetStockVariationResponse, error)
 
+	// ListTeamMemberWithResponse request
+	ListTeamMemberWithResponse(ctx context.Context, params *ListTeamMemberParams, reqEditors ...RequestEditorFn) (*ListTeamMemberResponse, error)
+
+	// GetTeamMemberWithResponse request
+	GetTeamMemberWithResponse(ctx context.Context, teamMemberId string, params *GetTeamMemberParams, reqEditors ...RequestEditorFn) (*GetTeamMemberResponse, error)
+
 	// GetWebhookDeliveryWithResponse request
 	GetWebhookDeliveryWithResponse(ctx context.Context, deliveryId string, params *GetWebhookDeliveryParams, reqEditors ...RequestEditorFn) (*GetWebhookDeliveryResponse, error)
 
@@ -9657,6 +10712,78 @@ type ClientWithResponsesInterface interface {
 
 	// ListWebhookEventWithResponse request
 	ListWebhookEventWithResponse(ctx context.Context, params *ListWebhookEventParams, reqEditors ...RequestEditorFn) (*ListWebhookEventResponse, error)
+}
+
+type ListActivityResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *ListResponseOfActivity
+	JSON400      *ErrorResponse
+	JSON401      *ErrorResponse
+	JSON403      *ErrorResponse
+	JSON404      *ErrorResponse
+	JSON429      *ErrorResponse
+	JSON500      *ErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r ListActivityResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ListActivityResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r ListActivityResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type GetActivityResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *Activity
+	JSON400      *ErrorResponse
+	JSON401      *ErrorResponse
+	JSON403      *ErrorResponse
+	JSON404      *ErrorResponse
+	JSON429      *ErrorResponse
+	JSON500      *ErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r GetActivityResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetActivityResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GetActivityResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
 }
 
 type ListAssetResponse struct {
@@ -11120,6 +12247,42 @@ func (r UpdateInvoiceResponse) ContentType() string {
 	return ""
 }
 
+type ListForInvoiceResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *ListResponseOfActivity
+	JSON400      *ErrorResponse
+	JSON401      *ErrorResponse
+	JSON403      *ErrorResponse
+	JSON404      *ErrorResponse
+	JSON429      *ErrorResponse
+	JSON500      *ErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r ListForInvoiceResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ListForInvoiceResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r ListForInvoiceResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type ChangeInvoiceAutoSyncResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
@@ -11779,6 +12942,78 @@ func (r ChangeAcceptedStatusResponse) ContentType() string {
 	return ""
 }
 
+type ListForJobResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *ListResponseOfActivity
+	JSON400      *ErrorResponse
+	JSON401      *ErrorResponse
+	JSON403      *ErrorResponse
+	JSON404      *ErrorResponse
+	JSON429      *ErrorResponse
+	JSON500      *ErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r ListForJobResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ListForJobResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r ListForJobResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type GetForJobResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *Activity
+	JSON400      *ErrorResponse
+	JSON401      *ErrorResponse
+	JSON403      *ErrorResponse
+	JSON404      *ErrorResponse
+	JSON429      *ErrorResponse
+	JSON500      *ErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r GetForJobResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetForJobResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GetForJobResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type ListJobReportForJobResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
@@ -12399,6 +13634,78 @@ func (r GetStockVariationResponse) ContentType() string {
 	return ""
 }
 
+type ListTeamMemberResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *ListResponseOfTeamMember
+	JSON400      *ErrorResponse
+	JSON401      *ErrorResponse
+	JSON403      *ErrorResponse
+	JSON404      *ErrorResponse
+	JSON429      *ErrorResponse
+	JSON500      *ErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r ListTeamMemberResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ListTeamMemberResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r ListTeamMemberResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type GetTeamMemberResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *TeamMember
+	JSON400      *ErrorResponse
+	JSON401      *ErrorResponse
+	JSON403      *ErrorResponse
+	JSON404      *ErrorResponse
+	JSON429      *ErrorResponse
+	JSON500      *ErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r GetTeamMemberResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetTeamMemberResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GetTeamMemberResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type GetWebhookDeliveryResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
@@ -12762,6 +14069,24 @@ func (r ListWebhookEventResponse) ContentType() string {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
+}
+
+// ListActivityWithResponse request returning *ListActivityResponse
+func (c *ClientWithResponses) ListActivityWithResponse(ctx context.Context, params *ListActivityParams, reqEditors ...RequestEditorFn) (*ListActivityResponse, error) {
+	rsp, err := c.ListActivity(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseListActivityResponse(rsp)
+}
+
+// GetActivityWithResponse request returning *GetActivityResponse
+func (c *ClientWithResponses) GetActivityWithResponse(ctx context.Context, activityId string, params *GetActivityParams, reqEditors ...RequestEditorFn) (*GetActivityResponse, error) {
+	rsp, err := c.GetActivity(ctx, activityId, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetActivityResponse(rsp)
 }
 
 // ListAssetWithResponse request returning *ListAssetResponse
@@ -13252,6 +14577,15 @@ func (c *ClientWithResponses) UpdateInvoiceWithResponse(ctx context.Context, inv
 	return ParseUpdateInvoiceResponse(rsp)
 }
 
+// ListForInvoiceWithResponse request returning *ListForInvoiceResponse
+func (c *ClientWithResponses) ListForInvoiceWithResponse(ctx context.Context, invoiceId string, params *ListForInvoiceParams, reqEditors ...RequestEditorFn) (*ListForInvoiceResponse, error) {
+	rsp, err := c.ListForInvoice(ctx, invoiceId, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseListForInvoiceResponse(rsp)
+}
+
 // ChangeInvoiceAutoSyncWithBodyWithResponse request with arbitrary body returning *ChangeInvoiceAutoSyncResponse
 func (c *ClientWithResponses) ChangeInvoiceAutoSyncWithBodyWithResponse(ctx context.Context, invoiceId string, params *ChangeInvoiceAutoSyncParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*ChangeInvoiceAutoSyncResponse, error) {
 	rsp, err := c.ChangeInvoiceAutoSyncWithBody(ctx, invoiceId, params, contentType, body, reqEditors...)
@@ -13486,6 +14820,24 @@ func (c *ClientWithResponses) ChangeAcceptedStatusWithResponse(ctx context.Conte
 	return ParseChangeAcceptedStatusResponse(rsp)
 }
 
+// ListForJobWithResponse request returning *ListForJobResponse
+func (c *ClientWithResponses) ListForJobWithResponse(ctx context.Context, jobId string, params *ListForJobParams, reqEditors ...RequestEditorFn) (*ListForJobResponse, error) {
+	rsp, err := c.ListForJob(ctx, jobId, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseListForJobResponse(rsp)
+}
+
+// GetForJobWithResponse request returning *GetForJobResponse
+func (c *ClientWithResponses) GetForJobWithResponse(ctx context.Context, jobId string, activityId string, params *GetForJobParams, reqEditors ...RequestEditorFn) (*GetForJobResponse, error) {
+	rsp, err := c.GetForJob(ctx, jobId, activityId, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetForJobResponse(rsp)
+}
+
 // ListJobReportForJobWithResponse request returning *ListJobReportForJobResponse
 func (c *ClientWithResponses) ListJobReportForJobWithResponse(ctx context.Context, jobId string, params *ListJobReportForJobParams, reqEditors ...RequestEditorFn) (*ListJobReportForJobResponse, error) {
 	rsp, err := c.ListJobReportForJob(ctx, jobId, params, reqEditors...)
@@ -13703,6 +15055,24 @@ func (c *ClientWithResponses) GetStockVariationWithResponse(ctx context.Context,
 	return ParseGetStockVariationResponse(rsp)
 }
 
+// ListTeamMemberWithResponse request returning *ListTeamMemberResponse
+func (c *ClientWithResponses) ListTeamMemberWithResponse(ctx context.Context, params *ListTeamMemberParams, reqEditors ...RequestEditorFn) (*ListTeamMemberResponse, error) {
+	rsp, err := c.ListTeamMember(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseListTeamMemberResponse(rsp)
+}
+
+// GetTeamMemberWithResponse request returning *GetTeamMemberResponse
+func (c *ClientWithResponses) GetTeamMemberWithResponse(ctx context.Context, teamMemberId string, params *GetTeamMemberParams, reqEditors ...RequestEditorFn) (*GetTeamMemberResponse, error) {
+	rsp, err := c.GetTeamMember(ctx, teamMemberId, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetTeamMemberResponse(rsp)
+}
+
 // GetWebhookDeliveryWithResponse request returning *GetWebhookDeliveryResponse
 func (c *ClientWithResponses) GetWebhookDeliveryWithResponse(ctx context.Context, deliveryId string, params *GetWebhookDeliveryParams, reqEditors ...RequestEditorFn) (*GetWebhookDeliveryResponse, error) {
 	rsp, err := c.GetWebhookDelivery(ctx, deliveryId, params, reqEditors...)
@@ -13807,6 +15177,142 @@ func (c *ClientWithResponses) ListWebhookEventWithResponse(ctx context.Context, 
 		return nil, err
 	}
 	return ParseListWebhookEventResponse(rsp)
+}
+
+// ParseListActivityResponse parses an HTTP response from a ListActivityWithResponse call
+func ParseListActivityResponse(rsp *http.Response) (*ListActivityResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ListActivityResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest ListResponseOfActivity
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetActivityResponse parses an HTTP response from a GetActivityWithResponse call
+func ParseGetActivityResponse(rsp *http.Response) (*GetActivityResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetActivityResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest Activity
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
 }
 
 // ParseListAssetResponse parses an HTTP response from a ListAssetWithResponse call
@@ -16676,6 +18182,74 @@ func ParseUpdateInvoiceResponse(rsp *http.Response) (*UpdateInvoiceResponse, err
 	return response, nil
 }
 
+// ParseListForInvoiceResponse parses an HTTP response from a ListForInvoiceWithResponse call
+func ParseListForInvoiceResponse(rsp *http.Response) (*ListForInvoiceResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ListForInvoiceResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest ListResponseOfActivity
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
 // ParseChangeInvoiceAutoSyncResponse parses an HTTP response from a ChangeInvoiceAutoSyncWithResponse call
 func ParseChangeInvoiceAutoSyncResponse(rsp *http.Response) (*ChangeInvoiceAutoSyncResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
@@ -17977,6 +19551,142 @@ func ParseChangeAcceptedStatusResponse(rsp *http.Response) (*ChangeAcceptedStatu
 	return response, nil
 }
 
+// ParseListForJobResponse parses an HTTP response from a ListForJobWithResponse call
+func ParseListForJobResponse(rsp *http.Response) (*ListForJobResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ListForJobResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest ListResponseOfActivity
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetForJobResponse parses an HTTP response from a GetForJobWithResponse call
+func ParseGetForJobResponse(rsp *http.Response) (*GetForJobResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetForJobResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest Activity
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
 // ParseListJobReportForJobResponse parses an HTTP response from a ListJobReportForJobWithResponse call
 func ParseListJobReportForJobResponse(rsp *http.Response) (*ListJobReportForJobResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
@@ -19137,6 +20847,142 @@ func ParseGetStockVariationResponse(rsp *http.Response) (*GetStockVariationRespo
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
 		var dest StockVariation
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseListTeamMemberResponse parses an HTTP response from a ListTeamMemberWithResponse call
+func ParseListTeamMemberResponse(rsp *http.Response) (*ListTeamMemberResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ListTeamMemberResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest ListResponseOfTeamMember
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetTeamMemberResponse parses an HTTP response from a GetTeamMemberWithResponse call
+func ParseGetTeamMemberResponse(rsp *http.Response) (*GetTeamMemberResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetTeamMemberResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest TeamMember
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
