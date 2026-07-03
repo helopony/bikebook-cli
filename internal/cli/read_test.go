@@ -11,8 +11,8 @@ import (
 
 func TestReadCommandsAllGETsHaveHappyPath(t *testing.T) {
 	withTempHome(t)
-	if got := len(readCommandSpecs()); got != 40 {
-		t.Fatalf("read command count = %d, want 40", got)
+	if got := len(readCommandSpecs()); got != 47 {
+		t.Fatalf("read command count = %d, want 47", got)
 	}
 	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		if r.Header.Get("Authorization") != "Bearer bbk_live_secret" {
@@ -48,6 +48,44 @@ func TestReadCommandsAllGETsHaveHappyPath(t *testing.T) {
 				t.Fatalf("stdout is not json: %s", stdout.String())
 			}
 		})
+	}
+}
+
+func TestActivitiesListFiltersForwarded(t *testing.T) {
+	withTempHome(t)
+	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		if r.URL.Path != "/public/v1/activities" {
+			t.Fatalf("path = %q", r.URL.Path)
+		}
+		for name, want := range map[string]string{
+			"job_id":        "job_1",
+			"activity_type": "status_changed,comment",
+			"created_from":  "2026-06-01T00:00:00Z",
+			"created_to":    "2026-06-30T23:59:59Z",
+		} {
+			if got := r.URL.Query().Get(name); got != want {
+				t.Fatalf("%s = %q, want %q", name, got, want)
+			}
+		}
+		w.Header().Set("Content-Type", "application/json")
+		_, _ = w.Write([]byte(`{"data":[],"pagination":{"has_more":false,"next_cursor":null}}`))
+	}))
+	t.Cleanup(server.Close)
+
+	var stdout, stderr bytes.Buffer
+	code := ExecuteWithArgs([]string{
+		"--api-key", "bbk_live_secret",
+		"--api-base", server.URL,
+		"--json",
+		"activities", "list",
+		"--job-id", "job_1",
+		"--activity-type", "status_changed,comment",
+		"--created-from", "2026-06-01T00:00:00Z",
+		"--created-to", "2026-06-30T23:59:59Z",
+	}, &stdout, &stderr)
+
+	if code != ExitSuccess {
+		t.Fatalf("exit = %d, stderr = %s", code, stderr.String())
 	}
 }
 
@@ -132,6 +170,84 @@ func TestCreatedDateFiltersForwardedForJobsAndInvoices(t *testing.T) {
 				t.Fatalf("exit = %d, stderr = %s", code, stderr.String())
 			}
 		})
+	}
+}
+
+func TestPaymentListFiltersForwarded(t *testing.T) {
+	withTempHome(t)
+	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		if r.URL.Path != "/public/v1/payments" {
+			t.Fatalf("path = %q", r.URL.Path)
+		}
+		for name, want := range map[string]string{
+			"business_id":     "org_1",
+			"invoice_id":      "inv_1",
+			"charged_on_from": "2026-06-01T00:00:00Z",
+			"charged_on_to":   "2026-06-30T23:59:59Z",
+			"amount_min":      "10.50",
+			"amount_max":      "250",
+		} {
+			if got := r.URL.Query().Get(name); got != want {
+				t.Fatalf("%s = %q, want %q", name, got, want)
+			}
+		}
+		w.Header().Set("Content-Type", "application/json")
+		_, _ = w.Write([]byte(`{"data":[],"pagination":{"has_more":false,"next_cursor":null}}`))
+	}))
+	t.Cleanup(server.Close)
+
+	var stdout, stderr bytes.Buffer
+	code := ExecuteWithArgs([]string{
+		"--api-key", "bbk_live_secret",
+		"--api-base", server.URL,
+		"--json",
+		"payments", "list",
+		"--business-id", "org_1",
+		"--invoice-id", "inv_1",
+		"--charged-on-from", "2026-06-01T00:00:00Z",
+		"--charged-on-to", "2026-06-30T23:59:59Z",
+		"--amount-min", "10.50",
+		"--amount-max", "250",
+	}, &stdout, &stderr)
+
+	if code != ExitSuccess {
+		t.Fatalf("exit = %d, stderr = %s", code, stderr.String())
+	}
+}
+
+func TestTeamMembersListFiltersForwarded(t *testing.T) {
+	withTempHome(t)
+	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		if r.URL.Path != "/public/v1/team_members" {
+			t.Fatalf("path = %q", r.URL.Path)
+		}
+		for name, want := range map[string]string{
+			"business_id": "org_1",
+			"is_mechanic": "true",
+			"enabled":     "true",
+		} {
+			if got := r.URL.Query().Get(name); got != want {
+				t.Fatalf("%s = %q, want %q", name, got, want)
+			}
+		}
+		w.Header().Set("Content-Type", "application/json")
+		_, _ = w.Write([]byte(`{"data":[],"pagination":{"has_more":false,"next_cursor":null}}`))
+	}))
+	t.Cleanup(server.Close)
+
+	var stdout, stderr bytes.Buffer
+	code := ExecuteWithArgs([]string{
+		"--api-key", "bbk_live_secret",
+		"--api-base", server.URL,
+		"--json",
+		"team-members", "list",
+		"--business-id", "org_1",
+		"--is-mechanic", "true",
+		"--enabled", "true",
+	}, &stdout, &stderr)
+
+	if code != ExitSuccess {
+		t.Fatalf("exit = %d, stderr = %s", code, stderr.String())
 	}
 }
 
