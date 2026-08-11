@@ -11,8 +11,8 @@ import (
 
 func TestReadCommandsAllGETsHaveHappyPath(t *testing.T) {
 	withTempHome(t)
-	if got := len(readCommandSpecs()); got != 47 {
-		t.Fatalf("read command count = %d, want 47", got)
+	if got := len(readCommandSpecs()); got != 49 {
+		t.Fatalf("read command count = %d, want 49", got)
 	}
 	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		if r.Header.Get("Authorization") != "Bearer bbk_live_secret" {
@@ -251,6 +251,52 @@ func TestTeamMembersListFiltersForwarded(t *testing.T) {
 	}
 }
 
+func TestStockListExternalIDFilterForwarded(t *testing.T) {
+	withTempHome(t)
+	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		if r.URL.Path != "/public/v1/stock_variations" {
+			t.Fatalf("path = %q", r.URL.Path)
+		}
+		if got := r.URL.Query().Get("external_id"); got != "gid://shopify/ProductVariant/123" {
+			t.Fatalf("external_id = %q", got)
+		}
+		w.Header().Set("Content-Type", "application/json")
+		_, _ = w.Write([]byte(`{"data":[],"pagination":{"has_more":false,"next_cursor":null}}`))
+	}))
+	t.Cleanup(server.Close)
+
+	var stdout, stderr bytes.Buffer
+	code := ExecuteWithArgs([]string{
+		"--api-key", "bbk_live_secret",
+		"--api-base", server.URL,
+		"--json",
+		"stock", "list",
+		"--external-id", "gid://shopify/ProductVariant/123",
+	}, &stdout, &stderr)
+
+	if code != ExitSuccess {
+		t.Fatalf("exit = %d, stderr = %s", code, stderr.String())
+	}
+}
+
+func TestMediaUploadGetRejectsInvalidUUID(t *testing.T) {
+	withTempHome(t)
+	var stdout, stderr bytes.Buffer
+	code := ExecuteWithArgs([]string{
+		"--api-key", "bbk_live_secret",
+		"--api-base", "https://api.example.test",
+		"--json",
+		"media-uploads", "get", "not-a-uuid",
+	}, &stdout, &stderr)
+
+	if code != ExitUsage {
+		t.Fatalf("exit = %d, stderr = %s", code, stderr.String())
+	}
+	if !strings.Contains(stderr.String(), `"parameter": "upload_id"`) {
+		t.Fatalf("stderr missing upload_id validation error: %s", stderr.String())
+	}
+}
+
 func TestJobsListRawEmitsNDJSONDataRows(t *testing.T) {
 	withTempHome(t)
 	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
@@ -305,5 +351,8 @@ func TestJobsGetMapsUpstreamError(t *testing.T) {
 }
 
 func samplePathArg(name string) string {
+	if name == "upload_id" {
+		return "8c1f7c7d-7d46-4e5e-8f3a-6406d0f67891"
+	}
 	return strings.TrimSuffix(name, "_id") + "_1"
 }

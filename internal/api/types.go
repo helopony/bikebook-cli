@@ -2167,6 +2167,1542 @@ func (e CustomerPreferredContactMethod) Valid() bool {
 	}
 }
 
+// Defines values for CustomerAddressCountry.
+const (
+	CustomerAddressCountryABW CustomerAddressCountry = "ABW"
+	CustomerAddressCountryAFG CustomerAddressCountry = "AFG"
+	CustomerAddressCountryAGO CustomerAddressCountry = "AGO"
+	CustomerAddressCountryAIA CustomerAddressCountry = "AIA"
+	CustomerAddressCountryALA CustomerAddressCountry = "ALA"
+	CustomerAddressCountryALB CustomerAddressCountry = "ALB"
+	CustomerAddressCountryAND CustomerAddressCountry = "AND"
+	CustomerAddressCountryANT CustomerAddressCountry = "ANT"
+	CustomerAddressCountryARE CustomerAddressCountry = "ARE"
+	CustomerAddressCountryARG CustomerAddressCountry = "ARG"
+	CustomerAddressCountryARM CustomerAddressCountry = "ARM"
+	CustomerAddressCountryASM CustomerAddressCountry = "ASM"
+	CustomerAddressCountryATA CustomerAddressCountry = "ATA"
+	CustomerAddressCountryATF CustomerAddressCountry = "ATF"
+	CustomerAddressCountryATG CustomerAddressCountry = "ATG"
+	CustomerAddressCountryAUS CustomerAddressCountry = "AUS"
+	CustomerAddressCountryAUT CustomerAddressCountry = "AUT"
+	CustomerAddressCountryAZE CustomerAddressCountry = "AZE"
+	CustomerAddressCountryBDI CustomerAddressCountry = "BDI"
+	CustomerAddressCountryBEL CustomerAddressCountry = "BEL"
+	CustomerAddressCountryBEN CustomerAddressCountry = "BEN"
+	CustomerAddressCountryBES CustomerAddressCountry = "BES"
+	CustomerAddressCountryBFA CustomerAddressCountry = "BFA"
+	CustomerAddressCountryBGD CustomerAddressCountry = "BGD"
+	CustomerAddressCountryBGR CustomerAddressCountry = "BGR"
+	CustomerAddressCountryBHR CustomerAddressCountry = "BHR"
+	CustomerAddressCountryBHS CustomerAddressCountry = "BHS"
+	CustomerAddressCountryBIH CustomerAddressCountry = "BIH"
+	CustomerAddressCountryBLM CustomerAddressCountry = "BLM"
+	CustomerAddressCountryBLR CustomerAddressCountry = "BLR"
+	CustomerAddressCountryBLZ CustomerAddressCountry = "BLZ"
+	CustomerAddressCountryBMU CustomerAddressCountry = "BMU"
+	CustomerAddressCountryBOL CustomerAddressCountry = "BOL"
+	CustomerAddressCountryBRA CustomerAddressCountry = "BRA"
+	CustomerAddressCountryBRB CustomerAddressCountry = "BRB"
+	CustomerAddressCountryBRN CustomerAddressCountry = "BRN"
+	CustomerAddressCountryBTN CustomerAddressCountry = "BTN"
+	CustomerAddressCountryBVT CustomerAddressCountry = "BVT"
+	CustomerAddressCountryBWA CustomerAddressCountry = "BWA"
+	CustomerAddressCountryCAF CustomerAddressCountry = "CAF"
+	CustomerAddressCountryCAN CustomerAddressCountry = "CAN"
+	CustomerAddressCountryCCK CustomerAddressCountry = "CCK"
+	CustomerAddressCountryCHE CustomerAddressCountry = "CHE"
+	CustomerAddressCountryCHL CustomerAddressCountry = "CHL"
+	CustomerAddressCountryCHN CustomerAddressCountry = "CHN"
+	CustomerAddressCountryCIV CustomerAddressCountry = "CIV"
+	CustomerAddressCountryCMR CustomerAddressCountry = "CMR"
+	CustomerAddressCountryCOD CustomerAddressCountry = "COD"
+	CustomerAddressCountryCOG CustomerAddressCountry = "COG"
+	CustomerAddressCountryCOK CustomerAddressCountry = "COK"
+	CustomerAddressCountryCOL CustomerAddressCountry = "COL"
+	CustomerAddressCountryCOM CustomerAddressCountry = "COM"
+	CustomerAddressCountryCPV CustomerAddressCountry = "CPV"
+	CustomerAddressCountryCRI CustomerAddressCountry = "CRI"
+	CustomerAddressCountryCUB CustomerAddressCountry = "CUB"
+	CustomerAddressCountryCUW CustomerAddressCountry = "CUW"
+	CustomerAddressCountryCXR CustomerAddressCountry = "CXR"
+	CustomerAddressCountryCYM CustomerAddressCountry = "CYM"
+	CustomerAddressCountryCYP CustomerAddressCountry = "CYP"
+	CustomerAddressCountryCZE CustomerAddressCountry = "CZE"
+	CustomerAddressCountryDEU CustomerAddressCountry = "DEU"
+	CustomerAddressCountryDJI CustomerAddressCountry = "DJI"
+	CustomerAddressCountryDMA CustomerAddressCountry = "DMA"
+	CustomerAddressCountryDNK CustomerAddressCountry = "DNK"
+	CustomerAddressCountryDOM CustomerAddressCountry = "DOM"
+	CustomerAddressCountryDZA CustomerAddressCountry = "DZA"
+	CustomerAddressCountryECU CustomerAddressCountry = "ECU"
+	CustomerAddressCountryEGY CustomerAddressCountry = "EGY"
+	CustomerAddressCountryERI CustomerAddressCountry = "ERI"
+	CustomerAddressCountryESH CustomerAddressCountry = "ESH"
+	CustomerAddressCountryESP CustomerAddressCountry = "ESP"
+	CustomerAddressCountryEST CustomerAddressCountry = "EST"
+	CustomerAddressCountryETH CustomerAddressCountry = "ETH"
+	CustomerAddressCountryFIN CustomerAddressCountry = "FIN"
+	CustomerAddressCountryFJI CustomerAddressCountry = "FJI"
+	CustomerAddressCountryFLK CustomerAddressCountry = "FLK"
+	CustomerAddressCountryFRA CustomerAddressCountry = "FRA"
+	CustomerAddressCountryFRO CustomerAddressCountry = "FRO"
+	CustomerAddressCountryFSM CustomerAddressCountry = "FSM"
+	CustomerAddressCountryGAB CustomerAddressCountry = "GAB"
+	CustomerAddressCountryGBR CustomerAddressCountry = "GBR"
+	CustomerAddressCountryGEO CustomerAddressCountry = "GEO"
+	CustomerAddressCountryGGY CustomerAddressCountry = "GGY"
+	CustomerAddressCountryGHA CustomerAddressCountry = "GHA"
+	CustomerAddressCountryGIB CustomerAddressCountry = "GIB"
+	CustomerAddressCountryGIN CustomerAddressCountry = "GIN"
+	CustomerAddressCountryGLP CustomerAddressCountry = "GLP"
+	CustomerAddressCountryGMB CustomerAddressCountry = "GMB"
+	CustomerAddressCountryGNB CustomerAddressCountry = "GNB"
+	CustomerAddressCountryGNQ CustomerAddressCountry = "GNQ"
+	CustomerAddressCountryGRC CustomerAddressCountry = "GRC"
+	CustomerAddressCountryGRD CustomerAddressCountry = "GRD"
+	CustomerAddressCountryGRL CustomerAddressCountry = "GRL"
+	CustomerAddressCountryGTM CustomerAddressCountry = "GTM"
+	CustomerAddressCountryGUF CustomerAddressCountry = "GUF"
+	CustomerAddressCountryGUM CustomerAddressCountry = "GUM"
+	CustomerAddressCountryGUY CustomerAddressCountry = "GUY"
+	CustomerAddressCountryHKG CustomerAddressCountry = "HKG"
+	CustomerAddressCountryHMD CustomerAddressCountry = "HMD"
+	CustomerAddressCountryHND CustomerAddressCountry = "HND"
+	CustomerAddressCountryHRV CustomerAddressCountry = "HRV"
+	CustomerAddressCountryHTI CustomerAddressCountry = "HTI"
+	CustomerAddressCountryHUN CustomerAddressCountry = "HUN"
+	CustomerAddressCountryIDN CustomerAddressCountry = "IDN"
+	CustomerAddressCountryIMN CustomerAddressCountry = "IMN"
+	CustomerAddressCountryIND CustomerAddressCountry = "IND"
+	CustomerAddressCountryIOT CustomerAddressCountry = "IOT"
+	CustomerAddressCountryIRL CustomerAddressCountry = "IRL"
+	CustomerAddressCountryIRN CustomerAddressCountry = "IRN"
+	CustomerAddressCountryIRQ CustomerAddressCountry = "IRQ"
+	CustomerAddressCountryISL CustomerAddressCountry = "ISL"
+	CustomerAddressCountryISR CustomerAddressCountry = "ISR"
+	CustomerAddressCountryITA CustomerAddressCountry = "ITA"
+	CustomerAddressCountryJAM CustomerAddressCountry = "JAM"
+	CustomerAddressCountryJEY CustomerAddressCountry = "JEY"
+	CustomerAddressCountryJOR CustomerAddressCountry = "JOR"
+	CustomerAddressCountryJPN CustomerAddressCountry = "JPN"
+	CustomerAddressCountryKAZ CustomerAddressCountry = "KAZ"
+	CustomerAddressCountryKEN CustomerAddressCountry = "KEN"
+	CustomerAddressCountryKGZ CustomerAddressCountry = "KGZ"
+	CustomerAddressCountryKHM CustomerAddressCountry = "KHM"
+	CustomerAddressCountryKIR CustomerAddressCountry = "KIR"
+	CustomerAddressCountryKNA CustomerAddressCountry = "KNA"
+	CustomerAddressCountryKOR CustomerAddressCountry = "KOR"
+	CustomerAddressCountryKWT CustomerAddressCountry = "KWT"
+	CustomerAddressCountryLAO CustomerAddressCountry = "LAO"
+	CustomerAddressCountryLBN CustomerAddressCountry = "LBN"
+	CustomerAddressCountryLBR CustomerAddressCountry = "LBR"
+	CustomerAddressCountryLBY CustomerAddressCountry = "LBY"
+	CustomerAddressCountryLCA CustomerAddressCountry = "LCA"
+	CustomerAddressCountryLIE CustomerAddressCountry = "LIE"
+	CustomerAddressCountryLKA CustomerAddressCountry = "LKA"
+	CustomerAddressCountryLSO CustomerAddressCountry = "LSO"
+	CustomerAddressCountryLTU CustomerAddressCountry = "LTU"
+	CustomerAddressCountryLUX CustomerAddressCountry = "LUX"
+	CustomerAddressCountryLVA CustomerAddressCountry = "LVA"
+	CustomerAddressCountryMAC CustomerAddressCountry = "MAC"
+	CustomerAddressCountryMAF CustomerAddressCountry = "MAF"
+	CustomerAddressCountryMAR CustomerAddressCountry = "MAR"
+	CustomerAddressCountryMCO CustomerAddressCountry = "MCO"
+	CustomerAddressCountryMDA CustomerAddressCountry = "MDA"
+	CustomerAddressCountryMDG CustomerAddressCountry = "MDG"
+	CustomerAddressCountryMDV CustomerAddressCountry = "MDV"
+	CustomerAddressCountryMEX CustomerAddressCountry = "MEX"
+	CustomerAddressCountryMHL CustomerAddressCountry = "MHL"
+	CustomerAddressCountryMKD CustomerAddressCountry = "MKD"
+	CustomerAddressCountryMLI CustomerAddressCountry = "MLI"
+	CustomerAddressCountryMLT CustomerAddressCountry = "MLT"
+	CustomerAddressCountryMMR CustomerAddressCountry = "MMR"
+	CustomerAddressCountryMNE CustomerAddressCountry = "MNE"
+	CustomerAddressCountryMNG CustomerAddressCountry = "MNG"
+	CustomerAddressCountryMNP CustomerAddressCountry = "MNP"
+	CustomerAddressCountryMOZ CustomerAddressCountry = "MOZ"
+	CustomerAddressCountryMRT CustomerAddressCountry = "MRT"
+	CustomerAddressCountryMSR CustomerAddressCountry = "MSR"
+	CustomerAddressCountryMTQ CustomerAddressCountry = "MTQ"
+	CustomerAddressCountryMUS CustomerAddressCountry = "MUS"
+	CustomerAddressCountryMWI CustomerAddressCountry = "MWI"
+	CustomerAddressCountryMYS CustomerAddressCountry = "MYS"
+	CustomerAddressCountryMYT CustomerAddressCountry = "MYT"
+	CustomerAddressCountryNAM CustomerAddressCountry = "NAM"
+	CustomerAddressCountryNCL CustomerAddressCountry = "NCL"
+	CustomerAddressCountryNER CustomerAddressCountry = "NER"
+	CustomerAddressCountryNFK CustomerAddressCountry = "NFK"
+	CustomerAddressCountryNGA CustomerAddressCountry = "NGA"
+	CustomerAddressCountryNIC CustomerAddressCountry = "NIC"
+	CustomerAddressCountryNIU CustomerAddressCountry = "NIU"
+	CustomerAddressCountryNLD CustomerAddressCountry = "NLD"
+	CustomerAddressCountryNOR CustomerAddressCountry = "NOR"
+	CustomerAddressCountryNPL CustomerAddressCountry = "NPL"
+	CustomerAddressCountryNRU CustomerAddressCountry = "NRU"
+	CustomerAddressCountryNZL CustomerAddressCountry = "NZL"
+	CustomerAddressCountryOMN CustomerAddressCountry = "OMN"
+	CustomerAddressCountryPAK CustomerAddressCountry = "PAK"
+	CustomerAddressCountryPAN CustomerAddressCountry = "PAN"
+	CustomerAddressCountryPCN CustomerAddressCountry = "PCN"
+	CustomerAddressCountryPER CustomerAddressCountry = "PER"
+	CustomerAddressCountryPHL CustomerAddressCountry = "PHL"
+	CustomerAddressCountryPLW CustomerAddressCountry = "PLW"
+	CustomerAddressCountryPNG CustomerAddressCountry = "PNG"
+	CustomerAddressCountryPOL CustomerAddressCountry = "POL"
+	CustomerAddressCountryPRI CustomerAddressCountry = "PRI"
+	CustomerAddressCountryPRK CustomerAddressCountry = "PRK"
+	CustomerAddressCountryPRT CustomerAddressCountry = "PRT"
+	CustomerAddressCountryPRY CustomerAddressCountry = "PRY"
+	CustomerAddressCountryPSE CustomerAddressCountry = "PSE"
+	CustomerAddressCountryPYF CustomerAddressCountry = "PYF"
+	CustomerAddressCountryQAT CustomerAddressCountry = "QAT"
+	CustomerAddressCountryREU CustomerAddressCountry = "REU"
+	CustomerAddressCountryROU CustomerAddressCountry = "ROU"
+	CustomerAddressCountryRUS CustomerAddressCountry = "RUS"
+	CustomerAddressCountryRWA CustomerAddressCountry = "RWA"
+	CustomerAddressCountrySAU CustomerAddressCountry = "SAU"
+	CustomerAddressCountrySCG CustomerAddressCountry = "SCG"
+	CustomerAddressCountrySDN CustomerAddressCountry = "SDN"
+	CustomerAddressCountrySEN CustomerAddressCountry = "SEN"
+	CustomerAddressCountrySGP CustomerAddressCountry = "SGP"
+	CustomerAddressCountrySGS CustomerAddressCountry = "SGS"
+	CustomerAddressCountrySHN CustomerAddressCountry = "SHN"
+	CustomerAddressCountrySJM CustomerAddressCountry = "SJM"
+	CustomerAddressCountrySLB CustomerAddressCountry = "SLB"
+	CustomerAddressCountrySLE CustomerAddressCountry = "SLE"
+	CustomerAddressCountrySLV CustomerAddressCountry = "SLV"
+	CustomerAddressCountrySMR CustomerAddressCountry = "SMR"
+	CustomerAddressCountrySOM CustomerAddressCountry = "SOM"
+	CustomerAddressCountrySPM CustomerAddressCountry = "SPM"
+	CustomerAddressCountrySRB CustomerAddressCountry = "SRB"
+	CustomerAddressCountrySSD CustomerAddressCountry = "SSD"
+	CustomerAddressCountrySTP CustomerAddressCountry = "STP"
+	CustomerAddressCountrySUR CustomerAddressCountry = "SUR"
+	CustomerAddressCountrySVK CustomerAddressCountry = "SVK"
+	CustomerAddressCountrySVN CustomerAddressCountry = "SVN"
+	CustomerAddressCountrySWE CustomerAddressCountry = "SWE"
+	CustomerAddressCountrySWZ CustomerAddressCountry = "SWZ"
+	CustomerAddressCountrySXM CustomerAddressCountry = "SXM"
+	CustomerAddressCountrySYC CustomerAddressCountry = "SYC"
+	CustomerAddressCountrySYR CustomerAddressCountry = "SYR"
+	CustomerAddressCountryTCA CustomerAddressCountry = "TCA"
+	CustomerAddressCountryTCD CustomerAddressCountry = "TCD"
+	CustomerAddressCountryTGO CustomerAddressCountry = "TGO"
+	CustomerAddressCountryTHA CustomerAddressCountry = "THA"
+	CustomerAddressCountryTJK CustomerAddressCountry = "TJK"
+	CustomerAddressCountryTKL CustomerAddressCountry = "TKL"
+	CustomerAddressCountryTKM CustomerAddressCountry = "TKM"
+	CustomerAddressCountryTLS CustomerAddressCountry = "TLS"
+	CustomerAddressCountryTON CustomerAddressCountry = "TON"
+	CustomerAddressCountryTTO CustomerAddressCountry = "TTO"
+	CustomerAddressCountryTUN CustomerAddressCountry = "TUN"
+	CustomerAddressCountryTUR CustomerAddressCountry = "TUR"
+	CustomerAddressCountryTUV CustomerAddressCountry = "TUV"
+	CustomerAddressCountryTWN CustomerAddressCountry = "TWN"
+	CustomerAddressCountryTZA CustomerAddressCountry = "TZA"
+	CustomerAddressCountryUGA CustomerAddressCountry = "UGA"
+	CustomerAddressCountryUKR CustomerAddressCountry = "UKR"
+	CustomerAddressCountryUMI CustomerAddressCountry = "UMI"
+	CustomerAddressCountryURY CustomerAddressCountry = "URY"
+	CustomerAddressCountryUSA CustomerAddressCountry = "USA"
+	CustomerAddressCountryUZB CustomerAddressCountry = "UZB"
+	CustomerAddressCountryVAT CustomerAddressCountry = "VAT"
+	CustomerAddressCountryVCT CustomerAddressCountry = "VCT"
+	CustomerAddressCountryVEN CustomerAddressCountry = "VEN"
+	CustomerAddressCountryVGB CustomerAddressCountry = "VGB"
+	CustomerAddressCountryVIR CustomerAddressCountry = "VIR"
+	CustomerAddressCountryVNM CustomerAddressCountry = "VNM"
+	CustomerAddressCountryVUT CustomerAddressCountry = "VUT"
+	CustomerAddressCountryWLF CustomerAddressCountry = "WLF"
+	CustomerAddressCountryWSM CustomerAddressCountry = "WSM"
+	CustomerAddressCountryXKX CustomerAddressCountry = "XKX"
+	CustomerAddressCountryYEM CustomerAddressCountry = "YEM"
+	CustomerAddressCountryZAF CustomerAddressCountry = "ZAF"
+	CustomerAddressCountryZMB CustomerAddressCountry = "ZMB"
+	CustomerAddressCountryZWE CustomerAddressCountry = "ZWE"
+)
+
+// Valid indicates whether the value is a known member of the CustomerAddressCountry enum.
+func (e CustomerAddressCountry) Valid() bool {
+	switch e {
+	case CustomerAddressCountryABW:
+		return true
+	case CustomerAddressCountryAFG:
+		return true
+	case CustomerAddressCountryAGO:
+		return true
+	case CustomerAddressCountryAIA:
+		return true
+	case CustomerAddressCountryALA:
+		return true
+	case CustomerAddressCountryALB:
+		return true
+	case CustomerAddressCountryAND:
+		return true
+	case CustomerAddressCountryANT:
+		return true
+	case CustomerAddressCountryARE:
+		return true
+	case CustomerAddressCountryARG:
+		return true
+	case CustomerAddressCountryARM:
+		return true
+	case CustomerAddressCountryASM:
+		return true
+	case CustomerAddressCountryATA:
+		return true
+	case CustomerAddressCountryATF:
+		return true
+	case CustomerAddressCountryATG:
+		return true
+	case CustomerAddressCountryAUS:
+		return true
+	case CustomerAddressCountryAUT:
+		return true
+	case CustomerAddressCountryAZE:
+		return true
+	case CustomerAddressCountryBDI:
+		return true
+	case CustomerAddressCountryBEL:
+		return true
+	case CustomerAddressCountryBEN:
+		return true
+	case CustomerAddressCountryBES:
+		return true
+	case CustomerAddressCountryBFA:
+		return true
+	case CustomerAddressCountryBGD:
+		return true
+	case CustomerAddressCountryBGR:
+		return true
+	case CustomerAddressCountryBHR:
+		return true
+	case CustomerAddressCountryBHS:
+		return true
+	case CustomerAddressCountryBIH:
+		return true
+	case CustomerAddressCountryBLM:
+		return true
+	case CustomerAddressCountryBLR:
+		return true
+	case CustomerAddressCountryBLZ:
+		return true
+	case CustomerAddressCountryBMU:
+		return true
+	case CustomerAddressCountryBOL:
+		return true
+	case CustomerAddressCountryBRA:
+		return true
+	case CustomerAddressCountryBRB:
+		return true
+	case CustomerAddressCountryBRN:
+		return true
+	case CustomerAddressCountryBTN:
+		return true
+	case CustomerAddressCountryBVT:
+		return true
+	case CustomerAddressCountryBWA:
+		return true
+	case CustomerAddressCountryCAF:
+		return true
+	case CustomerAddressCountryCAN:
+		return true
+	case CustomerAddressCountryCCK:
+		return true
+	case CustomerAddressCountryCHE:
+		return true
+	case CustomerAddressCountryCHL:
+		return true
+	case CustomerAddressCountryCHN:
+		return true
+	case CustomerAddressCountryCIV:
+		return true
+	case CustomerAddressCountryCMR:
+		return true
+	case CustomerAddressCountryCOD:
+		return true
+	case CustomerAddressCountryCOG:
+		return true
+	case CustomerAddressCountryCOK:
+		return true
+	case CustomerAddressCountryCOL:
+		return true
+	case CustomerAddressCountryCOM:
+		return true
+	case CustomerAddressCountryCPV:
+		return true
+	case CustomerAddressCountryCRI:
+		return true
+	case CustomerAddressCountryCUB:
+		return true
+	case CustomerAddressCountryCUW:
+		return true
+	case CustomerAddressCountryCXR:
+		return true
+	case CustomerAddressCountryCYM:
+		return true
+	case CustomerAddressCountryCYP:
+		return true
+	case CustomerAddressCountryCZE:
+		return true
+	case CustomerAddressCountryDEU:
+		return true
+	case CustomerAddressCountryDJI:
+		return true
+	case CustomerAddressCountryDMA:
+		return true
+	case CustomerAddressCountryDNK:
+		return true
+	case CustomerAddressCountryDOM:
+		return true
+	case CustomerAddressCountryDZA:
+		return true
+	case CustomerAddressCountryECU:
+		return true
+	case CustomerAddressCountryEGY:
+		return true
+	case CustomerAddressCountryERI:
+		return true
+	case CustomerAddressCountryESH:
+		return true
+	case CustomerAddressCountryESP:
+		return true
+	case CustomerAddressCountryEST:
+		return true
+	case CustomerAddressCountryETH:
+		return true
+	case CustomerAddressCountryFIN:
+		return true
+	case CustomerAddressCountryFJI:
+		return true
+	case CustomerAddressCountryFLK:
+		return true
+	case CustomerAddressCountryFRA:
+		return true
+	case CustomerAddressCountryFRO:
+		return true
+	case CustomerAddressCountryFSM:
+		return true
+	case CustomerAddressCountryGAB:
+		return true
+	case CustomerAddressCountryGBR:
+		return true
+	case CustomerAddressCountryGEO:
+		return true
+	case CustomerAddressCountryGGY:
+		return true
+	case CustomerAddressCountryGHA:
+		return true
+	case CustomerAddressCountryGIB:
+		return true
+	case CustomerAddressCountryGIN:
+		return true
+	case CustomerAddressCountryGLP:
+		return true
+	case CustomerAddressCountryGMB:
+		return true
+	case CustomerAddressCountryGNB:
+		return true
+	case CustomerAddressCountryGNQ:
+		return true
+	case CustomerAddressCountryGRC:
+		return true
+	case CustomerAddressCountryGRD:
+		return true
+	case CustomerAddressCountryGRL:
+		return true
+	case CustomerAddressCountryGTM:
+		return true
+	case CustomerAddressCountryGUF:
+		return true
+	case CustomerAddressCountryGUM:
+		return true
+	case CustomerAddressCountryGUY:
+		return true
+	case CustomerAddressCountryHKG:
+		return true
+	case CustomerAddressCountryHMD:
+		return true
+	case CustomerAddressCountryHND:
+		return true
+	case CustomerAddressCountryHRV:
+		return true
+	case CustomerAddressCountryHTI:
+		return true
+	case CustomerAddressCountryHUN:
+		return true
+	case CustomerAddressCountryIDN:
+		return true
+	case CustomerAddressCountryIMN:
+		return true
+	case CustomerAddressCountryIND:
+		return true
+	case CustomerAddressCountryIOT:
+		return true
+	case CustomerAddressCountryIRL:
+		return true
+	case CustomerAddressCountryIRN:
+		return true
+	case CustomerAddressCountryIRQ:
+		return true
+	case CustomerAddressCountryISL:
+		return true
+	case CustomerAddressCountryISR:
+		return true
+	case CustomerAddressCountryITA:
+		return true
+	case CustomerAddressCountryJAM:
+		return true
+	case CustomerAddressCountryJEY:
+		return true
+	case CustomerAddressCountryJOR:
+		return true
+	case CustomerAddressCountryJPN:
+		return true
+	case CustomerAddressCountryKAZ:
+		return true
+	case CustomerAddressCountryKEN:
+		return true
+	case CustomerAddressCountryKGZ:
+		return true
+	case CustomerAddressCountryKHM:
+		return true
+	case CustomerAddressCountryKIR:
+		return true
+	case CustomerAddressCountryKNA:
+		return true
+	case CustomerAddressCountryKOR:
+		return true
+	case CustomerAddressCountryKWT:
+		return true
+	case CustomerAddressCountryLAO:
+		return true
+	case CustomerAddressCountryLBN:
+		return true
+	case CustomerAddressCountryLBR:
+		return true
+	case CustomerAddressCountryLBY:
+		return true
+	case CustomerAddressCountryLCA:
+		return true
+	case CustomerAddressCountryLIE:
+		return true
+	case CustomerAddressCountryLKA:
+		return true
+	case CustomerAddressCountryLSO:
+		return true
+	case CustomerAddressCountryLTU:
+		return true
+	case CustomerAddressCountryLUX:
+		return true
+	case CustomerAddressCountryLVA:
+		return true
+	case CustomerAddressCountryMAC:
+		return true
+	case CustomerAddressCountryMAF:
+		return true
+	case CustomerAddressCountryMAR:
+		return true
+	case CustomerAddressCountryMCO:
+		return true
+	case CustomerAddressCountryMDA:
+		return true
+	case CustomerAddressCountryMDG:
+		return true
+	case CustomerAddressCountryMDV:
+		return true
+	case CustomerAddressCountryMEX:
+		return true
+	case CustomerAddressCountryMHL:
+		return true
+	case CustomerAddressCountryMKD:
+		return true
+	case CustomerAddressCountryMLI:
+		return true
+	case CustomerAddressCountryMLT:
+		return true
+	case CustomerAddressCountryMMR:
+		return true
+	case CustomerAddressCountryMNE:
+		return true
+	case CustomerAddressCountryMNG:
+		return true
+	case CustomerAddressCountryMNP:
+		return true
+	case CustomerAddressCountryMOZ:
+		return true
+	case CustomerAddressCountryMRT:
+		return true
+	case CustomerAddressCountryMSR:
+		return true
+	case CustomerAddressCountryMTQ:
+		return true
+	case CustomerAddressCountryMUS:
+		return true
+	case CustomerAddressCountryMWI:
+		return true
+	case CustomerAddressCountryMYS:
+		return true
+	case CustomerAddressCountryMYT:
+		return true
+	case CustomerAddressCountryNAM:
+		return true
+	case CustomerAddressCountryNCL:
+		return true
+	case CustomerAddressCountryNER:
+		return true
+	case CustomerAddressCountryNFK:
+		return true
+	case CustomerAddressCountryNGA:
+		return true
+	case CustomerAddressCountryNIC:
+		return true
+	case CustomerAddressCountryNIU:
+		return true
+	case CustomerAddressCountryNLD:
+		return true
+	case CustomerAddressCountryNOR:
+		return true
+	case CustomerAddressCountryNPL:
+		return true
+	case CustomerAddressCountryNRU:
+		return true
+	case CustomerAddressCountryNZL:
+		return true
+	case CustomerAddressCountryOMN:
+		return true
+	case CustomerAddressCountryPAK:
+		return true
+	case CustomerAddressCountryPAN:
+		return true
+	case CustomerAddressCountryPCN:
+		return true
+	case CustomerAddressCountryPER:
+		return true
+	case CustomerAddressCountryPHL:
+		return true
+	case CustomerAddressCountryPLW:
+		return true
+	case CustomerAddressCountryPNG:
+		return true
+	case CustomerAddressCountryPOL:
+		return true
+	case CustomerAddressCountryPRI:
+		return true
+	case CustomerAddressCountryPRK:
+		return true
+	case CustomerAddressCountryPRT:
+		return true
+	case CustomerAddressCountryPRY:
+		return true
+	case CustomerAddressCountryPSE:
+		return true
+	case CustomerAddressCountryPYF:
+		return true
+	case CustomerAddressCountryQAT:
+		return true
+	case CustomerAddressCountryREU:
+		return true
+	case CustomerAddressCountryROU:
+		return true
+	case CustomerAddressCountryRUS:
+		return true
+	case CustomerAddressCountryRWA:
+		return true
+	case CustomerAddressCountrySAU:
+		return true
+	case CustomerAddressCountrySCG:
+		return true
+	case CustomerAddressCountrySDN:
+		return true
+	case CustomerAddressCountrySEN:
+		return true
+	case CustomerAddressCountrySGP:
+		return true
+	case CustomerAddressCountrySGS:
+		return true
+	case CustomerAddressCountrySHN:
+		return true
+	case CustomerAddressCountrySJM:
+		return true
+	case CustomerAddressCountrySLB:
+		return true
+	case CustomerAddressCountrySLE:
+		return true
+	case CustomerAddressCountrySLV:
+		return true
+	case CustomerAddressCountrySMR:
+		return true
+	case CustomerAddressCountrySOM:
+		return true
+	case CustomerAddressCountrySPM:
+		return true
+	case CustomerAddressCountrySRB:
+		return true
+	case CustomerAddressCountrySSD:
+		return true
+	case CustomerAddressCountrySTP:
+		return true
+	case CustomerAddressCountrySUR:
+		return true
+	case CustomerAddressCountrySVK:
+		return true
+	case CustomerAddressCountrySVN:
+		return true
+	case CustomerAddressCountrySWE:
+		return true
+	case CustomerAddressCountrySWZ:
+		return true
+	case CustomerAddressCountrySXM:
+		return true
+	case CustomerAddressCountrySYC:
+		return true
+	case CustomerAddressCountrySYR:
+		return true
+	case CustomerAddressCountryTCA:
+		return true
+	case CustomerAddressCountryTCD:
+		return true
+	case CustomerAddressCountryTGO:
+		return true
+	case CustomerAddressCountryTHA:
+		return true
+	case CustomerAddressCountryTJK:
+		return true
+	case CustomerAddressCountryTKL:
+		return true
+	case CustomerAddressCountryTKM:
+		return true
+	case CustomerAddressCountryTLS:
+		return true
+	case CustomerAddressCountryTON:
+		return true
+	case CustomerAddressCountryTTO:
+		return true
+	case CustomerAddressCountryTUN:
+		return true
+	case CustomerAddressCountryTUR:
+		return true
+	case CustomerAddressCountryTUV:
+		return true
+	case CustomerAddressCountryTWN:
+		return true
+	case CustomerAddressCountryTZA:
+		return true
+	case CustomerAddressCountryUGA:
+		return true
+	case CustomerAddressCountryUKR:
+		return true
+	case CustomerAddressCountryUMI:
+		return true
+	case CustomerAddressCountryURY:
+		return true
+	case CustomerAddressCountryUSA:
+		return true
+	case CustomerAddressCountryUZB:
+		return true
+	case CustomerAddressCountryVAT:
+		return true
+	case CustomerAddressCountryVCT:
+		return true
+	case CustomerAddressCountryVEN:
+		return true
+	case CustomerAddressCountryVGB:
+		return true
+	case CustomerAddressCountryVIR:
+		return true
+	case CustomerAddressCountryVNM:
+		return true
+	case CustomerAddressCountryVUT:
+		return true
+	case CustomerAddressCountryWLF:
+		return true
+	case CustomerAddressCountryWSM:
+		return true
+	case CustomerAddressCountryXKX:
+		return true
+	case CustomerAddressCountryYEM:
+		return true
+	case CustomerAddressCountryZAF:
+		return true
+	case CustomerAddressCountryZMB:
+		return true
+	case CustomerAddressCountryZWE:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for CustomerAddressCreateRequestCountry.
+const (
+	CustomerAddressCreateRequestCountryABW CustomerAddressCreateRequestCountry = "ABW"
+	CustomerAddressCreateRequestCountryAFG CustomerAddressCreateRequestCountry = "AFG"
+	CustomerAddressCreateRequestCountryAGO CustomerAddressCreateRequestCountry = "AGO"
+	CustomerAddressCreateRequestCountryAIA CustomerAddressCreateRequestCountry = "AIA"
+	CustomerAddressCreateRequestCountryALA CustomerAddressCreateRequestCountry = "ALA"
+	CustomerAddressCreateRequestCountryALB CustomerAddressCreateRequestCountry = "ALB"
+	CustomerAddressCreateRequestCountryAND CustomerAddressCreateRequestCountry = "AND"
+	CustomerAddressCreateRequestCountryANT CustomerAddressCreateRequestCountry = "ANT"
+	CustomerAddressCreateRequestCountryARE CustomerAddressCreateRequestCountry = "ARE"
+	CustomerAddressCreateRequestCountryARG CustomerAddressCreateRequestCountry = "ARG"
+	CustomerAddressCreateRequestCountryARM CustomerAddressCreateRequestCountry = "ARM"
+	CustomerAddressCreateRequestCountryASM CustomerAddressCreateRequestCountry = "ASM"
+	CustomerAddressCreateRequestCountryATA CustomerAddressCreateRequestCountry = "ATA"
+	CustomerAddressCreateRequestCountryATF CustomerAddressCreateRequestCountry = "ATF"
+	CustomerAddressCreateRequestCountryATG CustomerAddressCreateRequestCountry = "ATG"
+	CustomerAddressCreateRequestCountryAUS CustomerAddressCreateRequestCountry = "AUS"
+	CustomerAddressCreateRequestCountryAUT CustomerAddressCreateRequestCountry = "AUT"
+	CustomerAddressCreateRequestCountryAZE CustomerAddressCreateRequestCountry = "AZE"
+	CustomerAddressCreateRequestCountryBDI CustomerAddressCreateRequestCountry = "BDI"
+	CustomerAddressCreateRequestCountryBEL CustomerAddressCreateRequestCountry = "BEL"
+	CustomerAddressCreateRequestCountryBEN CustomerAddressCreateRequestCountry = "BEN"
+	CustomerAddressCreateRequestCountryBES CustomerAddressCreateRequestCountry = "BES"
+	CustomerAddressCreateRequestCountryBFA CustomerAddressCreateRequestCountry = "BFA"
+	CustomerAddressCreateRequestCountryBGD CustomerAddressCreateRequestCountry = "BGD"
+	CustomerAddressCreateRequestCountryBGR CustomerAddressCreateRequestCountry = "BGR"
+	CustomerAddressCreateRequestCountryBHR CustomerAddressCreateRequestCountry = "BHR"
+	CustomerAddressCreateRequestCountryBHS CustomerAddressCreateRequestCountry = "BHS"
+	CustomerAddressCreateRequestCountryBIH CustomerAddressCreateRequestCountry = "BIH"
+	CustomerAddressCreateRequestCountryBLM CustomerAddressCreateRequestCountry = "BLM"
+	CustomerAddressCreateRequestCountryBLR CustomerAddressCreateRequestCountry = "BLR"
+	CustomerAddressCreateRequestCountryBLZ CustomerAddressCreateRequestCountry = "BLZ"
+	CustomerAddressCreateRequestCountryBMU CustomerAddressCreateRequestCountry = "BMU"
+	CustomerAddressCreateRequestCountryBOL CustomerAddressCreateRequestCountry = "BOL"
+	CustomerAddressCreateRequestCountryBRA CustomerAddressCreateRequestCountry = "BRA"
+	CustomerAddressCreateRequestCountryBRB CustomerAddressCreateRequestCountry = "BRB"
+	CustomerAddressCreateRequestCountryBRN CustomerAddressCreateRequestCountry = "BRN"
+	CustomerAddressCreateRequestCountryBTN CustomerAddressCreateRequestCountry = "BTN"
+	CustomerAddressCreateRequestCountryBVT CustomerAddressCreateRequestCountry = "BVT"
+	CustomerAddressCreateRequestCountryBWA CustomerAddressCreateRequestCountry = "BWA"
+	CustomerAddressCreateRequestCountryCAF CustomerAddressCreateRequestCountry = "CAF"
+	CustomerAddressCreateRequestCountryCAN CustomerAddressCreateRequestCountry = "CAN"
+	CustomerAddressCreateRequestCountryCCK CustomerAddressCreateRequestCountry = "CCK"
+	CustomerAddressCreateRequestCountryCHE CustomerAddressCreateRequestCountry = "CHE"
+	CustomerAddressCreateRequestCountryCHL CustomerAddressCreateRequestCountry = "CHL"
+	CustomerAddressCreateRequestCountryCHN CustomerAddressCreateRequestCountry = "CHN"
+	CustomerAddressCreateRequestCountryCIV CustomerAddressCreateRequestCountry = "CIV"
+	CustomerAddressCreateRequestCountryCMR CustomerAddressCreateRequestCountry = "CMR"
+	CustomerAddressCreateRequestCountryCOD CustomerAddressCreateRequestCountry = "COD"
+	CustomerAddressCreateRequestCountryCOG CustomerAddressCreateRequestCountry = "COG"
+	CustomerAddressCreateRequestCountryCOK CustomerAddressCreateRequestCountry = "COK"
+	CustomerAddressCreateRequestCountryCOL CustomerAddressCreateRequestCountry = "COL"
+	CustomerAddressCreateRequestCountryCOM CustomerAddressCreateRequestCountry = "COM"
+	CustomerAddressCreateRequestCountryCPV CustomerAddressCreateRequestCountry = "CPV"
+	CustomerAddressCreateRequestCountryCRI CustomerAddressCreateRequestCountry = "CRI"
+	CustomerAddressCreateRequestCountryCUB CustomerAddressCreateRequestCountry = "CUB"
+	CustomerAddressCreateRequestCountryCUW CustomerAddressCreateRequestCountry = "CUW"
+	CustomerAddressCreateRequestCountryCXR CustomerAddressCreateRequestCountry = "CXR"
+	CustomerAddressCreateRequestCountryCYM CustomerAddressCreateRequestCountry = "CYM"
+	CustomerAddressCreateRequestCountryCYP CustomerAddressCreateRequestCountry = "CYP"
+	CustomerAddressCreateRequestCountryCZE CustomerAddressCreateRequestCountry = "CZE"
+	CustomerAddressCreateRequestCountryDEU CustomerAddressCreateRequestCountry = "DEU"
+	CustomerAddressCreateRequestCountryDJI CustomerAddressCreateRequestCountry = "DJI"
+	CustomerAddressCreateRequestCountryDMA CustomerAddressCreateRequestCountry = "DMA"
+	CustomerAddressCreateRequestCountryDNK CustomerAddressCreateRequestCountry = "DNK"
+	CustomerAddressCreateRequestCountryDOM CustomerAddressCreateRequestCountry = "DOM"
+	CustomerAddressCreateRequestCountryDZA CustomerAddressCreateRequestCountry = "DZA"
+	CustomerAddressCreateRequestCountryECU CustomerAddressCreateRequestCountry = "ECU"
+	CustomerAddressCreateRequestCountryEGY CustomerAddressCreateRequestCountry = "EGY"
+	CustomerAddressCreateRequestCountryERI CustomerAddressCreateRequestCountry = "ERI"
+	CustomerAddressCreateRequestCountryESH CustomerAddressCreateRequestCountry = "ESH"
+	CustomerAddressCreateRequestCountryESP CustomerAddressCreateRequestCountry = "ESP"
+	CustomerAddressCreateRequestCountryEST CustomerAddressCreateRequestCountry = "EST"
+	CustomerAddressCreateRequestCountryETH CustomerAddressCreateRequestCountry = "ETH"
+	CustomerAddressCreateRequestCountryFIN CustomerAddressCreateRequestCountry = "FIN"
+	CustomerAddressCreateRequestCountryFJI CustomerAddressCreateRequestCountry = "FJI"
+	CustomerAddressCreateRequestCountryFLK CustomerAddressCreateRequestCountry = "FLK"
+	CustomerAddressCreateRequestCountryFRA CustomerAddressCreateRequestCountry = "FRA"
+	CustomerAddressCreateRequestCountryFRO CustomerAddressCreateRequestCountry = "FRO"
+	CustomerAddressCreateRequestCountryFSM CustomerAddressCreateRequestCountry = "FSM"
+	CustomerAddressCreateRequestCountryGAB CustomerAddressCreateRequestCountry = "GAB"
+	CustomerAddressCreateRequestCountryGBR CustomerAddressCreateRequestCountry = "GBR"
+	CustomerAddressCreateRequestCountryGEO CustomerAddressCreateRequestCountry = "GEO"
+	CustomerAddressCreateRequestCountryGGY CustomerAddressCreateRequestCountry = "GGY"
+	CustomerAddressCreateRequestCountryGHA CustomerAddressCreateRequestCountry = "GHA"
+	CustomerAddressCreateRequestCountryGIB CustomerAddressCreateRequestCountry = "GIB"
+	CustomerAddressCreateRequestCountryGIN CustomerAddressCreateRequestCountry = "GIN"
+	CustomerAddressCreateRequestCountryGLP CustomerAddressCreateRequestCountry = "GLP"
+	CustomerAddressCreateRequestCountryGMB CustomerAddressCreateRequestCountry = "GMB"
+	CustomerAddressCreateRequestCountryGNB CustomerAddressCreateRequestCountry = "GNB"
+	CustomerAddressCreateRequestCountryGNQ CustomerAddressCreateRequestCountry = "GNQ"
+	CustomerAddressCreateRequestCountryGRC CustomerAddressCreateRequestCountry = "GRC"
+	CustomerAddressCreateRequestCountryGRD CustomerAddressCreateRequestCountry = "GRD"
+	CustomerAddressCreateRequestCountryGRL CustomerAddressCreateRequestCountry = "GRL"
+	CustomerAddressCreateRequestCountryGTM CustomerAddressCreateRequestCountry = "GTM"
+	CustomerAddressCreateRequestCountryGUF CustomerAddressCreateRequestCountry = "GUF"
+	CustomerAddressCreateRequestCountryGUM CustomerAddressCreateRequestCountry = "GUM"
+	CustomerAddressCreateRequestCountryGUY CustomerAddressCreateRequestCountry = "GUY"
+	CustomerAddressCreateRequestCountryHKG CustomerAddressCreateRequestCountry = "HKG"
+	CustomerAddressCreateRequestCountryHMD CustomerAddressCreateRequestCountry = "HMD"
+	CustomerAddressCreateRequestCountryHND CustomerAddressCreateRequestCountry = "HND"
+	CustomerAddressCreateRequestCountryHRV CustomerAddressCreateRequestCountry = "HRV"
+	CustomerAddressCreateRequestCountryHTI CustomerAddressCreateRequestCountry = "HTI"
+	CustomerAddressCreateRequestCountryHUN CustomerAddressCreateRequestCountry = "HUN"
+	CustomerAddressCreateRequestCountryIDN CustomerAddressCreateRequestCountry = "IDN"
+	CustomerAddressCreateRequestCountryIMN CustomerAddressCreateRequestCountry = "IMN"
+	CustomerAddressCreateRequestCountryIND CustomerAddressCreateRequestCountry = "IND"
+	CustomerAddressCreateRequestCountryIOT CustomerAddressCreateRequestCountry = "IOT"
+	CustomerAddressCreateRequestCountryIRL CustomerAddressCreateRequestCountry = "IRL"
+	CustomerAddressCreateRequestCountryIRN CustomerAddressCreateRequestCountry = "IRN"
+	CustomerAddressCreateRequestCountryIRQ CustomerAddressCreateRequestCountry = "IRQ"
+	CustomerAddressCreateRequestCountryISL CustomerAddressCreateRequestCountry = "ISL"
+	CustomerAddressCreateRequestCountryISR CustomerAddressCreateRequestCountry = "ISR"
+	CustomerAddressCreateRequestCountryITA CustomerAddressCreateRequestCountry = "ITA"
+	CustomerAddressCreateRequestCountryJAM CustomerAddressCreateRequestCountry = "JAM"
+	CustomerAddressCreateRequestCountryJEY CustomerAddressCreateRequestCountry = "JEY"
+	CustomerAddressCreateRequestCountryJOR CustomerAddressCreateRequestCountry = "JOR"
+	CustomerAddressCreateRequestCountryJPN CustomerAddressCreateRequestCountry = "JPN"
+	CustomerAddressCreateRequestCountryKAZ CustomerAddressCreateRequestCountry = "KAZ"
+	CustomerAddressCreateRequestCountryKEN CustomerAddressCreateRequestCountry = "KEN"
+	CustomerAddressCreateRequestCountryKGZ CustomerAddressCreateRequestCountry = "KGZ"
+	CustomerAddressCreateRequestCountryKHM CustomerAddressCreateRequestCountry = "KHM"
+	CustomerAddressCreateRequestCountryKIR CustomerAddressCreateRequestCountry = "KIR"
+	CustomerAddressCreateRequestCountryKNA CustomerAddressCreateRequestCountry = "KNA"
+	CustomerAddressCreateRequestCountryKOR CustomerAddressCreateRequestCountry = "KOR"
+	CustomerAddressCreateRequestCountryKWT CustomerAddressCreateRequestCountry = "KWT"
+	CustomerAddressCreateRequestCountryLAO CustomerAddressCreateRequestCountry = "LAO"
+	CustomerAddressCreateRequestCountryLBN CustomerAddressCreateRequestCountry = "LBN"
+	CustomerAddressCreateRequestCountryLBR CustomerAddressCreateRequestCountry = "LBR"
+	CustomerAddressCreateRequestCountryLBY CustomerAddressCreateRequestCountry = "LBY"
+	CustomerAddressCreateRequestCountryLCA CustomerAddressCreateRequestCountry = "LCA"
+	CustomerAddressCreateRequestCountryLIE CustomerAddressCreateRequestCountry = "LIE"
+	CustomerAddressCreateRequestCountryLKA CustomerAddressCreateRequestCountry = "LKA"
+	CustomerAddressCreateRequestCountryLSO CustomerAddressCreateRequestCountry = "LSO"
+	CustomerAddressCreateRequestCountryLTU CustomerAddressCreateRequestCountry = "LTU"
+	CustomerAddressCreateRequestCountryLUX CustomerAddressCreateRequestCountry = "LUX"
+	CustomerAddressCreateRequestCountryLVA CustomerAddressCreateRequestCountry = "LVA"
+	CustomerAddressCreateRequestCountryMAC CustomerAddressCreateRequestCountry = "MAC"
+	CustomerAddressCreateRequestCountryMAF CustomerAddressCreateRequestCountry = "MAF"
+	CustomerAddressCreateRequestCountryMAR CustomerAddressCreateRequestCountry = "MAR"
+	CustomerAddressCreateRequestCountryMCO CustomerAddressCreateRequestCountry = "MCO"
+	CustomerAddressCreateRequestCountryMDA CustomerAddressCreateRequestCountry = "MDA"
+	CustomerAddressCreateRequestCountryMDG CustomerAddressCreateRequestCountry = "MDG"
+	CustomerAddressCreateRequestCountryMDV CustomerAddressCreateRequestCountry = "MDV"
+	CustomerAddressCreateRequestCountryMEX CustomerAddressCreateRequestCountry = "MEX"
+	CustomerAddressCreateRequestCountryMHL CustomerAddressCreateRequestCountry = "MHL"
+	CustomerAddressCreateRequestCountryMKD CustomerAddressCreateRequestCountry = "MKD"
+	CustomerAddressCreateRequestCountryMLI CustomerAddressCreateRequestCountry = "MLI"
+	CustomerAddressCreateRequestCountryMLT CustomerAddressCreateRequestCountry = "MLT"
+	CustomerAddressCreateRequestCountryMMR CustomerAddressCreateRequestCountry = "MMR"
+	CustomerAddressCreateRequestCountryMNE CustomerAddressCreateRequestCountry = "MNE"
+	CustomerAddressCreateRequestCountryMNG CustomerAddressCreateRequestCountry = "MNG"
+	CustomerAddressCreateRequestCountryMNP CustomerAddressCreateRequestCountry = "MNP"
+	CustomerAddressCreateRequestCountryMOZ CustomerAddressCreateRequestCountry = "MOZ"
+	CustomerAddressCreateRequestCountryMRT CustomerAddressCreateRequestCountry = "MRT"
+	CustomerAddressCreateRequestCountryMSR CustomerAddressCreateRequestCountry = "MSR"
+	CustomerAddressCreateRequestCountryMTQ CustomerAddressCreateRequestCountry = "MTQ"
+	CustomerAddressCreateRequestCountryMUS CustomerAddressCreateRequestCountry = "MUS"
+	CustomerAddressCreateRequestCountryMWI CustomerAddressCreateRequestCountry = "MWI"
+	CustomerAddressCreateRequestCountryMYS CustomerAddressCreateRequestCountry = "MYS"
+	CustomerAddressCreateRequestCountryMYT CustomerAddressCreateRequestCountry = "MYT"
+	CustomerAddressCreateRequestCountryNAM CustomerAddressCreateRequestCountry = "NAM"
+	CustomerAddressCreateRequestCountryNCL CustomerAddressCreateRequestCountry = "NCL"
+	CustomerAddressCreateRequestCountryNER CustomerAddressCreateRequestCountry = "NER"
+	CustomerAddressCreateRequestCountryNFK CustomerAddressCreateRequestCountry = "NFK"
+	CustomerAddressCreateRequestCountryNGA CustomerAddressCreateRequestCountry = "NGA"
+	CustomerAddressCreateRequestCountryNIC CustomerAddressCreateRequestCountry = "NIC"
+	CustomerAddressCreateRequestCountryNIU CustomerAddressCreateRequestCountry = "NIU"
+	CustomerAddressCreateRequestCountryNLD CustomerAddressCreateRequestCountry = "NLD"
+	CustomerAddressCreateRequestCountryNOR CustomerAddressCreateRequestCountry = "NOR"
+	CustomerAddressCreateRequestCountryNPL CustomerAddressCreateRequestCountry = "NPL"
+	CustomerAddressCreateRequestCountryNRU CustomerAddressCreateRequestCountry = "NRU"
+	CustomerAddressCreateRequestCountryNZL CustomerAddressCreateRequestCountry = "NZL"
+	CustomerAddressCreateRequestCountryOMN CustomerAddressCreateRequestCountry = "OMN"
+	CustomerAddressCreateRequestCountryPAK CustomerAddressCreateRequestCountry = "PAK"
+	CustomerAddressCreateRequestCountryPAN CustomerAddressCreateRequestCountry = "PAN"
+	CustomerAddressCreateRequestCountryPCN CustomerAddressCreateRequestCountry = "PCN"
+	CustomerAddressCreateRequestCountryPER CustomerAddressCreateRequestCountry = "PER"
+	CustomerAddressCreateRequestCountryPHL CustomerAddressCreateRequestCountry = "PHL"
+	CustomerAddressCreateRequestCountryPLW CustomerAddressCreateRequestCountry = "PLW"
+	CustomerAddressCreateRequestCountryPNG CustomerAddressCreateRequestCountry = "PNG"
+	CustomerAddressCreateRequestCountryPOL CustomerAddressCreateRequestCountry = "POL"
+	CustomerAddressCreateRequestCountryPRI CustomerAddressCreateRequestCountry = "PRI"
+	CustomerAddressCreateRequestCountryPRK CustomerAddressCreateRequestCountry = "PRK"
+	CustomerAddressCreateRequestCountryPRT CustomerAddressCreateRequestCountry = "PRT"
+	CustomerAddressCreateRequestCountryPRY CustomerAddressCreateRequestCountry = "PRY"
+	CustomerAddressCreateRequestCountryPSE CustomerAddressCreateRequestCountry = "PSE"
+	CustomerAddressCreateRequestCountryPYF CustomerAddressCreateRequestCountry = "PYF"
+	CustomerAddressCreateRequestCountryQAT CustomerAddressCreateRequestCountry = "QAT"
+	CustomerAddressCreateRequestCountryREU CustomerAddressCreateRequestCountry = "REU"
+	CustomerAddressCreateRequestCountryROU CustomerAddressCreateRequestCountry = "ROU"
+	CustomerAddressCreateRequestCountryRUS CustomerAddressCreateRequestCountry = "RUS"
+	CustomerAddressCreateRequestCountryRWA CustomerAddressCreateRequestCountry = "RWA"
+	CustomerAddressCreateRequestCountrySAU CustomerAddressCreateRequestCountry = "SAU"
+	CustomerAddressCreateRequestCountrySCG CustomerAddressCreateRequestCountry = "SCG"
+	CustomerAddressCreateRequestCountrySDN CustomerAddressCreateRequestCountry = "SDN"
+	CustomerAddressCreateRequestCountrySEN CustomerAddressCreateRequestCountry = "SEN"
+	CustomerAddressCreateRequestCountrySGP CustomerAddressCreateRequestCountry = "SGP"
+	CustomerAddressCreateRequestCountrySGS CustomerAddressCreateRequestCountry = "SGS"
+	CustomerAddressCreateRequestCountrySHN CustomerAddressCreateRequestCountry = "SHN"
+	CustomerAddressCreateRequestCountrySJM CustomerAddressCreateRequestCountry = "SJM"
+	CustomerAddressCreateRequestCountrySLB CustomerAddressCreateRequestCountry = "SLB"
+	CustomerAddressCreateRequestCountrySLE CustomerAddressCreateRequestCountry = "SLE"
+	CustomerAddressCreateRequestCountrySLV CustomerAddressCreateRequestCountry = "SLV"
+	CustomerAddressCreateRequestCountrySMR CustomerAddressCreateRequestCountry = "SMR"
+	CustomerAddressCreateRequestCountrySOM CustomerAddressCreateRequestCountry = "SOM"
+	CustomerAddressCreateRequestCountrySPM CustomerAddressCreateRequestCountry = "SPM"
+	CustomerAddressCreateRequestCountrySRB CustomerAddressCreateRequestCountry = "SRB"
+	CustomerAddressCreateRequestCountrySSD CustomerAddressCreateRequestCountry = "SSD"
+	CustomerAddressCreateRequestCountrySTP CustomerAddressCreateRequestCountry = "STP"
+	CustomerAddressCreateRequestCountrySUR CustomerAddressCreateRequestCountry = "SUR"
+	CustomerAddressCreateRequestCountrySVK CustomerAddressCreateRequestCountry = "SVK"
+	CustomerAddressCreateRequestCountrySVN CustomerAddressCreateRequestCountry = "SVN"
+	CustomerAddressCreateRequestCountrySWE CustomerAddressCreateRequestCountry = "SWE"
+	CustomerAddressCreateRequestCountrySWZ CustomerAddressCreateRequestCountry = "SWZ"
+	CustomerAddressCreateRequestCountrySXM CustomerAddressCreateRequestCountry = "SXM"
+	CustomerAddressCreateRequestCountrySYC CustomerAddressCreateRequestCountry = "SYC"
+	CustomerAddressCreateRequestCountrySYR CustomerAddressCreateRequestCountry = "SYR"
+	CustomerAddressCreateRequestCountryTCA CustomerAddressCreateRequestCountry = "TCA"
+	CustomerAddressCreateRequestCountryTCD CustomerAddressCreateRequestCountry = "TCD"
+	CustomerAddressCreateRequestCountryTGO CustomerAddressCreateRequestCountry = "TGO"
+	CustomerAddressCreateRequestCountryTHA CustomerAddressCreateRequestCountry = "THA"
+	CustomerAddressCreateRequestCountryTJK CustomerAddressCreateRequestCountry = "TJK"
+	CustomerAddressCreateRequestCountryTKL CustomerAddressCreateRequestCountry = "TKL"
+	CustomerAddressCreateRequestCountryTKM CustomerAddressCreateRequestCountry = "TKM"
+	CustomerAddressCreateRequestCountryTLS CustomerAddressCreateRequestCountry = "TLS"
+	CustomerAddressCreateRequestCountryTON CustomerAddressCreateRequestCountry = "TON"
+	CustomerAddressCreateRequestCountryTTO CustomerAddressCreateRequestCountry = "TTO"
+	CustomerAddressCreateRequestCountryTUN CustomerAddressCreateRequestCountry = "TUN"
+	CustomerAddressCreateRequestCountryTUR CustomerAddressCreateRequestCountry = "TUR"
+	CustomerAddressCreateRequestCountryTUV CustomerAddressCreateRequestCountry = "TUV"
+	CustomerAddressCreateRequestCountryTWN CustomerAddressCreateRequestCountry = "TWN"
+	CustomerAddressCreateRequestCountryTZA CustomerAddressCreateRequestCountry = "TZA"
+	CustomerAddressCreateRequestCountryUGA CustomerAddressCreateRequestCountry = "UGA"
+	CustomerAddressCreateRequestCountryUKR CustomerAddressCreateRequestCountry = "UKR"
+	CustomerAddressCreateRequestCountryUMI CustomerAddressCreateRequestCountry = "UMI"
+	CustomerAddressCreateRequestCountryURY CustomerAddressCreateRequestCountry = "URY"
+	CustomerAddressCreateRequestCountryUSA CustomerAddressCreateRequestCountry = "USA"
+	CustomerAddressCreateRequestCountryUZB CustomerAddressCreateRequestCountry = "UZB"
+	CustomerAddressCreateRequestCountryVAT CustomerAddressCreateRequestCountry = "VAT"
+	CustomerAddressCreateRequestCountryVCT CustomerAddressCreateRequestCountry = "VCT"
+	CustomerAddressCreateRequestCountryVEN CustomerAddressCreateRequestCountry = "VEN"
+	CustomerAddressCreateRequestCountryVGB CustomerAddressCreateRequestCountry = "VGB"
+	CustomerAddressCreateRequestCountryVIR CustomerAddressCreateRequestCountry = "VIR"
+	CustomerAddressCreateRequestCountryVNM CustomerAddressCreateRequestCountry = "VNM"
+	CustomerAddressCreateRequestCountryVUT CustomerAddressCreateRequestCountry = "VUT"
+	CustomerAddressCreateRequestCountryWLF CustomerAddressCreateRequestCountry = "WLF"
+	CustomerAddressCreateRequestCountryWSM CustomerAddressCreateRequestCountry = "WSM"
+	CustomerAddressCreateRequestCountryXKX CustomerAddressCreateRequestCountry = "XKX"
+	CustomerAddressCreateRequestCountryYEM CustomerAddressCreateRequestCountry = "YEM"
+	CustomerAddressCreateRequestCountryZAF CustomerAddressCreateRequestCountry = "ZAF"
+	CustomerAddressCreateRequestCountryZMB CustomerAddressCreateRequestCountry = "ZMB"
+	CustomerAddressCreateRequestCountryZWE CustomerAddressCreateRequestCountry = "ZWE"
+)
+
+// Valid indicates whether the value is a known member of the CustomerAddressCreateRequestCountry enum.
+func (e CustomerAddressCreateRequestCountry) Valid() bool {
+	switch e {
+	case CustomerAddressCreateRequestCountryABW:
+		return true
+	case CustomerAddressCreateRequestCountryAFG:
+		return true
+	case CustomerAddressCreateRequestCountryAGO:
+		return true
+	case CustomerAddressCreateRequestCountryAIA:
+		return true
+	case CustomerAddressCreateRequestCountryALA:
+		return true
+	case CustomerAddressCreateRequestCountryALB:
+		return true
+	case CustomerAddressCreateRequestCountryAND:
+		return true
+	case CustomerAddressCreateRequestCountryANT:
+		return true
+	case CustomerAddressCreateRequestCountryARE:
+		return true
+	case CustomerAddressCreateRequestCountryARG:
+		return true
+	case CustomerAddressCreateRequestCountryARM:
+		return true
+	case CustomerAddressCreateRequestCountryASM:
+		return true
+	case CustomerAddressCreateRequestCountryATA:
+		return true
+	case CustomerAddressCreateRequestCountryATF:
+		return true
+	case CustomerAddressCreateRequestCountryATG:
+		return true
+	case CustomerAddressCreateRequestCountryAUS:
+		return true
+	case CustomerAddressCreateRequestCountryAUT:
+		return true
+	case CustomerAddressCreateRequestCountryAZE:
+		return true
+	case CustomerAddressCreateRequestCountryBDI:
+		return true
+	case CustomerAddressCreateRequestCountryBEL:
+		return true
+	case CustomerAddressCreateRequestCountryBEN:
+		return true
+	case CustomerAddressCreateRequestCountryBES:
+		return true
+	case CustomerAddressCreateRequestCountryBFA:
+		return true
+	case CustomerAddressCreateRequestCountryBGD:
+		return true
+	case CustomerAddressCreateRequestCountryBGR:
+		return true
+	case CustomerAddressCreateRequestCountryBHR:
+		return true
+	case CustomerAddressCreateRequestCountryBHS:
+		return true
+	case CustomerAddressCreateRequestCountryBIH:
+		return true
+	case CustomerAddressCreateRequestCountryBLM:
+		return true
+	case CustomerAddressCreateRequestCountryBLR:
+		return true
+	case CustomerAddressCreateRequestCountryBLZ:
+		return true
+	case CustomerAddressCreateRequestCountryBMU:
+		return true
+	case CustomerAddressCreateRequestCountryBOL:
+		return true
+	case CustomerAddressCreateRequestCountryBRA:
+		return true
+	case CustomerAddressCreateRequestCountryBRB:
+		return true
+	case CustomerAddressCreateRequestCountryBRN:
+		return true
+	case CustomerAddressCreateRequestCountryBTN:
+		return true
+	case CustomerAddressCreateRequestCountryBVT:
+		return true
+	case CustomerAddressCreateRequestCountryBWA:
+		return true
+	case CustomerAddressCreateRequestCountryCAF:
+		return true
+	case CustomerAddressCreateRequestCountryCAN:
+		return true
+	case CustomerAddressCreateRequestCountryCCK:
+		return true
+	case CustomerAddressCreateRequestCountryCHE:
+		return true
+	case CustomerAddressCreateRequestCountryCHL:
+		return true
+	case CustomerAddressCreateRequestCountryCHN:
+		return true
+	case CustomerAddressCreateRequestCountryCIV:
+		return true
+	case CustomerAddressCreateRequestCountryCMR:
+		return true
+	case CustomerAddressCreateRequestCountryCOD:
+		return true
+	case CustomerAddressCreateRequestCountryCOG:
+		return true
+	case CustomerAddressCreateRequestCountryCOK:
+		return true
+	case CustomerAddressCreateRequestCountryCOL:
+		return true
+	case CustomerAddressCreateRequestCountryCOM:
+		return true
+	case CustomerAddressCreateRequestCountryCPV:
+		return true
+	case CustomerAddressCreateRequestCountryCRI:
+		return true
+	case CustomerAddressCreateRequestCountryCUB:
+		return true
+	case CustomerAddressCreateRequestCountryCUW:
+		return true
+	case CustomerAddressCreateRequestCountryCXR:
+		return true
+	case CustomerAddressCreateRequestCountryCYM:
+		return true
+	case CustomerAddressCreateRequestCountryCYP:
+		return true
+	case CustomerAddressCreateRequestCountryCZE:
+		return true
+	case CustomerAddressCreateRequestCountryDEU:
+		return true
+	case CustomerAddressCreateRequestCountryDJI:
+		return true
+	case CustomerAddressCreateRequestCountryDMA:
+		return true
+	case CustomerAddressCreateRequestCountryDNK:
+		return true
+	case CustomerAddressCreateRequestCountryDOM:
+		return true
+	case CustomerAddressCreateRequestCountryDZA:
+		return true
+	case CustomerAddressCreateRequestCountryECU:
+		return true
+	case CustomerAddressCreateRequestCountryEGY:
+		return true
+	case CustomerAddressCreateRequestCountryERI:
+		return true
+	case CustomerAddressCreateRequestCountryESH:
+		return true
+	case CustomerAddressCreateRequestCountryESP:
+		return true
+	case CustomerAddressCreateRequestCountryEST:
+		return true
+	case CustomerAddressCreateRequestCountryETH:
+		return true
+	case CustomerAddressCreateRequestCountryFIN:
+		return true
+	case CustomerAddressCreateRequestCountryFJI:
+		return true
+	case CustomerAddressCreateRequestCountryFLK:
+		return true
+	case CustomerAddressCreateRequestCountryFRA:
+		return true
+	case CustomerAddressCreateRequestCountryFRO:
+		return true
+	case CustomerAddressCreateRequestCountryFSM:
+		return true
+	case CustomerAddressCreateRequestCountryGAB:
+		return true
+	case CustomerAddressCreateRequestCountryGBR:
+		return true
+	case CustomerAddressCreateRequestCountryGEO:
+		return true
+	case CustomerAddressCreateRequestCountryGGY:
+		return true
+	case CustomerAddressCreateRequestCountryGHA:
+		return true
+	case CustomerAddressCreateRequestCountryGIB:
+		return true
+	case CustomerAddressCreateRequestCountryGIN:
+		return true
+	case CustomerAddressCreateRequestCountryGLP:
+		return true
+	case CustomerAddressCreateRequestCountryGMB:
+		return true
+	case CustomerAddressCreateRequestCountryGNB:
+		return true
+	case CustomerAddressCreateRequestCountryGNQ:
+		return true
+	case CustomerAddressCreateRequestCountryGRC:
+		return true
+	case CustomerAddressCreateRequestCountryGRD:
+		return true
+	case CustomerAddressCreateRequestCountryGRL:
+		return true
+	case CustomerAddressCreateRequestCountryGTM:
+		return true
+	case CustomerAddressCreateRequestCountryGUF:
+		return true
+	case CustomerAddressCreateRequestCountryGUM:
+		return true
+	case CustomerAddressCreateRequestCountryGUY:
+		return true
+	case CustomerAddressCreateRequestCountryHKG:
+		return true
+	case CustomerAddressCreateRequestCountryHMD:
+		return true
+	case CustomerAddressCreateRequestCountryHND:
+		return true
+	case CustomerAddressCreateRequestCountryHRV:
+		return true
+	case CustomerAddressCreateRequestCountryHTI:
+		return true
+	case CustomerAddressCreateRequestCountryHUN:
+		return true
+	case CustomerAddressCreateRequestCountryIDN:
+		return true
+	case CustomerAddressCreateRequestCountryIMN:
+		return true
+	case CustomerAddressCreateRequestCountryIND:
+		return true
+	case CustomerAddressCreateRequestCountryIOT:
+		return true
+	case CustomerAddressCreateRequestCountryIRL:
+		return true
+	case CustomerAddressCreateRequestCountryIRN:
+		return true
+	case CustomerAddressCreateRequestCountryIRQ:
+		return true
+	case CustomerAddressCreateRequestCountryISL:
+		return true
+	case CustomerAddressCreateRequestCountryISR:
+		return true
+	case CustomerAddressCreateRequestCountryITA:
+		return true
+	case CustomerAddressCreateRequestCountryJAM:
+		return true
+	case CustomerAddressCreateRequestCountryJEY:
+		return true
+	case CustomerAddressCreateRequestCountryJOR:
+		return true
+	case CustomerAddressCreateRequestCountryJPN:
+		return true
+	case CustomerAddressCreateRequestCountryKAZ:
+		return true
+	case CustomerAddressCreateRequestCountryKEN:
+		return true
+	case CustomerAddressCreateRequestCountryKGZ:
+		return true
+	case CustomerAddressCreateRequestCountryKHM:
+		return true
+	case CustomerAddressCreateRequestCountryKIR:
+		return true
+	case CustomerAddressCreateRequestCountryKNA:
+		return true
+	case CustomerAddressCreateRequestCountryKOR:
+		return true
+	case CustomerAddressCreateRequestCountryKWT:
+		return true
+	case CustomerAddressCreateRequestCountryLAO:
+		return true
+	case CustomerAddressCreateRequestCountryLBN:
+		return true
+	case CustomerAddressCreateRequestCountryLBR:
+		return true
+	case CustomerAddressCreateRequestCountryLBY:
+		return true
+	case CustomerAddressCreateRequestCountryLCA:
+		return true
+	case CustomerAddressCreateRequestCountryLIE:
+		return true
+	case CustomerAddressCreateRequestCountryLKA:
+		return true
+	case CustomerAddressCreateRequestCountryLSO:
+		return true
+	case CustomerAddressCreateRequestCountryLTU:
+		return true
+	case CustomerAddressCreateRequestCountryLUX:
+		return true
+	case CustomerAddressCreateRequestCountryLVA:
+		return true
+	case CustomerAddressCreateRequestCountryMAC:
+		return true
+	case CustomerAddressCreateRequestCountryMAF:
+		return true
+	case CustomerAddressCreateRequestCountryMAR:
+		return true
+	case CustomerAddressCreateRequestCountryMCO:
+		return true
+	case CustomerAddressCreateRequestCountryMDA:
+		return true
+	case CustomerAddressCreateRequestCountryMDG:
+		return true
+	case CustomerAddressCreateRequestCountryMDV:
+		return true
+	case CustomerAddressCreateRequestCountryMEX:
+		return true
+	case CustomerAddressCreateRequestCountryMHL:
+		return true
+	case CustomerAddressCreateRequestCountryMKD:
+		return true
+	case CustomerAddressCreateRequestCountryMLI:
+		return true
+	case CustomerAddressCreateRequestCountryMLT:
+		return true
+	case CustomerAddressCreateRequestCountryMMR:
+		return true
+	case CustomerAddressCreateRequestCountryMNE:
+		return true
+	case CustomerAddressCreateRequestCountryMNG:
+		return true
+	case CustomerAddressCreateRequestCountryMNP:
+		return true
+	case CustomerAddressCreateRequestCountryMOZ:
+		return true
+	case CustomerAddressCreateRequestCountryMRT:
+		return true
+	case CustomerAddressCreateRequestCountryMSR:
+		return true
+	case CustomerAddressCreateRequestCountryMTQ:
+		return true
+	case CustomerAddressCreateRequestCountryMUS:
+		return true
+	case CustomerAddressCreateRequestCountryMWI:
+		return true
+	case CustomerAddressCreateRequestCountryMYS:
+		return true
+	case CustomerAddressCreateRequestCountryMYT:
+		return true
+	case CustomerAddressCreateRequestCountryNAM:
+		return true
+	case CustomerAddressCreateRequestCountryNCL:
+		return true
+	case CustomerAddressCreateRequestCountryNER:
+		return true
+	case CustomerAddressCreateRequestCountryNFK:
+		return true
+	case CustomerAddressCreateRequestCountryNGA:
+		return true
+	case CustomerAddressCreateRequestCountryNIC:
+		return true
+	case CustomerAddressCreateRequestCountryNIU:
+		return true
+	case CustomerAddressCreateRequestCountryNLD:
+		return true
+	case CustomerAddressCreateRequestCountryNOR:
+		return true
+	case CustomerAddressCreateRequestCountryNPL:
+		return true
+	case CustomerAddressCreateRequestCountryNRU:
+		return true
+	case CustomerAddressCreateRequestCountryNZL:
+		return true
+	case CustomerAddressCreateRequestCountryOMN:
+		return true
+	case CustomerAddressCreateRequestCountryPAK:
+		return true
+	case CustomerAddressCreateRequestCountryPAN:
+		return true
+	case CustomerAddressCreateRequestCountryPCN:
+		return true
+	case CustomerAddressCreateRequestCountryPER:
+		return true
+	case CustomerAddressCreateRequestCountryPHL:
+		return true
+	case CustomerAddressCreateRequestCountryPLW:
+		return true
+	case CustomerAddressCreateRequestCountryPNG:
+		return true
+	case CustomerAddressCreateRequestCountryPOL:
+		return true
+	case CustomerAddressCreateRequestCountryPRI:
+		return true
+	case CustomerAddressCreateRequestCountryPRK:
+		return true
+	case CustomerAddressCreateRequestCountryPRT:
+		return true
+	case CustomerAddressCreateRequestCountryPRY:
+		return true
+	case CustomerAddressCreateRequestCountryPSE:
+		return true
+	case CustomerAddressCreateRequestCountryPYF:
+		return true
+	case CustomerAddressCreateRequestCountryQAT:
+		return true
+	case CustomerAddressCreateRequestCountryREU:
+		return true
+	case CustomerAddressCreateRequestCountryROU:
+		return true
+	case CustomerAddressCreateRequestCountryRUS:
+		return true
+	case CustomerAddressCreateRequestCountryRWA:
+		return true
+	case CustomerAddressCreateRequestCountrySAU:
+		return true
+	case CustomerAddressCreateRequestCountrySCG:
+		return true
+	case CustomerAddressCreateRequestCountrySDN:
+		return true
+	case CustomerAddressCreateRequestCountrySEN:
+		return true
+	case CustomerAddressCreateRequestCountrySGP:
+		return true
+	case CustomerAddressCreateRequestCountrySGS:
+		return true
+	case CustomerAddressCreateRequestCountrySHN:
+		return true
+	case CustomerAddressCreateRequestCountrySJM:
+		return true
+	case CustomerAddressCreateRequestCountrySLB:
+		return true
+	case CustomerAddressCreateRequestCountrySLE:
+		return true
+	case CustomerAddressCreateRequestCountrySLV:
+		return true
+	case CustomerAddressCreateRequestCountrySMR:
+		return true
+	case CustomerAddressCreateRequestCountrySOM:
+		return true
+	case CustomerAddressCreateRequestCountrySPM:
+		return true
+	case CustomerAddressCreateRequestCountrySRB:
+		return true
+	case CustomerAddressCreateRequestCountrySSD:
+		return true
+	case CustomerAddressCreateRequestCountrySTP:
+		return true
+	case CustomerAddressCreateRequestCountrySUR:
+		return true
+	case CustomerAddressCreateRequestCountrySVK:
+		return true
+	case CustomerAddressCreateRequestCountrySVN:
+		return true
+	case CustomerAddressCreateRequestCountrySWE:
+		return true
+	case CustomerAddressCreateRequestCountrySWZ:
+		return true
+	case CustomerAddressCreateRequestCountrySXM:
+		return true
+	case CustomerAddressCreateRequestCountrySYC:
+		return true
+	case CustomerAddressCreateRequestCountrySYR:
+		return true
+	case CustomerAddressCreateRequestCountryTCA:
+		return true
+	case CustomerAddressCreateRequestCountryTCD:
+		return true
+	case CustomerAddressCreateRequestCountryTGO:
+		return true
+	case CustomerAddressCreateRequestCountryTHA:
+		return true
+	case CustomerAddressCreateRequestCountryTJK:
+		return true
+	case CustomerAddressCreateRequestCountryTKL:
+		return true
+	case CustomerAddressCreateRequestCountryTKM:
+		return true
+	case CustomerAddressCreateRequestCountryTLS:
+		return true
+	case CustomerAddressCreateRequestCountryTON:
+		return true
+	case CustomerAddressCreateRequestCountryTTO:
+		return true
+	case CustomerAddressCreateRequestCountryTUN:
+		return true
+	case CustomerAddressCreateRequestCountryTUR:
+		return true
+	case CustomerAddressCreateRequestCountryTUV:
+		return true
+	case CustomerAddressCreateRequestCountryTWN:
+		return true
+	case CustomerAddressCreateRequestCountryTZA:
+		return true
+	case CustomerAddressCreateRequestCountryUGA:
+		return true
+	case CustomerAddressCreateRequestCountryUKR:
+		return true
+	case CustomerAddressCreateRequestCountryUMI:
+		return true
+	case CustomerAddressCreateRequestCountryURY:
+		return true
+	case CustomerAddressCreateRequestCountryUSA:
+		return true
+	case CustomerAddressCreateRequestCountryUZB:
+		return true
+	case CustomerAddressCreateRequestCountryVAT:
+		return true
+	case CustomerAddressCreateRequestCountryVCT:
+		return true
+	case CustomerAddressCreateRequestCountryVEN:
+		return true
+	case CustomerAddressCreateRequestCountryVGB:
+		return true
+	case CustomerAddressCreateRequestCountryVIR:
+		return true
+	case CustomerAddressCreateRequestCountryVNM:
+		return true
+	case CustomerAddressCreateRequestCountryVUT:
+		return true
+	case CustomerAddressCreateRequestCountryWLF:
+		return true
+	case CustomerAddressCreateRequestCountryWSM:
+		return true
+	case CustomerAddressCreateRequestCountryXKX:
+		return true
+	case CustomerAddressCreateRequestCountryYEM:
+		return true
+	case CustomerAddressCreateRequestCountryZAF:
+		return true
+	case CustomerAddressCreateRequestCountryZMB:
+		return true
+	case CustomerAddressCreateRequestCountryZWE:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for CustomerAddressInputCountry.
 const (
 	CustomerAddressInputCountryABW CustomerAddressInputCountry = "ABW"
@@ -2929,6 +4465,774 @@ func (e CustomerAddressInputCountry) Valid() bool {
 	case CustomerAddressInputCountryZMB:
 		return true
 	case CustomerAddressInputCountryZWE:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for CustomerAddressUpdateRequestCountry.
+const (
+	CustomerAddressUpdateRequestCountryABW CustomerAddressUpdateRequestCountry = "ABW"
+	CustomerAddressUpdateRequestCountryAFG CustomerAddressUpdateRequestCountry = "AFG"
+	CustomerAddressUpdateRequestCountryAGO CustomerAddressUpdateRequestCountry = "AGO"
+	CustomerAddressUpdateRequestCountryAIA CustomerAddressUpdateRequestCountry = "AIA"
+	CustomerAddressUpdateRequestCountryALA CustomerAddressUpdateRequestCountry = "ALA"
+	CustomerAddressUpdateRequestCountryALB CustomerAddressUpdateRequestCountry = "ALB"
+	CustomerAddressUpdateRequestCountryAND CustomerAddressUpdateRequestCountry = "AND"
+	CustomerAddressUpdateRequestCountryANT CustomerAddressUpdateRequestCountry = "ANT"
+	CustomerAddressUpdateRequestCountryARE CustomerAddressUpdateRequestCountry = "ARE"
+	CustomerAddressUpdateRequestCountryARG CustomerAddressUpdateRequestCountry = "ARG"
+	CustomerAddressUpdateRequestCountryARM CustomerAddressUpdateRequestCountry = "ARM"
+	CustomerAddressUpdateRequestCountryASM CustomerAddressUpdateRequestCountry = "ASM"
+	CustomerAddressUpdateRequestCountryATA CustomerAddressUpdateRequestCountry = "ATA"
+	CustomerAddressUpdateRequestCountryATF CustomerAddressUpdateRequestCountry = "ATF"
+	CustomerAddressUpdateRequestCountryATG CustomerAddressUpdateRequestCountry = "ATG"
+	CustomerAddressUpdateRequestCountryAUS CustomerAddressUpdateRequestCountry = "AUS"
+	CustomerAddressUpdateRequestCountryAUT CustomerAddressUpdateRequestCountry = "AUT"
+	CustomerAddressUpdateRequestCountryAZE CustomerAddressUpdateRequestCountry = "AZE"
+	CustomerAddressUpdateRequestCountryBDI CustomerAddressUpdateRequestCountry = "BDI"
+	CustomerAddressUpdateRequestCountryBEL CustomerAddressUpdateRequestCountry = "BEL"
+	CustomerAddressUpdateRequestCountryBEN CustomerAddressUpdateRequestCountry = "BEN"
+	CustomerAddressUpdateRequestCountryBES CustomerAddressUpdateRequestCountry = "BES"
+	CustomerAddressUpdateRequestCountryBFA CustomerAddressUpdateRequestCountry = "BFA"
+	CustomerAddressUpdateRequestCountryBGD CustomerAddressUpdateRequestCountry = "BGD"
+	CustomerAddressUpdateRequestCountryBGR CustomerAddressUpdateRequestCountry = "BGR"
+	CustomerAddressUpdateRequestCountryBHR CustomerAddressUpdateRequestCountry = "BHR"
+	CustomerAddressUpdateRequestCountryBHS CustomerAddressUpdateRequestCountry = "BHS"
+	CustomerAddressUpdateRequestCountryBIH CustomerAddressUpdateRequestCountry = "BIH"
+	CustomerAddressUpdateRequestCountryBLM CustomerAddressUpdateRequestCountry = "BLM"
+	CustomerAddressUpdateRequestCountryBLR CustomerAddressUpdateRequestCountry = "BLR"
+	CustomerAddressUpdateRequestCountryBLZ CustomerAddressUpdateRequestCountry = "BLZ"
+	CustomerAddressUpdateRequestCountryBMU CustomerAddressUpdateRequestCountry = "BMU"
+	CustomerAddressUpdateRequestCountryBOL CustomerAddressUpdateRequestCountry = "BOL"
+	CustomerAddressUpdateRequestCountryBRA CustomerAddressUpdateRequestCountry = "BRA"
+	CustomerAddressUpdateRequestCountryBRB CustomerAddressUpdateRequestCountry = "BRB"
+	CustomerAddressUpdateRequestCountryBRN CustomerAddressUpdateRequestCountry = "BRN"
+	CustomerAddressUpdateRequestCountryBTN CustomerAddressUpdateRequestCountry = "BTN"
+	CustomerAddressUpdateRequestCountryBVT CustomerAddressUpdateRequestCountry = "BVT"
+	CustomerAddressUpdateRequestCountryBWA CustomerAddressUpdateRequestCountry = "BWA"
+	CustomerAddressUpdateRequestCountryCAF CustomerAddressUpdateRequestCountry = "CAF"
+	CustomerAddressUpdateRequestCountryCAN CustomerAddressUpdateRequestCountry = "CAN"
+	CustomerAddressUpdateRequestCountryCCK CustomerAddressUpdateRequestCountry = "CCK"
+	CustomerAddressUpdateRequestCountryCHE CustomerAddressUpdateRequestCountry = "CHE"
+	CustomerAddressUpdateRequestCountryCHL CustomerAddressUpdateRequestCountry = "CHL"
+	CustomerAddressUpdateRequestCountryCHN CustomerAddressUpdateRequestCountry = "CHN"
+	CustomerAddressUpdateRequestCountryCIV CustomerAddressUpdateRequestCountry = "CIV"
+	CustomerAddressUpdateRequestCountryCMR CustomerAddressUpdateRequestCountry = "CMR"
+	CustomerAddressUpdateRequestCountryCOD CustomerAddressUpdateRequestCountry = "COD"
+	CustomerAddressUpdateRequestCountryCOG CustomerAddressUpdateRequestCountry = "COG"
+	CustomerAddressUpdateRequestCountryCOK CustomerAddressUpdateRequestCountry = "COK"
+	CustomerAddressUpdateRequestCountryCOL CustomerAddressUpdateRequestCountry = "COL"
+	CustomerAddressUpdateRequestCountryCOM CustomerAddressUpdateRequestCountry = "COM"
+	CustomerAddressUpdateRequestCountryCPV CustomerAddressUpdateRequestCountry = "CPV"
+	CustomerAddressUpdateRequestCountryCRI CustomerAddressUpdateRequestCountry = "CRI"
+	CustomerAddressUpdateRequestCountryCUB CustomerAddressUpdateRequestCountry = "CUB"
+	CustomerAddressUpdateRequestCountryCUW CustomerAddressUpdateRequestCountry = "CUW"
+	CustomerAddressUpdateRequestCountryCXR CustomerAddressUpdateRequestCountry = "CXR"
+	CustomerAddressUpdateRequestCountryCYM CustomerAddressUpdateRequestCountry = "CYM"
+	CustomerAddressUpdateRequestCountryCYP CustomerAddressUpdateRequestCountry = "CYP"
+	CustomerAddressUpdateRequestCountryCZE CustomerAddressUpdateRequestCountry = "CZE"
+	CustomerAddressUpdateRequestCountryDEU CustomerAddressUpdateRequestCountry = "DEU"
+	CustomerAddressUpdateRequestCountryDJI CustomerAddressUpdateRequestCountry = "DJI"
+	CustomerAddressUpdateRequestCountryDMA CustomerAddressUpdateRequestCountry = "DMA"
+	CustomerAddressUpdateRequestCountryDNK CustomerAddressUpdateRequestCountry = "DNK"
+	CustomerAddressUpdateRequestCountryDOM CustomerAddressUpdateRequestCountry = "DOM"
+	CustomerAddressUpdateRequestCountryDZA CustomerAddressUpdateRequestCountry = "DZA"
+	CustomerAddressUpdateRequestCountryECU CustomerAddressUpdateRequestCountry = "ECU"
+	CustomerAddressUpdateRequestCountryEGY CustomerAddressUpdateRequestCountry = "EGY"
+	CustomerAddressUpdateRequestCountryERI CustomerAddressUpdateRequestCountry = "ERI"
+	CustomerAddressUpdateRequestCountryESH CustomerAddressUpdateRequestCountry = "ESH"
+	CustomerAddressUpdateRequestCountryESP CustomerAddressUpdateRequestCountry = "ESP"
+	CustomerAddressUpdateRequestCountryEST CustomerAddressUpdateRequestCountry = "EST"
+	CustomerAddressUpdateRequestCountryETH CustomerAddressUpdateRequestCountry = "ETH"
+	CustomerAddressUpdateRequestCountryFIN CustomerAddressUpdateRequestCountry = "FIN"
+	CustomerAddressUpdateRequestCountryFJI CustomerAddressUpdateRequestCountry = "FJI"
+	CustomerAddressUpdateRequestCountryFLK CustomerAddressUpdateRequestCountry = "FLK"
+	CustomerAddressUpdateRequestCountryFRA CustomerAddressUpdateRequestCountry = "FRA"
+	CustomerAddressUpdateRequestCountryFRO CustomerAddressUpdateRequestCountry = "FRO"
+	CustomerAddressUpdateRequestCountryFSM CustomerAddressUpdateRequestCountry = "FSM"
+	CustomerAddressUpdateRequestCountryGAB CustomerAddressUpdateRequestCountry = "GAB"
+	CustomerAddressUpdateRequestCountryGBR CustomerAddressUpdateRequestCountry = "GBR"
+	CustomerAddressUpdateRequestCountryGEO CustomerAddressUpdateRequestCountry = "GEO"
+	CustomerAddressUpdateRequestCountryGGY CustomerAddressUpdateRequestCountry = "GGY"
+	CustomerAddressUpdateRequestCountryGHA CustomerAddressUpdateRequestCountry = "GHA"
+	CustomerAddressUpdateRequestCountryGIB CustomerAddressUpdateRequestCountry = "GIB"
+	CustomerAddressUpdateRequestCountryGIN CustomerAddressUpdateRequestCountry = "GIN"
+	CustomerAddressUpdateRequestCountryGLP CustomerAddressUpdateRequestCountry = "GLP"
+	CustomerAddressUpdateRequestCountryGMB CustomerAddressUpdateRequestCountry = "GMB"
+	CustomerAddressUpdateRequestCountryGNB CustomerAddressUpdateRequestCountry = "GNB"
+	CustomerAddressUpdateRequestCountryGNQ CustomerAddressUpdateRequestCountry = "GNQ"
+	CustomerAddressUpdateRequestCountryGRC CustomerAddressUpdateRequestCountry = "GRC"
+	CustomerAddressUpdateRequestCountryGRD CustomerAddressUpdateRequestCountry = "GRD"
+	CustomerAddressUpdateRequestCountryGRL CustomerAddressUpdateRequestCountry = "GRL"
+	CustomerAddressUpdateRequestCountryGTM CustomerAddressUpdateRequestCountry = "GTM"
+	CustomerAddressUpdateRequestCountryGUF CustomerAddressUpdateRequestCountry = "GUF"
+	CustomerAddressUpdateRequestCountryGUM CustomerAddressUpdateRequestCountry = "GUM"
+	CustomerAddressUpdateRequestCountryGUY CustomerAddressUpdateRequestCountry = "GUY"
+	CustomerAddressUpdateRequestCountryHKG CustomerAddressUpdateRequestCountry = "HKG"
+	CustomerAddressUpdateRequestCountryHMD CustomerAddressUpdateRequestCountry = "HMD"
+	CustomerAddressUpdateRequestCountryHND CustomerAddressUpdateRequestCountry = "HND"
+	CustomerAddressUpdateRequestCountryHRV CustomerAddressUpdateRequestCountry = "HRV"
+	CustomerAddressUpdateRequestCountryHTI CustomerAddressUpdateRequestCountry = "HTI"
+	CustomerAddressUpdateRequestCountryHUN CustomerAddressUpdateRequestCountry = "HUN"
+	CustomerAddressUpdateRequestCountryIDN CustomerAddressUpdateRequestCountry = "IDN"
+	CustomerAddressUpdateRequestCountryIMN CustomerAddressUpdateRequestCountry = "IMN"
+	CustomerAddressUpdateRequestCountryIND CustomerAddressUpdateRequestCountry = "IND"
+	CustomerAddressUpdateRequestCountryIOT CustomerAddressUpdateRequestCountry = "IOT"
+	CustomerAddressUpdateRequestCountryIRL CustomerAddressUpdateRequestCountry = "IRL"
+	CustomerAddressUpdateRequestCountryIRN CustomerAddressUpdateRequestCountry = "IRN"
+	CustomerAddressUpdateRequestCountryIRQ CustomerAddressUpdateRequestCountry = "IRQ"
+	CustomerAddressUpdateRequestCountryISL CustomerAddressUpdateRequestCountry = "ISL"
+	CustomerAddressUpdateRequestCountryISR CustomerAddressUpdateRequestCountry = "ISR"
+	CustomerAddressUpdateRequestCountryITA CustomerAddressUpdateRequestCountry = "ITA"
+	CustomerAddressUpdateRequestCountryJAM CustomerAddressUpdateRequestCountry = "JAM"
+	CustomerAddressUpdateRequestCountryJEY CustomerAddressUpdateRequestCountry = "JEY"
+	CustomerAddressUpdateRequestCountryJOR CustomerAddressUpdateRequestCountry = "JOR"
+	CustomerAddressUpdateRequestCountryJPN CustomerAddressUpdateRequestCountry = "JPN"
+	CustomerAddressUpdateRequestCountryKAZ CustomerAddressUpdateRequestCountry = "KAZ"
+	CustomerAddressUpdateRequestCountryKEN CustomerAddressUpdateRequestCountry = "KEN"
+	CustomerAddressUpdateRequestCountryKGZ CustomerAddressUpdateRequestCountry = "KGZ"
+	CustomerAddressUpdateRequestCountryKHM CustomerAddressUpdateRequestCountry = "KHM"
+	CustomerAddressUpdateRequestCountryKIR CustomerAddressUpdateRequestCountry = "KIR"
+	CustomerAddressUpdateRequestCountryKNA CustomerAddressUpdateRequestCountry = "KNA"
+	CustomerAddressUpdateRequestCountryKOR CustomerAddressUpdateRequestCountry = "KOR"
+	CustomerAddressUpdateRequestCountryKWT CustomerAddressUpdateRequestCountry = "KWT"
+	CustomerAddressUpdateRequestCountryLAO CustomerAddressUpdateRequestCountry = "LAO"
+	CustomerAddressUpdateRequestCountryLBN CustomerAddressUpdateRequestCountry = "LBN"
+	CustomerAddressUpdateRequestCountryLBR CustomerAddressUpdateRequestCountry = "LBR"
+	CustomerAddressUpdateRequestCountryLBY CustomerAddressUpdateRequestCountry = "LBY"
+	CustomerAddressUpdateRequestCountryLCA CustomerAddressUpdateRequestCountry = "LCA"
+	CustomerAddressUpdateRequestCountryLIE CustomerAddressUpdateRequestCountry = "LIE"
+	CustomerAddressUpdateRequestCountryLKA CustomerAddressUpdateRequestCountry = "LKA"
+	CustomerAddressUpdateRequestCountryLSO CustomerAddressUpdateRequestCountry = "LSO"
+	CustomerAddressUpdateRequestCountryLTU CustomerAddressUpdateRequestCountry = "LTU"
+	CustomerAddressUpdateRequestCountryLUX CustomerAddressUpdateRequestCountry = "LUX"
+	CustomerAddressUpdateRequestCountryLVA CustomerAddressUpdateRequestCountry = "LVA"
+	CustomerAddressUpdateRequestCountryMAC CustomerAddressUpdateRequestCountry = "MAC"
+	CustomerAddressUpdateRequestCountryMAF CustomerAddressUpdateRequestCountry = "MAF"
+	CustomerAddressUpdateRequestCountryMAR CustomerAddressUpdateRequestCountry = "MAR"
+	CustomerAddressUpdateRequestCountryMCO CustomerAddressUpdateRequestCountry = "MCO"
+	CustomerAddressUpdateRequestCountryMDA CustomerAddressUpdateRequestCountry = "MDA"
+	CustomerAddressUpdateRequestCountryMDG CustomerAddressUpdateRequestCountry = "MDG"
+	CustomerAddressUpdateRequestCountryMDV CustomerAddressUpdateRequestCountry = "MDV"
+	CustomerAddressUpdateRequestCountryMEX CustomerAddressUpdateRequestCountry = "MEX"
+	CustomerAddressUpdateRequestCountryMHL CustomerAddressUpdateRequestCountry = "MHL"
+	CustomerAddressUpdateRequestCountryMKD CustomerAddressUpdateRequestCountry = "MKD"
+	CustomerAddressUpdateRequestCountryMLI CustomerAddressUpdateRequestCountry = "MLI"
+	CustomerAddressUpdateRequestCountryMLT CustomerAddressUpdateRequestCountry = "MLT"
+	CustomerAddressUpdateRequestCountryMMR CustomerAddressUpdateRequestCountry = "MMR"
+	CustomerAddressUpdateRequestCountryMNE CustomerAddressUpdateRequestCountry = "MNE"
+	CustomerAddressUpdateRequestCountryMNG CustomerAddressUpdateRequestCountry = "MNG"
+	CustomerAddressUpdateRequestCountryMNP CustomerAddressUpdateRequestCountry = "MNP"
+	CustomerAddressUpdateRequestCountryMOZ CustomerAddressUpdateRequestCountry = "MOZ"
+	CustomerAddressUpdateRequestCountryMRT CustomerAddressUpdateRequestCountry = "MRT"
+	CustomerAddressUpdateRequestCountryMSR CustomerAddressUpdateRequestCountry = "MSR"
+	CustomerAddressUpdateRequestCountryMTQ CustomerAddressUpdateRequestCountry = "MTQ"
+	CustomerAddressUpdateRequestCountryMUS CustomerAddressUpdateRequestCountry = "MUS"
+	CustomerAddressUpdateRequestCountryMWI CustomerAddressUpdateRequestCountry = "MWI"
+	CustomerAddressUpdateRequestCountryMYS CustomerAddressUpdateRequestCountry = "MYS"
+	CustomerAddressUpdateRequestCountryMYT CustomerAddressUpdateRequestCountry = "MYT"
+	CustomerAddressUpdateRequestCountryNAM CustomerAddressUpdateRequestCountry = "NAM"
+	CustomerAddressUpdateRequestCountryNCL CustomerAddressUpdateRequestCountry = "NCL"
+	CustomerAddressUpdateRequestCountryNER CustomerAddressUpdateRequestCountry = "NER"
+	CustomerAddressUpdateRequestCountryNFK CustomerAddressUpdateRequestCountry = "NFK"
+	CustomerAddressUpdateRequestCountryNGA CustomerAddressUpdateRequestCountry = "NGA"
+	CustomerAddressUpdateRequestCountryNIC CustomerAddressUpdateRequestCountry = "NIC"
+	CustomerAddressUpdateRequestCountryNIU CustomerAddressUpdateRequestCountry = "NIU"
+	CustomerAddressUpdateRequestCountryNLD CustomerAddressUpdateRequestCountry = "NLD"
+	CustomerAddressUpdateRequestCountryNOR CustomerAddressUpdateRequestCountry = "NOR"
+	CustomerAddressUpdateRequestCountryNPL CustomerAddressUpdateRequestCountry = "NPL"
+	CustomerAddressUpdateRequestCountryNRU CustomerAddressUpdateRequestCountry = "NRU"
+	CustomerAddressUpdateRequestCountryNZL CustomerAddressUpdateRequestCountry = "NZL"
+	CustomerAddressUpdateRequestCountryOMN CustomerAddressUpdateRequestCountry = "OMN"
+	CustomerAddressUpdateRequestCountryPAK CustomerAddressUpdateRequestCountry = "PAK"
+	CustomerAddressUpdateRequestCountryPAN CustomerAddressUpdateRequestCountry = "PAN"
+	CustomerAddressUpdateRequestCountryPCN CustomerAddressUpdateRequestCountry = "PCN"
+	CustomerAddressUpdateRequestCountryPER CustomerAddressUpdateRequestCountry = "PER"
+	CustomerAddressUpdateRequestCountryPHL CustomerAddressUpdateRequestCountry = "PHL"
+	CustomerAddressUpdateRequestCountryPLW CustomerAddressUpdateRequestCountry = "PLW"
+	CustomerAddressUpdateRequestCountryPNG CustomerAddressUpdateRequestCountry = "PNG"
+	CustomerAddressUpdateRequestCountryPOL CustomerAddressUpdateRequestCountry = "POL"
+	CustomerAddressUpdateRequestCountryPRI CustomerAddressUpdateRequestCountry = "PRI"
+	CustomerAddressUpdateRequestCountryPRK CustomerAddressUpdateRequestCountry = "PRK"
+	CustomerAddressUpdateRequestCountryPRT CustomerAddressUpdateRequestCountry = "PRT"
+	CustomerAddressUpdateRequestCountryPRY CustomerAddressUpdateRequestCountry = "PRY"
+	CustomerAddressUpdateRequestCountryPSE CustomerAddressUpdateRequestCountry = "PSE"
+	CustomerAddressUpdateRequestCountryPYF CustomerAddressUpdateRequestCountry = "PYF"
+	CustomerAddressUpdateRequestCountryQAT CustomerAddressUpdateRequestCountry = "QAT"
+	CustomerAddressUpdateRequestCountryREU CustomerAddressUpdateRequestCountry = "REU"
+	CustomerAddressUpdateRequestCountryROU CustomerAddressUpdateRequestCountry = "ROU"
+	CustomerAddressUpdateRequestCountryRUS CustomerAddressUpdateRequestCountry = "RUS"
+	CustomerAddressUpdateRequestCountryRWA CustomerAddressUpdateRequestCountry = "RWA"
+	CustomerAddressUpdateRequestCountrySAU CustomerAddressUpdateRequestCountry = "SAU"
+	CustomerAddressUpdateRequestCountrySCG CustomerAddressUpdateRequestCountry = "SCG"
+	CustomerAddressUpdateRequestCountrySDN CustomerAddressUpdateRequestCountry = "SDN"
+	CustomerAddressUpdateRequestCountrySEN CustomerAddressUpdateRequestCountry = "SEN"
+	CustomerAddressUpdateRequestCountrySGP CustomerAddressUpdateRequestCountry = "SGP"
+	CustomerAddressUpdateRequestCountrySGS CustomerAddressUpdateRequestCountry = "SGS"
+	CustomerAddressUpdateRequestCountrySHN CustomerAddressUpdateRequestCountry = "SHN"
+	CustomerAddressUpdateRequestCountrySJM CustomerAddressUpdateRequestCountry = "SJM"
+	CustomerAddressUpdateRequestCountrySLB CustomerAddressUpdateRequestCountry = "SLB"
+	CustomerAddressUpdateRequestCountrySLE CustomerAddressUpdateRequestCountry = "SLE"
+	CustomerAddressUpdateRequestCountrySLV CustomerAddressUpdateRequestCountry = "SLV"
+	CustomerAddressUpdateRequestCountrySMR CustomerAddressUpdateRequestCountry = "SMR"
+	CustomerAddressUpdateRequestCountrySOM CustomerAddressUpdateRequestCountry = "SOM"
+	CustomerAddressUpdateRequestCountrySPM CustomerAddressUpdateRequestCountry = "SPM"
+	CustomerAddressUpdateRequestCountrySRB CustomerAddressUpdateRequestCountry = "SRB"
+	CustomerAddressUpdateRequestCountrySSD CustomerAddressUpdateRequestCountry = "SSD"
+	CustomerAddressUpdateRequestCountrySTP CustomerAddressUpdateRequestCountry = "STP"
+	CustomerAddressUpdateRequestCountrySUR CustomerAddressUpdateRequestCountry = "SUR"
+	CustomerAddressUpdateRequestCountrySVK CustomerAddressUpdateRequestCountry = "SVK"
+	CustomerAddressUpdateRequestCountrySVN CustomerAddressUpdateRequestCountry = "SVN"
+	CustomerAddressUpdateRequestCountrySWE CustomerAddressUpdateRequestCountry = "SWE"
+	CustomerAddressUpdateRequestCountrySWZ CustomerAddressUpdateRequestCountry = "SWZ"
+	CustomerAddressUpdateRequestCountrySXM CustomerAddressUpdateRequestCountry = "SXM"
+	CustomerAddressUpdateRequestCountrySYC CustomerAddressUpdateRequestCountry = "SYC"
+	CustomerAddressUpdateRequestCountrySYR CustomerAddressUpdateRequestCountry = "SYR"
+	CustomerAddressUpdateRequestCountryTCA CustomerAddressUpdateRequestCountry = "TCA"
+	CustomerAddressUpdateRequestCountryTCD CustomerAddressUpdateRequestCountry = "TCD"
+	CustomerAddressUpdateRequestCountryTGO CustomerAddressUpdateRequestCountry = "TGO"
+	CustomerAddressUpdateRequestCountryTHA CustomerAddressUpdateRequestCountry = "THA"
+	CustomerAddressUpdateRequestCountryTJK CustomerAddressUpdateRequestCountry = "TJK"
+	CustomerAddressUpdateRequestCountryTKL CustomerAddressUpdateRequestCountry = "TKL"
+	CustomerAddressUpdateRequestCountryTKM CustomerAddressUpdateRequestCountry = "TKM"
+	CustomerAddressUpdateRequestCountryTLS CustomerAddressUpdateRequestCountry = "TLS"
+	CustomerAddressUpdateRequestCountryTON CustomerAddressUpdateRequestCountry = "TON"
+	CustomerAddressUpdateRequestCountryTTO CustomerAddressUpdateRequestCountry = "TTO"
+	CustomerAddressUpdateRequestCountryTUN CustomerAddressUpdateRequestCountry = "TUN"
+	CustomerAddressUpdateRequestCountryTUR CustomerAddressUpdateRequestCountry = "TUR"
+	CustomerAddressUpdateRequestCountryTUV CustomerAddressUpdateRequestCountry = "TUV"
+	CustomerAddressUpdateRequestCountryTWN CustomerAddressUpdateRequestCountry = "TWN"
+	CustomerAddressUpdateRequestCountryTZA CustomerAddressUpdateRequestCountry = "TZA"
+	CustomerAddressUpdateRequestCountryUGA CustomerAddressUpdateRequestCountry = "UGA"
+	CustomerAddressUpdateRequestCountryUKR CustomerAddressUpdateRequestCountry = "UKR"
+	CustomerAddressUpdateRequestCountryUMI CustomerAddressUpdateRequestCountry = "UMI"
+	CustomerAddressUpdateRequestCountryURY CustomerAddressUpdateRequestCountry = "URY"
+	CustomerAddressUpdateRequestCountryUSA CustomerAddressUpdateRequestCountry = "USA"
+	CustomerAddressUpdateRequestCountryUZB CustomerAddressUpdateRequestCountry = "UZB"
+	CustomerAddressUpdateRequestCountryVAT CustomerAddressUpdateRequestCountry = "VAT"
+	CustomerAddressUpdateRequestCountryVCT CustomerAddressUpdateRequestCountry = "VCT"
+	CustomerAddressUpdateRequestCountryVEN CustomerAddressUpdateRequestCountry = "VEN"
+	CustomerAddressUpdateRequestCountryVGB CustomerAddressUpdateRequestCountry = "VGB"
+	CustomerAddressUpdateRequestCountryVIR CustomerAddressUpdateRequestCountry = "VIR"
+	CustomerAddressUpdateRequestCountryVNM CustomerAddressUpdateRequestCountry = "VNM"
+	CustomerAddressUpdateRequestCountryVUT CustomerAddressUpdateRequestCountry = "VUT"
+	CustomerAddressUpdateRequestCountryWLF CustomerAddressUpdateRequestCountry = "WLF"
+	CustomerAddressUpdateRequestCountryWSM CustomerAddressUpdateRequestCountry = "WSM"
+	CustomerAddressUpdateRequestCountryXKX CustomerAddressUpdateRequestCountry = "XKX"
+	CustomerAddressUpdateRequestCountryYEM CustomerAddressUpdateRequestCountry = "YEM"
+	CustomerAddressUpdateRequestCountryZAF CustomerAddressUpdateRequestCountry = "ZAF"
+	CustomerAddressUpdateRequestCountryZMB CustomerAddressUpdateRequestCountry = "ZMB"
+	CustomerAddressUpdateRequestCountryZWE CustomerAddressUpdateRequestCountry = "ZWE"
+)
+
+// Valid indicates whether the value is a known member of the CustomerAddressUpdateRequestCountry enum.
+func (e CustomerAddressUpdateRequestCountry) Valid() bool {
+	switch e {
+	case CustomerAddressUpdateRequestCountryABW:
+		return true
+	case CustomerAddressUpdateRequestCountryAFG:
+		return true
+	case CustomerAddressUpdateRequestCountryAGO:
+		return true
+	case CustomerAddressUpdateRequestCountryAIA:
+		return true
+	case CustomerAddressUpdateRequestCountryALA:
+		return true
+	case CustomerAddressUpdateRequestCountryALB:
+		return true
+	case CustomerAddressUpdateRequestCountryAND:
+		return true
+	case CustomerAddressUpdateRequestCountryANT:
+		return true
+	case CustomerAddressUpdateRequestCountryARE:
+		return true
+	case CustomerAddressUpdateRequestCountryARG:
+		return true
+	case CustomerAddressUpdateRequestCountryARM:
+		return true
+	case CustomerAddressUpdateRequestCountryASM:
+		return true
+	case CustomerAddressUpdateRequestCountryATA:
+		return true
+	case CustomerAddressUpdateRequestCountryATF:
+		return true
+	case CustomerAddressUpdateRequestCountryATG:
+		return true
+	case CustomerAddressUpdateRequestCountryAUS:
+		return true
+	case CustomerAddressUpdateRequestCountryAUT:
+		return true
+	case CustomerAddressUpdateRequestCountryAZE:
+		return true
+	case CustomerAddressUpdateRequestCountryBDI:
+		return true
+	case CustomerAddressUpdateRequestCountryBEL:
+		return true
+	case CustomerAddressUpdateRequestCountryBEN:
+		return true
+	case CustomerAddressUpdateRequestCountryBES:
+		return true
+	case CustomerAddressUpdateRequestCountryBFA:
+		return true
+	case CustomerAddressUpdateRequestCountryBGD:
+		return true
+	case CustomerAddressUpdateRequestCountryBGR:
+		return true
+	case CustomerAddressUpdateRequestCountryBHR:
+		return true
+	case CustomerAddressUpdateRequestCountryBHS:
+		return true
+	case CustomerAddressUpdateRequestCountryBIH:
+		return true
+	case CustomerAddressUpdateRequestCountryBLM:
+		return true
+	case CustomerAddressUpdateRequestCountryBLR:
+		return true
+	case CustomerAddressUpdateRequestCountryBLZ:
+		return true
+	case CustomerAddressUpdateRequestCountryBMU:
+		return true
+	case CustomerAddressUpdateRequestCountryBOL:
+		return true
+	case CustomerAddressUpdateRequestCountryBRA:
+		return true
+	case CustomerAddressUpdateRequestCountryBRB:
+		return true
+	case CustomerAddressUpdateRequestCountryBRN:
+		return true
+	case CustomerAddressUpdateRequestCountryBTN:
+		return true
+	case CustomerAddressUpdateRequestCountryBVT:
+		return true
+	case CustomerAddressUpdateRequestCountryBWA:
+		return true
+	case CustomerAddressUpdateRequestCountryCAF:
+		return true
+	case CustomerAddressUpdateRequestCountryCAN:
+		return true
+	case CustomerAddressUpdateRequestCountryCCK:
+		return true
+	case CustomerAddressUpdateRequestCountryCHE:
+		return true
+	case CustomerAddressUpdateRequestCountryCHL:
+		return true
+	case CustomerAddressUpdateRequestCountryCHN:
+		return true
+	case CustomerAddressUpdateRequestCountryCIV:
+		return true
+	case CustomerAddressUpdateRequestCountryCMR:
+		return true
+	case CustomerAddressUpdateRequestCountryCOD:
+		return true
+	case CustomerAddressUpdateRequestCountryCOG:
+		return true
+	case CustomerAddressUpdateRequestCountryCOK:
+		return true
+	case CustomerAddressUpdateRequestCountryCOL:
+		return true
+	case CustomerAddressUpdateRequestCountryCOM:
+		return true
+	case CustomerAddressUpdateRequestCountryCPV:
+		return true
+	case CustomerAddressUpdateRequestCountryCRI:
+		return true
+	case CustomerAddressUpdateRequestCountryCUB:
+		return true
+	case CustomerAddressUpdateRequestCountryCUW:
+		return true
+	case CustomerAddressUpdateRequestCountryCXR:
+		return true
+	case CustomerAddressUpdateRequestCountryCYM:
+		return true
+	case CustomerAddressUpdateRequestCountryCYP:
+		return true
+	case CustomerAddressUpdateRequestCountryCZE:
+		return true
+	case CustomerAddressUpdateRequestCountryDEU:
+		return true
+	case CustomerAddressUpdateRequestCountryDJI:
+		return true
+	case CustomerAddressUpdateRequestCountryDMA:
+		return true
+	case CustomerAddressUpdateRequestCountryDNK:
+		return true
+	case CustomerAddressUpdateRequestCountryDOM:
+		return true
+	case CustomerAddressUpdateRequestCountryDZA:
+		return true
+	case CustomerAddressUpdateRequestCountryECU:
+		return true
+	case CustomerAddressUpdateRequestCountryEGY:
+		return true
+	case CustomerAddressUpdateRequestCountryERI:
+		return true
+	case CustomerAddressUpdateRequestCountryESH:
+		return true
+	case CustomerAddressUpdateRequestCountryESP:
+		return true
+	case CustomerAddressUpdateRequestCountryEST:
+		return true
+	case CustomerAddressUpdateRequestCountryETH:
+		return true
+	case CustomerAddressUpdateRequestCountryFIN:
+		return true
+	case CustomerAddressUpdateRequestCountryFJI:
+		return true
+	case CustomerAddressUpdateRequestCountryFLK:
+		return true
+	case CustomerAddressUpdateRequestCountryFRA:
+		return true
+	case CustomerAddressUpdateRequestCountryFRO:
+		return true
+	case CustomerAddressUpdateRequestCountryFSM:
+		return true
+	case CustomerAddressUpdateRequestCountryGAB:
+		return true
+	case CustomerAddressUpdateRequestCountryGBR:
+		return true
+	case CustomerAddressUpdateRequestCountryGEO:
+		return true
+	case CustomerAddressUpdateRequestCountryGGY:
+		return true
+	case CustomerAddressUpdateRequestCountryGHA:
+		return true
+	case CustomerAddressUpdateRequestCountryGIB:
+		return true
+	case CustomerAddressUpdateRequestCountryGIN:
+		return true
+	case CustomerAddressUpdateRequestCountryGLP:
+		return true
+	case CustomerAddressUpdateRequestCountryGMB:
+		return true
+	case CustomerAddressUpdateRequestCountryGNB:
+		return true
+	case CustomerAddressUpdateRequestCountryGNQ:
+		return true
+	case CustomerAddressUpdateRequestCountryGRC:
+		return true
+	case CustomerAddressUpdateRequestCountryGRD:
+		return true
+	case CustomerAddressUpdateRequestCountryGRL:
+		return true
+	case CustomerAddressUpdateRequestCountryGTM:
+		return true
+	case CustomerAddressUpdateRequestCountryGUF:
+		return true
+	case CustomerAddressUpdateRequestCountryGUM:
+		return true
+	case CustomerAddressUpdateRequestCountryGUY:
+		return true
+	case CustomerAddressUpdateRequestCountryHKG:
+		return true
+	case CustomerAddressUpdateRequestCountryHMD:
+		return true
+	case CustomerAddressUpdateRequestCountryHND:
+		return true
+	case CustomerAddressUpdateRequestCountryHRV:
+		return true
+	case CustomerAddressUpdateRequestCountryHTI:
+		return true
+	case CustomerAddressUpdateRequestCountryHUN:
+		return true
+	case CustomerAddressUpdateRequestCountryIDN:
+		return true
+	case CustomerAddressUpdateRequestCountryIMN:
+		return true
+	case CustomerAddressUpdateRequestCountryIND:
+		return true
+	case CustomerAddressUpdateRequestCountryIOT:
+		return true
+	case CustomerAddressUpdateRequestCountryIRL:
+		return true
+	case CustomerAddressUpdateRequestCountryIRN:
+		return true
+	case CustomerAddressUpdateRequestCountryIRQ:
+		return true
+	case CustomerAddressUpdateRequestCountryISL:
+		return true
+	case CustomerAddressUpdateRequestCountryISR:
+		return true
+	case CustomerAddressUpdateRequestCountryITA:
+		return true
+	case CustomerAddressUpdateRequestCountryJAM:
+		return true
+	case CustomerAddressUpdateRequestCountryJEY:
+		return true
+	case CustomerAddressUpdateRequestCountryJOR:
+		return true
+	case CustomerAddressUpdateRequestCountryJPN:
+		return true
+	case CustomerAddressUpdateRequestCountryKAZ:
+		return true
+	case CustomerAddressUpdateRequestCountryKEN:
+		return true
+	case CustomerAddressUpdateRequestCountryKGZ:
+		return true
+	case CustomerAddressUpdateRequestCountryKHM:
+		return true
+	case CustomerAddressUpdateRequestCountryKIR:
+		return true
+	case CustomerAddressUpdateRequestCountryKNA:
+		return true
+	case CustomerAddressUpdateRequestCountryKOR:
+		return true
+	case CustomerAddressUpdateRequestCountryKWT:
+		return true
+	case CustomerAddressUpdateRequestCountryLAO:
+		return true
+	case CustomerAddressUpdateRequestCountryLBN:
+		return true
+	case CustomerAddressUpdateRequestCountryLBR:
+		return true
+	case CustomerAddressUpdateRequestCountryLBY:
+		return true
+	case CustomerAddressUpdateRequestCountryLCA:
+		return true
+	case CustomerAddressUpdateRequestCountryLIE:
+		return true
+	case CustomerAddressUpdateRequestCountryLKA:
+		return true
+	case CustomerAddressUpdateRequestCountryLSO:
+		return true
+	case CustomerAddressUpdateRequestCountryLTU:
+		return true
+	case CustomerAddressUpdateRequestCountryLUX:
+		return true
+	case CustomerAddressUpdateRequestCountryLVA:
+		return true
+	case CustomerAddressUpdateRequestCountryMAC:
+		return true
+	case CustomerAddressUpdateRequestCountryMAF:
+		return true
+	case CustomerAddressUpdateRequestCountryMAR:
+		return true
+	case CustomerAddressUpdateRequestCountryMCO:
+		return true
+	case CustomerAddressUpdateRequestCountryMDA:
+		return true
+	case CustomerAddressUpdateRequestCountryMDG:
+		return true
+	case CustomerAddressUpdateRequestCountryMDV:
+		return true
+	case CustomerAddressUpdateRequestCountryMEX:
+		return true
+	case CustomerAddressUpdateRequestCountryMHL:
+		return true
+	case CustomerAddressUpdateRequestCountryMKD:
+		return true
+	case CustomerAddressUpdateRequestCountryMLI:
+		return true
+	case CustomerAddressUpdateRequestCountryMLT:
+		return true
+	case CustomerAddressUpdateRequestCountryMMR:
+		return true
+	case CustomerAddressUpdateRequestCountryMNE:
+		return true
+	case CustomerAddressUpdateRequestCountryMNG:
+		return true
+	case CustomerAddressUpdateRequestCountryMNP:
+		return true
+	case CustomerAddressUpdateRequestCountryMOZ:
+		return true
+	case CustomerAddressUpdateRequestCountryMRT:
+		return true
+	case CustomerAddressUpdateRequestCountryMSR:
+		return true
+	case CustomerAddressUpdateRequestCountryMTQ:
+		return true
+	case CustomerAddressUpdateRequestCountryMUS:
+		return true
+	case CustomerAddressUpdateRequestCountryMWI:
+		return true
+	case CustomerAddressUpdateRequestCountryMYS:
+		return true
+	case CustomerAddressUpdateRequestCountryMYT:
+		return true
+	case CustomerAddressUpdateRequestCountryNAM:
+		return true
+	case CustomerAddressUpdateRequestCountryNCL:
+		return true
+	case CustomerAddressUpdateRequestCountryNER:
+		return true
+	case CustomerAddressUpdateRequestCountryNFK:
+		return true
+	case CustomerAddressUpdateRequestCountryNGA:
+		return true
+	case CustomerAddressUpdateRequestCountryNIC:
+		return true
+	case CustomerAddressUpdateRequestCountryNIU:
+		return true
+	case CustomerAddressUpdateRequestCountryNLD:
+		return true
+	case CustomerAddressUpdateRequestCountryNOR:
+		return true
+	case CustomerAddressUpdateRequestCountryNPL:
+		return true
+	case CustomerAddressUpdateRequestCountryNRU:
+		return true
+	case CustomerAddressUpdateRequestCountryNZL:
+		return true
+	case CustomerAddressUpdateRequestCountryOMN:
+		return true
+	case CustomerAddressUpdateRequestCountryPAK:
+		return true
+	case CustomerAddressUpdateRequestCountryPAN:
+		return true
+	case CustomerAddressUpdateRequestCountryPCN:
+		return true
+	case CustomerAddressUpdateRequestCountryPER:
+		return true
+	case CustomerAddressUpdateRequestCountryPHL:
+		return true
+	case CustomerAddressUpdateRequestCountryPLW:
+		return true
+	case CustomerAddressUpdateRequestCountryPNG:
+		return true
+	case CustomerAddressUpdateRequestCountryPOL:
+		return true
+	case CustomerAddressUpdateRequestCountryPRI:
+		return true
+	case CustomerAddressUpdateRequestCountryPRK:
+		return true
+	case CustomerAddressUpdateRequestCountryPRT:
+		return true
+	case CustomerAddressUpdateRequestCountryPRY:
+		return true
+	case CustomerAddressUpdateRequestCountryPSE:
+		return true
+	case CustomerAddressUpdateRequestCountryPYF:
+		return true
+	case CustomerAddressUpdateRequestCountryQAT:
+		return true
+	case CustomerAddressUpdateRequestCountryREU:
+		return true
+	case CustomerAddressUpdateRequestCountryROU:
+		return true
+	case CustomerAddressUpdateRequestCountryRUS:
+		return true
+	case CustomerAddressUpdateRequestCountryRWA:
+		return true
+	case CustomerAddressUpdateRequestCountrySAU:
+		return true
+	case CustomerAddressUpdateRequestCountrySCG:
+		return true
+	case CustomerAddressUpdateRequestCountrySDN:
+		return true
+	case CustomerAddressUpdateRequestCountrySEN:
+		return true
+	case CustomerAddressUpdateRequestCountrySGP:
+		return true
+	case CustomerAddressUpdateRequestCountrySGS:
+		return true
+	case CustomerAddressUpdateRequestCountrySHN:
+		return true
+	case CustomerAddressUpdateRequestCountrySJM:
+		return true
+	case CustomerAddressUpdateRequestCountrySLB:
+		return true
+	case CustomerAddressUpdateRequestCountrySLE:
+		return true
+	case CustomerAddressUpdateRequestCountrySLV:
+		return true
+	case CustomerAddressUpdateRequestCountrySMR:
+		return true
+	case CustomerAddressUpdateRequestCountrySOM:
+		return true
+	case CustomerAddressUpdateRequestCountrySPM:
+		return true
+	case CustomerAddressUpdateRequestCountrySRB:
+		return true
+	case CustomerAddressUpdateRequestCountrySSD:
+		return true
+	case CustomerAddressUpdateRequestCountrySTP:
+		return true
+	case CustomerAddressUpdateRequestCountrySUR:
+		return true
+	case CustomerAddressUpdateRequestCountrySVK:
+		return true
+	case CustomerAddressUpdateRequestCountrySVN:
+		return true
+	case CustomerAddressUpdateRequestCountrySWE:
+		return true
+	case CustomerAddressUpdateRequestCountrySWZ:
+		return true
+	case CustomerAddressUpdateRequestCountrySXM:
+		return true
+	case CustomerAddressUpdateRequestCountrySYC:
+		return true
+	case CustomerAddressUpdateRequestCountrySYR:
+		return true
+	case CustomerAddressUpdateRequestCountryTCA:
+		return true
+	case CustomerAddressUpdateRequestCountryTCD:
+		return true
+	case CustomerAddressUpdateRequestCountryTGO:
+		return true
+	case CustomerAddressUpdateRequestCountryTHA:
+		return true
+	case CustomerAddressUpdateRequestCountryTJK:
+		return true
+	case CustomerAddressUpdateRequestCountryTKL:
+		return true
+	case CustomerAddressUpdateRequestCountryTKM:
+		return true
+	case CustomerAddressUpdateRequestCountryTLS:
+		return true
+	case CustomerAddressUpdateRequestCountryTON:
+		return true
+	case CustomerAddressUpdateRequestCountryTTO:
+		return true
+	case CustomerAddressUpdateRequestCountryTUN:
+		return true
+	case CustomerAddressUpdateRequestCountryTUR:
+		return true
+	case CustomerAddressUpdateRequestCountryTUV:
+		return true
+	case CustomerAddressUpdateRequestCountryTWN:
+		return true
+	case CustomerAddressUpdateRequestCountryTZA:
+		return true
+	case CustomerAddressUpdateRequestCountryUGA:
+		return true
+	case CustomerAddressUpdateRequestCountryUKR:
+		return true
+	case CustomerAddressUpdateRequestCountryUMI:
+		return true
+	case CustomerAddressUpdateRequestCountryURY:
+		return true
+	case CustomerAddressUpdateRequestCountryUSA:
+		return true
+	case CustomerAddressUpdateRequestCountryUZB:
+		return true
+	case CustomerAddressUpdateRequestCountryVAT:
+		return true
+	case CustomerAddressUpdateRequestCountryVCT:
+		return true
+	case CustomerAddressUpdateRequestCountryVEN:
+		return true
+	case CustomerAddressUpdateRequestCountryVGB:
+		return true
+	case CustomerAddressUpdateRequestCountryVIR:
+		return true
+	case CustomerAddressUpdateRequestCountryVNM:
+		return true
+	case CustomerAddressUpdateRequestCountryVUT:
+		return true
+	case CustomerAddressUpdateRequestCountryWLF:
+		return true
+	case CustomerAddressUpdateRequestCountryWSM:
+		return true
+	case CustomerAddressUpdateRequestCountryXKX:
+		return true
+	case CustomerAddressUpdateRequestCountryYEM:
+		return true
+	case CustomerAddressUpdateRequestCountryZAF:
+		return true
+	case CustomerAddressUpdateRequestCountryZMB:
+		return true
+	case CustomerAddressUpdateRequestCountryZWE:
 		return true
 	default:
 		return false
@@ -4506,766 +6810,766 @@ func (e JobAddressCountry) Valid() bool {
 
 // Defines values for JobAddressInputCountry.
 const (
-	ABW JobAddressInputCountry = "ABW"
-	AFG JobAddressInputCountry = "AFG"
-	AGO JobAddressInputCountry = "AGO"
-	AIA JobAddressInputCountry = "AIA"
-	ALA JobAddressInputCountry = "ALA"
-	ALB JobAddressInputCountry = "ALB"
-	AND JobAddressInputCountry = "AND"
-	ANT JobAddressInputCountry = "ANT"
-	ARE JobAddressInputCountry = "ARE"
-	ARG JobAddressInputCountry = "ARG"
-	ARM JobAddressInputCountry = "ARM"
-	ASM JobAddressInputCountry = "ASM"
-	ATA JobAddressInputCountry = "ATA"
-	ATF JobAddressInputCountry = "ATF"
-	ATG JobAddressInputCountry = "ATG"
-	AUS JobAddressInputCountry = "AUS"
-	AUT JobAddressInputCountry = "AUT"
-	AZE JobAddressInputCountry = "AZE"
-	BDI JobAddressInputCountry = "BDI"
-	BEL JobAddressInputCountry = "BEL"
-	BEN JobAddressInputCountry = "BEN"
-	BES JobAddressInputCountry = "BES"
-	BFA JobAddressInputCountry = "BFA"
-	BGD JobAddressInputCountry = "BGD"
-	BGR JobAddressInputCountry = "BGR"
-	BHR JobAddressInputCountry = "BHR"
-	BHS JobAddressInputCountry = "BHS"
-	BIH JobAddressInputCountry = "BIH"
-	BLM JobAddressInputCountry = "BLM"
-	BLR JobAddressInputCountry = "BLR"
-	BLZ JobAddressInputCountry = "BLZ"
-	BMU JobAddressInputCountry = "BMU"
-	BOL JobAddressInputCountry = "BOL"
-	BRA JobAddressInputCountry = "BRA"
-	BRB JobAddressInputCountry = "BRB"
-	BRN JobAddressInputCountry = "BRN"
-	BTN JobAddressInputCountry = "BTN"
-	BVT JobAddressInputCountry = "BVT"
-	BWA JobAddressInputCountry = "BWA"
-	CAF JobAddressInputCountry = "CAF"
-	CAN JobAddressInputCountry = "CAN"
-	CCK JobAddressInputCountry = "CCK"
-	CHE JobAddressInputCountry = "CHE"
-	CHL JobAddressInputCountry = "CHL"
-	CHN JobAddressInputCountry = "CHN"
-	CIV JobAddressInputCountry = "CIV"
-	CMR JobAddressInputCountry = "CMR"
-	COD JobAddressInputCountry = "COD"
-	COG JobAddressInputCountry = "COG"
-	COK JobAddressInputCountry = "COK"
-	COL JobAddressInputCountry = "COL"
-	COM JobAddressInputCountry = "COM"
-	CPV JobAddressInputCountry = "CPV"
-	CRI JobAddressInputCountry = "CRI"
-	CUB JobAddressInputCountry = "CUB"
-	CUW JobAddressInputCountry = "CUW"
-	CXR JobAddressInputCountry = "CXR"
-	CYM JobAddressInputCountry = "CYM"
-	CYP JobAddressInputCountry = "CYP"
-	CZE JobAddressInputCountry = "CZE"
-	DEU JobAddressInputCountry = "DEU"
-	DJI JobAddressInputCountry = "DJI"
-	DMA JobAddressInputCountry = "DMA"
-	DNK JobAddressInputCountry = "DNK"
-	DOM JobAddressInputCountry = "DOM"
-	DZA JobAddressInputCountry = "DZA"
-	ECU JobAddressInputCountry = "ECU"
-	EGY JobAddressInputCountry = "EGY"
-	ERI JobAddressInputCountry = "ERI"
-	ESH JobAddressInputCountry = "ESH"
-	ESP JobAddressInputCountry = "ESP"
-	EST JobAddressInputCountry = "EST"
-	ETH JobAddressInputCountry = "ETH"
-	FIN JobAddressInputCountry = "FIN"
-	FJI JobAddressInputCountry = "FJI"
-	FLK JobAddressInputCountry = "FLK"
-	FRA JobAddressInputCountry = "FRA"
-	FRO JobAddressInputCountry = "FRO"
-	FSM JobAddressInputCountry = "FSM"
-	GAB JobAddressInputCountry = "GAB"
-	GBR JobAddressInputCountry = "GBR"
-	GEO JobAddressInputCountry = "GEO"
-	GGY JobAddressInputCountry = "GGY"
-	GHA JobAddressInputCountry = "GHA"
-	GIB JobAddressInputCountry = "GIB"
-	GIN JobAddressInputCountry = "GIN"
-	GLP JobAddressInputCountry = "GLP"
-	GMB JobAddressInputCountry = "GMB"
-	GNB JobAddressInputCountry = "GNB"
-	GNQ JobAddressInputCountry = "GNQ"
-	GRC JobAddressInputCountry = "GRC"
-	GRD JobAddressInputCountry = "GRD"
-	GRL JobAddressInputCountry = "GRL"
-	GTM JobAddressInputCountry = "GTM"
-	GUF JobAddressInputCountry = "GUF"
-	GUM JobAddressInputCountry = "GUM"
-	GUY JobAddressInputCountry = "GUY"
-	HKG JobAddressInputCountry = "HKG"
-	HMD JobAddressInputCountry = "HMD"
-	HND JobAddressInputCountry = "HND"
-	HRV JobAddressInputCountry = "HRV"
-	HTI JobAddressInputCountry = "HTI"
-	HUN JobAddressInputCountry = "HUN"
-	IDN JobAddressInputCountry = "IDN"
-	IMN JobAddressInputCountry = "IMN"
-	IND JobAddressInputCountry = "IND"
-	IOT JobAddressInputCountry = "IOT"
-	IRL JobAddressInputCountry = "IRL"
-	IRN JobAddressInputCountry = "IRN"
-	IRQ JobAddressInputCountry = "IRQ"
-	ISL JobAddressInputCountry = "ISL"
-	ISR JobAddressInputCountry = "ISR"
-	ITA JobAddressInputCountry = "ITA"
-	JAM JobAddressInputCountry = "JAM"
-	JEY JobAddressInputCountry = "JEY"
-	JOR JobAddressInputCountry = "JOR"
-	JPN JobAddressInputCountry = "JPN"
-	KAZ JobAddressInputCountry = "KAZ"
-	KEN JobAddressInputCountry = "KEN"
-	KGZ JobAddressInputCountry = "KGZ"
-	KHM JobAddressInputCountry = "KHM"
-	KIR JobAddressInputCountry = "KIR"
-	KNA JobAddressInputCountry = "KNA"
-	KOR JobAddressInputCountry = "KOR"
-	KWT JobAddressInputCountry = "KWT"
-	LAO JobAddressInputCountry = "LAO"
-	LBN JobAddressInputCountry = "LBN"
-	LBR JobAddressInputCountry = "LBR"
-	LBY JobAddressInputCountry = "LBY"
-	LCA JobAddressInputCountry = "LCA"
-	LIE JobAddressInputCountry = "LIE"
-	LKA JobAddressInputCountry = "LKA"
-	LSO JobAddressInputCountry = "LSO"
-	LTU JobAddressInputCountry = "LTU"
-	LUX JobAddressInputCountry = "LUX"
-	LVA JobAddressInputCountry = "LVA"
-	MAC JobAddressInputCountry = "MAC"
-	MAF JobAddressInputCountry = "MAF"
-	MAR JobAddressInputCountry = "MAR"
-	MCO JobAddressInputCountry = "MCO"
-	MDA JobAddressInputCountry = "MDA"
-	MDG JobAddressInputCountry = "MDG"
-	MDV JobAddressInputCountry = "MDV"
-	MEX JobAddressInputCountry = "MEX"
-	MHL JobAddressInputCountry = "MHL"
-	MKD JobAddressInputCountry = "MKD"
-	MLI JobAddressInputCountry = "MLI"
-	MLT JobAddressInputCountry = "MLT"
-	MMR JobAddressInputCountry = "MMR"
-	MNE JobAddressInputCountry = "MNE"
-	MNG JobAddressInputCountry = "MNG"
-	MNP JobAddressInputCountry = "MNP"
-	MOZ JobAddressInputCountry = "MOZ"
-	MRT JobAddressInputCountry = "MRT"
-	MSR JobAddressInputCountry = "MSR"
-	MTQ JobAddressInputCountry = "MTQ"
-	MUS JobAddressInputCountry = "MUS"
-	MWI JobAddressInputCountry = "MWI"
-	MYS JobAddressInputCountry = "MYS"
-	MYT JobAddressInputCountry = "MYT"
-	NAM JobAddressInputCountry = "NAM"
-	NCL JobAddressInputCountry = "NCL"
-	NER JobAddressInputCountry = "NER"
-	NFK JobAddressInputCountry = "NFK"
-	NGA JobAddressInputCountry = "NGA"
-	NIC JobAddressInputCountry = "NIC"
-	NIU JobAddressInputCountry = "NIU"
-	NLD JobAddressInputCountry = "NLD"
-	NOR JobAddressInputCountry = "NOR"
-	NPL JobAddressInputCountry = "NPL"
-	NRU JobAddressInputCountry = "NRU"
-	NZL JobAddressInputCountry = "NZL"
-	OMN JobAddressInputCountry = "OMN"
-	PAK JobAddressInputCountry = "PAK"
-	PAN JobAddressInputCountry = "PAN"
-	PCN JobAddressInputCountry = "PCN"
-	PER JobAddressInputCountry = "PER"
-	PHL JobAddressInputCountry = "PHL"
-	PLW JobAddressInputCountry = "PLW"
-	PNG JobAddressInputCountry = "PNG"
-	POL JobAddressInputCountry = "POL"
-	PRI JobAddressInputCountry = "PRI"
-	PRK JobAddressInputCountry = "PRK"
-	PRT JobAddressInputCountry = "PRT"
-	PRY JobAddressInputCountry = "PRY"
-	PSE JobAddressInputCountry = "PSE"
-	PYF JobAddressInputCountry = "PYF"
-	QAT JobAddressInputCountry = "QAT"
-	REU JobAddressInputCountry = "REU"
-	ROU JobAddressInputCountry = "ROU"
-	RUS JobAddressInputCountry = "RUS"
-	RWA JobAddressInputCountry = "RWA"
-	SAU JobAddressInputCountry = "SAU"
-	SCG JobAddressInputCountry = "SCG"
-	SDN JobAddressInputCountry = "SDN"
-	SEN JobAddressInputCountry = "SEN"
-	SGP JobAddressInputCountry = "SGP"
-	SGS JobAddressInputCountry = "SGS"
-	SHN JobAddressInputCountry = "SHN"
-	SJM JobAddressInputCountry = "SJM"
-	SLB JobAddressInputCountry = "SLB"
-	SLE JobAddressInputCountry = "SLE"
-	SLV JobAddressInputCountry = "SLV"
-	SMR JobAddressInputCountry = "SMR"
-	SOM JobAddressInputCountry = "SOM"
-	SPM JobAddressInputCountry = "SPM"
-	SRB JobAddressInputCountry = "SRB"
-	SSD JobAddressInputCountry = "SSD"
-	STP JobAddressInputCountry = "STP"
-	SUR JobAddressInputCountry = "SUR"
-	SVK JobAddressInputCountry = "SVK"
-	SVN JobAddressInputCountry = "SVN"
-	SWE JobAddressInputCountry = "SWE"
-	SWZ JobAddressInputCountry = "SWZ"
-	SXM JobAddressInputCountry = "SXM"
-	SYC JobAddressInputCountry = "SYC"
-	SYR JobAddressInputCountry = "SYR"
-	TCA JobAddressInputCountry = "TCA"
-	TCD JobAddressInputCountry = "TCD"
-	TGO JobAddressInputCountry = "TGO"
-	THA JobAddressInputCountry = "THA"
-	TJK JobAddressInputCountry = "TJK"
-	TKL JobAddressInputCountry = "TKL"
-	TKM JobAddressInputCountry = "TKM"
-	TLS JobAddressInputCountry = "TLS"
-	TON JobAddressInputCountry = "TON"
-	TTO JobAddressInputCountry = "TTO"
-	TUN JobAddressInputCountry = "TUN"
-	TUR JobAddressInputCountry = "TUR"
-	TUV JobAddressInputCountry = "TUV"
-	TWN JobAddressInputCountry = "TWN"
-	TZA JobAddressInputCountry = "TZA"
-	UGA JobAddressInputCountry = "UGA"
-	UKR JobAddressInputCountry = "UKR"
-	UMI JobAddressInputCountry = "UMI"
-	URY JobAddressInputCountry = "URY"
-	USA JobAddressInputCountry = "USA"
-	UZB JobAddressInputCountry = "UZB"
-	VAT JobAddressInputCountry = "VAT"
-	VCT JobAddressInputCountry = "VCT"
-	VEN JobAddressInputCountry = "VEN"
-	VGB JobAddressInputCountry = "VGB"
-	VIR JobAddressInputCountry = "VIR"
-	VNM JobAddressInputCountry = "VNM"
-	VUT JobAddressInputCountry = "VUT"
-	WLF JobAddressInputCountry = "WLF"
-	WSM JobAddressInputCountry = "WSM"
-	XKX JobAddressInputCountry = "XKX"
-	YEM JobAddressInputCountry = "YEM"
-	ZAF JobAddressInputCountry = "ZAF"
-	ZMB JobAddressInputCountry = "ZMB"
-	ZWE JobAddressInputCountry = "ZWE"
+	JobAddressInputCountryABW JobAddressInputCountry = "ABW"
+	JobAddressInputCountryAFG JobAddressInputCountry = "AFG"
+	JobAddressInputCountryAGO JobAddressInputCountry = "AGO"
+	JobAddressInputCountryAIA JobAddressInputCountry = "AIA"
+	JobAddressInputCountryALA JobAddressInputCountry = "ALA"
+	JobAddressInputCountryALB JobAddressInputCountry = "ALB"
+	JobAddressInputCountryAND JobAddressInputCountry = "AND"
+	JobAddressInputCountryANT JobAddressInputCountry = "ANT"
+	JobAddressInputCountryARE JobAddressInputCountry = "ARE"
+	JobAddressInputCountryARG JobAddressInputCountry = "ARG"
+	JobAddressInputCountryARM JobAddressInputCountry = "ARM"
+	JobAddressInputCountryASM JobAddressInputCountry = "ASM"
+	JobAddressInputCountryATA JobAddressInputCountry = "ATA"
+	JobAddressInputCountryATF JobAddressInputCountry = "ATF"
+	JobAddressInputCountryATG JobAddressInputCountry = "ATG"
+	JobAddressInputCountryAUS JobAddressInputCountry = "AUS"
+	JobAddressInputCountryAUT JobAddressInputCountry = "AUT"
+	JobAddressInputCountryAZE JobAddressInputCountry = "AZE"
+	JobAddressInputCountryBDI JobAddressInputCountry = "BDI"
+	JobAddressInputCountryBEL JobAddressInputCountry = "BEL"
+	JobAddressInputCountryBEN JobAddressInputCountry = "BEN"
+	JobAddressInputCountryBES JobAddressInputCountry = "BES"
+	JobAddressInputCountryBFA JobAddressInputCountry = "BFA"
+	JobAddressInputCountryBGD JobAddressInputCountry = "BGD"
+	JobAddressInputCountryBGR JobAddressInputCountry = "BGR"
+	JobAddressInputCountryBHR JobAddressInputCountry = "BHR"
+	JobAddressInputCountryBHS JobAddressInputCountry = "BHS"
+	JobAddressInputCountryBIH JobAddressInputCountry = "BIH"
+	JobAddressInputCountryBLM JobAddressInputCountry = "BLM"
+	JobAddressInputCountryBLR JobAddressInputCountry = "BLR"
+	JobAddressInputCountryBLZ JobAddressInputCountry = "BLZ"
+	JobAddressInputCountryBMU JobAddressInputCountry = "BMU"
+	JobAddressInputCountryBOL JobAddressInputCountry = "BOL"
+	JobAddressInputCountryBRA JobAddressInputCountry = "BRA"
+	JobAddressInputCountryBRB JobAddressInputCountry = "BRB"
+	JobAddressInputCountryBRN JobAddressInputCountry = "BRN"
+	JobAddressInputCountryBTN JobAddressInputCountry = "BTN"
+	JobAddressInputCountryBVT JobAddressInputCountry = "BVT"
+	JobAddressInputCountryBWA JobAddressInputCountry = "BWA"
+	JobAddressInputCountryCAF JobAddressInputCountry = "CAF"
+	JobAddressInputCountryCAN JobAddressInputCountry = "CAN"
+	JobAddressInputCountryCCK JobAddressInputCountry = "CCK"
+	JobAddressInputCountryCHE JobAddressInputCountry = "CHE"
+	JobAddressInputCountryCHL JobAddressInputCountry = "CHL"
+	JobAddressInputCountryCHN JobAddressInputCountry = "CHN"
+	JobAddressInputCountryCIV JobAddressInputCountry = "CIV"
+	JobAddressInputCountryCMR JobAddressInputCountry = "CMR"
+	JobAddressInputCountryCOD JobAddressInputCountry = "COD"
+	JobAddressInputCountryCOG JobAddressInputCountry = "COG"
+	JobAddressInputCountryCOK JobAddressInputCountry = "COK"
+	JobAddressInputCountryCOL JobAddressInputCountry = "COL"
+	JobAddressInputCountryCOM JobAddressInputCountry = "COM"
+	JobAddressInputCountryCPV JobAddressInputCountry = "CPV"
+	JobAddressInputCountryCRI JobAddressInputCountry = "CRI"
+	JobAddressInputCountryCUB JobAddressInputCountry = "CUB"
+	JobAddressInputCountryCUW JobAddressInputCountry = "CUW"
+	JobAddressInputCountryCXR JobAddressInputCountry = "CXR"
+	JobAddressInputCountryCYM JobAddressInputCountry = "CYM"
+	JobAddressInputCountryCYP JobAddressInputCountry = "CYP"
+	JobAddressInputCountryCZE JobAddressInputCountry = "CZE"
+	JobAddressInputCountryDEU JobAddressInputCountry = "DEU"
+	JobAddressInputCountryDJI JobAddressInputCountry = "DJI"
+	JobAddressInputCountryDMA JobAddressInputCountry = "DMA"
+	JobAddressInputCountryDNK JobAddressInputCountry = "DNK"
+	JobAddressInputCountryDOM JobAddressInputCountry = "DOM"
+	JobAddressInputCountryDZA JobAddressInputCountry = "DZA"
+	JobAddressInputCountryECU JobAddressInputCountry = "ECU"
+	JobAddressInputCountryEGY JobAddressInputCountry = "EGY"
+	JobAddressInputCountryERI JobAddressInputCountry = "ERI"
+	JobAddressInputCountryESH JobAddressInputCountry = "ESH"
+	JobAddressInputCountryESP JobAddressInputCountry = "ESP"
+	JobAddressInputCountryEST JobAddressInputCountry = "EST"
+	JobAddressInputCountryETH JobAddressInputCountry = "ETH"
+	JobAddressInputCountryFIN JobAddressInputCountry = "FIN"
+	JobAddressInputCountryFJI JobAddressInputCountry = "FJI"
+	JobAddressInputCountryFLK JobAddressInputCountry = "FLK"
+	JobAddressInputCountryFRA JobAddressInputCountry = "FRA"
+	JobAddressInputCountryFRO JobAddressInputCountry = "FRO"
+	JobAddressInputCountryFSM JobAddressInputCountry = "FSM"
+	JobAddressInputCountryGAB JobAddressInputCountry = "GAB"
+	JobAddressInputCountryGBR JobAddressInputCountry = "GBR"
+	JobAddressInputCountryGEO JobAddressInputCountry = "GEO"
+	JobAddressInputCountryGGY JobAddressInputCountry = "GGY"
+	JobAddressInputCountryGHA JobAddressInputCountry = "GHA"
+	JobAddressInputCountryGIB JobAddressInputCountry = "GIB"
+	JobAddressInputCountryGIN JobAddressInputCountry = "GIN"
+	JobAddressInputCountryGLP JobAddressInputCountry = "GLP"
+	JobAddressInputCountryGMB JobAddressInputCountry = "GMB"
+	JobAddressInputCountryGNB JobAddressInputCountry = "GNB"
+	JobAddressInputCountryGNQ JobAddressInputCountry = "GNQ"
+	JobAddressInputCountryGRC JobAddressInputCountry = "GRC"
+	JobAddressInputCountryGRD JobAddressInputCountry = "GRD"
+	JobAddressInputCountryGRL JobAddressInputCountry = "GRL"
+	JobAddressInputCountryGTM JobAddressInputCountry = "GTM"
+	JobAddressInputCountryGUF JobAddressInputCountry = "GUF"
+	JobAddressInputCountryGUM JobAddressInputCountry = "GUM"
+	JobAddressInputCountryGUY JobAddressInputCountry = "GUY"
+	JobAddressInputCountryHKG JobAddressInputCountry = "HKG"
+	JobAddressInputCountryHMD JobAddressInputCountry = "HMD"
+	JobAddressInputCountryHND JobAddressInputCountry = "HND"
+	JobAddressInputCountryHRV JobAddressInputCountry = "HRV"
+	JobAddressInputCountryHTI JobAddressInputCountry = "HTI"
+	JobAddressInputCountryHUN JobAddressInputCountry = "HUN"
+	JobAddressInputCountryIDN JobAddressInputCountry = "IDN"
+	JobAddressInputCountryIMN JobAddressInputCountry = "IMN"
+	JobAddressInputCountryIND JobAddressInputCountry = "IND"
+	JobAddressInputCountryIOT JobAddressInputCountry = "IOT"
+	JobAddressInputCountryIRL JobAddressInputCountry = "IRL"
+	JobAddressInputCountryIRN JobAddressInputCountry = "IRN"
+	JobAddressInputCountryIRQ JobAddressInputCountry = "IRQ"
+	JobAddressInputCountryISL JobAddressInputCountry = "ISL"
+	JobAddressInputCountryISR JobAddressInputCountry = "ISR"
+	JobAddressInputCountryITA JobAddressInputCountry = "ITA"
+	JobAddressInputCountryJAM JobAddressInputCountry = "JAM"
+	JobAddressInputCountryJEY JobAddressInputCountry = "JEY"
+	JobAddressInputCountryJOR JobAddressInputCountry = "JOR"
+	JobAddressInputCountryJPN JobAddressInputCountry = "JPN"
+	JobAddressInputCountryKAZ JobAddressInputCountry = "KAZ"
+	JobAddressInputCountryKEN JobAddressInputCountry = "KEN"
+	JobAddressInputCountryKGZ JobAddressInputCountry = "KGZ"
+	JobAddressInputCountryKHM JobAddressInputCountry = "KHM"
+	JobAddressInputCountryKIR JobAddressInputCountry = "KIR"
+	JobAddressInputCountryKNA JobAddressInputCountry = "KNA"
+	JobAddressInputCountryKOR JobAddressInputCountry = "KOR"
+	JobAddressInputCountryKWT JobAddressInputCountry = "KWT"
+	JobAddressInputCountryLAO JobAddressInputCountry = "LAO"
+	JobAddressInputCountryLBN JobAddressInputCountry = "LBN"
+	JobAddressInputCountryLBR JobAddressInputCountry = "LBR"
+	JobAddressInputCountryLBY JobAddressInputCountry = "LBY"
+	JobAddressInputCountryLCA JobAddressInputCountry = "LCA"
+	JobAddressInputCountryLIE JobAddressInputCountry = "LIE"
+	JobAddressInputCountryLKA JobAddressInputCountry = "LKA"
+	JobAddressInputCountryLSO JobAddressInputCountry = "LSO"
+	JobAddressInputCountryLTU JobAddressInputCountry = "LTU"
+	JobAddressInputCountryLUX JobAddressInputCountry = "LUX"
+	JobAddressInputCountryLVA JobAddressInputCountry = "LVA"
+	JobAddressInputCountryMAC JobAddressInputCountry = "MAC"
+	JobAddressInputCountryMAF JobAddressInputCountry = "MAF"
+	JobAddressInputCountryMAR JobAddressInputCountry = "MAR"
+	JobAddressInputCountryMCO JobAddressInputCountry = "MCO"
+	JobAddressInputCountryMDA JobAddressInputCountry = "MDA"
+	JobAddressInputCountryMDG JobAddressInputCountry = "MDG"
+	JobAddressInputCountryMDV JobAddressInputCountry = "MDV"
+	JobAddressInputCountryMEX JobAddressInputCountry = "MEX"
+	JobAddressInputCountryMHL JobAddressInputCountry = "MHL"
+	JobAddressInputCountryMKD JobAddressInputCountry = "MKD"
+	JobAddressInputCountryMLI JobAddressInputCountry = "MLI"
+	JobAddressInputCountryMLT JobAddressInputCountry = "MLT"
+	JobAddressInputCountryMMR JobAddressInputCountry = "MMR"
+	JobAddressInputCountryMNE JobAddressInputCountry = "MNE"
+	JobAddressInputCountryMNG JobAddressInputCountry = "MNG"
+	JobAddressInputCountryMNP JobAddressInputCountry = "MNP"
+	JobAddressInputCountryMOZ JobAddressInputCountry = "MOZ"
+	JobAddressInputCountryMRT JobAddressInputCountry = "MRT"
+	JobAddressInputCountryMSR JobAddressInputCountry = "MSR"
+	JobAddressInputCountryMTQ JobAddressInputCountry = "MTQ"
+	JobAddressInputCountryMUS JobAddressInputCountry = "MUS"
+	JobAddressInputCountryMWI JobAddressInputCountry = "MWI"
+	JobAddressInputCountryMYS JobAddressInputCountry = "MYS"
+	JobAddressInputCountryMYT JobAddressInputCountry = "MYT"
+	JobAddressInputCountryNAM JobAddressInputCountry = "NAM"
+	JobAddressInputCountryNCL JobAddressInputCountry = "NCL"
+	JobAddressInputCountryNER JobAddressInputCountry = "NER"
+	JobAddressInputCountryNFK JobAddressInputCountry = "NFK"
+	JobAddressInputCountryNGA JobAddressInputCountry = "NGA"
+	JobAddressInputCountryNIC JobAddressInputCountry = "NIC"
+	JobAddressInputCountryNIU JobAddressInputCountry = "NIU"
+	JobAddressInputCountryNLD JobAddressInputCountry = "NLD"
+	JobAddressInputCountryNOR JobAddressInputCountry = "NOR"
+	JobAddressInputCountryNPL JobAddressInputCountry = "NPL"
+	JobAddressInputCountryNRU JobAddressInputCountry = "NRU"
+	JobAddressInputCountryNZL JobAddressInputCountry = "NZL"
+	JobAddressInputCountryOMN JobAddressInputCountry = "OMN"
+	JobAddressInputCountryPAK JobAddressInputCountry = "PAK"
+	JobAddressInputCountryPAN JobAddressInputCountry = "PAN"
+	JobAddressInputCountryPCN JobAddressInputCountry = "PCN"
+	JobAddressInputCountryPER JobAddressInputCountry = "PER"
+	JobAddressInputCountryPHL JobAddressInputCountry = "PHL"
+	JobAddressInputCountryPLW JobAddressInputCountry = "PLW"
+	JobAddressInputCountryPNG JobAddressInputCountry = "PNG"
+	JobAddressInputCountryPOL JobAddressInputCountry = "POL"
+	JobAddressInputCountryPRI JobAddressInputCountry = "PRI"
+	JobAddressInputCountryPRK JobAddressInputCountry = "PRK"
+	JobAddressInputCountryPRT JobAddressInputCountry = "PRT"
+	JobAddressInputCountryPRY JobAddressInputCountry = "PRY"
+	JobAddressInputCountryPSE JobAddressInputCountry = "PSE"
+	JobAddressInputCountryPYF JobAddressInputCountry = "PYF"
+	JobAddressInputCountryQAT JobAddressInputCountry = "QAT"
+	JobAddressInputCountryREU JobAddressInputCountry = "REU"
+	JobAddressInputCountryROU JobAddressInputCountry = "ROU"
+	JobAddressInputCountryRUS JobAddressInputCountry = "RUS"
+	JobAddressInputCountryRWA JobAddressInputCountry = "RWA"
+	JobAddressInputCountrySAU JobAddressInputCountry = "SAU"
+	JobAddressInputCountrySCG JobAddressInputCountry = "SCG"
+	JobAddressInputCountrySDN JobAddressInputCountry = "SDN"
+	JobAddressInputCountrySEN JobAddressInputCountry = "SEN"
+	JobAddressInputCountrySGP JobAddressInputCountry = "SGP"
+	JobAddressInputCountrySGS JobAddressInputCountry = "SGS"
+	JobAddressInputCountrySHN JobAddressInputCountry = "SHN"
+	JobAddressInputCountrySJM JobAddressInputCountry = "SJM"
+	JobAddressInputCountrySLB JobAddressInputCountry = "SLB"
+	JobAddressInputCountrySLE JobAddressInputCountry = "SLE"
+	JobAddressInputCountrySLV JobAddressInputCountry = "SLV"
+	JobAddressInputCountrySMR JobAddressInputCountry = "SMR"
+	JobAddressInputCountrySOM JobAddressInputCountry = "SOM"
+	JobAddressInputCountrySPM JobAddressInputCountry = "SPM"
+	JobAddressInputCountrySRB JobAddressInputCountry = "SRB"
+	JobAddressInputCountrySSD JobAddressInputCountry = "SSD"
+	JobAddressInputCountrySTP JobAddressInputCountry = "STP"
+	JobAddressInputCountrySUR JobAddressInputCountry = "SUR"
+	JobAddressInputCountrySVK JobAddressInputCountry = "SVK"
+	JobAddressInputCountrySVN JobAddressInputCountry = "SVN"
+	JobAddressInputCountrySWE JobAddressInputCountry = "SWE"
+	JobAddressInputCountrySWZ JobAddressInputCountry = "SWZ"
+	JobAddressInputCountrySXM JobAddressInputCountry = "SXM"
+	JobAddressInputCountrySYC JobAddressInputCountry = "SYC"
+	JobAddressInputCountrySYR JobAddressInputCountry = "SYR"
+	JobAddressInputCountryTCA JobAddressInputCountry = "TCA"
+	JobAddressInputCountryTCD JobAddressInputCountry = "TCD"
+	JobAddressInputCountryTGO JobAddressInputCountry = "TGO"
+	JobAddressInputCountryTHA JobAddressInputCountry = "THA"
+	JobAddressInputCountryTJK JobAddressInputCountry = "TJK"
+	JobAddressInputCountryTKL JobAddressInputCountry = "TKL"
+	JobAddressInputCountryTKM JobAddressInputCountry = "TKM"
+	JobAddressInputCountryTLS JobAddressInputCountry = "TLS"
+	JobAddressInputCountryTON JobAddressInputCountry = "TON"
+	JobAddressInputCountryTTO JobAddressInputCountry = "TTO"
+	JobAddressInputCountryTUN JobAddressInputCountry = "TUN"
+	JobAddressInputCountryTUR JobAddressInputCountry = "TUR"
+	JobAddressInputCountryTUV JobAddressInputCountry = "TUV"
+	JobAddressInputCountryTWN JobAddressInputCountry = "TWN"
+	JobAddressInputCountryTZA JobAddressInputCountry = "TZA"
+	JobAddressInputCountryUGA JobAddressInputCountry = "UGA"
+	JobAddressInputCountryUKR JobAddressInputCountry = "UKR"
+	JobAddressInputCountryUMI JobAddressInputCountry = "UMI"
+	JobAddressInputCountryURY JobAddressInputCountry = "URY"
+	JobAddressInputCountryUSA JobAddressInputCountry = "USA"
+	JobAddressInputCountryUZB JobAddressInputCountry = "UZB"
+	JobAddressInputCountryVAT JobAddressInputCountry = "VAT"
+	JobAddressInputCountryVCT JobAddressInputCountry = "VCT"
+	JobAddressInputCountryVEN JobAddressInputCountry = "VEN"
+	JobAddressInputCountryVGB JobAddressInputCountry = "VGB"
+	JobAddressInputCountryVIR JobAddressInputCountry = "VIR"
+	JobAddressInputCountryVNM JobAddressInputCountry = "VNM"
+	JobAddressInputCountryVUT JobAddressInputCountry = "VUT"
+	JobAddressInputCountryWLF JobAddressInputCountry = "WLF"
+	JobAddressInputCountryWSM JobAddressInputCountry = "WSM"
+	JobAddressInputCountryXKX JobAddressInputCountry = "XKX"
+	JobAddressInputCountryYEM JobAddressInputCountry = "YEM"
+	JobAddressInputCountryZAF JobAddressInputCountry = "ZAF"
+	JobAddressInputCountryZMB JobAddressInputCountry = "ZMB"
+	JobAddressInputCountryZWE JobAddressInputCountry = "ZWE"
 )
 
 // Valid indicates whether the value is a known member of the JobAddressInputCountry enum.
 func (e JobAddressInputCountry) Valid() bool {
 	switch e {
-	case ABW:
+	case JobAddressInputCountryABW:
 		return true
-	case AFG:
+	case JobAddressInputCountryAFG:
 		return true
-	case AGO:
+	case JobAddressInputCountryAGO:
 		return true
-	case AIA:
+	case JobAddressInputCountryAIA:
 		return true
-	case ALA:
+	case JobAddressInputCountryALA:
 		return true
-	case ALB:
+	case JobAddressInputCountryALB:
 		return true
-	case AND:
+	case JobAddressInputCountryAND:
 		return true
-	case ANT:
+	case JobAddressInputCountryANT:
 		return true
-	case ARE:
+	case JobAddressInputCountryARE:
 		return true
-	case ARG:
+	case JobAddressInputCountryARG:
 		return true
-	case ARM:
+	case JobAddressInputCountryARM:
 		return true
-	case ASM:
+	case JobAddressInputCountryASM:
 		return true
-	case ATA:
+	case JobAddressInputCountryATA:
 		return true
-	case ATF:
+	case JobAddressInputCountryATF:
 		return true
-	case ATG:
+	case JobAddressInputCountryATG:
 		return true
-	case AUS:
+	case JobAddressInputCountryAUS:
 		return true
-	case AUT:
+	case JobAddressInputCountryAUT:
 		return true
-	case AZE:
+	case JobAddressInputCountryAZE:
 		return true
-	case BDI:
+	case JobAddressInputCountryBDI:
 		return true
-	case BEL:
+	case JobAddressInputCountryBEL:
 		return true
-	case BEN:
+	case JobAddressInputCountryBEN:
 		return true
-	case BES:
+	case JobAddressInputCountryBES:
 		return true
-	case BFA:
+	case JobAddressInputCountryBFA:
 		return true
-	case BGD:
+	case JobAddressInputCountryBGD:
 		return true
-	case BGR:
+	case JobAddressInputCountryBGR:
 		return true
-	case BHR:
+	case JobAddressInputCountryBHR:
 		return true
-	case BHS:
+	case JobAddressInputCountryBHS:
 		return true
-	case BIH:
+	case JobAddressInputCountryBIH:
 		return true
-	case BLM:
+	case JobAddressInputCountryBLM:
 		return true
-	case BLR:
+	case JobAddressInputCountryBLR:
 		return true
-	case BLZ:
+	case JobAddressInputCountryBLZ:
 		return true
-	case BMU:
+	case JobAddressInputCountryBMU:
 		return true
-	case BOL:
+	case JobAddressInputCountryBOL:
 		return true
-	case BRA:
+	case JobAddressInputCountryBRA:
 		return true
-	case BRB:
+	case JobAddressInputCountryBRB:
 		return true
-	case BRN:
+	case JobAddressInputCountryBRN:
 		return true
-	case BTN:
+	case JobAddressInputCountryBTN:
 		return true
-	case BVT:
+	case JobAddressInputCountryBVT:
 		return true
-	case BWA:
+	case JobAddressInputCountryBWA:
 		return true
-	case CAF:
+	case JobAddressInputCountryCAF:
 		return true
-	case CAN:
+	case JobAddressInputCountryCAN:
 		return true
-	case CCK:
+	case JobAddressInputCountryCCK:
 		return true
-	case CHE:
+	case JobAddressInputCountryCHE:
 		return true
-	case CHL:
+	case JobAddressInputCountryCHL:
 		return true
-	case CHN:
+	case JobAddressInputCountryCHN:
 		return true
-	case CIV:
+	case JobAddressInputCountryCIV:
 		return true
-	case CMR:
+	case JobAddressInputCountryCMR:
 		return true
-	case COD:
+	case JobAddressInputCountryCOD:
 		return true
-	case COG:
+	case JobAddressInputCountryCOG:
 		return true
-	case COK:
+	case JobAddressInputCountryCOK:
 		return true
-	case COL:
+	case JobAddressInputCountryCOL:
 		return true
-	case COM:
+	case JobAddressInputCountryCOM:
 		return true
-	case CPV:
+	case JobAddressInputCountryCPV:
 		return true
-	case CRI:
+	case JobAddressInputCountryCRI:
 		return true
-	case CUB:
+	case JobAddressInputCountryCUB:
 		return true
-	case CUW:
+	case JobAddressInputCountryCUW:
 		return true
-	case CXR:
+	case JobAddressInputCountryCXR:
 		return true
-	case CYM:
+	case JobAddressInputCountryCYM:
 		return true
-	case CYP:
+	case JobAddressInputCountryCYP:
 		return true
-	case CZE:
+	case JobAddressInputCountryCZE:
 		return true
-	case DEU:
+	case JobAddressInputCountryDEU:
 		return true
-	case DJI:
+	case JobAddressInputCountryDJI:
 		return true
-	case DMA:
+	case JobAddressInputCountryDMA:
 		return true
-	case DNK:
+	case JobAddressInputCountryDNK:
 		return true
-	case DOM:
+	case JobAddressInputCountryDOM:
 		return true
-	case DZA:
+	case JobAddressInputCountryDZA:
 		return true
-	case ECU:
+	case JobAddressInputCountryECU:
 		return true
-	case EGY:
+	case JobAddressInputCountryEGY:
 		return true
-	case ERI:
+	case JobAddressInputCountryERI:
 		return true
-	case ESH:
+	case JobAddressInputCountryESH:
 		return true
-	case ESP:
+	case JobAddressInputCountryESP:
 		return true
-	case EST:
+	case JobAddressInputCountryEST:
 		return true
-	case ETH:
+	case JobAddressInputCountryETH:
 		return true
-	case FIN:
+	case JobAddressInputCountryFIN:
 		return true
-	case FJI:
+	case JobAddressInputCountryFJI:
 		return true
-	case FLK:
+	case JobAddressInputCountryFLK:
 		return true
-	case FRA:
+	case JobAddressInputCountryFRA:
 		return true
-	case FRO:
+	case JobAddressInputCountryFRO:
 		return true
-	case FSM:
+	case JobAddressInputCountryFSM:
 		return true
-	case GAB:
+	case JobAddressInputCountryGAB:
 		return true
-	case GBR:
+	case JobAddressInputCountryGBR:
 		return true
-	case GEO:
+	case JobAddressInputCountryGEO:
 		return true
-	case GGY:
+	case JobAddressInputCountryGGY:
 		return true
-	case GHA:
+	case JobAddressInputCountryGHA:
 		return true
-	case GIB:
+	case JobAddressInputCountryGIB:
 		return true
-	case GIN:
+	case JobAddressInputCountryGIN:
 		return true
-	case GLP:
+	case JobAddressInputCountryGLP:
 		return true
-	case GMB:
+	case JobAddressInputCountryGMB:
 		return true
-	case GNB:
+	case JobAddressInputCountryGNB:
 		return true
-	case GNQ:
+	case JobAddressInputCountryGNQ:
 		return true
-	case GRC:
+	case JobAddressInputCountryGRC:
 		return true
-	case GRD:
+	case JobAddressInputCountryGRD:
 		return true
-	case GRL:
+	case JobAddressInputCountryGRL:
 		return true
-	case GTM:
+	case JobAddressInputCountryGTM:
 		return true
-	case GUF:
+	case JobAddressInputCountryGUF:
 		return true
-	case GUM:
+	case JobAddressInputCountryGUM:
 		return true
-	case GUY:
+	case JobAddressInputCountryGUY:
 		return true
-	case HKG:
+	case JobAddressInputCountryHKG:
 		return true
-	case HMD:
+	case JobAddressInputCountryHMD:
 		return true
-	case HND:
+	case JobAddressInputCountryHND:
 		return true
-	case HRV:
+	case JobAddressInputCountryHRV:
 		return true
-	case HTI:
+	case JobAddressInputCountryHTI:
 		return true
-	case HUN:
+	case JobAddressInputCountryHUN:
 		return true
-	case IDN:
+	case JobAddressInputCountryIDN:
 		return true
-	case IMN:
+	case JobAddressInputCountryIMN:
 		return true
-	case IND:
+	case JobAddressInputCountryIND:
 		return true
-	case IOT:
+	case JobAddressInputCountryIOT:
 		return true
-	case IRL:
+	case JobAddressInputCountryIRL:
 		return true
-	case IRN:
+	case JobAddressInputCountryIRN:
 		return true
-	case IRQ:
+	case JobAddressInputCountryIRQ:
 		return true
-	case ISL:
+	case JobAddressInputCountryISL:
 		return true
-	case ISR:
+	case JobAddressInputCountryISR:
 		return true
-	case ITA:
+	case JobAddressInputCountryITA:
 		return true
-	case JAM:
+	case JobAddressInputCountryJAM:
 		return true
-	case JEY:
+	case JobAddressInputCountryJEY:
 		return true
-	case JOR:
+	case JobAddressInputCountryJOR:
 		return true
-	case JPN:
+	case JobAddressInputCountryJPN:
 		return true
-	case KAZ:
+	case JobAddressInputCountryKAZ:
 		return true
-	case KEN:
+	case JobAddressInputCountryKEN:
 		return true
-	case KGZ:
+	case JobAddressInputCountryKGZ:
 		return true
-	case KHM:
+	case JobAddressInputCountryKHM:
 		return true
-	case KIR:
+	case JobAddressInputCountryKIR:
 		return true
-	case KNA:
+	case JobAddressInputCountryKNA:
 		return true
-	case KOR:
+	case JobAddressInputCountryKOR:
 		return true
-	case KWT:
+	case JobAddressInputCountryKWT:
 		return true
-	case LAO:
+	case JobAddressInputCountryLAO:
 		return true
-	case LBN:
+	case JobAddressInputCountryLBN:
 		return true
-	case LBR:
+	case JobAddressInputCountryLBR:
 		return true
-	case LBY:
+	case JobAddressInputCountryLBY:
 		return true
-	case LCA:
+	case JobAddressInputCountryLCA:
 		return true
-	case LIE:
+	case JobAddressInputCountryLIE:
 		return true
-	case LKA:
+	case JobAddressInputCountryLKA:
 		return true
-	case LSO:
+	case JobAddressInputCountryLSO:
 		return true
-	case LTU:
+	case JobAddressInputCountryLTU:
 		return true
-	case LUX:
+	case JobAddressInputCountryLUX:
 		return true
-	case LVA:
+	case JobAddressInputCountryLVA:
 		return true
-	case MAC:
+	case JobAddressInputCountryMAC:
 		return true
-	case MAF:
+	case JobAddressInputCountryMAF:
 		return true
-	case MAR:
+	case JobAddressInputCountryMAR:
 		return true
-	case MCO:
+	case JobAddressInputCountryMCO:
 		return true
-	case MDA:
+	case JobAddressInputCountryMDA:
 		return true
-	case MDG:
+	case JobAddressInputCountryMDG:
 		return true
-	case MDV:
+	case JobAddressInputCountryMDV:
 		return true
-	case MEX:
+	case JobAddressInputCountryMEX:
 		return true
-	case MHL:
+	case JobAddressInputCountryMHL:
 		return true
-	case MKD:
+	case JobAddressInputCountryMKD:
 		return true
-	case MLI:
+	case JobAddressInputCountryMLI:
 		return true
-	case MLT:
+	case JobAddressInputCountryMLT:
 		return true
-	case MMR:
+	case JobAddressInputCountryMMR:
 		return true
-	case MNE:
+	case JobAddressInputCountryMNE:
 		return true
-	case MNG:
+	case JobAddressInputCountryMNG:
 		return true
-	case MNP:
+	case JobAddressInputCountryMNP:
 		return true
-	case MOZ:
+	case JobAddressInputCountryMOZ:
 		return true
-	case MRT:
+	case JobAddressInputCountryMRT:
 		return true
-	case MSR:
+	case JobAddressInputCountryMSR:
 		return true
-	case MTQ:
+	case JobAddressInputCountryMTQ:
 		return true
-	case MUS:
+	case JobAddressInputCountryMUS:
 		return true
-	case MWI:
+	case JobAddressInputCountryMWI:
 		return true
-	case MYS:
+	case JobAddressInputCountryMYS:
 		return true
-	case MYT:
+	case JobAddressInputCountryMYT:
 		return true
-	case NAM:
+	case JobAddressInputCountryNAM:
 		return true
-	case NCL:
+	case JobAddressInputCountryNCL:
 		return true
-	case NER:
+	case JobAddressInputCountryNER:
 		return true
-	case NFK:
+	case JobAddressInputCountryNFK:
 		return true
-	case NGA:
+	case JobAddressInputCountryNGA:
 		return true
-	case NIC:
+	case JobAddressInputCountryNIC:
 		return true
-	case NIU:
+	case JobAddressInputCountryNIU:
 		return true
-	case NLD:
+	case JobAddressInputCountryNLD:
 		return true
-	case NOR:
+	case JobAddressInputCountryNOR:
 		return true
-	case NPL:
+	case JobAddressInputCountryNPL:
 		return true
-	case NRU:
+	case JobAddressInputCountryNRU:
 		return true
-	case NZL:
+	case JobAddressInputCountryNZL:
 		return true
-	case OMN:
+	case JobAddressInputCountryOMN:
 		return true
-	case PAK:
+	case JobAddressInputCountryPAK:
 		return true
-	case PAN:
+	case JobAddressInputCountryPAN:
 		return true
-	case PCN:
+	case JobAddressInputCountryPCN:
 		return true
-	case PER:
+	case JobAddressInputCountryPER:
 		return true
-	case PHL:
+	case JobAddressInputCountryPHL:
 		return true
-	case PLW:
+	case JobAddressInputCountryPLW:
 		return true
-	case PNG:
+	case JobAddressInputCountryPNG:
 		return true
-	case POL:
+	case JobAddressInputCountryPOL:
 		return true
-	case PRI:
+	case JobAddressInputCountryPRI:
 		return true
-	case PRK:
+	case JobAddressInputCountryPRK:
 		return true
-	case PRT:
+	case JobAddressInputCountryPRT:
 		return true
-	case PRY:
+	case JobAddressInputCountryPRY:
 		return true
-	case PSE:
+	case JobAddressInputCountryPSE:
 		return true
-	case PYF:
+	case JobAddressInputCountryPYF:
 		return true
-	case QAT:
+	case JobAddressInputCountryQAT:
 		return true
-	case REU:
+	case JobAddressInputCountryREU:
 		return true
-	case ROU:
+	case JobAddressInputCountryROU:
 		return true
-	case RUS:
+	case JobAddressInputCountryRUS:
 		return true
-	case RWA:
+	case JobAddressInputCountryRWA:
 		return true
-	case SAU:
+	case JobAddressInputCountrySAU:
 		return true
-	case SCG:
+	case JobAddressInputCountrySCG:
 		return true
-	case SDN:
+	case JobAddressInputCountrySDN:
 		return true
-	case SEN:
+	case JobAddressInputCountrySEN:
 		return true
-	case SGP:
+	case JobAddressInputCountrySGP:
 		return true
-	case SGS:
+	case JobAddressInputCountrySGS:
 		return true
-	case SHN:
+	case JobAddressInputCountrySHN:
 		return true
-	case SJM:
+	case JobAddressInputCountrySJM:
 		return true
-	case SLB:
+	case JobAddressInputCountrySLB:
 		return true
-	case SLE:
+	case JobAddressInputCountrySLE:
 		return true
-	case SLV:
+	case JobAddressInputCountrySLV:
 		return true
-	case SMR:
+	case JobAddressInputCountrySMR:
 		return true
-	case SOM:
+	case JobAddressInputCountrySOM:
 		return true
-	case SPM:
+	case JobAddressInputCountrySPM:
 		return true
-	case SRB:
+	case JobAddressInputCountrySRB:
 		return true
-	case SSD:
+	case JobAddressInputCountrySSD:
 		return true
-	case STP:
+	case JobAddressInputCountrySTP:
 		return true
-	case SUR:
+	case JobAddressInputCountrySUR:
 		return true
-	case SVK:
+	case JobAddressInputCountrySVK:
 		return true
-	case SVN:
+	case JobAddressInputCountrySVN:
 		return true
-	case SWE:
+	case JobAddressInputCountrySWE:
 		return true
-	case SWZ:
+	case JobAddressInputCountrySWZ:
 		return true
-	case SXM:
+	case JobAddressInputCountrySXM:
 		return true
-	case SYC:
+	case JobAddressInputCountrySYC:
 		return true
-	case SYR:
+	case JobAddressInputCountrySYR:
 		return true
-	case TCA:
+	case JobAddressInputCountryTCA:
 		return true
-	case TCD:
+	case JobAddressInputCountryTCD:
 		return true
-	case TGO:
+	case JobAddressInputCountryTGO:
 		return true
-	case THA:
+	case JobAddressInputCountryTHA:
 		return true
-	case TJK:
+	case JobAddressInputCountryTJK:
 		return true
-	case TKL:
+	case JobAddressInputCountryTKL:
 		return true
-	case TKM:
+	case JobAddressInputCountryTKM:
 		return true
-	case TLS:
+	case JobAddressInputCountryTLS:
 		return true
-	case TON:
+	case JobAddressInputCountryTON:
 		return true
-	case TTO:
+	case JobAddressInputCountryTTO:
 		return true
-	case TUN:
+	case JobAddressInputCountryTUN:
 		return true
-	case TUR:
+	case JobAddressInputCountryTUR:
 		return true
-	case TUV:
+	case JobAddressInputCountryTUV:
 		return true
-	case TWN:
+	case JobAddressInputCountryTWN:
 		return true
-	case TZA:
+	case JobAddressInputCountryTZA:
 		return true
-	case UGA:
+	case JobAddressInputCountryUGA:
 		return true
-	case UKR:
+	case JobAddressInputCountryUKR:
 		return true
-	case UMI:
+	case JobAddressInputCountryUMI:
 		return true
-	case URY:
+	case JobAddressInputCountryURY:
 		return true
-	case USA:
+	case JobAddressInputCountryUSA:
 		return true
-	case UZB:
+	case JobAddressInputCountryUZB:
 		return true
-	case VAT:
+	case JobAddressInputCountryVAT:
 		return true
-	case VCT:
+	case JobAddressInputCountryVCT:
 		return true
-	case VEN:
+	case JobAddressInputCountryVEN:
 		return true
-	case VGB:
+	case JobAddressInputCountryVGB:
 		return true
-	case VIR:
+	case JobAddressInputCountryVIR:
 		return true
-	case VNM:
+	case JobAddressInputCountryVNM:
 		return true
-	case VUT:
+	case JobAddressInputCountryVUT:
 		return true
-	case WLF:
+	case JobAddressInputCountryWLF:
 		return true
-	case WSM:
+	case JobAddressInputCountryWSM:
 		return true
-	case XKX:
+	case JobAddressInputCountryXKX:
 		return true
-	case YEM:
+	case JobAddressInputCountryYEM:
 		return true
-	case ZAF:
+	case JobAddressInputCountryZAF:
 		return true
-	case ZMB:
+	case JobAddressInputCountryZMB:
 		return true
-	case ZWE:
+	case JobAddressInputCountryZWE:
 		return true
 	default:
 		return false
@@ -5650,6 +7954,21 @@ func (e MechanicAssignmentNotificationsMechanic) Valid() bool {
 	}
 }
 
+// Defines values for MediaUploadObject.
+const (
+	MediaUploadObjectMediaUpload MediaUploadObject = "media_upload"
+)
+
+// Valid indicates whether the value is a known member of the MediaUploadObject enum.
+func (e MediaUploadObject) Valid() bool {
+	switch e {
+	case MediaUploadObjectMediaUpload:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for NextAvailableSlotResultFulfilmentType.
 const (
 	Collection      NextAvailableSlotResultFulfilmentType = "collection"
@@ -5860,12 +8179,18 @@ func (e PaymentRefundCreateRequestPaymentMethod) Valid() bool {
 // Defines values for ServiceCurrency.
 const (
 	GBP ServiceCurrency = "GBP"
+	MUR ServiceCurrency = "MUR"
+	SGD ServiceCurrency = "SGD"
 )
 
 // Valid indicates whether the value is a known member of the ServiceCurrency enum.
 func (e ServiceCurrency) Valid() bool {
 	switch e {
 	case GBP:
+		return true
+	case MUR:
+		return true
+	case SGD:
 		return true
 	default:
 		return false
@@ -7200,6 +9525,12 @@ type Business struct {
 	// ImageUrl Public image or logo URL for the business.
 	ImageUrl *string `json:"image_url,omitempty"`
 
+	// IntegrationLocationId Default POS or e-commerce integration location id when configured. For Shopify this is typically a location GID, for example `gid://shopify/Location/12345`.
+	IntegrationLocationId *string `json:"integration_location_id,omitempty"`
+
+	// IntegrationLocationName Display name for `integration_location_id`, when configured.
+	IntegrationLocationName *string `json:"integration_location_name,omitempty"`
+
 	// Name Public display name of the business.
 	Name *string `json:"name,omitempty"`
 
@@ -7250,6 +9581,12 @@ type BusinessIntegration struct {
 
 	// HasIntegration True when the business has an active supported POS or accounting integration.
 	HasIntegration *bool `json:"has_integration,omitempty"`
+
+	// IntegrationLocationId Default POS or e-commerce integration location id when configured. For Shopify this is typically a location GID, for example `gid://shopify/Location/12345`.
+	IntegrationLocationId *string `json:"integration_location_id,omitempty"`
+
+	// IntegrationLocationName Display name for `integration_location_id`, when configured.
+	IntegrationLocationName *string `json:"integration_location_name,omitempty"`
 
 	// Object Resource object type. Always business_integration.
 	Object *BusinessIntegrationObject `json:"object,omitempty"`
@@ -7477,8 +9814,20 @@ type CommandResponseOfWebhookEndpointWithSecret struct {
 	Resource *WebhookEndpointWithSecret `json:"resource,omitempty"`
 }
 
+// CompletedUploadPart Public representation of a completed multipart upload part.
+type CompletedUploadPart struct {
+	// ETag ETag returned by object storage after the part upload.
+	ETag *string `json:"e_tag,omitempty"`
+
+	// PartNumber One-based part number that was uploaded to the presigned part URL.
+	PartNumber *int32 `json:"part_number,omitempty"`
+}
+
 // Customer Public representation of a customer available to authorized API clients.
 type Customer struct {
+	// Addresses Stored customer addresses ordered with the default address first. Empty when no address has been set.
+	Addresses *[]CustomerAddress `json:"addresses,omitempty"`
+
 	// Assets Assets associated with the customer that may be serviced in jobs.
 	Assets *[]CustomerAssetSummary `json:"assets,omitempty"`
 
@@ -7493,6 +9842,9 @@ type Customer struct {
 
 	// Email Customer email address, when available.
 	Email *string `json:"email,omitempty"`
+
+	// ExternalId Linked POS customer id when configured, for example a Shopify customer GID.
+	ExternalId *string `json:"external_id,omitempty"`
 
 	// FirstName Customer first name.
 	FirstName *string `json:"first_name,omitempty"`
@@ -7531,6 +9883,84 @@ type CustomerObject string
 // CustomerPreferredContactMethod Preferred contact method. Allowed values: `email`, `phone`, `whats_app`, `instagram`, or `facebook`.
 type CustomerPreferredContactMethod string
 
+// CustomerAddress Public postal address stored on a customer. Customers may have multiple addresses; one is marked as default.
+type CustomerAddress struct {
+	// Country ISO 3166-1 alpha-3 country code in uppercase when known, for example `GBR`, `USA`, or `DEU`.
+	Country *CustomerAddressCountry `json:"country,omitempty"`
+
+	// Id Public location id (`loc_...`) when the address is stored as a location row. Omitted for legacy flat address fields that pre-date location records.
+	Id *string `json:"id,omitempty"`
+
+	// IsDefault Whether this is the customer's default address. Exactly one entry should be true when addresses are present.
+	IsDefault *bool `json:"is_default,omitempty"`
+
+	// Latitude Latitude for the address when known.
+	Latitude *float64 `json:"latitude,omitempty"`
+
+	// Line1 First address line.
+	Line1 *string `json:"line1,omitempty"`
+
+	// Line2 Second address line.
+	Line2 *string `json:"line2,omitempty"`
+
+	// Longitude Longitude for the address when known.
+	Longitude *float64 `json:"longitude,omitempty"`
+
+	// Name Optional friendly label for the address, for example `Home` or `Work`.
+	Name *string `json:"name,omitempty"`
+
+	// Postcode Postal code.
+	Postcode *string `json:"postcode,omitempty"`
+
+	// Town Town or city.
+	Town *string `json:"town,omitempty"`
+}
+
+// CustomerAddressCountry ISO 3166-1 alpha-3 country code in uppercase when known, for example `GBR`, `USA`, or `DEU`.
+type CustomerAddressCountry string
+
+// CustomerAddressCreateRequest Request body for adding a stored address to a customer.
+type CustomerAddressCreateRequest struct {
+	// Country ISO 3166-1 alpha-3 country code in uppercase, for example `GBR`, `USA`, or `DEU`.
+	Country *CustomerAddressCreateRequestCountry `json:"country,omitempty"`
+
+	// IsDefault When true, marks this address as the customer's default. Defaults to true when the customer has no other stored addresses.
+	IsDefault *bool `json:"is_default,omitempty"`
+
+	// Latitude Latitude when the caller has geocoded the address.
+	Latitude *float64 `json:"latitude,omitempty"`
+
+	// Line1 First address line.
+	Line1 *string `json:"line1,omitempty"`
+
+	// Line2 Second address line.
+	Line2 *string `json:"line2,omitempty"`
+
+	// Longitude Longitude when the caller has geocoded the address.
+	Longitude *float64 `json:"longitude,omitempty"`
+
+	// Name Optional friendly label, for example `Home` or `Work`.
+	Name *string `json:"name,omitempty"`
+
+	// Postcode Postal code.
+	Postcode *string `json:"postcode,omitempty"`
+
+	// Town Town or city.
+	Town *string `json:"town,omitempty"`
+}
+
+// CustomerAddressCreateRequestCountry ISO 3166-1 alpha-3 country code in uppercase, for example `GBR`, `USA`, or `DEU`.
+type CustomerAddressCreateRequestCountry string
+
+// CustomerAddressDeleted Response returned after deleting a stored customer address.
+type CustomerAddressDeleted struct {
+	// Deleted Whether the address was deleted.
+	Deleted *bool `json:"deleted,omitempty"`
+
+	// Id Deleted public address id (`loc_...`).
+	Id *string `json:"id,omitempty"`
+}
+
 // CustomerAddressInput Default customer address fields for create or patch requests.
 type CustomerAddressInput struct {
 	// Country ISO 3166-1 alpha-3 country code in uppercase (for example `GBR`, `USA`, or `DEU`).
@@ -7557,6 +9987,39 @@ type CustomerAddressInput struct {
 
 // CustomerAddressInputCountry ISO 3166-1 alpha-3 country code in uppercase (for example `GBR`, `USA`, or `DEU`).
 type CustomerAddressInputCountry string
+
+// CustomerAddressUpdateRequest Request body for updating a stored customer address. Omitted properties are left unchanged.
+type CustomerAddressUpdateRequest struct {
+	// Country ISO 3166-1 alpha-3 country code in uppercase, for example `GBR`, `USA`, or `DEU`.
+	Country *CustomerAddressUpdateRequestCountry `json:"country,omitempty"`
+
+	// IsDefault When true, marks this address as the customer's default and clears the default flag on other stored addresses.
+	IsDefault *bool `json:"is_default,omitempty"`
+
+	// Latitude Latitude when the caller has geocoded the address.
+	Latitude *float64 `json:"latitude,omitempty"`
+
+	// Line1 First address line.
+	Line1 *string `json:"line1,omitempty"`
+
+	// Line2 Second address line.
+	Line2 *string `json:"line2,omitempty"`
+
+	// Longitude Longitude when the caller has geocoded the address.
+	Longitude *float64 `json:"longitude,omitempty"`
+
+	// Name Optional friendly label, for example `Home` or `Work`.
+	Name *string `json:"name,omitempty"`
+
+	// Postcode Postal code.
+	Postcode *string `json:"postcode,omitempty"`
+
+	// Town Town or city.
+	Town *string `json:"town,omitempty"`
+}
+
+// CustomerAddressUpdateRequestCountry ISO 3166-1 alpha-3 country code in uppercase, for example `GBR`, `USA`, or `DEU`.
+type CustomerAddressUpdateRequestCountry string
 
 // CustomerAssetSummary Public customer asset summary embedded in customer responses.
 type CustomerAssetSummary struct {
@@ -7830,6 +10293,9 @@ type Invoice struct {
 	// Currency ISO currency code for all monetary fields, for example GBP.
 	Currency *string `json:"currency,omitempty"`
 
+	// CustomerExternalId Linked POS customer id when configured, for example a Shopify customer GID.
+	CustomerExternalId *string `json:"customer_external_id,omitempty"`
+
 	// CustomerId Public customer id for the billed party, for example cus_....
 	CustomerId *string `json:"customer_id,omitempty"`
 
@@ -7842,8 +10308,17 @@ type Invoice struct {
 	// DueAt UTC due date for payment, when set.
 	DueAt *time.Time `json:"due_at,omitempty"`
 
+	// ExternalSystemId Linked POS order or draft order id from the invoice sync link, when known.
+	ExternalSystemId *string `json:"external_system_id,omitempty"`
+
 	// Id Opaque resource-prefixed public identifier, such as job_... or cus_.... Internal database ids must never be assigned here.
 	Id *string `json:"id,omitempty"`
+
+	// IntegrationLocationId Default POS or e-commerce integration location id for the owning workshop, when configured. For Shopify this is typically a location GID, for example `gid://shopify/Location/12345`.
+	IntegrationLocationId *string `json:"integration_location_id,omitempty"`
+
+	// IntegrationLocationName Display name for `integration_location_id`, when configured.
+	IntegrationLocationName *string `json:"integration_location_name,omitempty"`
 
 	// InvoiceNumber Human-readable invoice number shown in Workshop, for example INV-1234.
 	InvoiceNumber *string `json:"invoice_number,omitempty"`
@@ -7982,6 +10457,9 @@ type InvoiceItem struct {
 
 	// Description Optional longer description for the item.
 	Description *string `json:"description,omitempty"`
+
+	// ExternalId Linked POS stock variation id for part line items, when configured.
+	ExternalId *string `json:"external_id,omitempty"`
 
 	// Id Opaque resource-prefixed public identifier, such as job_... or cus_.... Internal database ids must never be assigned here.
 	Id *string `json:"id,omitempty"`
@@ -8265,6 +10743,9 @@ type Job struct {
 	// CreationSource How the job entered Workshop. Allowed values: `manual`, `online_booking`, or `widget_booking`.
 	CreationSource *JobCreationSource `json:"creation_source,omitempty"`
 
+	// CustomerExternalId Linked POS customer id when configured, for example a Shopify customer GID.
+	CustomerExternalId *string `json:"customer_external_id,omitempty"`
+
 	// CustomerId Public customer id for the job, for example cus_....
 	CustomerId *string `json:"customer_id,omitempty"`
 
@@ -8280,8 +10761,17 @@ type Job struct {
 	// ExternalJobId Partner or integration ticket/reference id supplied by the caller or upstream system.
 	ExternalJobId *string `json:"external_job_id,omitempty"`
 
+	// ExternalSystemId Linked POS order or draft order id from the job invoice sync link, when known.
+	ExternalSystemId *string `json:"external_system_id,omitempty"`
+
 	// Id Opaque resource-prefixed public identifier, such as job_... or cus_.... Internal database ids must never be assigned here.
 	Id *string `json:"id,omitempty"`
+
+	// IntegrationLocationId Default POS or e-commerce integration location id for the owning workshop, when configured. For Shopify this is typically a location GID, for example `gid://shopify/Location/12345`.
+	IntegrationLocationId *string `json:"integration_location_id,omitempty"`
+
+	// IntegrationLocationName Display name for `integration_location_id`, when configured.
+	IntegrationLocationName *string `json:"integration_location_name,omitempty"`
 
 	// IntegrationStoreId External POS or integration store id selected for this job, when applicable.
 	IntegrationStoreId *string `json:"integration_store_id,omitempty"`
@@ -8624,6 +11114,9 @@ type JobReport struct {
 
 	// CreatedAt UTC timestamp when the report was created.
 	CreatedAt *time.Time `json:"created_at,omitempty"`
+
+	// CustomerExternalId Linked POS customer id when configured, for example a Shopify customer GID.
+	CustomerExternalId *string `json:"customer_external_id,omitempty"`
 
 	// CustomerId Public customer id for the report's customer, for example cus_....
 	CustomerId *string `json:"customer_id,omitempty"`
@@ -9205,6 +11698,98 @@ type MechanicAssignmentNotifications struct {
 // MechanicAssignmentNotificationsMechanic Notification control. Allowed values: `default`, `send`, or `skip`.
 type MechanicAssignmentNotificationsMechanic string
 
+// MediaUpload Public media upload session for direct-to-storage job report attachment uploads.
+type MediaUpload struct {
+	Attachment *JobReportAttachment `json:"attachment,omitempty"`
+
+	// ErrorCode Machine-readable failure code when the upload failed or was aborted.
+	ErrorCode *string `json:"error_code,omitempty"`
+
+	// ErrorMessage Human-readable failure message when available.
+	ErrorMessage *string `json:"error_message,omitempty"`
+
+	// ExpiresAt UTC expiry instant for the current presigned URL or upload instructions.
+	ExpiresAt *time.Time `json:"expires_at,omitempty"`
+
+	// Id Opaque resource-prefixed public identifier, such as job_... or cus_.... Internal database ids must never be assigned here.
+	Id *string `json:"id,omitempty"`
+
+	// JobId Public job id for route/context validation.
+	JobId *string `json:"job_id,omitempty"`
+
+	// JobReportId Public job report id that will receive the attachment.
+	JobReportId *string `json:"job_report_id,omitempty"`
+
+	// Kind Upload mode: single or multipart.
+	Kind *string `json:"kind,omitempty"`
+
+	// Object Resource object type. Always media_upload.
+	Object *MediaUploadObject `json:"object,omitempty"`
+
+	// PutUrl Presigned PUT URL for single uploads. Null for multipart sessions.
+	PutUrl *string `json:"put_url,omitempty"`
+
+	// RecommendedPartSize Recommended part size for multipart uploads. Null for single uploads.
+	RecommendedPartSize *int64 `json:"recommended_part_size,omitempty"`
+
+	// Status Current upload status in snake_case.
+	Status *string `json:"status,omitempty"`
+
+	// TotalParts Total expected part count for multipart uploads. Null for single uploads.
+	TotalParts *int32 `json:"total_parts,omitempty"`
+}
+
+// MediaUploadObject Resource object type. Always media_upload.
+type MediaUploadObject string
+
+// MediaUploadAbortRequest Request to abort an in-flight media upload session.
+type MediaUploadAbortRequest struct {
+	// Reason Optional reason stored with the aborted upload for diagnostics.
+	Reason *string `json:"reason,omitempty"`
+}
+
+// MediaUploadCompleteRequest Request to complete a direct-to-storage upload after all bytes have been uploaded.
+type MediaUploadCompleteRequest struct {
+	// Parts Completed multipart parts. Omit or send an empty list for single-PUT uploads.
+	Parts *[]CompletedUploadPart `json:"parts,omitempty"`
+}
+
+// MediaUploadCreateRequest Request to create a reliable public media upload session for a job report attachment.
+type MediaUploadCreateRequest struct {
+	// ContentType Declared MIME type, for example image/jpeg, video/mp4, or video/quicktime.
+	ContentType *string `json:"content_type,omitempty"`
+
+	// FileName Original file name reported by the API consumer.
+	FileName *string `json:"file_name,omitempty"`
+
+	// PosterUploadId Optional public upload id for a video poster image uploaded as a separate media upload.
+	PosterUploadId *openapi_types.UUID `json:"poster_upload_id,omitempty"`
+
+	// Sha256 Optional SHA-256 hash of the original file.
+	Sha256 *string `json:"sha256,omitempty"`
+
+	// TotalSizeBytes Declared total file size in bytes.
+	TotalSizeBytes *int64 `json:"total_size_bytes,omitempty"`
+}
+
+// MediaUploadPartUrl Short-lived upload URL for one direct-to-storage upload part.
+type MediaUploadPartUrl struct {
+	// ExpiresAt UTC expiry instant for the presigned URL.
+	ExpiresAt *time.Time `json:"expires_at,omitempty"`
+
+	// PartNumber One-based part number this URL accepts.
+	PartNumber *int32 `json:"part_number,omitempty"`
+
+	// PutUrl Presigned URL the client should PUT the part bytes to.
+	PutUrl *string `json:"put_url,omitempty"`
+}
+
+// MediaUploadPartUrlRequest Request for a short-lived presigned URL for one multipart upload part.
+type MediaUploadPartUrlRequest struct {
+	// PartNumber One-based part number to upload.
+	PartNumber *int32 `json:"part_number,omitempty"`
+}
+
 // NextAvailableSlotResult Public response containing the next available booking date and any known time slots.
 type NextAvailableSlotResult struct {
 	// BusinessId Public business id for this availability result.
@@ -9240,6 +11825,9 @@ type Pagination struct {
 
 // PartAuthorisation A single part line on a job report that the customer or integration can approve or decline.
 type PartAuthorisation struct {
+	// ExternalId Linked POS stock variation id when configured, for example a Shopify product variant GID.
+	ExternalId *string `json:"external_id,omitempty"`
+
 	// Id Public part authorisation id, always prefixed `pauth_` (for example `pauth_01h2xexample`). Copy into `decisions[].id` when submitting approve/decline decisions.
 	Id *string `json:"id,omitempty"`
 
@@ -9519,6 +12107,9 @@ type StockItemSummary struct {
 	// Description Stock item description, when configured.
 	Description *string `json:"description,omitempty"`
 
+	// ExternalId External identifier from the linked POS or e-commerce integration on the parent stock item, when configured. For Shopify this is typically the product GID, for example `gid://shopify/Product/987654321`.
+	ExternalId *string `json:"external_id,omitempty"`
+
 	// Id Opaque resource-prefixed public identifier, such as job_... or cus_.... Internal database ids must never be assigned here.
 	Id *string `json:"id,omitempty"`
 
@@ -9554,6 +12145,9 @@ type StockVariation struct {
 
 	// Ean European Article Number, when configured.
 	Ean *string `json:"ean,omitempty"`
+
+	// ExternalId External identifier from the linked POS or e-commerce integration on this variation, when configured. For Shopify this is typically the product variant GID, for example `gid://shopify/ProductVariant/123456789`. The parent stock item external id is returned on nested `stock_item.external_id`.
+	ExternalId *string `json:"external_id,omitempty"`
 
 	// Id Opaque resource-prefixed public identifier, such as job_... or cus_.... Internal database ids must never be assigned here.
 	Id *string `json:"id,omitempty"`
@@ -10266,6 +12860,51 @@ type UpdateCustomerParams struct {
 	IdempotencyKey string `json:"Idempotency-Key"`
 }
 
+// CreateCustomerAddressParams defines parameters for CreateCustomerAddress.
+type CreateCustomerAddressParams struct {
+	// Authorization Bearer Workshop API key. Example: Bearer bbk_live_...
+	Authorization *string `json:"Authorization,omitempty"`
+
+	// XBikebookRequestId Optional request id supplied by the client for support correlation.
+	XBikebookRequestId *string `json:"X-Bikebook-Request-Id,omitempty"`
+
+	// IdempotencyKey Required for public write operations to make retries safe.
+	IdempotencyKey string `json:"Idempotency-Key"`
+}
+
+// DeleteCustomerAddressParams defines parameters for DeleteCustomerAddress.
+type DeleteCustomerAddressParams struct {
+	// Authorization Bearer Workshop API key. Example: Bearer bbk_live_...
+	Authorization *string `json:"Authorization,omitempty"`
+
+	// XBikebookRequestId Optional request id supplied by the client for support correlation.
+	XBikebookRequestId *string `json:"X-Bikebook-Request-Id,omitempty"`
+
+	// IdempotencyKey Required for public write operations to make retries safe.
+	IdempotencyKey string `json:"Idempotency-Key"`
+}
+
+// GetCustomerAddressParams defines parameters for GetCustomerAddress.
+type GetCustomerAddressParams struct {
+	// Authorization Bearer Workshop API key. Example: Bearer bbk_live_...
+	Authorization *string `json:"Authorization,omitempty"`
+
+	// XBikebookRequestId Optional request id supplied by the client for support correlation.
+	XBikebookRequestId *string `json:"X-Bikebook-Request-Id,omitempty"`
+}
+
+// UpdateCustomerAddressParams defines parameters for UpdateCustomerAddress.
+type UpdateCustomerAddressParams struct {
+	// Authorization Bearer Workshop API key. Example: Bearer bbk_live_...
+	Authorization *string `json:"Authorization,omitempty"`
+
+	// XBikebookRequestId Optional request id supplied by the client for support correlation.
+	XBikebookRequestId *string `json:"X-Bikebook-Request-Id,omitempty"`
+
+	// IdempotencyKey Required for public write operations to make retries safe.
+	IdempotencyKey string `json:"Idempotency-Key"`
+}
+
 // ListForCustomerParams defines parameters for ListForCustomer.
 type ListForCustomerParams struct {
 	Name         *string `form:"name,omitempty" json:"name,omitempty"`
@@ -10656,6 +13295,18 @@ type GetJobReportParams struct {
 	XBikebookRequestId *string `json:"X-Bikebook-Request-Id,omitempty"`
 }
 
+// CreateMediaUploadParams defines parameters for CreateMediaUpload.
+type CreateMediaUploadParams struct {
+	// Authorization Bearer Workshop API key. Example: Bearer bbk_live_...
+	Authorization *string `json:"Authorization,omitempty"`
+
+	// XBikebookRequestId Optional request id supplied by the client for support correlation.
+	XBikebookRequestId *string `json:"X-Bikebook-Request-Id,omitempty"`
+
+	// IdempotencyKey Required for public write operations to make retries safe.
+	IdempotencyKey string `json:"Idempotency-Key"`
+}
+
 // JobsParams defines parameters for Jobs.
 type JobsParams struct {
 	BusinessId    *string `form:"business_id,omitempty" json:"business_id,omitempty"`
@@ -10799,6 +13450,18 @@ type GetJobReportForJobParams struct {
 	XBikebookRequestId *string `json:"X-Bikebook-Request-Id,omitempty"`
 }
 
+// CreateForJobParams defines parameters for CreateForJob.
+type CreateForJobParams struct {
+	// Authorization Bearer Workshop API key. Example: Bearer bbk_live_...
+	Authorization *string `json:"Authorization,omitempty"`
+
+	// XBikebookRequestId Optional request id supplied by the client for support correlation.
+	XBikebookRequestId *string `json:"X-Bikebook-Request-Id,omitempty"`
+
+	// IdempotencyKey Required for public write operations to make retries safe.
+	IdempotencyKey string `json:"Idempotency-Key"`
+}
+
 // PartAuthorisationsParams defines parameters for PartAuthorisations.
 type PartAuthorisationsParams struct {
 	// Limit Maximum number of resources to return (1–100, default 10).
@@ -10898,6 +13561,51 @@ type ChangeWorkLineStatusParams struct {
 	IdempotencyKey string `json:"Idempotency-Key"`
 }
 
+// GetMediaUploadParams defines parameters for GetMediaUpload.
+type GetMediaUploadParams struct {
+	// Authorization Bearer Workshop API key. Example: Bearer bbk_live_...
+	Authorization *string `json:"Authorization,omitempty"`
+
+	// XBikebookRequestId Optional request id supplied by the client for support correlation.
+	XBikebookRequestId *string `json:"X-Bikebook-Request-Id,omitempty"`
+}
+
+// AbortParams defines parameters for Abort.
+type AbortParams struct {
+	// Authorization Bearer Workshop API key. Example: Bearer bbk_live_...
+	Authorization *string `json:"Authorization,omitempty"`
+
+	// XBikebookRequestId Optional request id supplied by the client for support correlation.
+	XBikebookRequestId *string `json:"X-Bikebook-Request-Id,omitempty"`
+
+	// IdempotencyKey Required for public write operations to make retries safe.
+	IdempotencyKey string `json:"Idempotency-Key"`
+}
+
+// CompleteParams defines parameters for Complete.
+type CompleteParams struct {
+	// Authorization Bearer Workshop API key. Example: Bearer bbk_live_...
+	Authorization *string `json:"Authorization,omitempty"`
+
+	// XBikebookRequestId Optional request id supplied by the client for support correlation.
+	XBikebookRequestId *string `json:"X-Bikebook-Request-Id,omitempty"`
+
+	// IdempotencyKey Required for public write operations to make retries safe.
+	IdempotencyKey string `json:"Idempotency-Key"`
+}
+
+// PartUrlParams defines parameters for PartUrl.
+type PartUrlParams struct {
+	// Authorization Bearer Workshop API key. Example: Bearer bbk_live_...
+	Authorization *string `json:"Authorization,omitempty"`
+
+	// XBikebookRequestId Optional request id supplied by the client for support correlation.
+	XBikebookRequestId *string `json:"X-Bikebook-Request-Id,omitempty"`
+
+	// IdempotencyKey Required for public write operations to make retries safe.
+	IdempotencyKey string `json:"Idempotency-Key"`
+}
+
 // ListPaymentParams defines parameters for ListPayment.
 type ListPaymentParams struct {
 	BusinessId    *string `form:"business_id,omitempty" json:"business_id,omitempty"`
@@ -10979,10 +13687,11 @@ type ListStockVariationParams struct {
 	BusinessId *string `form:"business_id,omitempty" json:"business_id,omitempty"`
 
 	// Query Case-insensitive search across common name, email, phone, or public id fields.
-	Query   *string `form:"query,omitempty" json:"query,omitempty"`
-	Sku     *string `form:"sku,omitempty" json:"sku,omitempty"`
-	Ean     *string `form:"ean,omitempty" json:"ean,omitempty"`
-	Barcode *string `form:"barcode,omitempty" json:"barcode,omitempty"`
+	Query      *string `form:"query,omitempty" json:"query,omitempty"`
+	Sku        *string `form:"sku,omitempty" json:"sku,omitempty"`
+	Ean        *string `form:"ean,omitempty" json:"ean,omitempty"`
+	Barcode    *string `form:"barcode,omitempty" json:"barcode,omitempty"`
+	ExternalId *string `form:"external_id,omitempty" json:"external_id,omitempty"`
 
 	// Sort Sort field. Allowed values: `name`, `sku`, `price`, `remaining_stock`. Default: `name`. Prefix with `-` for descending order (for example `-name`).
 	Sort *string `form:"sort,omitempty" json:"sort,omitempty"`
@@ -11190,6 +13899,12 @@ type CreateCustomerJSONRequestBody = CustomerCreateRequest
 // UpdateCustomerJSONRequestBody defines body for UpdateCustomer for application/json ContentType.
 type UpdateCustomerJSONRequestBody = CustomerUpdateRequest
 
+// CreateCustomerAddressJSONRequestBody defines body for CreateCustomerAddress for application/json ContentType.
+type CreateCustomerAddressJSONRequestBody = CustomerAddressCreateRequest
+
+// UpdateCustomerAddressJSONRequestBody defines body for UpdateCustomerAddress for application/json ContentType.
+type UpdateCustomerAddressJSONRequestBody = CustomerAddressUpdateRequest
+
 // CreateChatAttachmentsMultipartRequestBody defines body for CreateChatAttachments for multipart/form-data ContentType.
 type CreateChatAttachmentsMultipartRequestBody CreateChatAttachmentsMultipartBody
 
@@ -11226,6 +13941,9 @@ type SendJSONRequestBody = InvoiceSendRequest
 // ChangeStatusJSONRequestBody defines body for ChangeStatus for application/json ContentType.
 type ChangeStatusJSONRequestBody = InvoiceStatusChangeRequest
 
+// CreateMediaUploadJSONRequestBody defines body for CreateMediaUpload for application/json ContentType.
+type CreateMediaUploadJSONRequestBody = MediaUploadCreateRequest
+
 // CreateJobBookingJSONRequestBody defines body for CreateJobBooking for application/json ContentType.
 type CreateJobBookingJSONRequestBody = JobCreateRequest
 
@@ -11234,6 +13952,9 @@ type UpdateJobJSONRequestBody = JobUpdateRequest
 
 // ChangeAcceptedStatusJSONRequestBody defines body for ChangeAcceptedStatus for application/json ContentType.
 type ChangeAcceptedStatusJSONRequestBody = JobAcceptedStatusChangeRequest
+
+// CreateForJobJSONRequestBody defines body for CreateForJob for application/json ContentType.
+type CreateForJobJSONRequestBody = MediaUploadCreateRequest
 
 // SubmitPartAuthorisationDecisionsJSONRequestBody defines body for SubmitPartAuthorisationDecisions for application/json ContentType.
 type SubmitPartAuthorisationDecisionsJSONRequestBody = PartAuthorisationDecisionSubmitRequest
@@ -11255,6 +13976,15 @@ type ReplaceWorkLineServicesJSONRequestBody = JobWorkLineServicesUpdateRequest
 
 // ChangeWorkLineStatusJSONRequestBody defines body for ChangeWorkLineStatus for application/json ContentType.
 type ChangeWorkLineStatusJSONRequestBody = JobWorkLineStatusChangeRequest
+
+// AbortJSONRequestBody defines body for Abort for application/json ContentType.
+type AbortJSONRequestBody = MediaUploadAbortRequest
+
+// CompleteJSONRequestBody defines body for Complete for application/json ContentType.
+type CompleteJSONRequestBody = MediaUploadCompleteRequest
+
+// PartUrlJSONRequestBody defines body for PartUrl for application/json ContentType.
+type PartUrlJSONRequestBody = MediaUploadPartUrlRequest
 
 // RefundJSONRequestBody defines body for Refund for application/json ContentType.
 type RefundJSONRequestBody = PaymentRefundCreateRequest

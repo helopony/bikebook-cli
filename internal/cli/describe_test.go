@@ -19,8 +19,8 @@ func TestDescribeDocumentIncludesCommandsAndOpenAPI(t *testing.T) {
 	if len(doc.Commands) == 0 {
 		t.Fatal("describe document has no commands")
 	}
-	if len(doc.OpenAPI.Operations) != 92 {
-		t.Fatalf("OpenAPI operations = %d, want 92", len(doc.OpenAPI.Operations))
+	if len(doc.OpenAPI.Operations) != 102 {
+		t.Fatalf("OpenAPI operations = %d, want 102", len(doc.OpenAPI.Operations))
 	}
 
 	commandsByName := map[string]DescribeCommand{}
@@ -44,8 +44,12 @@ func TestDescribeDocumentIncludesCommandsAndOpenAPI(t *testing.T) {
 		"bikebook activities list-for-invoice",
 		"bikebook config set",
 		"bikebook config profiles list",
+		"bikebook customers create-address",
+		"bikebook customers get-address",
 		"bikebook describe",
 		"bikebook doctor",
+		"bikebook media-uploads complete",
+		"bikebook media-uploads get",
 		"bikebook team-members list",
 		"bikebook version",
 	} {

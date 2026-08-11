@@ -221,6 +221,9 @@ func resolveWriteIdempotencyKey(opts rootOptions) (string, error) {
 func executeWriteRequest(ctx context.Context, client *api.Client, spec writeCommandSpec, pathArgs []string, body io.Reader, contentType string, opts rootOptions, apiKey, idempotencyKey string, query map[string]string) (any, error) {
 	resp, err := spec.Execute(ctx, client, pathArgs, body, contentType, []api.RequestEditorFn{writeRequestEditor(opts, apiKey, idempotencyKey, query)})
 	if err != nil {
+		if cliErr, ok := err.(*CLIError); ok {
+			return nil, cliErr
+		}
 		return nil, NewLocalError(ExitNetwork, "cli_network_error", err.Error(), "", "", "")
 	}
 	defer resp.Body.Close()
@@ -322,6 +325,14 @@ func writeRequestEditor(opts rootOptions, apiKey, idempotencyKey string, query m
 	}
 }
 
+func parseUUIDPathArg(value, name string) (uuid.UUID, error) {
+	parsed, err := uuid.Parse(value)
+	if err != nil {
+		return uuid.Nil, NewLocalError(ExitUsage, "cli_invalid_input", name+" must be a valid UUID", name, "", "")
+	}
+	return parsed, nil
+}
+
 func writeCommandSpecs() []writeCommandSpec {
 	return []writeCommandSpec{
 		{Group: "assets", Use: "create", Short: "Create an asset", Method: http.MethodPost, HasBody: true, Execute: func(ctx context.Context, c *api.Client, args []string, body io.Reader, contentType string, editors []api.RequestEditorFn) (*http.Response, error) {
@@ -362,6 +373,15 @@ func writeCommandSpecs() []writeCommandSpec {
 		}},
 		{Group: "customers", Use: "update", Short: "Update a customer", Method: http.MethodPatch, PathArgs: []string{"customer_id"}, HasBody: true, Execute: func(ctx context.Context, c *api.Client, args []string, body io.Reader, contentType string, editors []api.RequestEditorFn) (*http.Response, error) {
 			return c.UpdateCustomerWithBody(ctx, args[0], nil, contentType, body, editors...)
+		}},
+		{Group: "customers", Use: "create-address", Short: "Create a customer address", Method: http.MethodPost, PathArgs: []string{"customer_id"}, HasBody: true, Execute: func(ctx context.Context, c *api.Client, args []string, body io.Reader, contentType string, editors []api.RequestEditorFn) (*http.Response, error) {
+			return c.CreateCustomerAddressWithBody(ctx, args[0], nil, contentType, body, editors...)
+		}},
+		{Group: "customers", Use: "update-address", Short: "Update a customer address", Method: http.MethodPatch, PathArgs: []string{"customer_id", "address_id"}, HasBody: true, Execute: func(ctx context.Context, c *api.Client, args []string, body io.Reader, contentType string, editors []api.RequestEditorFn) (*http.Response, error) {
+			return c.UpdateCustomerAddressWithBody(ctx, args[0], args[1], nil, contentType, body, editors...)
+		}},
+		{Group: "customers", Use: "delete-address", Short: "Delete a customer address", Method: http.MethodDelete, PathArgs: []string{"customer_id", "address_id"}, Destructive: true, Execute: func(ctx context.Context, c *api.Client, args []string, body io.Reader, contentType string, editors []api.RequestEditorFn) (*http.Response, error) {
+			return c.DeleteCustomerAddress(ctx, args[0], args[1], nil, editors...)
 		}},
 		{Group: "integrations", Use: "trigger-customer-sync", Short: "Trigger customer integration sync", Method: http.MethodPost, PathArgs: []string{"business_id"}, HasBody: true, Execute: func(ctx context.Context, c *api.Client, args []string, body io.Reader, contentType string, editors []api.RequestEditorFn) (*http.Response, error) {
 			return c.TriggerCustomerSyncWithBody(ctx, args[0], nil, contentType, body, editors...)
@@ -440,6 +460,33 @@ func writeCommandSpecs() []writeCommandSpec {
 		}},
 		{Group: "jobs", Use: "change-work-line-status", Short: "Change work line status", Method: http.MethodPost, PathArgs: []string{"job_id", "work_line_id"}, HasBody: true, Execute: func(ctx context.Context, c *api.Client, args []string, body io.Reader, contentType string, editors []api.RequestEditorFn) (*http.Response, error) {
 			return c.ChangeWorkLineStatusWithBody(ctx, args[0], args[1], nil, contentType, body, editors...)
+		}},
+		{Group: "media-uploads", Use: "create", Short: "Create a job report media upload", Method: http.MethodPost, PathArgs: []string{"job_report_id"}, HasBody: true, Execute: func(ctx context.Context, c *api.Client, args []string, body io.Reader, contentType string, editors []api.RequestEditorFn) (*http.Response, error) {
+			return c.CreateMediaUploadWithBody(ctx, args[0], nil, contentType, body, editors...)
+		}},
+		{Group: "media-uploads", Use: "create-for-job", Short: "Create a media upload for a job report", Method: http.MethodPost, PathArgs: []string{"job_id", "job_report_id"}, HasBody: true, Execute: func(ctx context.Context, c *api.Client, args []string, body io.Reader, contentType string, editors []api.RequestEditorFn) (*http.Response, error) {
+			return c.CreateForJobWithBody(ctx, args[0], args[1], nil, contentType, body, editors...)
+		}},
+		{Group: "media-uploads", Use: "abort", Short: "Abort a media upload", Method: http.MethodPost, PathArgs: []string{"upload_id"}, HasBody: true, Execute: func(ctx context.Context, c *api.Client, args []string, body io.Reader, contentType string, editors []api.RequestEditorFn) (*http.Response, error) {
+			uploadID, err := parseUUIDPathArg(args[0], "upload_id")
+			if err != nil {
+				return nil, err
+			}
+			return c.AbortWithBody(ctx, uploadID, nil, contentType, body, editors...)
+		}},
+		{Group: "media-uploads", Use: "complete", Short: "Complete a media upload", Method: http.MethodPost, PathArgs: []string{"upload_id"}, HasBody: true, Execute: func(ctx context.Context, c *api.Client, args []string, body io.Reader, contentType string, editors []api.RequestEditorFn) (*http.Response, error) {
+			uploadID, err := parseUUIDPathArg(args[0], "upload_id")
+			if err != nil {
+				return nil, err
+			}
+			return c.CompleteWithBody(ctx, uploadID, nil, contentType, body, editors...)
+		}},
+		{Group: "media-uploads", Use: "part-url", Short: "Create a media upload part URL", Method: http.MethodPost, PathArgs: []string{"upload_id"}, HasBody: true, Execute: func(ctx context.Context, c *api.Client, args []string, body io.Reader, contentType string, editors []api.RequestEditorFn) (*http.Response, error) {
+			uploadID, err := parseUUIDPathArg(args[0], "upload_id")
+			if err != nil {
+				return nil, err
+			}
+			return c.PartUrlWithBody(ctx, uploadID, nil, contentType, body, editors...)
 		}},
 		{Group: "services", Use: "update", Short: "Update a service", Method: http.MethodPatch, PathArgs: []string{"business_id", "service_id"}, HasBody: true, Execute: func(ctx context.Context, c *api.Client, args []string, body io.Reader, contentType string, editors []api.RequestEditorFn) (*http.Response, error) {
 			return c.UpdateServiceWithBody(ctx, args[0], args[1], nil, contentType, body, editors...)
