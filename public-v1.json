@@ -2,14 +2,14 @@
   "openapi": "3.0.1",
   "info": {
     "title": "Workshop API",
-    "description": "HTTP API for integrations that work on behalf of bike workshops on Workshop — jobs, customers, services, chat, and webhooks. Authenticate with your API key (`Bearer bbk_live_...`). Writes require `Idempotency-Key`. JSON uses `snake_case` and ids such as `org_`, `job_`, `cus_`.\n\n**Guides:** [Getting started](/guides/getting-started) · [Platform overview](/guides/overview) · [Authentication](/guides/authentication) · [Rate limiting](/guides/rate-limiting) · [Retries & idempotency](/guides/retries-and-idempotency) · [Errors & pagination](/guides/errors-and-pagination) · [Resource ids](/guides/public-ids) · [Conventions](/guides/conventions) · [Availability and dates](/guides/availability) · [Part authorisations](/guides/part-authorisations) · [Back orders](/guides/back-orders) · [Chat](/guides/chat) · [Webhooks](/guides/webhooks) · [Webhook payloads](/guides/webhook-payloads) · [Changelog](/guides/changelog)",
+    "description": "HTTP API for integrations that work on behalf of bike workshops on Workshop — jobs, customers, services, chat, and webhooks. Authenticate with your API key (`Bearer bbk_live_...`). Writes require `Idempotency-Key`. JSON uses `snake_case` and ids such as `org_`, `job_`, `cus_`.\n\n**Guides:** [Getting started](/guides/getting-started) · [Platform overview](/guides/overview) · [Authentication](/guides/authentication) · [Rate limiting](/guides/rate-limiting) · [Retries & idempotency](/guides/retries-and-idempotency) · [Errors & pagination](/guides/errors-and-pagination) · [Resource ids](/guides/public-ids) · [Media uploads](/guides/media-uploads) · [Conventions](/guides/conventions) · [Availability and dates](/guides/availability) · [Part authorisations](/guides/part-authorisations) · [Back orders](/guides/back-orders) · [Chat](/guides/chat) · [Webhooks](/guides/webhooks) · [Webhook payloads](/guides/webhook-payloads) · [Changelog](/guides/changelog)",
     "contact": {
       "name": "Workshop by Bikebook API support",
       "email": "support@bikebook.co.uk",
       "url": "https://bikebook.co.uk/contact"
     },
     "version": "v1",
-    "x-bikebook-openapi-generated-at": "2026-07-03T12:20:42.515Z"
+    "x-bikebook-openapi-generated-at": "2026-07-22T13:42:48.870Z"
   },
   "paths": {
     "/public/v1/activities": {
@@ -1205,6 +1205,851 @@
           }
         },
         "x-required-scope": "job.read",
+        "x-bikebook-lifecycle-status": "current",
+        "x-bikebook-lifecycle-label": "Current"
+      }
+    },
+    "/public/v1/customers/{customer_id}/addresses/{address_id}": {
+      "get": {
+        "tags": [
+          "Addresses"
+        ],
+        "summary": "Get customer address",
+        "description": "Returns one stored address on the customer identified by `loc_...`. Legacy customers with only flat address fields and no location rows must use `PATCH /customers/{customer_id}` until a stored address exists.",
+        "operationId": "GetCustomerAddress",
+        "parameters": [
+          {
+            "name": "customer_id",
+            "in": "path",
+            "description": "Opaque public id of the customer (`cus_...`).",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "address_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Bearer Workshop API key. Example: Bearer bbk_live_...",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "X-Bikebook-Request-Id",
+            "in": "header",
+            "description": "Optional request id supplied by the client for support correlation.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Stored customer address.",
+            "headers": {
+              "X-Bikebook-Request-Id": {
+                "description": "Echoed or generated request correlation id. Log this with support.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomerAddress"
+                },
+                "example": {
+                  "id": "loc_01h2xexample",
+                  "is_default": true,
+                  "name": "Home",
+                  "line1": "10 High Street",
+                  "line2": "Flat 2",
+                  "town": "Bristol",
+                  "postcode": "BS1 1AA",
+                  "country": "GBR",
+                  "latitude": 51.4545,
+                  "longitude": -2.5879
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request. Request body, query, route, or headers failed validation (`invalid_request`, `idempotency_key_required`).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication required. Missing or invalid API key (`authentication_required`).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Permission denied. API key lacks scope or cannot access this business (`permission_denied`).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Resource not found. Resource does not exist or is outside the caller's allowed scope (`resource_not_found`).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limited. Caller exceeded rate limits (`rate_limited`). Back off with exponential delay.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error. Unexpected server failure (`internal_error`). Retry later or contact support with the `request_id`.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          }
+        },
+        "x-required-scope": "customer.read",
+        "x-bikebook-lifecycle-status": "current",
+        "x-bikebook-lifecycle-label": "Current"
+      },
+      "patch": {
+        "tags": [
+          "Addresses"
+        ],
+        "summary": "Update customer address",
+        "description": "Patches one stored address. Omitted properties are ignored. Set `is_default` to true to make this the default address. Requires `customer.write` and `Idempotency-Key`.",
+        "operationId": "UpdateCustomerAddress",
+        "parameters": [
+          {
+            "name": "customer_id",
+            "in": "path",
+            "description": "Opaque public id of the customer (`cus_...`).",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "address_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Bearer Workshop API key. Example: Bearer bbk_live_...",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "X-Bikebook-Request-Id",
+            "in": "header",
+            "description": "Optional request id supplied by the client for support correlation.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "description": "Required for public write operations to make retries safe.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CustomerAddressUpdateRequest"
+              },
+              "example": {
+                "name": "Office",
+                "is_default": true
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Updated customer address.",
+            "headers": {
+              "X-Bikebook-Request-Id": {
+                "description": "Echoed or generated request correlation id. Log this with support.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomerAddress"
+                },
+                "example": {
+                  "id": "loc_01h2xexample",
+                  "is_default": true,
+                  "name": "Home",
+                  "line1": "10 High Street",
+                  "line2": "Flat 2",
+                  "town": "Bristol",
+                  "postcode": "BS1 1AA",
+                  "country": "GBR",
+                  "latitude": 51.4545,
+                  "longitude": -2.5879
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request. Request body, query, route, or headers failed validation (`invalid_request`, `idempotency_key_required`).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication required. Missing or invalid API key (`authentication_required`).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Permission denied. API key lacks scope or cannot access this business (`permission_denied`).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Resource not found. Resource does not exist or is outside the caller's allowed scope (`resource_not_found`).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Idempotency conflict. Same Idempotency-Key reused with a different payload (`idempotency_conflict`).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limited. Caller exceeded rate limits (`rate_limited`). Back off with exponential delay.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error. Unexpected server failure (`internal_error`). Retry later or contact support with the `request_id`.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          }
+        },
+        "x-required-scope": "customer.write",
+        "x-bikebook-lifecycle-status": "current",
+        "x-bikebook-lifecycle-label": "Current"
+      },
+      "delete": {
+        "tags": [
+          "Addresses"
+        ],
+        "summary": "Delete customer address",
+        "description": "Soft-deletes one stored address. When the default address is deleted, another stored address becomes default when one remains. Requires `customer.write` and `Idempotency-Key`.",
+        "operationId": "DeleteCustomerAddress",
+        "parameters": [
+          {
+            "name": "customer_id",
+            "in": "path",
+            "description": "Opaque public id of the customer (`cus_...`).",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "address_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Bearer Workshop API key. Example: Bearer bbk_live_...",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "X-Bikebook-Request-Id",
+            "in": "header",
+            "description": "Optional request id supplied by the client for support correlation.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "description": "Required for public write operations to make retries safe.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Deleted customer address.",
+            "headers": {
+              "X-Bikebook-Request-Id": {
+                "description": "Echoed or generated request correlation id. Log this with support.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomerAddressDeleted"
+                },
+                "example": {
+                  "id": "loc_01h2xexample",
+                  "deleted": true
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request. Request body, query, route, or headers failed validation (`invalid_request`, `idempotency_key_required`).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication required. Missing or invalid API key (`authentication_required`).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Permission denied. API key lacks scope or cannot access this business (`permission_denied`).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Resource not found. Resource does not exist or is outside the caller's allowed scope (`resource_not_found`).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Idempotency conflict. Same Idempotency-Key reused with a different payload (`idempotency_conflict`).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limited. Caller exceeded rate limits (`rate_limited`). Back off with exponential delay.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error. Unexpected server failure (`internal_error`). Retry later or contact support with the `request_id`.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          }
+        },
+        "x-required-scope": "customer.write",
+        "x-bikebook-lifecycle-status": "current",
+        "x-bikebook-lifecycle-label": "Current"
+      }
+    },
+    "/public/v1/customers/{customer_id}/addresses": {
+      "post": {
+        "tags": [
+          "Addresses"
+        ],
+        "summary": "Create customer address",
+        "description": "Adds a stored address to the customer. When `is_default` is omitted, the first stored address becomes default. Requires `customer.write` and `Idempotency-Key`. When the workshop has a connected POS and customer sync on save is enabled, changes are pushed to the POS using the same rules as the Workshop customer form.",
+        "operationId": "CreateCustomerAddress",
+        "parameters": [
+          {
+            "name": "customer_id",
+            "in": "path",
+            "description": "Opaque public id of the customer (`cus_...`).",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Bearer Workshop API key. Example: Bearer bbk_live_...",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "X-Bikebook-Request-Id",
+            "in": "header",
+            "description": "Optional request id supplied by the client for support correlation.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "description": "Required for public write operations to make retries safe.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CustomerAddressCreateRequest"
+              },
+              "example": {
+                "name": "Work",
+                "line1": "2 Office Park",
+                "town": "Bristol",
+                "postcode": "BS1 2AA",
+                "country": "GBR",
+                "is_default": false
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created customer address.",
+            "headers": {
+              "X-Bikebook-Request-Id": {
+                "description": "Echoed or generated request correlation id. Log this with support.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomerAddress"
+                },
+                "example": {
+                  "id": "loc_01h2xexample",
+                  "is_default": true,
+                  "name": "Home",
+                  "line1": "10 High Street",
+                  "line2": "Flat 2",
+                  "town": "Bristol",
+                  "postcode": "BS1 1AA",
+                  "country": "GBR",
+                  "latitude": 51.4545,
+                  "longitude": -2.5879
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request. Request body, query, route, or headers failed validation (`invalid_request`, `idempotency_key_required`).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication required. Missing or invalid API key (`authentication_required`).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Permission denied. API key lacks scope or cannot access this business (`permission_denied`).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Resource not found. Resource does not exist or is outside the caller's allowed scope (`resource_not_found`).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Idempotency conflict. Same Idempotency-Key reused with a different payload (`idempotency_conflict`).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limited. Caller exceeded rate limits (`rate_limited`). Back off with exponential delay.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error. Unexpected server failure (`internal_error`). Retry later or contact support with the `request_id`.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          }
+        },
+        "x-required-scope": "customer.write",
         "x-bikebook-lifecycle-status": "current",
         "x-bikebook-lifecycle-label": "Current"
       }
@@ -2707,6 +3552,13 @@
                         "stock_item_id": "stki_01h2example",
                         "name": "Shimano B01S",
                         "sku": "BP-B01S",
+                        "external_id": "gid://shopify/ProductVariant/123456789",
+                        "stock_item": {
+                          "object": "stock_item",
+                          "id": "stki_01h2example",
+                          "name": "Brake pad set",
+                          "external_id": "gid://shopify/Product/987654321"
+                        },
                         "price": 18.5,
                         "currency": "GBP",
                         "remaining_stock": 12,
@@ -2923,6 +3775,13 @@
                     "stock_item_id": "stki_01h2example",
                     "name": "Shimano B01S",
                     "sku": "BP-B01S",
+                    "external_id": "gid://shopify/ProductVariant/123456789",
+                    "stock_item": {
+                      "object": "stock_item",
+                      "id": "stki_01h2example",
+                      "name": "Brake pad set",
+                      "external_id": "gid://shopify/Product/987654321"
+                    },
                     "price": 18.5,
                     "currency": "GBP",
                     "remaining_stock": 12,
@@ -3136,6 +3995,13 @@
                     "stock_item_id": "stki_01h2example",
                     "name": "Shimano B01S",
                     "sku": "BP-B01S",
+                    "external_id": "gid://shopify/ProductVariant/123456789",
+                    "stock_item": {
+                      "object": "stock_item",
+                      "id": "stki_01h2example",
+                      "name": "Brake pad set",
+                      "external_id": "gid://shopify/Product/987654321"
+                    },
                     "price": 18.5,
                     "currency": "GBP",
                     "remaining_stock": 12,
@@ -3352,6 +4218,13 @@
                     "stock_item_id": "stki_01h2example",
                     "name": "Shimano B01S",
                     "sku": "BP-B01S",
+                    "external_id": "gid://shopify/ProductVariant/123456789",
+                    "stock_item": {
+                      "object": "stock_item",
+                      "id": "stki_01h2example",
+                      "name": "Brake pad set",
+                      "external_id": "gid://shopify/Product/987654321"
+                    },
                     "price": 18.5,
                     "currency": "GBP",
                     "remaining_stock": 12,
@@ -3785,6 +4658,13 @@
                           "stock_item_id": "stki_01h2example",
                           "name": "Shimano B01S",
                           "sku": "BP-B01S",
+                          "external_id": "gid://shopify/ProductVariant/123456789",
+                          "stock_item": {
+                            "object": "stock_item",
+                            "id": "stki_01h2example",
+                            "name": "Brake pad set",
+                            "external_id": "gid://shopify/Product/987654321"
+                          },
                           "price": 18.5,
                           "currency": "GBP",
                           "remaining_stock": 12,
@@ -4006,7 +4886,9 @@
                       "bookings_enabled": true,
                       "collection_enabled": true,
                       "drop_offs_enabled": true,
-                      "services_visible": true
+                      "services_visible": true,
+                      "integration_location_id": "gid://shopify/Location/1234567890",
+                      "integration_location_name": "Bristol Workshop"
                     }
                   ],
                   "pagination": {
@@ -4196,7 +5078,9 @@
                   "bookings_enabled": true,
                   "collection_enabled": true,
                   "drop_offs_enabled": true,
-                  "services_visible": true
+                  "services_visible": true,
+                  "integration_location_id": "gid://shopify/Location/1234567890",
+                  "integration_location_name": "Bristol Workshop"
                 }
               }
             }
@@ -6483,7 +7367,7 @@
           "Customers"
         ],
         "summary": "Update customer",
-        "description": "Patches customer profile and address fields. Null properties are ignored. This does not contact the customer.",
+        "description": "Patches customer profile and address fields. Null properties are ignored. This does not contact the customer. When the workshop has a connected POS and customer sync on save is enabled, changes are pushed to the POS using the same rules as the Workshop customer form.",
         "operationId": "UpdateCustomer",
         "parameters": [
           {
@@ -6559,8 +7443,24 @@
                   "last_name": "Rider",
                   "full_name": "Alex Rider",
                   "email": "alex.rider@example.com",
+                  "country": "GBR",
                   "created_at": "2026-05-01T09:00:00Z",
-                  "updated_at": "2026-05-20T10:00:00Z"
+                  "updated_at": "2026-05-20T10:00:00Z",
+                  "addresses": [
+                    {
+                      "id": "loc_01h2xexample",
+                      "is_default": true,
+                      "name": "Home",
+                      "line1": "10 High Street",
+                      "line2": "Flat 2",
+                      "town": "Bristol",
+                      "postcode": "BS1 1AA",
+                      "country": "GBR",
+                      "latitude": 51.4545,
+                      "longitude": -2.5879
+                    }
+                  ],
+                  "external_id": "gid://shopify/Customer/1000000000001"
                 }
               }
             }
@@ -6754,8 +7654,24 @@
                   "last_name": "Rider",
                   "full_name": "Alex Rider",
                   "email": "alex@example.com",
+                  "country": "GBR",
                   "created_at": "2026-05-01T09:00:00Z",
-                  "updated_at": "2026-05-01T09:00:00Z"
+                  "updated_at": "2026-05-20T10:00:00Z",
+                  "addresses": [
+                    {
+                      "id": "loc_01h2xexample",
+                      "is_default": true,
+                      "name": "Home",
+                      "line1": "10 High Street",
+                      "line2": "Flat 2",
+                      "town": "Bristol",
+                      "postcode": "BS1 1AA",
+                      "country": "GBR",
+                      "latitude": 51.4545,
+                      "longitude": -2.5879
+                    }
+                  ],
+                  "external_id": "gid://shopify/Customer/1000000000001"
                 }
               }
             }
@@ -6880,7 +7796,7 @@
           "Customers"
         ],
         "summary": "Create customer",
-        "description": "**Deprecated:** Use POST /public/v2/businesses/{business_id}/customers for new integrations. Existing v1 integrations can continue using this endpoint during the deprecation window.\n\nCreates a customer in the selected workshop. This does not contact the customer. The request `business_id` must be one of the public business ids your API client can access.",
+        "description": "Creates a customer in the selected workshop. This does not contact the customer. The request `business_id` must be one of the public business ids your API client can access. When the workshop has a connected POS and customer sync on save is enabled, the customer is pushed to the POS using the same rules as the Workshop customer form.",
         "operationId": "CreateCustomer",
         "parameters": [
           {
@@ -6950,8 +7866,24 @@
                   "last_name": "Rider",
                   "full_name": "Alex Rider",
                   "email": "alex@example.com",
+                  "country": "GBR",
                   "created_at": "2026-05-01T09:00:00Z",
-                  "updated_at": "2026-05-01T09:00:00Z"
+                  "updated_at": "2026-05-20T10:00:00Z",
+                  "addresses": [
+                    {
+                      "id": "loc_01h2xexample",
+                      "is_default": true,
+                      "name": "Home",
+                      "line1": "10 High Street",
+                      "line2": "Flat 2",
+                      "town": "Bristol",
+                      "postcode": "BS1 1AA",
+                      "country": "GBR",
+                      "latitude": 51.4545,
+                      "longitude": -2.5879
+                    }
+                  ],
+                  "external_id": "gid://shopify/Customer/1000000000001"
                 }
               }
             }
@@ -7084,10 +8016,8 @@
           }
         },
         "x-required-scope": "customer.write",
-        "x-bikebook-lifecycle-status": "deprecated",
-        "x-bikebook-lifecycle-label": "Deprecated",
-        "x-bikebook-replacement-operation-id": "CreateCustomerV2",
-        "deprecated": true
+        "x-bikebook-lifecycle-status": "current",
+        "x-bikebook-lifecycle-label": "Current"
       },
       "get": {
         "tags": [
@@ -7193,8 +8123,24 @@
                       "last_name": "Rider",
                       "full_name": "Alex Rider",
                       "email": "alex@example.com",
+                      "country": "GBR",
                       "created_at": "2026-05-01T09:00:00Z",
-                      "updated_at": "2026-05-20T10:00:00Z"
+                      "updated_at": "2026-05-20T10:00:00Z",
+                      "addresses": [
+                        {
+                          "id": "loc_01h2xexample",
+                          "is_default": true,
+                          "name": "Home",
+                          "line1": "10 High Street",
+                          "line2": "Flat 2",
+                          "town": "Bristol",
+                          "postcode": "BS1 1AA",
+                          "country": "GBR",
+                          "latitude": 51.4545,
+                          "longitude": -2.5879
+                        }
+                      ],
+                      "external_id": "gid://shopify/Customer/1000000000001"
                     }
                   ],
                   "pagination": {
@@ -7395,7 +8341,9 @@
                     "status": "synced",
                     "last_synced_at": "2026-05-20T10:00:00Z",
                     "disabled": false
-                  }
+                  },
+                  "integration_location_id": "gid://shopify/Location/1234567890",
+                  "integration_location_name": "Bristol Workshop"
                 }
               }
             }
@@ -7605,7 +8553,9 @@
                       "status": "synced",
                       "last_synced_at": "2026-05-20T10:00:00Z",
                       "disabled": false
-                    }
+                    },
+                    "integration_location_id": "gid://shopify/Location/1234567890",
+                    "integration_location_name": "Bristol Workshop"
                   },
                   "effects": {
                     "emails_sent": [],
@@ -7844,7 +8794,9 @@
                       "status": "synced",
                       "last_synced_at": "2026-05-20T10:00:00Z",
                       "disabled": false
-                    }
+                    },
+                    "integration_location_id": "gid://shopify/Location/1234567890",
+                    "integration_location_name": "Bristol Workshop"
                   },
                   "effects": {
                     "emails_sent": [],
@@ -10600,10 +11552,27 @@
                           "unit_price": 65,
                           "quantity": 1,
                           "total": 65
+                        },
+                        {
+                          "object": "invoice_item",
+                          "id": "invitem_01h2yexample",
+                          "invoice_id": "inv_01h2example",
+                          "name": "Brake pads",
+                          "description": "Shimano B01S",
+                          "line_type": "part",
+                          "external_id": "gid://shopify/ProductVariant/123456789",
+                          "order": 2,
+                          "unit_price": 40,
+                          "quantity": 1,
+                          "total": 40
                         }
                       ],
                       "created_at": "2026-05-20T10:00:00Z",
-                      "updated_at": "2026-05-20T14:30:00Z"
+                      "updated_at": "2026-05-20T14:30:00Z",
+                      "customer_external_id": "gid://shopify/Customer/1000000000001",
+                      "external_system_id": "gid://shopify/Order/1234567890",
+                      "integration_location_id": "gid://shopify/Location/1234567890",
+                      "integration_location_name": "Bristol Workshop"
                     }
                   ],
                   "pagination": {
@@ -10810,10 +11779,27 @@
                       "unit_price": 65,
                       "quantity": 1,
                       "total": 65
+                    },
+                    {
+                      "object": "invoice_item",
+                      "id": "invitem_01h2yexample",
+                      "invoice_id": "inv_01h2example",
+                      "name": "Brake pads",
+                      "description": "Shimano B01S",
+                      "line_type": "part",
+                      "external_id": "gid://shopify/ProductVariant/123456789",
+                      "order": 2,
+                      "unit_price": 40,
+                      "quantity": 1,
+                      "total": 40
                     }
                   ],
                   "created_at": "2026-05-20T10:00:00Z",
-                  "updated_at": "2026-05-20T14:30:00Z"
+                  "updated_at": "2026-05-20T14:30:00Z",
+                  "customer_external_id": "gid://shopify/Customer/1000000000001",
+                  "external_system_id": "gid://shopify/Order/1234567890",
+                  "integration_location_id": "gid://shopify/Location/1234567890",
+                  "integration_location_name": "Bristol Workshop"
                 }
               }
             }
@@ -11036,10 +12022,27 @@
                         "unit_price": 65,
                         "quantity": 1,
                         "total": 65
+                      },
+                      {
+                        "object": "invoice_item",
+                        "id": "invitem_01h2yexample",
+                        "invoice_id": "inv_01h2example",
+                        "name": "Brake pads",
+                        "description": "Shimano B01S",
+                        "line_type": "part",
+                        "external_id": "gid://shopify/ProductVariant/123456789",
+                        "order": 2,
+                        "unit_price": 40,
+                        "quantity": 1,
+                        "total": 40
                       }
                     ],
                     "created_at": "2026-05-20T10:00:00Z",
-                    "updated_at": "2026-05-20T14:30:00Z"
+                    "updated_at": "2026-05-20T14:30:00Z",
+                    "customer_external_id": "gid://shopify/Customer/1000000000001",
+                    "external_system_id": "gid://shopify/Order/1234567890",
+                    "integration_location_id": "gid://shopify/Location/1234567890",
+                    "integration_location_name": "Bristol Workshop"
                   },
                   "effects": {
                     "emails_sent": [
@@ -11297,10 +12300,27 @@
                         "unit_price": 65,
                         "quantity": 1,
                         "total": 65
+                      },
+                      {
+                        "object": "invoice_item",
+                        "id": "invitem_01h2yexample",
+                        "invoice_id": "inv_01h2example",
+                        "name": "Brake pads",
+                        "description": "Shimano B01S",
+                        "line_type": "part",
+                        "external_id": "gid://shopify/ProductVariant/123456789",
+                        "order": 2,
+                        "unit_price": 40,
+                        "quantity": 1,
+                        "total": 40
                       }
                     ],
                     "created_at": "2026-05-20T10:00:00Z",
-                    "updated_at": "2026-05-20T14:30:00Z"
+                    "updated_at": "2026-05-20T14:30:00Z",
+                    "customer_external_id": "gid://shopify/Customer/1000000000001",
+                    "external_system_id": "gid://shopify/Order/1234567890",
+                    "integration_location_id": "gid://shopify/Location/1234567890",
+                    "integration_location_name": "Bristol Workshop"
                   },
                   "effects": {
                     "emails_sent": [
@@ -11561,10 +12581,27 @@
                         "unit_price": 65,
                         "quantity": 1,
                         "total": 65
+                      },
+                      {
+                        "object": "invoice_item",
+                        "id": "invitem_01h2yexample",
+                        "invoice_id": "inv_01h2example",
+                        "name": "Brake pads",
+                        "description": "Shimano B01S",
+                        "line_type": "part",
+                        "external_id": "gid://shopify/ProductVariant/123456789",
+                        "order": 2,
+                        "unit_price": 40,
+                        "quantity": 1,
+                        "total": 40
                       }
                     ],
                     "created_at": "2026-05-20T10:00:00Z",
-                    "updated_at": "2026-05-20T14:30:00Z"
+                    "updated_at": "2026-05-20T14:30:00Z",
+                    "customer_external_id": "gid://shopify/Customer/1000000000001",
+                    "external_system_id": "gid://shopify/Order/1234567890",
+                    "integration_location_id": "gid://shopify/Location/1234567890",
+                    "integration_location_name": "Bristol Workshop"
                   },
                   "effects": {
                     "emails_sent": [
@@ -12188,8 +13225,19 @@
                         "mechanical_check": true,
                         "signed_off": true
                       },
+                      "attachments": [
+                        {
+                          "object": "attachment",
+                          "id": "doc_01h2example",
+                          "name": "after-service-photo.jpg",
+                          "friendly_name": "After service photo.jpg",
+                          "content_type": "image/jpeg",
+                          "file_size_bytes": 2489134
+                        }
+                      ],
                       "created_at": "2026-05-20T10:00:00Z",
-                      "updated_at": "2026-05-20T10:00:00Z"
+                      "updated_at": "2026-05-20T10:00:00Z",
+                      "customer_external_id": "gid://shopify/Customer/1000000000001"
                     }
                   ],
                   "pagination": {
@@ -12412,8 +13460,19 @@
                         "mechanical_check": true,
                         "signed_off": true
                       },
+                      "attachments": [
+                        {
+                          "object": "attachment",
+                          "id": "doc_01h2example",
+                          "name": "after-service-photo.jpg",
+                          "friendly_name": "After service photo.jpg",
+                          "content_type": "image/jpeg",
+                          "file_size_bytes": 2489134
+                        }
+                      ],
                       "created_at": "2026-05-20T10:00:00Z",
-                      "updated_at": "2026-05-20T10:00:00Z"
+                      "updated_at": "2026-05-20T10:00:00Z",
+                      "customer_external_id": "gid://shopify/Customer/1000000000001"
                     }
                   ],
                   "pagination": {
@@ -12602,8 +13661,19 @@
                     "mechanical_check": true,
                     "signed_off": true
                   },
+                  "attachments": [
+                    {
+                      "object": "attachment",
+                      "id": "doc_01h2example",
+                      "name": "after-service-photo.jpg",
+                      "friendly_name": "After service photo.jpg",
+                      "content_type": "image/jpeg",
+                      "file_size_bytes": 2489134
+                    }
+                  ],
                   "created_at": "2026-05-20T10:00:00Z",
-                  "updated_at": "2026-05-20T10:00:00Z"
+                  "updated_at": "2026-05-20T10:00:00Z",
+                  "customer_external_id": "gid://shopify/Customer/1000000000001"
                 }
               }
             }
@@ -12795,8 +13865,19 @@
                     "mechanical_check": true,
                     "signed_off": true
                   },
+                  "attachments": [
+                    {
+                      "object": "attachment",
+                      "id": "doc_01h2example",
+                      "name": "after-service-photo.jpg",
+                      "friendly_name": "After service photo.jpg",
+                      "content_type": "image/jpeg",
+                      "file_size_bytes": 2489134
+                    }
+                  ],
                   "created_at": "2026-05-20T10:00:00Z",
-                  "updated_at": "2026-05-20T10:00:00Z"
+                  "updated_at": "2026-05-20T10:00:00Z",
+                  "customer_external_id": "gid://shopify/Customer/1000000000001"
                 }
               }
             }
@@ -12992,6 +14073,7 @@
                       "job_report_id": "jr_7d3eexample",
                       "service_item_name": "Brake check",
                       "name": "Brake pads",
+                      "external_id": "gid://shopify/ProductVariant/123456789",
                       "quantity": 1,
                       "status": "pending"
                     }
@@ -13208,6 +14290,7 @@
                         "job_report_id": "jr_7d3eexample",
                         "service_item_name": "Brake check",
                         "name": "Brake pads",
+                        "external_id": "gid://shopify/ProductVariant/123456789",
                         "quantity": 1,
                         "status": "pending"
                       }
@@ -13441,6 +14524,7 @@
                         "job_report_id": "jr_7d3eexample",
                         "service_item_name": "Brake check",
                         "name": "Brake pads",
+                        "external_id": "gid://shopify/ProductVariant/123456789",
                         "quantity": 1,
                         "status": "pending"
                       }
@@ -13733,7 +14817,11 @@
                       "id": "job_01h2example",
                       "business_id": "org_2abc8example",
                       "customer_id": "cus_9k3mexample",
-                      "job_number": 1042
+                      "job_number": 1042,
+                      "customer_external_id": "gid://shopify/Customer/1000000000001",
+                      "external_system_id": "gid://shopify/Order/1234567890",
+                      "integration_location_id": "gid://shopify/Location/1234567890",
+                      "integration_location_name": "Bristol Workshop"
                     }
                   ],
                   "pagination": {
@@ -14008,7 +15096,11 @@
                       }
                     ],
                     "created_at": "2026-05-20T10:00:00Z",
-                    "updated_at": "2026-05-20T10:00:00Z"
+                    "updated_at": "2026-05-20T10:00:00Z",
+                    "customer_external_id": "gid://shopify/Customer/1000000000001",
+                    "external_system_id": "gid://shopify/Order/1234567890",
+                    "integration_location_id": "gid://shopify/Location/1234567890",
+                    "integration_location_name": "Bristol Workshop"
                   },
                   "effects": {
                     "emails_sent": [
@@ -14267,7 +15359,11 @@
                     }
                   ],
                   "created_at": "2026-05-20T10:00:00Z",
-                  "updated_at": "2026-05-20T10:00:00Z"
+                  "updated_at": "2026-05-20T10:00:00Z",
+                  "customer_external_id": "gid://shopify/Customer/1000000000001",
+                  "external_system_id": "gid://shopify/Order/1234567890",
+                  "integration_location_id": "gid://shopify/Location/1234567890",
+                  "integration_location_name": "Bristol Workshop"
                 }
               }
             }
@@ -14519,7 +15615,11 @@
                       }
                     ],
                     "created_at": "2026-05-20T10:00:00Z",
-                    "updated_at": "2026-05-20T10:00:00Z"
+                    "updated_at": "2026-05-20T10:00:00Z",
+                    "customer_external_id": "gid://shopify/Customer/1000000000001",
+                    "external_system_id": "gid://shopify/Order/1234567890",
+                    "integration_location_id": "gid://shopify/Location/1234567890",
+                    "integration_location_name": "Bristol Workshop"
                   },
                   "effects": {
                     "emails_sent": [
@@ -14814,7 +15914,11 @@
                       }
                     ],
                     "created_at": "2026-05-20T10:00:00Z",
-                    "updated_at": "2026-05-20T10:00:00Z"
+                    "updated_at": "2026-05-20T10:00:00Z",
+                    "customer_external_id": "gid://shopify/Customer/1000000000001",
+                    "external_system_id": "gid://shopify/Order/1234567890",
+                    "integration_location_id": "gid://shopify/Location/1234567890",
+                    "integration_location_name": "Bristol Workshop"
                   },
                   "effects": {
                     "emails_sent": [
@@ -15107,7 +16211,11 @@
                       }
                     ],
                     "created_at": "2026-05-20T10:00:00Z",
-                    "updated_at": "2026-05-20T10:00:00Z"
+                    "updated_at": "2026-05-20T10:00:00Z",
+                    "customer_external_id": "gid://shopify/Customer/1000000000001",
+                    "external_system_id": "gid://shopify/Order/1234567890",
+                    "integration_location_id": "gid://shopify/Location/1234567890",
+                    "integration_location_name": "Bristol Workshop"
                   },
                   "effects": {
                     "emails_sent": [
@@ -15401,7 +16509,11 @@
                       }
                     ],
                     "created_at": "2026-05-20T10:00:00Z",
-                    "updated_at": "2026-05-20T10:00:00Z"
+                    "updated_at": "2026-05-20T10:00:00Z",
+                    "customer_external_id": "gid://shopify/Customer/1000000000001",
+                    "external_system_id": "gid://shopify/Order/1234567890",
+                    "integration_location_id": "gid://shopify/Location/1234567890",
+                    "integration_location_name": "Bristol Workshop"
                   },
                   "effects": {
                     "emails_sent": [],
@@ -15684,7 +16796,11 @@
                       }
                     ],
                     "created_at": "2026-05-20T10:00:00Z",
-                    "updated_at": "2026-05-20T10:00:00Z"
+                    "updated_at": "2026-05-20T10:00:00Z",
+                    "customer_external_id": "gid://shopify/Customer/1000000000001",
+                    "external_system_id": "gid://shopify/Order/1234567890",
+                    "integration_location_id": "gid://shopify/Location/1234567890",
+                    "integration_location_name": "Bristol Workshop"
                   },
                   "effects": {
                     "emails_sent": [
@@ -15983,7 +17099,11 @@
                       }
                     ],
                     "created_at": "2026-05-20T10:00:00Z",
-                    "updated_at": "2026-05-20T10:00:00Z"
+                    "updated_at": "2026-05-20T10:00:00Z",
+                    "customer_external_id": "gid://shopify/Customer/1000000000001",
+                    "external_system_id": "gid://shopify/Order/1234567890",
+                    "integration_location_id": "gid://shopify/Location/1234567890",
+                    "integration_location_name": "Bristol Workshop"
                   },
                   "effects": {
                     "emails_sent": [
@@ -16275,7 +17395,11 @@
                       }
                     ],
                     "created_at": "2026-05-20T10:00:00Z",
-                    "updated_at": "2026-05-20T10:00:00Z"
+                    "updated_at": "2026-05-20T10:00:00Z",
+                    "customer_external_id": "gid://shopify/Customer/1000000000001",
+                    "external_system_id": "gid://shopify/Order/1234567890",
+                    "integration_location_id": "gid://shopify/Location/1234567890",
+                    "integration_location_name": "Bristol Workshop"
                   },
                   "effects": {
                     "emails_sent": [
@@ -16290,6 +17414,1391 @@
                     "notifications_created": false,
                     "warnings": []
                   }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request. Request body, query, route, or headers failed validation (`invalid_request`, `idempotency_key_required`).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication required. Missing or invalid API key (`authentication_required`).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Permission denied. API key lacks scope or cannot access this business (`permission_denied`).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Resource not found. Resource does not exist or is outside the caller's allowed scope (`resource_not_found`).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Idempotency conflict. Same Idempotency-Key reused with a different payload (`idempotency_conflict`).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limited. Caller exceeded rate limits (`rate_limited`). Back off with exponential delay.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error. Unexpected server failure (`internal_error`). Retry later or contact support with the `request_id`.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          }
+        },
+        "x-required-scope": "job.write",
+        "x-bikebook-lifecycle-status": "current",
+        "x-bikebook-lifecycle-label": "Current"
+      }
+    },
+    "/public/v1/job_reports/{job_report_id}/media_uploads": {
+      "post": {
+        "tags": [
+          "Media uploads"
+        ],
+        "summary": "Create job report media upload",
+        "description": "Creates an idempotent direct-to-storage upload session for an image or video that will be attached to this job report. Small files return a single presigned PUT URL. Larger files return multipart instructions and callers request part URLs separately. Requires `job.write` and `Idempotency-Key`.",
+        "operationId": "CreateMediaUpload",
+        "parameters": [
+          {
+            "name": "job_report_id",
+            "in": "path",
+            "description": "Opaque public id of the job report (`jrp_...`).",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Bearer Workshop API key. Example: Bearer bbk_live_...",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "X-Bikebook-Request-Id",
+            "in": "header",
+            "description": "Optional request id supplied by the client for support correlation.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "description": "Required for public write operations to make retries safe.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MediaUploadCreateRequest"
+              },
+              "example": {
+                "file_name": "after-service-photo.jpg",
+                "content_type": "image/jpeg",
+                "total_size_bytes": 2489134,
+                "sha256": "1a2b3c4d5e6f7890examplehash"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created media upload session.",
+            "headers": {
+              "X-Bikebook-Request-Id": {
+                "description": "Echoed or generated request correlation id. Log this with support.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MediaUpload"
+                },
+                "example": {
+                  "object": "media_upload",
+                  "id": "8c1f7c7d-7d46-4e5e-8f3a-6406d0f67891",
+                  "job_report_id": "jr_7d3eexample",
+                  "job_id": "job_01h2example",
+                  "status": "initializing",
+                  "kind": "single",
+                  "put_url": "https://storage.example.com/uploads/media/single-put?signature=example",
+                  "recommended_part_size": null,
+                  "total_parts": null,
+                  "expires_at": "2026-05-20T11:00:00Z",
+                  "error_code": null,
+                  "error_message": null,
+                  "attachment": null
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request. Request body, query, route, or headers failed validation (`invalid_request`, `idempotency_key_required`).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication required. Missing or invalid API key (`authentication_required`).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Permission denied. API key lacks scope or cannot access this business (`permission_denied`).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Resource not found. Resource does not exist or is outside the caller's allowed scope (`resource_not_found`).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Idempotency conflict. Same Idempotency-Key reused with a different payload (`idempotency_conflict`).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limited. Caller exceeded rate limits (`rate_limited`). Back off with exponential delay.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error. Unexpected server failure (`internal_error`). Retry later or contact support with the `request_id`.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          }
+        },
+        "x-required-scope": "job.write",
+        "x-bikebook-lifecycle-status": "current",
+        "x-bikebook-lifecycle-label": "Current"
+      }
+    },
+    "/public/v1/jobs/{job_id}/job_reports/{job_report_id}/media_uploads": {
+      "post": {
+        "tags": [
+          "Media uploads"
+        ],
+        "summary": "Create job report media upload",
+        "description": "Creates an idempotent direct-to-storage upload session for an image or video that will be attached to this job report. Small files return a single presigned PUT URL. Larger files return multipart instructions and callers request part URLs separately. Requires `job.write` and `Idempotency-Key`.",
+        "operationId": "CreateForJob",
+        "parameters": [
+          {
+            "name": "job_report_id",
+            "in": "path",
+            "description": "Opaque public id of the job report (`jrp_...`).",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "job_id",
+            "in": "path",
+            "description": "Opaque public id of the job (`job_...`).",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Bearer Workshop API key. Example: Bearer bbk_live_...",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "X-Bikebook-Request-Id",
+            "in": "header",
+            "description": "Optional request id supplied by the client for support correlation.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "description": "Required for public write operations to make retries safe.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MediaUploadCreateRequest"
+              },
+              "example": {
+                "file_name": "after-service-photo.jpg",
+                "content_type": "image/jpeg",
+                "total_size_bytes": 2489134,
+                "sha256": "1a2b3c4d5e6f7890examplehash"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created media upload session.",
+            "headers": {
+              "X-Bikebook-Request-Id": {
+                "description": "Echoed or generated request correlation id. Log this with support.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MediaUpload"
+                },
+                "example": {
+                  "object": "media_upload",
+                  "id": "8c1f7c7d-7d46-4e5e-8f3a-6406d0f67891",
+                  "job_report_id": "jr_7d3eexample",
+                  "job_id": "job_01h2example",
+                  "status": "initializing",
+                  "kind": "multipart",
+                  "put_url": null,
+                  "recommended_part_size": 8388608,
+                  "total_parts": 7,
+                  "expires_at": "2026-05-20T11:00:00Z",
+                  "error_code": null,
+                  "error_message": null,
+                  "attachment": null
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request. Request body, query, route, or headers failed validation (`invalid_request`, `idempotency_key_required`).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication required. Missing or invalid API key (`authentication_required`).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Permission denied. API key lacks scope or cannot access this business (`permission_denied`).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Resource not found. Resource does not exist or is outside the caller's allowed scope (`resource_not_found`).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Idempotency conflict. Same Idempotency-Key reused with a different payload (`idempotency_conflict`).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limited. Caller exceeded rate limits (`rate_limited`). Back off with exponential delay.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error. Unexpected server failure (`internal_error`). Retry later or contact support with the `request_id`.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          }
+        },
+        "x-required-scope": "job.write",
+        "x-bikebook-lifecycle-status": "current",
+        "x-bikebook-lifecycle-label": "Current"
+      }
+    },
+    "/public/v1/media_uploads/{upload_id}/part_urls": {
+      "post": {
+        "tags": [
+          "Media uploads"
+        ],
+        "summary": "Create job report media upload part URL",
+        "description": "Requires `job.write` access scope. Write operation: send a unique `Idempotency-Key` header on every request so retries are safe. See the [Retries and idempotency](/guides/retries-and-idempotency) guide. **Guides:** [Authentication](/guides/authentication) · [Errors & pagination](/guides/errors-and-pagination) · [Rate limiting](/guides/rate-limiting) · [Retries & idempotency](/guides/retries-and-idempotency) · [Public ids](/guides/public-ids) · [Webhooks](/guides/webhooks)",
+        "operationId": "PartUrl",
+        "parameters": [
+          {
+            "name": "upload_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Bearer Workshop API key. Example: Bearer bbk_live_...",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "X-Bikebook-Request-Id",
+            "in": "header",
+            "description": "Optional request id supplied by the client for support correlation.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "description": "Required for public write operations to make retries safe.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MediaUploadPartUrlRequest"
+              },
+              "example": {
+                "part_number": 2
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Presigned URL for one upload part.",
+            "headers": {
+              "X-Bikebook-Request-Id": {
+                "description": "Echoed or generated request correlation id. Log this with support.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MediaUploadPartUrl"
+                },
+                "example": {
+                  "part_number": 2,
+                  "put_url": "https://storage.example.com/uploads/media/part-2?signature=example",
+                  "expires_at": "2026-05-20T10:15:00Z"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request. Request body, query, route, or headers failed validation (`invalid_request`, `idempotency_key_required`).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication required. Missing or invalid API key (`authentication_required`).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Permission denied. API key lacks scope or cannot access this business (`permission_denied`).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Resource not found. Resource does not exist or is outside the caller's allowed scope (`resource_not_found`).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Idempotency conflict. Same Idempotency-Key reused with a different payload (`idempotency_conflict`).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limited. Caller exceeded rate limits (`rate_limited`). Back off with exponential delay.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error. Unexpected server failure (`internal_error`). Retry later or contact support with the `request_id`.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          }
+        },
+        "x-required-scope": "job.write",
+        "x-bikebook-lifecycle-status": "current",
+        "x-bikebook-lifecycle-label": "Current"
+      }
+    },
+    "/public/v1/media_uploads/{upload_id}/complete": {
+      "post": {
+        "tags": [
+          "Media uploads"
+        ],
+        "summary": "Complete job report media upload",
+        "description": "Requires `job.write` access scope. Write operation: send a unique `Idempotency-Key` header on every request so retries are safe. See the [Retries and idempotency](/guides/retries-and-idempotency) guide. **Guides:** [Authentication](/guides/authentication) · [Errors & pagination](/guides/errors-and-pagination) · [Rate limiting](/guides/rate-limiting) · [Retries & idempotency](/guides/retries-and-idempotency) · [Public ids](/guides/public-ids) · [Webhooks](/guides/webhooks)",
+        "operationId": "Complete",
+        "parameters": [
+          {
+            "name": "upload_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Bearer Workshop API key. Example: Bearer bbk_live_...",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "X-Bikebook-Request-Id",
+            "in": "header",
+            "description": "Optional request id supplied by the client for support correlation.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "description": "Required for public write operations to make retries safe.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MediaUploadCompleteRequest"
+              },
+              "example": {
+                "parts": [
+                  {
+                    "part_number": 1,
+                    "e_tag": "etag-part-1"
+                  },
+                  {
+                    "part_number": 2,
+                    "e_tag": "etag-part-2"
+                  }
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Media upload accepted for processing.",
+            "headers": {
+              "X-Bikebook-Request-Id": {
+                "description": "Echoed or generated request correlation id. Log this with support.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MediaUpload"
+                },
+                "example": {
+                  "object": "media_upload",
+                  "id": "8c1f7c7d-7d46-4e5e-8f3a-6406d0f67891",
+                  "job_report_id": "jr_7d3eexample",
+                  "job_id": "job_01h2example",
+                  "status": "uploaded",
+                  "kind": "single",
+                  "put_url": null,
+                  "recommended_part_size": null,
+                  "total_parts": null,
+                  "expires_at": null,
+                  "error_code": null,
+                  "error_message": null,
+                  "attachment": null
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request. Request body, query, route, or headers failed validation (`invalid_request`, `idempotency_key_required`).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication required. Missing or invalid API key (`authentication_required`).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Permission denied. API key lacks scope or cannot access this business (`permission_denied`).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Resource not found. Resource does not exist or is outside the caller's allowed scope (`resource_not_found`).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Idempotency conflict. Same Idempotency-Key reused with a different payload (`idempotency_conflict`).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limited. Caller exceeded rate limits (`rate_limited`). Back off with exponential delay.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error. Unexpected server failure (`internal_error`). Retry later or contact support with the `request_id`.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          }
+        },
+        "x-required-scope": "job.write",
+        "x-bikebook-lifecycle-status": "current",
+        "x-bikebook-lifecycle-label": "Current"
+      }
+    },
+    "/public/v1/media_uploads/{upload_id}": {
+      "get": {
+        "tags": [
+          "Media uploads"
+        ],
+        "summary": "Get media upload status",
+        "description": "Requires `job.read` or `job.write` access scope. **Guides:** [Authentication](/guides/authentication) · [Errors & pagination](/guides/errors-and-pagination) · [Rate limiting](/guides/rate-limiting) · [Retries & idempotency](/guides/retries-and-idempotency) · [Public ids](/guides/public-ids) · [Webhooks](/guides/webhooks)",
+        "operationId": "GetMediaUpload",
+        "parameters": [
+          {
+            "name": "upload_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Bearer Workshop API key. Example: Bearer bbk_live_...",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "X-Bikebook-Request-Id",
+            "in": "header",
+            "description": "Optional request id supplied by the client for support correlation.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Media upload status.",
+            "headers": {
+              "X-Bikebook-Request-Id": {
+                "description": "Echoed or generated request correlation id. Log this with support.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MediaUpload"
+                },
+                "example": {
+                  "object": "media_upload",
+                  "id": "8c1f7c7d-7d46-4e5e-8f3a-6406d0f67891",
+                  "job_report_id": "jr_7d3eexample",
+                  "job_id": "job_01h2example",
+                  "status": "attached",
+                  "kind": "single",
+                  "put_url": null,
+                  "recommended_part_size": null,
+                  "total_parts": null,
+                  "expires_at": null,
+                  "error_code": null,
+                  "error_message": null,
+                  "attachment": {
+                    "object": "attachment",
+                    "id": "doc_01h2example",
+                    "name": "after-service-photo.jpg",
+                    "friendly_name": "After service photo.jpg",
+                    "content_type": "image/jpeg",
+                    "file_size_bytes": 2489134
+                  }
+                },
+                "examples": {
+                  "attached": {
+                    "summary": "attached",
+                    "value": {
+                      "object": "media_upload",
+                      "id": "8c1f7c7d-7d46-4e5e-8f3a-6406d0f67891",
+                      "job_report_id": "jr_7d3eexample",
+                      "job_id": "job_01h2example",
+                      "status": "attached",
+                      "kind": "single",
+                      "put_url": null,
+                      "recommended_part_size": null,
+                      "total_parts": null,
+                      "expires_at": null,
+                      "error_code": null,
+                      "error_message": null,
+                      "attachment": {
+                        "object": "attachment",
+                        "id": "doc_01h2example",
+                        "name": "after-service-photo.jpg",
+                        "friendly_name": "After service photo.jpg",
+                        "content_type": "image/jpeg",
+                        "file_size_bytes": 2489134
+                      }
+                    }
+                  },
+                  "failed": {
+                    "summary": "failed",
+                    "value": {
+                      "object": "media_upload",
+                      "id": "8c1f7c7d-7d46-4e5e-8f3a-6406d0f67891",
+                      "job_report_id": "jr_7d3eexample",
+                      "job_id": "job_01h2example",
+                      "status": "failed",
+                      "kind": "single",
+                      "put_url": null,
+                      "recommended_part_size": null,
+                      "total_parts": null,
+                      "expires_at": null,
+                      "error_code": "content_type_mismatch",
+                      "error_message": "Uploaded bytes did not match the declared image or video type.",
+                      "attachment": null
+                    }
+                  },
+                  "aborted": {
+                    "summary": "aborted",
+                    "value": {
+                      "object": "media_upload",
+                      "id": "8c1f7c7d-7d46-4e5e-8f3a-6406d0f67891",
+                      "job_report_id": "jr_7d3eexample",
+                      "job_id": "job_01h2example",
+                      "status": "aborted",
+                      "kind": "single",
+                      "put_url": null,
+                      "recommended_part_size": null,
+                      "total_parts": null,
+                      "expires_at": null,
+                      "error_code": "aborted",
+                      "error_message": "Customer cancelled the upload before completion.",
+                      "attachment": null
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request. Request body, query, route, or headers failed validation (`invalid_request`, `idempotency_key_required`).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication required. Missing or invalid API key (`authentication_required`).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Permission denied. API key lacks scope or cannot access this business (`permission_denied`).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Resource not found. Resource does not exist or is outside the caller's allowed scope (`resource_not_found`).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limited. Caller exceeded rate limits (`rate_limited`). Back off with exponential delay.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error. Unexpected server failure (`internal_error`). Retry later or contact support with the `request_id`.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_request",
+                    "message": "The request body failed validation.",
+                    "parameter": "assets"
+                  },
+                  "request_id": "req_01h2example"
+                }
+              }
+            }
+          }
+        },
+        "x-required-scopes": [
+          "job.read",
+          "job.write"
+        ],
+        "x-bikebook-lifecycle-status": "current",
+        "x-bikebook-lifecycle-label": "Current"
+      }
+    },
+    "/public/v1/media_uploads/{upload_id}/abort": {
+      "post": {
+        "tags": [
+          "Media uploads"
+        ],
+        "summary": "Abort media upload",
+        "description": "Requires `job.write` access scope. Write operation: send a unique `Idempotency-Key` header on every request so retries are safe. See the [Retries and idempotency](/guides/retries-and-idempotency) guide. **Guides:** [Authentication](/guides/authentication) · [Errors & pagination](/guides/errors-and-pagination) · [Rate limiting](/guides/rate-limiting) · [Retries & idempotency](/guides/retries-and-idempotency) · [Public ids](/guides/public-ids) · [Webhooks](/guides/webhooks)",
+        "operationId": "Abort",
+        "parameters": [
+          {
+            "name": "upload_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Bearer Workshop API key. Example: Bearer bbk_live_...",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "X-Bikebook-Request-Id",
+            "in": "header",
+            "description": "Optional request id supplied by the client for support correlation.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "description": "Required for public write operations to make retries safe.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MediaUploadAbortRequest"
+              },
+              "example": {
+                "reason": "Customer cancelled the upload before completion."
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Aborted media upload.",
+            "headers": {
+              "X-Bikebook-Request-Id": {
+                "description": "Echoed or generated request correlation id. Log this with support.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MediaUpload"
+                },
+                "example": {
+                  "object": "media_upload",
+                  "id": "8c1f7c7d-7d46-4e5e-8f3a-6406d0f67891",
+                  "job_report_id": "jr_7d3eexample",
+                  "job_id": "job_01h2example",
+                  "status": "aborted",
+                  "kind": "single",
+                  "put_url": null,
+                  "recommended_part_size": null,
+                  "total_parts": null,
+                  "expires_at": null,
+                  "error_code": "aborted",
+                  "error_message": "Customer cancelled the upload before completion.",
+                  "attachment": null
                 }
               }
             }
@@ -17960,7 +20469,7 @@
           "Stock"
         ],
         "summary": "List stock variations",
-        "description": "Lists enabled stock variations for workshops allowed by the API key. Optional `business_id` narrows results to one workshop. Use `query` for text search across name, SKU, EAN, barcode, and parent item name. Use `sku`, `ean`, or `barcode` for exact identifier lookup.",
+        "description": "Lists enabled stock variations for workshops allowed by the API key. Optional `business_id` narrows results to one workshop. Use `query` for text search across name, SKU, EAN, barcode, external ids, and parent item name. Use `sku`, `ean`, `barcode`, or `external_id` for exact identifier lookup. `external_id` matches the variation external id or the parent stock item external id.",
         "operationId": "ListStockVariation",
         "parameters": [
           {
@@ -17994,6 +20503,13 @@
           },
           {
             "name": "barcode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "external_id",
             "in": "query",
             "schema": {
               "type": "string"
@@ -18066,6 +20582,13 @@
                       "stock_item_id": "stki_01h2example",
                       "name": "Shimano B01S",
                       "sku": "BP-B01S",
+                      "external_id": "gid://shopify/ProductVariant/123456789",
+                      "stock_item": {
+                        "object": "stock_item",
+                        "id": "stki_01h2example",
+                        "name": "Brake pad set",
+                        "external_id": "gid://shopify/Product/987654321"
+                      },
                       "price": 18.5,
                       "currency": "GBP",
                       "remaining_stock": 12,
@@ -18251,6 +20774,13 @@
                   "stock_item_id": "stki_01h2example",
                   "name": "Shimano B01S",
                   "sku": "BP-B01S",
+                  "external_id": "gid://shopify/ProductVariant/123456789",
+                  "stock_item": {
+                    "object": "stock_item",
+                    "id": "stki_01h2example",
+                    "name": "Brake pad set",
+                    "external_id": "gid://shopify/Product/987654321"
+                  },
                   "price": 18.5,
                   "currency": "GBP",
                   "remaining_stock": 12,
@@ -21084,6 +23614,962 @@
         "additionalProperties": false,
         "description": "Public API error details. Codes are stable machine-readable values."
       },
+      "CustomerAddress": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Public location id (`loc_...`) when the address is stored as a location row. Omitted for legacy flat address fields that pre-date location records.",
+            "nullable": true
+          },
+          "is_default": {
+            "type": "boolean",
+            "description": "Whether this is the customer's default address. Exactly one entry should be true when addresses are present."
+          },
+          "name": {
+            "type": "string",
+            "description": "Optional friendly label for the address, for example `Home` or `Work`.",
+            "nullable": true
+          },
+          "line1": {
+            "type": "string",
+            "description": "First address line.",
+            "nullable": true
+          },
+          "line2": {
+            "type": "string",
+            "description": "Second address line.",
+            "nullable": true
+          },
+          "town": {
+            "type": "string",
+            "description": "Town or city.",
+            "nullable": true
+          },
+          "postcode": {
+            "type": "string",
+            "description": "Postal code.",
+            "nullable": true
+          },
+          "country": {
+            "enum": [
+              "ABW",
+              "AFG",
+              "AGO",
+              "AIA",
+              "ALA",
+              "ALB",
+              "AND",
+              "ANT",
+              "ARE",
+              "ARG",
+              "ARM",
+              "ASM",
+              "ATA",
+              "ATF",
+              "ATG",
+              "AUS",
+              "AUT",
+              "AZE",
+              "BDI",
+              "BEL",
+              "BEN",
+              "BES",
+              "BFA",
+              "BGD",
+              "BGR",
+              "BHR",
+              "BHS",
+              "BIH",
+              "BLM",
+              "BLR",
+              "BLZ",
+              "BMU",
+              "BOL",
+              "BRA",
+              "BRB",
+              "BRN",
+              "BTN",
+              "BVT",
+              "BWA",
+              "CAF",
+              "CAN",
+              "CCK",
+              "CHE",
+              "CHL",
+              "CHN",
+              "CIV",
+              "CMR",
+              "COD",
+              "COG",
+              "COK",
+              "COL",
+              "COM",
+              "CPV",
+              "CRI",
+              "CUB",
+              "CUW",
+              "CXR",
+              "CYM",
+              "CYP",
+              "CZE",
+              "DEU",
+              "DJI",
+              "DMA",
+              "DNK",
+              "DOM",
+              "DZA",
+              "ECU",
+              "EGY",
+              "ERI",
+              "ESH",
+              "ESP",
+              "EST",
+              "ETH",
+              "FIN",
+              "FJI",
+              "FLK",
+              "FRA",
+              "FRO",
+              "FSM",
+              "GAB",
+              "GBR",
+              "GEO",
+              "GGY",
+              "GHA",
+              "GIB",
+              "GIN",
+              "GLP",
+              "GMB",
+              "GNB",
+              "GNQ",
+              "GRC",
+              "GRD",
+              "GRL",
+              "GTM",
+              "GUF",
+              "GUM",
+              "GUY",
+              "HKG",
+              "HMD",
+              "HND",
+              "HRV",
+              "HTI",
+              "HUN",
+              "IDN",
+              "IMN",
+              "IND",
+              "IOT",
+              "IRL",
+              "IRN",
+              "IRQ",
+              "ISL",
+              "ISR",
+              "ITA",
+              "JAM",
+              "JEY",
+              "JOR",
+              "JPN",
+              "KAZ",
+              "KEN",
+              "KGZ",
+              "KHM",
+              "KIR",
+              "KNA",
+              "KOR",
+              "KWT",
+              "LAO",
+              "LBN",
+              "LBR",
+              "LBY",
+              "LCA",
+              "LIE",
+              "LKA",
+              "LSO",
+              "LTU",
+              "LUX",
+              "LVA",
+              "MAC",
+              "MAF",
+              "MAR",
+              "MCO",
+              "MDA",
+              "MDG",
+              "MDV",
+              "MEX",
+              "MHL",
+              "MKD",
+              "MLI",
+              "MLT",
+              "MMR",
+              "MNE",
+              "MNG",
+              "MNP",
+              "MOZ",
+              "MRT",
+              "MSR",
+              "MTQ",
+              "MUS",
+              "MWI",
+              "MYS",
+              "MYT",
+              "NAM",
+              "NCL",
+              "NER",
+              "NFK",
+              "NGA",
+              "NIC",
+              "NIU",
+              "NLD",
+              "NOR",
+              "NPL",
+              "NRU",
+              "NZL",
+              "OMN",
+              "PAK",
+              "PAN",
+              "PCN",
+              "PER",
+              "PHL",
+              "PLW",
+              "PNG",
+              "POL",
+              "PRI",
+              "PRK",
+              "PRT",
+              "PRY",
+              "PSE",
+              "PYF",
+              "QAT",
+              "REU",
+              "ROU",
+              "RUS",
+              "RWA",
+              "SAU",
+              "SCG",
+              "SDN",
+              "SEN",
+              "SGP",
+              "SGS",
+              "SHN",
+              "SJM",
+              "SLB",
+              "SLE",
+              "SLV",
+              "SMR",
+              "SOM",
+              "SPM",
+              "SRB",
+              "SSD",
+              "STP",
+              "SUR",
+              "SVK",
+              "SVN",
+              "SWE",
+              "SWZ",
+              "SXM",
+              "SYC",
+              "SYR",
+              "TCA",
+              "TCD",
+              "TGO",
+              "THA",
+              "TJK",
+              "TKL",
+              "TKM",
+              "TLS",
+              "TON",
+              "TTO",
+              "TUN",
+              "TUR",
+              "TUV",
+              "TWN",
+              "TZA",
+              "UGA",
+              "UKR",
+              "UMI",
+              "URY",
+              "USA",
+              "UZB",
+              "VAT",
+              "VCT",
+              "VEN",
+              "VGB",
+              "VIR",
+              "VNM",
+              "VUT",
+              "WLF",
+              "WSM",
+              "XKX",
+              "YEM",
+              "ZAF",
+              "ZMB",
+              "ZWE"
+            ],
+            "type": "string",
+            "description": "ISO 3166-1 alpha-3 country code in uppercase when known, for example `GBR`, `USA`, or `DEU`.",
+            "nullable": true
+          },
+          "latitude": {
+            "type": "number",
+            "description": "Latitude for the address when known.",
+            "format": "double",
+            "nullable": true
+          },
+          "longitude": {
+            "type": "number",
+            "description": "Longitude for the address when known.",
+            "format": "double",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Public postal address stored on a customer. Customers may have multiple addresses; one is marked as default."
+      },
+      "CustomerAddressUpdateRequest": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "maxLength": 120,
+            "type": "string",
+            "description": "Optional friendly label, for example `Home` or `Work`.",
+            "nullable": true
+          },
+          "line1": {
+            "maxLength": 200,
+            "type": "string",
+            "description": "First address line.",
+            "nullable": true
+          },
+          "line2": {
+            "maxLength": 200,
+            "type": "string",
+            "description": "Second address line.",
+            "nullable": true
+          },
+          "town": {
+            "maxLength": 120,
+            "type": "string",
+            "description": "Town or city.",
+            "nullable": true
+          },
+          "postcode": {
+            "maxLength": 40,
+            "type": "string",
+            "description": "Postal code.",
+            "nullable": true
+          },
+          "country": {
+            "maxLength": 3,
+            "enum": [
+              "ABW",
+              "AFG",
+              "AGO",
+              "AIA",
+              "ALA",
+              "ALB",
+              "AND",
+              "ANT",
+              "ARE",
+              "ARG",
+              "ARM",
+              "ASM",
+              "ATA",
+              "ATF",
+              "ATG",
+              "AUS",
+              "AUT",
+              "AZE",
+              "BDI",
+              "BEL",
+              "BEN",
+              "BES",
+              "BFA",
+              "BGD",
+              "BGR",
+              "BHR",
+              "BHS",
+              "BIH",
+              "BLM",
+              "BLR",
+              "BLZ",
+              "BMU",
+              "BOL",
+              "BRA",
+              "BRB",
+              "BRN",
+              "BTN",
+              "BVT",
+              "BWA",
+              "CAF",
+              "CAN",
+              "CCK",
+              "CHE",
+              "CHL",
+              "CHN",
+              "CIV",
+              "CMR",
+              "COD",
+              "COG",
+              "COK",
+              "COL",
+              "COM",
+              "CPV",
+              "CRI",
+              "CUB",
+              "CUW",
+              "CXR",
+              "CYM",
+              "CYP",
+              "CZE",
+              "DEU",
+              "DJI",
+              "DMA",
+              "DNK",
+              "DOM",
+              "DZA",
+              "ECU",
+              "EGY",
+              "ERI",
+              "ESH",
+              "ESP",
+              "EST",
+              "ETH",
+              "FIN",
+              "FJI",
+              "FLK",
+              "FRA",
+              "FRO",
+              "FSM",
+              "GAB",
+              "GBR",
+              "GEO",
+              "GGY",
+              "GHA",
+              "GIB",
+              "GIN",
+              "GLP",
+              "GMB",
+              "GNB",
+              "GNQ",
+              "GRC",
+              "GRD",
+              "GRL",
+              "GTM",
+              "GUF",
+              "GUM",
+              "GUY",
+              "HKG",
+              "HMD",
+              "HND",
+              "HRV",
+              "HTI",
+              "HUN",
+              "IDN",
+              "IMN",
+              "IND",
+              "IOT",
+              "IRL",
+              "IRN",
+              "IRQ",
+              "ISL",
+              "ISR",
+              "ITA",
+              "JAM",
+              "JEY",
+              "JOR",
+              "JPN",
+              "KAZ",
+              "KEN",
+              "KGZ",
+              "KHM",
+              "KIR",
+              "KNA",
+              "KOR",
+              "KWT",
+              "LAO",
+              "LBN",
+              "LBR",
+              "LBY",
+              "LCA",
+              "LIE",
+              "LKA",
+              "LSO",
+              "LTU",
+              "LUX",
+              "LVA",
+              "MAC",
+              "MAF",
+              "MAR",
+              "MCO",
+              "MDA",
+              "MDG",
+              "MDV",
+              "MEX",
+              "MHL",
+              "MKD",
+              "MLI",
+              "MLT",
+              "MMR",
+              "MNE",
+              "MNG",
+              "MNP",
+              "MOZ",
+              "MRT",
+              "MSR",
+              "MTQ",
+              "MUS",
+              "MWI",
+              "MYS",
+              "MYT",
+              "NAM",
+              "NCL",
+              "NER",
+              "NFK",
+              "NGA",
+              "NIC",
+              "NIU",
+              "NLD",
+              "NOR",
+              "NPL",
+              "NRU",
+              "NZL",
+              "OMN",
+              "PAK",
+              "PAN",
+              "PCN",
+              "PER",
+              "PHL",
+              "PLW",
+              "PNG",
+              "POL",
+              "PRI",
+              "PRK",
+              "PRT",
+              "PRY",
+              "PSE",
+              "PYF",
+              "QAT",
+              "REU",
+              "ROU",
+              "RUS",
+              "RWA",
+              "SAU",
+              "SCG",
+              "SDN",
+              "SEN",
+              "SGP",
+              "SGS",
+              "SHN",
+              "SJM",
+              "SLB",
+              "SLE",
+              "SLV",
+              "SMR",
+              "SOM",
+              "SPM",
+              "SRB",
+              "SSD",
+              "STP",
+              "SUR",
+              "SVK",
+              "SVN",
+              "SWE",
+              "SWZ",
+              "SXM",
+              "SYC",
+              "SYR",
+              "TCA",
+              "TCD",
+              "TGO",
+              "THA",
+              "TJK",
+              "TKL",
+              "TKM",
+              "TLS",
+              "TON",
+              "TTO",
+              "TUN",
+              "TUR",
+              "TUV",
+              "TWN",
+              "TZA",
+              "UGA",
+              "UKR",
+              "UMI",
+              "URY",
+              "USA",
+              "UZB",
+              "VAT",
+              "VCT",
+              "VEN",
+              "VGB",
+              "VIR",
+              "VNM",
+              "VUT",
+              "WLF",
+              "WSM",
+              "XKX",
+              "YEM",
+              "ZAF",
+              "ZMB",
+              "ZWE"
+            ],
+            "type": "string",
+            "description": "ISO 3166-1 alpha-3 country code in uppercase, for example `GBR`, `USA`, or `DEU`.",
+            "nullable": true
+          },
+          "latitude": {
+            "type": "number",
+            "description": "Latitude when the caller has geocoded the address.",
+            "format": "double",
+            "nullable": true
+          },
+          "longitude": {
+            "type": "number",
+            "description": "Longitude when the caller has geocoded the address.",
+            "format": "double",
+            "nullable": true
+          },
+          "is_default": {
+            "type": "boolean",
+            "description": "When true, marks this address as the customer's default and clears the default flag on other stored addresses.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Request body for updating a stored customer address. Omitted properties are left unchanged."
+      },
+      "CustomerAddressDeleted": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Deleted public address id (`loc_...`).",
+            "nullable": true
+          },
+          "deleted": {
+            "type": "boolean",
+            "description": "Whether the address was deleted."
+          }
+        },
+        "additionalProperties": false,
+        "description": "Response returned after deleting a stored customer address."
+      },
+      "CustomerAddressCreateRequest": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "maxLength": 120,
+            "type": "string",
+            "description": "Optional friendly label, for example `Home` or `Work`.",
+            "nullable": true
+          },
+          "line1": {
+            "maxLength": 200,
+            "type": "string",
+            "description": "First address line.",
+            "nullable": true
+          },
+          "line2": {
+            "maxLength": 200,
+            "type": "string",
+            "description": "Second address line.",
+            "nullable": true
+          },
+          "town": {
+            "maxLength": 120,
+            "type": "string",
+            "description": "Town or city.",
+            "nullable": true
+          },
+          "postcode": {
+            "maxLength": 40,
+            "type": "string",
+            "description": "Postal code.",
+            "nullable": true
+          },
+          "country": {
+            "maxLength": 3,
+            "enum": [
+              "ABW",
+              "AFG",
+              "AGO",
+              "AIA",
+              "ALA",
+              "ALB",
+              "AND",
+              "ANT",
+              "ARE",
+              "ARG",
+              "ARM",
+              "ASM",
+              "ATA",
+              "ATF",
+              "ATG",
+              "AUS",
+              "AUT",
+              "AZE",
+              "BDI",
+              "BEL",
+              "BEN",
+              "BES",
+              "BFA",
+              "BGD",
+              "BGR",
+              "BHR",
+              "BHS",
+              "BIH",
+              "BLM",
+              "BLR",
+              "BLZ",
+              "BMU",
+              "BOL",
+              "BRA",
+              "BRB",
+              "BRN",
+              "BTN",
+              "BVT",
+              "BWA",
+              "CAF",
+              "CAN",
+              "CCK",
+              "CHE",
+              "CHL",
+              "CHN",
+              "CIV",
+              "CMR",
+              "COD",
+              "COG",
+              "COK",
+              "COL",
+              "COM",
+              "CPV",
+              "CRI",
+              "CUB",
+              "CUW",
+              "CXR",
+              "CYM",
+              "CYP",
+              "CZE",
+              "DEU",
+              "DJI",
+              "DMA",
+              "DNK",
+              "DOM",
+              "DZA",
+              "ECU",
+              "EGY",
+              "ERI",
+              "ESH",
+              "ESP",
+              "EST",
+              "ETH",
+              "FIN",
+              "FJI",
+              "FLK",
+              "FRA",
+              "FRO",
+              "FSM",
+              "GAB",
+              "GBR",
+              "GEO",
+              "GGY",
+              "GHA",
+              "GIB",
+              "GIN",
+              "GLP",
+              "GMB",
+              "GNB",
+              "GNQ",
+              "GRC",
+              "GRD",
+              "GRL",
+              "GTM",
+              "GUF",
+              "GUM",
+              "GUY",
+              "HKG",
+              "HMD",
+              "HND",
+              "HRV",
+              "HTI",
+              "HUN",
+              "IDN",
+              "IMN",
+              "IND",
+              "IOT",
+              "IRL",
+              "IRN",
+              "IRQ",
+              "ISL",
+              "ISR",
+              "ITA",
+              "JAM",
+              "JEY",
+              "JOR",
+              "JPN",
+              "KAZ",
+              "KEN",
+              "KGZ",
+              "KHM",
+              "KIR",
+              "KNA",
+              "KOR",
+              "KWT",
+              "LAO",
+              "LBN",
+              "LBR",
+              "LBY",
+              "LCA",
+              "LIE",
+              "LKA",
+              "LSO",
+              "LTU",
+              "LUX",
+              "LVA",
+              "MAC",
+              "MAF",
+              "MAR",
+              "MCO",
+              "MDA",
+              "MDG",
+              "MDV",
+              "MEX",
+              "MHL",
+              "MKD",
+              "MLI",
+              "MLT",
+              "MMR",
+              "MNE",
+              "MNG",
+              "MNP",
+              "MOZ",
+              "MRT",
+              "MSR",
+              "MTQ",
+              "MUS",
+              "MWI",
+              "MYS",
+              "MYT",
+              "NAM",
+              "NCL",
+              "NER",
+              "NFK",
+              "NGA",
+              "NIC",
+              "NIU",
+              "NLD",
+              "NOR",
+              "NPL",
+              "NRU",
+              "NZL",
+              "OMN",
+              "PAK",
+              "PAN",
+              "PCN",
+              "PER",
+              "PHL",
+              "PLW",
+              "PNG",
+              "POL",
+              "PRI",
+              "PRK",
+              "PRT",
+              "PRY",
+              "PSE",
+              "PYF",
+              "QAT",
+              "REU",
+              "ROU",
+              "RUS",
+              "RWA",
+              "SAU",
+              "SCG",
+              "SDN",
+              "SEN",
+              "SGP",
+              "SGS",
+              "SHN",
+              "SJM",
+              "SLB",
+              "SLE",
+              "SLV",
+              "SMR",
+              "SOM",
+              "SPM",
+              "SRB",
+              "SSD",
+              "STP",
+              "SUR",
+              "SVK",
+              "SVN",
+              "SWE",
+              "SWZ",
+              "SXM",
+              "SYC",
+              "SYR",
+              "TCA",
+              "TCD",
+              "TGO",
+              "THA",
+              "TJK",
+              "TKL",
+              "TKM",
+              "TLS",
+              "TON",
+              "TTO",
+              "TUN",
+              "TUR",
+              "TUV",
+              "TWN",
+              "TZA",
+              "UGA",
+              "UKR",
+              "UMI",
+              "URY",
+              "USA",
+              "UZB",
+              "VAT",
+              "VCT",
+              "VEN",
+              "VGB",
+              "VIR",
+              "VNM",
+              "VUT",
+              "WLF",
+              "WSM",
+              "XKX",
+              "YEM",
+              "ZAF",
+              "ZMB",
+              "ZWE"
+            ],
+            "type": "string",
+            "description": "ISO 3166-1 alpha-3 country code in uppercase, for example `GBR`, `USA`, or `DEU`.",
+            "nullable": true
+          },
+          "latitude": {
+            "type": "number",
+            "description": "Latitude when the caller has geocoded the address.",
+            "format": "double",
+            "nullable": true
+          },
+          "longitude": {
+            "type": "number",
+            "description": "Longitude when the caller has geocoded the address.",
+            "format": "double",
+            "nullable": true
+          },
+          "is_default": {
+            "type": "boolean",
+            "description": "When true, marks this address as the customer's default. Defaults to true when the customer has no other stored addresses.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Request body for adding a stored address to a customer."
+      },
       "ListResponseOfAsset": {
         "type": "object",
         "properties": {
@@ -21504,6 +24990,11 @@
             "description": "Barcode value, when configured.",
             "nullable": true
           },
+          "external_id": {
+            "type": "string",
+            "description": "External identifier from the linked POS or e-commerce integration on this variation, when configured. For Shopify this is typically the product variant GID, for example `gid://shopify/ProductVariant/123456789`. The parent stock item external id is returned on nested `stock_item.external_id`.",
+            "nullable": true
+          },
           "manufacturer_sku": {
             "type": "string",
             "description": "Manufacturer SKU, when configured.",
@@ -21584,6 +25075,11 @@
           "category": {
             "type": "string",
             "description": "Stock category name, when configured.",
+            "nullable": true
+          },
+          "external_id": {
+            "type": "string",
+            "description": "External identifier from the linked POS or e-commerce integration on the parent stock item, when configured. For Shopify this is typically the product GID, for example `gid://shopify/Product/987654321`.",
             "nullable": true
           },
           "image_url": {
@@ -22174,6 +25670,16 @@
             "type": "boolean",
             "description": "True when the business has chosen to show services publicly."
           },
+          "integration_location_id": {
+            "type": "string",
+            "description": "Default POS or e-commerce integration location id when configured. For Shopify this is typically a location GID, for example `gid://shopify/Location/12345`.",
+            "nullable": true
+          },
+          "integration_location_name": {
+            "type": "string",
+            "description": "Display name for `integration_location_id`, when configured.",
+            "nullable": true
+          },
           "id": {
             "type": "string",
             "description": "Opaque resource-prefixed public identifier, such as job_... or cus_.... Internal database ids must never be assigned here.",
@@ -22250,7 +25756,9 @@
           },
           "currency": {
             "enum": [
-              "GBP"
+              "GBP",
+              "MUR",
+              "SGD"
             ],
             "type": "string",
             "description": "ISO 4217 currency code for the service price. Currently `GBP`.",
@@ -23200,6 +26708,11 @@
             "description": "Public business id that owns this customer.",
             "nullable": true
           },
+          "external_id": {
+            "type": "string",
+            "description": "Linked POS customer id when configured, for example a Shopify customer GID.",
+            "nullable": true
+          },
           "first_name": {
             "type": "string",
             "description": "Customer first name.",
@@ -23520,6 +27033,14 @@
             "description": "Assets associated with the customer that may be serviced in jobs.",
             "nullable": true
           },
+          "addresses": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CustomerAddress"
+            },
+            "description": "Stored customer addresses ordered with the default address first. Empty when no address has been set.",
+            "nullable": true
+          },
           "id": {
             "type": "string",
             "description": "Opaque resource-prefixed public identifier, such as job_... or cus_.... Internal database ids must never be assigned here.",
@@ -23711,6 +27232,16 @@
           "default_store_name": {
             "type": "string",
             "description": "Default store, location, register, or account display name where available.",
+            "nullable": true
+          },
+          "integration_location_id": {
+            "type": "string",
+            "description": "Default POS or e-commerce integration location id when configured. For Shopify this is typically a location GID, for example `gid://shopify/Location/12345`.",
+            "nullable": true
+          },
+          "integration_location_name": {
+            "type": "string",
+            "description": "Display name for `integration_location_id`, when configured.",
             "nullable": true
           },
           "supports_invoice_sync": {
@@ -24223,6 +27754,11 @@
             "description": "Public customer asset id when the row is tied to a serviced asset, for example asset_....",
             "nullable": true
           },
+          "external_id": {
+            "type": "string",
+            "description": "Linked POS stock variation id for part line items, when configured.",
+            "nullable": true
+          },
           "order": {
             "type": "integer",
             "description": "Display order of the item on the invoice.",
@@ -24462,6 +27998,26 @@
           "customer_id": {
             "type": "string",
             "description": "Public customer id for the billed party, for example cus_....",
+            "nullable": true
+          },
+          "customer_external_id": {
+            "type": "string",
+            "description": "Linked POS customer id when configured, for example a Shopify customer GID.",
+            "nullable": true
+          },
+          "external_system_id": {
+            "type": "string",
+            "description": "Linked POS order or draft order id from the invoice sync link, when known.",
+            "nullable": true
+          },
+          "integration_location_id": {
+            "type": "string",
+            "description": "Default POS or e-commerce integration location id for the owning workshop, when configured. For Shopify this is typically a location GID, for example `gid://shopify/Location/12345`.",
+            "nullable": true
+          },
+          "integration_location_name": {
+            "type": "string",
+            "description": "Display name for `integration_location_id`, when configured.",
             "nullable": true
           },
           "invoice_number": {
@@ -24868,6 +28424,11 @@
             "description": "Public customer id for the report's customer, for example cus_....",
             "nullable": true
           },
+          "customer_external_id": {
+            "type": "string",
+            "description": "Linked POS customer id when configured, for example a Shopify customer GID.",
+            "nullable": true
+          },
           "asset_id": {
             "type": "string",
             "description": "Public asset id for the reported asset, for example asset_....",
@@ -25070,6 +28631,11 @@
             "description": "Part or stock item display name.",
             "nullable": true
           },
+          "external_id": {
+            "type": "string",
+            "description": "Linked POS stock variation id when configured, for example a Shopify product variant GID.",
+            "nullable": true
+          },
           "quantity": {
             "type": "number",
             "description": "Quantity requested or used.",
@@ -25219,6 +28785,16 @@
           "customer_id": {
             "type": "string",
             "description": "Public customer id for the job, for example cus_....",
+            "nullable": true
+          },
+          "customer_external_id": {
+            "type": "string",
+            "description": "Linked POS customer id when configured, for example a Shopify customer GID.",
+            "nullable": true
+          },
+          "external_system_id": {
+            "type": "string",
+            "description": "Linked POS order or draft order id from the job invoice sync link, when known.",
             "nullable": true
           },
           "job_number": {
@@ -25395,6 +28971,16 @@
           "integration_store_name": {
             "type": "string",
             "description": "Display name for `integration_store_id`, when applicable.",
+            "nullable": true
+          },
+          "integration_location_id": {
+            "type": "string",
+            "description": "Default POS or e-commerce integration location id for the owning workshop, when configured. For Shopify this is typically a location GID, for example `gid://shopify/Location/12345`.",
+            "nullable": true
+          },
+          "integration_location_name": {
+            "type": "string",
+            "description": "Display name for `integration_location_id`, when configured.",
             "nullable": true
           },
           "schedule": {
@@ -27055,6 +30641,199 @@
         "additionalProperties": false,
         "description": "Request body for replacing the services on a work line."
       },
+      "MediaUploadCreateRequest": {
+        "type": "object",
+        "properties": {
+          "file_name": {
+            "type": "string",
+            "description": "Original file name reported by the API consumer.",
+            "nullable": true
+          },
+          "content_type": {
+            "type": "string",
+            "description": "Declared MIME type, for example image/jpeg, video/mp4, or video/quicktime.",
+            "nullable": true
+          },
+          "total_size_bytes": {
+            "type": "integer",
+            "description": "Declared total file size in bytes.",
+            "format": "int64"
+          },
+          "sha256": {
+            "type": "string",
+            "description": "Optional SHA-256 hash of the original file.",
+            "nullable": true
+          },
+          "poster_upload_id": {
+            "type": "string",
+            "description": "Optional public upload id for a video poster image uploaded as a separate media upload.",
+            "format": "uuid",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Request to create a reliable public media upload session for a job report attachment."
+      },
+      "MediaUpload": {
+        "type": "object",
+        "properties": {
+          "object": {
+            "enum": [
+              "media_upload"
+            ],
+            "type": "string",
+            "description": "Resource object type. Always media_upload.",
+            "nullable": true,
+            "example": "media_upload"
+          },
+          "job_report_id": {
+            "type": "string",
+            "description": "Public job report id that will receive the attachment.",
+            "nullable": true
+          },
+          "job_id": {
+            "type": "string",
+            "description": "Public job id for route/context validation.",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "description": "Current upload status in snake_case.",
+            "nullable": true
+          },
+          "kind": {
+            "type": "string",
+            "description": "Upload mode: single or multipart.",
+            "nullable": true
+          },
+          "put_url": {
+            "type": "string",
+            "description": "Presigned PUT URL for single uploads. Null for multipart sessions.",
+            "nullable": true
+          },
+          "recommended_part_size": {
+            "type": "integer",
+            "description": "Recommended part size for multipart uploads. Null for single uploads.",
+            "format": "int64",
+            "nullable": true
+          },
+          "total_parts": {
+            "type": "integer",
+            "description": "Total expected part count for multipart uploads. Null for single uploads.",
+            "format": "int32",
+            "nullable": true
+          },
+          "expires_at": {
+            "type": "string",
+            "description": "UTC expiry instant for the current presigned URL or upload instructions.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "error_code": {
+            "type": "string",
+            "description": "Machine-readable failure code when the upload failed or was aborted.",
+            "nullable": true
+          },
+          "error_message": {
+            "type": "string",
+            "description": "Human-readable failure message when available.",
+            "nullable": true
+          },
+          "attachment": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/JobReportAttachment"
+              }
+            ],
+            "nullable": true
+          },
+          "id": {
+            "type": "string",
+            "description": "Opaque resource-prefixed public identifier, such as job_... or cus_.... Internal database ids must never be assigned here.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Public media upload session for direct-to-storage job report attachment uploads."
+      },
+      "MediaUploadPartUrlRequest": {
+        "type": "object",
+        "properties": {
+          "part_number": {
+            "type": "integer",
+            "description": "One-based part number to upload.",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Request for a short-lived presigned URL for one multipart upload part."
+      },
+      "MediaUploadPartUrl": {
+        "type": "object",
+        "properties": {
+          "part_number": {
+            "type": "integer",
+            "description": "One-based part number this URL accepts.",
+            "format": "int32"
+          },
+          "put_url": {
+            "type": "string",
+            "description": "Presigned URL the client should PUT the part bytes to.",
+            "nullable": true
+          },
+          "expires_at": {
+            "type": "string",
+            "description": "UTC expiry instant for the presigned URL.",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Short-lived upload URL for one direct-to-storage upload part."
+      },
+      "MediaUploadCompleteRequest": {
+        "type": "object",
+        "properties": {
+          "parts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CompletedUploadPart"
+            },
+            "description": "Completed multipart parts. Omit or send an empty list for single-PUT uploads.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Request to complete a direct-to-storage upload after all bytes have been uploaded."
+      },
+      "CompletedUploadPart": {
+        "type": "object",
+        "properties": {
+          "part_number": {
+            "type": "integer",
+            "description": "One-based part number that was uploaded to the presigned part URL.",
+            "format": "int32"
+          },
+          "e_tag": {
+            "type": "string",
+            "description": "ETag returned by object storage after the part upload.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Public representation of a completed multipart upload part."
+      },
+      "MediaUploadAbortRequest": {
+        "type": "object",
+        "properties": {
+          "reason": {
+            "type": "string",
+            "description": "Optional reason stored with the aborted upload for diagnostics.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Request to abort an in-flight media upload session."
+      },
       "InvoicePaymentCreateRequest": {
         "required": [
           "payment_method"
@@ -28001,6 +31780,9 @@
       "name": "Activities"
     },
     {
+      "name": "Addresses"
+    },
+    {
       "name": "Assets",
       "description": "Customer-owned bikes booked on jobs. Public assets are bikes today; use bike_type for category."
     },
@@ -28038,6 +31820,10 @@
     {
       "name": "Jobs",
       "description": "Jobs and part authorisation decisions on a job."
+    },
+    {
+      "name": "Media uploads",
+      "description": "Direct-to-storage upload sessions for job report images and videos."
     },
     {
       "name": "Payments",

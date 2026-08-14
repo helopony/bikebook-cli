@@ -150,6 +150,9 @@ func executeReadRequest(ctx context.Context, client *api.Client, spec readComman
 func executeReadPage(ctx context.Context, client *api.Client, spec readCommandSpec, pathArgs []string, opts rootOptions, apiKey string, query map[string]string) (any, error) {
 	resp, err := spec.ExecutePage(ctx, client, pathArgs, []api.RequestEditorFn{readRequestEditor(opts, apiKey, query)})
 	if err != nil {
+		if cliErr, ok := err.(*CLIError); ok {
+			return nil, cliErr
+		}
 		return nil, NewLocalError(ExitNetwork, "cli_network_error", err.Error(), "", "", "")
 	}
 	defer resp.Body.Close()
@@ -330,6 +333,9 @@ func readCommandSpecs() []readCommandSpec {
 		{Group: "customers", Use: "get", Short: "Get a customer", PathArgs: []string{"customer_id"}, ExecutePage: func(ctx context.Context, c *api.Client, args []string, editors []api.RequestEditorFn) (*http.Response, error) {
 			return c.Customer(ctx, args[0], nil, editors...)
 		}},
+		{Group: "customers", Use: "get-address", Short: "Get a customer address", PathArgs: []string{"customer_id", "address_id"}, ExecutePage: func(ctx context.Context, c *api.Client, args []string, editors []api.RequestEditorFn) (*http.Response, error) {
+			return c.GetCustomerAddress(ctx, args[0], args[1], nil, editors...)
+		}},
 		{Group: "invoice-items", Use: "get", Short: "Get an invoice item", PathArgs: []string{"invoice_item_id"}, ExecutePage: func(ctx context.Context, c *api.Client, args []string, editors []api.RequestEditorFn) (*http.Response, error) {
 			return c.GetInvoiceItem(ctx, args[0], nil, editors...)
 		}},
@@ -363,6 +369,13 @@ func readCommandSpecs() []readCommandSpec {
 		{Group: "job-reports", Use: "get-for-job", Short: "Get a report for a job", PathArgs: []string{"job_id", "job_report_id"}, ExecutePage: func(ctx context.Context, c *api.Client, args []string, editors []api.RequestEditorFn) (*http.Response, error) {
 			return c.GetJobReportForJob(ctx, args[0], args[1], nil, editors...)
 		}},
+		{Group: "media-uploads", Use: "get", Short: "Get media upload status", PathArgs: []string{"upload_id"}, ExecutePage: func(ctx context.Context, c *api.Client, args []string, editors []api.RequestEditorFn) (*http.Response, error) {
+			uploadID, err := parseUUIDPathArg(args[0], "upload_id")
+			if err != nil {
+				return nil, err
+			}
+			return c.GetMediaUpload(ctx, uploadID, nil, editors...)
+		}},
 		{Group: "jobs", Use: "list", Short: "List jobs", QueryFlags: []string{"business_id", "job_number", "customer_id", "customer_email", "accepted_status", "status_id", "created_from", "created_to", "sort", "limit", "cursor"}, Pageable: true, ExecutePage: func(ctx context.Context, c *api.Client, args []string, editors []api.RequestEditorFn) (*http.Response, error) {
 			return c.Jobs(ctx, nil, editors...)
 		}},
@@ -384,7 +397,7 @@ func readCommandSpecs() []readCommandSpec {
 		{Group: "services", Use: "get", Short: "Get a service", PathArgs: []string{"service_id"}, ExecutePage: func(ctx context.Context, c *api.Client, args []string, editors []api.RequestEditorFn) (*http.Response, error) {
 			return c.GetService(ctx, args[0], nil, editors...)
 		}},
-		{Group: "stock", Use: "list", Short: "List stock variations", QueryFlags: []string{"business_id", "query", "sku", "ean", "barcode", "sort", "limit", "cursor"}, Pageable: true, ExecutePage: func(ctx context.Context, c *api.Client, args []string, editors []api.RequestEditorFn) (*http.Response, error) {
+		{Group: "stock", Use: "list", Short: "List stock variations", QueryFlags: []string{"business_id", "query", "sku", "ean", "barcode", "external_id", "sort", "limit", "cursor"}, Pageable: true, ExecutePage: func(ctx context.Context, c *api.Client, args []string, editors []api.RequestEditorFn) (*http.Response, error) {
 			return c.ListStockVariation(ctx, nil, editors...)
 		}},
 		{Group: "stock", Use: "get", Short: "Get a stock variation", PathArgs: []string{"stock_variation_id"}, ExecutePage: func(ctx context.Context, c *api.Client, args []string, editors []api.RequestEditorFn) (*http.Response, error) {
@@ -426,6 +439,8 @@ func readGroupShort(group string) string {
 		return "Read invoice item resources"
 	case "job-reports":
 		return "Read job report resources"
+	case "media-uploads":
+		return "Read media upload resources"
 	case "team-members":
 		return "Read team member resources"
 	case "webhook-deliveries":

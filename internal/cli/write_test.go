@@ -15,8 +15,8 @@ import (
 
 func TestWriteCommandsAllEndpointsHaveHappyPath(t *testing.T) {
 	withTempHome(t)
-	if got := len(writeCommandSpecs()); got != 45 {
-		t.Fatalf("write command count = %d, want 45", got)
+	if got := len(writeCommandSpecs()); got != 53 {
+		t.Fatalf("write command count = %d, want 53", got)
 	}
 
 	for _, spec := range writeCommandSpecs() {
@@ -171,6 +171,24 @@ func TestDestructiveWriteRequiresYes(t *testing.T) {
 	}
 	if !strings.Contains(stderr.String(), "cli_confirmation_required") {
 		t.Fatalf("stderr missing confirmation error: %s", stderr.String())
+	}
+}
+
+func TestMediaUploadWriteRejectsInvalidUUID(t *testing.T) {
+	withTempHome(t)
+	var stdout, stderr bytes.Buffer
+	code := ExecuteWithArgs([]string{
+		"--api-key", "bbk_live_secret",
+		"--api-base", "https://api.example.test",
+		"--json",
+		"media-uploads", "complete", "not-a-uuid", "--field", "parts=[]",
+	}, &stdout, &stderr)
+
+	if code != ExitUsage {
+		t.Fatalf("exit = %d, stderr = %s", code, stderr.String())
+	}
+	if !strings.Contains(stderr.String(), `"parameter": "upload_id"`) {
+		t.Fatalf("stderr missing upload_id validation error: %s", stderr.String())
 	}
 }
 

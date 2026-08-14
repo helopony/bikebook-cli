@@ -14,6 +14,7 @@ import (
 	"strings"
 
 	"github.com/oapi-codegen/runtime"
+	openapi_types "github.com/oapi-codegen/runtime/types"
 )
 
 // RequestEditorFn  is the function signature for the RequestEditor callback function
@@ -198,6 +199,22 @@ type ClientInterface interface {
 
 	UpdateCustomer(ctx context.Context, customerId string, params *UpdateCustomerParams, body UpdateCustomerJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// CreateCustomerAddressWithBody request with any body
+	CreateCustomerAddressWithBody(ctx context.Context, customerId string, params *CreateCustomerAddressParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	CreateCustomerAddress(ctx context.Context, customerId string, params *CreateCustomerAddressParams, body CreateCustomerAddressJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// DeleteCustomerAddress request
+	DeleteCustomerAddress(ctx context.Context, customerId string, addressId string, params *DeleteCustomerAddressParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetCustomerAddress request
+	GetCustomerAddress(ctx context.Context, customerId string, addressId string, params *GetCustomerAddressParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// UpdateCustomerAddressWithBody request with any body
+	UpdateCustomerAddressWithBody(ctx context.Context, customerId string, addressId string, params *UpdateCustomerAddressParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	UpdateCustomerAddress(ctx context.Context, customerId string, addressId string, params *UpdateCustomerAddressParams, body UpdateCustomerAddressJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
 	// ListForCustomer request
 	ListForCustomer(ctx context.Context, customerId string, params *ListForCustomerParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
@@ -301,6 +318,11 @@ type ClientInterface interface {
 	// GetJobReport request
 	GetJobReport(ctx context.Context, jobReportId string, params *GetJobReportParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// CreateMediaUploadWithBody request with any body
+	CreateMediaUploadWithBody(ctx context.Context, jobReportId string, params *CreateMediaUploadParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	CreateMediaUpload(ctx context.Context, jobReportId string, params *CreateMediaUploadParams, body CreateMediaUploadJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
 	// Jobs request
 	Jobs(ctx context.Context, params *JobsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
@@ -333,6 +355,11 @@ type ClientInterface interface {
 
 	// GetJobReportForJob request
 	GetJobReportForJob(ctx context.Context, jobId string, jobReportId string, params *GetJobReportForJobParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// CreateForJobWithBody request with any body
+	CreateForJobWithBody(ctx context.Context, jobId string, jobReportId string, params *CreateForJobParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	CreateForJob(ctx context.Context, jobId string, jobReportId string, params *CreateForJobParams, body CreateForJobJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// PartAuthorisations request
 	PartAuthorisations(ctx context.Context, jobId string, params *PartAuthorisationsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -371,6 +398,24 @@ type ClientInterface interface {
 	ChangeWorkLineStatusWithBody(ctx context.Context, jobId string, workLineId string, params *ChangeWorkLineStatusParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	ChangeWorkLineStatus(ctx context.Context, jobId string, workLineId string, params *ChangeWorkLineStatusParams, body ChangeWorkLineStatusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetMediaUpload request
+	GetMediaUpload(ctx context.Context, uploadId openapi_types.UUID, params *GetMediaUploadParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// AbortWithBody request with any body
+	AbortWithBody(ctx context.Context, uploadId openapi_types.UUID, params *AbortParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	Abort(ctx context.Context, uploadId openapi_types.UUID, params *AbortParams, body AbortJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// CompleteWithBody request with any body
+	CompleteWithBody(ctx context.Context, uploadId openapi_types.UUID, params *CompleteParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	Complete(ctx context.Context, uploadId openapi_types.UUID, params *CompleteParams, body CompleteJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// PartUrlWithBody request with any body
+	PartUrlWithBody(ctx context.Context, uploadId openapi_types.UUID, params *PartUrlParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	PartUrl(ctx context.Context, uploadId openapi_types.UUID, params *PartUrlParams, body PartUrlJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ListPayment request
 	ListPayment(ctx context.Context, params *ListPaymentParams, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -916,6 +961,78 @@ func (c *Client) UpdateCustomer(ctx context.Context, customerId string, params *
 	return c.Client.Do(req)
 }
 
+func (c *Client) CreateCustomerAddressWithBody(ctx context.Context, customerId string, params *CreateCustomerAddressParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateCustomerAddressRequestWithBody(c.Server, customerId, params, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateCustomerAddress(ctx context.Context, customerId string, params *CreateCustomerAddressParams, body CreateCustomerAddressJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateCustomerAddressRequest(c.Server, customerId, params, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) DeleteCustomerAddress(ctx context.Context, customerId string, addressId string, params *DeleteCustomerAddressParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDeleteCustomerAddressRequest(c.Server, customerId, addressId, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetCustomerAddress(ctx context.Context, customerId string, addressId string, params *GetCustomerAddressParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetCustomerAddressRequest(c.Server, customerId, addressId, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdateCustomerAddressWithBody(ctx context.Context, customerId string, addressId string, params *UpdateCustomerAddressParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateCustomerAddressRequestWithBody(c.Server, customerId, addressId, params, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdateCustomerAddress(ctx context.Context, customerId string, addressId string, params *UpdateCustomerAddressParams, body UpdateCustomerAddressJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateCustomerAddressRequest(c.Server, customerId, addressId, params, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
 func (c *Client) ListForCustomer(ctx context.Context, customerId string, params *ListForCustomerParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListForCustomerRequest(c.Server, customerId, params)
 	if err != nil {
@@ -1372,6 +1489,30 @@ func (c *Client) GetJobReport(ctx context.Context, jobReportId string, params *G
 	return c.Client.Do(req)
 }
 
+func (c *Client) CreateMediaUploadWithBody(ctx context.Context, jobReportId string, params *CreateMediaUploadParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateMediaUploadRequestWithBody(c.Server, jobReportId, params, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateMediaUpload(ctx context.Context, jobReportId string, params *CreateMediaUploadParams, body CreateMediaUploadJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateMediaUploadRequest(c.Server, jobReportId, params, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
 func (c *Client) Jobs(ctx context.Context, params *JobsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewJobsRequest(c.Server, params)
 	if err != nil {
@@ -1506,6 +1647,30 @@ func (c *Client) ListJobReportForJob(ctx context.Context, jobId string, params *
 
 func (c *Client) GetJobReportForJob(ctx context.Context, jobId string, jobReportId string, params *GetJobReportForJobParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetJobReportForJobRequest(c.Server, jobId, jobReportId, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateForJobWithBody(ctx context.Context, jobId string, jobReportId string, params *CreateForJobParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateForJobRequestWithBody(c.Server, jobId, jobReportId, params, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateForJob(ctx context.Context, jobId string, jobReportId string, params *CreateForJobParams, body CreateForJobJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateForJobRequest(c.Server, jobId, jobReportId, params, body)
 	if err != nil {
 		return nil, err
 	}
@@ -1686,6 +1851,90 @@ func (c *Client) ChangeWorkLineStatusWithBody(ctx context.Context, jobId string,
 
 func (c *Client) ChangeWorkLineStatus(ctx context.Context, jobId string, workLineId string, params *ChangeWorkLineStatusParams, body ChangeWorkLineStatusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewChangeWorkLineStatusRequest(c.Server, jobId, workLineId, params, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetMediaUpload(ctx context.Context, uploadId openapi_types.UUID, params *GetMediaUploadParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetMediaUploadRequest(c.Server, uploadId, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) AbortWithBody(ctx context.Context, uploadId openapi_types.UUID, params *AbortParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewAbortRequestWithBody(c.Server, uploadId, params, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) Abort(ctx context.Context, uploadId openapi_types.UUID, params *AbortParams, body AbortJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewAbortRequest(c.Server, uploadId, params, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CompleteWithBody(ctx context.Context, uploadId openapi_types.UUID, params *CompleteParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCompleteRequestWithBody(c.Server, uploadId, params, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) Complete(ctx context.Context, uploadId openapi_types.UUID, params *CompleteParams, body CompleteJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCompleteRequest(c.Server, uploadId, params, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) PartUrlWithBody(ctx context.Context, uploadId openapi_types.UUID, params *PartUrlParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewPartUrlRequestWithBody(c.Server, uploadId, params, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) PartUrl(ctx context.Context, uploadId openapi_types.UUID, params *PartUrlParams, body PartUrlJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewPartUrlRequest(c.Server, uploadId, params, body)
 	if err != nil {
 		return nil, err
 	}
@@ -4596,6 +4845,320 @@ func NewUpdateCustomerRequestWithBody(server string, customerId string, params *
 	return req, nil
 }
 
+// NewCreateCustomerAddressRequest calls the generic CreateCustomerAddress builder with application/json body
+func NewCreateCustomerAddressRequest(server string, customerId string, params *CreateCustomerAddressParams, body CreateCustomerAddressJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewCreateCustomerAddressRequestWithBody(server, customerId, params, "application/json", bodyReader)
+}
+
+// NewCreateCustomerAddressRequestWithBody generates requests for CreateCustomerAddress with any type of body
+func NewCreateCustomerAddressRequestWithBody(server string, customerId string, params *CreateCustomerAddressParams, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "customer_id", customerId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/public/v1/customers/%s/addresses", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	if params != nil {
+
+		if params.Authorization != nil {
+			var headerParam0 string
+
+			headerParam0, err = runtime.StyleParamWithOptions("simple", false, "Authorization", *params.Authorization, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+			if err != nil {
+				return nil, err
+			}
+
+			req.Header.Set("Authorization", headerParam0)
+		}
+
+		if params.XBikebookRequestId != nil {
+			var headerParam1 string
+
+			headerParam1, err = runtime.StyleParamWithOptions("simple", false, "X-Bikebook-Request-Id", *params.XBikebookRequestId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+			if err != nil {
+				return nil, err
+			}
+
+			req.Header.Set("X-Bikebook-Request-Id", headerParam1)
+		}
+
+		var headerParam2 string
+
+		headerParam2, err = runtime.StyleParamWithOptions("simple", false, "Idempotency-Key", params.IdempotencyKey, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+		if err != nil {
+			return nil, err
+		}
+
+		req.Header.Set("Idempotency-Key", headerParam2)
+
+	}
+
+	return req, nil
+}
+
+// NewDeleteCustomerAddressRequest generates requests for DeleteCustomerAddress
+func NewDeleteCustomerAddressRequest(server string, customerId string, addressId string, params *DeleteCustomerAddressParams) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "customer_id", customerId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "address_id", addressId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/public/v1/customers/%s/addresses/%s", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodDelete, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+
+		if params.Authorization != nil {
+			var headerParam0 string
+
+			headerParam0, err = runtime.StyleParamWithOptions("simple", false, "Authorization", *params.Authorization, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+			if err != nil {
+				return nil, err
+			}
+
+			req.Header.Set("Authorization", headerParam0)
+		}
+
+		if params.XBikebookRequestId != nil {
+			var headerParam1 string
+
+			headerParam1, err = runtime.StyleParamWithOptions("simple", false, "X-Bikebook-Request-Id", *params.XBikebookRequestId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+			if err != nil {
+				return nil, err
+			}
+
+			req.Header.Set("X-Bikebook-Request-Id", headerParam1)
+		}
+
+		var headerParam2 string
+
+		headerParam2, err = runtime.StyleParamWithOptions("simple", false, "Idempotency-Key", params.IdempotencyKey, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+		if err != nil {
+			return nil, err
+		}
+
+		req.Header.Set("Idempotency-Key", headerParam2)
+
+	}
+
+	return req, nil
+}
+
+// NewGetCustomerAddressRequest generates requests for GetCustomerAddress
+func NewGetCustomerAddressRequest(server string, customerId string, addressId string, params *GetCustomerAddressParams) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "customer_id", customerId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "address_id", addressId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/public/v1/customers/%s/addresses/%s", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+
+		if params.Authorization != nil {
+			var headerParam0 string
+
+			headerParam0, err = runtime.StyleParamWithOptions("simple", false, "Authorization", *params.Authorization, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+			if err != nil {
+				return nil, err
+			}
+
+			req.Header.Set("Authorization", headerParam0)
+		}
+
+		if params.XBikebookRequestId != nil {
+			var headerParam1 string
+
+			headerParam1, err = runtime.StyleParamWithOptions("simple", false, "X-Bikebook-Request-Id", *params.XBikebookRequestId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+			if err != nil {
+				return nil, err
+			}
+
+			req.Header.Set("X-Bikebook-Request-Id", headerParam1)
+		}
+
+	}
+
+	return req, nil
+}
+
+// NewUpdateCustomerAddressRequest calls the generic UpdateCustomerAddress builder with application/json body
+func NewUpdateCustomerAddressRequest(server string, customerId string, addressId string, params *UpdateCustomerAddressParams, body UpdateCustomerAddressJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewUpdateCustomerAddressRequestWithBody(server, customerId, addressId, params, "application/json", bodyReader)
+}
+
+// NewUpdateCustomerAddressRequestWithBody generates requests for UpdateCustomerAddress with any type of body
+func NewUpdateCustomerAddressRequestWithBody(server string, customerId string, addressId string, params *UpdateCustomerAddressParams, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "customer_id", customerId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "address_id", addressId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/public/v1/customers/%s/addresses/%s", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPatch, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	if params != nil {
+
+		if params.Authorization != nil {
+			var headerParam0 string
+
+			headerParam0, err = runtime.StyleParamWithOptions("simple", false, "Authorization", *params.Authorization, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+			if err != nil {
+				return nil, err
+			}
+
+			req.Header.Set("Authorization", headerParam0)
+		}
+
+		if params.XBikebookRequestId != nil {
+			var headerParam1 string
+
+			headerParam1, err = runtime.StyleParamWithOptions("simple", false, "X-Bikebook-Request-Id", *params.XBikebookRequestId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+			if err != nil {
+				return nil, err
+			}
+
+			req.Header.Set("X-Bikebook-Request-Id", headerParam1)
+		}
+
+		var headerParam2 string
+
+		headerParam2, err = runtime.StyleParamWithOptions("simple", false, "Idempotency-Key", params.IdempotencyKey, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+		if err != nil {
+			return nil, err
+		}
+
+		req.Header.Set("Idempotency-Key", headerParam2)
+
+	}
+
+	return req, nil
+}
+
 // NewListForCustomerRequest generates requests for ListForCustomer
 func NewListForCustomerRequest(server string, customerId string, params *ListForCustomerParams) (*http.Request, error) {
 	var err error
@@ -7053,6 +7616,88 @@ func NewGetJobReportRequest(server string, jobReportId string, params *GetJobRep
 	return req, nil
 }
 
+// NewCreateMediaUploadRequest calls the generic CreateMediaUpload builder with application/json body
+func NewCreateMediaUploadRequest(server string, jobReportId string, params *CreateMediaUploadParams, body CreateMediaUploadJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewCreateMediaUploadRequestWithBody(server, jobReportId, params, "application/json", bodyReader)
+}
+
+// NewCreateMediaUploadRequestWithBody generates requests for CreateMediaUpload with any type of body
+func NewCreateMediaUploadRequestWithBody(server string, jobReportId string, params *CreateMediaUploadParams, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "job_report_id", jobReportId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/public/v1/job_reports/%s/media_uploads", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	if params != nil {
+
+		if params.Authorization != nil {
+			var headerParam0 string
+
+			headerParam0, err = runtime.StyleParamWithOptions("simple", false, "Authorization", *params.Authorization, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+			if err != nil {
+				return nil, err
+			}
+
+			req.Header.Set("Authorization", headerParam0)
+		}
+
+		if params.XBikebookRequestId != nil {
+			var headerParam1 string
+
+			headerParam1, err = runtime.StyleParamWithOptions("simple", false, "X-Bikebook-Request-Id", *params.XBikebookRequestId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+			if err != nil {
+				return nil, err
+			}
+
+			req.Header.Set("X-Bikebook-Request-Id", headerParam1)
+		}
+
+		var headerParam2 string
+
+		headerParam2, err = runtime.StyleParamWithOptions("simple", false, "Idempotency-Key", params.IdempotencyKey, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+		if err != nil {
+			return nil, err
+		}
+
+		req.Header.Set("Idempotency-Key", headerParam2)
+
+	}
+
+	return req, nil
+}
+
 // NewJobsRequest generates requests for Jobs
 func NewJobsRequest(server string, params *JobsParams) (*http.Request, error) {
 	var err error
@@ -7992,6 +8637,95 @@ func NewGetJobReportForJobRequest(server string, jobId string, jobReportId strin
 	return req, nil
 }
 
+// NewCreateForJobRequest calls the generic CreateForJob builder with application/json body
+func NewCreateForJobRequest(server string, jobId string, jobReportId string, params *CreateForJobParams, body CreateForJobJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewCreateForJobRequestWithBody(server, jobId, jobReportId, params, "application/json", bodyReader)
+}
+
+// NewCreateForJobRequestWithBody generates requests for CreateForJob with any type of body
+func NewCreateForJobRequestWithBody(server string, jobId string, jobReportId string, params *CreateForJobParams, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "job_id", jobId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "job_report_id", jobReportId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/public/v1/jobs/%s/job_reports/%s/media_uploads", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	if params != nil {
+
+		if params.Authorization != nil {
+			var headerParam0 string
+
+			headerParam0, err = runtime.StyleParamWithOptions("simple", false, "Authorization", *params.Authorization, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+			if err != nil {
+				return nil, err
+			}
+
+			req.Header.Set("Authorization", headerParam0)
+		}
+
+		if params.XBikebookRequestId != nil {
+			var headerParam1 string
+
+			headerParam1, err = runtime.StyleParamWithOptions("simple", false, "X-Bikebook-Request-Id", *params.XBikebookRequestId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+			if err != nil {
+				return nil, err
+			}
+
+			req.Header.Set("X-Bikebook-Request-Id", headerParam1)
+		}
+
+		var headerParam2 string
+
+		headerParam2, err = runtime.StyleParamWithOptions("simple", false, "Idempotency-Key", params.IdempotencyKey, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+		if err != nil {
+			return nil, err
+		}
+
+		req.Header.Set("Idempotency-Key", headerParam2)
+
+	}
+
+	return req, nil
+}
+
 // NewPartAuthorisationsRequest generates requests for PartAuthorisations
 func NewPartAuthorisationsRequest(server string, jobId string, params *PartAuthorisationsParams) (*http.Request, error) {
 	var err error
@@ -8693,6 +9427,312 @@ func NewChangeWorkLineStatusRequestWithBody(server string, jobId string, workLin
 	return req, nil
 }
 
+// NewGetMediaUploadRequest generates requests for GetMediaUpload
+func NewGetMediaUploadRequest(server string, uploadId openapi_types.UUID, params *GetMediaUploadParams) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "upload_id", uploadId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: "uuid"})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/public/v1/media_uploads/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+
+		if params.Authorization != nil {
+			var headerParam0 string
+
+			headerParam0, err = runtime.StyleParamWithOptions("simple", false, "Authorization", *params.Authorization, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+			if err != nil {
+				return nil, err
+			}
+
+			req.Header.Set("Authorization", headerParam0)
+		}
+
+		if params.XBikebookRequestId != nil {
+			var headerParam1 string
+
+			headerParam1, err = runtime.StyleParamWithOptions("simple", false, "X-Bikebook-Request-Id", *params.XBikebookRequestId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+			if err != nil {
+				return nil, err
+			}
+
+			req.Header.Set("X-Bikebook-Request-Id", headerParam1)
+		}
+
+	}
+
+	return req, nil
+}
+
+// NewAbortRequest calls the generic Abort builder with application/json body
+func NewAbortRequest(server string, uploadId openapi_types.UUID, params *AbortParams, body AbortJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewAbortRequestWithBody(server, uploadId, params, "application/json", bodyReader)
+}
+
+// NewAbortRequestWithBody generates requests for Abort with any type of body
+func NewAbortRequestWithBody(server string, uploadId openapi_types.UUID, params *AbortParams, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "upload_id", uploadId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: "uuid"})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/public/v1/media_uploads/%s/abort", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	if params != nil {
+
+		if params.Authorization != nil {
+			var headerParam0 string
+
+			headerParam0, err = runtime.StyleParamWithOptions("simple", false, "Authorization", *params.Authorization, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+			if err != nil {
+				return nil, err
+			}
+
+			req.Header.Set("Authorization", headerParam0)
+		}
+
+		if params.XBikebookRequestId != nil {
+			var headerParam1 string
+
+			headerParam1, err = runtime.StyleParamWithOptions("simple", false, "X-Bikebook-Request-Id", *params.XBikebookRequestId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+			if err != nil {
+				return nil, err
+			}
+
+			req.Header.Set("X-Bikebook-Request-Id", headerParam1)
+		}
+
+		var headerParam2 string
+
+		headerParam2, err = runtime.StyleParamWithOptions("simple", false, "Idempotency-Key", params.IdempotencyKey, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+		if err != nil {
+			return nil, err
+		}
+
+		req.Header.Set("Idempotency-Key", headerParam2)
+
+	}
+
+	return req, nil
+}
+
+// NewCompleteRequest calls the generic Complete builder with application/json body
+func NewCompleteRequest(server string, uploadId openapi_types.UUID, params *CompleteParams, body CompleteJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewCompleteRequestWithBody(server, uploadId, params, "application/json", bodyReader)
+}
+
+// NewCompleteRequestWithBody generates requests for Complete with any type of body
+func NewCompleteRequestWithBody(server string, uploadId openapi_types.UUID, params *CompleteParams, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "upload_id", uploadId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: "uuid"})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/public/v1/media_uploads/%s/complete", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	if params != nil {
+
+		if params.Authorization != nil {
+			var headerParam0 string
+
+			headerParam0, err = runtime.StyleParamWithOptions("simple", false, "Authorization", *params.Authorization, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+			if err != nil {
+				return nil, err
+			}
+
+			req.Header.Set("Authorization", headerParam0)
+		}
+
+		if params.XBikebookRequestId != nil {
+			var headerParam1 string
+
+			headerParam1, err = runtime.StyleParamWithOptions("simple", false, "X-Bikebook-Request-Id", *params.XBikebookRequestId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+			if err != nil {
+				return nil, err
+			}
+
+			req.Header.Set("X-Bikebook-Request-Id", headerParam1)
+		}
+
+		var headerParam2 string
+
+		headerParam2, err = runtime.StyleParamWithOptions("simple", false, "Idempotency-Key", params.IdempotencyKey, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+		if err != nil {
+			return nil, err
+		}
+
+		req.Header.Set("Idempotency-Key", headerParam2)
+
+	}
+
+	return req, nil
+}
+
+// NewPartUrlRequest calls the generic PartUrl builder with application/json body
+func NewPartUrlRequest(server string, uploadId openapi_types.UUID, params *PartUrlParams, body PartUrlJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewPartUrlRequestWithBody(server, uploadId, params, "application/json", bodyReader)
+}
+
+// NewPartUrlRequestWithBody generates requests for PartUrl with any type of body
+func NewPartUrlRequestWithBody(server string, uploadId openapi_types.UUID, params *PartUrlParams, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "upload_id", uploadId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: "uuid"})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/public/v1/media_uploads/%s/part_urls", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	if params != nil {
+
+		if params.Authorization != nil {
+			var headerParam0 string
+
+			headerParam0, err = runtime.StyleParamWithOptions("simple", false, "Authorization", *params.Authorization, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+			if err != nil {
+				return nil, err
+			}
+
+			req.Header.Set("Authorization", headerParam0)
+		}
+
+		if params.XBikebookRequestId != nil {
+			var headerParam1 string
+
+			headerParam1, err = runtime.StyleParamWithOptions("simple", false, "X-Bikebook-Request-Id", *params.XBikebookRequestId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+			if err != nil {
+				return nil, err
+			}
+
+			req.Header.Set("X-Bikebook-Request-Id", headerParam1)
+		}
+
+		var headerParam2 string
+
+		headerParam2, err = runtime.StyleParamWithOptions("simple", false, "Idempotency-Key", params.IdempotencyKey, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+		if err != nil {
+			return nil, err
+		}
+
+		req.Header.Set("Idempotency-Key", headerParam2)
+
+	}
+
+	return req, nil
+}
+
 // NewListPaymentRequest generates requests for ListPayment
 func NewListPaymentRequest(server string, params *ListPaymentParams) (*http.Request, error) {
 	var err error
@@ -9278,6 +10318,18 @@ func NewListStockVariationRequest(server string, params *ListStockVariationParam
 		if params.Barcode != nil {
 
 			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "barcode", *params.Barcode, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.ExternalId != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "external_id", *params.ExternalId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
 				return nil, err
 			} else {
 				for _, qp := range strings.Split(queryFrag, "&") {
@@ -10476,6 +11528,22 @@ type ClientWithResponsesInterface interface {
 
 	UpdateCustomerWithResponse(ctx context.Context, customerId string, params *UpdateCustomerParams, body UpdateCustomerJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateCustomerResponse, error)
 
+	// CreateCustomerAddressWithBodyWithResponse request with any body
+	CreateCustomerAddressWithBodyWithResponse(ctx context.Context, customerId string, params *CreateCustomerAddressParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateCustomerAddressResponse, error)
+
+	CreateCustomerAddressWithResponse(ctx context.Context, customerId string, params *CreateCustomerAddressParams, body CreateCustomerAddressJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateCustomerAddressResponse, error)
+
+	// DeleteCustomerAddressWithResponse request
+	DeleteCustomerAddressWithResponse(ctx context.Context, customerId string, addressId string, params *DeleteCustomerAddressParams, reqEditors ...RequestEditorFn) (*DeleteCustomerAddressResponse, error)
+
+	// GetCustomerAddressWithResponse request
+	GetCustomerAddressWithResponse(ctx context.Context, customerId string, addressId string, params *GetCustomerAddressParams, reqEditors ...RequestEditorFn) (*GetCustomerAddressResponse, error)
+
+	// UpdateCustomerAddressWithBodyWithResponse request with any body
+	UpdateCustomerAddressWithBodyWithResponse(ctx context.Context, customerId string, addressId string, params *UpdateCustomerAddressParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateCustomerAddressResponse, error)
+
+	UpdateCustomerAddressWithResponse(ctx context.Context, customerId string, addressId string, params *UpdateCustomerAddressParams, body UpdateCustomerAddressJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateCustomerAddressResponse, error)
+
 	// ListForCustomerWithResponse request
 	ListForCustomerWithResponse(ctx context.Context, customerId string, params *ListForCustomerParams, reqEditors ...RequestEditorFn) (*ListForCustomerResponse, error)
 
@@ -10579,6 +11647,11 @@ type ClientWithResponsesInterface interface {
 	// GetJobReportWithResponse request
 	GetJobReportWithResponse(ctx context.Context, jobReportId string, params *GetJobReportParams, reqEditors ...RequestEditorFn) (*GetJobReportResponse, error)
 
+	// CreateMediaUploadWithBodyWithResponse request with any body
+	CreateMediaUploadWithBodyWithResponse(ctx context.Context, jobReportId string, params *CreateMediaUploadParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateMediaUploadResponse, error)
+
+	CreateMediaUploadWithResponse(ctx context.Context, jobReportId string, params *CreateMediaUploadParams, body CreateMediaUploadJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateMediaUploadResponse, error)
+
 	// JobsWithResponse request
 	JobsWithResponse(ctx context.Context, params *JobsParams, reqEditors ...RequestEditorFn) (*JobsResponse, error)
 
@@ -10611,6 +11684,11 @@ type ClientWithResponsesInterface interface {
 
 	// GetJobReportForJobWithResponse request
 	GetJobReportForJobWithResponse(ctx context.Context, jobId string, jobReportId string, params *GetJobReportForJobParams, reqEditors ...RequestEditorFn) (*GetJobReportForJobResponse, error)
+
+	// CreateForJobWithBodyWithResponse request with any body
+	CreateForJobWithBodyWithResponse(ctx context.Context, jobId string, jobReportId string, params *CreateForJobParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateForJobResponse, error)
+
+	CreateForJobWithResponse(ctx context.Context, jobId string, jobReportId string, params *CreateForJobParams, body CreateForJobJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateForJobResponse, error)
 
 	// PartAuthorisationsWithResponse request
 	PartAuthorisationsWithResponse(ctx context.Context, jobId string, params *PartAuthorisationsParams, reqEditors ...RequestEditorFn) (*PartAuthorisationsResponse, error)
@@ -10649,6 +11727,24 @@ type ClientWithResponsesInterface interface {
 	ChangeWorkLineStatusWithBodyWithResponse(ctx context.Context, jobId string, workLineId string, params *ChangeWorkLineStatusParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*ChangeWorkLineStatusResponse, error)
 
 	ChangeWorkLineStatusWithResponse(ctx context.Context, jobId string, workLineId string, params *ChangeWorkLineStatusParams, body ChangeWorkLineStatusJSONRequestBody, reqEditors ...RequestEditorFn) (*ChangeWorkLineStatusResponse, error)
+
+	// GetMediaUploadWithResponse request
+	GetMediaUploadWithResponse(ctx context.Context, uploadId openapi_types.UUID, params *GetMediaUploadParams, reqEditors ...RequestEditorFn) (*GetMediaUploadResponse, error)
+
+	// AbortWithBodyWithResponse request with any body
+	AbortWithBodyWithResponse(ctx context.Context, uploadId openapi_types.UUID, params *AbortParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*AbortResponse, error)
+
+	AbortWithResponse(ctx context.Context, uploadId openapi_types.UUID, params *AbortParams, body AbortJSONRequestBody, reqEditors ...RequestEditorFn) (*AbortResponse, error)
+
+	// CompleteWithBodyWithResponse request with any body
+	CompleteWithBodyWithResponse(ctx context.Context, uploadId openapi_types.UUID, params *CompleteParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CompleteResponse, error)
+
+	CompleteWithResponse(ctx context.Context, uploadId openapi_types.UUID, params *CompleteParams, body CompleteJSONRequestBody, reqEditors ...RequestEditorFn) (*CompleteResponse, error)
+
+	// PartUrlWithBodyWithResponse request with any body
+	PartUrlWithBodyWithResponse(ctx context.Context, uploadId openapi_types.UUID, params *PartUrlParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PartUrlResponse, error)
+
+	PartUrlWithResponse(ctx context.Context, uploadId openapi_types.UUID, params *PartUrlParams, body PartUrlJSONRequestBody, reqEditors ...RequestEditorFn) (*PartUrlResponse, error)
 
 	// ListPaymentWithResponse request
 	ListPaymentWithResponse(ctx context.Context, params *ListPaymentParams, reqEditors ...RequestEditorFn) (*ListPaymentResponse, error)
@@ -11771,6 +12867,153 @@ func (r UpdateCustomerResponse) ContentType() string {
 	return ""
 }
 
+type CreateCustomerAddressResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON201      *CustomerAddress
+	JSON400      *ErrorResponse
+	JSON401      *ErrorResponse
+	JSON403      *ErrorResponse
+	JSON404      *ErrorResponse
+	JSON409      *ErrorResponse
+	JSON429      *ErrorResponse
+	JSON500      *ErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r CreateCustomerAddressResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r CreateCustomerAddressResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r CreateCustomerAddressResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type DeleteCustomerAddressResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *CustomerAddressDeleted
+	JSON400      *ErrorResponse
+	JSON401      *ErrorResponse
+	JSON403      *ErrorResponse
+	JSON404      *ErrorResponse
+	JSON409      *ErrorResponse
+	JSON429      *ErrorResponse
+	JSON500      *ErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r DeleteCustomerAddressResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r DeleteCustomerAddressResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r DeleteCustomerAddressResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type GetCustomerAddressResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *CustomerAddress
+	JSON400      *ErrorResponse
+	JSON401      *ErrorResponse
+	JSON403      *ErrorResponse
+	JSON404      *ErrorResponse
+	JSON429      *ErrorResponse
+	JSON500      *ErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r GetCustomerAddressResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetCustomerAddressResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GetCustomerAddressResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type UpdateCustomerAddressResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *CustomerAddress
+	JSON400      *ErrorResponse
+	JSON401      *ErrorResponse
+	JSON403      *ErrorResponse
+	JSON404      *ErrorResponse
+	JSON409      *ErrorResponse
+	JSON429      *ErrorResponse
+	JSON500      *ErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r UpdateCustomerAddressResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r UpdateCustomerAddressResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r UpdateCustomerAddressResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type ListForCustomerResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
@@ -12759,6 +14002,43 @@ func (r GetJobReportResponse) ContentType() string {
 	return ""
 }
 
+type CreateMediaUploadResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON201      *MediaUpload
+	JSON400      *ErrorResponse
+	JSON401      *ErrorResponse
+	JSON403      *ErrorResponse
+	JSON404      *ErrorResponse
+	JSON409      *ErrorResponse
+	JSON429      *ErrorResponse
+	JSON500      *ErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r CreateMediaUploadResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r CreateMediaUploadResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r CreateMediaUploadResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type JobsResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
@@ -13086,6 +14366,43 @@ func (r GetJobReportForJobResponse) ContentType() string {
 	return ""
 }
 
+type CreateForJobResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON201      *MediaUpload
+	JSON400      *ErrorResponse
+	JSON401      *ErrorResponse
+	JSON403      *ErrorResponse
+	JSON404      *ErrorResponse
+	JSON409      *ErrorResponse
+	JSON429      *ErrorResponse
+	JSON500      *ErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r CreateForJobResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r CreateForJobResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r CreateForJobResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type PartAuthorisationsResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
@@ -13375,6 +14692,153 @@ func (r ChangeWorkLineStatusResponse) StatusCode() int {
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
 func (r ChangeWorkLineStatusResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type GetMediaUploadResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *MediaUpload
+	JSON400      *ErrorResponse
+	JSON401      *ErrorResponse
+	JSON403      *ErrorResponse
+	JSON404      *ErrorResponse
+	JSON429      *ErrorResponse
+	JSON500      *ErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r GetMediaUploadResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetMediaUploadResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GetMediaUploadResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type AbortResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *MediaUpload
+	JSON400      *ErrorResponse
+	JSON401      *ErrorResponse
+	JSON403      *ErrorResponse
+	JSON404      *ErrorResponse
+	JSON409      *ErrorResponse
+	JSON429      *ErrorResponse
+	JSON500      *ErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r AbortResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r AbortResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r AbortResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type CompleteResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *MediaUpload
+	JSON400      *ErrorResponse
+	JSON401      *ErrorResponse
+	JSON403      *ErrorResponse
+	JSON404      *ErrorResponse
+	JSON409      *ErrorResponse
+	JSON429      *ErrorResponse
+	JSON500      *ErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r CompleteResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r CompleteResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r CompleteResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type PartUrlResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *MediaUploadPartUrl
+	JSON400      *ErrorResponse
+	JSON401      *ErrorResponse
+	JSON403      *ErrorResponse
+	JSON404      *ErrorResponse
+	JSON409      *ErrorResponse
+	JSON429      *ErrorResponse
+	JSON500      *ErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r PartUrlResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r PartUrlResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r PartUrlResponse) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -14420,6 +15884,58 @@ func (c *ClientWithResponses) UpdateCustomerWithResponse(ctx context.Context, cu
 	return ParseUpdateCustomerResponse(rsp)
 }
 
+// CreateCustomerAddressWithBodyWithResponse request with arbitrary body returning *CreateCustomerAddressResponse
+func (c *ClientWithResponses) CreateCustomerAddressWithBodyWithResponse(ctx context.Context, customerId string, params *CreateCustomerAddressParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateCustomerAddressResponse, error) {
+	rsp, err := c.CreateCustomerAddressWithBody(ctx, customerId, params, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateCustomerAddressResponse(rsp)
+}
+
+func (c *ClientWithResponses) CreateCustomerAddressWithResponse(ctx context.Context, customerId string, params *CreateCustomerAddressParams, body CreateCustomerAddressJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateCustomerAddressResponse, error) {
+	rsp, err := c.CreateCustomerAddress(ctx, customerId, params, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateCustomerAddressResponse(rsp)
+}
+
+// DeleteCustomerAddressWithResponse request returning *DeleteCustomerAddressResponse
+func (c *ClientWithResponses) DeleteCustomerAddressWithResponse(ctx context.Context, customerId string, addressId string, params *DeleteCustomerAddressParams, reqEditors ...RequestEditorFn) (*DeleteCustomerAddressResponse, error) {
+	rsp, err := c.DeleteCustomerAddress(ctx, customerId, addressId, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDeleteCustomerAddressResponse(rsp)
+}
+
+// GetCustomerAddressWithResponse request returning *GetCustomerAddressResponse
+func (c *ClientWithResponses) GetCustomerAddressWithResponse(ctx context.Context, customerId string, addressId string, params *GetCustomerAddressParams, reqEditors ...RequestEditorFn) (*GetCustomerAddressResponse, error) {
+	rsp, err := c.GetCustomerAddress(ctx, customerId, addressId, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetCustomerAddressResponse(rsp)
+}
+
+// UpdateCustomerAddressWithBodyWithResponse request with arbitrary body returning *UpdateCustomerAddressResponse
+func (c *ClientWithResponses) UpdateCustomerAddressWithBodyWithResponse(ctx context.Context, customerId string, addressId string, params *UpdateCustomerAddressParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateCustomerAddressResponse, error) {
+	rsp, err := c.UpdateCustomerAddressWithBody(ctx, customerId, addressId, params, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateCustomerAddressResponse(rsp)
+}
+
+func (c *ClientWithResponses) UpdateCustomerAddressWithResponse(ctx context.Context, customerId string, addressId string, params *UpdateCustomerAddressParams, body UpdateCustomerAddressJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateCustomerAddressResponse, error) {
+	rsp, err := c.UpdateCustomerAddress(ctx, customerId, addressId, params, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateCustomerAddressResponse(rsp)
+}
+
 // ListForCustomerWithResponse request returning *ListForCustomerResponse
 func (c *ClientWithResponses) ListForCustomerWithResponse(ctx context.Context, customerId string, params *ListForCustomerParams, reqEditors ...RequestEditorFn) (*ListForCustomerResponse, error) {
 	rsp, err := c.ListForCustomer(ctx, customerId, params, reqEditors...)
@@ -14751,6 +16267,23 @@ func (c *ClientWithResponses) GetJobReportWithResponse(ctx context.Context, jobR
 	return ParseGetJobReportResponse(rsp)
 }
 
+// CreateMediaUploadWithBodyWithResponse request with arbitrary body returning *CreateMediaUploadResponse
+func (c *ClientWithResponses) CreateMediaUploadWithBodyWithResponse(ctx context.Context, jobReportId string, params *CreateMediaUploadParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateMediaUploadResponse, error) {
+	rsp, err := c.CreateMediaUploadWithBody(ctx, jobReportId, params, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateMediaUploadResponse(rsp)
+}
+
+func (c *ClientWithResponses) CreateMediaUploadWithResponse(ctx context.Context, jobReportId string, params *CreateMediaUploadParams, body CreateMediaUploadJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateMediaUploadResponse, error) {
+	rsp, err := c.CreateMediaUpload(ctx, jobReportId, params, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateMediaUploadResponse(rsp)
+}
+
 // JobsWithResponse request returning *JobsResponse
 func (c *ClientWithResponses) JobsWithResponse(ctx context.Context, params *JobsParams, reqEditors ...RequestEditorFn) (*JobsResponse, error) {
 	rsp, err := c.Jobs(ctx, params, reqEditors...)
@@ -14854,6 +16387,23 @@ func (c *ClientWithResponses) GetJobReportForJobWithResponse(ctx context.Context
 		return nil, err
 	}
 	return ParseGetJobReportForJobResponse(rsp)
+}
+
+// CreateForJobWithBodyWithResponse request with arbitrary body returning *CreateForJobResponse
+func (c *ClientWithResponses) CreateForJobWithBodyWithResponse(ctx context.Context, jobId string, jobReportId string, params *CreateForJobParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateForJobResponse, error) {
+	rsp, err := c.CreateForJobWithBody(ctx, jobId, jobReportId, params, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateForJobResponse(rsp)
+}
+
+func (c *ClientWithResponses) CreateForJobWithResponse(ctx context.Context, jobId string, jobReportId string, params *CreateForJobParams, body CreateForJobJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateForJobResponse, error) {
+	rsp, err := c.CreateForJob(ctx, jobId, jobReportId, params, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateForJobResponse(rsp)
 }
 
 // PartAuthorisationsWithResponse request returning *PartAuthorisationsResponse
@@ -14982,6 +16532,66 @@ func (c *ClientWithResponses) ChangeWorkLineStatusWithResponse(ctx context.Conte
 		return nil, err
 	}
 	return ParseChangeWorkLineStatusResponse(rsp)
+}
+
+// GetMediaUploadWithResponse request returning *GetMediaUploadResponse
+func (c *ClientWithResponses) GetMediaUploadWithResponse(ctx context.Context, uploadId openapi_types.UUID, params *GetMediaUploadParams, reqEditors ...RequestEditorFn) (*GetMediaUploadResponse, error) {
+	rsp, err := c.GetMediaUpload(ctx, uploadId, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetMediaUploadResponse(rsp)
+}
+
+// AbortWithBodyWithResponse request with arbitrary body returning *AbortResponse
+func (c *ClientWithResponses) AbortWithBodyWithResponse(ctx context.Context, uploadId openapi_types.UUID, params *AbortParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*AbortResponse, error) {
+	rsp, err := c.AbortWithBody(ctx, uploadId, params, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseAbortResponse(rsp)
+}
+
+func (c *ClientWithResponses) AbortWithResponse(ctx context.Context, uploadId openapi_types.UUID, params *AbortParams, body AbortJSONRequestBody, reqEditors ...RequestEditorFn) (*AbortResponse, error) {
+	rsp, err := c.Abort(ctx, uploadId, params, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseAbortResponse(rsp)
+}
+
+// CompleteWithBodyWithResponse request with arbitrary body returning *CompleteResponse
+func (c *ClientWithResponses) CompleteWithBodyWithResponse(ctx context.Context, uploadId openapi_types.UUID, params *CompleteParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CompleteResponse, error) {
+	rsp, err := c.CompleteWithBody(ctx, uploadId, params, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCompleteResponse(rsp)
+}
+
+func (c *ClientWithResponses) CompleteWithResponse(ctx context.Context, uploadId openapi_types.UUID, params *CompleteParams, body CompleteJSONRequestBody, reqEditors ...RequestEditorFn) (*CompleteResponse, error) {
+	rsp, err := c.Complete(ctx, uploadId, params, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCompleteResponse(rsp)
+}
+
+// PartUrlWithBodyWithResponse request with arbitrary body returning *PartUrlResponse
+func (c *ClientWithResponses) PartUrlWithBodyWithResponse(ctx context.Context, uploadId openapi_types.UUID, params *PartUrlParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PartUrlResponse, error) {
+	rsp, err := c.PartUrlWithBody(ctx, uploadId, params, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParsePartUrlResponse(rsp)
+}
+
+func (c *ClientWithResponses) PartUrlWithResponse(ctx context.Context, uploadId openapi_types.UUID, params *PartUrlParams, body PartUrlJSONRequestBody, reqEditors ...RequestEditorFn) (*PartUrlResponse, error) {
+	rsp, err := c.PartUrl(ctx, uploadId, params, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParsePartUrlResponse(rsp)
 }
 
 // ListPaymentWithResponse request returning *ListPaymentResponse
@@ -17242,6 +18852,299 @@ func ParseUpdateCustomerResponse(rsp *http.Response) (*UpdateCustomerResponse, e
 	return response, nil
 }
 
+// ParseCreateCustomerAddressResponse parses an HTTP response from a CreateCustomerAddressWithResponse call
+func ParseCreateCustomerAddressResponse(rsp *http.Response) (*CreateCustomerAddressResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &CreateCustomerAddressResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 201:
+		var dest CustomerAddress
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON201 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 409:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON409 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseDeleteCustomerAddressResponse parses an HTTP response from a DeleteCustomerAddressWithResponse call
+func ParseDeleteCustomerAddressResponse(rsp *http.Response) (*DeleteCustomerAddressResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &DeleteCustomerAddressResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CustomerAddressDeleted
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 409:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON409 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetCustomerAddressResponse parses an HTTP response from a GetCustomerAddressWithResponse call
+func ParseGetCustomerAddressResponse(rsp *http.Response) (*GetCustomerAddressResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetCustomerAddressResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CustomerAddress
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseUpdateCustomerAddressResponse parses an HTTP response from a UpdateCustomerAddressWithResponse call
+func ParseUpdateCustomerAddressResponse(rsp *http.Response) (*UpdateCustomerAddressResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &UpdateCustomerAddressResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CustomerAddress
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 409:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON409 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
 // ParseListForCustomerResponse parses an HTTP response from a ListForCustomerWithResponse call
 func ParseListForCustomerResponse(rsp *http.Response) (*ListForCustomerResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
@@ -19190,6 +21093,81 @@ func ParseGetJobReportResponse(rsp *http.Response) (*GetJobReportResponse, error
 	return response, nil
 }
 
+// ParseCreateMediaUploadResponse parses an HTTP response from a CreateMediaUploadWithResponse call
+func ParseCreateMediaUploadResponse(rsp *http.Response) (*CreateMediaUploadResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &CreateMediaUploadResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 201:
+		var dest MediaUpload
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON201 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 409:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON409 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
 // ParseJobsResponse parses an HTTP response from a JobsWithResponse call
 func ParseJobsResponse(rsp *http.Response) (*JobsResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
@@ -19823,6 +21801,81 @@ func ParseGetJobReportForJobResponse(rsp *http.Response) (*GetJobReportForJobRes
 	return response, nil
 }
 
+// ParseCreateForJobResponse parses an HTTP response from a CreateForJobWithResponse call
+func ParseCreateForJobResponse(rsp *http.Response) (*CreateForJobResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &CreateForJobResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 201:
+		var dest MediaUpload
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON201 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 409:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON409 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
 // ParsePartAuthorisationsResponse parses an HTTP response from a PartAuthorisationsWithResponse call
 func ParsePartAuthorisationsResponse(rsp *http.Response) (*PartAuthorisationsResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
@@ -20357,6 +22410,299 @@ func ParseChangeWorkLineStatusResponse(rsp *http.Response) (*ChangeWorkLineStatu
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
 		var dest CommandResponseOfJob
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 409:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON409 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetMediaUploadResponse parses an HTTP response from a GetMediaUploadWithResponse call
+func ParseGetMediaUploadResponse(rsp *http.Response) (*GetMediaUploadResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetMediaUploadResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest MediaUpload
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseAbortResponse parses an HTTP response from a AbortWithResponse call
+func ParseAbortResponse(rsp *http.Response) (*AbortResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &AbortResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest MediaUpload
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 409:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON409 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseCompleteResponse parses an HTTP response from a CompleteWithResponse call
+func ParseCompleteResponse(rsp *http.Response) (*CompleteResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &CompleteResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest MediaUpload
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 409:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON409 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest ErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParsePartUrlResponse parses an HTTP response from a PartUrlWithResponse call
+func ParsePartUrlResponse(rsp *http.Response) (*PartUrlResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &PartUrlResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest MediaUploadPartUrl
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
